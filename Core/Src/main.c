@@ -32,37 +32,32 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-#define HALF_SECOND_MS  (500)
-
+// TODO change to actual values
 #define BRIGHTNESS_STEPS (50)
-
-#define MAX_BRIGHTNESS  (BRIGHTNESS_STEPS - 1)
-#define MIN_BRIGHTNESS  (0)
-#define HALF_BRIGHTNESS ((uint8_t)(BRIGHTNESS_STEPS + 0.5f) / 2)
+#define MAX_BRIGHTNESS   (BRIGHTNESS_STEPS - 1)
+#define MIN_BRIGHTNESS   (0)
+#define HALF_BRIGHTNESS  ((uint8_t)(BRIGHTNESS_STEPS + 0.5f) / 2)
 
 #define HOLD_BRIGHTNESS_JUMP (3)
 
-#define SWEEP_TIME_STEP_MS (142)
-#define SWEEP_DELAY_MS     (SWEEP_TIME_STEP_MS * HOLD_BRIGHTNESS_JUMP)
+#define HALF_SECOND_MS      (500)
+#define LOWER_SWEEP_TIME_MS (3375)                                          // time from 50%->0%
+#define UPPER_SWEEP_TIME_MS (4000)                                          // time from 50%->100%
+#define TOTAL_SWEEP_TIME_MS (7375)                                          // time from 0%->100%
+#define AVG_SWEEP_TIME_MS   (TOTAL_SWEEP_TIME_MS / 2)                       // 3687.5
+#define LOWER_STEP_TIME_MS  (LOWER_SWEEP_TIME_MS / BRIGHTNESS_STEPS / 2)    // 135, time lower per step
+#define UPPER_STEP_TIME_MS  (UPPER_SWEEP_TIME_MS / BRIGHTNESS_STEPS / 2)    // 160, time upper per step
+#define AVG_STEP_TIME_MS    ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2) // 147.5
+#define AVG_STEP_DIFF_MS    (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)      // 12.5, distance between lower step time and average step time
+#define LOW_STEP_TIME_MS    (LOWER_STEP_TIME_MS  - AVG_STEP_DIFF_MS)        // 122.5
+#define HIGH_STEP_TIME_MS   (UPPER_STEP_TIME_MS  + AVG_STEP_DIFF_MS)        // 172.5
 
-// this is if it is linear
-#define LOWER_SWEEP_TIME_MS (3375)
-#define UPPER_SWEEP_TIME_MS (4000)
-#define LOWER_STEP_TIME_MS  (LOWER_SWEEP_TIME_MS / HALF_BRIGHTNESS)
-#define UPPER_STEP_TIME_MS  (UPPER_SWEEP_TIME_MS / HALF_BRIGHTNESS)
-#define LOWER_DELAY_MS      (LOWER_STEP_TIME_MS * HOLD_BRIGHTNESS_JUMP)
-#define UPPER_DELAY_MS      (UPPER_STEP_TIME_MS * HOLD_BRIGHTNESS_JUMP)
-
-#define PW_PERIOD     (255) // Period of PWM timer
-
-#define MIN_IR_PW     (PW_PERIOD / 10)                                    // relative pulse width
-#define MAX_IR_PW     (PW_PERIOD)                                         // relative pulse width
-#define MID_IR_PW     ((uint8_t)(MAX_IR_PW + MIN_IR_PW + 0.5f) / 2)       // relative pulse width
-#define MIN_WHITE_PW  (PW_PERIOD / 10)                                    // relative pulse width
-#define MAX_WHITE_PW  (PW_PERIOD)                                         // relative pulse width
-#define MID_WHITE_PW  ((uint8_t)(MAX_WHITE_PW + MIN_WHITE_PW + 0.5f) / 2) // relative pulse width
-
-#define LED_PWM_OFF (0)
+#define LED_PWM_OFF   (0)
+#define PW_PERIOD     (255)            // Period of PWM timer
+#define MIN_IR_PW     (PW_PERIOD / 10) // relative pulse width
+#define MAX_IR_PW     (PW_PERIOD)      // relative pulse width
+#define MIN_WHITE_PW  (PW_PERIOD / 10) // relative pulse width
+#define MAX_WHITE_PW  (PW_PERIOD)      // relative pulse width
 
 #define BUTTON_PRESSED (GPIO_PIN_SET)
 
@@ -79,8 +74,8 @@ TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
 
-static uint16_t whitePWM [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_WHITE_PW
-static uint16_t irPWM    [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_IR_PW
+static uint8_t whitePWM [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_WHITE_PW
+static uint8_t irPWM    [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_IR_PW
 
 /* USER CODE END PV */
 
@@ -93,8 +88,10 @@ static void MX_TIM2_Init(void);
 
 void initWhitePWM(void);             // Init whitePWM var
 void initIRPWM(void);                // Init irPWM var
-void setWhitePWM(uint16_t pulse_width); // set White PWM
-void setIRPWM(uint16_t pulse_width);    // set IR PWM
+int8_t increaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prevState); // increase selected LED brightness
+int8_t decreaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prevState); // decrease selected LED brightness
+void setWhitePWM(uint8_t pulse_width); // set White PWM
+void setIRPWM(uint8_t pulse_width);    // set IR PWM
 GPIO_PinState isTogglePressed ( void );
 GPIO_PinState isBrightPressed ( void );
 GPIO_PinState isDimPressed    ( void );
@@ -170,7 +167,6 @@ int main(void)
     brightPressed = isBrightPressed();
     dimPressed    = isDimPressed();
 
-    // TODO analog
     if (togglePressed == BUTTON_PRESSED)
     {
       // toggle white/IR
@@ -180,58 +176,30 @@ int main(void)
       {
 	// set white and disable IR
 	setIRPWM(LED_PWM_OFF);
-	setWhitePWM(irPWM[(uint16_t)whiteBrightness]);
+	setWhitePWM(irPWM[(uint8_t)whiteBrightness]);
       }
       else
       {
 	// set IR and disable white
 	setWhitePWM(LED_PWM_OFF);
-	setIRPWM(irPWM[(uint16_t)irBrightness]);
+	setIRPWM(irPWM[(uint8_t)irBrightness]);
       }
       HAL_Delay(HALF_SECOND_MS);
     }
     else if (brightPressed == BUTTON_PRESSED)
     {
-      // increase brightness
-      if ((prevBrightPressed == BUTTON_PRESSED) && isWhite)       whiteBrightness += HOLD_BRIGHTNESS_JUMP;
-      else if ((prevBrightPressed == BUTTON_PRESSED) && !isWhite) irBrightness += HOLD_BRIGHTNESS_JUMP;
-      else if ((prevBrightPressed != BUTTON_PRESSED) && isWhite)  whiteBrightness++;
-      else                                    irBrightness++;
-
-      if (whiteBrightness > MAX_BRIGHTNESS)   whiteBrightness = MAX_BRIGHTNESS;
-      else if (irBrightness > MAX_BRIGHTNESS) irBrightness = MAX_BRIGHTNESS;
+      if(isWhite) whiteBrightness = increaseBrightness(isWhite, whiteBrightness, prevBrightPressed);
+      else        irBrightness = increaseBrightness(isWhite, irBrightness, prevBrightPressed);
     }
     else if (dimPressed == BUTTON_PRESSED)
     {
-      // decrease brightness
-      if ((prevDimPressed == BUTTON_PRESSED) && isWhite)       whiteBrightness -= HOLD_BRIGHTNESS_JUMP;
-      else if ((prevDimPressed == BUTTON_PRESSED) && !isWhite) irBrightness -= HOLD_BRIGHTNESS_JUMP;
-      else if ((prevDimPressed != BUTTON_PRESSED) && isWhite)  whiteBrightness--;
-      else                                                     irBrightness--;
-
-      if (whiteBrightness < MIN_BRIGHTNESS)   whiteBrightness = MIN_BRIGHTNESS;
-      else if (irBrightness < MIN_BRIGHTNESS) irBrightness = MIN_BRIGHTNESS;
+      if(isWhite) whiteBrightness = decreaseBrightness(isWhite, whiteBrightness, prevDimPressed);
+      else        irBrightness = decreaseBrightness(isWhite, irBrightness, prevDimPressed);
     }
 
+    // save previous button state
     prevBrightPressed = brightPressed;
     prevDimPressed    = dimPressed;
-
-    // delay next button press
-    if ((brightPressed == BUTTON_PRESSED) || (dimPressed == BUTTON_PRESSED))
-    {
-      if (isWhite)
-      {
-	setWhitePWM(whitePWM[(uint8_t)whiteBrightness]);
-	if (whiteBrightness < HALF_BRIGHTNESS) HAL_Delay(LOWER_DELAY_MS);
-        else                                   HAL_Delay(UPPER_DELAY_MS);
-      }
-      else
-      {
-	setIRPWM(irPWM[(uint8_t)irBrightness]);
-        if (irBrightness < HALF_BRIGHTNESS) HAL_Delay(LOWER_DELAY_MS);
-        else                                HAL_Delay(UPPER_DELAY_MS);
-      }
-    }
   }
   /* USER CODE END 3 */
 }
@@ -480,11 +448,11 @@ GPIO_PinState isDimPressed    ( void )
 // i = [MIN_WHITE_PW, MAX_WHITE_PW]
 void initWhitePWM(void)
 {
-  const uint16_t range      = MAX_WHITE_PW - MIN_WHITE_PW;
+  const uint8_t range      = MAX_WHITE_PW - MIN_WHITE_PW;
   const float   incPerStep = range / (BRIGHTNESS_STEPS - 1);
   for (uint8_t i = 0; i < BRIGHTNESS_STEPS; i++)
   {
-    whitePWM[i] = (uint16_t)(i * incPerStep) + MIN_WHITE_PW;
+    whitePWM[i] = (uint8_t)(i * incPerStep) + MIN_WHITE_PW;
   }
 }
 
@@ -492,17 +460,59 @@ void initWhitePWM(void)
 // i = [MIN_IR_PW, MAX_IR_PW]
 void initIRPWM(void)
 {
-  const uint16_t range      = MAX_IR_PW - MIN_IR_PW;
+  const uint8_t range      = MAX_IR_PW - MIN_IR_PW;
   const float   incPerStep = range / (BRIGHTNESS_STEPS - 1);
   for (uint8_t i = 0; i < BRIGHTNESS_STEPS; i++)
   {
-    irPWM[i] = (uint16_t)(i * incPerStep) + MIN_IR_PW;
+    irPWM[i] = (uint8_t)(i * incPerStep) + MIN_IR_PW;
   }
 }
 
-// TODO: Change to PWM
+
+int8_t increaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prevState)
+{
+  // increase brightness
+  if (prevState == BUTTON_PRESSED) brightness += HOLD_BRIGHTNESS_JUMP;
+  else                             brightness++;
+
+  // prevent from going above MAX_BRIGHTNESS
+  if (brightness > MAX_BRIGHTNESS) brightness = MAX_BRIGHTNESS;
+
+  // set brightness
+  if (isWhite) setWhitePWM(whitePWM[(uint8_t)brightness]);
+  else         setIRPWM(irPWM[(uint8_t)brightness]);
+
+  // delay next button press
+  // get faster as brightness lowers
+  // HAL_Delay((uint32_t)((AVG_STEP_TIME_MS + AVG_STEP_DIFF_MS * 2 * (brightness - ((BRIGHTNESS_STEPS - 1) / 2)) / ((BRIGHTNESS_STEPS - 1) / 2)) + 0.5f));
+  HAL_Delay(((uint8_t)LOW_STEP_TIME_MS + brightness) * HOLD_BRIGHTNESS_JUMP); // roughly equivalent
+
+  return (brightness);
+}
+
+int8_t decreaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prevState)
+{
+  // decrease brightness
+  if (prevState == BUTTON_PRESSED) brightness -= HOLD_BRIGHTNESS_JUMP;
+  else                             brightness--;
+
+  // prevent from going below MIN_BRIGHTNESS
+  if (brightness < MIN_BRIGHTNESS) brightness = MIN_BRIGHTNESS;
+
+  // set brightness
+  if (isWhite) setWhitePWM(whitePWM[(uint8_t)brightness]);
+  else         setIRPWM(irPWM[(uint8_t)brightness]);
+
+  // delay next button press
+  // get faster as brightness lowers
+  // HAL_Delay((uint32_t)((AVG_STEP_TIME_MS + AVG_STEP_DIFF_MS * 2 * (brightness - ((BRIGHTNESS_STEPS - 1) / 2)) / ((BRIGHTNESS_STEPS - 1) / 2)) + 0.5f) * HOLD_BRIGHTNESS_JUMP);
+  HAL_Delay(((uint8_t)LOW_STEP_TIME_MS + brightness) * HOLD_BRIGHTNESS_JUMP); // roughly equivalent
+
+  return (brightness);
+}
+
 // set White PWM
-void setWhitePWM(uint16_t pulse_width)
+void setWhitePWM(uint8_t pulse_width)
 {
   // set white pwm to pulse_width
   if (pulse_width == LED_PWM_OFF) HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
@@ -513,9 +523,8 @@ void setWhitePWM(uint16_t pulse_width)
   }
 }
 
-// TODO: Change to PWM
 // set IR PWM
-void setIRPWM(uint16_t pulse_width)
+void setIRPWM(uint8_t pulse_width)
 {
   // set IR pwm to pulse_width
   if (pulse_width == LED_PWM_OFF) HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
