@@ -59,14 +59,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define MCO_Pin GPIO_PIN_0
-#define MCO_GPIO_Port GPIOF
-#define IR_LED_Pin GPIO_PIN_0
-#define IR_LED_GPIO_Port GPIOA
 #define BRIGHT_Pin GPIO_PIN_1
 #define BRIGHT_GPIO_Port GPIOA
-#define VCP_TX_Pin GPIO_PIN_2
-#define VCP_TX_GPIO_Port GPIOA
 #define DIM_Pin GPIO_PIN_3
 #define DIM_GPIO_Port GPIOA
 #define SWITCH_LED_Pin GPIO_PIN_5
@@ -75,12 +69,8 @@ void Error_Handler(void);
 #define LED_STATUS_GPIO_Port GPIOA
 #define WHITE_LED_Pin GPIO_PIN_8
 #define WHITE_LED_GPIO_Port GPIOA
-#define SWDIO_Pin GPIO_PIN_13
-#define SWDIO_GPIO_Port GPIOA
-#define SWCLK_Pin GPIO_PIN_14
-#define SWCLK_GPIO_Port GPIOA
-#define VCP_RX_Pin GPIO_PIN_15
-#define VCP_RX_GPIO_Port GPIOA
+#define IR_LED_Pin GPIO_PIN_9
+#define IR_LED_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 

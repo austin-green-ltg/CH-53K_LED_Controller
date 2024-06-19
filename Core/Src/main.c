@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "time.h"
 
 /* USER CODE END Includes */
 
@@ -33,6 +34,11 @@
 /* USER CODE BEGIN PD */
 
 // TODO change to actual values
+#define CLK_FREQ_HZ (8000000)
+#define TIM2_CLK_DEV (1)
+#define TIM2_CLK_PRESCALER (8000)
+#define TIM2_CLK_KHZ (CLK_FREQ_HZ / TIM2_CLK_DEV / TIM2_CLK_PRESCALER / 1000) // 1 / ms
+
 #define BRIGHTNESS_STEPS (50)
 #define MAX_BRIGHTNESS   (BRIGHTNESS_STEPS - 1)
 #define MIN_BRIGHTNESS   (0)
@@ -40,13 +46,13 @@
 
 #define HOLD_BRIGHTNESS_JUMP (3)
 
-#define HALF_SECOND_MS      (500)
+#define TOGGLE_DELAY_MS     (250)
 #define LOWER_SWEEP_TIME_MS (3375)                                          // time from 50%->0%
 #define UPPER_SWEEP_TIME_MS (4000)                                          // time from 50%->100%
 #define TOTAL_SWEEP_TIME_MS (7375)                                          // time from 0%->100%
 #define AVG_SWEEP_TIME_MS   (TOTAL_SWEEP_TIME_MS / 2)                       // 3687.5
-#define LOWER_STEP_TIME_MS  (LOWER_SWEEP_TIME_MS / BRIGHTNESS_STEPS / 2)    // 135, time lower per step
-#define UPPER_STEP_TIME_MS  (UPPER_SWEEP_TIME_MS / BRIGHTNESS_STEPS / 2)    // 160, time upper per step
+#define LOWER_STEP_TIME_MS  (LOWER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))    // 135, time lower per step
+#define UPPER_STEP_TIME_MS  (UPPER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))    // 160, time upper per step
 #define AVG_STEP_TIME_MS    ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2) // 147.5
 #define AVG_STEP_DIFF_MS    (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)      // 12.5, distance between lower step time and average step time
 #define LOW_STEP_TIME_MS    (LOWER_STEP_TIME_MS  - AVG_STEP_DIFF_MS)        // 122.5
@@ -92,6 +98,8 @@ int8_t increaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prev
 int8_t decreaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prevState); // decrease selected LED brightness
 void setWhitePWM(uint8_t pulse_width); // set White PWM
 void setIRPWM(uint8_t pulse_width);    // set IR PWM
+void restartDelayCounter(void);	        // restart the counter
+uint8_t delayHit_ms(uint32_t delay_ms); // is delay in ms hit
 GPIO_PinState isTogglePressed ( void );
 GPIO_PinState isBrightPressed ( void );
 GPIO_PinState isDimPressed    ( void );
@@ -139,11 +147,8 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
-  GPIO_PinState togglePressed     = !BUTTON_PRESSED;
-  GPIO_PinState brightPressed     = !BUTTON_PRESSED;
-  GPIO_PinState dimPressed        = !BUTTON_PRESSED;
-  GPIO_PinState prevBrightPressed = !BUTTON_PRESSED;
-  GPIO_PinState prevDimPressed    = !BUTTON_PRESSED;
+  GPIO_PinState prevBrightPressed = GPIO_PIN_RESET;
+  GPIO_PinState prevDimPressed    = GPIO_PIN_RESET;
 
   uint8_t isWhite = 1; // 0 = IR, 1 = White
   int8_t whiteBrightness = HALF_BRIGHTNESS; // should never be negative but don't want underflow
@@ -152,6 +157,9 @@ int main(void)
   setIRPWM(LED_PWM_OFF);
   setWhitePWM(whitePWM[(uint8_t)whiteBrightness]);
   HAL_GPIO_WritePin(LED_STATUS_GPIO_Port, LED_STATUS_Pin, GPIO_PIN_SET);
+
+  HAL_TIM_Base_Start(&htim2);
+  restartDelayCounter();
 
   /* USER CODE END 2 */
 
@@ -163,38 +171,42 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-    togglePressed = isTogglePressed();
-    brightPressed = isBrightPressed();
-    dimPressed    = isDimPressed();
+    GPIO_PinState togglePressed = isTogglePressed();
+    GPIO_PinState brightPressed = isBrightPressed();
+    GPIO_PinState dimPressed    = isDimPressed();
 
-    if (togglePressed == BUTTON_PRESSED)
+    int8_t currBrightness  = isWhite ? whiteBrightness : irBrightness;
+    uint16_t brightnessDelay = ((LOW_STEP_TIME_MS + currBrightness) * HOLD_BRIGHTNESS_JUMP);
+
+    if ((togglePressed == BUTTON_PRESSED) && delayHit_ms(TOGGLE_DELAY_MS))
     {
       // toggle white/IR
       isWhite = !isWhite;
       HAL_GPIO_TogglePin(LED_STATUS_GPIO_Port, LED_STATUS_Pin);
       if (isWhite)
       {
-	// set white and disable IR
-	setIRPWM(LED_PWM_OFF);
-	setWhitePWM(irPWM[(uint8_t)whiteBrightness]);
+        // set white and disable IR
+        setIRPWM(LED_PWM_OFF);
+        setWhitePWM(irPWM[(uint8_t)whiteBrightness]);
       }
       else
       {
-	// set IR and disable white
-	setWhitePWM(LED_PWM_OFF);
-	setIRPWM(irPWM[(uint8_t)irBrightness]);
+        // set IR and disable white
+        setWhitePWM(LED_PWM_OFF);
+        setIRPWM(irPWM[(uint8_t)irBrightness]);
       }
-      HAL_Delay(HALF_SECOND_MS);
+
+      restartDelayCounter();
     }
-    else if (brightPressed == BUTTON_PRESSED)
+    else if ((brightPressed == BUTTON_PRESSED) && delayHit_ms(brightnessDelay))
     {
       if(isWhite) whiteBrightness = increaseBrightness(isWhite, whiteBrightness, prevBrightPressed);
-      else        irBrightness = increaseBrightness(isWhite, irBrightness, prevBrightPressed);
+      else        irBrightness    = increaseBrightness(isWhite, irBrightness, prevBrightPressed);
     }
-    else if (dimPressed == BUTTON_PRESSED)
+    else if ((dimPressed == BUTTON_PRESSED) && delayHit_ms(brightnessDelay))
     {
       if(isWhite) whiteBrightness = decreaseBrightness(isWhite, whiteBrightness, prevDimPressed);
-      else        irBrightness = decreaseBrightness(isWhite, irBrightness, prevDimPressed);
+      else        irBrightness    = decreaseBrightness(isWhite, irBrightness, prevDimPressed);
     }
 
     // save previous button state
@@ -270,7 +282,7 @@ static void MX_TIM1_Init(void)
   htim1.Instance = TIM1;
   htim1.Init.Prescaler = 0;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = PW_PERIOD;
+  htim1.Init.Period = 255;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
@@ -302,6 +314,10 @@ static void MX_TIM1_Init(void)
   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -341,17 +357,16 @@ static void MX_TIM2_Init(void)
 
   TIM_ClockConfigTypeDef sClockSourceConfig = {0};
   TIM_MasterConfigTypeDef sMasterConfig = {0};
-  TIM_OC_InitTypeDef sConfigOC = {0};
 
   /* USER CODE BEGIN TIM2_Init 1 */
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 0;
+  htim2.Init.Prescaler = 8000;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = PW_PERIOD;
+  htim2.Init.Period = 4294967295;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
   {
     Error_Handler();
@@ -361,28 +376,15 @@ static void MX_TIM2_Init(void)
   {
     Error_Handler();
   }
-  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
-  {
-    Error_Handler();
-  }
   sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
   if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
   {
     Error_Handler();
   }
-  sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
-  HAL_TIM_MspPostInit(&htim2);
 
 }
 
@@ -398,7 +400,6 @@ static void MX_GPIO_Init(void)
 /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
@@ -408,14 +409,6 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = BRIGHT_Pin|DIM_Pin|SWITCH_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : VCP_TX_Pin VCP_RX_Pin */
-  GPIO_InitStruct.Pin = VCP_TX_Pin|VCP_RX_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED_STATUS_Pin */
@@ -485,7 +478,8 @@ int8_t increaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prev
   // delay next button press
   // get faster as brightness lowers
   // HAL_Delay((uint32_t)((AVG_STEP_TIME_MS + AVG_STEP_DIFF_MS * 2 * (brightness - ((BRIGHTNESS_STEPS - 1) / 2)) / ((BRIGHTNESS_STEPS - 1) / 2)) + 0.5f));
-  HAL_Delay(((uint8_t)LOW_STEP_TIME_MS + brightness) * HOLD_BRIGHTNESS_JUMP); // roughly equivalent
+  // HAL_Delay(((uint8_t)LOW_STEP_TIME_MS + brightness) * HOLD_BRIGHTNESS_JUMP); // roughly equivalent
+  restartDelayCounter();
 
   return (brightness);
 }
@@ -506,7 +500,8 @@ int8_t decreaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prev
   // delay next button press
   // get faster as brightness lowers
   // HAL_Delay((uint32_t)((AVG_STEP_TIME_MS + AVG_STEP_DIFF_MS * 2 * (brightness - ((BRIGHTNESS_STEPS - 1) / 2)) / ((BRIGHTNESS_STEPS - 1) / 2)) + 0.5f) * HOLD_BRIGHTNESS_JUMP);
-  HAL_Delay(((uint8_t)LOW_STEP_TIME_MS + brightness) * HOLD_BRIGHTNESS_JUMP); // roughly equivalent
+  // HAL_Delay(((uint8_t)LOW_STEP_TIME_MS + brightness) * HOLD_BRIGHTNESS_JUMP); // roughly equivalent
+  restartDelayCounter();
 
   return (brightness);
 }
@@ -527,11 +522,21 @@ void setWhitePWM(uint8_t pulse_width)
 void setIRPWM(uint8_t pulse_width)
 {
   // set IR pwm to pulse_width
-  if (pulse_width == LED_PWM_OFF) HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+  if (pulse_width == LED_PWM_OFF) HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
   {
-    TIM2->CCR1 = pulse_width;
-    HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+    TIM1->CCR2 = pulse_width;
+    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   }
+}
+
+void restartDelayCounter(void)
+{
+  TIM2->CNT = 0;
+}
+
+uint8_t delayHit_ms(uint32_t delay_ms)
+{
+  return (TIM2->CNT >= (delay_ms * TIM2_CLK_KHZ));
 }
 
 /* USER CODE END 4 */
