@@ -535,6 +535,7 @@ void setIRPWM(uint8_t pulse_width)
 {
   // set IR pwm to pulse_width
   if (pulse_width == LED_PWM_OFF) HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
+  else
   {
     TIM1->CCR2 = pulse_width;
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
