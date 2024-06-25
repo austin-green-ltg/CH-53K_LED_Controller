@@ -51,19 +51,19 @@
 #define UPPER_SWEEP_TIME_MS (4000)                                          // time from 50%->100%
 #define TOTAL_SWEEP_TIME_MS (7375)                                          // time from 0%->100%
 #define AVG_SWEEP_TIME_MS   (TOTAL_SWEEP_TIME_MS / 2)                       // 3687.5
-#define LOWER_STEP_TIME_MS  (LOWER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))    // 135, time lower per step
-#define UPPER_STEP_TIME_MS  (UPPER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))    // 160, time upper per step
+#define LOWER_STEP_TIME_MS  (LOWER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))  // 135, time lower per step
+#define UPPER_STEP_TIME_MS  (UPPER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))  // 160, time upper per step
 #define AVG_STEP_TIME_MS    ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2) // 147.5
 #define AVG_STEP_DIFF_MS    (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)      // 12.5, distance between lower step time and average step time
 #define LOW_STEP_TIME_MS    (LOWER_STEP_TIME_MS  - AVG_STEP_DIFF_MS)        // 122.5
 #define HIGH_STEP_TIME_MS   (UPPER_STEP_TIME_MS  + AVG_STEP_DIFF_MS)        // 172.5
 
-#define LED_PWM_OFF   (0)
-#define PW_PERIOD     (255)            // Period of PWM timer
-#define MIN_IR_PW     (PW_PERIOD / 10) // relative pulse width
-#define MAX_IR_PW     (PW_PERIOD)      // relative pulse width
-#define MIN_WHITE_PW  (PW_PERIOD / 10) // relative pulse width
-#define MAX_WHITE_PW  (PW_PERIOD)      // relative pulse width
+#define LED_PWM_OFF  (0)
+#define PW_PERIOD    (255)            // Period of PWM timer
+#define MIN_IR_PW    (PW_PERIOD / 10) // relative pulse width
+#define MAX_IR_PW    (PW_PERIOD)      // relative pulse width
+#define MIN_WHITE_PW (PW_PERIOD / 10) // relative pulse width
+#define MAX_WHITE_PW (PW_PERIOD)      // relative pulse width
 
 #define BUTTON_PRESSED (GPIO_PIN_SET)
 
@@ -80,8 +80,20 @@ TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN PV */
 
+// todo make these const
 static uint8_t whitePWM [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_WHITE_PW
 static uint8_t irPWM    [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_IR_PW
+
+// static const uint8_t whitePWM = {26, 30, 35, 40, 44, 49, 54, 58, 63, 68,
+                                 // 72, 77, 82, 86, 91, 96, 100, 105, 110, 114,
+                                 // 119, 124, 129, 133, 138, 143, 147, 152, 157, 161,
+                                 // 166, 171, 175, 180, 185, 189, 194, 199, 203, 208,
+                                 // 213, 218, 222, 227, 232, 236, 241, 246, 250, 255};
+// static const uint8_t irPWM    = {26, 30, 35, 40, 44, 49, 54, 58, 63, 68,
+                                 // 72, 77, 82, 86, 91, 96, 100, 105, 110, 114,
+                                 // 119, 124, 129, 133, 138, 143, 147, 152, 157, 161,
+                                 // 166, 171, 175, 180, 185, 189, 194, 199, 203, 208,
+                                 // 213, 218, 222, 227, 232, 236, 241, 246, 250, 255};
 
 /* USER CODE END PV */
 
