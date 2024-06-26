@@ -21,8 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "time.h"
-#include <stdio.h>
+#include "my_printf.h"
 
 /* USER CODE END Includes */
 
@@ -161,7 +160,7 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  printf("Begin\n");
+  MY_PRINTF("Begin\n");
 
   initWhitePWM();
   initIRPWM();
@@ -222,6 +221,7 @@ int main(void)
     else if ((dimPressed == BUTTON_PRESSED) && brightnessDelayHit)
     {
       if(isWhite) whiteBrightness = decreaseBrightness(isWhite, whiteBrightness, prevDimPressed);
+      else        irBrightness    = decreaseBrightness(isWhite, irBrightness, prevDimPressed);
     }
     else if ((brightPressed == BUTTON_PRESSED) && brightnessDelayHit)
     {
@@ -417,7 +417,7 @@ static void MX_USART2_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
-
+#ifdef ENABLE_UART_DEBUGGING
   /* USER CODE END USART2_Init 0 */
 
   /* USER CODE BEGIN USART2_Init 1 */
@@ -438,7 +438,7 @@ static void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-
+#endif
   /* USER CODE END USART2_Init 2 */
 
 }
@@ -489,7 +489,7 @@ void initWhitePWM(void)
   {
     whitePWM[i] = (uint8_t)(i * incPerStep + 0.5) + MIN_WHITE_PW;
   }
-  printf("Init %s PWM\n", "White");
+  MY_PRINTF("Init %s PWM\n", "White");
   return;
 }
 
@@ -503,7 +503,7 @@ void initIRPWM(void)
   {
     irPWM[i] = (uint8_t)(i * incPerStep + 0.5) + MIN_IR_PW;
   }
-  printf("Init %s PWM\n", "IR");
+  MY_PRINTF("Init %s PWM\n", "IR");
   return;
 }
 
@@ -516,8 +516,8 @@ int8_t decreaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prev
   // prevent from going below MIN_BRIGHTNESS
   if (brightness < MIN_BRIGHTNESS) brightness = MIN_BRIGHTNESS;
 
-  if (isWhite) printf("%s decreased to %d / %d\n", "White", brightness, MAX_BRIGHTNESS);
-  else         printf("%s decreased to %d / %d\n", "IR", brightness, MAX_BRIGHTNESS);
+  if (isWhite) MY_PRINTF("%s decreased to %d / %d\n", "White", brightness, MAX_BRIGHTNESS);
+  else         MY_PRINTF("%s decreased to %d / %d\n", "IR", brightness, MAX_BRIGHTNESS);
 
   // set brightness
   if (isWhite) setWhitePWM(whitePWM[(uint8_t)brightness]);
@@ -537,8 +537,8 @@ int8_t increaseBrightness(uint8_t isWhite, int8_t brightness, GPIO_PinState prev
   // prevent from going above MAX_BRIGHTNESS
   if (brightness > MAX_BRIGHTNESS) brightness = MAX_BRIGHTNESS;
 
-  if (isWhite) printf("%s increased to %d / %d\n", "White", brightness, MAX_BRIGHTNESS);
-  else         printf("%s increased to %d / %d\n", "IR", brightness, MAX_BRIGHTNESS);
+  if (isWhite) MY_PRINTF("%s increased to %d / %d\n", "White", brightness, MAX_BRIGHTNESS);
+  else         MY_PRINTF("%s increased to %d / %d\n", "IR", brightness, MAX_BRIGHTNESS);
 
   // set brightness
   if (isWhite) setWhitePWM(whitePWM[(uint8_t)brightness]);
@@ -572,13 +572,13 @@ void inline setWhitePWM(uint8_t pulse_width)
   if (pulse_width == LED_PWM_OFF)
   {
     HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-    printf("Turn off %s\n", "White");
+    MY_PRINTF("Turn off %s\n", "White");
   }
   else
   {
     TIM1->CCR1 = pulse_width;
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-    printf("Turn on %s to %u / %u \n", "White", pulse_width, PW_PERIOD);
+    MY_PRINTF("Turn on %s to %u / %u \n", "White", pulse_width, PW_PERIOD);
   }
 }
 
@@ -589,13 +589,13 @@ void inline setIRPWM(uint8_t pulse_width)
   if (pulse_width == LED_PWM_OFF)
   {
     HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
-    printf("Turn off %s\n", "IR");
+    MY_PRINTF("Turn off %s\n", "IR");
   }
   else
   {
     TIM1->CCR2 = pulse_width;
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-    printf("Turn on %s to %u / %u\n", "IR", pulse_width, PW_PERIOD);
+    MY_PRINTF("Turn on %s to %u / %u\n", "IR", pulse_width, PW_PERIOD);
   }
   return;
 }
@@ -612,12 +612,14 @@ uint8_t inline delayHit(uint32_t delay_ms)
   return isDelayHit;
 }
 
+#ifdef ENABLE_UART_DEBUGGING
 int fputc(int c, FILE *stream)
 {
   (void)stream;
   HAL_UART_Transmit(&huart2, (uint8_t *) &c, sizeof(uint8_t), 0xFFFF);
   return c;
 }
+#endif
 
 /* USER CODE END 4 */
 
