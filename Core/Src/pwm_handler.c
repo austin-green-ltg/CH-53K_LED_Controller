@@ -5,33 +5,6 @@
 
 /* Private define ------------------------------------------------------------*/
 // todo make these const
-#define BRIGHTNESS_STEPS (50)
-#define MAX_BRIGHTNESS   (BRIGHTNESS_STEPS - 1)
-#define MIN_BRIGHTNESS   (0)
-#define HALF_BRIGHTNESS  ((uint8_t)(BRIGHTNESS_STEPS + 0.5f) / 2)
-
-#define HOLD_BRIGHTNESS_JUMP (3)
-
-#define TOGGLE_DELAY_MS     (250)
-#define LOWER_SWEEP_TIME_MS (3375)                                          // time from 50%->0%
-#define UPPER_SWEEP_TIME_MS (4000)                                          // time from 50%->100%
-#define TOTAL_SWEEP_TIME_MS (7375)                                          // time from 0%->100%
-#define AVG_SWEEP_TIME_MS   (TOTAL_SWEEP_TIME_MS / 2)                       // 3687.5
-#define LOWER_STEP_TIME_MS  (LOWER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))  // 135, time lower per step
-#define UPPER_STEP_TIME_MS  (UPPER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))  // 160, time upper per step
-#define AVG_STEP_TIME_MS    ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2) // 147.5
-#define AVG_STEP_DIFF_MS    (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)      // 12.5, distance between lower step time and average step time
-#define LOW_STEP_TIME_MS    (LOWER_STEP_TIME_MS  - AVG_STEP_DIFF_MS)        // 122.5
-#define HIGH_STEP_TIME_MS   (UPPER_STEP_TIME_MS  + AVG_STEP_DIFF_MS)        // 172.5
-
-#define LED_PWM_OFF  (0)
-#define PW_PERIOD    (255)            // Period of PWM timer
-#define MIN_WHITE_PW (PW_PERIOD / 10) // relative pulse width
-#define MAX_WHITE_PW (PW_PERIOD)      // relative pulse width
-#define MIN_IR_PW    (PW_PERIOD / 10) // relative pulse width
-#define MAX_IR_PW    (PW_PERIOD)      // relative pulse width
-
-#define BUTTON_PRESSED (1)
 
 /* Private variables ---------------------------------------------------------*/
 static uint8_t whitePWM [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_WHITE_PW
@@ -58,8 +31,9 @@ void initWhitePWM(void)
   const float incPerStep = range / (BRIGHTNESS_STEPS - 1);
   for (uint8_t i = 0; i < BRIGHTNESS_STEPS; i++)
   {
-    whitePWM[i] = (uint8_t)(i * incPerStep + 0.5) + MIN_WHITE_PW;
+    whitePWM[i] = (uint8_t)((i * incPerStep + 0.5f) + MIN_WHITE_PW);
   }
+  turnOffWhitePWM();
   MY_PRINTF("Init %s PWM\n", "White");
   return;
 }
@@ -73,8 +47,9 @@ void initIRPWM(void)
   const float incPerStep = range / (BRIGHTNESS_STEPS - 1);
   for (uint8_t i = 0; i < BRIGHTNESS_STEPS; i++)
   {
-    irPWM[i] = (uint8_t)(i * incPerStep + 0.5) + MIN_IR_PW;
+    irPWM[i] = (uint8_t)((i * incPerStep + 0.5f) + MIN_IR_PW);
   }
+  turnOffIRPWM();
   MY_PRINTF("Init %s PWM\n", "IR");
   return;
 }
@@ -193,13 +168,17 @@ int8_t getIRBrightness( void )
 
 void setWhiteBrightness( int8_t brightness )
 {
-  whiteBrightness = brightness;
+  if      (brightness > MAX_BRIGHTNESS) whiteBrightness = MAX_BRIGHTNESS;
+  else if (brightness < MIN_BRIGHTNESS) whiteBrightness = MIN_BRIGHTNESS;
+  else                                  whiteBrightness = brightness;
   return;
 }
 
 void setIRBrightness( int8_t brightness )
 {
-  irBrightness = brightness;
+  if      (brightness > MAX_BRIGHTNESS) irBrightness = MAX_BRIGHTNESS;
+  else if (brightness < MIN_BRIGHTNESS) irBrightness = MIN_BRIGHTNESS;
+  else                                  irBrightness = brightness;
   return;
 }
 
