@@ -20,6 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "bsp.h"
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
