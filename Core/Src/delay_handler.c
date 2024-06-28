@@ -25,5 +25,5 @@ uint8_t delayHit(uint32_t delay_ms)
 
 uint16_t brightnessDelay(int8_t brightness)
 {
-  return ((50 + brightness) * 5);
+  return (brightness * 5 + 250);
 }

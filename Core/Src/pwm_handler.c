@@ -34,7 +34,9 @@ void initWhitePWM(void)
     whitePWM[i] = (uint8_t)((i * incPerStep + 0.5f) + MIN_WHITE_PW);
   }
   turnOffWhitePWM();
-  MY_PRINTF("Init %s PWM\n", "White");
+#ifdef ENABLE_UART_DEBUGGING
+  printf("Init %s PWM\n", "White");
+#endif
   return;
 }
 
@@ -50,7 +52,9 @@ void initIRPWM(void)
     irPWM[i] = (uint8_t)((i * incPerStep + 0.5f) + MIN_IR_PW);
   }
   turnOffIRPWM();
-  MY_PRINTF("Init %s PWM\n", "IR");
+#ifdef ENABLE_UART_DEBUGGING
+  printf("Init %s PWM\n", "IR");
+#endif
   return;
 }
 
@@ -63,7 +67,9 @@ void decreaseWhiteBrightness( uint8_t button_held )
   // prevent from going below MIN_BRIGHTNESS
   if (whiteBrightness < MIN_BRIGHTNESS) whiteBrightness = MIN_BRIGHTNESS;
 
-  MY_PRINTF("%s decreased to %d / %d\n", "White", whiteBrightness, MAX_BRIGHTNESS);
+#ifdef ENABLE_UART_DEBUGGING
+  printf("%s decreased to %d / %d\n", "White", whiteBrightness, MAX_BRIGHTNESS);
+#endif
 
   // set whiteBrightness
   setWhitePWM();
@@ -80,7 +86,9 @@ void decreaseIRBrightness( uint8_t button_held )
   // prevent from going below MIN_BRIGHTNESS
   if (irBrightness < MIN_BRIGHTNESS) irBrightness = MIN_BRIGHTNESS;
 
-  MY_PRINTF("%s decreased to %d / %d\n", "IR", irBrightness, MAX_BRIGHTNESS);
+#ifdef ENABLE_UART_DEBUGGING
+  printf("%s decreased to %d / %d\n", "IR", irBrightness, MAX_BRIGHTNESS);
+#endif
 
   // set irBrightness
   setIRPWM();
@@ -97,7 +105,9 @@ void increaseWhiteBrightness( uint8_t button_held )
   // prevent from going above MAX_BRIGHTNESS
   if (whiteBrightness > MAX_BRIGHTNESS) whiteBrightness = MAX_BRIGHTNESS;
 
-  MY_PRINTF("%s increased to %d / %d\n", "White", whiteBrightness, MAX_BRIGHTNESS);
+#ifdef ENABLE_UART_DEBUGGING
+  printf("%s increased to %d / %d\n", "White", whiteBrightness, MAX_BRIGHTNESS);
+#endif
 
   // set whiteBrightness
   setWhitePWM();
@@ -114,7 +124,9 @@ void increaseIRBrightness( uint8_t button_held )
   // prevent from going above MAX_BRIGHTNESS
   if (irBrightness > MAX_BRIGHTNESS) irBrightness = MAX_BRIGHTNESS;
 
-  MY_PRINTF("%s increased to %d / %d\n", "IR", irBrightness, MAX_BRIGHTNESS);
+#ifdef ENABLE_UART_DEBUGGING
+  printf("%s increased to %d / %d\n", "IR", irBrightness, MAX_BRIGHTNESS);
+#endif
 
   // set irBrightness
   setIRPWM();
@@ -128,7 +140,9 @@ void setWhitePWM( void )
   uint32_t pulse_width = whitePWM[whiteBrightness];
   setPW11(pulse_width);
   startPWM11();
-  MY_PRINTF("Turn on %s to %u / %u \n", "White", pulse_width, PW_PERIOD);
+#ifdef ENABLE_UART_DEBUGGING
+  printf("Turn on %s to %u / %u \n", "White", pulse_width, PW_PERIOD);
+#endif
 }
 
 // set IR PWM
@@ -137,7 +151,9 @@ void setIRPWM( void )
   uint32_t pulse_width = irPWM[irBrightness];
   setPW12(pulse_width);
   startPWM12();
-  MY_PRINTF("Turn on %s to %u / %u\n", "IR", pulse_width, PW_PERIOD);
+#ifdef ENABLE_UART_DEBUGGING
+  printf("Turn on %s to %u / %u\n", "IR", pulse_width, PW_PERIOD);
+#endif
   return;
 }
 
@@ -145,14 +161,18 @@ void setIRPWM( void )
 void turnOffWhitePWM( void )
 {
   stopPWM11();
-  MY_PRINTF("Turn off %s\n", "White");
+#ifdef ENABLE_UART_DEBUGGING
+  printf("Turn off %s\n", "White");
+#endif
 }
 
 // set IR PWM
 void turnOffIRPWM( void )
 {
   stopPWM12();
-  MY_PRINTF("Turn off %s\n", "IR");
+#ifdef ENABLE_UART_DEBUGGING
+  printf("Turn off %s\n", "IR");
+#endif
   return;
 }
 

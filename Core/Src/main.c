@@ -104,8 +104,6 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  MY_PRINTF("Begin\n");
-
   initWhitePWM();
   initIRPWM();
 

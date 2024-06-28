@@ -225,11 +225,10 @@ TEST_GROUP("CH-53K")
 
         // Ensure two consecutive delay times are greater than 500ms
         uint16_t delay1 = brightnessDelay(MIN_BRIGHTNESS);
-        uint16_t delay2 = 0;
 
         for (uint8_t i = 1; i < BRIGHTNESS_STEPS; i++)
         {
-            delay2 = brightnessDelay(MIN_BRIGHTNESS + i);
+            uint16_t delay2 = brightnessDelay(MIN_BRIGHTNESS + i);
             VERIFY((delay2 + delay1) > 500);
             delay1 = delay2;
         }
@@ -251,11 +250,6 @@ TEST_GROUP("CH-53K")
         const uint32_t onehundred_to_zero_time_ms = 6000; // 6 seconds
         const uint32_t onehundred_to_zero_ff_ms = 1500;    // +- 1.5 seconds
 
-        uint32_t sweep_fifty_to_onehundred_time_ms = 0;
-        uint32_t sweep_fifty_to_zero_time_ms = 0;
-        uint32_t sweep_zero_to_onehundred_time_ms = 0;
-        uint32_t sweep_onehundred_to_zero_time_ms = 0;
-
         // formula is step + 3*step*(num_steps-1)
         // initial step from pressing the button, then sweep
         int8_t start_step;
@@ -266,7 +260,7 @@ TEST_GROUP("CH-53K")
             start_step = HALF_BRIGHTNESS;
             end_step = MAX_BRIGHTNESS + 1;
 
-            sweep_fifty_to_onehundred_time_ms = brightnessDelay(start_step);
+            uint32_t sweep_fifty_to_onehundred_time_ms = brightnessDelay(start_step);
 
             for (int8_t i = start_step + 1 ; i < end_step; i+=3)
             {
@@ -284,7 +278,7 @@ TEST_GROUP("CH-53K")
             start_step = HALF_BRIGHTNESS;
             end_step = MIN_BRIGHTNESS - 1;
 
-            sweep_fifty_to_zero_time_ms = brightnessDelay(start_step);
+            uint32_t sweep_fifty_to_zero_time_ms = brightnessDelay(start_step);
 
             for (int8_t i = start_step - 1 ; i > end_step; i-=3)
             {
@@ -301,7 +295,7 @@ TEST_GROUP("CH-53K")
             start_step = MIN_BRIGHTNESS;
             end_step = MAX_BRIGHTNESS + 1;
 
-            sweep_zero_to_onehundred_time_ms = brightnessDelay(start_step);
+            uint32_t sweep_zero_to_onehundred_time_ms = brightnessDelay(start_step);
 
             for (int8_t i = start_step + 1 ; i < end_step; i+=3)
             {
@@ -318,7 +312,7 @@ TEST_GROUP("CH-53K")
             start_step = MAX_BRIGHTNESS;
             end_step = MIN_BRIGHTNESS - 1;
 
-            sweep_onehundred_to_zero_time_ms = brightnessDelay(start_step);
+            uint32_t sweep_onehundred_to_zero_time_ms = brightnessDelay(start_step);
 
             for (int8_t i = start_step - 1 ; i > end_step; i-=3)
             {
