@@ -4,6 +4,7 @@
 #ifdef USE_HAL_DRIVER
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 
 UART_HandleTypeDef huart2;
 #endif
