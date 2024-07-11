@@ -38,16 +38,16 @@
 #-----------------------------------------------------------------------------
 # project name:
 PROJECT := test
-ET_DIR  := et
+ET_DIR  := ../et
 
 # list of all source directories used by this project
 VPATH := . \
-	../Core/Src \
+	../../Core/Src \
 	$(ET_DIR)
 
 # list of all include directories needed by this project
 INCLUDES := -I. \
-	-I../Core/Inc \
+	-I../../Core/Inc \
 	-I$(ET_DIR)
 
 #-----------------------------------------------------------------------------
@@ -56,10 +56,11 @@ INCLUDES := -I. \
 
 # C source files...
 C_SRCS := \
-	test.c \
 	button_handler.c \
 	delay_handler.c \
 	pwm_handler.c \
+	thermistor_handler.c \
+	test.c \
 	bsp.c \
 	et.c \
 	et_host.c
@@ -71,8 +72,7 @@ LIB_DIRS :=
 LIBS     :=
 
 # defines...
-DEFINES  := \
-	-DSTM32F303x8
+DEFINES  :=
 
 #============================================================================
 # Typically you should not need to change anything below this line
