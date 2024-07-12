@@ -57,6 +57,7 @@ INCLUDES := -I. \
 # C source files...
 C_SRCS := \
 	pwm_handler.c \
+	thermistor_handler.c \
 	test.c \
 	bsp.c \
 	et.c \

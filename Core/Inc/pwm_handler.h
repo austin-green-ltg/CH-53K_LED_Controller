@@ -18,6 +18,9 @@
 #define MIN_IR_PW    (PW_PERIOD / 10.0f) // relative pulse width
 #define MAX_IR_PW    (PW_PERIOD)         // relative pulse width
 
+#define WARM_PWM_RATIO  (0.90f)
+#define HOT_PWM_RATIO   (0.50f)
+
 void    initWhitePWM(void);                             // Init whitePWM var
 void    initIRPWM(void);                                // Init irPWM var
 void    decreaseWhiteBrightness( uint8_t button_held ); // decrease White brightness

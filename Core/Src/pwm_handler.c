@@ -1,5 +1,6 @@
 /* Private includes ----------------------------------------------------------*/
 #include "pwm_handler.h"
+#include "thermistor_handler.h"
 #include "bsp.h"
 #include "my_printf.h"
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -10,9 +11,9 @@ extern TIM_HandleTypeDef htim3;
 #endif /* ENABLE_UART_DEBUGGING */
 
 /* Private define ------------------------------------------------------------*/
-// todo make these const
 
 /* Private variables ---------------------------------------------------------*/
+// todo make these const
 static uint8_t whitePWM [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_WHITE_PW
 static uint8_t irPWM    [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_IR_PW
 // static const uint8_t whitePWM = {26, 30, 35, 40, 44, 49, 54, 58, 63, 68,
@@ -304,7 +305,7 @@ void increaseIRBrightness( uint8_t button_held )
 // set White PWM
 void setWhitePWM( void )
 {
-  uint32_t pulse_width = whitePWM[whiteBrightness];
+  uint32_t pulse_width = getWhitePWM();
   setPW11(pulse_width);
   startPWM11();
 #ifdef ENABLE_UART_DEBUGGING
@@ -315,7 +316,7 @@ void setWhitePWM( void )
 // set IR PWM
 void setIRPWM( void )
 {
-  uint32_t pulse_width = irPWM[irBrightness];
+  uint32_t pulse_width = getIRPWM();
   setPW12(pulse_width);
   startPWM12();
 #ifdef ENABLE_UART_DEBUGGING
@@ -371,10 +372,48 @@ void setIRBrightness( int8_t brightness )
 
 uint8_t getWhitePWM( void )
 {
-  return (whitePWM[whiteBrightness]);
+  uint8_t pwm;
+  TemperatureRange_e temperature_range = get_temperature_range();
+
+  switch(temperature_range)
+  {
+    case Cool:
+      pwm = whitePWM[whiteBrightness];
+      break;
+    case Warm:
+      pwm = whitePWM[whiteBrightness] * WARM_PWM_RATIO;
+      break;
+    case Hot:
+      pwm = whitePWM[whiteBrightness] * HOT_PWM_RATIO;
+      break;
+    default:
+      pwm = 0;
+      break;
+  }
+
+  return (pwm);
 }
 
 uint8_t getIRPWM( void )
 {
-  return (irPWM[irBrightness]);
+  uint8_t pwm;
+  TemperatureRange_e temperature_range = get_temperature_range();
+
+  switch(temperature_range)
+  {
+    case Cool:
+      pwm = irPWM[irBrightness];
+      break;
+    case Warm:
+      pwm = irPWM[irBrightness] * WARM_PWM_RATIO;
+      break;
+    case Hot:
+      pwm = irPWM[irBrightness] * HOT_PWM_RATIO;
+      break;
+    default:
+      pwm = 0;
+      break;
+  }
+
+  return (pwm);
 }

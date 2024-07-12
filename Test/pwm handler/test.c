@@ -4,11 +4,19 @@
 // #include "pwm_handler.h"
 #include "et.h" /* ET: embedded test */
 #include "pwm_handler.h"    /* CUT */
+#include "thermistor_handler.h"    /* CUT */
 #include "bsp.h"    /* CUT */
 #include <stdio.h>
 
 #define PRESS (0)
 #define HOLD  (1)
+
+#define HEATING_WARM_THERM (100000)
+#define HEATING_HOT_THERM  (120000)
+#define COOLING_COOL_THERM (80000)
+#define COOLING_WARM_THERM (100000)
+
+extern int32_t thermistor_value;
 
 void setup(void) {
     /* executed before *every* non-skipped test */
@@ -18,6 +26,8 @@ void setup(void) {
 
 void teardown(void) {
     /* executed after *every* non-skipped and non-failing test */
+    thermistor_value = 0; // return to default value
+    get_temperature_range(); // set thermistor range
 }
 
 /* test group --------------------------------------------------------------*/
@@ -320,6 +330,48 @@ TEST_GROUP("PWM Handler")
         expected_pwm = ((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
         setIRBrightness(brightness);
         VERIFY(getIRPWM() == expected_pwm);
+    }
+
+    // verify nice case of getWhitePWM
+    TEST("getWhitePWM Thermistor nice case")
+    {
+        const float white_pwm_steps = (MAX_WHITE_PW - MIN_WHITE_PW) / (BRIGHTNESS_STEPS - 1);
+        const int8_t brightness = MAX_BRIGHTNESS;
+        const uint8_t expected_pwm = ((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
+        const uint8_t expected_cool_pwm = expected_pwm;
+        const uint8_t expected_warm_pwm = (uint8_t)(expected_pwm * WARM_PWM_RATIO);
+        const uint8_t expected_hot_pwm  = (uint8_t)(expected_pwm * HOT_PWM_RATIO);
+        setWhiteBrightness(brightness);
+
+        thermistor_value = HEATING_WARM_THERM;
+        VERIFY(getWhitePWM() == expected_warm_pwm);
+
+        thermistor_value = HEATING_HOT_THERM;
+        VERIFY(getWhitePWM() == expected_hot_pwm);
+
+        thermistor_value = COOLING_COOL_THERM;
+        VERIFY(getWhitePWM() == expected_cool_pwm);
+    }
+
+    // verify nice case of getIRPWM
+    TEST("getIRPWM Thermistor nice case")
+    {
+        const float IR_pwm_steps = (MAX_IR_PW - MIN_IR_PW) / (BRIGHTNESS_STEPS - 1);
+        const int8_t brightness = MAX_BRIGHTNESS;
+        const uint8_t expected_pwm = ((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
+        const uint8_t expected_cool_pwm = expected_pwm;
+        const uint8_t expected_warm_pwm = (uint8_t)(expected_pwm * WARM_PWM_RATIO);
+        const uint8_t expected_hot_pwm  = (uint8_t)(expected_pwm * HOT_PWM_RATIO);
+        setIRBrightness(brightness);
+
+        thermistor_value = HEATING_WARM_THERM;
+        VERIFY(getIRPWM() == expected_warm_pwm);
+
+        thermistor_value = HEATING_HOT_THERM;
+        VERIFY(getIRPWM() == expected_hot_pwm);
+
+        thermistor_value = COOLING_COOL_THERM;
+        VERIFY(getIRPWM() == expected_cool_pwm);
     }
 
     /* EDGE CASES */
