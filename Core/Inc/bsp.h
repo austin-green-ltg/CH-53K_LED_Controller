@@ -69,6 +69,7 @@ void setPW12( uint32_t pulse_width );
 void startTIM2( void );
 void restartTIM2( void );
 uint32_t getTIM2Cnt( void );
+int32_t getThermistorValue( void );
 void sendUARTChar(char c);
 
 

@@ -72,6 +72,13 @@ uint32_t getTIM2Cnt( void )
   return TIM2->CNT;
 }
 
+// Returns raw thermistor ADC value
+int32_t getThermistorValue( void )
+{
+  // TODO
+  return -1;
+}
+
 void sendUARTChar(char c)
 {
   HAL_UART_Transmit(&huart2, (uint8_t *) &c, sizeof(uint8_t), 0xFFFF);
@@ -152,6 +159,13 @@ uint32_t getTIM2Cnt( void )
 {
   float seconds = difftime(time(NULL), timer);
   return (uint32_t)(seconds / 1000.0f / TIM2_CLK_KHZ);
+}
+
+int32_t thermistor_value = 0;
+int32_t getThermistorValue( void )
+{
+  // assumes value is mC, i.e. 1000 = 1 C
+  return thermistor_value;
 }
 
 void sendUARTChar(char c)
