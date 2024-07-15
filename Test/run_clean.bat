@@ -3,19 +3,19 @@ REM to add another test group, duplicate folder, change test.c, add file to Make
 
 REM change to folder name
 pushd button handler
-REM build and run test
-start cmd.exe /k make
+REM clean build
+start cmd.exe /c make clean
 REM return to original folder (here)
 popd
 pushd delay handler
-start cmd.exe /k make
+start cmd.exe /c make clean
 popd
 pushd pwm handler
-start cmd.exe /k make
+start cmd.exe /c make clean
 popd
 pushd requirements
-start cmd.exe /k make
+start cmd.exe /c make clean
 popd
 pushd thermistor handler
-start cmd.exe /k make
+start cmd.exe /c make clean
 popd
