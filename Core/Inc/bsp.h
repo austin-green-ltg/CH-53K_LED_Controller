@@ -45,9 +45,15 @@
 
 typedef struct
 {
-  uint8_t running;
+  uint8_t is_running;
   uint32_t pulse_width;
 } pwmStruct;
+
+typedef struct
+{
+  uint8_t is_running;
+  uint32_t time;
+} timerStruct;
 
 #endif
 

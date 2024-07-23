@@ -7,16 +7,13 @@
 
 GPIO_PinState isTogglePressed ( void )
 {
-  GPIO_PinState pressed = readTogglePin();
-  return pressed;
+  return readTogglePin();
 }
 GPIO_PinState isDimPressed    ( void )
 {
-  GPIO_PinState pressed = readDimPin();
-  return pressed;
+  return readDimPin();
 }
 GPIO_PinState isBrightPressed ( void )
 {
-  GPIO_PinState pressed = readBrightPin();
-  return pressed;
+  return readBrightPin();
 }

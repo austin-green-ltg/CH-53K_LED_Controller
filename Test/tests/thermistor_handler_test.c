@@ -1,10 +1,5 @@
-/*============================================================================
-  * ET: embedded test; very simple test example
-============================================================================*/
-// #include "pwm_handler.h"
-#include "unity_fixture.h"
-#include "thermistor_handler.h"  /* CUT */
-#include <stdio.h>
+#include "unity_fixture.h"      /* UNITY */
+#include "thermistor_handler.h" /* CUT */
 
 #define HEATING_WARM_THERM (100000)
 #define HEATING_HOT_THERM  (120000)

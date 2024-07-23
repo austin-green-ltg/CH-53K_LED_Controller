@@ -6,6 +6,8 @@ GCOV := 1
 # list of all source directories used by this project
 VPATH := . \
 	../Core/Src \
+	tests \
+	mocks \
 	$(UNITY_DIR) \
 
 # list of all include directories needed by this project
@@ -23,7 +25,7 @@ C_SRCS := \
 	delay_handler.c \
 	pwm_handler.c \
 	thermistor_handler.c \
-	bsp.c \
+	bsp_mock.c \
 
 # test files
 TEST_SRCS := \
@@ -51,11 +53,6 @@ DEFINES  :=
 #-----------------------------------------------------------------------------
 # GNU toolset:
 #
-# NOTE:
-# GNU toolset (MinGW) is included in the QTools collection for Windows, see:
-#     https://www.state-machine.com/qtools
-# It is assumed that %QTOOLS%\bin directory is added to the PATH
-#
 CC    := gcc
 LINK  := gcc    # for C programs
 
@@ -82,7 +79,7 @@ endif
 BIN_DIR := build
 
 CFLAGS  := -c -g -O -fno-pie -std=c11 -pedantic -Wall -Wextra -W \
-	$(INCLUDES) $(DEFINES) -DQ_HOST -DUNITY_FIXTURE_NO_EXTRAS
+	$(INCLUDES) $(DEFINES)
 
 ifndef GCC_OLD
 	LINKFLAGS := -no-pie
