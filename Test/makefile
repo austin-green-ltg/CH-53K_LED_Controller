@@ -1,0 +1,163 @@
+# project name:
+PROJECT := CH-53K_TEST
+UNITY_DIR  := unity
+GCOV := 1
+
+# list of all source directories used by this project
+VPATH := . \
+	../Core/Src \
+	$(UNITY_DIR) \
+
+# list of all include directories needed by this project
+INCLUDES := -I. \
+	-I../Core/Inc \
+	-I$(UNITY_DIR) \
+
+#-----------------------------------------------------------------------------
+# project files:
+#
+
+# C source files...
+C_SRCS := \
+	button_handler.c \
+	delay_handler.c \
+	pwm_handler.c \
+	thermistor_handler.c \
+	bsp.c \
+
+# test files
+TEST_SRCS := \
+	requirements_test.c \
+	button_handler_test.c \
+	delay_handler_test.c \
+	pwm_handler_test.c \
+	thermistor_handler_test.c \
+	test_runner.c \
+
+# unity files
+UNITY_SRCS := \
+	unity.c \
+	unity_fixture.c \
+
+LIB_DIRS :=
+LIBS     :=
+
+# defines...
+DEFINES  :=
+
+#============================================================================
+# Typically you should not need to change anything below this line
+
+#-----------------------------------------------------------------------------
+# GNU toolset:
+#
+# NOTE:
+# GNU toolset (MinGW) is included in the QTools collection for Windows, see:
+#     https://www.state-machine.com/qtools
+# It is assumed that %QTOOLS%\bin directory is added to the PATH
+#
+CC    := gcc
+LINK  := gcc    # for C programs
+
+#-----------------------------------------------------------------------------
+# basic utilities (depends on the OS this Makefile runs on):
+#
+ifeq ($(OS),Windows_NT)
+	MKDIR      := mkdir
+	RM         := rm
+	TARGET_EXT := .exe
+else ifeq ($(OSTYPE),cygwin)
+	MKDIR      := mkdir -p
+	RM         := rm -f
+	TARGET_EXT := .exe
+else
+	MKDIR      := mkdir -p
+	RM         := rm -f
+	TARGET_EXT :=
+endif
+
+#-----------------------------------------------------------------------------
+# build options...
+
+BIN_DIR := build
+
+CFLAGS  := -c -g -O -fno-pie -std=c11 -pedantic -Wall -Wextra -W \
+	$(INCLUDES) $(DEFINES) -DQ_HOST -DUNITY_FIXTURE_NO_EXTRAS
+
+ifndef GCC_OLD
+	LINKFLAGS := -no-pie
+endif
+
+ifdef GCOV
+	CFLAGS    += -fprofile-arcs -ftest-coverage
+	LINKFLAGS += -lgcov --coverage
+endif
+
+#-----------------------------------------------------------------------------
+C_OBJS       := $(patsubst %.c,%.o,   $(C_SRCS))
+TEST_OBJS    := $(patsubst %.c,%.o,   $(TEST_SRCS))
+UNITY_OBJS   := $(patsubst %.c,%.o,   $(UNITY_SRCS))
+
+TARGET_EXE     := $(BIN_DIR)/$(PROJECT)$(TARGET_EXT)
+C_OBJS_EXT     := $(addprefix $(BIN_DIR)/, $(C_OBJS))
+TEST_OBJS_EXT  := $(addprefix $(BIN_DIR)/, $(TEST_OBJS))
+UNITY_OBJS_EXT := $(addprefix $(BIN_DIR)/, $(UNITY_OBJS))
+C_DEPS_EXT     := $(patsubst %.o,%.d, $(C_OBJS_EXT))
+TEST_DEPS_EXT  := $(patsubst %.o,%.d, $(TEST_OBJS_EXT))
+UNITY_DEPS_EXT := $(patsubst %.o,%.d, $(UNITY_OBJS_EXT))
+
+#-----------------------------------------------------------------------------
+# rules
+#
+
+.PHONY : norun clean show
+
+ifeq ($(MAKECMDGOALS),norun)
+all : $(TARGET_EXE)
+norun : all
+else
+all : $(TARGET_EXE) run
+endif
+
+$(TARGET_EXE) : $(C_OBJS_EXT) $(TEST_OBJS_EXT) $(UNITY_OBJS_EXT)
+	$(LINK) $(LINKFLAGS) $(LIB_DIRS) -o $@ $^ $(LIBS)
+
+run : $(TARGET_EXE)
+	$(TARGET_EXE)
+
+$(BIN_DIR)/%.d : %.c
+	$(CC) -MM -MT $(@:.d=.o) $(CFLAGS) $< > $@
+
+$(BIN_DIR)/%.o : %.c
+	$(CC) $(CFLAGS) $< -o $@
+
+# create BIN_DIR and include dependencies only if needed
+ifneq ($(MAKECMDGOALS),clean)
+  ifneq ($(MAKECMDGOALS),show)
+     ifneq ($(MAKECMDGOALS),debug)
+ifeq ("$(wildcard $(BIN_DIR))","")
+$(shell $(MKDIR) $(BIN_DIR))
+endif
+-include $(C_DEPS_EXT) $(TEST_DEPS_EXT) $(UNITY_DEPS_EXT)
+     endif
+  endif
+endif
+
+clean :
+	-$(RM) $(BIN_DIR)/*.*
+
+show :
+	@echo PROJECT      	= $(PROJECT)
+	@echo TARGET_EXE   	= $(TARGET_EXE)
+	@echo VPATH        	= $(VPATH)
+	@echo C_SRCS       	= $(C_SRCS)
+	@echo TEST_SRCS    	= $(TEST_SRCS)
+	@echo UNITY_SRCS   	= $(UNITY_SRCS)
+	@echo C_DEPS_EXT   	= $(C_DEPS_EXT)
+	@echo C_OBJS_EXT   	= $(C_OBJS_EXT)
+	@echo TEST_OBJS_EXT = $(TEST_OBJS_EXT)
+	@echo TEST_DEPS_EXT = $(TEST_DEPS_EXT)
+	@echo LIB_DIRS     	= $(LIB_DIRS)
+	@echo LIBS         	= $(LIBS)
+	@echo DEFINES      	= $(DEFINES)
+
