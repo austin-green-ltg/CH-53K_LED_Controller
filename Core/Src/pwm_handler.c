@@ -13,19 +13,16 @@ extern TIM_HandleTypeDef htim3;
 /* Private define ------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
-// todo make these const
-static uint8_t whitePWM [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_WHITE_PW
-static uint8_t irPWM    [ BRIGHTNESS_STEPS ]; // pulse width out of MAX_IR_PW
-// static const uint8_t whitePWM = {26, 30, 35, 40, 44, 49, 54, 58, 63, 68,
-                                 // 72, 77, 82, 86, 91, 96, 100, 105, 110, 114,
-                                 // 119, 124, 129, 133, 138, 143, 147, 152, 157, 161,
-                                 // 166, 171, 175, 180, 185, 189, 194, 199, 203, 208,
-                                 // 213, 218, 222, 227, 232, 236, 241, 246, 250, 255};
-// static const uint8_t irPWM    = {26, 30, 35, 40, 44, 49, 54, 58, 63, 68,
-                                 // 72, 77, 82, 86, 91, 96, 100, 105, 110, 114,
-                                 // 119, 124, 129, 133, 138, 143, 147, 152, 157, 161,
-                                 // 166, 171, 175, 180, 185, 189, 194, 199, 203, 208,
-                                 // 213, 218, 222, 227, 232, 236, 241, 246, 250, 255};
+static const uint8_t whitePWM [ BRIGHTNESS_STEPS ] = {26, 30, 35, 40, 44, 49, 54, 58, 63, 68,
+                                                      72, 77, 82, 86, 91, 96, 100, 105, 110, 114,
+                                                      119, 124, 129, 133, 138, 143, 147, 152, 157, 161,
+                                                      166, 171, 175, 180, 185, 189, 194, 199, 203, 208,
+                                                      213, 218, 222, 227, 232, 236, 241, 246, 250, 255};
+static const uint8_t irPWM    [ BRIGHTNESS_STEPS ] = {26, 30, 35, 40, 44, 49, 54, 58, 63, 68,
+                                                      72, 77, 82, 86, 91, 96, 100, 105, 110, 114,
+                                                      119, 124, 129, 133, 138, 143, 147, 152, 157, 161,
+                                                      166, 171, 175, 180, 185, 189, 194, 199, 203, 208,
+                                                      213, 218, 222, 227, 232, 236, 241, 246, 250, 255};
 static int8_t  whiteBrightness = 0;
 static int8_t  irBrightness = 0;
 
@@ -43,12 +40,6 @@ static uint16_t ir_half_time    = 0;
 void initWhitePWM(void)
 {
   whiteBrightness = HALF_BRIGHTNESS;
-  const float range      = MAX_WHITE_PW - MIN_WHITE_PW;
-  const float incPerStep = range / (BRIGHTNESS_STEPS - 1);
-  for (uint8_t i = 0; i < BRIGHTNESS_STEPS; i++)
-  {
-    whitePWM[i] = (uint8_t)((i * incPerStep + 0.5f) + MIN_WHITE_PW);
-  }
 #ifdef ENABLE_UART_DEBUGGING
   printf("Init %s PWM\n", "White");
 #endif
@@ -61,12 +52,6 @@ void initWhitePWM(void)
 void initIRPWM(void)
 {
   irBrightness = HALF_BRIGHTNESS;
-  const float range      = MAX_IR_PW - MIN_IR_PW;
-  const float incPerStep = range / (BRIGHTNESS_STEPS - 1);
-  for (uint8_t i = 0; i < BRIGHTNESS_STEPS; i++)
-  {
-    irPWM[i] = (uint8_t)((i * incPerStep + 0.5f) + MIN_IR_PW);
-  }
 #ifdef ENABLE_UART_DEBUGGING
   printf("Init %s PWM\n", "IR");
 #endif
