@@ -366,10 +366,10 @@ uint8_t getWhitePWM( void )
       pwm = whitePWM[whiteBrightness];
       break;
     case Warm:
-      pwm = whitePWM[whiteBrightness] * WARM_PWM_RATIO;
+      pwm = (uint8_t)(whitePWM[whiteBrightness] * WARM_PWM_RATIO + 0.5f);
       break;
     case Hot:
-      pwm = whitePWM[whiteBrightness] * HOT_PWM_RATIO;
+      pwm = (uint8_t)(whitePWM[whiteBrightness] * HOT_PWM_RATIO + 0.5f);
       break;
     default:
       pwm = 0;
@@ -390,10 +390,10 @@ uint8_t getIRPWM( void )
       pwm = irPWM[irBrightness];
       break;
     case Warm:
-      pwm = irPWM[irBrightness] * WARM_PWM_RATIO;
+      pwm = (uint8_t)(irPWM[irBrightness] * WARM_PWM_RATIO + 0.5f);
       break;
     case Hot:
-      pwm = irPWM[irBrightness] * HOT_PWM_RATIO;
+      pwm = (uint8_t)(irPWM[irBrightness] * HOT_PWM_RATIO + 0.5f);
       break;
     default:
       pwm = 0;

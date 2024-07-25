@@ -333,8 +333,8 @@ TEST(PWM_Handler, getWhitePWMThermistorNiceCase)
   const int8_t brightness = MAX_BRIGHTNESS;
   const uint8_t expected_pwm = ((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
   const uint8_t expected_cool_pwm = expected_pwm;
-  const uint8_t expected_warm_pwm = (uint8_t)(expected_pwm * WARM_PWM_RATIO);
-  const uint8_t expected_hot_pwm  = (uint8_t)(expected_pwm * HOT_PWM_RATIO);
+  const uint8_t expected_warm_pwm = (uint8_t)(expected_pwm * WARM_PWM_RATIO + 0.5);
+  const uint8_t expected_hot_pwm  = (uint8_t)(expected_pwm * HOT_PWM_RATIO + 0.5);
   setWhiteBrightness(brightness);
 
   thermistor_value = HEATING_WARM_THERM;
@@ -354,8 +354,8 @@ TEST(PWM_Handler, getIRPWMThermistorNiceCase)
   const int8_t brightness = MAX_BRIGHTNESS;
   const uint8_t expected_pwm = ((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
   const uint8_t expected_cool_pwm = expected_pwm;
-  const uint8_t expected_warm_pwm = (uint8_t)(expected_pwm * WARM_PWM_RATIO);
-  const uint8_t expected_hot_pwm  = (uint8_t)(expected_pwm * HOT_PWM_RATIO);
+  const uint8_t expected_warm_pwm = (uint8_t)(expected_pwm * WARM_PWM_RATIO + 0.5);
+  const uint8_t expected_hot_pwm  = (uint8_t)(expected_pwm * HOT_PWM_RATIO + 0.5);
   setIRBrightness(brightness);
 
   thermistor_value = HEATING_WARM_THERM;
