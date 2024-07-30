@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "bsp.h"
 
 pwmStruct pwm_white;
@@ -7,6 +9,7 @@ GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
 GPIO_PinState bright_pin = 0;
 int32_t thermistor_value = 0;
+FILE* file_ptr;
 
 GPIO_PinState readTogglePin( void )
 {
@@ -80,6 +83,19 @@ int32_t getThermistorValue( void )
 {
   // assumes value is mC, i.e. 1000 = 1 C
   return thermistor_value;
+}
+
+void writeMem( const uint32_t address, const char* const string, const uint32_t bytes )
+{
+  if (address == 0) rewind(file_ptr);
+
+  fwrite(string, sizeof(char), bytes, file_ptr);
+}
+void readMem(  const uint32_t address, char* string, const uint32_t bytes )
+{
+  fseek(file_ptr, address, SEEK_SET);
+
+  fread(string, sizeof(char), bytes, file_ptr);
 }
 
 void sendUARTChar(char c)

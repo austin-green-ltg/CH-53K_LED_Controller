@@ -1,4 +1,4 @@
-#ifdef ENABLE_UART_DEBUGGING
+#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
 #include "my_printf.h"
 #include "bsp.h"
 int fputc(int c, FILE *stream)
@@ -7,4 +7,4 @@ int fputc(int c, FILE *stream)
   sendUARTChar(c);
   return c;
 }
-#endif
+#endif /* ENABLE_UART_DEBUGGING */

@@ -26,6 +26,7 @@ C_SRCS := \
 	pwm_handler.c \
 	thermistor_handler.c \
 	bsp_mock.c \
+	logger.c \
 
 # test files
 TEST_SRCS := \
@@ -34,12 +35,14 @@ TEST_SRCS := \
 	delay_handler_test.c \
 	pwm_handler_test.c \
 	thermistor_handler_test.c \
+	logger_test.c \
 	test_runner.c \
 
 # unity files
 UNITY_SRCS := \
 	unity.c \
 	unity_fixture.c \
+	unity_memory.c \
 
 LIB_DIRS :=
 LIBS     :=

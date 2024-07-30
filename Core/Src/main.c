@@ -118,10 +118,10 @@ int main(void)
   turnOffIRPWM();
 
   startDelayCounter();
-#ifdef ENABLE_UART_DEBUGGING
+#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
   HAL_TIM_Base_Start(&htim3);
   htim3.Instance->CNT = 0;
-#endif
+#endif /* ENABLE_UART_DEBUGGING */
 
   /* USER CODE END 2 */
 
@@ -409,7 +409,7 @@ static void MX_USART2_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
-#ifdef ENABLE_UART_DEBUGGING
+#ifdef ENABLE_UART_DEBUGGING  /* tracing enabled */
   /* USER CODE END USART2_Init 0 */
 
   /* USER CODE BEGIN USART2_Init 1 */
@@ -430,7 +430,7 @@ static void MX_USART2_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART2_Init 2 */
-#endif
+#endif /* ENABLE_UART_DEBUGGING */
   /* USER CODE END USART2_Init 2 */
 
 }

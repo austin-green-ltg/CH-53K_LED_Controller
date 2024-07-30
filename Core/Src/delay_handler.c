@@ -2,7 +2,6 @@
 #include "delay_handler.h"
 #include "bsp.h"
 #include "my_printf.h"
-#include "pwm_handler.h"
 
 void startDelayCounter(void)
 {

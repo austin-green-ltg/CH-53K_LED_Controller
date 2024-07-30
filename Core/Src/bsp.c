@@ -75,6 +75,21 @@ int32_t getThermistorValue( void )
   return -1;
 }
 
+void writeMem( const uint32_t address, const char* const string, const uint32_t bytes )
+{
+  // TODO
+  (void) address;
+  (void) string;
+  (void) bytes;
+}
+void readMem(  const uint32_t address, char* string, const uint32_t bytes )
+{
+  // TODO
+  (void) address;
+  (void) string;
+  (void) bytes;
+}
+
 void sendUARTChar(char c)
 {
   HAL_UART_Transmit(&huart2, (uint8_t *) &c, sizeof(uint8_t), 0xFFFF);
