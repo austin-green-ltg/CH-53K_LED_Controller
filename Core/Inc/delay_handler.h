@@ -1,7 +1,7 @@
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __DELAY_HANDLER_H
-#define __DELAY_HANDLER_H
+#ifndef INC_delay_handlerh
+#define INC_delay_handlerh
 
 #include <stdint.h>
 
@@ -22,4 +22,4 @@ void    restartDelayCounter(void);   // restart the counter
 uint8_t delayHit(uint32_t delay_ms); // is delay in ms hit
 uint16_t brightnessDelay(int8_t brightness);
 
-#endif /* __DELAY_HANDLER_H */
+#endif /* INC_delay_handlerh */

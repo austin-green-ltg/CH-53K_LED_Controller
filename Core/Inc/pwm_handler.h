@@ -1,7 +1,7 @@
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __PWM_HANDLER_H
-#define __PWM_HANDLER_H
+#ifndef INC_pwm_handlerh
+#define INC_pwm_handlerh
 
 #include <stdint.h>
 
@@ -38,4 +38,4 @@ void    setIRBrightness( int8_t brightness );           // set value of irBright
 uint8_t getWhitePWM( void );                            // get value of current white PWM
 uint8_t getIRPWM( void );                               // get value of current IR PWM
 
-#endif /* __PWM_HANDLER_H */
+#endif /* INC_pwm_handlerh */

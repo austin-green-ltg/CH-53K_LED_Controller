@@ -1,7 +1,7 @@
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __THERMISTOR_HANDLER_H
-#define __THERMISTOR_HANDLER_H
+#ifndef INC_thermistor_handlerh
+#define INC_thermistor_handlerh
 
 #include "bsp.h"
 #include <stdint.h>
@@ -16,4 +16,4 @@ typedef enum
 int16_t get_temperature( void );
 TemperatureRange_e get_temperature_range( void );
 
-#endif /* __THERMISTOR_HANDLER_H */
+#endif /* INC_thermistor_handlerh */

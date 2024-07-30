@@ -1,6 +1,6 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __BSP_H
-#define __BSP_H
+#ifndef INC_bsph
+#define INC_bsph
 
 #include <stdint.h>
 
@@ -76,7 +76,9 @@ void startTIM2( void );
 void restartTIM2( void );
 uint32_t getTIM2Cnt( void );
 int32_t getThermistorValue( void );
+void writeMem( uint32_t address, const char* const string, const uint32_t bytes);
+void readMem( uint32_t address, char* string, uint32_t bytes_to_read);
 void sendUARTChar(char c);
 
 
-#endif /* __BSP_H */
+#endif /* INC_bsph */
