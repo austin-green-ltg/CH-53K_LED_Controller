@@ -18,8 +18,8 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F3xx_HAL_CONF_H
-#define __STM32F3xx_HAL_CONF_H
+#ifndef INC_stm32f3xx_hal_confh
+#define INC_stm32f3xx_hal_confh
 
 #ifdef __cplusplus
  extern "C" {
@@ -356,4 +356,4 @@
 }
 #endif
 
-#endif /* __STM32F3xx_HAL_CONF_H */
+#endif /* INC_stm32f3xx_hal_confh */

@@ -18,8 +18,8 @@
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F3xx_IT_H
-#define __STM32F3xx_IT_H
+#ifndef INC_stm32f3xx_ith
+#define INC_stm32f3xx_ith
 
 #ifdef __cplusplus
  extern "C" {
@@ -63,4 +63,4 @@ void SysTick_Handler(void);
 }
 #endif
 
-#endif /* __STM32F3xx_IT_H */
+#endif /* INC_stm32f3xx_ith */

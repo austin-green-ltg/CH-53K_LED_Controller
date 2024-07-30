@@ -1,11 +1,6 @@
 #include "bsp.h"
 
 /* Private variables ---------------------------------------------------------*/
-TIM_HandleTypeDef htim1;
-TIM_HandleTypeDef htim2;
-TIM_HandleTypeDef htim3;
-
-UART_HandleTypeDef huart2;
 GPIO_PinState readTogglePin( void )
 {
   return (HAL_GPIO_ReadPin(SWITCH_LED_GPIO_Port, SWITCH_LED_Pin));
@@ -92,6 +87,23 @@ void readMem(  const uint32_t address, char* string, const uint32_t bytes )
 
 void sendUARTChar(char c)
 {
+#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
   HAL_UART_Transmit(&huart2, (uint8_t *) &c, sizeof(uint8_t), 0xFFFF);
-	return;
+  return;
+#endif /* ENABLE_UART_DEBUGGING */
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  __disable_irq();
+  while (1)
+  {
+  }
+  /* USER CODE END Error_Handler_Debug */
 }

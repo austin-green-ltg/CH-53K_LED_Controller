@@ -5,9 +5,15 @@
 #include <stdint.h>
 
 /* Private defines -----------------------------------------------------------*/
-#ifdef USE_HAL_DRIVER
+#ifdef STM32F303x8
 
 #include "stm32f3xx_hal.h"
+#include "tim.h"
+#include "gpio.h"
+
+#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
+#include "usart.h"
+#endif /* ENABLE_UART_DEBUGGING */
 
 #define BRIGHT_Pin GPIO_PIN_1
 #define BRIGHT_GPIO_Port GPIOA
@@ -15,8 +21,6 @@
 #define DIM_GPIO_Port GPIOA
 #define SWITCH_LED_Pin GPIO_PIN_5
 #define SWITCH_LED_GPIO_Port GPIOA
-#define LED_STATUS_Pin GPIO_PIN_7
-#define LED_STATUS_GPIO_Port GPIOA
 #define WHITE_LED_Pin GPIO_PIN_8
 #define WHITE_LED_GPIO_Port GPIOA
 #define IR_LED_Pin GPIO_PIN_9
@@ -32,8 +36,6 @@
 #define DIM_GPIO_Port 0
 #define SWITCH_LED_Pin 0
 #define SWITCH_LED_GPIO_Port 0
-#define LED_STATUS_Pin 0
-#define LED_STATUS_GPIO_Port 0
 #define WHITE_LED_Pin 0
 #define WHITE_LED_GPIO_Port 0
 #define IR_LED_Pin 0
@@ -79,6 +81,8 @@ int32_t getThermistorValue( void );
 void writeMem( uint32_t address, const char* const string, const uint32_t bytes);
 void readMem( uint32_t address, char* string, uint32_t bytes_to_read);
 void sendUARTChar(char c);
+/* Exported functions prototypes ---------------------------------------------*/
+void Error_Handler(void);
 
 
 #endif /* INC_bsph */
