@@ -6,8 +6,7 @@
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
 #define CLOCK_HZ         (8000000)
 #define TIM3_PRESCALER   (65535)
-#define TIM3_CNT_PER_SEC (CLOCK_HZ / (float)TIM3_PRESCALER)
-extern TIM_HandleTypeDef htim3;
+#define TIM3_CNT_PER_SEC (CLOCK_HZ / (double)TIM3_PRESCALER)
 #endif /* ENABLE_UART_DEBUGGING */
 
 /* Private define ------------------------------------------------------------*/
@@ -65,19 +64,19 @@ void decreaseWhiteBrightness( uint8_t button_held )
   // set this to ensure that when we sweep we are using the exact value from when we start
   if (whiteBrightness == MIN_BRIGHTNESS)
   {
-    white_min_time  = htim3.Instance->CNT;
+    white_min_time  = TIM3->CNT;
     white_half_time = 0;
     white_max_time  = 0;
   }
   else if (whiteBrightness == HALF_BRIGHTNESS)
   {
-    white_half_time = htim3.Instance->CNT;
+    white_half_time = TIM3->CNT;
   }
   else if (whiteBrightness == MAX_BRIGHTNESS)
   {
     white_min_time  = 0;
     white_half_time = 0;
-    white_max_time  = htim3.Instance->CNT;
+    white_max_time  = TIM3->CNT;
   }
 #endif /* ENABLE_UART_DEBUGGING */
   // decrease whiteBrightness
@@ -92,21 +91,21 @@ void decreaseWhiteBrightness( uint8_t button_held )
 
   if (whiteBrightness == MIN_BRIGHTNESS)
   {
-    white_min_time = htim3.Instance->CNT;
-    if ((white_half_time != 0) && button_held) printf("Swept half time to min time in %f seconds\n", (float)(white_min_time - white_half_time) / TIM3_CNT_PER_SEC);
-    if ((white_max_time  != 0) && button_held) printf("Swept max time to min time in %f seconds\n",  (float)(white_min_time - white_max_time) / TIM3_CNT_PER_SEC);
+    white_min_time = TIM3->CNT;
+    if ((white_half_time != 0) && button_held) printf("Swept half time to min time in %f seconds\n", (double)(white_min_time - white_half_time) / TIM3_CNT_PER_SEC);
+    if ((white_max_time  != 0) && button_held) printf("Swept max time to min time in %f seconds\n",  (double)(white_min_time - white_max_time) / TIM3_CNT_PER_SEC);
   }
   else if (whiteBrightness == HALF_BRIGHTNESS)
   {
-    white_half_time = htim3.Instance->CNT;
-    if ((white_min_time != 0) && button_held) printf("Swept min time to half time in %f seconds\n", (float)(white_half_time - white_min_time) / TIM3_CNT_PER_SEC);
-    if ((white_max_time != 0) && button_held) printf("Swept max time to half time in %f seconds\n", (float)(white_half_time - white_max_time) / TIM3_CNT_PER_SEC);
+    white_half_time = TIM3->CNT;
+    if ((white_min_time != 0) && button_held) printf("Swept min time to half time in %f seconds\n", (double)(white_half_time - white_min_time) / TIM3_CNT_PER_SEC);
+    if ((white_max_time != 0) && button_held) printf("Swept max time to half time in %f seconds\n", (double)(white_half_time - white_max_time) / TIM3_CNT_PER_SEC);
   }
   else if (whiteBrightness == MAX_BRIGHTNESS)
   {
-    white_max_time = htim3.Instance->CNT;
-    if ((white_min_time  != 0) && button_held) printf("Swept min time to max time in %f seconds\n",  (float)(white_max_time - white_min_time) / TIM3_CNT_PER_SEC);
-    if ((white_half_time != 0) && button_held) printf("Swept half time to max time in %f seconds\n", (float)(white_max_time - white_half_time) / TIM3_CNT_PER_SEC);
+    white_max_time = TIM3->CNT;
+    if ((white_min_time  != 0) && button_held) printf("Swept min time to max time in %f seconds\n",  (double)(white_max_time - white_min_time) / TIM3_CNT_PER_SEC);
+    if ((white_half_time != 0) && button_held) printf("Swept half time to max time in %f seconds\n", (double)(white_max_time - white_half_time) / TIM3_CNT_PER_SEC);
   }
 #endif /* ENABLE_UART_DEBUGGING */
 
@@ -122,19 +121,19 @@ void decreaseIRBrightness( uint8_t button_held )
   // set this to ensure that when we sweep we are using the exact value from when we start
   if (irBrightness == MIN_BRIGHTNESS)
   {
-    ir_min_time  = htim3.Instance->CNT;
+    ir_min_time  = TIM3->CNT;
     ir_half_time = 0;
     ir_max_time  = 0;
   }
   else if (irBrightness == HALF_BRIGHTNESS)
   {
-    ir_half_time = htim3.Instance->CNT;
+    ir_half_time = TIM3->CNT;
   }
   else if (irBrightness == MAX_BRIGHTNESS)
   {
     ir_min_time  = 0;
     ir_half_time = 0;
-    ir_max_time  = htim3.Instance->CNT;
+    ir_max_time  = TIM3->CNT;
   }
 #endif /* ENABLE_UART_DEBUGGING */
   // decrease irBrightness
@@ -149,21 +148,21 @@ void decreaseIRBrightness( uint8_t button_held )
 
   if (irBrightness == MIN_BRIGHTNESS)
   {
-    ir_min_time = htim3.Instance->CNT;
-    if ((ir_half_time != 0) && button_held) printf("Swept half time to min time in %f seconds\n", (float)(ir_min_time - ir_half_time) / TIM3_CNT_PER_SEC);
-    if ((ir_max_time  != 0) && button_held) printf("Swept max time to min time in %f seconds\n",  (float)(ir_min_time - ir_max_time) / TIM3_CNT_PER_SEC);
+    ir_min_time = TIM3->CNT;
+    if ((ir_half_time != 0) && button_held) printf("Swept half time to min time in %f seconds\n", (double)(ir_min_time - ir_half_time) / TIM3_CNT_PER_SEC);
+    if ((ir_max_time  != 0) && button_held) printf("Swept max time to min time in %f seconds\n",  (double)(ir_min_time - ir_max_time) / TIM3_CNT_PER_SEC);
   }
   else if (irBrightness == HALF_BRIGHTNESS)
   {
-    ir_half_time = htim3.Instance->CNT;
-    if ((ir_min_time != 0) && button_held) printf("Swept min time to half time in %f seconds\n", (float)(ir_half_time - ir_min_time) / TIM3_CNT_PER_SEC);
-    if ((ir_max_time != 0) && button_held) printf("Swept max time to half time in %f seconds\n", (float)(ir_half_time - ir_max_time) / TIM3_CNT_PER_SEC);
+    ir_half_time = TIM3->CNT;
+    if ((ir_min_time != 0) && button_held) printf("Swept min time to half time in %f seconds\n", (double)(ir_half_time - ir_min_time) / TIM3_CNT_PER_SEC);
+    if ((ir_max_time != 0) && button_held) printf("Swept max time to half time in %f seconds\n", (double)(ir_half_time - ir_max_time) / TIM3_CNT_PER_SEC);
   }
   else if (irBrightness == MAX_BRIGHTNESS)
   {
-    ir_max_time = htim3.Instance->CNT;
-    if ((ir_min_time  != 0) && button_held) printf("Swept min time to max time in %f seconds\n",  (float)(ir_max_time - ir_min_time) / TIM3_CNT_PER_SEC);
-    if ((ir_half_time != 0) && button_held) printf("Swept half time to max time in %f seconds\n", (float)(ir_max_time - ir_half_time) / TIM3_CNT_PER_SEC);
+    ir_max_time = TIM3->CNT;
+    if ((ir_min_time  != 0) && button_held) printf("Swept min time to max time in %f seconds\n",  (double)(ir_max_time - ir_min_time) / TIM3_CNT_PER_SEC);
+    if ((ir_half_time != 0) && button_held) printf("Swept half time to max time in %f seconds\n", (double)(ir_max_time - ir_half_time) / TIM3_CNT_PER_SEC);
   }
 #endif /* ENABLE_UART_DEBUGGING */
 
@@ -179,19 +178,19 @@ void increaseWhiteBrightness( uint8_t button_held )
   // set this to ensure that when we sweep we are using the exact value from when we start
   if (whiteBrightness == MIN_BRIGHTNESS)
   {
-    white_min_time  = htim3.Instance->CNT;
+    white_min_time  = TIM3->CNT;
     white_half_time = 0;
     white_max_time  = 0;
   }
   else if (whiteBrightness == HALF_BRIGHTNESS)
   {
-    white_half_time = htim3.Instance->CNT;
+    white_half_time = TIM3->CNT;
   }
   else if (whiteBrightness == MAX_BRIGHTNESS)
   {
     white_min_time  = 0;
     white_half_time = 0;
-    white_max_time  = htim3.Instance->CNT;
+    white_max_time  = TIM3->CNT;
   }
 #endif /* ENABLE_UART_DEBUGGING */
   // increase whiteBrightness
@@ -206,21 +205,21 @@ void increaseWhiteBrightness( uint8_t button_held )
 
   if (whiteBrightness == MIN_BRIGHTNESS)
   {
-    white_min_time = htim3.Instance->CNT;
-    if ((white_half_time != 0) && button_held) printf("Swept half time to min time in %f seconds\n", (float)(white_min_time - white_half_time) / TIM3_CNT_PER_SEC);
-    if ((white_max_time  != 0) && button_held) printf("Swept max time to min time in %f seconds\n",  (float)(white_min_time - white_max_time) / TIM3_CNT_PER_SEC);
+    white_min_time = TIM3->CNT;
+    if ((white_half_time != 0) && button_held) printf("Swept half time to min time in %f seconds\n", (double)(white_min_time - white_half_time) / TIM3_CNT_PER_SEC);
+    if ((white_max_time  != 0) && button_held) printf("Swept max time to min time in %f seconds\n",  (double)(white_min_time - white_max_time) / TIM3_CNT_PER_SEC);
   }
   else if (whiteBrightness == HALF_BRIGHTNESS)
   {
-    white_half_time = htim3.Instance->CNT;
-    if ((white_min_time != 0) && button_held) printf("Swept min time to half time in %f seconds\n", (float)(white_half_time - white_min_time) / TIM3_CNT_PER_SEC);
-    if ((white_max_time != 0) && button_held) printf("Swept max time to half time in %f seconds\n", (float)(white_half_time - white_max_time) / TIM3_CNT_PER_SEC);
+    white_half_time = TIM3->CNT;
+    if ((white_min_time != 0) && button_held) printf("Swept min time to half time in %f seconds\n", (double)(white_half_time - white_min_time) / TIM3_CNT_PER_SEC);
+    if ((white_max_time != 0) && button_held) printf("Swept max time to half time in %f seconds\n", (double)(white_half_time - white_max_time) / TIM3_CNT_PER_SEC);
   }
   else if (whiteBrightness == MAX_BRIGHTNESS)
   {
-    white_max_time = htim3.Instance->CNT;
-    if ((white_min_time  != 0) && button_held) printf("Swept min time to max time in %f seconds\n",  (float)(white_max_time - white_min_time) / TIM3_CNT_PER_SEC);
-    if ((white_half_time != 0) && button_held) printf("Swept half time to max time in %f seconds\n", (float)(white_max_time - white_half_time) / TIM3_CNT_PER_SEC);
+    white_max_time = TIM3->CNT;
+    if ((white_min_time  != 0) && button_held) printf("Swept min time to max time in %f seconds\n",  (double)(white_max_time - white_min_time) / TIM3_CNT_PER_SEC);
+    if ((white_half_time != 0) && button_held) printf("Swept half time to max time in %f seconds\n", (double)(white_max_time - white_half_time) / TIM3_CNT_PER_SEC);
   }
 #endif /* ENABLE_UART_DEBUGGING */
 
@@ -236,19 +235,19 @@ void increaseIRBrightness( uint8_t button_held )
   // set this to ensure that when we sweep we are using the exact value from when we start
   if (irBrightness == MIN_BRIGHTNESS)
   {
-    ir_min_time  = htim3.Instance->CNT;
+    ir_min_time  = TIM3->CNT;
     ir_half_time = 0;
     ir_max_time  = 0;
   }
   else if (irBrightness == HALF_BRIGHTNESS)
   {
-    ir_half_time = htim3.Instance->CNT;
+    ir_half_time = TIM3->CNT;
   }
   else if (irBrightness == MAX_BRIGHTNESS)
   {
     ir_min_time  = 0;
     ir_half_time = 0;
-    ir_max_time  = htim3.Instance->CNT;
+    ir_max_time  = TIM3->CNT;
   }
 #endif /* ENABLE_UART_DEBUGGING */
   // increase irBrightness
@@ -263,21 +262,21 @@ void increaseIRBrightness( uint8_t button_held )
 
   if (irBrightness == MIN_BRIGHTNESS)
   {
-    ir_min_time = htim3.Instance->CNT;
-    if ((ir_half_time != 0) && button_held) printf("Swept half time to min time in %f seconds\n", (float)(ir_min_time - ir_half_time) / TIM3_CNT_PER_SEC);
-    if ((ir_max_time  != 0) && button_held) printf("Swept max time to min time in %f seconds\n",  (float)(ir_min_time - ir_max_time) / TIM3_CNT_PER_SEC);
+    ir_min_time = TIM3->CNT;
+    if ((ir_half_time != 0) && button_held) printf("Swept half time to min time in %f seconds\n", (double)(ir_min_time - ir_half_time) / TIM3_CNT_PER_SEC);
+    if ((ir_max_time  != 0) && button_held) printf("Swept max time to min time in %f seconds\n",  (double)(ir_min_time - ir_max_time) / TIM3_CNT_PER_SEC);
   }
   else if (irBrightness == HALF_BRIGHTNESS)
   {
-    ir_half_time = htim3.Instance->CNT;
-    if ((ir_min_time != 0) && button_held) printf("Swept min time to half time in %f seconds\n", (float)(ir_half_time - ir_min_time) / TIM3_CNT_PER_SEC);
-    if ((ir_max_time != 0) && button_held) printf("Swept max time to half time in %f seconds\n", (float)(ir_half_time - ir_max_time) / TIM3_CNT_PER_SEC);
+    ir_half_time = TIM3->CNT;
+    if ((ir_min_time != 0) && button_held) printf("Swept min time to half time in %f seconds\n", (double)(ir_half_time - ir_min_time) / TIM3_CNT_PER_SEC);
+    if ((ir_max_time != 0) && button_held) printf("Swept max time to half time in %f seconds\n", (double)(ir_half_time - ir_max_time) / TIM3_CNT_PER_SEC);
   }
   else if (irBrightness == MAX_BRIGHTNESS)
   {
-    ir_max_time = htim3.Instance->CNT;
-    if ((ir_min_time  != 0) && button_held) printf("Swept min time to max time in %f seconds\n",  (float)(ir_max_time - ir_min_time) / TIM3_CNT_PER_SEC);
-    if ((ir_half_time != 0) && button_held) printf("Swept half time to max time in %f seconds\n", (float)(ir_max_time - ir_half_time) / TIM3_CNT_PER_SEC);
+    ir_max_time = TIM3->CNT;
+    if ((ir_min_time  != 0) && button_held) printf("Swept min time to max time in %f seconds\n",  (double)(ir_max_time - ir_min_time) / TIM3_CNT_PER_SEC);
+    if ((ir_half_time != 0) && button_held) printf("Swept half time to max time in %f seconds\n", (double)(ir_max_time - ir_half_time) / TIM3_CNT_PER_SEC);
   }
 #endif /* ENABLE_UART_DEBUGGING */
 

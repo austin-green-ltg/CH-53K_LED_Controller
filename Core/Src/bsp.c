@@ -3,37 +3,45 @@
 /* Private variables ---------------------------------------------------------*/
 GPIO_PinState readTogglePin( void )
 {
-  return (HAL_GPIO_ReadPin(SWITCH_LED_GPIO_Port, SWITCH_LED_Pin));
+  return (LL_GPIO_IsInputPinSet(SWITCH_LED_GPIO_Port, SWITCH_LED_Pin));
 }
 
 GPIO_PinState readDimPin( void )
 {
-  return (HAL_GPIO_ReadPin(DIM_GPIO_Port, DIM_Pin));
+  return (LL_GPIO_IsInputPinSet(DIM_GPIO_Port, DIM_Pin));
 }
 
 GPIO_PinState readBrightPin( void )
 {
-  return (HAL_GPIO_ReadPin(BRIGHT_GPIO_Port, BRIGHT_Pin));
+  return (LL_GPIO_IsInputPinSet(BRIGHT_GPIO_Port, BRIGHT_Pin));
 }
 
 void startPWM11( void )
 {
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  LL_TIM_CC_EnableChannel(TIM1, LL_TIM_CHANNEL_CH1);
+
+  LL_TIM_EnableCounter(TIM1);
 }
 
 void startPWM12( void )
 {
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+  LL_TIM_CC_EnableChannel(TIM1, LL_TIM_CHANNEL_CH2);
+
+  LL_TIM_EnableCounter(TIM1);
 }
 
 void stopPWM11( void )
 {
-  HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
+  LL_TIM_CC_DisableChannel(TIM1, LL_TIM_CHANNEL_CH1);
+
+  LL_TIM_DisableCounter(TIM1);
 }
 
 void stopPWM12( void )
 {
-  HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
+  LL_TIM_CC_DisableChannel(TIM1, LL_TIM_CHANNEL_CH2);
+
+  LL_TIM_DisableCounter(TIM1);
 }
 
 void setPW11( uint32_t pulse_width )
@@ -48,7 +56,8 @@ void setPW12( uint32_t pulse_width )
 
 void startTIM2( void )
 {
-  HAL_TIM_Base_Start(&htim2);
+  LL_TIM_EnableCounter(TIM2);
+
   return;
 }
 
@@ -88,7 +97,9 @@ void readMem(  const uint32_t address, char* string, const uint32_t bytes )
 void sendUARTChar(char c)
 {
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-  HAL_UART_Transmit(&huart2, (uint8_t *) &c, sizeof(uint8_t), 0xFFFF);
+	while(!LL_USART_IsActiveFlag_TXE(USART2)){};
+	LL_USART_TransmitData8(USART2, (uint8_t)(c & 0xFFU));
+	while(LL_USART_IsActiveFlag_TC(USART2)){}
   return;
 #endif /* ENABLE_UART_DEBUGGING */
 }

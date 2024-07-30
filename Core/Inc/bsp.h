@@ -7,7 +7,22 @@
 /* Private defines -----------------------------------------------------------*/
 #ifdef STM32F303x8
 
-#include "stm32f3xx_hal.h"
+#include "stm32f3xx_ll_rcc.h"
+#include "stm32f3xx_ll_bus.h"
+#include "stm32f3xx_ll_system.h"
+#include "stm32f3xx_ll_exti.h"
+#include "stm32f3xx_ll_cortex.h"
+#include "stm32f3xx_ll_utils.h"
+#include "stm32f3xx_ll_pwr.h"
+#include "stm32f3xx_ll_dma.h"
+#include "stm32f3xx_ll_tim.h"
+#include "stm32f3xx_ll_usart.h"
+#include "stm32f3xx_ll_gpio.h"
+
+#if defined(USE_FULL_ASSERT)
+#include "stm32_assert.h"
+#endif /* USE_FULL_ASSERT */
+
 #include "tim.h"
 #include "gpio.h"
 
@@ -15,18 +30,16 @@
 #include "usart.h"
 #endif /* ENABLE_UART_DEBUGGING */
 
-#define BRIGHT_Pin GPIO_PIN_1
+#define BRIGHT_Pin LL_GPIO_PIN_1
 #define BRIGHT_GPIO_Port GPIOA
-#define DIM_Pin GPIO_PIN_3
+#define DIM_Pin LL_GPIO_PIN_3
 #define DIM_GPIO_Port GPIOA
-#define SWITCH_LED_Pin GPIO_PIN_5
+#define SWITCH_LED_Pin LL_GPIO_PIN_5
 #define SWITCH_LED_GPIO_Port GPIOA
-#define WHITE_LED_Pin GPIO_PIN_8
+#define WHITE_LED_Pin LL_GPIO_PIN_8
 #define WHITE_LED_GPIO_Port GPIOA
-#define IR_LED_Pin GPIO_PIN_9
+#define IR_LED_Pin LL_GPIO_PIN_9
 #define IR_LED_GPIO_Port GPIOA
-
-#define BUTTON_PRESSED (GPIO_PIN_SET)
 
 #else
 
@@ -41,10 +54,6 @@
 #define IR_LED_Pin 0
 #define IR_LED_GPIO_Port 0
 
-#define GPIO_PinState uint8_t
-
-#define BUTTON_PRESSED (1)
-
 typedef struct
 {
   uint8_t is_running;
@@ -57,6 +66,24 @@ typedef struct
   uint32_t time;
 } timerStruct;
 
+#endif
+
+#define GPIO_PinState uint8_t
+
+#define BUTTON_PRESSED    (1)
+#define BUTTON_UNPRESSED  (0)
+
+#ifndef NVIC_PRIORITYGROUP_0
+#define NVIC_PRIORITYGROUP_0         ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority,
+                                                                 4 bits for subpriority */
+#define NVIC_PRIORITYGROUP_1         ((uint32_t)0x00000006) /*!< 1 bit  for pre-emption priority,
+                                                                 3 bits for subpriority */
+#define NVIC_PRIORITYGROUP_2         ((uint32_t)0x00000005) /*!< 2 bits for pre-emption priority,
+                                                                 2 bits for subpriority */
+#define NVIC_PRIORITYGROUP_3         ((uint32_t)0x00000004) /*!< 3 bits for pre-emption priority,
+                                                                 1 bit  for subpriority */
+#define NVIC_PRIORITYGROUP_4         ((uint32_t)0x00000003) /*!< 4 bits for pre-emption priority,
+                                                                 0 bit  for subpriority */
 #endif
 
 #define CLK_FREQ_HZ (8000000)
