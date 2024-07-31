@@ -26,6 +26,16 @@ GPIO_PinState readBrightPin( void )
   return bright_pin;
 }
 
+void enablePWM1( void )
+{
+  return;
+}
+
+void disablePWM1( void )
+{
+  return;
+}
+
 void startPWM11( void )
 {
   pwm_white.is_running = 1;
@@ -53,13 +63,13 @@ void stopPWM12( void )
 void setPW11( uint32_t pulse_width )
 {
   pwm_white.pulse_width = pulse_width;
-	return;
+  return;
 }
 
 void setPW12( uint32_t pulse_width )
 {
   pwm_ir.pulse_width = pulse_width;
-	return;
+  return;
 }
 
 void startTIM2( void )

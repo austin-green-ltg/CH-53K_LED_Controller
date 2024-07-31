@@ -16,42 +16,48 @@ GPIO_PinState readBrightPin( void )
   return (LL_GPIO_IsInputPinSet(BRIGHT_GPIO_Port, BRIGHT_Pin));
 }
 
+void enablePWM1( void )
+{
+  LL_TIM_EnableAllOutputs(TIM1);
+
+  LL_TIM_EnableCounter(TIM1);
+}
+
+void disablePWM1( void )
+{
+  LL_TIM_DisableAllOutputs(TIM1);
+
+  LL_TIM_DisableCounter(TIM1);
+}
+
 void startPWM11( void )
 {
   LL_TIM_CC_EnableChannel(TIM1, LL_TIM_CHANNEL_CH1);
-
-  LL_TIM_EnableCounter(TIM1);
 }
 
 void startPWM12( void )
 {
   LL_TIM_CC_EnableChannel(TIM1, LL_TIM_CHANNEL_CH2);
-
-  LL_TIM_EnableCounter(TIM1);
 }
 
 void stopPWM11( void )
 {
   LL_TIM_CC_DisableChannel(TIM1, LL_TIM_CHANNEL_CH1);
-
-  LL_TIM_DisableCounter(TIM1);
 }
 
 void stopPWM12( void )
 {
   LL_TIM_CC_DisableChannel(TIM1, LL_TIM_CHANNEL_CH2);
-
-  LL_TIM_DisableCounter(TIM1);
 }
 
 void setPW11( uint32_t pulse_width )
 {
-  TIM1->CCR1 = pulse_width;
+  LL_TIM_OC_SetCompareCH1(TIM1, pulse_width);
 }
 
 void setPW12( uint32_t pulse_width )
 {
-  TIM1->CCR2 = pulse_width;
+  LL_TIM_OC_SetCompareCH2(TIM1, pulse_width);
 }
 
 void startTIM2( void )
@@ -63,13 +69,13 @@ void startTIM2( void )
 
 void restartTIM2( void )
 {
-  TIM2->CNT = 0;
+  LL_TIM_SetCounter(TIM2, 0);
   return;
 }
 
 uint32_t getTIM2Cnt( void )
 {
-  return TIM2->CNT;
+  return LL_TIM_GetCounter(TIM2);
 }
 
 // Returns raw thermistor ADC value
@@ -97,9 +103,9 @@ void readMem(  const uint32_t address, char* string, const uint32_t bytes )
 void sendUARTChar(char c)
 {
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-	while(!LL_USART_IsActiveFlag_TXE(USART2)){};
-	LL_USART_TransmitData8(USART2, (uint8_t)(c & 0xFFU));
-	while(LL_USART_IsActiveFlag_TC(USART2)){}
+  while(!LL_USART_IsActiveFlag_TXE(USART2)){};
+  LL_USART_TransmitData8(USART2, (uint8_t)(c & 0xFFU));
+  while(LL_USART_IsActiveFlag_TC(USART2)){}
   return;
 #endif /* ENABLE_UART_DEBUGGING */
 }

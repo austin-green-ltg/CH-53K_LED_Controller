@@ -95,6 +95,8 @@ GPIO_PinState readTogglePin( void );
 GPIO_PinState readDimPin( void );
 GPIO_PinState readBrightPin( void );
 
+void enablePWM1( void );
+void disablePWM1( void );
 void startPWM11( void );
 void startPWM12( void );
 void stopPWM11( void );

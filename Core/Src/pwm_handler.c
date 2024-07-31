@@ -42,6 +42,7 @@ void initWhitePWM(void)
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
   printf("Init %s PWM\n", "White");
 #endif /* ENABLE_UART_DEBUGGING */
+  enablePWM1();
   turnOffWhitePWM();
   return;
 }
@@ -54,6 +55,7 @@ void initIRPWM(void)
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
   printf("Init %s PWM\n", "IR");
 #endif /* ENABLE_UART_DEBUGGING */
+  enablePWM1();
   turnOffIRPWM();
   return;
 }
