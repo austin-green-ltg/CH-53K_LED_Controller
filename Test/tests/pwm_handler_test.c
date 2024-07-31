@@ -280,23 +280,23 @@ TEST(PWM_Handler, GetWhitePWMNiceCase)
 {
     const float white_pwm_steps = (MAX_WHITE_PW - MIN_WHITE_PW) / (BRIGHTNESS_STEPS - 1);
     int8_t brightness = MIN_BRIGHTNESS;
-    uint8_t expected_pwm = ((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
+    uint8_t expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
     TEST_ASSERT(GetWhitePWM() == expected_pwm);
     brightness = MAX_BRIGHTNESS;
-    expected_pwm = ((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
+    expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
     TEST_ASSERT(GetWhitePWM() == expected_pwm);
     brightness = HALF_BRIGHTNESS;
-    expected_pwm = ((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
+    expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
     TEST_ASSERT(GetWhitePWM() == expected_pwm);
     brightness = 17;
-    expected_pwm = ((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
+    expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
     TEST_ASSERT(GetWhitePWM() == expected_pwm);
     brightness = 42;
-    expected_pwm = ((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
+    expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
     TEST_ASSERT(GetWhitePWM() == expected_pwm);
 }
@@ -306,23 +306,23 @@ TEST(PWM_Handler, GetIRPWMNiceCase)
 {
     const float IR_pwm_steps = (MAX_IR_PW - MIN_IR_PW) / (BRIGHTNESS_STEPS - 1);
     int8_t brightness = MIN_BRIGHTNESS;
-    uint8_t expected_pwm = ((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
+    uint8_t expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
     TEST_ASSERT(GetIRPWM() == expected_pwm);
     brightness = MAX_BRIGHTNESS;
-    expected_pwm = ((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
+    expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
     TEST_ASSERT(GetIRPWM() == expected_pwm);
     brightness = HALF_BRIGHTNESS;
-    expected_pwm = ((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
+    expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
     TEST_ASSERT(GetIRPWM() == expected_pwm);
     brightness = 12;
-    expected_pwm = ((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
+    expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
     TEST_ASSERT(GetIRPWM() == expected_pwm);
     brightness = 39;
-    expected_pwm = ((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
+    expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
     TEST_ASSERT(GetIRPWM() == expected_pwm);
 }
@@ -332,7 +332,7 @@ TEST(PWM_Handler, GetWhitePWMThermistorNiceCase)
 {
     const float white_pwm_steps = (MAX_WHITE_PW - MIN_WHITE_PW) / (BRIGHTNESS_STEPS - 1);
     const int8_t brightness = MAX_BRIGHTNESS;
-    const uint8_t expected_pwm = ((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
+    const uint8_t expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     const uint8_t expected_cool_pwm = expected_pwm;
     const uint8_t expected_warm_pwm = (uint8_t)(expected_pwm * WARM_PWM_RATIO + 0.5);
     const uint8_t expected_hot_pwm  = (uint8_t)(expected_pwm * HOT_PWM_RATIO + 0.5);
@@ -353,7 +353,7 @@ TEST(PWM_Handler, GetIRPWMThermistorNiceCase)
 {
     const float IR_pwm_steps = (MAX_IR_PW - MIN_IR_PW) / (BRIGHTNESS_STEPS - 1);
     const int8_t brightness = MAX_BRIGHTNESS;
-    const uint8_t expected_pwm = ((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
+    const uint8_t expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     const uint8_t expected_cool_pwm = expected_pwm;
     const uint8_t expected_warm_pwm = (uint8_t)(expected_pwm * WARM_PWM_RATIO + 0.5);
     const uint8_t expected_hot_pwm  = (uint8_t)(expected_pwm * HOT_PWM_RATIO + 0.5);

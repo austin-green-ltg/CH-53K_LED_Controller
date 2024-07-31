@@ -1,0 +1,160 @@
+# project name:
+PROJECT := CH-53K_IAR
+
+# list of all source directories used by this project
+VPATH := . \
+	../Core/Src \
+	../Drivers/STM32F3xx_HAL_Driver\Src \
+	../EWARM \
+
+# list of all include directories needed by this project
+INCLUDES := -I. \
+	-I ../Core/Inc \
+	-I ../Drivers/STM32F3xx_HAL_Driver/Inc \
+	-I ../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy \
+	-I ../Drivers/CMSIS/Device/ST/STM32F3xx/Include \
+	-I ../Drivers/CMSIS/Include \
+#-----------------------------------------------------------------------------
+# project files:
+#
+
+# C source files...
+C_SRCS := \
+	bsp.c \
+	button_handler.c \
+	delay_handler.c \
+	gpio.c \
+	logger.c \
+	main.c \
+	my_printf.c \
+	pwm_handler.c \
+	stm32f3xx_it.c \
+	system_stm32f3xx.c \
+	thermistor_handler.c \
+	tim.c \
+	usart.c \
+	stm32f3xx_ll_dma.c \
+	stm32f3xx_ll_exti.c \
+	stm32f3xx_ll_gpio.c \
+	stm32f3xx_ll_rcc.c \
+	stm32f3xx_ll_tim.c \
+	stm32f3xx_ll_usart.c \
+	stm32f3xx_ll_utils.c \
+
+# Assembler files
+S_SRCS := \
+	startup_stm32f303x8.s
+
+LIB_DIRS :=
+LIBS     :=
+
+# defines...
+DEFINES  := \
+	-D STM32F303x8 \
+	-D USE_FULL_LL_DRIVER \
+	-D ENABLE_UART_DEBUGGING \
+
+#============================================================================
+# Typically you should not need to change anything below this line
+
+#-----------------------------------------------------------------------------
+# GNU toolset:
+#
+CC    := "C:/Programs/IAR Systems/Embedded Workbench 9.2/arm/bin/iccarm.exe"
+AS    := "C:/Programs/IAR Systems/Embedded Workbench 9.2/arm/bin/iasmarm.exe"
+LINK  := "C:/Programs/IAR Systems/Embedded Workbench 9.2/arm/bin/ilinkarm.exe"
+ELF   := "C:/Programs/IAR Systems/Embedded Workbench 9.2/arm/bin/ielftool.exe"
+
+#-----------------------------------------------------------------------------
+# basic utilities (depends on the OS this Makefile runs on):
+#
+ifeq ($(OS),Windows_NT)
+	MKDIR      := mkdir
+	RM         := rm
+	TARGET_EXT := .exe
+else ifeq ($(OSTYPE),cygwin)
+	MKDIR      := mkdir -p
+	RM         := rm -f
+	TARGET_EXT := .exe
+else
+	MKDIR      := mkdir -p
+	RM         := rm -f
+	TARGET_EXT :=
+endif
+
+#-----------------------------------------------------------------------------
+# build options...
+
+BIN_DIR := iar-build
+
+CFLAGS  := --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp \
+	--dlib_config "C:/Programs/IAR Systems/Embedded Workbench 9.2/arm/inc/c/DLib_Config_Full.h" \
+	$(INCLUDES)  \
+	-Ohs --require_prototypes
+
+SFLAGS :=  -s+ -M"<>" -w+ -r --cpu=Cortex-M4 --fpu=VFPv4_sp
+
+LINKFLAGS := --redirect _Printf=_PrintfFullNoMb --redirect _Scanf=_ScanfFullNoMb \
+	--map "..\EWARM\Release\List\CH-53K_LED_ Controller.map" \
+	--config ..\EWARM/stm32f303x8_flash.icf  \
+	--warnings_are_errors --semihosting --entry __iar_program_start --vfe --text_out locale --cpu=Cortex-M4 --fpu=VFPv4_sp
+
+ELFFLAGS := --ihex --verbose
+
+#-----------------------------------------------------------------------------
+C_OBJS       := $(patsubst %.c,%.o,   $(C_SRCS))
+S_OBJS       := $(patsubst %.s,%.o,   $(S_SRCS))
+
+TARGET_EXE     := $(BIN_DIR)/$(PROJECT)$(TARGET_EXT)
+TARGET_HEX     := $(BIN_DIR)/$(PROJECT).hex
+C_OBJS_EXT     := $(addprefix $(BIN_DIR)/, $(C_OBJS))
+S_OBJS_EXT     := $(addprefix $(BIN_DIR)/, $(S_OBJS))
+C_DEPS_EXT     := $(patsubst %.o,%.d, $(C_OBJS_EXT))
+S_DEPS_EXT     := $(patsubst %.o,%.d, $(S_OBJS_EXT))
+
+#-----------------------------------------------------------------------------
+# rules
+#
+
+.PHONY : clean show
+
+all : $(TARGET_HEX)
+
+$(TARGET_HEX) : $(TARGET_EXE)
+	$(ELF) $(ELFFLAGS) $^ $@
+
+$(TARGET_EXE) : $(C_OBJS_EXT) $(S_OBJS_EXT)
+	$(LINK) $^ --no_out_extension -o $@ $(LINKFLAGS)
+
+$(BIN_DIR)/%.o : %.s
+	$(AS) $< -o $@ $(SFLAGS)
+
+$(BIN_DIR)/%.o : %.c
+	$(CC) $< $(DEFINES) -o $@ $(CFLAGS)
+
+# create BIN_DIR and include dependencies only if needed
+ifneq ($(MAKECMDGOALS),clean)
+  ifneq ($(MAKECMDGOALS),show)
+     ifneq ($(MAKECMDGOALS),debug)
+ifeq ("$(wildcard $(BIN_DIR))","")
+$(shell $(MKDIR) $(BIN_DIR))
+endif
+-include $(C_DEPS_EXT) $(S_DEPS_EXT)
+     endif
+  endif
+endif
+
+clean :
+	-$(RM) $(BIN_DIR)/*.*
+
+show :
+	@echo PROJECT      	= $(PROJECT)
+	@echo TARGET_EXE   	= $(TARGET_EXE)
+	@echo VPATH        	= $(VPATH)
+	@echo C_SRCS       	= $(C_SRCS)
+	@echo C_DEPS_EXT   	= $(C_DEPS_EXT)
+	@echo C_OBJS_EXT   	= $(C_OBJS_EXT)
+	@echo LIB_DIRS     	= $(LIB_DIRS)
+	@echo LIBS         	= $(LIBS)
+	@echo DEFINES      	= $(DEFINES)
+
