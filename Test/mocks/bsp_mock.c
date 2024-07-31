@@ -2,114 +2,119 @@
 
 #include "bsp.h"
 
-pwmStruct pwm_white;
-pwmStruct pwm_ir;
-timerStruct timer;
+PwmStruct pwm_white;
+PwmStruct pwm_ir;
+TimerStruct timer;
 GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
 GPIO_PinState bright_pin = 0;
 int32_t thermistor_value = 0;
 FILE* file_ptr;
 
-GPIO_PinState readTogglePin( void )
+GPIO_PinState ReadTogglePin( void )
 {
-  return toggle_pin;
+    return toggle_pin;
 }
 
-GPIO_PinState readDimPin( void )
+GPIO_PinState ReadDimPin( void )
 {
-  return dim_pin;
+    return dim_pin;
 }
 
-GPIO_PinState readBrightPin( void )
+GPIO_PinState ReadBrightPin( void )
 {
-  return bright_pin;
+    return bright_pin;
 }
 
-void enablePWM1( void )
+void EnablePWM1( void )
 {
-  return;
+    return;
 }
 
-void disablePWM1( void )
+void DisablePWM1( void )
 {
-  return;
+    return;
 }
 
-void startPWM11( void )
+void StartPWM11( void )
 {
-  pwm_white.is_running = 1;
-  return;
+    pwm_white.is_running = 1;
+    return;
 }
 
-void startPWM12( void )
+void StartPWM12( void )
 {
-  pwm_ir.is_running = 1;
-  return;
+    pwm_ir.is_running = 1;
+    return;
 }
 
-void stopPWM11( void )
+void StopPWM11( void )
 {
-  pwm_white.is_running = 0;
-  return;
+    pwm_white.is_running = 0;
+    return;
 }
 
-void stopPWM12( void )
+void StopPWM12( void )
 {
-  pwm_ir.is_running = 0;
-  return;
+    pwm_ir.is_running = 0;
+    return;
 }
 
-void setPW11( uint32_t pulse_width )
+void SetPW11( uint32_t pulse_width )
 {
-  pwm_white.pulse_width = pulse_width;
-  return;
+    pwm_white.pulse_width = pulse_width;
+    return;
 }
 
-void setPW12( uint32_t pulse_width )
+void SetPW12( uint32_t pulse_width )
 {
-  pwm_ir.pulse_width = pulse_width;
-  return;
+    pwm_ir.pulse_width = pulse_width;
+    return;
 }
 
-void startTIM2( void )
+void StartTIM2( void )
 {
-  timer.is_running = 1;
-  timer.time = 0;
+    timer.is_running = 1;
+    timer.time = 0;
 }
 
-void restartTIM2( void )
+void RestartTIM2( void )
 {
-  timer.is_running = 1;
-  timer.time = 0;
+    timer.is_running = 1;
+    timer.time = 0;
 }
 
-uint32_t getTIM2Cnt( void )
+uint32_t GetTIM2Cnt( void )
 {
-  return timer.time;
+    return timer.time;
 }
 
-int32_t getThermistorValue( void )
+int32_t GetThermistorValue( void )
 {
-  // assumes value is mC, i.e. 1000 = 1 C
-  return thermistor_value;
+    // assumes value is mC, i.e. 1000 = 1 C
+    return thermistor_value;
 }
 
-void writeMem( const uint32_t address, const char* const string, const uint32_t bytes )
+void WriteMem( const uint32_t address, const char* const string, const uint32_t bytes )
 {
-  if (address == 0) rewind(file_ptr);
+    if (address == 0) rewind(file_ptr);
 
-  fwrite(string, sizeof(char), bytes, file_ptr);
+    fwrite(string, sizeof(char), bytes, file_ptr);
 }
-void readMem(  const uint32_t address, char* string, const uint32_t bytes )
+void ReadMem(  const uint32_t address, char* string, const uint32_t bytes )
 {
-  fseek(file_ptr, address, SEEK_SET);
+    fseek(file_ptr, address, SEEK_SET);
 
-  fread(string, sizeof(char), bytes, file_ptr);
+    fread(string, sizeof(char), bytes, file_ptr);
 }
 
 void sendUARTChar(char c)
 {
-  (void)c;
-  return;
+    (void)c;
+    return;
+}
+
+void Error_Handler(void)
+{
+    return;
 }

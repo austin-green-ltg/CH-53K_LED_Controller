@@ -1,5 +1,28 @@
+// ***************************************************************************
+// Copyright © 2007 Luminator Mark IV
+// All rights reserved.
+// Any use without the prior written consent of Luminator Mark IV
+// is strictly prohibited.
+// ***************************************************************************
+// ***************************************************************************
+//
+// Filename: thermistor_handler.c
+//
+// Description: Handles getting this temperature and transitioning
+//                between temperature states.
+//
+// Revision History:
+// Date       - Name         -  Ver -  Remarks
+// 07/31/2024 - Austin Green -  1.0 -  Initial Document
+//
+// Notes: Depends on the board support package bsp
+//        logger is used to log temperature transitions
+//
+// ***************************************************************************
+
 /* Private includes ----------------------------------------------------------*/
 #include "thermistor_handler.h"
+#include "bsp.h"
 #include "logger.h"
 
 #define THERMISTOR_TO_CELCIUS (1.0f / 1000.0f)
@@ -11,98 +34,106 @@
 
 static TemperatureRange_e temperature_threshold = Cool;
 
-int16_t get_temperature( void )
+static void LogTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
 {
-  float temperature = getThermistorValue() * THERMISTOR_TO_CELCIUS;
-  temperature += (temperature > 0 ? 0.5f : -0.5f);
-  return (int16_t)(temperature);
+    switch(temp1)
+    {
+        case Cool:
+            LogString("Cool", 0);
+            break;
+
+        case Warm:
+            LogString("Warm", 0);
+            break;
+
+        case Hot:
+            LogString("Hot", 0);
+            break;
+
+        default:
+            break;
+
+    }
+
+    LogString("->", 0);
+
+    switch(temp2)
+    {
+    case Cool:
+        LogString("Cool", 0);
+        break;
+
+    case Warm:
+        LogString("Warm", 0);
+        break;
+
+    case Hot:
+        LogString("Hot", 0);
+        break;
+
+    default:
+        break;
+
+    }
+
+    LogString("\n", 0);
+
 }
 
-static void logTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
+int16_t GetTemperature( void )
 {
-  switch(temp1)
-  {
-    case Cool:
-      logString("Cool", 0);
-      break;
-    case Warm:
-      logString("Warm", 0);
-      break;
-    case Hot:
-      logString("Hot", 0);
-      break;
-    default:
-      break;
-  }
-
-  logString("->", 0);
-
-  switch(temp2)
-  {
-    case Cool:
-      logString("Cool", 0);
-      break;
-    case Warm:
-      logString("Warm", 0);
-      break;
-    case Hot:
-      logString("Hot", 0);
-      break;
-    default:
-      break;
-  }
-
-  logString("\n", 0);
-
+    float temperature = GetThermistorValue() * THERMISTOR_TO_CELCIUS;
+    temperature += (temperature > 0 ? 0.5f : -0.5f);
+    return (int16_t)(temperature);
 }
 
-TemperatureRange_e get_temperature_range( void )
+TemperatureRange_e GetTemperatureRange( void )
 {
-  int16_t temperature = get_temperature();
+    int16_t temperature = GetTemperature();
 
-  if (temperature_threshold == Cool)
-  {
-    // no cooling check needed
-    if (temperature >= HEATING_THRESHOLD_2)
+    if (temperature_threshold == Cool)
     {
-      temperature_threshold = Hot;
-      logTempChange(Cool, Hot);
+        // no cooling check needed
+        if (temperature >= HEATING_THRESHOLD_2)
+        {
+            temperature_threshold = Hot;
+            LogTempChange(Cool, Hot);
+        }
+        else if (temperature >= HEATING_THRESHOLD_1)
+        {
+            temperature_threshold = Warm;
+            LogTempChange(Cool, Warm);
+        }
     }
-    else if (temperature >= HEATING_THRESHOLD_1)
+    else if (temperature_threshold == Warm)
     {
-      temperature_threshold = Warm;
-      logTempChange(Cool, Warm);
+        // check if cooled down or heated up
+        if (temperature <= COOLING_THRESHOLD_1)
+        {
+            temperature_threshold = Cool;
+            LogTempChange(Warm, Cool);
+        }
+        else if (temperature >= HEATING_THRESHOLD_2)
+        {
+            temperature_threshold = Hot;
+            LogTempChange(Warm, Hot);
+        }
     }
-  }
-  else if (temperature_threshold == Warm)
-  {
-    // check if cooled down or heated up
-    if (temperature <= COOLING_THRESHOLD_1)
+    else if (temperature_threshold == Hot)
     {
-      temperature_threshold = Cool;
-      logTempChange(Warm, Cool);
+        // check if cooled down
+        if (temperature <= COOLING_THRESHOLD_1)
+        {
+            temperature_threshold = Cool;
+            LogTempChange(Hot, Cool);
+        }
+        else if (temperature <= COOLING_THRESHOLD_2)
+        {
+            temperature_threshold = Warm;
+            LogTempChange(Hot, Warm);
+        }
     }
-    else if (temperature >= HEATING_THRESHOLD_2)
-    {
-      temperature_threshold = Hot;
-      logTempChange(Warm, Hot);
-    }
-  }
-  else if (temperature_threshold == Hot)
-  {
-    // check if cooled down
-    if (temperature <= COOLING_THRESHOLD_1)
-    {
-      temperature_threshold = Cool;
-      logTempChange(Hot, Cool);
-    }
-    else if (temperature <= COOLING_THRESHOLD_2)
-    {
-      temperature_threshold = Warm;
-      logTempChange(Hot, Warm);
-    }
-  }
 
-  return temperature_threshold;
+    return temperature_threshold;
 
 }

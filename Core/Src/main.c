@@ -1,20 +1,20 @@
 /* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2024 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+/****
+    ******************************************************************************
+    * @file           : main.c
+    * @brief          : Main program body
+    ******************************************************************************
+    * @attention
+    *
+    * Copyright (c) 2024 STMicroelectronics.
+    * All rights reserved.
+    *
+    * This software is licensed under terms that can be found in the LICENSE file
+    * in the root directory of this software component.
+    * If no LICENSE file comes with this software, it is provided AS-IS.
+    *
+    ******************************************************************************
+    */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -62,154 +62,154 @@ void SystemClock_Config(void);
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  * @retval int
-  */
+    * @brief  The application entry point.
+    * @retval int
+*/
 int main(void)
 {
 
-  /* USER CODE BEGIN 1 */
+    /* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
+    /* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
+    /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
+    /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+    LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_SYSCFG);
+    LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
 
-  /* System interrupt init*/
-  NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+    /* System interrupt init*/
+    NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
-  /* USER CODE BEGIN Init */
+    /* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+    /* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+    /* Configure the system clock */
+    SystemClock_Config();
 
-  /* USER CODE BEGIN SysInit */
+    /* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
+    /* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_TIM1_Init();
-  MX_TIM2_Init();
-#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-  MX_USART2_UART_Init();
-#endif /* ENABLE_UART_DEBUGGING */
-  MX_TIM3_Init();
-  /* USER CODE BEGIN 2 */
+    /* Initialize all configured peripherals */
+    MX_GPIO_Init();
+    MX_TIM1_Init();
+    MX_TIM2_Init();
+    #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
+        MX_USART2_UART_Init();
+    #endif /* ENABLE_UART_DEBUGGING */
+    MX_TIM3_Init();
+    /* USER CODE BEGIN 2 */
 
-  initWhitePWM();
-  initIRPWM();
+    InitWhitePWM();
+    InitIRPWM();
 
-  GPIO_PinState prevDimPressed    = BUTTON_UNPRESSED;
-  GPIO_PinState prevBrightPressed = BUTTON_UNPRESSED;
+    GPIO_PinState prevDimPressed    = BUTTON_UNPRESSED;
+    GPIO_PinState prevBrightPressed = BUTTON_UNPRESSED;
 
-  uint8_t isWhite = 1; // 0 = IR, 1 = White
+    uint8_t isWhite = 1; // 0 = IR, 1 = White
 
-  setWhitePWM();
-  turnOffIRPWM();
+    SetWhitePWM();
+    TurnOffIRPWM();
 
-  startDelayCounter();
-#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-  LL_TIM_EnableCounter(TIM3);
-  TIM3->CNT = 0;
-#endif /* ENABLE_UART_DEBUGGING */
+    StartDelayCounter();
+    #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
+        LL_TIM_EnableCounter(TIM3);
+        TIM3->CNT = 0;
+    #endif /* ENABLE_UART_DEBUGGING */
 
-  /* USER CODE END 2 */
+    /* USER CODE END 2 */
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-
-    const int8_t currBrightness    = isWhite ? getWhiteBrightness() : getIRBrightness();
-    const uint16_t brightnessDelay = ((LOW_STEP_TIME_MS + currBrightness) * HOLD_BRIGHTNESS_JUMP);
-
-    const uint8_t brightnessDelayHit = delayHit(brightnessDelay);
-
-    const GPIO_PinState togglePressed = isTogglePressed();
-    const GPIO_PinState dimPressed    = isDimPressed();
-    const GPIO_PinState brightPressed = isBrightPressed();
-
-    if ((togglePressed == BUTTON_PRESSED) && delayHit(TOGGLE_DELAY_MS))
+    /* Infinite loop */
+    /* USER CODE BEGIN WHILE */
+    while (1)
     {
-      // toggle white/IR
-      isWhite = !isWhite;
-      if (isWhite)
-      {
-        // set white and disable IR
-        setWhitePWM();
-        turnOffIRPWM();
-      }
-      else
-      {
-        // set IR and disable white
-        turnOffWhitePWM();
-        setIRPWM();
-      }
+        /* USER CODE END WHILE */
 
-      restartDelayCounter();
+        /* USER CODE BEGIN 3 */
+
+        const int8_t currBrightness    = isWhite ? GetWhiteBrightness() : GetIRBrightness();
+        const uint16_t BrightnessDelay = ((LOW_STEP_TIME_MS + currBrightness) * HOLD_BRIGHTNESS_JUMP);
+
+        const uint8_t BrightnessDelayHit = DelayHit(BrightnessDelay);
+
+        const GPIO_PinState togglePressed = IsTogglePressed();
+        const GPIO_PinState dimPressed    = IsDimPressed();
+        const GPIO_PinState brightPressed = IsBrightPressed();
+
+        if ((togglePressed == BUTTON_PRESSED) && DelayHit(TOGGLE_DELAY_MS))
+        {
+            // toggle white/IR
+            isWhite = !isWhite;
+            if (isWhite)
+            {
+                // set white and disable IR
+                SetWhitePWM();
+                TurnOffIRPWM();
+            }
+            else
+            {
+                // set IR and disable white
+                TurnOffWhitePWM();
+                SetIRPWM();
+            }
+
+            RestartDelayCounter();
+        }
+        else if ((dimPressed == BUTTON_PRESSED) && BrightnessDelayHit)
+        {
+            if(isWhite) DecreaseWhiteBrightness(prevDimPressed);
+            else        DecreaseIRBrightness(prevDimPressed);
+
+            RestartDelayCounter();
+        }
+        else if ((brightPressed == BUTTON_PRESSED) && BrightnessDelayHit)
+        {
+            if(isWhite) IncreaseWhiteBrightness(prevBrightPressed);
+            else        IncreaseIRBrightness(prevBrightPressed);
+
+            RestartDelayCounter();
+        }
+
+        // save previous button state
+        prevDimPressed    = dimPressed;
+        prevBrightPressed = brightPressed;
     }
-    else if ((dimPressed == BUTTON_PRESSED) && brightnessDelayHit)
-    {
-      if(isWhite) decreaseWhiteBrightness(prevDimPressed);
-      else        decreaseIRBrightness(prevDimPressed);
-
-			restartDelayCounter();
-    }
-    else if ((brightPressed == BUTTON_PRESSED) && brightnessDelayHit)
-    {
-      if(isWhite) increaseWhiteBrightness(prevBrightPressed);
-      else        increaseIRBrightness(prevBrightPressed);
-
-			restartDelayCounter();
-    }
-
-    // save previous button state
-    prevDimPressed    = dimPressed;
-    prevBrightPressed = brightPressed;
-  }
-  /* USER CODE END 3 */
+    /* USER CODE END 3 */
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+* @brief System Clock Configuration
+* @retval None
+*/
 void SystemClock_Config(void)
 {
-  LL_FLASH_SetLatency(LL_FLASH_LATENCY_0);
-  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_0)
-  {
-  }
-  LL_RCC_HSI_Enable();
+    LL_FLASH_SetLatency(LL_FLASH_LATENCY_0);
+    while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_0)
+    {
+    }
+    LL_RCC_HSI_Enable();
 
-   /* Wait till HSI is ready */
-  while(LL_RCC_HSI_IsReady() != 1)
-  {
+    /* Wait till HSI is ready */
+    while(LL_RCC_HSI_IsReady() != 1)
+    {
 
-  }
-  LL_RCC_HSI_SetCalibTrimming(16);
-  LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
-  LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
-  LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
-  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
+    }
+    LL_RCC_HSI_SetCalibTrimming(16);
+    LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
+    LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
+    LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
+    LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
 
-   /* Wait till System clock is ready */
-  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
-  {
+    /* Wait till System clock is ready */
+    while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
+    {
 
-  }
-  LL_Init1msTick(8000000);
-  LL_SetSystemCoreClock(8000000);
-  LL_RCC_SetTIMClockSource(LL_RCC_TIM1_CLKSOURCE_PCLK2);
+    }
+    LL_Init1msTick(8000000);
+    LL_SetSystemCoreClock(8000000);
+    LL_RCC_SetTIMClockSource(LL_RCC_TIM1_CLKSOURCE_PCLK2);
 }
 
 /* USER CODE BEGIN 4 */
@@ -218,17 +218,17 @@ void SystemClock_Config(void)
 
 #ifdef  USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+* @brief  Reports the name of the source file and the source line number
+*         where the assert_param error has occurred.
+* @param  file: pointer to the source file name
+* @param  line: assert_param error line source number
+* @retval None
+*/
 void assert_failed(uint8_t *file, uint32_t line)
 {
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
+    /* USER CODE BEGIN 6 */
+    /* User can add his own implementation to report the file name and line number,
+    ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+    /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

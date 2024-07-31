@@ -1,28 +1,47 @@
+// ***************************************************************************
+// Copyright © 2007 Luminator Mark IV
+// All rights reserved.
+// Any use without the prior written consent of Luminator Mark IV
+// is strictly prohibited.
+// ***************************************************************************
+// ***************************************************************************
+//
+// Filename: delay_handler.c
+//
+// Description: Handles system counters and delays
+//
+// Revision History:
+// Date       - Name         -  Ver -  Remarks
+// 07/31/2024 - Austin Green -  1.0 -  Initial Document
+//
+// Notes: Depends on the board support package bsp
+//
+// ***************************************************************************
+
 /* Private includes ----------------------------------------------------------*/
 #include "delay_handler.h"
 #include "bsp.h"
-#include "my_printf.h"
 
-void startDelayCounter(void)
+void StartDelayCounter(void)
 {
-  startTIM2();
-  restartDelayCounter();
-  return;
+    StartTIM2();
+    RestartDelayCounter();
+    return;
 }
 
-void restartDelayCounter(void)
+void RestartDelayCounter(void)
 {
-  restartTIM2();
-  return;
+    RestartTIM2();
+    return;
 }
 
-uint8_t delayHit(uint32_t delay_ms)
+uint8_t DelayHit(uint32_t delay_ms)
 {
-  uint8_t isDelayHit = (getTIM2Cnt() >= (delay_ms * TIM2_CLK_KHZ));
-  return isDelayHit;
+    uint8_t isDelayHit = (GetTIM2Cnt() >= (delay_ms * TIM2_CLK_KHZ));
+    return isDelayHit;
 }
 
-uint16_t brightnessDelay(int8_t brightness)
+uint16_t BrightnessDelay(int8_t brightness)
 {
-  return (brightness * 5 + 250);
+    return (brightness * 5 + 250);
 }

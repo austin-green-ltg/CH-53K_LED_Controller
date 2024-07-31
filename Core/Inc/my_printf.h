@@ -1,9 +1,29 @@
+// ***************************************************************************
+// Copyright © 2007 Luminator Mark IV
+// All rights reserved.
+// Any use without the prior written consent of Luminator Mark IV
+// is strictly prohibited.
+// ***************************************************************************
+// ***************************************************************************
+//
+// Filename: my_printf.h
+//
+// Description: Prints characters to a terminal for debugging purposes
+//
+// Revision History:
+// Date       - Name         -  Ver -  Remarks
+// 07/31/2024 - Austin Green -  1.0 -  Initial Document
+//
+// Notes:
+//
+// ***************************************************************************
+
 // Software tracing with printf()
 #ifndef INC_my_printfh
-#define INC_my_printfh
+    #define INC_my_printfh
 
-#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-#include <stdio.h>
-#endif /* ENABLE_UART_DEBUGGING */
+    #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
+        #include <stdio.h>
+    #endif /* ENABLE_UART_DEBUGGING */
 
 #endif /* INC_my_printfh */

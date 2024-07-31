@@ -1,19 +1,39 @@
+// ***************************************************************************
+// Copyright © 2007 Luminator Mark IV
+// All rights reserved.
+// Any use without the prior written consent of Luminator Mark IV
+// is strictly prohibited.
+// ***************************************************************************
+// ***************************************************************************
+//
+// Filename: thermistor_handler.h
+//
+// Description: Handles getting this temperature and transitioning
+//                between temperature states.
+//
+// Revision History:
+// Date       - Name         -  Ver -  Remarks
+// 07/31/2024 - Austin Green -  1.0 -  Initial Document
+//
+// Notes:
+//
+// ***************************************************************************
 
-/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef INC_thermistor_handlerh
-#define INC_thermistor_handlerh
+    #define INC_thermistor_handlerh
 
-#include "bsp.h"
-#include <stdint.h>
+    #include <stdint.h>
 
-typedef enum
-{
-  Cool  = 0,
-  Warm  = 1,
-  Hot   = 2
-}TemperatureRange_e;
+    /* Temperature Range Enum */
+    typedef enum
+    {
+        Cool  = 0,
+        Warm  = 1,
+        Hot   = 2
+    } TemperatureRange_e;
 
-int16_t get_temperature( void );
-TemperatureRange_e get_temperature_range( void );
+    /* Get Temperature */
+    int16_t GetTemperature( void );
+    TemperatureRange_e GetTemperatureRange( void );
 
 #endif /* INC_thermistor_handlerh */
