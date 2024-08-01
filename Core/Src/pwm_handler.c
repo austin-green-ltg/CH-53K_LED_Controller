@@ -36,9 +36,9 @@
 #endif /* ENABLE_UART_DEBUGGING */
 
 /* Brightness Steps */
-const uint8_t MAX_BRIGHTNESS   = (BRIGHTNESS_STEPS - 1)                 ;   // 49
-const uint8_t MIN_BRIGHTNESS   = (0)                                    ;   // 0
-const uint8_t HALF_BRIGHTNESS  = ((uint8_t)((BRIGHTNESS_STEPS - 1) / 2));   // Rounds down to 24
+const uint8_t MAX_BRIGHTNESS   = (BRIGHTNESS_STEPS - 1)                     ;   // 49
+const uint8_t MIN_BRIGHTNESS   = (0)                                        ;   // 0
+const uint8_t HALF_BRIGHTNESS  = ((uint8_t)((BRIGHTNESS_STEPS - 1) / 2.0f)) ;   // Rounds down to 24
 
 /* Pulse Width Values */
 #define PW_PERIOD (255)                         // Period of PWM timer

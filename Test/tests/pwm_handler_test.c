@@ -288,7 +288,7 @@ TEST(PWM_Handler, SetIRBrightnessNiceCase)
 // verify nice case of GetWhitePWM
 TEST(PWM_Handler, GetWhitePWMNiceCase)
 {
-    const float white_pwm_steps = (MAX_WHITE_PW - MIN_WHITE_PW) / (BRIGHTNESS_STEPS - 1);
+    const float white_pwm_steps = (MAX_WHITE_PW - MIN_WHITE_PW) / ((float)BRIGHTNESS_STEPS - 1.0f);
     int8_t brightness = MIN_BRIGHTNESS;
     uint8_t expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
@@ -314,7 +314,7 @@ TEST(PWM_Handler, GetWhitePWMNiceCase)
 // verify nice case of GetIRPWM
 TEST(PWM_Handler, GetIRPWMNiceCase)
 {
-    const float IR_pwm_steps = (MAX_IR_PW - MIN_IR_PW) / (BRIGHTNESS_STEPS - 1);
+    const float IR_pwm_steps = (MAX_IR_PW - MIN_IR_PW) / ((float)BRIGHTNESS_STEPS - 1.0f);
     int8_t brightness = MIN_BRIGHTNESS;
     uint8_t expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
@@ -340,7 +340,7 @@ TEST(PWM_Handler, GetIRPWMNiceCase)
 // verify nice case of GetWhitePWM
 TEST(PWM_Handler, GetWhitePWMThermistorNiceCase)
 {
-    const float white_pwm_steps = (MAX_WHITE_PW - MIN_WHITE_PW) / (BRIGHTNESS_STEPS - 1);
+    const float white_pwm_steps = (MAX_WHITE_PW - MIN_WHITE_PW) / ((float)BRIGHTNESS_STEPS - 1.0f);
     const int8_t brightness = MAX_BRIGHTNESS;
     const uint8_t expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     const uint8_t expected_cool_pwm = expected_pwm;
@@ -361,7 +361,7 @@ TEST(PWM_Handler, GetWhitePWMThermistorNiceCase)
 // verify nice case of GetIRPWM
 TEST(PWM_Handler, GetIRPWMThermistorNiceCase)
 {
-    const float IR_pwm_steps = (MAX_IR_PW - MIN_IR_PW) / (BRIGHTNESS_STEPS - 1);
+    const float IR_pwm_steps = (MAX_IR_PW - MIN_IR_PW) / ((float)BRIGHTNESS_STEPS - 1.0f);
     const int8_t brightness = MAX_BRIGHTNESS;
     const uint8_t expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     const uint8_t expected_cool_pwm = expected_pwm;

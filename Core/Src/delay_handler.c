@@ -23,7 +23,7 @@
 #include "bsp.h"
 
 /* values in bsp.h */
-const float TIM2_CLK_KHZ = (CLK_FREQ_HZ / TIM2_CLK_DEV / TIM2_CLK_PRESCALER / 1000); // 1 / ms
+const float TIM2_CLK_KHZ = (CLK_FREQ_HZ / (float)TIM2_CLK_DEV / (float)TIM2_CLK_PRESCALER / 1000.0f); // 1 / ms
 
 void StartDelayCounter(void)
 {
@@ -40,7 +40,7 @@ void RestartDelayCounter(void)
 
 uint8_t DelayHit(uint32_t delay_ms)
 {
-    uint8_t isDelayHit = (GetTIM2Cnt() >= (delay_ms * TIM2_CLK_KHZ));
+    uint8_t isDelayHit = (GetTIM2Cnt() >= (uint32_t)(delay_ms * TIM2_CLK_KHZ + 0.5f));
     return isDelayHit;
 }
 

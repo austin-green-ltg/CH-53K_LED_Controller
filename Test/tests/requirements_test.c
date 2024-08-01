@@ -39,7 +39,7 @@ TEST(Requirements, WhiteInitialValues)
 {
     TEST_ASSERT(GetWhiteBrightness() == HALF_BRIGHTNESS);
     // There are 49 steps from min brightness, find brightness that is halfway in discrete steps
-    const uint8_t white_pwm_init = (uint8_t)((MAX_WHITE_PW - MIN_WHITE_PW) / (BRIGHTNESS_STEPS - 1) * HALF_BRIGHTNESS + MIN_WHITE_PW + 0.5f);
+    const uint8_t white_pwm_init = (uint8_t)((MAX_WHITE_PW - MIN_WHITE_PW) / ((float)BRIGHTNESS_STEPS - 1.0f) * HALF_BRIGHTNESS + MIN_WHITE_PW + 0.5f);
     TEST_ASSERT_EQUAL_UINT8(white_pwm_init, GetWhitePWM());
 }
 
@@ -49,7 +49,7 @@ TEST(Requirements, IRInitialValues)
 {
     TEST_ASSERT(GetIRBrightness() == HALF_BRIGHTNESS);
     // There are 49 steps from min brightness, find brightness that is halfway in discrete steps
-    const uint8_t ir_pwm_init = (uint8_t)((MAX_IR_PW - MIN_IR_PW) / (BRIGHTNESS_STEPS - 1) * HALF_BRIGHTNESS + MIN_IR_PW + 0.5f);
+    const uint8_t ir_pwm_init = (uint8_t)((MAX_IR_PW - MIN_IR_PW) / ((float)BRIGHTNESS_STEPS - 1.0f) * HALF_BRIGHTNESS + MIN_IR_PW + 0.5f);
     TEST_ASSERT_EQUAL_UINT8(ir_pwm_init, GetIRPWM());
 }
 

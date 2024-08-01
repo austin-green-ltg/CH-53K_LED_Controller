@@ -40,9 +40,9 @@
 #define LOWER_SWEEP_TIME_MS  (3375)                                             // time from 50%->0%
 #define UPPER_SWEEP_TIME_MS  (4000)                                             // time from 50%->100%
 #define TOTAL_SWEEP_TIME_MS (7375)                                              // time from 0%->100%
-#define LOWER_STEP_TIME_MS   (LOWER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))     // 135, time lower per step
-#define UPPER_STEP_TIME_MS   (UPPER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))     // 160, time upper per step
-#define AVG_STEP_TIME_MS     ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2)    // 147.5
+#define LOWER_STEP_TIME_MS   (LOWER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2.0f))  // 135, time lower per step
+#define UPPER_STEP_TIME_MS   (UPPER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2.0f))  // 160, time upper per step
+#define AVG_STEP_TIME_MS     ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2.0f) // 147.5
 #define AVG_STEP_DIFF_MS     (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)         // 12.5, distance between lower step time and average step time
 
 const float     LOW_STEP_TIME_MS    = (LOWER_STEP_TIME_MS  - AVG_STEP_DIFF_MS)  ; // 122.5
