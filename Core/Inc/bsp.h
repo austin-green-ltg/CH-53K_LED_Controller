@@ -107,15 +107,13 @@
     #endif
 
     /* Button Defines */
-    #define GPIO_PinState uint8_t
-    #define BUTTON_PRESSED    (1)
-    #define BUTTON_UNPRESSED  (0)
+    typedef uint8_t GPIO_PinState;
+    enum { BUTTON_PRESSED = 1, BUTTON_UNPRESSED = 0};
 
-    /* Clock frequency conversions */
-    #define CLK_FREQ_HZ (8000000)
-    #define TIM2_CLK_DEV (1)
-    #define TIM2_CLK_PRESCALER (8000)
-    #define TIM2_CLK_KHZ (CLK_FREQ_HZ / TIM2_CLK_DEV / TIM2_CLK_PRESCALER / 1000) // 1 / ms
+    /* Clock frequency Values */
+    #define CLK_FREQ_HZ  (8000000)
+    #define TIM2_CLK_DEV  (1)
+    #define TIM2_CLK_PRESCALER  (8000)
 
     /* Returns button state */
     GPIO_PinState ReadTogglePin( void );

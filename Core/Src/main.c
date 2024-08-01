@@ -36,7 +36,18 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+/* Delay timings for sweeping brightness */
+#define LOWER_SWEEP_TIME_MS  (3375)                                             // time from 50%->0%
+#define UPPER_SWEEP_TIME_MS  (4000)                                             // time from 50%->100%
+#define TOTAL_SWEEP_TIME_MS (7375)                                              // time from 0%->100%
+#define LOWER_STEP_TIME_MS   (LOWER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))     // 135, time lower per step
+#define UPPER_STEP_TIME_MS   (UPPER_SWEEP_TIME_MS / (BRIGHTNESS_STEPS / 2))     // 160, time upper per step
+#define AVG_STEP_TIME_MS     ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2)    // 147.5
+#define AVG_STEP_DIFF_MS     (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)         // 12.5, distance between lower step time and average step time
 
+const float     LOW_STEP_TIME_MS    = (LOWER_STEP_TIME_MS  - AVG_STEP_DIFF_MS)  ; // 122.5
+const float     HIGH_STEP_TIME_MS   = (UPPER_STEP_TIME_MS  + AVG_STEP_DIFF_MS)  ; // 172.5
+const uint8_t   TOGGLE_DELAY_MS     = (250)                                     ;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -130,7 +141,7 @@ int main(void)
         /* USER CODE BEGIN 3 */
 
         const int8_t currBrightness    = isWhite ? GetWhiteBrightness() : GetIRBrightness();
-        const uint16_t BrightnessDelay = ((LOW_STEP_TIME_MS + currBrightness) * HOLD_BRIGHTNESS_JUMP);
+        const uint16_t BrightnessDelay = (uint16_t)((LOW_STEP_TIME_MS + currBrightness) * HOLD_BRIGHTNESS_JUMP);
 
         const uint8_t BrightnessDelayHit = DelayHit(BrightnessDelay);
 
@@ -138,7 +149,7 @@ int main(void)
         const GPIO_PinState dimPressed    = IsDimPressed();
         const GPIO_PinState brightPressed = IsBrightPressed();
 
-        if ((togglePressed == BUTTON_PRESSED) && DelayHit(TOGGLE_DELAY_MS))
+        if ((togglePressed == BUTTON_PRESSED) && DelayHit((uint32_t)TOGGLE_DELAY_MS))
         {
             // toggle white/IR
             isWhite = !isWhite;

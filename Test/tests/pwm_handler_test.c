@@ -13,6 +13,16 @@
 
 extern int32_t thermistor_value;
 
+extern const uint8_t    MIN_BRIGHTNESS  ;
+extern const uint8_t    MAX_BRIGHTNESS  ;
+extern const uint8_t    HALF_BRIGHTNESS ;
+extern const float      MIN_WHITE_PW    ;
+extern const float      MIN_IR_PW       ;
+extern const float      MAX_WHITE_PW    ;
+extern const float      MAX_IR_PW       ;
+extern const float      WARM_PWM_RATIO  ;
+extern const float      HOT_PWM_RATIO   ;
+
 TEST_GROUP(PWM_Handler);
 
 TEST_SETUP(PWM_Handler)
@@ -282,23 +292,23 @@ TEST(PWM_Handler, GetWhitePWMNiceCase)
     int8_t brightness = MIN_BRIGHTNESS;
     uint8_t expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
-    TEST_ASSERT(GetWhitePWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetWhitePWM());
     brightness = MAX_BRIGHTNESS;
     expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
-    TEST_ASSERT(GetWhitePWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetWhitePWM());
     brightness = HALF_BRIGHTNESS;
     expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
-    TEST_ASSERT(GetWhitePWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetWhitePWM());
     brightness = 17;
     expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
-    TEST_ASSERT(GetWhitePWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetWhitePWM());
     brightness = 42;
     expected_pwm = (uint8_t)((brightness * white_pwm_steps) + MIN_WHITE_PW + 0.5f);
     SetWhiteBrightness(brightness);
-    TEST_ASSERT(GetWhitePWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetWhitePWM());
 }
 
 // verify nice case of GetIRPWM
@@ -308,23 +318,23 @@ TEST(PWM_Handler, GetIRPWMNiceCase)
     int8_t brightness = MIN_BRIGHTNESS;
     uint8_t expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
-    TEST_ASSERT(GetIRPWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetIRPWM());
     brightness = MAX_BRIGHTNESS;
     expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
-    TEST_ASSERT(GetIRPWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetIRPWM());
     brightness = HALF_BRIGHTNESS;
     expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
-    TEST_ASSERT(GetIRPWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetIRPWM());
     brightness = 12;
     expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
-    TEST_ASSERT(GetIRPWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetIRPWM());
     brightness = 39;
     expected_pwm = (uint8_t)((brightness * IR_pwm_steps) + MIN_IR_PW + 0.5f);
     SetIRBrightness(brightness);
-    TEST_ASSERT(GetIRPWM() == expected_pwm);
+    TEST_ASSERT_EQUAL_UINT8(expected_pwm, GetIRPWM());
 }
 
 // verify nice case of GetWhitePWM

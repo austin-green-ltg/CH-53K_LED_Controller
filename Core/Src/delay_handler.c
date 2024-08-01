@@ -22,6 +22,9 @@
 #include "delay_handler.h"
 #include "bsp.h"
 
+/* values in bsp.h */
+const float TIM2_CLK_KHZ = (CLK_FREQ_HZ / TIM2_CLK_DEV / TIM2_CLK_PRESCALER / 1000); // 1 / ms
+
 void StartDelayCounter(void)
 {
     StartTIM2();
@@ -43,5 +46,6 @@ uint8_t DelayHit(uint32_t delay_ms)
 
 uint16_t BrightnessDelay(int8_t brightness)
 {
+    /* formula to satisfy requirements */
     return (brightness * 5 + 250);
 }

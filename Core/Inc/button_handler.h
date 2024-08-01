@@ -14,7 +14,7 @@
 // Date       - Name         -  Ver -  Remarks
 // 07/31/2024 - Austin Green -  1.0 -  Initial Document
 //
-// Notes: Depends on the board support package bsp
+// Notes: Depends on the board support package bsp for GPIO_PinState
 //
 // ***************************************************************************
 

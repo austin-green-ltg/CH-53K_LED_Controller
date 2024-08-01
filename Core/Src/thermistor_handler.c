@@ -25,12 +25,13 @@
 #include "bsp.h"
 #include "logger.h"
 
-#define THERMISTOR_TO_CELCIUS (1.0f / 1000.0f)
-#define CELCIUS_TO_THERMISTOR (1.0f / THERMISTOR_TO_CELCIUS)
-#define HEATING_THRESHOLD_1   (100)
-#define HEATING_THRESHOLD_2   (120)
-#define COOLING_THRESHOLD_1   (HEATING_THRESHOLD_1 - 20)
-#define COOLING_THRESHOLD_2   (HEATING_THRESHOLD_2 - 20)
+const float     THERMISTOR_TO_CELCIUS = (1.0f / 1000.0f);
+const uint16_t  CELCIUS_TO_THERMISTOR = (1000.0f)       ;
+
+const uint8_t   HEATING_THRESHOLD_1   = (100);
+const uint8_t   HEATING_THRESHOLD_2   = (120);
+const uint8_t   COOLING_THRESHOLD_1   = (80) ;
+const uint8_t   COOLING_THRESHOLD_2   = (100);
 
 static TemperatureRange_e temperature_threshold = Cool;
 
