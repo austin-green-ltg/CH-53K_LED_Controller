@@ -8,21 +8,21 @@
 #define PRESS (0)
 #define HOLD  (1)
 
-extern const uint8_t    MIN_BRIGHTNESS  ;
-extern const uint8_t    MAX_BRIGHTNESS  ;
-extern const uint8_t    HALF_BRIGHTNESS ;
-extern const float      MIN_WHITE_PW    ;
-extern const float      MIN_IR_PW       ;
-extern const float      MAX_WHITE_PW    ;
-extern const float      MAX_IR_PW       ;
+extern const uint8_t    MinBrightness  ;
+extern const uint8_t    MaxBrightness  ;
+extern const uint8_t    HalfBrightness ;
+extern const float      MinWhitePw    ;
+extern const float      MinIrPw       ;
+extern const float      MaxWhitePw    ;
+extern const float      MaxIrPw       ;
 
 TEST_GROUP(Requirements);
 
 TEST_SETUP(Requirements)
 {
     /* executed before *every* non-skipped test */
-    InitWhitePWM();
-    InitIRPWM();
+    InitWhitePwm();
+    InitIrPwm();
 }
 
 
@@ -37,20 +37,20 @@ TEST_TEAR_DOWN(Requirements)
 // SrchLt.01225 When the Controllable Searchlight is initially powered on in the Visible mode, it shall illuminate to the 50% brightness level.
 TEST(Requirements, WhiteInitialValues)
 {
-    TEST_ASSERT(GetWhiteBrightness() == HALF_BRIGHTNESS);
+    TEST_ASSERT(GetWhiteBrightness() == HalfBrightness);
     // There are 49 steps from min brightness, find brightness that is halfway in discrete steps
-    const uint8_t white_pwm_init = (uint8_t)((MAX_WHITE_PW - MIN_WHITE_PW) / ((float)BRIGHTNESS_STEPS - 1.0f) * HALF_BRIGHTNESS + MIN_WHITE_PW + 0.5f);
-    TEST_ASSERT_EQUAL_UINT8(white_pwm_init, GetWhitePWM());
+    const uint8_t white_pwm_init = (uint8_t)((MaxWhitePw - MinWhitePw) / ((float)BRIGHTNESS_STEPS - 1.0f) * HalfBrightness + MinWhitePw + 0.5f);
+    TEST_ASSERT_EQUAL_UINT8(white_pwm_init, GetWhitePwm());
 }
 
 /* TEST CASE 2 */
 // SrchLt.01226 When the Controllable Searchlight is initially powered on in the IR mode, it shall illuminate to the 50% intensity level.
 TEST(Requirements, IRInitialValues)
 {
-    TEST_ASSERT(GetIRBrightness() == HALF_BRIGHTNESS);
+    TEST_ASSERT(GetIRBrightness() == HalfBrightness);
     // There are 49 steps from min brightness, find brightness that is halfway in discrete steps
-    const uint8_t ir_pwm_init = (uint8_t)((MAX_IR_PW - MIN_IR_PW) / ((float)BRIGHTNESS_STEPS - 1.0f) * HALF_BRIGHTNESS + MIN_IR_PW + 0.5f);
-    TEST_ASSERT_EQUAL_UINT8(ir_pwm_init, GetIRPWM());
+    const uint8_t ir_pwm_init = (uint8_t)((MaxIrPw - MinIrPw) / ((float)BRIGHTNESS_STEPS - 1.0f) * HalfBrightness + MinIrPw + 0.5f);
+    TEST_ASSERT_EQUAL_UINT8(ir_pwm_init, GetIrPwm());
 }
 
 /* TEST CASE 3 */
@@ -67,36 +67,36 @@ TEST(Requirements, DimmingSteps)
 TEST(Requirements, LinearDimming)
 {
     // Set to initial brightness
-    SetWhiteBrightness(MIN_BRIGHTNESS);
-    SetIRBrightness(MIN_BRIGHTNESS);
+    SetWhiteBrightness(MinBrightness);
+    SetIRBrightness(MinBrightness);
 
     // Get white brightness diff
-    uint8_t whiteBrightness1 = GetWhitePWM();
+    uint8_t whiteBrightness1 = GetWhitePwm();
     IncreaseWhiteBrightness(PRESS);
-    uint8_t whiteBrightness2 = GetWhitePWM();
+    uint8_t whiteBrightness2 = GetWhitePwm();
     const uint8_t whiteBrightnessStep = whiteBrightness2 - whiteBrightness1;
 
     for (uint8_t i = 2; i < BRIGHTNESS_STEPS; i++)
     {
         whiteBrightness1 = whiteBrightness2;
         IncreaseWhiteBrightness(PRESS);
-        whiteBrightness2 = GetWhitePWM();
+        whiteBrightness2 = GetWhitePwm();
         // Verify step is the same +-1 to deal with float conversion
         TEST_ASSERT(((whiteBrightness2 - whiteBrightness1) >= (whiteBrightnessStep - 1)) &&
                     ((whiteBrightness2 - whiteBrightness1) <= (whiteBrightnessStep + 1)));
     }
 
     // Get IR brightness diff
-    uint8_t irBrightness1 = GetIRPWM();
+    uint8_t irBrightness1 = GetIrPwm();
     IncreaseIRBrightness(PRESS);
-    uint8_t irBrightness2 = GetIRPWM();
+    uint8_t irBrightness2 = GetIrPwm();
     const uint8_t irBrightnessStep = irBrightness2 - irBrightness1;
 
     for (uint8_t i = 2; i < BRIGHTNESS_STEPS; i++)
     {
         irBrightness1 = irBrightness2;
         IncreaseIRBrightness(PRESS);
-        irBrightness2 = GetIRPWM();
+        irBrightness2 = GetIrPwm();
         // Verify step is the same +-1 to deal with float conversion
         TEST_ASSERT(((irBrightness2 - irBrightness1) >= (irBrightnessStep - 1)) &&
                     ((irBrightness2 - irBrightness1) <= (irBrightnessStep + 1)));
@@ -111,120 +111,120 @@ TEST(Requirements, RememberLedState)
     uint8_t expectedWhite = 0;
     uint8_t expectedIR = 0;
     // Sweep up through all brightness levels with white press
-    SetWhiteBrightness(MIN_BRIGHTNESS);
+    SetWhiteBrightness(MinBrightness);
     expectedIR = GetIRBrightness();
 
-    while(GetWhiteBrightness() < MAX_BRIGHTNESS)
+    while(GetWhiteBrightness() < MaxBrightness)
     {
         IncreaseWhiteBrightness(PRESS);
         TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep up through all brightness levels with white hold
-    SetWhiteBrightness(MIN_BRIGHTNESS);
+    SetWhiteBrightness(MinBrightness);
     expectedIR = GetIRBrightness();
 
-    while(GetWhiteBrightness() < MAX_BRIGHTNESS)
+    while(GetWhiteBrightness() < MaxBrightness)
     {
         IncreaseWhiteBrightness(HOLD);
         TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep up through all brightness levels with white alternating press and hold
-    SetWhiteBrightness(MIN_BRIGHTNESS);
+    SetWhiteBrightness(MinBrightness);
     expectedIR = GetIRBrightness();
 
-    while(GetWhiteBrightness() < MAX_BRIGHTNESS)
+    while(GetWhiteBrightness() < MaxBrightness)
     {
         IncreaseWhiteBrightness(GetWhiteBrightness() % 2);
         TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep up through all brightness levels with ir press
-    SetIRBrightness(MIN_BRIGHTNESS);
+    SetIRBrightness(MinBrightness);
     expectedWhite = GetWhiteBrightness();
 
-    while(GetIRBrightness() < MAX_BRIGHTNESS)
+    while(GetIRBrightness() < MaxBrightness)
     {
         IncreaseIRBrightness(PRESS);
         TEST_ASSERT(expectedWhite == GetWhiteBrightness());
     }
 
     // Sweep up through all brightness levels with ir hold
-    SetIRBrightness(MIN_BRIGHTNESS);
+    SetIRBrightness(MinBrightness);
     expectedWhite = GetWhiteBrightness();
 
-    while(GetIRBrightness() < MAX_BRIGHTNESS)
+    while(GetIRBrightness() < MaxBrightness)
     {
         IncreaseIRBrightness(HOLD);
         TEST_ASSERT(expectedWhite == GetWhiteBrightness());
     }
 
     // Sweep up through all brightness levels with ir alternating press and hold
-    SetIRBrightness(MIN_BRIGHTNESS);
+    SetIRBrightness(MinBrightness);
     expectedWhite = GetWhiteBrightness();
 
-    while(GetIRBrightness() < MAX_BRIGHTNESS)
+    while(GetIRBrightness() < MaxBrightness)
     {
         IncreaseIRBrightness(GetIRBrightness() % 2);
         TEST_ASSERT(expectedWhite == GetWhiteBrightness());
     }
 
     // Sweep down through all brightness levels with white press
-    SetWhiteBrightness(MAX_BRIGHTNESS);
+    SetWhiteBrightness(MaxBrightness);
     expectedIR = GetIRBrightness();
 
-    while(GetWhiteBrightness() > MIN_BRIGHTNESS)
+    while(GetWhiteBrightness() > MinBrightness)
     {
         DecreaseWhiteBrightness(PRESS);
         TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep down through all brightness levels with white hold
-    SetWhiteBrightness(MAX_BRIGHTNESS);
+    SetWhiteBrightness(MaxBrightness);
     expectedIR = GetIRBrightness();
 
-    while(GetWhiteBrightness() > MIN_BRIGHTNESS)
+    while(GetWhiteBrightness() > MinBrightness)
     {
         DecreaseWhiteBrightness(HOLD);
         TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep up through all brightness levels with white alternating press and hold
-    SetWhiteBrightness(MAX_BRIGHTNESS);
+    SetWhiteBrightness(MaxBrightness);
     expectedIR = GetIRBrightness();
 
-    while(GetWhiteBrightness() > MIN_BRIGHTNESS)
+    while(GetWhiteBrightness() > MinBrightness)
     {
         DecreaseWhiteBrightness(GetWhiteBrightness() % 2);
         TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep down through all brightness levels with ir press
-    SetIRBrightness(MAX_BRIGHTNESS);
+    SetIRBrightness(MaxBrightness);
     expectedWhite = GetWhiteBrightness();
 
-    while(GetIRBrightness() > MIN_BRIGHTNESS)
+    while(GetIRBrightness() > MinBrightness)
     {
         DecreaseIRBrightness(PRESS);
         TEST_ASSERT(expectedWhite == GetWhiteBrightness());
     }
 
     // Sweep down through all brightness levels with ir hold
-    SetIRBrightness(MAX_BRIGHTNESS);
+    SetIRBrightness(MaxBrightness);
     expectedWhite = GetWhiteBrightness();
 
-    while(GetIRBrightness() > MIN_BRIGHTNESS)
+    while(GetIRBrightness() > MinBrightness)
     {
         DecreaseIRBrightness(HOLD);
         TEST_ASSERT(expectedWhite == GetWhiteBrightness());
     }
 
     // Sweep down through all brightness levels with ir alternating press and hold
-    SetIRBrightness(MAX_BRIGHTNESS);
+    SetIRBrightness(MaxBrightness);
     expectedWhite = GetWhiteBrightness();
 
-    while(GetIRBrightness() > MIN_BRIGHTNESS)
+    while(GetIRBrightness() > MinBrightness)
     {
         DecreaseIRBrightness(GetIRBrightness() % 2);
         TEST_ASSERT(expectedWhite == GetWhiteBrightness());
@@ -242,7 +242,7 @@ TEST(Requirements, RememberLedState)
 TEST(Requirements, PressCheck)
 {
     // Ensure greatest delay time is less than 500ms
-    for (uint8_t i = MIN_BRIGHTNESS; i < BRIGHTNESS_STEPS; i++)
+    for (uint8_t i = MinBrightness; i < BRIGHTNESS_STEPS; i++)
     {
         TEST_ASSERT(BrightnessDelay(i) < 500);
     }
@@ -253,11 +253,11 @@ TEST(Requirements, PressCheck)
 TEST(Requirements, HoldCheck)
 {
     // Ensure two consecutive delay times are greater than 500ms
-    uint16_t delay1 = BrightnessDelay(MIN_BRIGHTNESS);
+    uint16_t delay1 = BrightnessDelay(MinBrightness);
 
     for (uint8_t i = 1; i < BRIGHTNESS_STEPS; i++)
     {
-    uint16_t delay2 = BrightnessDelay(MIN_BRIGHTNESS + i);
+    uint16_t delay2 = BrightnessDelay(MinBrightness + i);
     TEST_ASSERT((delay2 + delay1) > 500);
     delay1 = delay2;
 }
@@ -265,38 +265,38 @@ TEST(Requirements, HoldCheck)
 
 /* TEST CASE 8 */
 // SrchLt.01247 In the Visible Mode, when BRT = HOLD, the Visible Luminance and IR Radiance of the Controllable Searchlight shall increase continuously from the stored dimming value until it reaches Maximum brightness.
-#define BRIGHTNESS_ITERATIONS (BRIGHTNESS_STEPS * 2) // Step through more than brightness steps to ensure we don't go over MAX_BRIGHTNESS
+#define BRIGHTNESS_ITERATIONS (BRIGHTNESS_STEPS * 2) // Step through more than brightness steps to ensure we don't go over MaxBrightness
 TEST(Requirements, MaxWhiteBrightnessSweep)
 {
     int8_t expectedBrightness;
 
     // press button case
-    expectedBrightness = MIN_BRIGHTNESS;
-    SetWhiteBrightness(MIN_BRIGHTNESS);
+    expectedBrightness = MinBrightness;
+    SetWhiteBrightness(MinBrightness);
     for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
     {
         expectedBrightness += 1;
-        if (expectedBrightness > MAX_BRIGHTNESS) expectedBrightness = MAX_BRIGHTNESS;
+        if (expectedBrightness > MaxBrightness) expectedBrightness = MaxBrightness;
 
         IncreaseWhiteBrightness(PRESS);
         TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetWhiteBrightness());
     }
     // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MAX_BRIGHTNESS, GetWhiteBrightness());
+    TEST_ASSERT_EQUAL_INT8(MaxBrightness, GetWhiteBrightness());
 
     // hold button case
-    expectedBrightness = MIN_BRIGHTNESS;
-    SetWhiteBrightness(MIN_BRIGHTNESS);
+    expectedBrightness = MinBrightness;
+    SetWhiteBrightness(MinBrightness);
     for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
     {
         expectedBrightness += HOLD_BRIGHTNESS_JUMP;
-        if (expectedBrightness > MAX_BRIGHTNESS) expectedBrightness = MAX_BRIGHTNESS;
+        if (expectedBrightness > MaxBrightness) expectedBrightness = MaxBrightness;
 
         IncreaseWhiteBrightness(HOLD);
         TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetWhiteBrightness());
     }
     // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MAX_BRIGHTNESS, GetWhiteBrightness());
+    TEST_ASSERT_EQUAL_INT8(MaxBrightness, GetWhiteBrightness());
 }
 
 /* TEST CASE 9 */
@@ -306,32 +306,32 @@ TEST(Requirements, MaxIRBrightnessSweep)
     int8_t expectedBrightness;
 
     // press button case
-    expectedBrightness = MIN_BRIGHTNESS;
-    SetIRBrightness(MIN_BRIGHTNESS);
+    expectedBrightness = MinBrightness;
+    SetIRBrightness(MinBrightness);
     for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
     {
         expectedBrightness += 1;
-        if (expectedBrightness > MAX_BRIGHTNESS) expectedBrightness = MAX_BRIGHTNESS;
+        if (expectedBrightness > MaxBrightness) expectedBrightness = MaxBrightness;
 
         IncreaseIRBrightness(PRESS);
         TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetIRBrightness());
     }
     // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MAX_BRIGHTNESS, GetIRBrightness());
+    TEST_ASSERT_EQUAL_INT8(MaxBrightness, GetIRBrightness());
 
     // hold button case
-    expectedBrightness = MIN_BRIGHTNESS;
-    SetIRBrightness(MIN_BRIGHTNESS);
+    expectedBrightness = MinBrightness;
+    SetIRBrightness(MinBrightness);
     for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
     {
         expectedBrightness += HOLD_BRIGHTNESS_JUMP;
-        if (expectedBrightness > MAX_BRIGHTNESS) expectedBrightness = MAX_BRIGHTNESS;
+        if (expectedBrightness > MaxBrightness) expectedBrightness = MaxBrightness;
 
         IncreaseIRBrightness(HOLD);
         TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetIRBrightness());
     }
     // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MAX_BRIGHTNESS, GetIRBrightness());
+    TEST_ASSERT_EQUAL_INT8(MaxBrightness, GetIRBrightness());
 }
 
 /* TEST CASE 10 */
@@ -341,32 +341,32 @@ TEST(Requirements, MinWhiteBrightnessSweep)
     int8_t expectedBrightness;
 
     // press button case
-    expectedBrightness = MAX_BRIGHTNESS;
-    SetWhiteBrightness(MAX_BRIGHTNESS);
+    expectedBrightness = MaxBrightness;
+    SetWhiteBrightness(MaxBrightness);
     for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
     {
         expectedBrightness -= 1;
-        if (expectedBrightness < MIN_BRIGHTNESS) expectedBrightness = MIN_BRIGHTNESS;
+        if (expectedBrightness < MinBrightness) expectedBrightness = MinBrightness;
 
         DecreaseWhiteBrightness(PRESS);
         TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetWhiteBrightness());
     }
     // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MIN_BRIGHTNESS, GetWhiteBrightness());
+    TEST_ASSERT_EQUAL_INT8(MinBrightness, GetWhiteBrightness());
 
     // hold button case
-    expectedBrightness = MAX_BRIGHTNESS;
-    SetWhiteBrightness(MAX_BRIGHTNESS);
+    expectedBrightness = MaxBrightness;
+    SetWhiteBrightness(MaxBrightness);
     for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
     {
         expectedBrightness -= HOLD_BRIGHTNESS_JUMP;
-        if (expectedBrightness < MIN_BRIGHTNESS) expectedBrightness = MIN_BRIGHTNESS;
+        if (expectedBrightness < MinBrightness) expectedBrightness = MinBrightness;
 
         DecreaseWhiteBrightness(HOLD);
         TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetWhiteBrightness());
     }
     // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MIN_BRIGHTNESS, GetWhiteBrightness());
+    TEST_ASSERT_EQUAL_INT8(MinBrightness, GetWhiteBrightness());
 }
 
 /* TEST CASE 11 */
@@ -376,32 +376,32 @@ TEST(Requirements, MinIRBrightnessSweep)
     int8_t expectedBrightness;
 
     // press button case
-    expectedBrightness = MAX_BRIGHTNESS;
-    SetIRBrightness(MAX_BRIGHTNESS);
+    expectedBrightness = MaxBrightness;
+    SetIRBrightness(MaxBrightness);
     for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
     {
         expectedBrightness -= 1;
-        if (expectedBrightness < MIN_BRIGHTNESS) expectedBrightness = MIN_BRIGHTNESS;
+        if (expectedBrightness < MinBrightness) expectedBrightness = MinBrightness;
 
         DecreaseIRBrightness(PRESS);
         TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetIRBrightness());
     }
     // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MIN_BRIGHTNESS, GetIRBrightness());
+    TEST_ASSERT_EQUAL_INT8(MinBrightness, GetIRBrightness());
 
     // hold button case
-    expectedBrightness = MAX_BRIGHTNESS;
-    SetIRBrightness(MAX_BRIGHTNESS);
+    expectedBrightness = MaxBrightness;
+    SetIRBrightness(MaxBrightness);
     for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
     {
         expectedBrightness -= HOLD_BRIGHTNESS_JUMP;
-        if (expectedBrightness < MIN_BRIGHTNESS) expectedBrightness = MIN_BRIGHTNESS;
+        if (expectedBrightness < MinBrightness) expectedBrightness = MinBrightness;
 
         DecreaseIRBrightness(HOLD);
         TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetIRBrightness());
     }
     // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MIN_BRIGHTNESS, GetIRBrightness());
+    TEST_ASSERT_EQUAL_INT8(MinBrightness, GetIRBrightness());
 }
 
 
@@ -419,8 +419,8 @@ TEST(Requirements, FiftyToOneHundredTheoreticalSweep)
     int8_t end_step;
     // 50% -> 100%
     // 24 -> 49, 25 steps
-    start_step = HALF_BRIGHTNESS;
-    end_step = MAX_BRIGHTNESS + 1;
+    start_step = HalfBrightness;
+    end_step = MaxBrightness + 1;
 
     uint32_t sweep_fifty_to_onehundred_time_ms = BrightnessDelay(start_step);
 
@@ -448,8 +448,8 @@ TEST(Requirements, FiftyToZeroTheoreticalSweep)
 
     // 50% -> 0%
     // 24 -> 0, 24 steps
-    start_step = HALF_BRIGHTNESS;
-    end_step = MIN_BRIGHTNESS - 1;
+    start_step = HalfBrightness;
+    end_step = MinBrightness - 1;
 
     uint32_t sweep_fifty_to_zero_time_ms = BrightnessDelay(start_step);
 
@@ -476,8 +476,8 @@ TEST(Requirements, OneHundredToZeroTheoreticalSweep)
 
     // 100% -> 0%
     // 49 -> 0, 49 steps
-    start_step = MAX_BRIGHTNESS;
-    end_step = MIN_BRIGHTNESS - 1;
+    start_step = MaxBrightness;
+    end_step = MinBrightness - 1;
 
     uint32_t sweep_onehundred_to_zero_time_ms = BrightnessDelay(start_step);
 
@@ -504,8 +504,8 @@ TEST(Requirements, ZeroToOneHundredTheoreticalSweep)
 
     // 0% -> 100%
     // 0 -> 49, 49 steps
-    start_step = MIN_BRIGHTNESS;
-    end_step = MAX_BRIGHTNESS + 1;
+    start_step = MinBrightness;
+    end_step = MaxBrightness + 1;
 
     uint32_t sweep_zero_to_onehundred_time_ms = BrightnessDelay(start_step);
 

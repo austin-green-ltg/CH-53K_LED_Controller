@@ -45,9 +45,9 @@
 #define AVG_STEP_TIME_MS     ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2.0f) // 147.5
 #define AVG_STEP_DIFF_MS     (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)         // 12.5, distance between lower step time and average step time
 
-const float     LOW_STEP_TIME_MS    = (LOWER_STEP_TIME_MS  - AVG_STEP_DIFF_MS)  ; // 122.5
-const float     HIGH_STEP_TIME_MS   = (UPPER_STEP_TIME_MS  + AVG_STEP_DIFF_MS)  ; // 172.5
-const uint8_t   TOGGLE_DELAY_MS     = (250)                                     ;
+const float     LowStepTimeMs   = (LOWER_STEP_TIME_MS  - AVG_STEP_DIFF_MS)  ; // 122.5
+const float     HighStepTimeMs  = (UPPER_STEP_TIME_MS  + AVG_STEP_DIFF_MS)  ; // 172.5
+const uint8_t   ToggleDelayMs   = (250)                                     ;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -113,16 +113,16 @@ int main(void)
     MX_TIM3_Init();
     /* USER CODE BEGIN 2 */
 
-    InitWhitePWM();
-    InitIRPWM();
+    InitWhitePwm();
+    InitIrPwm();
 
     GPIO_PinState prevDimPressed    = BUTTON_UNPRESSED;
     GPIO_PinState prevBrightPressed = BUTTON_UNPRESSED;
 
     uint8_t isWhite = 1; // 0 = IR, 1 = White
 
-    SetWhitePWM();
-    TurnOffIRPWM();
+    SetWhitePwm();
+    TurnOffIrPwm();
 
     StartDelayCounter();
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -140,42 +140,42 @@ int main(void)
 
         /* USER CODE BEGIN 3 */
 
-        const int8_t currBrightness    = isWhite ? GetWhiteBrightness() : GetIRBrightness();
-        const uint16_t BrightnessDelay = (uint16_t)((LOW_STEP_TIME_MS + currBrightness) * HOLD_BRIGHTNESS_JUMP);
+        const int8_t CurrBrightness    = isWhite ? GetWhiteBrightness() : GetIRBrightness();
+        const uint16_t BrightnessDelay = (uint16_t)((LowStepTimeMs + CurrBrightness) * HOLD_BRIGHTNESS_JUMP);
 
-        const uint8_t BrightnessDelayHit = DelayHit(BrightnessDelay);
+        uint8_t brightnessDelayHit = DelayHit(BrightnessDelay);
 
-        const GPIO_PinState togglePressed = IsTogglePressed();
-        const GPIO_PinState dimPressed    = IsDimPressed();
-        const GPIO_PinState brightPressed = IsBrightPressed();
+        GPIO_PinState togglePressed = IsTogglePressed();
+        GPIO_PinState dimPressed    = IsDimPressed();
+        GPIO_PinState brightPressed = IsBrightPressed();
 
-        if ((togglePressed == BUTTON_PRESSED) && DelayHit((uint32_t)TOGGLE_DELAY_MS))
+        if ((togglePressed == BUTTON_PRESSED) && DelayHit((uint32_t)ToggleDelayMs))
         {
             // toggle white/IR
             isWhite = !isWhite;
             if (isWhite)
             {
                 // set white and disable IR
-                SetWhitePWM();
-                TurnOffIRPWM();
+                SetWhitePwm();
+                TurnOffIrPwm();
             }
             else
             {
                 // set IR and disable white
-                TurnOffWhitePWM();
-                SetIRPWM();
+                TurnOffWhitePwm();
+                SetIrPwm();
             }
 
             RestartDelayCounter();
         }
-        else if ((dimPressed == BUTTON_PRESSED) && BrightnessDelayHit)
+        else if ((dimPressed == BUTTON_PRESSED) && brightnessDelayHit)
         {
             if(isWhite) DecreaseWhiteBrightness(prevDimPressed);
             else        DecreaseIRBrightness(prevDimPressed);
 
             RestartDelayCounter();
         }
-        else if ((brightPressed == BUTTON_PRESSED) && BrightnessDelayHit)
+        else if ((brightPressed == BUTTON_PRESSED) && brightnessDelayHit)
         {
             if(isWhite) IncreaseWhiteBrightness(prevBrightPressed);
             else        IncreaseIRBrightness(prevBrightPressed);
