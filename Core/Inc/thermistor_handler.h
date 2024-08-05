@@ -27,9 +27,9 @@
     /* Temperature Range Enum */
     typedef enum
     {
-        Cool  = 0,
-        Warm  = 1,
-        Hot   = 2
+        TempCool    = 0,
+        TempWarm    = 1,
+        TempHot     = 2
     } TemperatureRange_e;
 
     /* Get Temperature */

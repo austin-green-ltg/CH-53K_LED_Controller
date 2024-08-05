@@ -30,21 +30,21 @@ const uint16_t  mAmpsToRaw = (1);
 const uint16_t CurrentHighThreshold_mA  = 3500u;
 const uint16_t CurrentErrorThreshold_mA = 4000u;
 
-static CurrentRange_e current_threshold = Normal;
+static CurrentRange_e current_threshold = CurrentNormal;
 
 static void LogCurrentChange(CurrentRange_e range, uint16_t currentValue)
 {
     switch(range)
     {
-        case Normal:
+        case CurrentNormal:
             LogString("Normal Current ", 0);
             break;
 
-        case High:
+        case CurrentHigh:
             LogString("High Current ", 0);
             break;
 
-        case Error:
+        case CurrentError:
             LogString("Error Current ", 0);
             break;
 
@@ -68,47 +68,22 @@ uint16_t GetCurrent_mA( void )
 CurrentRange_e GetCurrentRange( void )
 {
     uint16_t current = GetCurrent_mA();
+    CurrentRange_e prev_threshold = current_threshold;
 
-    if (current_threshold == Normal)
+    if (current >= CurrentErrorThreshold_mA)
     {
-        if (current >= CurrentErrorThreshold_mA)
-        {
-            current_threshold = Error;
-            LogCurrentChange(Error, current);
-        }
-        else if (current >= CurrentHighThreshold_mA)
-        {
-            current_threshold = High;
-            LogCurrentChange(High, current);
-        }
+        current_threshold = CurrentError;
     }
-    else if (current_threshold == High)
+    else if (current >= CurrentHighThreshold_mA)
     {
-        if (current < CurrentHighThreshold_mA)
-        {
-            current_threshold = Normal;
-            LogCurrentChange(Normal, current);
-        }
-        else if (current >= CurrentErrorThreshold_mA)
-        {
-            current_threshold = Error;
-            LogCurrentChange(Error, current);
-        }
+        current_threshold = CurrentHigh;
     }
-    else if (current_threshold == Error)
+    else
     {
-        if (current < CurrentHighThreshold_mA)
-        {
-            current_threshold = Normal;
-            LogCurrentChange(Normal, current);
-        }
-        else if (current < CurrentErrorThreshold_mA)
-        {
-            current_threshold = High;
-            LogCurrentChange(High, current);
-        }
+        current_threshold = CurrentNormal;
     }
+
+    if (prev_threshold != current_threshold) LogCurrentChange(current_threshold, current);
 
     return current_threshold;
-
 }

@@ -28,6 +28,7 @@ C_SRCS := \
 	bsp_mock.c \
 	logger.c \
 	current_handler.c \
+	voltage_handler.c \
 
 # test files
 TEST_SRCS := \
@@ -38,6 +39,7 @@ TEST_SRCS := \
 	thermistor_handler_test.c \
 	logger_test.c \
 	current_handler_test.c \
+	voltage_handler_test.c \
 	test_runner.c \
 
 # unity files

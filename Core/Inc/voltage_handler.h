@@ -6,9 +6,9 @@
 // ***************************************************************************
 // ***************************************************************************
 //
-// Filename: current_handler.h
+// Filename: voltage_handler.h
 //
-// Description: Handles getting current and reporting values.
+// Description: Handles getting voltage and reporting values.
 //
 // Revision History:
 // Date       - Name         -  Ver -  Remarks
@@ -18,21 +18,23 @@
 //
 // ***************************************************************************
 
-#ifndef INC_current_handlerh
-    #define INC_current_handlerh
+#ifndef INC_voltage_handlerh
+    #define INC_voltage_handlerh
 
     #include <stdint.h>
 
-    /* Current Range Enum */
+    /* Voltage Range Enum */
     typedef enum
     {
-        CurrentNormal   = 0,
-        CurrentHigh     = 1,
-        CurrentError    = 2
-    } CurrentRange_e;
+        VoltageNormal       = 0,
+        VoltageLow          = 1,
+        VoltageHigh         = 2,
+        VoltageErrorLow     = 3,
+        VoltageErrorHigh    = 4
+    } VoltageRange_e;
 
-    /* Get Current */
-    uint16_t GetCurrent_mA( void );
-    CurrentRange_e GetCurrentRange( void );
+    /* Get Voltage */
+    uint16_t GetVoltage_mV( void );
+    VoltageRange_e GetVoltageRange( void );
 
-#endif /* INC_current_handlerh */
+#endif /* INC_voltage_handlerh */

@@ -1,7 +1,7 @@
 #include <string.h>
 
 #include "unity_fixture.h"      /* UNITY */
-#include "current_handler.h" /* CUT */
+#include "current_handler.h"    /* CUT */
 #include "logger.h"             /* CUT */
 #include "bsp.h"                /* CUT */
 
@@ -32,7 +32,7 @@ TEST(Current_Handler, GetDefaultCurrent)
 }
 TEST(Current_Handler, GetDefaultCurrentRange)
 {
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 }
 TEST(Current_Handler, GetCurrent)
 {
@@ -50,112 +50,112 @@ TEST(Current_Handler, GetCurrent)
 TEST(Current_Handler, CurrentRangeNormalStepping)
 {
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = CurrentNormalValue;
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeNormalTesting)
 {
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = CurrentNormalValue;
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeHighTesting)
 {
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = CurrentNormalValue;
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeErrorTesting)
 {
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
     current_value_mA = CurrentNormalValue;
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeNormalBoundaryTesting)
 {
     current_value_mA = (CurrentHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = CurrentNormalValue;
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
     current_value_mA = (CurrentErrorValue - 1);
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = CurrentNormalValue;
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeHighBoundaryTesting)
 {
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = (CurrentHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = (CurrentErrorValue - 1);
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeErrorBoundaryTesting)
 {
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
     current_value_mA = (CurrentErrorValue - 1);
-    TEST_ASSERT_EQUAL_INT(High, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
     current_value_mA = (CurrentHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(Normal, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_INT(Error, GetCurrentRange());
+    TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 }
 
 TEST(Current_Handler, NormalToHighPrintout)

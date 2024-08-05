@@ -136,6 +136,8 @@
     int32_t GetThermistorValue( void );
     /* Current Sensing */
     int32_t GetCurrentValue( void );
+    /* Voltage Sensing */
+    int32_t GetVoltageValue( void );
     /* Logging */
     void WriteMem( uint32_t address, const char* const string, const uint32_t bytes);
     void ReadMem( uint32_t address, char* string, uint32_t bytes_to_read);

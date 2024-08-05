@@ -33,22 +33,22 @@ const uint8_t   HeatingThreshold2   = (120);
 const uint8_t   CoolingThreshold1   = (80) ;
 const uint8_t   CoolingThreshold2   = (100);
 
-static TemperatureRange_e temperature_threshold = Cool;
+static TemperatureRange_e temperature_threshold = TempCool;
 
 static void LogTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
 {
     switch(temp1)
     {
-        case Cool:
-            LogString("Cool", 0);
+        case TempCool:
+            LogString("Temp Cool", 0);
             break;
 
-        case Warm:
-            LogString("Warm", 0);
+        case TempWarm:
+            LogString("Temp Warm", 0);
             break;
 
-        case Hot:
-            LogString("Hot", 0);
+        case TempHot:
+            LogString("Temp Hot", 0);
             break;
 
         default:
@@ -60,15 +60,15 @@ static void LogTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
 
     switch(temp2)
     {
-    case Cool:
+    case TempCool:
         LogString("Cool", 0);
         break;
 
-    case Warm:
+    case TempWarm:
         LogString("Warm", 0);
         break;
 
-    case Hot:
+    case TempHot:
         LogString("Hot", 0);
         break;
 
@@ -92,47 +92,52 @@ TemperatureRange_e GetTemperatureRange( void )
 {
     int16_t temperature = GetTemperature();
 
-    if (temperature_threshold == Cool)
+    switch(temperature_threshold)
     {
-        // no cooling check needed
-        if (temperature >= HeatingThreshold2)
-        {
-            temperature_threshold = Hot;
-            LogTempChange(Cool, Hot);
-        }
-        else if (temperature >= HeatingThreshold1)
-        {
-            temperature_threshold = Warm;
-            LogTempChange(Cool, Warm);
-        }
-    }
-    else if (temperature_threshold == Warm)
-    {
-        // check if cooled down or heated up
-        if (temperature <= CoolingThreshold1)
-        {
-            temperature_threshold = Cool;
-            LogTempChange(Warm, Cool);
-        }
-        else if (temperature >= HeatingThreshold2)
-        {
-            temperature_threshold = Hot;
-            LogTempChange(Warm, Hot);
-        }
-    }
-    else if (temperature_threshold == Hot)
-    {
-        // check if cooled down
-        if (temperature <= CoolingThreshold1)
-        {
-            temperature_threshold = Cool;
-            LogTempChange(Hot, Cool);
-        }
-        else if (temperature <= CoolingThreshold2)
-        {
-            temperature_threshold = Warm;
-            LogTempChange(Hot, Warm);
-        }
+        case TempCool:
+            // no cooling check needed
+            if (temperature >= HeatingThreshold2)
+            {
+                temperature_threshold = TempHot;
+                LogTempChange(TempCool, temperature_threshold);
+            }
+            else if (temperature >= HeatingThreshold1)
+            {
+                temperature_threshold = TempWarm;
+                LogTempChange(TempCool, temperature_threshold);
+            }
+            break;
+
+        case TempWarm:
+            // check if cooled down or heated up
+            if (temperature <= CoolingThreshold1)
+            {
+                temperature_threshold = TempCool;
+                LogTempChange(TempWarm, temperature_threshold);
+            }
+            else if (temperature >= HeatingThreshold2)
+            {
+                temperature_threshold = TempHot;
+                LogTempChange(TempWarm, temperature_threshold);
+            }
+            break;
+
+        case TempHot:
+            // check if cooled down
+            if (temperature <= CoolingThreshold1)
+            {
+                temperature_threshold = TempCool;
+                LogTempChange(TempHot, temperature_threshold);
+            }
+            else if (temperature <= CoolingThreshold2)
+            {
+                temperature_threshold = TempWarm;
+                LogTempChange(TempHot, temperature_threshold);
+            }
+            break;
+
+        default:
+            break;
     }
 
     return temperature_threshold;

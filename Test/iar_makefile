@@ -34,6 +34,7 @@ C_SRCS := \
 	thermistor_handler.c \
 	tim.c \
 	usart.c \
+	voltage_handler.c \
 	stm32f3xx_ll_dma.c \
 	stm32f3xx_ll_exti.c \
 	stm32f3xx_ll_gpio.c \

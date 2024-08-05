@@ -406,15 +406,15 @@ uint8_t GetWhitePwm( void )
 
     switch(temperature_range)
     {
-        case Cool:
+        case TempCool:
             pwm = WhitePwm[whiteBrightness];
             break;
 
-        case Warm:
+        case TempWarm:
             pwm = (uint8_t)(WhitePwm[whiteBrightness] * WarmPwmRatio + 0.5f);
             break;
 
-        case Hot:
+        case TempHot:
             pwm = (uint8_t)(WhitePwm[whiteBrightness] * HotPwmRatio + 0.5f);
             break;
 
@@ -434,15 +434,15 @@ uint8_t GetIrPwm( void )
 
     switch(temperature_range)
     {
-        case Cool:
+        case TempCool:
             pwm = IrPwm[irBrightness];
             break;
 
-        case Warm:
+        case TempWarm:
             pwm = (uint8_t)(IrPwm[irBrightness] * WarmPwmRatio + 0.5f);
             break;
 
-        case Hot:
+        case TempHot:
             pwm = (uint8_t)(IrPwm[irBrightness] * HotPwmRatio + 0.5f);
             break;
 

@@ -26,6 +26,7 @@
 #include "delay_handler.h"
 #include "button_handler.h"
 #include "current_handler.h"
+#include "voltage_handler.h"
 #include "my_printf.h"
 
 /* USER CODE END Includes */
@@ -141,7 +142,12 @@ int main(void)
 
         /* USER CODE BEGIN 3 */
 
-        if (GetCurrentRange() == Error)
+        if (GetCurrentRange() == CurrentError)
+        {
+            // TODO: Do something
+        }
+
+        if (GetVoltageRange() == VoltageErrorLow || GetVoltageRange() == VoltageErrorHigh)
         {
             // TODO: Do something
         }

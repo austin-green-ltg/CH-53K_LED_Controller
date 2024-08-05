@@ -10,6 +10,7 @@ GPIO_PinState dim_pin = 0;
 GPIO_PinState bright_pin = 0;
 int32_t thermistor_value = 0;
 int32_t current_value_mA = 0;
+int32_t voltage_value_mV = 28000;
 FILE* file_ptr;
 
 GPIO_PinState ReadTogglePin( void )
@@ -100,6 +101,12 @@ int32_t GetCurrentValue( void )
 {
     // assumes value is mA, i.e. 1000 = 1 A
     return current_value_mA;
+}
+
+int32_t GetVoltageValue( void )
+{
+    // assumes value is mV, i.e. 1000 = 1 V
+    return voltage_value_mV;
 }
 
 void WriteMem( const uint32_t address, const char* const string, const uint32_t bytes )
