@@ -122,6 +122,81 @@ TEST(Logger, WriteRestart)
     TEST_ASSERT_EQUAL_STRING("test2test string", string);
 }
 
+TEST(Logger, WriteNumber)
+{
+    file_ptr = fopen(file_name, "w");
+
+    const int32_t expected = 1;
+
+    LogNumber(expected, 0);
+    fclose(file_ptr);
+
+    file_ptr = fopen(file_name, "r");
+
+    ReadLog(0, string, 1 );
+    TEST_ASSERT_EQUAL_STRING("1", string);
+}
+
+TEST(Logger, WriteNumberZero)
+{
+    file_ptr = fopen(file_name, "w");
+
+    const int32_t expected = 0;
+
+    LogNumber(expected, 0);
+    fclose(file_ptr);
+
+    file_ptr = fopen(file_name, "r");
+
+    ReadLog(0, string, 1 );
+    TEST_ASSERT_EQUAL_STRING("0", string);
+}
+
+TEST(Logger, WriteNumberNegative)
+{
+    file_ptr = fopen(file_name, "w");
+
+    const int32_t expected = -1;
+
+    LogNumber(expected, 0);
+    fclose(file_ptr);
+
+    file_ptr = fopen(file_name, "r");
+
+    ReadLog(0, string, 2 );
+    TEST_ASSERT_EQUAL_STRING("-1", string);
+}
+
+TEST(Logger, WriteNumberMax)
+{
+    file_ptr = fopen(file_name, "w");
+
+    const int32_t expected = 0x7fffffff;
+
+    LogNumber(expected, 0);
+    fclose(file_ptr);
+
+    file_ptr = fopen(file_name, "r");
+
+    ReadLog(0, string, 32 );
+    TEST_ASSERT_EQUAL_STRING("2147483647", string);
+}
+
+TEST(Logger, WriteNumberMin)
+{
+    file_ptr = fopen(file_name, "w");
+
+    const int32_t expected = 0x80000000;
+
+    LogNumber(expected, 0);
+    fclose(file_ptr);
+
+    file_ptr = fopen(file_name, "r");
+
+    ReadLog(0, string, 33 );
+    TEST_ASSERT_EQUAL_STRING("-2147483648", string);
+}
+
 TEST(Logger, ReadEmpty)
 {
     file_ptr = fopen(file_name, "r");
@@ -200,6 +275,11 @@ TEST_GROUP_RUNNER(Logger)
     RUN_TEST_CASE(Logger, WriteEmpty);
     RUN_TEST_CASE(Logger, WriteMultiple);
     RUN_TEST_CASE(Logger, WriteBegging);
+    RUN_TEST_CASE(Logger, WriteNumber);
+    RUN_TEST_CASE(Logger, WriteNumberZero);
+    RUN_TEST_CASE(Logger, WriteNumberNegative);
+    RUN_TEST_CASE(Logger, WriteNumberMax);
+    RUN_TEST_CASE(Logger, WriteNumberMin);
     RUN_TEST_CASE(Logger, ReadEmpty);
     RUN_TEST_CASE(Logger, ReadLessThanWrite);
     RUN_TEST_CASE(Logger, ReadMoreThanWrite);

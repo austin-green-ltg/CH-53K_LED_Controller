@@ -22,6 +22,7 @@ INCLUDES := -I. \
 C_SRCS := \
 	bsp.c \
 	button_handler.c \
+	current_handler.c \
 	delay_handler.c \
 	gpio.c \
 	logger.c \

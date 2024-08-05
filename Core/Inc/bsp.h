@@ -134,6 +134,8 @@
     uint32_t GetTIM2Cnt( void );
     /* Thermistor */
     int32_t GetThermistorValue( void );
+    /* Current Sensing */
+    int32_t GetCurrentValue( void );
     /* Logging */
     void WriteMem( uint32_t address, const char* const string, const uint32_t bytes);
     void ReadMem( uint32_t address, char* string, uint32_t bytes_to_read);

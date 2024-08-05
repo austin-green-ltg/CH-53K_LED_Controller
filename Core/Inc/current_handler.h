@@ -6,27 +6,33 @@
 // ***************************************************************************
 // ***************************************************************************
 //
-// Filename: logger.h
+// Filename: current_handler.h
 //
-// Description: Handles logging and reading of data to memory
+// Description: Handles getting current and reporting values.
 //
 // Revision History:
 // Date       - Name         -  Ver -  Remarks
-// 07/31/2024 - Austin Green -  1.0 -  Initial Document
-// 08/05/2024 - Austin Green -  1.1 -  Added Log Number
+// 08/05/2024 - Austin Green -  1.0 -  Initial Document
 //
 // Notes:
 //
 // ***************************************************************************
 
-#ifndef INC_loggerh
-    #define INC_loggerh
+#ifndef INC_current_handlerh
+    #define INC_current_handlerh
 
     #include <stdint.h>
 
-    /* Store and Read Logs */
-    void LogString( const char* const string, uint8_t write_beginning );
-    void LogNumber( const int32_t number, uint8_t write_beginning );
-    void ReadLog(  const uint32_t address, char* string, const uint32_t bytes );
+    /* Current Range Enum */
+    typedef enum
+    {
+        Normal  = 0,
+        High    = 1,
+        Error   = 2
+    } CurrentRange_e;
 
-#endif /* INC_loggerh */
+    /* Get Current */
+    uint16_t GetCurrent_mA( void );
+    CurrentRange_e GetCurrentRange( void );
+
+#endif /* INC_current_handlerh */

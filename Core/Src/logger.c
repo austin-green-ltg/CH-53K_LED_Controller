@@ -19,6 +19,7 @@
 // ***************************************************************************
 
 #include <string.h>
+#include <stdio.h>
 
 #include "logger.h"
 #include "bsp.h"
@@ -35,9 +36,15 @@ void LogString( const char* const string, uint8_t write_beginning )
         address = 0;
         tail_pointer = 0;
     }
-    
+
     if (string == NULL) return;
     WriteMem( address, string, write_bytes );
+}
+void LogNumber( const int32_t number, uint8_t write_beginning )
+{
+    char str[11]; // max number of characters needed for 32 bit number 2 million = 10 numbers + "-"
+    sprintf(str, "%d", number);
+    LogString(str, write_beginning);
 }
 void ReadLog(  const uint32_t address, char* string, const uint32_t bytes )
 {

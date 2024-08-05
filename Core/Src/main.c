@@ -25,6 +25,7 @@
 #include "pwm_handler.h"
 #include "delay_handler.h"
 #include "button_handler.h"
+#include "current_handler.h"
 #include "my_printf.h"
 
 /* USER CODE END Includes */
@@ -139,6 +140,11 @@ int main(void)
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
+
+        if (GetCurrentRange() == Error)
+        {
+            // TODO: Do something
+        }
 
         const int8_t CurrBrightness    = isWhite ? GetWhiteBrightness() : GetIRBrightness();
         const uint16_t BrightnessDelay = (uint16_t)((LowStepTimeMs + CurrBrightness) * HOLD_BRIGHTNESS_JUMP);

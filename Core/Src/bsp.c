@@ -106,6 +106,13 @@ int32_t GetThermistorValue( void )
     return -1;
 }
 
+// Returns raw current ADC value
+int32_t GetCurrentValue( void )
+{
+    // TODO
+    return -1;
+}
+
 void WriteMem( const uint32_t address, const char* const string, const uint32_t bytes )
 {
     // TODO
