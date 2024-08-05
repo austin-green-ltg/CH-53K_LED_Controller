@@ -115,7 +115,7 @@ void WriteMem( const uint32_t address, const char* const string, const uint32_t 
 
     fwrite(string, sizeof(char), bytes, file_ptr);
 }
-void ReadMem(  const uint32_t address, char* string, const uint32_t bytes )
+void ReadMem( const uint32_t address, char* string, const uint32_t bytes )
 {
     fseek(file_ptr, address, SEEK_SET);
 

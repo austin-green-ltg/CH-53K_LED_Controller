@@ -338,7 +338,7 @@ void SetWhitePwm( void )
     SetPW11(pulse_width);
     StartPWM11();
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-        printf("Turn on %s to %u / %u \n", "White", pulse_width, PW_PERIOD);
+        printf("Turn on %s to %u / %u\n", "White", pulse_width, (uint8_t)PW_PERIOD);
     #endif /* ENABLE_UART_DEBUGGING */
 }
 
@@ -349,7 +349,7 @@ void SetIrPwm( void )
     SetPW12(pulse_width);
     StartPWM12();
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-        printf("Turn on %s to %u / %u\n", "IR", pulse_width, PW_PERIOD);
+        printf("Turn on %s to %u / %u\n", "IR", pulse_width, (uint8_t)PW_PERIOD);
     #endif /* ENABLE_UART_DEBUGGING */
     return;
 }

@@ -37,7 +37,6 @@ void LogString( const char* const string, uint8_t write_beginning )
         tail_pointer = 0;
     }
 
-    if (string == NULL) return;
     WriteMem( address, string, write_bytes );
 }
 void LogNumber( const int32_t number, uint8_t write_beginning )

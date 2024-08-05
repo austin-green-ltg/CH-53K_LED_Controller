@@ -153,9 +153,9 @@ int main(void)
         }
 
         const int8_t CurrBrightness    = isWhite ? GetWhiteBrightness() : GetIRBrightness();
-        const uint16_t BrightnessDelay = (uint16_t)((LowStepTimeMs + CurrBrightness) * HOLD_BRIGHTNESS_JUMP);
+        const uint16_t BrightnessDelay_ms = (uint16_t)((LowStepTimeMs + CurrBrightness) * HOLD_BRIGHTNESS_JUMP);
 
-        uint8_t brightnessDelayHit = DelayHit(BrightnessDelay);
+        uint8_t brightnessDelayHit = DelayHit(BrightnessDelay_ms);
 
         GPIO_PinState togglePressed = IsTogglePressed();
         GPIO_PinState dimPressed    = IsDimPressed();

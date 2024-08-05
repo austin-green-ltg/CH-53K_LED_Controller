@@ -127,7 +127,7 @@ void WriteMem( const uint32_t address, const char* const string, const uint32_t 
     (void) string;
     (void) bytes;
 }
-void ReadMem(  const uint32_t address, char* string, const uint32_t bytes )
+void ReadMem( const uint32_t address, char* string, const uint32_t bytes )
 {
     // TODO
     (void) address;
