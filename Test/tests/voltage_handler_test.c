@@ -30,7 +30,7 @@ TEST_TEAR_DOWN(Voltage_Handler)
 /* start Voltage_Handler tests */
 TEST(Voltage_Handler, GetDefaultVoltage)
 {
-    TEST_ASSERT_EQUAL_UINT16(VoltageNormalValue, GetVoltage_mV()); // Default value
+    TEST_ASSERT_EQUAL_UINT16(VoltageNormalValue, GetVoltage()); // Default value
 }
 TEST(Voltage_Handler, GetDefaultVoltageRange)
 {
@@ -39,21 +39,21 @@ TEST(Voltage_Handler, GetDefaultVoltageRange)
 TEST(Voltage_Handler, GetVoltage)
 {
     voltage_value_mV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageNormalValue, GetVoltage_mV());
+    TEST_ASSERT_EQUAL_UINT16(VoltageNormalValue, GetVoltage());
     voltage_value_mV = 29245u;
-    TEST_ASSERT_EQUAL_UINT16(29245u, GetVoltage_mV());
+    TEST_ASSERT_EQUAL_UINT16(29245u, GetVoltage());
 
     voltage_value_mV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageErrorLowValue, GetVoltage_mV());
+    TEST_ASSERT_EQUAL_UINT16(VoltageErrorLowValue, GetVoltage());
 
     voltage_value_mV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageLowValue, GetVoltage_mV());
+    TEST_ASSERT_EQUAL_UINT16(VoltageLowValue, GetVoltage());
 
     voltage_value_mV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageHighValue, GetVoltage_mV());
+    TEST_ASSERT_EQUAL_UINT16(VoltageHighValue, GetVoltage());
 
     voltage_value_mV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageErrorHighValue, GetVoltage_mV());
+    TEST_ASSERT_EQUAL_UINT16(VoltageErrorHighValue, GetVoltage());
 }
 TEST(Voltage_Handler, VoltageRangeNormalStepping)
 {

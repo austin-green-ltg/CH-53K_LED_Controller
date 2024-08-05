@@ -14,6 +14,7 @@
 // Revision History:
 // Date       - Name         -  Ver -  Remarks
 // 07/31/2024 - Austin Green -  1.0 -  Initial Document
+// 08/05/2024 - Austin Green -  1.1 -  Refactor to not use floats
 //
 // Notes:
 //
@@ -33,7 +34,7 @@
     } TemperatureRange_e;
 
     /* Get Temperature */
-    int16_t GetTemperature( void );
+    int32_t GetTemperature( void ); // in mC
     TemperatureRange_e GetTemperatureRange( void );
 
 #endif /* INC_thermistor_handlerh */

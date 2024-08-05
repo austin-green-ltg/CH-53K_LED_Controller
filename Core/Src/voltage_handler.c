@@ -69,7 +69,7 @@ static void LogVoltageChange(VoltageRange_e range, uint16_t voltageValue)
 
 }
 
-uint16_t GetVoltage_mV( void )
+uint16_t GetVoltage( void )
 {
     uint16_t voltage = GetVoltageValue() * RawTomVolts;
     return (voltage);
@@ -77,7 +77,7 @@ uint16_t GetVoltage_mV( void )
 
 VoltageRange_e GetVoltageRange( void )
 {
-    uint16_t voltage = GetVoltage_mV();
+    uint16_t voltage = GetVoltage();
     VoltageRange_e prev_threshold = voltage_threshold;
 
     if (voltage <= VoltageErrorLowThreshold_mV)

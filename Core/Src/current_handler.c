@@ -59,7 +59,7 @@ static void LogCurrentChange(CurrentRange_e range, uint16_t currentValue)
 
 }
 
-uint16_t GetCurrent_mA( void )
+uint16_t GetCurrent( void )
 {
     uint16_t current = GetCurrentValue() * RawTomAmps;
     return (current);
@@ -67,7 +67,7 @@ uint16_t GetCurrent_mA( void )
 
 CurrentRange_e GetCurrentRange( void )
 {
-    uint16_t current = GetCurrent_mA();
+    uint16_t current = GetCurrent();
     CurrentRange_e prev_threshold = current_threshold;
 
     if (current >= CurrentErrorThreshold_mA)

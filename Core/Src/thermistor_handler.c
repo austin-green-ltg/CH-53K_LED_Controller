@@ -14,6 +14,7 @@
 // Revision History:
 // Date       - Name         -  Ver -  Remarks
 // 07/31/2024 - Austin Green -  1.0 -  Initial Document
+// 08/05/2024 - Austin Green -  1.1 -  Refactor to not use floats
 //
 // Notes: Depends on the board support package bsp
 //        logger is used to log temperature transitions
@@ -25,13 +26,13 @@
 #include "bsp.h"
 #include "logger.h"
 
-const float     ThermistorToCelcius = (1.0f / 1000.0f);
-const uint16_t  CelciusToThermistor = (1000.0f)       ;
+const int32_t  ThermistorTomCelcius = (1);
+const int32_t  mCelciusToThermistor = (1);
 
-const uint8_t   HeatingThreshold1   = (100);
-const uint8_t   HeatingThreshold2   = (120);
-const uint8_t   CoolingThreshold1   = (80) ;
-const uint8_t   CoolingThreshold2   = (100);
+const int32_t   HeatingThreshold1   = (100000);
+const int32_t   HeatingThreshold2   = (120000);
+const int32_t   CoolingThreshold1   = (80000) ;
+const int32_t   CoolingThreshold2   = (100000);
 
 static TemperatureRange_e temperature_threshold = TempCool;
 
@@ -81,16 +82,15 @@ static void LogTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
 
 }
 
-int16_t GetTemperature( void )
+int32_t GetTemperature( void )
 {
-    float temperature = GetThermistorValue() * ThermistorToCelcius;
-    temperature += (temperature > 0 ? 0.5f : -0.5f);
-    return (int16_t)(temperature);
+    int32_t temperature = GetThermistorValue() * ThermistorTomCelcius;
+    return (temperature);
 }
 
 TemperatureRange_e GetTemperatureRange( void )
 {
-    int16_t temperature = GetTemperature();
+    int32_t temperature = GetTemperature();
 
     switch(temperature_threshold)
     {

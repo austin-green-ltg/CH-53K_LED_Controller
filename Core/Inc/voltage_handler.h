@@ -34,7 +34,7 @@
     } VoltageRange_e;
 
     /* Get Voltage */
-    uint16_t GetVoltage_mV( void );
+    uint16_t GetVoltage( void ); // in mV
     VoltageRange_e GetVoltageRange( void );
 
 #endif /* INC_voltage_handlerh */

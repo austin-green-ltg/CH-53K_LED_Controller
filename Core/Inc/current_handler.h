@@ -32,7 +32,7 @@
     } CurrentRange_e;
 
     /* Get Current */
-    uint16_t GetCurrent_mA( void );
+    uint16_t GetCurrent( void ); // in mA
     CurrentRange_e GetCurrentRange( void );
 
 #endif /* INC_current_handlerh */

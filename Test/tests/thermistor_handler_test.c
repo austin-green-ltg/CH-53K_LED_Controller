@@ -35,7 +35,7 @@ TEST_TEAR_DOWN(Thermistor_Handler)
 /* start thermistor_handler tests */
 TEST(Thermistor_Handler, GetDefaultTemperature)
 {
-    TEST_ASSERT(GetTemperature() == 0); // Default value
+    TEST_ASSERT_EQUAL_INT32(0, GetTemperature()); // Default value
 }
 TEST(Thermistor_Handler, GetDefaultTemperatureRange)
 {
@@ -44,28 +44,34 @@ TEST(Thermistor_Handler, GetDefaultTemperatureRange)
 TEST(Thermistor_Handler, GetTemperature)
 {
     thermistor_value = 70000;
-    TEST_ASSERT(GetTemperature() == 70);
+    TEST_ASSERT_EQUAL_INT32(70000, GetTemperature());
 
     thermistor_value = HEATING_WARM_THERM;
-    TEST_ASSERT(GetTemperature() == 100);
+    TEST_ASSERT_EQUAL_INT32(HEATING_WARM_THERM, GetTemperature());
 
     thermistor_value = HEATING_HOT_THERM;
-    TEST_ASSERT(GetTemperature() == 120);
+    TEST_ASSERT_EQUAL_INT32(HEATING_HOT_THERM, GetTemperature());
+
+    thermistor_value = COOLING_COOL_THERM;
+    TEST_ASSERT_EQUAL_INT32(COOLING_COOL_THERM, GetTemperature());
+
+    thermistor_value = COOLING_WARM_THERM;
+    TEST_ASSERT_EQUAL_INT32(COOLING_WARM_THERM, GetTemperature());
 
     thermistor_value = 150000;
-    TEST_ASSERT(GetTemperature() == 150);
+    TEST_ASSERT_EQUAL_INT32(150000, GetTemperature());
 
     thermistor_value = -70000;
-    TEST_ASSERT(GetTemperature() == -70);
+    TEST_ASSERT_EQUAL_INT32(-70000, GetTemperature());
 
     thermistor_value = -100000;
-    TEST_ASSERT(GetTemperature() == -100);
+    TEST_ASSERT_EQUAL_INT32(-100000, GetTemperature());
 
     thermistor_value = -120000;
-    TEST_ASSERT(GetTemperature() == -120);
+    TEST_ASSERT_EQUAL_INT32(-120000, GetTemperature());
 
     thermistor_value = -150000;
-    TEST_ASSERT(GetTemperature() == -150);
+    TEST_ASSERT_EQUAL_INT32(-150000, GetTemperature());
 }
 TEST(Thermistor_Handler, TemperatureRangeNormalStepping)
 {

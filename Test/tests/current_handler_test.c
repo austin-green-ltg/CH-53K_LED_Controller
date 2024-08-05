@@ -28,7 +28,7 @@ TEST_TEAR_DOWN(Current_Handler)
 /* start Current_Handler tests */
 TEST(Current_Handler, GetDefaultCurrent)
 {
-    TEST_ASSERT_EQUAL_UINT16(0u, GetCurrent_mA()); // Default value
+    TEST_ASSERT_EQUAL_UINT16(0u, GetCurrent()); // Default value
 }
 TEST(Current_Handler, GetDefaultCurrentRange)
 {
@@ -37,15 +37,15 @@ TEST(Current_Handler, GetDefaultCurrentRange)
 TEST(Current_Handler, GetCurrent)
 {
     current_value_mA = 1000u;
-    TEST_ASSERT_EQUAL_UINT16(1000u, GetCurrent_mA());
+    TEST_ASSERT_EQUAL_UINT16(1000u, GetCurrent());
     current_value_mA = 2523u;
-    TEST_ASSERT_EQUAL_UINT16(2523u, GetCurrent_mA());
+    TEST_ASSERT_EQUAL_UINT16(2523u, GetCurrent());
 
     current_value_mA = CurrentHighValue;
-    TEST_ASSERT_EQUAL_UINT16(CurrentHighValue, GetCurrent_mA());
+    TEST_ASSERT_EQUAL_UINT16(CurrentHighValue, GetCurrent());
 
     current_value_mA = CurrentErrorValue;
-    TEST_ASSERT_EQUAL_UINT16(CurrentErrorValue, GetCurrent_mA());
+    TEST_ASSERT_EQUAL_UINT16(CurrentErrorValue, GetCurrent());
 }
 TEST(Current_Handler, CurrentRangeNormalStepping)
 {
