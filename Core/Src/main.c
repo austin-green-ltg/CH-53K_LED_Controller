@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "bsp.h"
+#include "stm32l412xx-bsp.h"
 #include "pwm_handler.h"
 #include "delay_handler.h"
 #include "button_handler.h"

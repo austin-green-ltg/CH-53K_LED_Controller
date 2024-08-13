@@ -21,7 +21,7 @@
 
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
     #include "my_printf.h"
-    #include "bsp.h"
+    #include "stm32l412xx-bsp.h"
 
     int fputc(int c, FILE *stream)
     {

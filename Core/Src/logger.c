@@ -22,7 +22,7 @@
 #include <stdio.h>
 
 #include "logger.h"
-#include "bsp.h"
+#include "stm32l412xx-bsp.h"
 
 static uint32_t tail_pointer = 0;
 

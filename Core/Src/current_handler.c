@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 #include "current_handler.h"
-#include "bsp.h"
+#include "stm32l412xx-bsp.h"
 #include "logger.h"
 
 const uint16_t  RawTomAmps = (1);

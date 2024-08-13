@@ -3,7 +3,7 @@
 #include "unity_fixture.h"      /* UNITY */
 #include "thermistor_handler.h" /* CUT */
 #include "logger.h"             /* CUT */
-#include "bsp.h"                /* CUT */
+#include "stm32l412xx-bsp.h"    /* CUT */
 
 #define HEATING_WARM_THERM (100000)
 #define HEATING_HOT_THERM  (120000)

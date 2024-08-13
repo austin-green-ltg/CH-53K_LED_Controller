@@ -26,7 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 #include "pwm_handler.h"
-#include "bsp.h"
+#include "stm32l412xx-bsp.h"
 #include "thermistor_handler.h"
 #include "my_printf.h"
 

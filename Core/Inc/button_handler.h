@@ -23,7 +23,7 @@
 
     #include <stdint.h>
 
-    #include "bsp.h"
+    #include "stm32l412xx-bsp.h"
 
     /* Return state of buttons */
     GPIO_PinState IsTogglePressed ( void );

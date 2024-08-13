@@ -26,7 +26,7 @@
     #endif
 
     /* Includes ------------------------------------------------------------------*/
-    #include "bsp.h"
+    #include "stm32l412xx-bsp.h"
 
     /* USER CODE BEGIN Includes */
 

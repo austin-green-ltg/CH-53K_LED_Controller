@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 #include "thermistor_handler.h"
-#include "bsp.h"
+#include "stm32l412xx-bsp.h"
 #include "logger.h"
 
 const int32_t  ThermistorTomCelcius = (1);

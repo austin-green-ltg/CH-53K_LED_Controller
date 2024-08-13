@@ -20,7 +20,7 @@ INCLUDES := -I. \
 
 # C source files...
 C_SRCS := \
-	bsp.c \
+	stm32l412xx-bsp.c \
 	button_handler.c \
 	current_handler.c \
 	delay_handler.c \

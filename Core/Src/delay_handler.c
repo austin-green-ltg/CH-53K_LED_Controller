@@ -20,9 +20,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 #include "delay_handler.h"
-#include "bsp.h"
+#include "stm32l412xx-bsp.h"
 
-/* values in bsp.h */
+/* values in stm32l412xx-bsp.h */
 const float Tim2ClkKhz = (CLK_FREQ_HZ / (float)TIM2_CLK_DEV / (float)TIM2_CLK_PRESCALER / 1000.0f); // 1 / ms
 
 void StartDelayCounter(void)

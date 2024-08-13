@@ -3,7 +3,7 @@
 #include "unity_fixture.h"      /* UNITY */
 #include "current_handler.h"    /* CUT */
 #include "logger.h"             /* CUT */
-#include "bsp.h"                /* CUT */
+#include "stm32l412xx-bsp.h"    /* CUT */
 
 const uint16_t CurrentNormalValue   = 3000u;
 const uint16_t CurrentHighValue     = 3500u;

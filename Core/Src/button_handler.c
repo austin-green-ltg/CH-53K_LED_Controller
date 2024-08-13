@@ -20,7 +20,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 #include "button_handler.h"
-#include "bsp.h"
+#include "stm32l412xx-bsp.h"
 
 /* Private define ------------------------------------------------------------*/
 

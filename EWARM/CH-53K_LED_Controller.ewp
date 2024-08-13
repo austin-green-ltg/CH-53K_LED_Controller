@@ -1118,9 +1118,6 @@
             <group>
                 <name>Core</name>
                 <file>
-                    <name>$PROJ_DIR$\..\Core\Src\bsp.c</name>
-                </file>
-                <file>
                     <name>$PROJ_DIR$\..\Core\Src\button_handler.c</name>
                 </file>
                 <file>
@@ -1143,6 +1140,9 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Core\Src\pwm_handler.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Core\Src\stm32l412xx-bsp.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Core\Src\stm32l4xx_it.c</name>

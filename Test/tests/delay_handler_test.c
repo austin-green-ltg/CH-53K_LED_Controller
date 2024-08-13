@@ -2,7 +2,7 @@
 
 #include "unity_fixture.h"      /* UNITY */
 #include "delay_handler.h"      /* CUT */
-#include "bsp.h"                /* CUT */
+#include "stm32l412xx-bsp.h"    /* CUT */
 
 #define PRESS (0)
 #define HOLD  (1)

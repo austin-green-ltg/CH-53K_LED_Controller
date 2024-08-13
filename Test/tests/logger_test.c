@@ -2,7 +2,7 @@
 
 #include "unity_fixture.h"      /* UNITY */
 #include "logger.h"             /* CUT */
-#include "bsp.h"                /* CUT */
+#include "stm32l412xx-bsp.h"    /* CUT */
 
 extern FILE* file_ptr;
 const char* const file_name = "testFile.txt";
