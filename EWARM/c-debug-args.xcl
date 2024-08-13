@@ -1,1 +1,0 @@
---no_cse --no_unroll --no_inline --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config

@@ -2,7 +2,7 @@
 <project>
 	<fileVersion>3</fileVersion>
 	<configuration>
-		<name>CH-53K_LED_ Controller</name>
+		<name>CH-53K_LED_Controller</name>
 		<toolchain>
 			<name>ARM</name>
 		</toolchain>

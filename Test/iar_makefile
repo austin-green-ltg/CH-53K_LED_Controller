@@ -97,8 +97,8 @@ CFLAGS  := --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fp
 SFLAGS :=  -s+ -M"<>" -w+ -r --cpu=Cortex-M4 --fpu=VFPv4_sp
 
 LINKFLAGS := --redirect _Printf=_PrintfFullNoMb --redirect _Scanf=_ScanfFullNoMb \
-	--map "..\EWARM\Release\List\CH-53K_LED_ Controller.map" \
-	--config ..\EWARM/stm32f303x8_flash.icf  \
+	--map "..\EWARM\Release\List\CH-53K_LED_Controller.map" \
+	--config ..\EWARM/stm32l412xx_flash.icf  \
 	--warnings_are_errors --semihosting --entry __iar_program_start --vfe --text_out locale --cpu=Cortex-M4 --fpu=VFPv4_sp
 
 ELFFLAGS := --ihex --verbose
