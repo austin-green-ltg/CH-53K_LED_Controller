@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    stm32f3xx_ll_exti.c
+  * @file    stm32l4xx_ll_exti.c
   * @author  MCD Application Team
   * @brief   EXTI LL module driver.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -18,14 +18,14 @@
 #if defined(USE_FULL_LL_DRIVER)
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f3xx_ll_exti.h"
+#include "stm32l4xx_ll_exti.h"
 #ifdef  USE_FULL_ASSERT
 #include "stm32_assert.h"
 #else
 #define assert_param(expr) ((void)0U)
 #endif
 
-/** @addtogroup STM32F3xx_LL_Driver
+/** @addtogroup STM32L4xx_LL_Driver
   * @{
   */
 
@@ -44,9 +44,7 @@
   */
 
 #define IS_LL_EXTI_LINE_0_31(__VALUE__)              (((__VALUE__) & ~LL_EXTI_LINE_ALL_0_31) == 0x00000000U)
-#if defined(EXTI_32_63_SUPPORT)
 #define IS_LL_EXTI_LINE_32_63(__VALUE__)             (((__VALUE__) & ~LL_EXTI_LINE_ALL_32_63) == 0x00000000U)
-#endif
 
 #define IS_LL_EXTI_MODE(__VALUE__)                   (((__VALUE__) == LL_EXTI_MODE_IT)            \
                                                    || ((__VALUE__) == LL_EXTI_MODE_EVENT)         \
@@ -76,31 +74,29 @@
 /**
   * @brief  De-initialize the EXTI registers to their default reset values.
   * @retval An ErrorStatus enumeration value:
-  *          - SUCCESS: EXTI registers are de-initialized
-  *          - ERROR: not applicable
+  *          - 0x00: EXTI registers are de-initialized
   */
 uint32_t LL_EXTI_DeInit(void)
 {
   /* Interrupt mask register set to default reset values */
-  LL_EXTI_WriteReg(IMR,   0x1F800000U);
+  LL_EXTI_WriteReg(IMR1,   0xFF820000U);
   /* Event mask register set to default reset values */
-  LL_EXTI_WriteReg(EMR,   0x00000000U);
+  LL_EXTI_WriteReg(EMR1,   0x00000000U);
   /* Rising Trigger selection register set to default reset values */
-  LL_EXTI_WriteReg(RTSR,  0x00000000U);
+  LL_EXTI_WriteReg(RTSR1,  0x00000000U);
   /* Falling Trigger selection register set to default reset values */
-  LL_EXTI_WriteReg(FTSR,  0x00000000U);
+  LL_EXTI_WriteReg(FTSR1,  0x00000000U);
   /* Software interrupt event register set to default reset values */
-  LL_EXTI_WriteReg(SWIER, 0x00000000U);
+  LL_EXTI_WriteReg(SWIER1, 0x00000000U);
   /* Pending register clear */
-  LL_EXTI_WriteReg(PR,    0x007FFFFFU);
+  LL_EXTI_WriteReg(PR1,    0x007DFFFFU);
 
-#if defined(EXTI_32_63_SUPPORT)
   /* Interrupt mask register 2 set to default reset values */
-#if defined(STM32F334x8)
-  LL_EXTI_WriteReg(IMR2,        0xFFFFFFFEU);
+#if defined(LL_EXTI_LINE_40)
+  LL_EXTI_WriteReg(IMR2,        0x00000187U);
 #else
-  LL_EXTI_WriteReg(IMR2,        0xFFFFFFFCU);
-#endif  
+  LL_EXTI_WriteReg(IMR2,        0x00000087U);
+#endif
   /* Event mask register 2 set to default reset values */
   LL_EXTI_WriteReg(EMR2,        0x00000000U);
   /* Rising Trigger selection register 2 set to default reset values */
@@ -110,27 +106,25 @@ uint32_t LL_EXTI_DeInit(void)
   /* Software interrupt event register 2 set to default reset values */
   LL_EXTI_WriteReg(SWIER2,      0x00000000U);
   /* Pending register 2 clear */
-  LL_EXTI_WriteReg(PR2,         0x00000003U);
+  LL_EXTI_WriteReg(PR2,         0x00000078U);
 
-#endif
-  return SUCCESS;
+  return 0x00u;
 }
 
 /**
   * @brief  Initialize the EXTI registers according to the specified parameters in EXTI_InitStruct.
   * @param  EXTI_InitStruct pointer to a @ref LL_EXTI_InitTypeDef structure.
   * @retval An ErrorStatus enumeration value:
-  *          - SUCCESS: EXTI registers are initialized
-  *          - ERROR: not applicable
+  *          - 0x00: EXTI registers are initialized
+  *          - any other value : wrong configuration
   */
 uint32_t LL_EXTI_Init(LL_EXTI_InitTypeDef *EXTI_InitStruct)
 {
-  ErrorStatus status = SUCCESS;
+  uint32_t status = 0x00u;
+
   /* Check the parameters */
   assert_param(IS_LL_EXTI_LINE_0_31(EXTI_InitStruct->Line_0_31));
-#if defined(EXTI_32_63_SUPPORT)
   assert_param(IS_LL_EXTI_LINE_32_63(EXTI_InitStruct->Line_32_63));
-#endif
   assert_param(IS_FUNCTIONAL_STATE(EXTI_InitStruct->LineCommand));
   assert_param(IS_LL_EXTI_MODE(EXTI_InitStruct->Mode));
 
@@ -162,7 +156,7 @@ uint32_t LL_EXTI_Init(LL_EXTI_InitTypeDef *EXTI_InitStruct)
           LL_EXTI_EnableEvent_0_31(EXTI_InitStruct->Line_0_31);
           break;
         default:
-          status = ERROR;
+          status = 0x01u;
           break;
       }
       if (EXTI_InitStruct->Trigger != LL_EXTI_TRIGGER_NONE)
@@ -186,12 +180,11 @@ uint32_t LL_EXTI_Init(LL_EXTI_InitTypeDef *EXTI_InitStruct)
             LL_EXTI_EnableFallingTrig_0_31(EXTI_InitStruct->Line_0_31);
             break;
           default:
-            status = ERROR;
+            status |= 0x02u;
             break;
         }
       }
     }
-#if defined(EXTI_32_63_SUPPORT)
     /* Configure EXTI Lines in range from 32 to 63 */
     if (EXTI_InitStruct->Line_32_63 != LL_EXTI_LINE_NONE)
     {
@@ -215,7 +208,7 @@ uint32_t LL_EXTI_Init(LL_EXTI_InitTypeDef *EXTI_InitStruct)
           LL_EXTI_EnableEvent_32_63(EXTI_InitStruct->Line_32_63);
           break;
         default:
-          status = ERROR;
+          status |= 0x04u;
           break;
       }
       if (EXTI_InitStruct->Trigger != LL_EXTI_TRIGGER_NONE)
@@ -244,7 +237,6 @@ uint32_t LL_EXTI_Init(LL_EXTI_InitTypeDef *EXTI_InitStruct)
         }
       }
     }
-#endif
   }
   /* DISABLE LineCommand */
   else
@@ -252,12 +244,11 @@ uint32_t LL_EXTI_Init(LL_EXTI_InitTypeDef *EXTI_InitStruct)
     /* De-configure EXTI Lines in range from 0 to 31 */
     LL_EXTI_DisableIT_0_31(EXTI_InitStruct->Line_0_31);
     LL_EXTI_DisableEvent_0_31(EXTI_InitStruct->Line_0_31);
-#if defined(EXTI_32_63_SUPPORT)
     /* De-configure EXTI Lines in range from 32 to 63 */
     LL_EXTI_DisableIT_32_63(EXTI_InitStruct->Line_32_63);
     LL_EXTI_DisableEvent_32_63(EXTI_InitStruct->Line_32_63);
-#endif
   }
+
   return status;
 }
 
@@ -269,9 +260,7 @@ uint32_t LL_EXTI_Init(LL_EXTI_InitTypeDef *EXTI_InitStruct)
 void LL_EXTI_StructInit(LL_EXTI_InitTypeDef *EXTI_InitStruct)
 {
   EXTI_InitStruct->Line_0_31      = LL_EXTI_LINE_NONE;
-#if defined(EXTI_32_63_SUPPORT)
   EXTI_InitStruct->Line_32_63     = LL_EXTI_LINE_NONE;
-#endif
   EXTI_InitStruct->LineCommand    = DISABLE;
   EXTI_InitStruct->Mode           = LL_EXTI_MODE_IT;
   EXTI_InitStruct->Trigger        = LL_EXTI_TRIGGER_FALLING;

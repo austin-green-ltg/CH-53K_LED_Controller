@@ -15,7 +15,7 @@
     * If no LICENSE file comes with this software, it is provided AS-IS.
     *
     ******************************************************************************
-    */
+*/
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -40,7 +40,7 @@ void MX_GPIO_Init(void)
     LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
 
     /* GPIO Ports Clock Enable */
-    LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
+    LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA);
 
     /**/
     GPIO_InitStruct.Pin = BRIGHT_Pin|DIM_Pin|SWITCH_LED_Pin;

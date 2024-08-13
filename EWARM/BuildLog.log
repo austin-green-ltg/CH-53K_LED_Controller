@@ -3969,3 +3969,219 @@ Total number of warnings: 0
 Resolving dependencies...
 Using C:\Programs\IAR Systems\Embedded Workbench 9.2\common\bin\ninja.exe for the build
 Build succeeded
+
+Live logging to 'C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\BuildLog.log' enabled.
+
+Live logging to 'C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\BuildLog.log' enabled.
+
+Live logging to 'C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\BuildLog.log' enabled.
+
+CH-53K_LED_Controller - CH-53K_LED_Controller
+Reading project nodes...
+
+Using C:\Programs\IAR Systems\Embedded Workbench 9.2\common\bin\ninja.exe for the build
+Cleaning... 13 files.
+Using C:\Programs\IAR Systems\Embedded Workbench 9.2\common\bin\ninja.exe for the build
+delay_handler.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\delay_handler.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 72 bytes of CODE  memory
+  4 bytes of CONST memory
+
+Errors: none
+Warnings: none
+button_handler.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\button_handler.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 12 bytes of CODE memory
+
+Errors: none
+Warnings: none
+current_handler.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\current_handler.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 174 bytes of CODE  memory
+   8 bytes of CONST memory
+   1 byte  of DATA  memory
+
+Errors: none
+Warnings: none
+my_printf.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\my_printf.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 0 bytes of memory
+
+Errors: none
+Warnings: none
+stm32l4xx_ll_pwr.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_ll_pwr.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\STM32L4xx_HAL_Driver_2987639196379523013.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 28 bytes of CODE memory
+
+Errors: none
+Warnings: none
+main.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\main.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(70) : Error[Pa181]: incompatible redefinition of macro "BRIGHT_Pin" (defined <SRCREF line=76 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 76 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(71) : Error[Pa181]: incompatible redefinition of macro "BRIGHT_GPIO_Port" (defined <SRCREF line=77 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 77 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(72) : Error[Pa181]: incompatible redefinition of macro "DIM_Pin" (defined <SRCREF line=78 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 78 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(73) : Error[Pa181]: incompatible redefinition of macro "DIM_GPIO_Port" (defined <SRCREF line=79 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 79 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(74) : Error[Pa181]: incompatible redefinition of macro "SWITCH_LED_Pin" (defined <SRCREF line=80 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 80 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(75) : Error[Pa181]: incompatible redefinition of macro "SWITCH_LED_GPIO_Port" (defined <SRCREF line=81 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 81 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(76) : Error[Pa181]: incompatible redefinition of macro "WHITE_LED_Pin" (defined <SRCREF line=82 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 82 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(77) : Error[Pa181]: incompatible redefinition of macro "WHITE_LED_GPIO_Port" (defined <SRCREF line=83 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 83 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(78) : Error[Pa181]: incompatible redefinition of macro "IR_LED_Pin" (defined <SRCREF line=84 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 84 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Inc\bsp.h(79) : Error[Pa181]: incompatible redefinition of macro "IR_LED_GPIO_Port" (defined <SRCREF line=85 file="C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h">at line 85 of "C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\main.h"</SRCREF>)
+
+Errors: 10
+Warnings: none
+thermistor_handler.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\thermistor_handler.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 298 bytes of CODE  memory
+  34 bytes of CONST memory
+   1 byte  of DATA  memory
+
+Errors: none
+Warnings: none
+gpio.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\gpio.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 64 bytes of CODE memory
+
+Errors: none
+Warnings: none
+stm32l4xx_it.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\stm32l4xx_it.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 18 bytes of CODE memory
+
+Errors: none
+Warnings: none
+logger.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\logger.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 90 bytes of CODE  memory
+  4 bytes of CONST memory
+  4 bytes of DATA  memory
+
+Errors: none
+Warnings: none
+stm32l4xx_ll_usart.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_ll_usart.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\STM32L4xx_HAL_Driver_2987639196379523013.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 362 bytes of CODE memory
+
+Errors: none
+Warnings: none
+stm32l4xx_ll_gpio.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_ll_gpio.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\STM32L4xx_HAL_Driver_2987639196379523013.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 462 bytes of CODE memory
+
+Errors: none
+Warnings: none
+tim.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Core\Src\tim.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\Core_13247989168731456611.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 550 bytes of CODE memory
+
+Errors: none
+Warnings: none
+stm32l4xx_ll_tim.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_ll_tim.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\STM32L4xx_HAL_Driver_2987639196379523013.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 1'572 bytes of CODE memory
+
+Errors: none
+Warnings: none
+stm32l4xx_ll_rcc.c
+"C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\bin\iccarm.exe" C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\Drivers\STM32L4xx_HAL_Driver\Src\stm32l4xx_ll_rcc.c -D USE_FULL_LL_DRIVER -D STM32L412xx -D HSE_VALUE=8000000 -D HSE_STARTUP_TIMEOUT=100 -D LSE_STARTUP_TIMEOUT=5000 -D LSE_VALUE=32768 -D MSI_VALUE=32000000 -D HSI_VALUE=16000000 -D LSI_VALUE=32000 -D VDD_VALUE=3300 -D PREFETCH_ENABLE=0 -D INSTRUCTION_CACHE_ENABLE=1 -D DATA_CACHE_ENABLE=1 -o C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\Release\Obj\STM32L4xx_HAL_Driver_2987639196379523013.dir --debug --endian=little --cpu=Cortex-M4 -e --warnings_are_errors --fpu=VFPv4_sp --dlib_config "C:\Programs\IAR Systems\Embedded Workbench 9.2\arm\inc\c\DLib_Config_Full.h" -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Core/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32F3xx_HAL_Driver/Inc/Legacy\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32F3xx/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Include\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/STM32L4xx_HAL_Driver/Inc\ -I C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM/../Drivers/CMSIS/Device/ST/STM32L4xx/Include\ -Ohs --require_prototypes 
+
+
+   IAR ANSI C/C++ Compiler V9.50.2.385/W64 for ARM
+   Copyright 1999-2024 IAR Systems AB.
+   Mobile license - IAR Embedded Workbench for Arm 9.50
+ 
+ 1'644 bytes of CODE memory
+
+Errors: none
+Warnings: none
+
+Total number of errors: 10
+Total number of warnings: 0
+Resolving dependencies...
+Using C:\Programs\IAR Systems\Embedded Workbench 9.2\common\bin\ninja.exe for the build
+Build failed
+
+Live logging to 'C:\Users\agreen\Documents\Projects\Aveo\CH-53K_LED_Controller-2\EWARM\BuildLog.log' enabled.

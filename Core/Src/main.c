@@ -75,9 +75,9 @@ void SystemClock_Config(void);
 /* USER CODE END 0 */
 
 /**
-    * @brief  The application entry point.
-    * @retval int
-*/
+  * @brief  The application entry point.
+  * @retval int
+  */
 int main(void)
 {
 
@@ -106,13 +106,12 @@ int main(void)
     /* USER CODE END SysInit */
 
     /* Initialize all configured peripherals */
-    MX_GPIO_Init();
     MX_TIM1_Init();
     MX_TIM2_Init();
+    MX_TIM15_Init();
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
         MX_USART2_UART_Init();
     #endif /* ENABLE_UART_DEBUGGING */
-    MX_TIM3_Init();
     /* USER CODE BEGIN 2 */
 
     InitWhitePwm();
@@ -128,8 +127,8 @@ int main(void)
 
     StartDelayCounter();
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-        LL_TIM_EnableCounter(TIM3);
-        TIM3->CNT = 0;
+        LL_TIM_EnableCounter(TIM15);
+        TIM15->CNT = 0;
     #endif /* ENABLE_UART_DEBUGGING */
 
     /* USER CODE END 2 */
@@ -208,31 +207,38 @@ int main(void)
 */
 void SystemClock_Config(void)
 {
-    LL_FLASH_SetLatency(LL_FLASH_LATENCY_0);
-    while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_0)
+    LL_FLASH_SetLatency(LL_FLASH_LATENCY_1);
+    while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_1)
     {
     }
-    LL_RCC_HSI_Enable();
+    LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE1);
+    while (LL_PWR_IsActiveFlag_VOS() != 0)
+    {
+    }
+    LL_RCC_MSI_Enable();
 
-    /* Wait till HSI is ready */
-    while(LL_RCC_HSI_IsReady() != 1)
+    /* Wait till MSI is ready */
+    while(LL_RCC_MSI_IsReady() != 1)
     {
 
     }
-    LL_RCC_HSI_SetCalibTrimming(16);
+    LL_RCC_MSI_EnableRangeSelection();
+    LL_RCC_MSI_SetRange(LL_RCC_MSIRANGE_10);
+    LL_RCC_MSI_SetCalibTrimming(0);
+    LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_MSI);
+
+    /* Wait till System clock is ready */
+    while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_MSI)
+    {
+
+    }
     LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
     LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
     LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
-    LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_HSI);
 
-    /* Wait till System clock is ready */
-    while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_HSI)
-    {
+    LL_Init1msTick(32000000);
 
-    }
-    LL_Init1msTick(8000000);
-    LL_SetSystemCoreClock(8000000);
-    LL_RCC_SetTIMClockSource(LL_RCC_TIM1_CLKSOURCE_PCLK2);
+    LL_SetSystemCoreClock(32000000);
 }
 
 /* USER CODE BEGIN 4 */
@@ -240,18 +246,18 @@ void SystemClock_Config(void)
 /* USER CODE END 4 */
 
 #ifdef  USE_FULL_ASSERT
-/**
-* @brief  Reports the name of the source file and the source line number
-*         where the assert_param error has occurred.
-* @param  file: pointer to the source file name
-* @param  line: assert_param error line source number
-* @retval None
-*/
-void assert_failed(uint8_t *file, uint32_t line)
-{
-    /* USER CODE BEGIN 6 */
-    /* User can add his own implementation to report the file name and line number,
-    ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-    /* USER CODE END 6 */
+    /**
+      * @brief  Reports the name of the source file and the source line number
+      *         where the assert_param error has occurred.
+      * @param  file: pointer to the source file name
+      * @param  line: assert_param error line source number
+      * @retval None
+      */
+    void assert_failed(uint8_t *file, uint32_t line)
+    {
+        /* USER CODE BEGIN 6 */
+        /* User can add his own implementation to report the file name and line number,
+        ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+        /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    stm32f3xx_ll_cortex.h
+  * @file    stm32l4xx_ll_cortex.h
   * @author  MCD Application Team
   * @brief   Header file of CORTEX LL module.
   @verbatim
@@ -10,11 +10,10 @@
     [..]
     The LL CORTEX driver contains a set of generic APIs that can be
     used by user:
-      (+) SYSTICK configuration used by LL_mDelay and LL_Init1msTick
+      (+) SYSTICK configuration used by @ref LL_mDelay and @ref LL_Init1msTick
           functions
       (+) Low power mode configuration (SCB register of Cortex-MCU)
       (+) MPU API to configure and enable regions
-          (MPU services provided only on some devices)
       (+) API to access to MCU info (CPUID register)
       (+) API to enable fault handler (SHCSR accesses)
 
@@ -22,7 +21,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file in
@@ -33,17 +32,17 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F3xx_LL_CORTEX_H
-#define __STM32F3xx_LL_CORTEX_H
+#ifndef STM32L4xx_LL_CORTEX_H
+#define STM32L4xx_LL_CORTEX_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f3xx.h"
+#include "stm32l4xx.h"
 
-/** @addtogroup STM32F3xx_LL_Driver
+/** @addtogroup STM32L4xx_LL_Driver
   * @{
   */
 
@@ -587,7 +586,7 @@ __STATIC_INLINE void LL_MPU_ConfigRegion(uint32_t Region, uint32_t SubRegionDisa
   /* Set base address */
   WRITE_REG(MPU->RBAR, (Address & 0xFFFFFFE0U));
   /* Configure MPU */
-  WRITE_REG(MPU->RASR, (MPU_RASR_ENABLE_Msk | Attributes | SubRegionDisable << MPU_RASR_SRD_Pos));
+  WRITE_REG(MPU->RASR, (MPU_RASR_ENABLE_Msk | Attributes | (SubRegionDisable << MPU_RASR_SRD_Pos)));
 }
 
 /**
@@ -634,5 +633,5 @@ __STATIC_INLINE void LL_MPU_DisableRegion(uint32_t Region)
 }
 #endif
 
-#endif /* __STM32F3xx_LL_CORTEX_H */
+#endif /* STM32L4xx_LL_CORTEX_H */
 

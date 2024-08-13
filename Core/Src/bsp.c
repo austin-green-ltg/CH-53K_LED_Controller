@@ -8,7 +8,7 @@
 //
 // Filename: bsp.c
 //
-// Description: Board Support Package for STM32F303x8
+// Description: Board Support Package for STM32L412xx
 //
 // Revision History:
 // Date       - Name         -  Ver -  Remarks

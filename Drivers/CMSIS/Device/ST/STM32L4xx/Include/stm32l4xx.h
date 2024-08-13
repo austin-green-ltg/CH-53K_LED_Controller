@@ -1,22 +1,22 @@
 /**
   ******************************************************************************
-  * @file    stm32f3xx.h
+  * @file    stm32l4xx.h
   * @author  MCD Application Team
-  * @brief   CMSIS STM32F3xx Device Peripheral Access Layer Header File.           
-  *            
+  * @brief   CMSIS STM32L4xx Device Peripheral Access Layer Header File.
+  *
   *          The file is the unique include file that the application programmer
   *          is using in the C source code, usually in main.c. This file contains:
   *           - Configuration section that allows to select:
-  *              - The STM32F3xx device used in the target application
-  *              - To use or not the peripheral's drivers in application code(i.e. 
-  *                code will be based on direct access to peripheral's registers 
-  *                rather than drivers API), this option is controlled by 
+  *              - The STM32L4xx device used in the target application
+  *              - To use or not the peripheral's drivers in application code(i.e.
+  *                code will be based on direct access to peripheral's registers
+  *                rather than drivers API), this option is controlled by
   *                "#define USE_HAL_DRIVER"
-  *  
+  *
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -30,17 +30,17 @@
   * @{
   */
 
-/** @addtogroup stm32f3xx
+/** @addtogroup stm32l4xx
   * @{
   */
-    
-#ifndef __STM32F3xx_H
-#define __STM32F3xx_H
+
+#ifndef __STM32L4xx_H
+#define __STM32L4xx_H
 
 #ifdef __cplusplus
  extern "C" {
 #endif /* __cplusplus */
-   
+
 /** @addtogroup Library_configuration_section
   * @{
   */
@@ -48,70 +48,70 @@
 /**
   * @brief STM32 Family
   */
-#if !defined (STM32F3)
-#define STM32F3
-#endif /* STM32F3 */
+#if !defined (STM32L4)
+#define STM32L4
+#endif /* STM32L4 */
 
-/* Uncomment the line below according to the target STM32 device used in your
-   application 
+/* Uncomment the line below according to the target STM32L4 device used in your
+   application
   */
 
-#if !defined (STM32F301x8) && !defined (STM32F302x8) && !defined (STM32F318xx) && \
-    !defined (STM32F302xC) && !defined (STM32F303xC) && !defined (STM32F358xx) && \
-    !defined (STM32F303x8) && !defined (STM32F334x8) && !defined (STM32F328xx) && \
-    !defined (STM32F302xE) && !defined (STM32F303xE) && !defined (STM32F398xx) && \
-    !defined (STM32F373xC) && !defined (STM32F378xx)
-    
-  /* #define STM32F301x8 */   /*!< STM32F301K6, STM32F301K8, STM32F301C6, STM32F301C8,
-                                   STM32F301R6 and STM32F301R8 Devices */
-  /* #define STM32F302x8 */   /*!< STM32F302K6, STM32F302K8, STM32F302C6, STM32F302C8,
-                                   STM32F302R6 and STM32F302R8 Devices */
-  /* #define STM32F302xC */   /*!< STM32F302CB, STM32F302CC, STM32F302RB, STM32F302RC,
-                                   STM32F302VB and STM32F302VC Devices */
-  /* #define STM32F302xE */   /*!< STM32F302RE, STM32F302VE, STM32F302ZE, STM32F302RD,
-                                   STM32F302VD and STM32F302ZD Devices */
-  /* #define STM32F303x8 */   /*!< STM32F303K6, STM32F303K8, STM32F303C6, STM32F303C8, 
-                                   STM32F303R6 and STM32F303R8 Devices */
-  /* #define STM32F303xC */   /*!< STM32F303CB, STM32F303CC, STM32F303RB, STM32F303RC,
-                                   STM32F303VB and STM32F303VC Devices */
-  /* #define STM32F303xE */   /*!< STM32F303RE, STM32F303VE, STM32F303ZE, STM32F303RD,
-                                   STM32F303VD and STM32F303ZD Devices */
-  /* #define STM32F373xC */   /*!< STM32F373C8, STM32F373CB, STM32F373CC,
-                                   STM32F373R8, STM32F373RB, STM32F373RC,
-                                   STM32F373V8, STM32F373VB and STM32F373VC Devices */
-  /* #define STM32F334x8 */   /*!< STM32F334K4, STM32F334K6, STM32F334K8,
-                                   STM32F334C4, STM32F334C6, STM32F334C8,
-                                   STM32F334R4, STM32F334R6 and STM32F334R8 Devices */
-  /* #define STM32F318xx */   /*!< STM32F318K8, STM32F318C8: STM32F301x8 with regulator off: STM32F318xx Devices */
-  /* #define STM32F328xx */   /*!< STM32F328C8, STM32F328R8: STM32F334x8 with regulator off: STM32F328xx Devices */
-  /* #define STM32F358xx */   /*!< STM32F358CC, STM32F358RC, STM32F358VC: STM32F303xC with regulator off: STM32F358xx Devices */
-  /* #define STM32F378xx */   /*!< STM32F378CC, STM32F378RC, STM32F378VC: STM32F373xC with regulator off: STM32F378xx Devices */
-  /* #define STM32F398xx */   /*!< STM32F398VE: STM32F303xE with regulator off: STM32F398xx Devices */
+#if !defined (STM32L412xx) && !defined (STM32L422xx) && \
+    !defined (STM32L431xx) && !defined (STM32L432xx) && !defined (STM32L433xx) && !defined (STM32L442xx) && !defined (STM32L443xx) && \
+    !defined (STM32L451xx) && !defined (STM32L452xx) && !defined (STM32L462xx) && \
+    !defined (STM32L471xx) && !defined (STM32L475xx) && !defined (STM32L476xx) && !defined (STM32L485xx) && !defined (STM32L486xx) && \
+    !defined (STM32L496xx) && !defined (STM32L4A6xx) && \
+    !defined (STM32L4P5xx) && !defined (STM32L4Q5xx) && \
+    !defined (STM32L4R5xx) && !defined (STM32L4R7xx) && !defined (STM32L4R9xx) && !defined (STM32L4S5xx) && !defined (STM32L4S7xx) && !defined (STM32L4S9xx)
+  /* #define STM32L412xx */   /*!< STM32L412xx Devices */
+  /* #define STM32L422xx */   /*!< STM32L422xx Devices */
+  /* #define STM32L431xx */   /*!< STM32L431xx Devices */
+  /* #define STM32L432xx */   /*!< STM32L432xx Devices */
+  /* #define STM32L433xx */   /*!< STM32L433xx Devices */
+  /* #define STM32L442xx */   /*!< STM32L442xx Devices */
+  /* #define STM32L443xx */   /*!< STM32L443xx Devices */
+  /* #define STM32L451xx */   /*!< STM32L451xx Devices */
+  /* #define STM32L452xx */   /*!< STM32L452xx Devices */
+  /* #define STM32L462xx */   /*!< STM32L462xx Devices */
+  /* #define STM32L471xx */   /*!< STM32L471xx Devices */
+  /* #define STM32L475xx */   /*!< STM32L475xx Devices */
+  /* #define STM32L476xx */   /*!< STM32L476xx Devices */
+  /* #define STM32L485xx */   /*!< STM32L485xx Devices */
+  /* #define STM32L486xx */   /*!< STM32L486xx Devices */
+  /* #define STM32L496xx */   /*!< STM32L496xx Devices */
+  /* #define STM32L4A6xx */   /*!< STM32L4A6xx Devices */
+  /* #define STM32L4P5xx */   /*!< STM32L4Q5xx Devices */
+  /* #define STM32L4R5xx */   /*!< STM32L4R5xx Devices */
+  /* #define STM32L4R7xx */   /*!< STM32L4R7xx Devices */
+  /* #define STM32L4R9xx */   /*!< STM32L4R9xx Devices */
+  /* #define STM32L4S5xx */   /*!< STM32L4S5xx Devices */
+  /* #define STM32L4S7xx */   /*!< STM32L4S7xx Devices */
+  /* #define STM32L4S9xx */   /*!< STM32L4S9xx Devices */
 #endif
-   
+
 /*  Tip: To avoid modifying this file each time you need to switch between these
         devices, you can define the device in your toolchain compiler preprocessor.
   */
 #if !defined  (USE_HAL_DRIVER)
 /**
  * @brief Comment the line below if you will not use the peripherals drivers.
-   In this case, these drivers will not be included and the application code will 
-   be based on direct access to peripherals registers 
+   In this case, these drivers will not be included and the application code will
+   be based on direct access to peripherals registers
    */
   /*#define USE_HAL_DRIVER */
 #endif /* USE_HAL_DRIVER */
 
 /**
-  * @brief CMSIS Device version number V2.3.8
+  * @brief CMSIS Device version number
   */
-#define __STM32F3_CMSIS_VERSION_MAIN   (0x02) /*!< [31:24] main version */
-#define __STM32F3_CMSIS_VERSION_SUB1   (0x03) /*!< [23:16] sub1 version */
-#define __STM32F3_CMSIS_VERSION_SUB2   (0x08) /*!< [15:8]  sub2 version */
-#define __STM32F3_CMSIS_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
-#define __STM32F3_CMSIS_VERSION        ((__STM32F3_CMSIS_VERSION_MAIN     << 24)\
-                                       |(__STM32F3_CMSIS_VERSION_SUB1 << 16)\
-                                       |(__STM32F3_CMSIS_VERSION_SUB2 << 8 )\
-                                       |(__STM32F3_CMSIS_VERSION_RC))
+#define __STM32L4_CMSIS_VERSION_MAIN   (0x01) /*!< [31:24] main version */
+#define __STM32L4_CMSIS_VERSION_SUB1   (0x07) /*!< [23:16] sub1 version */
+#define __STM32L4_CMSIS_VERSION_SUB2   (0x04) /*!< [15:8]  sub2 version */
+#define __STM32L4_CMSIS_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
+#define __STM32L4_CMSIS_VERSION        ((__STM32L4_CMSIS_VERSION_MAIN << 24)\
+                                       |(__STM32L4_CMSIS_VERSION_SUB1 << 16)\
+                                       |(__STM32L4_CMSIS_VERSION_SUB2 << 8 )\
+                                       |(__STM32L4_CMSIS_VERSION_RC))
 
 /**
   * @}
@@ -121,36 +121,58 @@
   * @{
   */
 
-#if defined(STM32F301x8)
-  #include "stm32f301x8.h"
-#elif defined(STM32F302x8)
-  #include "stm32f302x8.h"
-#elif defined(STM32F302xC)
-  #include "stm32f302xc.h"
-#elif defined(STM32F302xE)
-  #include "stm32f302xe.h"
-#elif defined(STM32F303x8)
-  #include "stm32f303x8.h"
-#elif defined(STM32F303xC)
-  #include "stm32f303xc.h"
-#elif defined(STM32F303xE)
-  #include "stm32f303xe.h"
-#elif defined(STM32F373xC)
-  #include "stm32f373xc.h"
-#elif defined(STM32F334x8)
-  #include "stm32f334x8.h"
-#elif defined(STM32F318xx)
-  #include "stm32f318xx.h"
-#elif defined(STM32F328xx)
-  #include "stm32f328xx.h"
-#elif defined(STM32F358xx)
-  #include "stm32f358xx.h"
-#elif defined(STM32F378xx)
-  #include "stm32f378xx.h"
-#elif defined(STM32F398xx)
-  #include "stm32f398xx.h"
+#if defined(STM32L412xx)
+  #include "stm32l412xx.h"
+#elif defined(STM32L422xx)
+  #include "stm32l422xx.h"
+#elif defined(STM32L431xx)
+  #include "stm32l431xx.h"
+#elif defined(STM32L432xx)
+  #include "stm32l432xx.h"
+#elif defined(STM32L433xx)
+  #include "stm32l433xx.h"
+#elif defined(STM32L442xx)
+  #include "stm32l442xx.h"
+#elif defined(STM32L443xx)
+  #include "stm32l443xx.h"
+#elif defined(STM32L451xx)
+  #include "stm32l451xx.h"
+#elif defined(STM32L452xx)
+  #include "stm32l452xx.h"
+#elif defined(STM32L462xx)
+  #include "stm32l462xx.h"
+#elif defined(STM32L471xx)
+  #include "stm32l471xx.h"
+#elif defined(STM32L475xx)
+  #include "stm32l475xx.h"
+#elif defined(STM32L476xx)
+  #include "stm32l476xx.h"
+#elif defined(STM32L485xx)
+  #include "stm32l485xx.h"
+#elif defined(STM32L486xx)
+  #include "stm32l486xx.h"
+#elif defined(STM32L496xx)
+  #include "stm32l496xx.h"
+#elif defined(STM32L4A6xx)
+  #include "stm32l4a6xx.h"
+#elif defined(STM32L4P5xx)
+  #include "stm32l4p5xx.h"
+#elif defined(STM32L4Q5xx)
+  #include "stm32l4q5xx.h"
+#elif defined(STM32L4R5xx)
+  #include "stm32l4r5xx.h"
+#elif defined(STM32L4R7xx)
+  #include "stm32l4r7xx.h"
+#elif defined(STM32L4R9xx)
+  #include "stm32l4r9xx.h"
+#elif defined(STM32L4S5xx)
+  #include "stm32l4s5xx.h"
+#elif defined(STM32L4S7xx)
+  #include "stm32l4s7xx.h"
+#elif defined(STM32L4S9xx)
+  #include "stm32l4s9xx.h"
 #else
- #error "Please select first the target STM32F3xx device used in your application (in stm32f3xx.h file)"
+ #error "Please select first the target STM32L4xx device used in your application (in stm32l4xx.h file)"
 #endif
 
 /**
@@ -159,23 +181,23 @@
 
 /** @addtogroup Exported_types
   * @{
-  */ 
-typedef enum 
+  */
+typedef enum
 {
-  RESET = 0U, 
+  RESET = 0,
   SET = !RESET
 } FlagStatus, ITStatus;
 
-typedef enum 
+typedef enum
 {
-  DISABLE = 0U, 
+  DISABLE = 0,
   ENABLE = !DISABLE
 } FunctionalState;
 #define IS_FUNCTIONAL_STATE(STATE) (((STATE) == DISABLE) || ((STATE) == ENABLE))
 
-typedef enum 
+typedef enum
 {
-  SUCCESS = 0U,
+  SUCCESS = 0,
   ERROR = !SUCCESS
 } ErrorStatus;
 
@@ -200,8 +222,6 @@ typedef enum
 #define READ_REG(REG)         ((REG))
 
 #define MODIFY_REG(REG, CLEARMASK, SETMASK)  WRITE_REG((REG), (((READ_REG(REG)) & (~(CLEARMASK))) | (SETMASK)))
-
-#define POSITION_VAL(VAL)     (__CLZ(__RBIT(VAL))) 
 
 /* Use of CMSIS compiler intrinsics for register exclusive access */
 /* Atomic 32-bit register access macro to set one or several bits */
@@ -258,19 +278,21 @@ typedef enum
     } while ((__STREXH(val,(__IO uint16_t *)&(REG))) != 0U);               \
   } while(0)
 
+#define POSITION_VAL(VAL)     (__CLZ(__RBIT(VAL)))
+
 /**
   * @}
   */
 
 #if defined (USE_HAL_DRIVER)
- #include "stm32f3xx_hal.h"
+ #include "stm32l4xx_hal.h"
 #endif /* USE_HAL_DRIVER */
 
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
 
-#endif /* __STM32F3xx_H */
+#endif /* __STM32L4xx_H */
 /**
   * @}
   */
@@ -278,3 +300,4 @@ typedef enum
 /**
   * @}
   */
+

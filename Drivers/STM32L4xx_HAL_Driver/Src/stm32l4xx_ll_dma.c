@@ -1,16 +1,16 @@
 /**
   ******************************************************************************
-  * @file    stm32f3xx_ll_dma.c
+  * @file    stm32l4xx_ll_dma.c
   * @author  MCD Application Team
   * @brief   DMA LL module driver.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
-  * This software is licensed under terms that can be found in the LICENSE file in
-  * the root directory of this software component.
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
   * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
@@ -18,15 +18,15 @@
 #if defined(USE_FULL_LL_DRIVER)
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f3xx_ll_dma.h"
-#include "stm32f3xx_ll_bus.h"
+#include "stm32l4xx_ll_dma.h"
+#include "stm32l4xx_ll_bus.h"
 #ifdef  USE_FULL_ASSERT
 #include "stm32_assert.h"
 #else
 #define assert_param(expr) ((void)0U)
 #endif
 
-/** @addtogroup STM32F3xx_LL_Driver
+/** @addtogroup STM32L4xx_LL_Driver
   * @{
   */
 
@@ -66,6 +66,18 @@
 
 #define IS_LL_DMA_NBDATA(__VALUE__)             ((__VALUE__)  <= 0x0000FFFFU)
 
+#if defined(DMAMUX1)
+#define IS_LL_DMA_PERIPHREQUEST(__VALUE__)      ((__VALUE__) <= 93U)
+#else
+#define IS_LL_DMA_PERIPHREQUEST(__VALUE__)      (((__VALUE__) == LL_DMA_REQUEST_0)  || \
+                                                 ((__VALUE__) == LL_DMA_REQUEST_1)  || \
+                                                 ((__VALUE__) == LL_DMA_REQUEST_2)  || \
+                                                 ((__VALUE__) == LL_DMA_REQUEST_3)  || \
+                                                 ((__VALUE__) == LL_DMA_REQUEST_4)  || \
+                                                 ((__VALUE__) == LL_DMA_REQUEST_5)  || \
+                                                 ((__VALUE__) == LL_DMA_REQUEST_6)  || \
+                                                 ((__VALUE__) == LL_DMA_REQUEST_7))
+#endif /* DMAMUX1 */
 
 #define IS_LL_DMA_PRIORITY(__VALUE__)           (((__VALUE__) == LL_DMA_PRIORITY_LOW)    || \
                                                  ((__VALUE__) == LL_DMA_PRIORITY_MEDIUM) || \
@@ -142,35 +154,70 @@
   *         @arg @ref LL_DMA_CHANNEL_5
   *         @arg @ref LL_DMA_CHANNEL_6
   *         @arg @ref LL_DMA_CHANNEL_7
+  *         @arg @ref LL_DMA_CHANNEL_ALL
   * @retval An ErrorStatus enumeration value:
   *          - SUCCESS: DMA registers are de-initialized
   *          - ERROR: DMA registers are not de-initialized
   */
-uint32_t LL_DMA_DeInit(DMA_TypeDef *DMAx, uint32_t Channel)
+ErrorStatus LL_DMA_DeInit(DMA_TypeDef *DMAx, uint32_t Channel)
 {
-  DMA_Channel_TypeDef *tmp = (DMA_Channel_TypeDef *)DMA1_Channel1;
   ErrorStatus status = SUCCESS;
+  DMA_Channel_TypeDef *tmp;
 
   /* Check the DMA Instance DMAx and Channel parameters*/
-  assert_param(IS_LL_DMA_ALL_CHANNEL_INSTANCE(DMAx, Channel));
+  assert_param(IS_LL_DMA_ALL_CHANNEL_INSTANCE(DMAx, Channel) || (Channel == LL_DMA_CHANNEL_ALL));
 
+  if (Channel == LL_DMA_CHANNEL_ALL)
+  {
+    if (DMAx == DMA1)
+    {
+      /* Force reset of DMA clock */
+      LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_DMA1);
+
+      /* Release reset of DMA clock */
+      LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_DMA1);
+    }
+#if defined(DMA2)
+    else if (DMAx == DMA2)
+    {
+      /* Force reset of DMA clock */
+      LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_DMA2);
+
+      /* Release reset of DMA clock */
+      LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_DMA2);
+    }
+#endif
+    else
+    {
+      status = ERROR;
+    }
+  }
+  else
+  {
     tmp = (DMA_Channel_TypeDef *)(__LL_DMA_GET_CHANNEL_INSTANCE(DMAx, Channel));
 
     /* Disable the selected DMAx_Channely */
     CLEAR_BIT(tmp->CCR, DMA_CCR_EN);
 
     /* Reset DMAx_Channely control register */
-    LL_DMA_WriteReg(tmp, CCR, 0U);
+    WRITE_REG(tmp->CCR, 0U);
 
     /* Reset DMAx_Channely remaining bytes register */
-    LL_DMA_WriteReg(tmp, CNDTR, 0U);
+    WRITE_REG(tmp->CNDTR, 0U);
 
     /* Reset DMAx_Channely peripheral address register */
-    LL_DMA_WriteReg(tmp, CPAR, 0U);
+    WRITE_REG(tmp->CPAR, 0U);
 
-    /* Reset DMAx_Channely memory address register */
-    LL_DMA_WriteReg(tmp, CMAR, 0U);
+    /* Reset DMAx_Channely memory 0 address register */
+    WRITE_REG(tmp->CMAR, 0U);
 
+#if defined(DMAMUX1)
+    /* Reset Request register field for DMAx Channel */
+    LL_DMA_SetPeriphRequest(DMAx, Channel, LL_DMAMUX_REQ_MEM2MEM);
+#else
+    /* Reset Request register field for DMAx Channel */
+    LL_DMA_SetPeriphRequest(DMAx, Channel, LL_DMA_REQUEST_0);
+#endif /* DMAMUX1 */
 
     if (Channel == LL_DMA_CHANNEL_1)
     {
@@ -212,6 +259,7 @@ uint32_t LL_DMA_DeInit(DMA_TypeDef *DMAx, uint32_t Channel)
     {
       status = ERROR;
     }
+  }
 
   return status;
 }
@@ -235,7 +283,7 @@ uint32_t LL_DMA_DeInit(DMA_TypeDef *DMAx, uint32_t Channel)
   *          - SUCCESS: DMA registers are initialized
   *          - ERROR: Not applicable
   */
-uint32_t LL_DMA_Init(DMA_TypeDef *DMAx, uint32_t Channel, LL_DMA_InitTypeDef *DMA_InitStruct)
+ErrorStatus LL_DMA_Init(DMA_TypeDef *DMAx, uint32_t Channel, LL_DMA_InitTypeDef *DMA_InitStruct)
 {
   /* Check the DMA Instance DMAx and Channel parameters*/
   assert_param(IS_LL_DMA_ALL_CHANNEL_INSTANCE(DMAx, Channel));
@@ -248,6 +296,7 @@ uint32_t LL_DMA_Init(DMA_TypeDef *DMAx, uint32_t Channel, LL_DMA_InitTypeDef *DM
   assert_param(IS_LL_DMA_PERIPHDATASIZE(DMA_InitStruct->PeriphOrM2MSrcDataSize));
   assert_param(IS_LL_DMA_MEMORYDATASIZE(DMA_InitStruct->MemoryOrM2MDstDataSize));
   assert_param(IS_LL_DMA_NBDATA(DMA_InitStruct->NbData));
+  assert_param(IS_LL_DMA_PERIPHREQUEST(DMA_InitStruct->PeriphRequest));
   assert_param(IS_LL_DMA_PRIORITY(DMA_InitStruct->Priority));
 
   /*---------------------------- DMAx CCR Configuration ------------------------
@@ -288,6 +337,19 @@ uint32_t LL_DMA_Init(DMA_TypeDef *DMAx, uint32_t Channel, LL_DMA_InitTypeDef *DM
    */
   LL_DMA_SetDataLength(DMAx, Channel, DMA_InitStruct->NbData);
 
+#if defined(DMAMUX1)
+  /*--------------------------- DMAMUXx CCR Configuration ----------------------
+   * Configure the DMA request for DMA Channels on DMAMUX Channel x with parameter :
+   * - PeriphRequest: DMA_CxCR[7:0] bits
+   */
+  LL_DMA_SetPeriphRequest(DMAx, Channel, DMA_InitStruct->PeriphRequest);
+#else
+  /*--------------------------- DMAx CSELR Configuration -----------------------
+   * Configure the DMA request for DMA instance on Channel x with parameter :
+   * - PeriphRequest: DMA_CSELR[31:0] bits
+   */
+  LL_DMA_SetPeriphRequest(DMAx, Channel, DMA_InitStruct->PeriphRequest);
+#endif /* DMAMUX1 */
 
   return SUCCESS;
 }
@@ -309,6 +371,11 @@ void LL_DMA_StructInit(LL_DMA_InitTypeDef *DMA_InitStruct)
   DMA_InitStruct->PeriphOrM2MSrcDataSize = LL_DMA_PDATAALIGN_BYTE;
   DMA_InitStruct->MemoryOrM2MDstDataSize = LL_DMA_MDATAALIGN_BYTE;
   DMA_InitStruct->NbData                 = 0x00000000U;
+#if defined(DMAMUX1)
+  DMA_InitStruct->PeriphRequest          = LL_DMAMUX_REQ_MEM2MEM;
+#else
+  DMA_InitStruct->PeriphRequest          = LL_DMA_REQUEST_0;
+#endif /* DMAMUX1 */
   DMA_InitStruct->Priority               = LL_DMA_PRIORITY_LOW;
 }
 
@@ -331,4 +398,3 @@ void LL_DMA_StructInit(LL_DMA_InitTypeDef *DMA_InitStruct)
   */
 
 #endif /* USE_FULL_LL_DRIVER */
-

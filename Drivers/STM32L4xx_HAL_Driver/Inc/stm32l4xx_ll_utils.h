@@ -1,12 +1,13 @@
 /**
   ******************************************************************************
-  * @file    stm32f3xx_ll_utils.h
+  * @file    stm32l4xx_ll_utils.h
   * @author  MCD Application Team
   * @brief   Header file of UTILS LL module.
+  *
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -30,17 +31,17 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F3xx_LL_UTILS_H
-#define __STM32F3xx_LL_UTILS_H
+#ifndef STM32L4xx_LL_UTILS_H
+#define STM32L4xx_LL_UTILS_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f3xx.h"
+#include "stm32l4xx.h"
 
-/** @addtogroup STM32F3xx_LL_Driver
+/** @addtogroup STM32L4xx_LL_Driver
   * @{
   */
 
@@ -94,25 +95,23 @@ extern "C" {
   */
 typedef struct
 {
-  uint32_t PLLMul;   /*!< Multiplication factor for PLL VCO input clock.
-                          This parameter can be a value of @ref RCC_LL_EC_PLL_MUL
+  uint32_t PLLM;   /*!< Division factor for PLL VCO input clock.
+                        This parameter can be a value of @ref RCC_LL_EC_PLLM_DIV
 
-                          This feature can be modified afterwards using unitary function
-                          @ref LL_RCC_PLL_ConfigDomain_SYS(). */
+                        This feature can be modified afterwards using unitary function
+                        @ref LL_RCC_PLL_ConfigDomain_SYS(). */
 
-#if defined(RCC_PLLSRC_PREDIV1_SUPPORT)
-  uint32_t PLLDiv;   /*!< Division factor for PLL VCO output clock.
-                          This parameter can be a value of @ref RCC_LL_EC_PREDIV_DIV 
-  
-                          This feature can be modified afterwards using unitary function
-                          @ref LL_RCC_PLL_ConfigDomain_SYS(). */
-#else
-  uint32_t Prediv;   /*!< Division factor for HSE used as PLL clock source.
-                          This parameter can be a value of @ref RCC_LL_EC_PREDIV_DIV 
-  
-                          This feature can be modified afterwards using unitary function
-                          @ref LL_RCC_PLL_ConfigDomain_SYS(). */
-#endif /* RCC_PLLSRC_PREDIV1_SUPPORT */
+  uint32_t PLLN;   /*!< Multiplication factor for PLL VCO output clock.
+                        This parameter must be a number between Min_Data = 8 and Max_Data = 86
+
+                        This feature can be modified afterwards using unitary function
+                        @ref LL_RCC_PLL_ConfigDomain_SYS(). */
+
+  uint32_t PLLR;   /*!< Division for the main system clock.
+                        This parameter can be a value of @ref RCC_LL_EC_PLLR_DIV
+
+                        This feature can be modified afterwards using unitary function
+                        @ref LL_RCC_PLL_ConfigDomain_SYS(). */
 } LL_UTILS_PLLInitTypeDef;
 
 /**
@@ -154,6 +153,30 @@ typedef struct
   */
 #define LL_UTILS_HSEBYPASS_OFF        0x00000000U       /*!< HSE Bypass is not enabled                */
 #define LL_UTILS_HSEBYPASS_ON         0x00000001U       /*!< HSE Bypass is enabled                    */
+/**
+  * @}
+  */
+
+/** @defgroup UTILS_EC_PACKAGETYPE PACKAGE TYPE
+  * @{
+  */
+#define LL_UTILS_PACKAGETYPE_LQFP64          0x00000000U /*!< LQFP64 package type                      */
+#define LL_UTILS_PACKAGETYPE_WLCSP64         0x00000001U /*!< WLCSP64 package type                     */
+#define LL_UTILS_PACKAGETYPE_LQFP100         0x00000002U /*!< LQFP100 package type                     */
+#define LL_UTILS_PACKAGETYPE_BGA132          0x00000003U /*!< BGA132 package type                      */
+#define LL_UTILS_PACKAGETYPE_LQFP144_CSP72   0x00000004U /*!< LQFP144, WLCSP81 or WLCSP72 package type */
+#define LL_UTILS_PACKAGETYPE_UFQFPN32        0x00000008U /*!< UFQFPN32 package type                    */
+#define LL_UTILS_PACKAGETYPE_UFQFPN48        0x0000000AU /*!< UFQFPN48 package type                    */
+#define LL_UTILS_PACKAGETYPE_LQFP48          0x0000000BU /*!< LQFP48 package type                      */
+#define LL_UTILS_PACKAGETYPE_WLCSP49         0x0000000CU /*!< WLCSP49 package type                     */
+#define LL_UTILS_PACKAGETYPE_UFBGA64         0x0000000DU /*!< UFBGA64 package type                     */
+#define LL_UTILS_PACKAGETYPE_UFBGA100        0x0000000EU /*!< UFBGA100 package type                    */
+#define LL_UTILS_PACKAGETYPE_UFBGA169_CSP115 0x00000010U /*!< UFBGA169 or WLCSP115 package type        */
+#define LL_UTILS_PACKAGETYPE_LQFP100_DSI     0x00000012U /*!< LQFP100 with DSI package type            */
+#define LL_UTILS_PACKAGETYPE_WLCSP144_DSI    0x00000013U /*!< WLCSP144 with DSI package type           */
+#define LL_UTILS_PACKAGETYPE_UFBGA144_DSI    0x00000013U /*!< UFBGA144 with DSI package type           */
+#define LL_UTILS_PACKAGETYPE_UFBGA169_DSI    0x00000014U /*!< UFBGA169 with DSI package type           */
+#define LL_UTILS_PACKAGETYPE_LQFP144_DSI     0x00000015U /*!< LQFP144 with DSI package type            */
 /**
   * @}
   */
@@ -208,9 +231,35 @@ __STATIC_INLINE uint32_t LL_GetUID_Word2(void)
   */
 __STATIC_INLINE uint32_t LL_GetFlashSize(void)
 {
-  return (uint16_t)(READ_REG(*((uint32_t *)FLASHSIZE_BASE_ADDRESS)));
+  return (uint32_t)(READ_REG(*((uint32_t *)FLASHSIZE_BASE_ADDRESS)) & 0xFFFFU);
 }
 
+/**
+  * @brief  Get Package type
+  * @retval Returned value can be one of the following values:
+  *         @arg @ref LL_UTILS_PACKAGETYPE_LQFP64 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_LQFP100 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_BGA132 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_LQFP144_CSP72 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_UFQFPN32 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_UFQFPN48 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_LQFP48 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_WLCSP49 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_UFBGA64 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_UFBGA100 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_UFBGA169 (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_LQFP100_DSI (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_WLCSP144_DSI (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_UFBGA144_DSI (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_UFBGA169_DSI (*)
+  *         @arg @ref LL_UTILS_PACKAGETYPE_LQFP144_DSI (*)
+  *
+  *         (*) value not defined in all devices.
+  */
+__STATIC_INLINE uint32_t LL_GetPackageType(void)
+{
+  return (uint32_t)(READ_REG(*((uint32_t *)PACKAGE_BASE_ADDRESS)) & 0x1FU);
+}
 
 /**
   * @}
@@ -223,7 +272,7 @@ __STATIC_INLINE uint32_t LL_GetFlashSize(void)
 /**
   * @brief  This function configures the Cortex-M SysTick source of the time base.
   * @param  HCLKFrequency HCLK frequency in Hz (can be calculated thanks to RCC helper macro)
-  * @note   When a RTOS is used, it is recommended to avoid changing the SysTick 
+  * @note   When a RTOS is used, it is recommended to avoid changing the SysTick
   *         configuration by calling this function, for a delay use rather osDelay RTOS service.
   * @param  Ticks Frequency of Ticks (Hz)
   * @retval None
@@ -249,9 +298,9 @@ void        LL_mDelay(uint32_t Delay);
   */
 
 void        LL_SetSystemCoreClock(uint32_t HCLKFrequency);
-#if defined(FLASH_ACR_LATENCY)
-ErrorStatus LL_SetFlashLatency(uint32_t Frequency);
-#endif /* FLASH_ACR_LATENCY */
+ErrorStatus LL_SetFlashLatency(uint32_t HCLKFrequency);
+ErrorStatus LL_PLL_ConfigSystemClock_MSI(LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct,
+                                         LL_UTILS_ClkInitTypeDef *UTILS_ClkInitStruct);
 ErrorStatus LL_PLL_ConfigSystemClock_HSI(LL_UTILS_PLLInitTypeDef *UTILS_PLLInitStruct,
                                          LL_UTILS_ClkInitTypeDef *UTILS_ClkInitStruct);
 ErrorStatus LL_PLL_ConfigSystemClock_HSE(uint32_t HSEFrequency, uint32_t HSEBypass,
@@ -277,4 +326,4 @@ ErrorStatus LL_PLL_ConfigSystemClock_HSE(uint32_t HSEFrequency, uint32_t HSEBypa
 }
 #endif
 
-#endif /* __STM32F3xx_LL_UTILS_H */
+#endif /* STM32L4xx_LL_UTILS_H */

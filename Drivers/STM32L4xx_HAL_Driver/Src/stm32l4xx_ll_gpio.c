@@ -1,12 +1,12 @@
 /**
   ******************************************************************************
-  * @file    stm32f3xx_ll_gpio.c
+  * @file    stm32l4xx_ll_gpio.c
   * @author  MCD Application Team
   * @brief   GPIO LL module driver.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2016 STMicroelectronics.
+  * Copyright (c) 2017 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -18,19 +18,19 @@
 #if defined(USE_FULL_LL_DRIVER)
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f3xx_ll_gpio.h"
-#include "stm32f3xx_ll_bus.h"
+#include "stm32l4xx_ll_gpio.h"
+#include "stm32l4xx_ll_bus.h"
 #ifdef  USE_FULL_ASSERT
 #include "stm32_assert.h"
 #else
 #define assert_param(expr) ((void)0U)
 #endif
 
-/** @addtogroup STM32F3xx_LL_Driver
+/** @addtogroup STM32L4xx_LL_Driver
   * @{
   */
 
-#if defined (GPIOA) || defined (GPIOB) || defined (GPIOC) || defined (GPIOD) || defined (GPIOE) || defined (GPIOF) || defined (GPIOG) || defined (GPIOH)
+#if defined (GPIOA) || defined (GPIOB) || defined (GPIOC) || defined (GPIOD) || defined (GPIOE) || defined (GPIOF) || defined (GPIOG) || defined (GPIOH) || defined (GPIOI)
 
 /** @addtogroup GPIO_LL
   * @{
@@ -39,17 +39,6 @@
   * Rule-12.2 - Medium: RHS argument is in interval [0,INF] which is out of
   * range of the shift operator in following API :
   * LL_GPIO_Init
-  * LL_GPIO_DeInit
-  * LL_GPIO_SetPinMode
-  * LL_GPIO_GetPinMode
-  * LL_GPIO_SetPinSpeed
-  * LL_GPIO_GetPinSpeed
-  * LL_GPIO_SetPinPull
-  * LL_GPIO_GetPinPull
-  * LL_GPIO_GetAFPin_0_7
-  * LL_GPIO_SetAFPin_0_7
-  * LL_GPIO_SetAFPin_8_15
-  * LL_GPIO_GetAFPin_8_15
   */
 
 /* Private types -------------------------------------------------------------*/
@@ -71,7 +60,8 @@
 
 #define IS_LL_GPIO_SPEED(__VALUE__)        (((__VALUE__) == LL_GPIO_SPEED_FREQ_LOW)       ||\
                                             ((__VALUE__) == LL_GPIO_SPEED_FREQ_MEDIUM)    ||\
-                                            ((__VALUE__) == LL_GPIO_SPEED_FREQ_HIGH))
+                                            ((__VALUE__) == LL_GPIO_SPEED_FREQ_HIGH)      ||\
+                                            ((__VALUE__) == LL_GPIO_SPEED_FREQ_VERY_HIGH))
 
 #define IS_LL_GPIO_PULL(__VALUE__)         (((__VALUE__) == LL_GPIO_PULL_NO)   ||\
                                             ((__VALUE__) == LL_GPIO_PULL_UP)   ||\
@@ -125,54 +115,61 @@ ErrorStatus LL_GPIO_DeInit(GPIO_TypeDef *GPIOx)
   /* Force and Release reset on clock of GPIOx Port */
   if (GPIOx == GPIOA)
   {
-    LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_GPIOA);
-    LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOA);
+    LL_AHB2_GRP1_ForceReset(LL_AHB2_GRP1_PERIPH_GPIOA);
+    LL_AHB2_GRP1_ReleaseReset(LL_AHB2_GRP1_PERIPH_GPIOA);
   }
   else if (GPIOx == GPIOB)
   {
-    LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_GPIOB);
-    LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOB);
+    LL_AHB2_GRP1_ForceReset(LL_AHB2_GRP1_PERIPH_GPIOB);
+    LL_AHB2_GRP1_ReleaseReset(LL_AHB2_GRP1_PERIPH_GPIOB);
   }
   else if (GPIOx == GPIOC)
   {
-    LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_GPIOC);
-    LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOC);
+    LL_AHB2_GRP1_ForceReset(LL_AHB2_GRP1_PERIPH_GPIOC);
+    LL_AHB2_GRP1_ReleaseReset(LL_AHB2_GRP1_PERIPH_GPIOC);
   }
 #if defined(GPIOD)
   else if (GPIOx == GPIOD)
   {
-    LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_GPIOD);
-    LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOD);
+    LL_AHB2_GRP1_ForceReset(LL_AHB2_GRP1_PERIPH_GPIOD);
+    LL_AHB2_GRP1_ReleaseReset(LL_AHB2_GRP1_PERIPH_GPIOD);
   }
 #endif /* GPIOD */
 #if defined(GPIOE)
   else if (GPIOx == GPIOE)
   {
-    LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_GPIOE);
-    LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOE);
+    LL_AHB2_GRP1_ForceReset(LL_AHB2_GRP1_PERIPH_GPIOE);
+    LL_AHB2_GRP1_ReleaseReset(LL_AHB2_GRP1_PERIPH_GPIOE);
   }
 #endif /* GPIOE */
 #if defined(GPIOF)
   else if (GPIOx == GPIOF)
   {
-    LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_GPIOF);
-    LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOF);
+    LL_AHB2_GRP1_ForceReset(LL_AHB2_GRP1_PERIPH_GPIOF);
+    LL_AHB2_GRP1_ReleaseReset(LL_AHB2_GRP1_PERIPH_GPIOF);
   }
 #endif /* GPIOF */
 #if defined(GPIOG)
   else if (GPIOx == GPIOG)
   {
-    LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_GPIOG);
-    LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOG);
+    LL_AHB2_GRP1_ForceReset(LL_AHB2_GRP1_PERIPH_GPIOG);
+    LL_AHB2_GRP1_ReleaseReset(LL_AHB2_GRP1_PERIPH_GPIOG);
   }
 #endif /* GPIOG */
 #if defined(GPIOH)
   else if (GPIOx == GPIOH)
   {
-    LL_AHB1_GRP1_ForceReset(LL_AHB1_GRP1_PERIPH_GPIOH);
-    LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_GPIOH);
+    LL_AHB2_GRP1_ForceReset(LL_AHB2_GRP1_PERIPH_GPIOH);
+    LL_AHB2_GRP1_ReleaseReset(LL_AHB2_GRP1_PERIPH_GPIOH);
   }
 #endif /* GPIOH */
+#if defined(GPIOI)
+  else if (GPIOx == GPIOI)
+  {
+    LL_AHB2_GRP1_ForceReset(LL_AHB2_GRP1_PERIPH_GPIOI);
+    LL_AHB2_GRP1_ReleaseReset(LL_AHB2_GRP1_PERIPH_GPIOI);
+  }
+#endif /* GPIOI */
   else
   {
     status = ERROR;
@@ -184,7 +181,7 @@ ErrorStatus LL_GPIO_DeInit(GPIO_TypeDef *GPIOx)
 /**
   * @brief  Initialize GPIO registers according to the specified parameters in GPIO_InitStruct.
   * @param  GPIOx GPIO Port
-  * @param  GPIO_InitStruct pointer to a @ref LL_GPIO_InitTypeDef structure
+  * @param GPIO_InitStruct pointer to a @ref LL_GPIO_InitTypeDef structure
   *         that contains the configuration information for the specified GPIO peripheral.
   * @retval An ErrorStatus enumeration value:
   *          - SUCCESS: GPIO registers are initialized according to GPIO_InitStruct content
@@ -237,7 +234,7 @@ ErrorStatus LL_GPIO_Init(GPIO_TypeDef *GPIOx, LL_GPIO_InitTypeDef *GPIO_InitStru
         assert_param(IS_LL_GPIO_ALTERNATE(GPIO_InitStruct->Alternate));
 
         /* Speed mode configuration */
-        if (POSITION_VAL(currentpin) < 0x00000008U)
+        if (currentpin < LL_GPIO_PIN_8)
         {
           LL_GPIO_SetAFPin_0_7(GPIOx, currentpin, GPIO_InitStruct->Alternate);
         }
@@ -286,10 +283,11 @@ void LL_GPIO_StructInit(LL_GPIO_InitTypeDef *GPIO_InitStruct)
   * @}
   */
 
-#endif /* defined (GPIOA) || defined (GPIOB) || defined (GPIOC) || defined (GPIOD) || defined (GPIOE) || defined (GPIOF) || defined (GPIOG) || defined (GPIOH) */
+#endif /* defined (GPIOA) || defined (GPIOB) || defined (GPIOC) || defined (GPIOD) || defined (GPIOE) || defined (GPIOF) || defined (GPIOG) || defined (GPIOH) || defined (GPIOI) */
 
 /**
   * @}
   */
 
 #endif /* USE_FULL_LL_DRIVER */
+

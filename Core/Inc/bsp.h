@@ -8,7 +8,7 @@
 //
 // Filename: bsp.h
 //
-// Description: Board Support Package for STM32F303x8
+// Description: Board Support Package for STM32L412xx
 //
 // Revision History:
 // Date       - Name         -  Ver -  Remarks
@@ -24,23 +24,23 @@
     #include <stdint.h>
 
     /* Private defines -----------------------------------------------------------*/
-    #ifdef STM32F303x8
+    #ifdef STM32L412xx
 
         /* Low Level ST API */
-        #include "stm32f3xx_ll_rcc.h"
-        #include "stm32f3xx_ll_bus.h"
-        #include "stm32f3xx_ll_system.h"
-        #include "stm32f3xx_ll_exti.h"
-        #include "stm32f3xx_ll_cortex.h"
-        #include "stm32f3xx_ll_utils.h"
-        #include "stm32f3xx_ll_pwr.h"
-        #include "stm32f3xx_ll_dma.h"
-        #include "stm32f3xx_ll_tim.h"
-        #include "stm32f3xx_ll_usart.h"
-        #include "stm32f3xx_ll_gpio.h"
+        #include "stm32l4xx_ll_crs.h"
+        #include "stm32l4xx_ll_rcc.h"
+        #include "stm32l4xx_ll_bus.h"
+        #include "stm32l4xx_ll_system.h"
+        #include "stm32l4xx_ll_exti.h"
+        #include "stm32l4xx_ll_cortex.h"
+        #include "stm32l4xx_ll_utils.h"
+        #include "stm32l4xx_ll_pwr.h"
+        #include "stm32l4xx_ll_dma.h"
+        #include "stm32l4xx_ll_tim.h"
+        #include "stm32l4xx_ll_usart.h"
+        #include "stm32l4xx_ll_gpio.h"
 
         #if defined(USE_FULL_ASSERT)
-            /* ST Assert */
             #include "stm32_assert.h"
         #endif /* USE_FULL_ASSERT */
 
@@ -64,7 +64,7 @@
         #define IR_LED_Pin LL_GPIO_PIN_9
         #define IR_LED_GPIO_Port GPIOA
 
-        #else /* STM32F303x8 */
+        #else /* STM32L412xx */
 
         /* Below is for debugging purposes */
         #define BRIGHT_Pin 0
@@ -90,20 +90,20 @@
             uint32_t time;
         } TimerStruct;
 
-    #endif /* STM32F303x8 */
+    #endif /* STM32L412xx */
 
     /* Interrupt Handlers */
     #ifndef NVIC_PRIORITYGROUP_0
         #define NVIC_PRIORITYGROUP_0         ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority,
-        4 bits for subpriority */
+                                                                         4 bits for subpriority */
         #define NVIC_PRIORITYGROUP_1         ((uint32_t)0x00000006) /*!< 1 bit  for pre-emption priority,
-        3 bits for subpriority */
+                                                                         3 bits for subpriority */
         #define NVIC_PRIORITYGROUP_2         ((uint32_t)0x00000005) /*!< 2 bits for pre-emption priority,
-        2 bits for subpriority */
+                                                                         2 bits for subpriority */
         #define NVIC_PRIORITYGROUP_3         ((uint32_t)0x00000004) /*!< 3 bits for pre-emption priority,
-        1 bit  for subpriority */
+                                                                         1 bit  for subpriority */
         #define NVIC_PRIORITYGROUP_4         ((uint32_t)0x00000003) /*!< 4 bits for pre-emption priority,
-        0 bit  for subpriority */
+                                                                        0 bit  for subpriority */
     #endif
 
     /* Button Defines */
@@ -111,9 +111,9 @@
     enum { BUTTON_PRESSED = 1, BUTTON_UNPRESSED = 0};
 
     /* Clock frequency Values */
-    #define CLK_FREQ_HZ  (8000000)
+    #define CLK_FREQ_HZ  (32000000)
     #define TIM2_CLK_DEV  (1)
-    #define TIM2_CLK_PRESCALER  (8000)
+    #define TIM2_CLK_PRESCALER  (32000)
 
     /* Returns button state */
     GPIO_PinState ReadTogglePin( void );
