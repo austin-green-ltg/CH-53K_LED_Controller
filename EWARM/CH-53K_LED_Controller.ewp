@@ -237,13 +237,13 @@
           <state>HSE_STARTUP_TIMEOUT=100</state>
           <state>LSE_STARTUP_TIMEOUT=5000</state>
           <state>LSE_VALUE=32768</state>
-          <state>MSI_VALUE=32000000</state>
           <state>HSI_VALUE=16000000</state>
           <state>LSI_VALUE=32000</state>
           <state>VDD_VALUE=3300</state>
           <state>PREFETCH_ENABLE=0</state>
           <state>INSTRUCTION_CACHE_ENABLE=1</state>
           <state>DATA_CACHE_ENABLE=1</state>
+          <state>MSI_VALUE=8000000</state>
         </option>
         <option>
           <name>CCPreprocFile</name>

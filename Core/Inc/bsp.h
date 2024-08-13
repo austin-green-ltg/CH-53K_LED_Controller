@@ -41,6 +41,7 @@
         #include "stm32l4xx_ll_gpio.h"
 
         #if defined(USE_FULL_ASSERT)
+            /* ST Assert */
             #include "stm32_assert.h"
         #endif /* USE_FULL_ASSERT */
 
@@ -111,9 +112,9 @@
     enum { BUTTON_PRESSED = 1, BUTTON_UNPRESSED = 0};
 
     /* Clock frequency Values */
-    #define CLK_FREQ_HZ  (32000000)
+    #define CLK_FREQ_HZ  (8000000)
     #define TIM2_CLK_DEV  (1)
-    #define TIM2_CLK_PRESCALER  (32000)
+    #define TIM2_CLK_PRESCALER  (8000)
 
     /* Returns button state */
     GPIO_PinState ReadTogglePin( void );
