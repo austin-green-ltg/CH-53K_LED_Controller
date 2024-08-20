@@ -30,6 +30,8 @@
 #include "thermistor_handler.h"
 #include "my_printf.h"
 
+// #define REVERSE_BRIGHTNESS
+
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
     #define TIM15_PRESCALER    (65535)
     const float Tim15CntPerSec = (CLK_FREQ_HZ / (float)TIM15_PRESCALER);
@@ -42,10 +44,10 @@ const uint8_t HalfBrightness    = ((uint8_t)((BRIGHTNESS_STEPS - 1) / 2.0f)); //
 
 /* Pulse Width Values */
 #define PW_PERIOD (255)                        // Period of PWM timer
-const float MinWhitePw  = (PW_PERIOD / 10.0f); // relative pulse width
-const float MaxWhitePw  = (PW_PERIOD)        ; // relative pulse width
-const float MinIrPw     = (PW_PERIOD / 10.0f); // relative pulse width
-const float MaxIrPw     = (PW_PERIOD)        ; // relative pulse width
+const float MinWhitePw  = (0)           ; // relative pulse width
+const float MaxWhitePw  = (PW_PERIOD)   ; // relative pulse width
+const float MinIrPw     = (0)           ; // relative pulse width
+const float MaxIrPw     = (PW_PERIOD)   ; // relative pulse width
 
 /* Thermal State Constants */
 const float WarmPwmRatio    = (0.90f);
@@ -54,16 +56,30 @@ const float HotPwmRatio     = (0.50f);
 /* Private define ------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
+/*
 static const uint8_t WhitePwm [ BRIGHTNESS_STEPS ] = {  26, 30, 35, 40, 44, 49, 54, 58, 63, 68,
                                                         72, 77, 82, 86, 91, 96, 100, 105, 110, 114,
                                                         119, 124, 129, 133, 138, 143, 147, 152, 157, 161,
                                                         166, 171, 175, 180, 185, 189, 194, 199, 203, 208,
                                                         213, 218, 222, 227, 232, 236, 241, 246, 250, 255};
+*/
+static const uint8_t WhitePwm [ BRIGHTNESS_STEPS ] = {  0, 5, 10, 16, 21, 26, 31, 36, 42, 47,
+                                                        52, 57, 62, 68, 73, 78, 83, 88, 94, 99,
+                                                        104, 109, 114, 120, 125, 130, 135, 141, 146, 151,
+                                                        156, 161, 167, 172, 177, 182, 187, 193, 198, 203,
+                                                        208, 213, 219, 224, 229, 234, 239, 245, 250, 255 };
+/*
 static const uint8_t IrPwm    [ BRIGHTNESS_STEPS ] = {  26, 30, 35, 40, 44, 49, 54, 58, 63, 68,
                                                         72, 77, 82, 86, 91, 96, 100, 105, 110, 114,
                                                         119, 124, 129, 133, 138, 143, 147, 152, 157, 161,
                                                         166, 171, 175, 180, 185, 189, 194, 199, 203, 208,
                                                         213, 218, 222, 227, 232, 236, 241, 246, 250, 255};
+*/
+static const uint8_t IrPwm [ BRIGHTNESS_STEPS ] = { 0, 5, 10, 16, 21, 26, 31, 36, 42, 47,
+                                                    52, 57, 62, 68, 73, 78, 83, 88, 94, 99,
+                                                    104, 109, 114, 120, 125, 130, 135, 141, 146, 151,
+                                                    156, 161, 167, 172, 177, 182, 187, 193, 198, 203,
+                                                    208, 213, 219, 224, 229, 234, 239, 245, 250, 255 };
 static int8_t  whiteBrightness = 0;
 static int8_t  irBrightness = 0;
 
@@ -123,12 +139,22 @@ void DecreaseWhiteBrightness( uint8_t button_held )
             white_max_time  = TIM15->CNT;
         }
     #endif /* ENABLE_UART_DEBUGGING */
+
+#ifdef REVERSE_BRIGHTNESS
+    // increase whiteBrightness
+    if (button_held == BUTTON_PRESSED) whiteBrightness += HOLD_BRIGHTNESS_JUMP;
+    else                               whiteBrightness++;
+
+    // prevent from going above MaxBrightness
+    if (whiteBrightness > MaxBrightness) whiteBrightness = MaxBrightness;
+#else
     // decrease whiteBrightness
     if (button_held == BUTTON_PRESSED) whiteBrightness -= HOLD_BRIGHTNESS_JUMP;
     else                               whiteBrightness--;
 
     // prevent from going below MinBrightness
     if (whiteBrightness < MinBrightness) whiteBrightness = MinBrightness;
+#endif /* REVERSE_BRIGHTNESS */
 
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
         printf("%s decreased to %d / %d\n", "White", whiteBrightness, MaxBrightness);
@@ -181,12 +207,21 @@ void DecreaseIRBrightness( uint8_t button_held )
         }
     #endif /* ENABLE_UART_DEBUGGING */
 
+#ifdef REVERSE_BRIGHTNESS
+    // increase irBrightness
+    if (button_held == BUTTON_PRESSED) irBrightness += HOLD_BRIGHTNESS_JUMP;
+    else                               irBrightness++;
+
+    // prevent from going above MaxBrightness
+    if (irBrightness > MaxBrightness) irBrightness = MaxBrightness;
+#else
     // decrease irBrightness
     if (button_held == BUTTON_PRESSED) irBrightness -= HOLD_BRIGHTNESS_JUMP;
     else                               irBrightness--;
 
     // prevent from going below MinBrightness
     if (irBrightness < MinBrightness) irBrightness = MinBrightness;
+#endif /* REVERSE_BRIGHTNESS */
 
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
         printf("%s decreased to %d / %d\n", "IR", irBrightness, MaxBrightness);
@@ -238,12 +273,22 @@ void IncreaseWhiteBrightness( uint8_t button_held )
             white_max_time  = TIM15->CNT;
         }
     #endif /* ENABLE_UART_DEBUGGING */
+
+#ifdef REVERSE_BRIGHTNESS
+    // decrease whiteBrightness
+    if (button_held == BUTTON_PRESSED) whiteBrightness -= HOLD_BRIGHTNESS_JUMP;
+    else                               whiteBrightness--;
+
+    // prevent from going below MinBrightness
+    if (whiteBrightness < MinBrightness) whiteBrightness = MinBrightness;
+#else
     // increase whiteBrightness
     if (button_held == BUTTON_PRESSED) whiteBrightness += HOLD_BRIGHTNESS_JUMP;
     else                               whiteBrightness++;
 
     // prevent from going above MaxBrightness
     if (whiteBrightness > MaxBrightness) whiteBrightness = MaxBrightness;
+#endif /* REVERSE_BRIGHTNESS */
 
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
         printf("%s increased to %d / %d\n", "White", whiteBrightness, MaxBrightness);
@@ -295,12 +340,22 @@ void IncreaseIRBrightness( uint8_t button_held )
             ir_max_time  = TIM15->CNT;
         }
     #endif /* ENABLE_UART_DEBUGGING */
+
+#ifdef REVERSE_BRIGHTNESS
+    // decrease irBrightness
+    if (button_held == BUTTON_PRESSED) irBrightness -= HOLD_BRIGHTNESS_JUMP;
+    else                               irBrightness--;
+
+    // prevent from going below MinBrightness
+    if (irBrightness < MinBrightness) irBrightness = MinBrightness;
+#else
     // increase irBrightness
     if (button_held == BUTTON_PRESSED) irBrightness += HOLD_BRIGHTNESS_JUMP;
     else                               irBrightness++;
 
     // prevent from going above MaxBrightness
     if (irBrightness > MaxBrightness) irBrightness = MaxBrightness;
+#endif /* REVERSE_BRIGHTNESS */
 
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
         printf("%s increased to %d / %d\n", "IR", irBrightness, MaxBrightness);
@@ -335,8 +390,15 @@ void IncreaseIRBrightness( uint8_t button_held )
 void SetWhitePwm( void )
 {
     uint32_t pulse_width = GetWhitePwm();
+
     SetPW11(pulse_width);
-    StartPWM11();
+#ifdef REVERSE_BRIGHTNESS
+    if (pulse_width == MaxWhitePw) TurnOffWhitePwm();
+#else
+    if (pulse_width == MinWhitePw) TurnOffWhitePwm();
+#endif /* REVERSE_BRIGHTNESS */
+    else StartPWM11();
+
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
         printf("Turn on %s to %u / %u\n", "White", pulse_width, (uint8_t)PW_PERIOD);
     #endif /* ENABLE_UART_DEBUGGING */
@@ -347,7 +409,13 @@ void SetIrPwm( void )
 {
     uint32_t pulse_width = GetIrPwm();
     SetPW12(pulse_width);
-    StartPWM12();
+#ifdef REVERSE_BRIGHTNESS
+    if (pulse_width == MaxIrPw) TurnOffIrPwm();
+#else
+    if (pulse_width == MinIrPw) TurnOffIrPwm();
+#endif /* REVERSE_BRIGHTNESS */
+    else StartPWM12();
+
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
         printf("Turn on %s to %u / %u\n", "IR", pulse_width, (uint8_t)PW_PERIOD);
     #endif /* ENABLE_UART_DEBUGGING */

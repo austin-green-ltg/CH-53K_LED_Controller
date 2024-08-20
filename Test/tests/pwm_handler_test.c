@@ -389,14 +389,14 @@ TEST(PWM_Handler, DecreaseWhiteBrightnessEdgeCase)
     SetWhiteBrightness(MinBrightness);
     DecreaseWhiteBrightness(PRESS);
     TEST_ASSERT(GetWhiteBrightness() == MinBrightness);
-    TEST_ASSERT(pwm_white.is_running == 1);
+    TEST_ASSERT(pwm_white.is_running == 0);
     TEST_ASSERT(pwm_white.pulse_width == GetWhitePwm());
     TEST_ASSERT(GetIRBrightness()    == HalfBrightness); // IR should not change
     TEST_ASSERT(pwm_ir.is_running == 0);
 
     DecreaseWhiteBrightness(HOLD);
     TEST_ASSERT(GetWhiteBrightness() == MinBrightness);
-    TEST_ASSERT(pwm_white.is_running == 1);
+    TEST_ASSERT(pwm_white.is_running == 0);
     TEST_ASSERT(pwm_white.pulse_width == GetWhitePwm());
     TEST_ASSERT(GetIRBrightness()    == HalfBrightness); // IR should not change
     TEST_ASSERT(pwm_ir.is_running == 0);
@@ -407,14 +407,14 @@ TEST(PWM_Handler, DecreaseWhiteBrightnessEdgeCase)
     SetWhiteBrightness(MinBrightness);
     DecreaseWhiteBrightness(HOLD);
     TEST_ASSERT(GetWhiteBrightness() == MinBrightness);
-    TEST_ASSERT(pwm_white.is_running == 1);
+    TEST_ASSERT(pwm_white.is_running == 0);
     TEST_ASSERT(pwm_white.pulse_width == GetWhitePwm());
     TEST_ASSERT(GetIRBrightness()    == HalfBrightness); // IR should not change
 
     TEST_ASSERT(pwm_ir.is_running == 0);
     DecreaseWhiteBrightness(PRESS);
     TEST_ASSERT(GetWhiteBrightness() == MinBrightness);
-    TEST_ASSERT(pwm_white.is_running == 1);
+    TEST_ASSERT(pwm_white.is_running == 0);
     TEST_ASSERT(pwm_white.pulse_width == GetWhitePwm());
     TEST_ASSERT(GetIRBrightness()    == HalfBrightness); // IR should not change
     TEST_ASSERT(pwm_ir.is_running == 0);
@@ -431,14 +431,14 @@ TEST(PWM_Handler, DecreaseIRBrightnessEdgeCase)
     TEST_ASSERT(GetWhiteBrightness() == HalfBrightness); // White should not change
     TEST_ASSERT(pwm_white.is_running == 0);
     TEST_ASSERT(GetIRBrightness()    == MinBrightness);
-    TEST_ASSERT(pwm_ir.is_running == 1);
+    TEST_ASSERT(pwm_ir.is_running == 0);
     TEST_ASSERT(pwm_ir.pulse_width == GetIrPwm());
 
     DecreaseIRBrightness(HOLD);
     TEST_ASSERT(GetWhiteBrightness() == HalfBrightness); // White should not change
     TEST_ASSERT(pwm_white.is_running == 0);
     TEST_ASSERT(GetIRBrightness()    == MinBrightness);
-    TEST_ASSERT(pwm_ir.is_running == 1);
+    TEST_ASSERT(pwm_ir.is_running == 0);
     TEST_ASSERT(pwm_ir.pulse_width == GetIrPwm());
 
     InitWhitePwm();
@@ -449,14 +449,14 @@ TEST(PWM_Handler, DecreaseIRBrightnessEdgeCase)
     TEST_ASSERT(GetWhiteBrightness() == HalfBrightness); // White should not change
     TEST_ASSERT(pwm_white.is_running == 0);
     TEST_ASSERT(GetIRBrightness()    == MinBrightness);
-    TEST_ASSERT(pwm_ir.is_running == 1);
+    TEST_ASSERT(pwm_ir.is_running == 0);
     TEST_ASSERT(pwm_ir.pulse_width == GetIrPwm());
 
     DecreaseIRBrightness(PRESS);
     TEST_ASSERT(GetWhiteBrightness() == HalfBrightness); // White should not change
     TEST_ASSERT(pwm_white.is_running == 0);
     TEST_ASSERT(GetIRBrightness()    == MinBrightness);
-    TEST_ASSERT(pwm_ir.is_running == 1);
+    TEST_ASSERT(pwm_ir.is_running == 0);
     TEST_ASSERT(pwm_ir.pulse_width == GetIrPwm());
 }
 
