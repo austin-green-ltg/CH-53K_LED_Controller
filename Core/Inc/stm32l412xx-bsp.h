@@ -65,7 +65,7 @@
         #define IR_LED_Pin LL_GPIO_PIN_9
         #define IR_LED_GPIO_Port GPIOA
 
-        #else /* STM32L412xx */
+    #else /* STM32L412xx */
 
         /* Below is for debugging purposes */
         #define BRIGHT_Pin 0

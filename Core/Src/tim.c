@@ -15,7 +15,7 @@
     * If no LICENSE file comes with this software, it is provided AS-IS.
     *
     ******************************************************************************
-    */
+*/
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "tim.h"
@@ -43,7 +43,7 @@ void MX_TIM1_Init(void)
     /* USER CODE BEGIN TIM1_Init 1 */
 
     /* USER CODE END TIM1_Init 1 */
-    TIM_InitStruct.Prescaler = 0;
+    TIM_InitStruct.Prescaler = 32;
     TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
     TIM_InitStruct.Autoreload = 255;
     TIM_InitStruct.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
@@ -88,8 +88,8 @@ void MX_TIM1_Init(void)
     /* USER CODE END TIM1_Init 2 */
     LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA);
     /**TIM1 GPIO Configuration
-    PA8     ------> TIM1_CH1
-    PA9     ------> TIM1_CH2
+        PA8     ------> TIM1_CH1
+        PA9     ------> TIM1_CH2
     */
     GPIO_InitStruct.Pin = WHITE_LED_Pin|IR_LED_Pin;
     GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
