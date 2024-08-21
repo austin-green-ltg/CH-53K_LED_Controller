@@ -2,8 +2,7 @@
 
 #include "stm32l412xx-bsp.h"
 
-PwmStruct pwm_white;
-PwmStruct pwm_ir;
+PwmStruct pwm;
 TimerStruct timer;
 GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
@@ -40,37 +39,19 @@ void DisablePWM1( void )
 
 void StartPWM11( void )
 {
-    pwm_white.is_running = 1;
-    return;
-}
-
-void StartPWM12( void )
-{
-    pwm_ir.is_running = 1;
+    pwm.is_running = 1;
     return;
 }
 
 void StopPWM11( void )
 {
-    pwm_white.is_running = 0;
-    return;
-}
-
-void StopPWM12( void )
-{
-    pwm_ir.is_running = 0;
+    pwm.is_running = 0;
     return;
 }
 
 void SetPW11( uint32_t pulse_width )
 {
-    pwm_white.pulse_width = pulse_width;
-    return;
-}
-
-void SetPW12( uint32_t pulse_width )
-{
-    pwm_ir.pulse_width = pulse_width;
+    pwm.pulse_width = pulse_width;
     return;
 }
 

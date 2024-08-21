@@ -113,12 +113,12 @@ int main(void)
     #endif /* ENABLE_UART_DEBUGGING */
     /* USER CODE BEGIN 2 */
 
-    InitWhitePwm();
+    InitPwm();
 
     GPIO_PinState prevDimPressed    = BUTTON_UNPRESSED;
     GPIO_PinState prevBrightPressed = BUTTON_UNPRESSED;
 
-    SetWhitePwm();
+    SetPwm();
 
     StartDelayCounter();
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -146,7 +146,7 @@ int main(void)
             // TODO: Do something
         }
 
-        const int8_t CurrBrightness         = GetWhiteBrightness();
+        const int8_t CurrBrightness         = GetBrightness();
         const uint16_t BrightnessDelay_ms   = (uint16_t)((LowStepTimeMs + CurrBrightness) * HOLD_BRIGHTNESS_JUMP);
 
         uint8_t brightnessDelayHit = DelayHit(BrightnessDelay_ms);
@@ -156,13 +156,13 @@ int main(void)
 
         if ((dimPressed == BUTTON_PRESSED) && brightnessDelayHit)
         {
-            DecreaseWhiteBrightness(prevDimPressed);
+            DecreaseBrightness(prevDimPressed);
 
             RestartDelayCounter();
         }
         else if ((brightPressed == BUTTON_PRESSED) && brightnessDelayHit)
         {
-            IncreaseWhiteBrightness(prevBrightPressed);
+            IncreaseBrightness(prevBrightPressed);
 
             RestartDelayCounter();
         }

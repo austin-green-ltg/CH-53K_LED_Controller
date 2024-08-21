@@ -8,8 +8,8 @@
 //
 // Filename: pwm_handler.h
 //
-// Description: Handles the PWM output of the lights. Output is 
-//                  determined by a Brightness variable that is 
+// Description: Handles the PWM output of the lights. Output is
+//                  determined by a Brightness variable that is
 //                  controlled by this file.
 //
 // Revision History:
@@ -30,16 +30,16 @@
     #define HOLD_BRIGHTNESS_JUMP    (3)
 
     /* Initialize system */
-    void    InitWhitePwm(void);                             // Init WhitePwm var
+    void    InitPwm(void);                              // Init Pwm var
     /* Decrease/Increase brightness levels */
-    void    DecreaseWhiteBrightness( uint8_t button_held ); // decrease White brightness
-    void    IncreaseWhiteBrightness( uint8_t button_held ); // increase White brightness
+    void    DecreaseBrightness( uint8_t button_held );  // decrease brightness
+    void    IncreaseBrightness( uint8_t button_held );  // increase brightness
     /* Set PWM value based on internal brightness */
-    void    SetWhitePwm( void );                            // turn on and set White PWM
-    void    TurnOffWhitePwm( void );                        // turn of White PWM
+    void    SetPwm( void );                             // turn on and set PWM
+    void    TurnOffPwm( void );                         // turn of PWM
     /* Get or set internal values */
-    int8_t  GetWhiteBrightness( void );                     // get value of whiteBrightness
-    void    SetWhiteBrightness( int8_t brightness );        // set value of whiteBrightness
-    uint8_t GetWhitePwm( void );                            // get value of current white PWM
+    int8_t  GetBrightness( void );                      // get value of Brightness
+    void    SetBrightness( int8_t brightness );         // set value of Brightness
+    uint8_t GetPwm( void );                             // get value of current PWM
 
 #endif /* INC_pwm_handlerh */

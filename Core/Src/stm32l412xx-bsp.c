@@ -51,29 +51,14 @@ void StartPWM11( void )
     LL_TIM_CC_EnableChannel(TIM1, LL_TIM_CHANNEL_CH1);
 }
 
-void StartPWM12( void )
-{
-    LL_TIM_CC_EnableChannel(TIM1, LL_TIM_CHANNEL_CH2);
-}
-
 void StopPWM11( void )
 {
     LL_TIM_CC_DisableChannel(TIM1, LL_TIM_CHANNEL_CH1);
 }
 
-void StopPWM12( void )
-{
-    LL_TIM_CC_DisableChannel(TIM1, LL_TIM_CHANNEL_CH2);
-}
-
 void SetPW11( uint32_t pulse_width )
 {
     LL_TIM_OC_SetCompareCH1(TIM1, pulse_width);
-}
-
-void SetPW12( uint32_t pulse_width )
-{
-    LL_TIM_OC_SetCompareCH2(TIM1, pulse_width);
 }
 
 void StartTIM2( void )

@@ -58,8 +58,8 @@
         #define BRIGHT_GPIO_Port GPIOA
         #define DIM_Pin LL_GPIO_PIN_3
         #define DIM_GPIO_Port GPIOA
-        #define WHITE_LED_Pin LL_GPIO_PIN_8
-        #define WHITE_LED_GPIO_Port GPIOA
+        #define PWM_OUT_Pin LL_GPIO_PIN_8
+        #define PWM_OUT_GPIO_Port GPIOA
 
     #else /* STM32L412xx */
 
@@ -70,8 +70,8 @@
         #define DIM_GPIO_Port 0
         #define SWITCH_LED_Pin 0
         #define SWITCH_LED_GPIO_Port 0
-        #define WHITE_LED_Pin 0
-        #define WHITE_LED_GPIO_Port 0
+        #define PWM_OUT_Pin 0
+        #define PWM_OUT_GPIO_Port 0
 
         typedef struct
         {
@@ -117,11 +117,8 @@
     void EnablePWM1( void );
     void DisablePWM1( void );
     void StartPWM11( void );
-    void StartPWM12( void );
     void StopPWM11( void );
-    void StopPWM12( void );
     void SetPW11( uint32_t pulse_width );
-    void SetPW12( uint32_t pulse_width );
     /* Timers */
     void StartTIM2( void );
     void RestartTIM2( void );

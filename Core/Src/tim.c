@@ -15,7 +15,7 @@
     * If no LICENSE file comes with this software, it is provided AS-IS.
     *
     ******************************************************************************
-*/
+    */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "tim.h"
@@ -87,13 +87,13 @@ void MX_TIM1_Init(void)
     /**TIM1 GPIO Configuration
         PA8     ------> TIM1_CH1
     */
-    GPIO_InitStruct.Pin = WHITE_LED_Pin;
+    GPIO_InitStruct.Pin = PWM_OUT_Pin;
     GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
     GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
     GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
     GPIO_InitStruct.Alternate = LL_GPIO_AF_1;
-    LL_GPIO_Init(WHITE_LED_GPIO_Port, &GPIO_InitStruct);
+    LL_GPIO_Init(PWM_OUT_GPIO_Port, &GPIO_InitStruct);
 
 }
 /* TIM2 init function */
