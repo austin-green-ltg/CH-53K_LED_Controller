@@ -21,10 +21,6 @@
 #include "stm32l412xx-bsp.h"
 
 /* Private variables ---------------------------------------------------------*/
-GPIO_PinState ReadTogglePin( void )
-{
-    return (LL_GPIO_IsInputPinSet(SWITCH_LED_GPIO_Port, SWITCH_LED_Pin));
-}
 
 GPIO_PinState ReadDimPin( void )
 {

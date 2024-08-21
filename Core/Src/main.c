@@ -49,7 +49,6 @@
 
 const float     LowStepTimeMs   = (LOWER_STEP_TIME_MS  - AVG_STEP_DIFF_MS)  ; // 122.5
 const float     HighStepTimeMs  = (UPPER_STEP_TIME_MS  + AVG_STEP_DIFF_MS)  ; // 172.5
-const uint8_t   ToggleDelayMs   = (250)                                     ;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -106,25 +105,20 @@ int main(void)
     /* USER CODE END SysInit */
 
     /* Initialize all configured peripherals */
-    MX_GPIO_Init();
     MX_TIM1_Init();
     MX_TIM2_Init();
-    MX_TIM15_Init();
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
+        MX_TIM15_Init();
         MX_USART2_UART_Init();
     #endif /* ENABLE_UART_DEBUGGING */
     /* USER CODE BEGIN 2 */
 
     InitWhitePwm();
-    InitIrPwm();
 
     GPIO_PinState prevDimPressed    = BUTTON_UNPRESSED;
     GPIO_PinState prevBrightPressed = BUTTON_UNPRESSED;
 
-    uint8_t isWhite = 1; // 0 = IR, 1 = White
-
     SetWhitePwm();
-    TurnOffIrPwm();
 
     StartDelayCounter();
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -152,45 +146,23 @@ int main(void)
             // TODO: Do something
         }
 
-        const int8_t CurrBrightness    = isWhite ? GetWhiteBrightness() : GetIRBrightness();
-        const uint16_t BrightnessDelay_ms = (uint16_t)((LowStepTimeMs + CurrBrightness) * HOLD_BRIGHTNESS_JUMP);
+        const int8_t CurrBrightness         = GetWhiteBrightness();
+        const uint16_t BrightnessDelay_ms   = (uint16_t)((LowStepTimeMs + CurrBrightness) * HOLD_BRIGHTNESS_JUMP);
 
         uint8_t brightnessDelayHit = DelayHit(BrightnessDelay_ms);
 
-        GPIO_PinState togglePressed = IsTogglePressed();
         GPIO_PinState dimPressed    = IsDimPressed();
         GPIO_PinState brightPressed = IsBrightPressed();
 
-        if ((togglePressed == BUTTON_PRESSED) && DelayHit((uint32_t)ToggleDelayMs))
+        if ((dimPressed == BUTTON_PRESSED) && brightnessDelayHit)
         {
-            // toggle white/IR
-            isWhite = !isWhite;
-            if (isWhite)
-            {
-                // set white and disable IR
-                SetWhitePwm();
-                TurnOffIrPwm();
-            }
-            else
-            {
-                // set IR and disable white
-                TurnOffWhitePwm();
-                SetIrPwm();
-            }
-
-            RestartDelayCounter();
-        }
-        else if ((dimPressed == BUTTON_PRESSED) && brightnessDelayHit)
-        {
-            if(isWhite) DecreaseWhiteBrightness(prevDimPressed);
-            else        DecreaseIRBrightness(prevDimPressed);
+            DecreaseWhiteBrightness(prevDimPressed);
 
             RestartDelayCounter();
         }
         else if ((brightPressed == BUTTON_PRESSED) && brightnessDelayHit)
         {
-            if(isWhite) IncreaseWhiteBrightness(prevBrightPressed);
-            else        IncreaseIRBrightness(prevBrightPressed);
+            IncreaseWhiteBrightness(prevBrightPressed);
 
             RestartDelayCounter();
         }

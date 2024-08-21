@@ -24,10 +24,6 @@
 
 /* Private define ------------------------------------------------------------*/
 
-GPIO_PinState IsTogglePressed ( void )
-{
-    return ReadTogglePin();
-}
 GPIO_PinState IsDimPressed    ( void )
 {
     return ReadDimPin();

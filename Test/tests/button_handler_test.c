@@ -21,15 +21,6 @@ TEST_TEAR_DOWN(Button_Handler)
     /* executed after *every* non-skipped and non-failing test */
 }
 
-/* start button_handler tests */
-TEST(Button_Handler, TogglePin)
-{
-    toggle_pin = 0;
-    TEST_ASSERT_EQUAL_INT(0, IsTogglePressed());
-    toggle_pin = 1;
-    TEST_ASSERT_EQUAL_INT(1, IsTogglePressed());
-}
-
 TEST(Button_Handler, DimPin)
 {
     dim_pin = 0;
@@ -50,7 +41,6 @@ TEST(Button_Handler, BrightPin)
 
 TEST_GROUP_RUNNER(Button_Handler)
 {
-    RUN_TEST_CASE(Button_Handler, TogglePin);
     RUN_TEST_CASE(Button_Handler, DimPin);
     RUN_TEST_CASE(Button_Handler, BrightPin);
 }

@@ -26,7 +26,6 @@
     #include "stm32l412xx-bsp.h"
 
     /* Return state of buttons */
-    GPIO_PinState IsTogglePressed ( void );
     GPIO_PinState IsDimPressed    ( void );
     GPIO_PinState IsBrightPressed ( void );
 

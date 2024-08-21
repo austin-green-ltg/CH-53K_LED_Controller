@@ -12,9 +12,7 @@ extern const uint8_t    MinBrightness  ;
 extern const uint8_t    MaxBrightness  ;
 extern const uint8_t    HalfBrightness ;
 extern const float      MinWhitePw    ;
-extern const float      MinIrPw       ;
 extern const float      MaxWhitePw    ;
-extern const float      MaxIrPw       ;
 
 TEST_GROUP(Requirements);
 
@@ -22,7 +20,6 @@ TEST_SETUP(Requirements)
 {
     /* executed before *every* non-skipped test */
     InitWhitePwm();
-    InitIrPwm();
 }
 
 
@@ -35,22 +32,13 @@ TEST_TEAR_DOWN(Requirements)
 /* start requirements tests */
 /* TEST CASE 1 */
 // SrchLt.01225 When the Controllable Searchlight is initially powered on in the Visible mode, it shall illuminate to the 50% brightness level.
+// SrchLt.01226 When the Controllable Searchlight is initially powered on in the IR mode, it shall illuminate to the 50% intensity level.
 TEST(Requirements, WhiteInitialValues)
 {
     TEST_ASSERT(GetWhiteBrightness() == HalfBrightness);
     // There are 49 steps from min brightness, find brightness that is halfway in discrete steps
     const uint8_t white_pwm_init = (uint8_t)((MaxWhitePw - MinWhitePw) / ((float)BRIGHTNESS_STEPS - 1.0f) * HalfBrightness + MinWhitePw + 0.5f);
     TEST_ASSERT_EQUAL_UINT8(white_pwm_init, GetWhitePwm());
-}
-
-/* TEST CASE 2 */
-// SrchLt.01226 When the Controllable Searchlight is initially powered on in the IR mode, it shall illuminate to the 50% intensity level.
-TEST(Requirements, IRInitialValues)
-{
-    TEST_ASSERT(GetIRBrightness() == HalfBrightness);
-    // There are 49 steps from min brightness, find brightness that is halfway in discrete steps
-    const uint8_t ir_pwm_init = (uint8_t)((MaxIrPw - MinIrPw) / ((float)BRIGHTNESS_STEPS - 1.0f) * HalfBrightness + MinIrPw + 0.5f);
-    TEST_ASSERT_EQUAL_UINT8(ir_pwm_init, GetIrPwm());
 }
 
 /* TEST CASE 3 */
@@ -68,7 +56,6 @@ TEST(Requirements, LinearDimming)
 {
     // Set to initial brightness
     SetWhiteBrightness(MinBrightness);
-    SetIRBrightness(MinBrightness);
 
     // Get white brightness diff
     uint8_t whiteBrightness1 = GetWhitePwm();
@@ -85,22 +72,6 @@ TEST(Requirements, LinearDimming)
         TEST_ASSERT(((whiteBrightness2 - whiteBrightness1) >= (whiteBrightnessStep - 1)) &&
                     ((whiteBrightness2 - whiteBrightness1) <= (whiteBrightnessStep + 1)));
     }
-
-    // Get IR brightness diff
-    uint8_t irBrightness1 = GetIrPwm();
-    IncreaseIRBrightness(PRESS);
-    uint8_t irBrightness2 = GetIrPwm();
-    const uint8_t irBrightnessStep = irBrightness2 - irBrightness1;
-
-    for (uint8_t i = 2; i < BRIGHTNESS_STEPS; i++)
-    {
-        irBrightness1 = irBrightness2;
-        IncreaseIRBrightness(PRESS);
-        irBrightness2 = GetIrPwm();
-        // Verify step is the same +-1 to deal with float conversion
-        TEST_ASSERT(((irBrightness2 - irBrightness1) >= (irBrightnessStep - 1)) &&
-                    ((irBrightness2 - irBrightness1) <= (irBrightnessStep + 1)));
-    }
 }
 
 /* TEST CASE 5 */
@@ -108,126 +79,52 @@ TEST(Requirements, LinearDimming)
 // SrchLt.01240 The Controllable Searchlight BRT and Dim signals shall have two states, PRESS & HOLD.
 TEST(Requirements, RememberLedState)
 {
-    uint8_t expectedWhite = 0;
-    uint8_t expectedIR = 0;
     // Sweep up through all brightness levels with white press
     SetWhiteBrightness(MinBrightness);
-    expectedIR = GetIRBrightness();
 
     while(GetWhiteBrightness() < MaxBrightness)
     {
         IncreaseWhiteBrightness(PRESS);
-        TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep up through all brightness levels with white hold
     SetWhiteBrightness(MinBrightness);
-    expectedIR = GetIRBrightness();
 
     while(GetWhiteBrightness() < MaxBrightness)
     {
         IncreaseWhiteBrightness(HOLD);
-        TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep up through all brightness levels with white alternating press and hold
     SetWhiteBrightness(MinBrightness);
-    expectedIR = GetIRBrightness();
 
     while(GetWhiteBrightness() < MaxBrightness)
     {
         IncreaseWhiteBrightness(GetWhiteBrightness() % 2);
-        TEST_ASSERT(expectedIR == GetIRBrightness());
-    }
-
-    // Sweep up through all brightness levels with ir press
-    SetIRBrightness(MinBrightness);
-    expectedWhite = GetWhiteBrightness();
-
-    while(GetIRBrightness() < MaxBrightness)
-    {
-        IncreaseIRBrightness(PRESS);
-        TEST_ASSERT(expectedWhite == GetWhiteBrightness());
-    }
-
-    // Sweep up through all brightness levels with ir hold
-    SetIRBrightness(MinBrightness);
-    expectedWhite = GetWhiteBrightness();
-
-    while(GetIRBrightness() < MaxBrightness)
-    {
-        IncreaseIRBrightness(HOLD);
-        TEST_ASSERT(expectedWhite == GetWhiteBrightness());
-    }
-
-    // Sweep up through all brightness levels with ir alternating press and hold
-    SetIRBrightness(MinBrightness);
-    expectedWhite = GetWhiteBrightness();
-
-    while(GetIRBrightness() < MaxBrightness)
-    {
-        IncreaseIRBrightness(GetIRBrightness() % 2);
-        TEST_ASSERT(expectedWhite == GetWhiteBrightness());
     }
 
     // Sweep down through all brightness levels with white press
     SetWhiteBrightness(MaxBrightness);
-    expectedIR = GetIRBrightness();
 
     while(GetWhiteBrightness() > MinBrightness)
     {
         DecreaseWhiteBrightness(PRESS);
-        TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep down through all brightness levels with white hold
     SetWhiteBrightness(MaxBrightness);
-    expectedIR = GetIRBrightness();
 
     while(GetWhiteBrightness() > MinBrightness)
     {
         DecreaseWhiteBrightness(HOLD);
-        TEST_ASSERT(expectedIR == GetIRBrightness());
     }
 
     // Sweep up through all brightness levels with white alternating press and hold
     SetWhiteBrightness(MaxBrightness);
-    expectedIR = GetIRBrightness();
 
     while(GetWhiteBrightness() > MinBrightness)
     {
         DecreaseWhiteBrightness(GetWhiteBrightness() % 2);
-        TEST_ASSERT(expectedIR == GetIRBrightness());
-    }
-
-    // Sweep down through all brightness levels with ir press
-    SetIRBrightness(MaxBrightness);
-    expectedWhite = GetWhiteBrightness();
-
-    while(GetIRBrightness() > MinBrightness)
-    {
-        DecreaseIRBrightness(PRESS);
-        TEST_ASSERT(expectedWhite == GetWhiteBrightness());
-    }
-
-    // Sweep down through all brightness levels with ir hold
-    SetIRBrightness(MaxBrightness);
-    expectedWhite = GetWhiteBrightness();
-
-    while(GetIRBrightness() > MinBrightness)
-    {
-        DecreaseIRBrightness(HOLD);
-        TEST_ASSERT(expectedWhite == GetWhiteBrightness());
-    }
-
-    // Sweep down through all brightness levels with ir alternating press and hold
-    SetIRBrightness(MaxBrightness);
-    expectedWhite = GetWhiteBrightness();
-
-    while(GetIRBrightness() > MinBrightness)
-    {
-        DecreaseIRBrightness(GetIRBrightness() % 2);
-        TEST_ASSERT(expectedWhite == GetWhiteBrightness());
     }
 }
 
@@ -265,6 +162,7 @@ TEST(Requirements, HoldCheck)
 
 /* TEST CASE 8 */
 // SrchLt.01247 In the Visible Mode, when BRT = HOLD, the Visible Luminance and IR Radiance of the Controllable Searchlight shall increase continuously from the stored dimming value until it reaches Maximum brightness.
+// SrchLt.01248 In the IR Mode, when BRT = HOLD, the IR Radiance of the Controllable Searchlight shall increase continuously from the stored dimming value until it reaches Maximum brightness.
 #define BRIGHTNESS_ITERATIONS (BRIGHTNESS_STEPS * 2) // Step through more than brightness steps to ensure we don't go over MaxBrightness
 TEST(Requirements, MaxWhiteBrightnessSweep)
 {
@@ -299,43 +197,9 @@ TEST(Requirements, MaxWhiteBrightnessSweep)
     TEST_ASSERT_EQUAL_INT8(MaxBrightness, GetWhiteBrightness());
 }
 
-/* TEST CASE 9 */
-// SrchLt.01248 In the IR Mode, when BRT = HOLD, the IR Radiance of the Controllable Searchlight shall increase continuously from the stored dimming value until it reaches Maximum brightness.
-TEST(Requirements, MaxIRBrightnessSweep)
-{
-    int8_t expectedBrightness;
-
-    // press button case
-    expectedBrightness = MinBrightness;
-    SetIRBrightness(MinBrightness);
-    for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
-    {
-        expectedBrightness += 1;
-        if (expectedBrightness > MaxBrightness) expectedBrightness = MaxBrightness;
-
-        IncreaseIRBrightness(PRESS);
-        TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetIRBrightness());
-    }
-    // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MaxBrightness, GetIRBrightness());
-
-    // hold button case
-    expectedBrightness = MinBrightness;
-    SetIRBrightness(MinBrightness);
-    for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
-    {
-        expectedBrightness += HOLD_BRIGHTNESS_JUMP;
-        if (expectedBrightness > MaxBrightness) expectedBrightness = MaxBrightness;
-
-        IncreaseIRBrightness(HOLD);
-        TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetIRBrightness());
-    }
-    // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MaxBrightness, GetIRBrightness());
-}
-
 /* TEST CASE 10 */
 // SrchLt.01249 In the Visible Mode, when DIM = HOLD, the Visible Luminance and IR Radiance of the Controllable Searchlight shall decrease continuously from the stored dimming value until it reaches Minimum brightness.
+// SrchLt.01250 In the IR Mode, when DIM = HOLD, the IR Radiance of the Controllable Searchlight shall decrease continuously from the stored dimming value until it reaches Minimum brightness.
 TEST(Requirements, MinWhiteBrightnessSweep)
 {
     int8_t expectedBrightness;
@@ -368,42 +232,6 @@ TEST(Requirements, MinWhiteBrightnessSweep)
     // check to see we hit max brightness
     TEST_ASSERT_EQUAL_INT8(MinBrightness, GetWhiteBrightness());
 }
-
-/* TEST CASE 11 */
-// SrchLt.01250 In the IR Mode, when DIM = HOLD, the IR Radiance of the Controllable Searchlight shall decrease continuously from the stored dimming value until it reaches Minimum brightness.
-TEST(Requirements, MinIRBrightnessSweep)
-{
-    int8_t expectedBrightness;
-
-    // press button case
-    expectedBrightness = MaxBrightness;
-    SetIRBrightness(MaxBrightness);
-    for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
-    {
-        expectedBrightness -= 1;
-        if (expectedBrightness < MinBrightness) expectedBrightness = MinBrightness;
-
-        DecreaseIRBrightness(PRESS);
-        TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetIRBrightness());
-    }
-    // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MinBrightness, GetIRBrightness());
-
-    // hold button case
-    expectedBrightness = MaxBrightness;
-    SetIRBrightness(MaxBrightness);
-    for (int i = 0; i < BRIGHTNESS_ITERATIONS; i++)
-    {
-        expectedBrightness -= HOLD_BRIGHTNESS_JUMP;
-        if (expectedBrightness < MinBrightness) expectedBrightness = MinBrightness;
-
-        DecreaseIRBrightness(HOLD);
-        TEST_ASSERT_EQUAL_INT8(expectedBrightness, GetIRBrightness());
-    }
-    // check to see we hit max brightness
-    TEST_ASSERT_EQUAL_INT8(MinBrightness, GetIRBrightness());
-}
-
 
 /* TEST CASE 12 */
 // SrchLt.01251 In the Visible Mode, the Controllable Searchlight dimmer shall brighten from the initial 50% to Full Bright in 4.5 +/-0.5 seconds.
@@ -523,16 +351,13 @@ TEST(Requirements, ZeroToOneHundredTheoreticalSweep)
 TEST_GROUP_RUNNER(Requirements)
 {
     RUN_TEST_CASE(Requirements, WhiteInitialValues);
-    RUN_TEST_CASE(Requirements, IRInitialValues);
     RUN_TEST_CASE(Requirements, DimmingSteps);
     RUN_TEST_CASE(Requirements, LinearDimming);
     RUN_TEST_CASE(Requirements, RememberLedState);
     RUN_TEST_CASE(Requirements, PressCheck);
     RUN_TEST_CASE(Requirements, HoldCheck);
     RUN_TEST_CASE(Requirements, MaxWhiteBrightnessSweep);
-    RUN_TEST_CASE(Requirements, MaxIRBrightnessSweep);
     RUN_TEST_CASE(Requirements, MinWhiteBrightnessSweep);
-    RUN_TEST_CASE(Requirements, MinIRBrightnessSweep);
     RUN_TEST_CASE(Requirements, FiftyToOneHundredTheoreticalSweep);
     RUN_TEST_CASE(Requirements, FiftyToZeroTheoreticalSweep);
     RUN_TEST_CASE(Requirements, OneHundredToZeroTheoreticalSweep);
