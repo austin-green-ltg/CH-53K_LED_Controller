@@ -6,7 +6,7 @@ static void RunAllTests(void)
   RUN_TEST_GROUP(Button_Handler);
   RUN_TEST_GROUP(Delay_Handler);
   RUN_TEST_GROUP(PWM_Handler);
-  RUN_TEST_GROUP(Thermistor_Handler);
+  RUN_TEST_GROUP(Temperature_Handler);
   RUN_TEST_GROUP(Logger);
   RUN_TEST_GROUP(Current_Handler);
   RUN_TEST_GROUP(Voltage_Handler);

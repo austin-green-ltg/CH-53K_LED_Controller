@@ -6,7 +6,7 @@
 // ***************************************************************************
 // ***************************************************************************
 //
-// Filename: thermistor_handler.h
+// Filename: temperature_handler.h
 //
 // Description: Handles getting this temperature and transitioning
 //                between temperature states.
@@ -20,8 +20,8 @@
 //
 // ***************************************************************************
 
-#ifndef INC_thermistor_handlerh
-    #define INC_thermistor_handlerh
+#ifndef INC_temperature_handlerh
+    #define INC_temperature_handlerh
 
     #include <stdint.h>
 
@@ -37,4 +37,4 @@
     int32_t GetTemperature( void ); // in mC
     TemperatureRange_e GetTemperatureRange( void );
 
-#endif /* INC_thermistor_handlerh */
+#endif /* INC_temperature_handlerh */

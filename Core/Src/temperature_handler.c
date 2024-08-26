@@ -6,7 +6,7 @@
 // ***************************************************************************
 // ***************************************************************************
 //
-// Filename: thermistor_handler.c
+// Filename: temperature_handler.c
 //
 // Description: Handles getting this temperature and transitioning
 //                between temperature states.
@@ -22,7 +22,7 @@
 // ***************************************************************************
 
 /* Private includes ----------------------------------------------------------*/
-#include "thermistor_handler.h"
+#include "temperature_handler.h"
 #include "stm32l412xx-bsp.h"
 #include "logger.h"
 

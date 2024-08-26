@@ -2,7 +2,7 @@
 <project>
     <fileVersion>4</fileVersion>
     <configuration>
-        <name>Release</name>
+        <name>CH-53K_LED_Controller</name>
         <toolchain>
             <name>ARM</name>
         </toolchain>
@@ -22,7 +22,7 @@
                     <enableFalsePositives>0</enableFalsePositives>
                     <messagesLimitEnabled>1</messagesLimitEnabled>
                     <messagesLimit>100</messagesLimit>
-                    <outputDir>Release/C-STAT</outputDir>
+                    <outputDir>CH-53K_LED_Controller/C-STAT</outputDir>
                 </cstatargs>
                 <cstat_settings>
                     <cstat_version>2.6.0</cstat_version>
@@ -1502,7 +1502,7 @@
                     <name>$PROJ_DIR$\..\Core\Src\stm32l4xx_it.c</name>
                 </file>
                 <file>
-                    <name>$PROJ_DIR$\..\Core\Src\thermistor_handler.c</name>
+                    <name>$PROJ_DIR$\..\Core\Src\temperature_handler.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Core\Src\tim.c</name>

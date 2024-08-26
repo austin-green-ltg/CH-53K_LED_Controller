@@ -24,7 +24,7 @@ C_SRCS := \
 	button_handler.c \
 	delay_handler.c \
 	pwm_handler.c \
-	thermistor_handler.c \
+	temperature_handler.c \
 	bsp_mock.c \
 	logger.c \
 	current_handler.c \
@@ -36,7 +36,7 @@ TEST_SRCS := \
 	button_handler_test.c \
 	delay_handler_test.c \
 	pwm_handler_test.c \
-	thermistor_handler_test.c \
+	temperature_handler_test.c \
 	logger_test.c \
 	current_handler_test.c \
 	voltage_handler_test.c \

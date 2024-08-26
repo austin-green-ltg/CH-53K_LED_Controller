@@ -1,9 +1,9 @@
 #include <string.h>
 
-#include "unity_fixture.h"      /* UNITY */
-#include "thermistor_handler.h" /* CUT */
-#include "logger.h"             /* CUT */
-#include "stm32l412xx-bsp.h"    /* CUT */
+#include "unity_fixture.h"          /* UNITY */
+#include "temperature_handler.h"    /* CUT */
+#include "logger.h"                 /* CUT */
+#include "stm32l412xx-bsp.h"        /* CUT */
 
 #define HEATING_WARM_THERM (100000)
 #define HEATING_HOT_THERM  (120000)
@@ -12,18 +12,18 @@
 
 extern int32_t thermistor_value;
 
-TEST_GROUP(Thermistor_Handler);
+TEST_GROUP(Temperature_Handler);
 
-TEST_SETUP(Thermistor_Handler)
+TEST_SETUP(Temperature_Handler)
 {
     /* executed before *every* non-skipped test */
 }
 
-TEST_TEAR_DOWN(Thermistor_Handler)
+TEST_TEAR_DOWN(Temperature_Handler)
 {
     /* executed after *every* non-skipped and non-failing test */
     thermistor_value = 0; // return to default value
-    GetTemperatureRange(); // set thermistor range
+    GetTemperatureRange(); // set temperature range
 }
 
 /* TESTS */
@@ -32,16 +32,16 @@ TEST_TEAR_DOWN(Thermistor_Handler)
     * Check get range
 */
 
-/* start thermistor_handler tests */
-TEST(Thermistor_Handler, GetDefaultTemperature)
+/* start temperature_handler tests */
+TEST(Temperature_Handler, GetDefaultTemperature)
 {
     TEST_ASSERT_EQUAL_INT32(0, GetTemperature()); // Default value
 }
-TEST(Thermistor_Handler, GetDefaultTemperatureRange)
+TEST(Temperature_Handler, GetDefaultTemperatureRange)
 {
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 }
-TEST(Thermistor_Handler, GetTemperature)
+TEST(Temperature_Handler, GetTemperature)
 {
     thermistor_value = 70000;
     TEST_ASSERT_EQUAL_INT32(70000, GetTemperature());
@@ -73,7 +73,7 @@ TEST(Thermistor_Handler, GetTemperature)
     thermistor_value = -150000;
     TEST_ASSERT_EQUAL_INT32(-150000, GetTemperature());
 }
-TEST(Thermistor_Handler, TemperatureRangeNormalStepping)
+TEST(Temperature_Handler, TemperatureRangeNormalStepping)
 {
     thermistor_value = HEATING_WARM_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
@@ -87,7 +87,7 @@ TEST(Thermistor_Handler, TemperatureRangeNormalStepping)
     thermistor_value = COOLING_COOL_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempCool);
     }
-    TEST(Thermistor_Handler, TemperatureRangeCoolTesting)
+    TEST(Temperature_Handler, TemperatureRangeCoolTesting)
     {
     thermistor_value = HEATING_WARM_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
@@ -98,7 +98,7 @@ TEST(Thermistor_Handler, TemperatureRangeNormalStepping)
     thermistor_value = HEATING_HOT_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 }
-TEST(Thermistor_Handler, TemperatureRangeWarmTesting)
+TEST(Temperature_Handler, TemperatureRangeWarmTesting)
 {
     thermistor_value = HEATING_WARM_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
@@ -115,7 +115,7 @@ TEST(Thermistor_Handler, TemperatureRangeWarmTesting)
     thermistor_value = COOLING_WARM_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 }
-TEST(Thermistor_Handler, TemperatureRangeHotTesting)
+TEST(Temperature_Handler, TemperatureRangeHotTesting)
 {
     thermistor_value = HEATING_HOT_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
@@ -129,7 +129,7 @@ TEST(Thermistor_Handler, TemperatureRangeHotTesting)
     thermistor_value = COOLING_WARM_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 }
-TEST(Thermistor_Handler, TemperatureRangeCoolBoundaryTesting)
+TEST(Temperature_Handler, TemperatureRangeCoolBoundaryTesting)
 {
     thermistor_value = (HEATING_WARM_THERM - 1000);
     TEST_ASSERT(GetTemperatureRange() == TempCool);
@@ -149,7 +149,7 @@ TEST(Thermistor_Handler, TemperatureRangeCoolBoundaryTesting)
     thermistor_value = HEATING_HOT_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 }
-TEST(Thermistor_Handler, TemperatureRangeWarmBoundaryTesting)
+TEST(Temperature_Handler, TemperatureRangeWarmBoundaryTesting)
 {
     thermistor_value = HEATING_WARM_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
@@ -169,7 +169,7 @@ TEST(Thermistor_Handler, TemperatureRangeWarmBoundaryTesting)
     thermistor_value = HEATING_HOT_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 }
-TEST(Thermistor_Handler, TemperatureRangeHotBoundaryTesting)
+TEST(Temperature_Handler, TemperatureRangeHotBoundaryTesting)
 {
     thermistor_value = HEATING_HOT_THERM;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
@@ -193,7 +193,7 @@ TEST(Thermistor_Handler, TemperatureRangeHotBoundaryTesting)
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 }
 
-TEST(Thermistor_Handler, CoolToWarmPrintout)
+TEST(Temperature_Handler, CoolToWarmPrintout)
 {
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
@@ -216,7 +216,7 @@ TEST(Thermistor_Handler, CoolToWarmPrintout)
     free(string);
 }
 
-TEST(Thermistor_Handler, CoolToHotPrintout)
+TEST(Temperature_Handler, CoolToHotPrintout)
 {
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
@@ -239,7 +239,7 @@ TEST(Thermistor_Handler, CoolToHotPrintout)
     free(string);
 }
 
-TEST(Thermistor_Handler, CoolToCoolNoPrintout)
+TEST(Temperature_Handler, CoolToCoolNoPrintout)
 {
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
@@ -262,7 +262,7 @@ TEST(Thermistor_Handler, CoolToCoolNoPrintout)
     free(string);
 }
 
-TEST(Thermistor_Handler, WarmToCoolPrintout)
+TEST(Temperature_Handler, WarmToCoolPrintout)
 {
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
@@ -288,7 +288,7 @@ TEST(Thermistor_Handler, WarmToCoolPrintout)
     free(string);
 }
 
-TEST(Thermistor_Handler, WarmToHotPrintout)
+TEST(Temperature_Handler, WarmToHotPrintout)
 {
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
@@ -314,7 +314,7 @@ TEST(Thermistor_Handler, WarmToHotPrintout)
     free(string);
 }
 
-TEST(Thermistor_Handler, WarmToWarmNoPrintout)
+TEST(Temperature_Handler, WarmToWarmNoPrintout)
 {
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
@@ -342,7 +342,7 @@ TEST(Thermistor_Handler, WarmToWarmNoPrintout)
     free(string);
 }
 
-TEST(Thermistor_Handler, HotToCoolPrintout)
+TEST(Temperature_Handler, HotToCoolPrintout)
 {
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
@@ -368,7 +368,7 @@ TEST(Thermistor_Handler, HotToCoolPrintout)
     free(string);
 }
 
-TEST(Thermistor_Handler, HotToWarmPrintout)
+TEST(Temperature_Handler, HotToWarmPrintout)
 {
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
@@ -394,7 +394,7 @@ TEST(Thermistor_Handler, HotToWarmPrintout)
     free(string);
 }
 
-TEST(Thermistor_Handler, HotToHotNoPrintout)
+TEST(Temperature_Handler, HotToHotNoPrintout)
 {
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
@@ -419,28 +419,28 @@ TEST(Thermistor_Handler, HotToHotNoPrintout)
     remove("testFile.txt");  // delete file
     free(string);
 }
-/* end thermistor_handler tests */
+/* end temperature_handler tests */
 
 
-TEST_GROUP_RUNNER(Thermistor_Handler)
+TEST_GROUP_RUNNER(Temperature_Handler)
 {
-    RUN_TEST_CASE(Thermistor_Handler, GetDefaultTemperature);
-    RUN_TEST_CASE(Thermistor_Handler, GetDefaultTemperatureRange);
-    RUN_TEST_CASE(Thermistor_Handler, GetTemperature);
-    RUN_TEST_CASE(Thermistor_Handler, TemperatureRangeNormalStepping);
-    RUN_TEST_CASE(Thermistor_Handler, TemperatureRangeCoolTesting);
-    RUN_TEST_CASE(Thermistor_Handler, TemperatureRangeWarmTesting);
-    RUN_TEST_CASE(Thermistor_Handler, TemperatureRangeHotTesting);
-    RUN_TEST_CASE(Thermistor_Handler, TemperatureRangeCoolBoundaryTesting);
-    RUN_TEST_CASE(Thermistor_Handler, TemperatureRangeWarmBoundaryTesting);
-    RUN_TEST_CASE(Thermistor_Handler, TemperatureRangeHotBoundaryTesting);
-    RUN_TEST_CASE(Thermistor_Handler, CoolToWarmPrintout);
-    RUN_TEST_CASE(Thermistor_Handler, CoolToHotPrintout);
-    RUN_TEST_CASE(Thermistor_Handler, CoolToCoolNoPrintout);
-    RUN_TEST_CASE(Thermistor_Handler, WarmToCoolPrintout);
-    RUN_TEST_CASE(Thermistor_Handler, WarmToHotPrintout);
-    RUN_TEST_CASE(Thermistor_Handler, WarmToWarmNoPrintout);
-    RUN_TEST_CASE(Thermistor_Handler, HotToCoolPrintout);
-    RUN_TEST_CASE(Thermistor_Handler, HotToWarmPrintout);
-    RUN_TEST_CASE(Thermistor_Handler, HotToHotNoPrintout);
+    RUN_TEST_CASE(Temperature_Handler, GetDefaultTemperature);
+    RUN_TEST_CASE(Temperature_Handler, GetDefaultTemperatureRange);
+    RUN_TEST_CASE(Temperature_Handler, GetTemperature);
+    RUN_TEST_CASE(Temperature_Handler, TemperatureRangeNormalStepping);
+    RUN_TEST_CASE(Temperature_Handler, TemperatureRangeCoolTesting);
+    RUN_TEST_CASE(Temperature_Handler, TemperatureRangeWarmTesting);
+    RUN_TEST_CASE(Temperature_Handler, TemperatureRangeHotTesting);
+    RUN_TEST_CASE(Temperature_Handler, TemperatureRangeCoolBoundaryTesting);
+    RUN_TEST_CASE(Temperature_Handler, TemperatureRangeWarmBoundaryTesting);
+    RUN_TEST_CASE(Temperature_Handler, TemperatureRangeHotBoundaryTesting);
+    RUN_TEST_CASE(Temperature_Handler, CoolToWarmPrintout);
+    RUN_TEST_CASE(Temperature_Handler, CoolToHotPrintout);
+    RUN_TEST_CASE(Temperature_Handler, CoolToCoolNoPrintout);
+    RUN_TEST_CASE(Temperature_Handler, WarmToCoolPrintout);
+    RUN_TEST_CASE(Temperature_Handler, WarmToHotPrintout);
+    RUN_TEST_CASE(Temperature_Handler, WarmToWarmNoPrintout);
+    RUN_TEST_CASE(Temperature_Handler, HotToCoolPrintout);
+    RUN_TEST_CASE(Temperature_Handler, HotToWarmPrintout);
+    RUN_TEST_CASE(Temperature_Handler, HotToHotNoPrintout);
 }

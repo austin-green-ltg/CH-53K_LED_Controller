@@ -17,7 +17,7 @@
 // 07/31/2024 - Austin Green -  1.0 -  Initial Document
 //
 // Notes: Depends on the board support package bsp
-//        thermistor_handler is for getting the temperature range of
+//        temperature_handler is for getting the temperature range of
 //          of the device. Lowers output at higher temperatures
 //        my_printf is for debugging purposes, doesn't do anything if
 //          ENABLE_UART_DEBUGGING is not defined
@@ -27,7 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 #include "pwm_handler.h"
 #include "stm32l412xx-bsp.h"
-#include "thermistor_handler.h"
+#include "temperature_handler.h"
 #include "my_printf.h"
 
 // #define REVERSE_BRIGHTNESS
