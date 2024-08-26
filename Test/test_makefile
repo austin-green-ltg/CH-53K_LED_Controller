@@ -21,24 +21,24 @@ INCLUDES := -I. \
 
 # C source files...
 C_SRCS := \
+	bsp_mock.c \
 	button_handler.c \
+	current_handler.c \
 	delay_handler.c \
+	logger.c \
 	pwm_handler.c \
 	temperature_handler.c \
-	bsp_mock.c \
-	logger.c \
-	current_handler.c \
 	voltage_handler.c \
 
 # test files
 TEST_SRCS := \
-	requirements_test.c \
 	button_handler_test.c \
-	delay_handler_test.c \
-	pwm_handler_test.c \
-	temperature_handler_test.c \
-	logger_test.c \
 	current_handler_test.c \
+	delay_handler_test.c \
+	logger_test.c \
+	pwm_handler_test.c \
+	requirements_test.c \
+	temperature_handler_test.c \
 	voltage_handler_test.c \
 	test_runner.c \
 

@@ -12,11 +12,6 @@ int32_t current_value_mA = 0;
 int32_t voltage_value_mV = 28000;
 FILE* file_ptr;
 
-GPIO_PinState ReadTogglePin( void )
-{
-    return toggle_pin;
-}
-
 GPIO_PinState ReadDimPin( void )
 {
     return dim_pin;
