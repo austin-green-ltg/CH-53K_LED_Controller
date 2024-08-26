@@ -27,11 +27,14 @@
 const uint16_t  RawTomAmps = (1);
 const uint16_t  mAmpsToRaw = (1);
 
+// Current Thresholds (mA)
 const uint16_t CurrentHighThreshold_mA  = 3500u;
 const uint16_t CurrentErrorThreshold_mA = 4000u;
 
+// Default Current is Normal
 static CurrentRange_e current_threshold = CurrentNormal;
 
+// Logs current change to storage
 static void LogCurrentChange(CurrentRange_e range, uint16_t currentValue)
 {
     switch(range)
@@ -59,12 +62,20 @@ static void LogCurrentChange(CurrentRange_e range, uint16_t currentValue)
 
 }
 
+// Get voltage from ampmeter
 uint16_t GetCurrent( void )
 {
     uint16_t current = GetCurrentValue() * RawTomAmps;
     return (current);
 }
 
+/****
+    * Get range that the current falls into
+    * Possible ranges are
+    *   Normal  - Normal Operating Current
+    *   High    - Current high, but ok
+    *   Error   - Current too high
+    */
 CurrentRange_e GetCurrentRange( void )
 {
     uint16_t current = GetCurrent();

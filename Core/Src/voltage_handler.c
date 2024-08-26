@@ -27,13 +27,16 @@
 const uint16_t  RawTomVolts = (1);
 const uint16_t  mVoltsToRaw = (1);
 
+// Voltage Thresholds (mv)
 const uint16_t VoltageErrorLowThreshold_mV  = 24000u;
 const uint16_t VoltageLowThreshold_mV       = 26000u;
 const uint16_t VoltageHighThreshold_mV      = 30000u;
 const uint16_t VoltageErrorHighThreshold_mV = 32000u;
 
+// default voltage state is normal
 static VoltageRange_e voltage_threshold = VoltageNormal;
 
+// Logs voltage change to storage
 static void LogVoltageChange(VoltageRange_e range, uint16_t voltageValue)
 {
     switch(range)
@@ -69,12 +72,22 @@ static void LogVoltageChange(VoltageRange_e range, uint16_t voltageValue)
 
 }
 
+// Get voltage from voltmeter
 uint16_t GetVoltage( void )
 {
     uint16_t voltage = GetVoltageValue() * RawTomVolts;
     return (voltage);
 }
 
+/****
+    * Get range that the voltage falls into
+    * Possible ranges are
+    *   Normal      - Normal Operating Voltage
+    *   Low         - Voltage low, but ok
+    *   High        - Voltage high, but ok
+    *   ErrorLow    - Voltage too low
+    *   ErrorHigh   - Voltage too high
+    */
 VoltageRange_e GetVoltageRange( void )
 {
     uint16_t voltage = GetVoltage();

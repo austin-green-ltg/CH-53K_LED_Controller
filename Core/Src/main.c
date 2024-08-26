@@ -75,6 +75,8 @@ void SystemClock_Config(void);
 
 /**
   * @brief  The application entry point.
+  * Initialize variables and go into bare metal loop.
+  * Polls buttons and sensors.
   * @retval int
   */
 int main(void)

@@ -24,10 +24,13 @@
 
 /* Private define ------------------------------------------------------------*/
 
+// Check if dim button is pressed
 GPIO_PinState IsDimPressed    ( void )
 {
     return ReadDimPin();
 }
+
+// Check if bright button is pressed
 GPIO_PinState IsBrightPressed ( void )
 {
     return ReadBrightPin();

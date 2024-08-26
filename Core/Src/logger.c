@@ -24,8 +24,10 @@
 #include "logger.h"
 #include "stm32l412xx-bsp.h"
 
+// Signals end of data
 static uint32_t tail_pointer = 0;
 
+// Log a string to tail_pointer, use write_beginning flag to write the beginning
 void LogString( const char* const string, uint8_t write_beginning )
 {
     uint32_t write_bytes = strlen(string);
@@ -39,12 +41,15 @@ void LogString( const char* const string, uint8_t write_beginning )
 
     WriteMem( address, string, write_bytes );
 }
+
+// Logs a number by converting the number to a string and using the LogString function
 void LogNumber( const int32_t number, uint8_t write_beginning )
 {
     char str[11]; // max number of characters needed for 32 bit number 2 million = 10 numbers + "-"
     sprintf(str, "%d", number);
     LogString(str, write_beginning);
 }
+// Reads the log at a given address and size
 void ReadLog(  const uint32_t address, char* string, const uint32_t bytes )
 {
     uint32_t read_bytes = bytes;

@@ -54,11 +54,13 @@ const float HotPwmRatio     = (0.50f);
 /* Private define ------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
+// Brightness to PWM value array (out of 255)
 static const uint8_t PwmArray [ BRIGHTNESS_STEPS ] = {  0, 5, 10, 16, 21, 26, 31, 36, 42, 47,
                                                         52, 57, 62, 68, 73, 78, 83, 88, 94, 99,
                                                         104, 109, 114, 120, 125, 130, 135, 141, 146, 151,
                                                         156, 161, 167, 172, 177, 182, 187, 193, 198, 203,
                                                         208, 213, 219, 224, 229, 234, 239, 245, 250, 255 };
+// Initial led brightness, changed to half brightness on init
 static int8_t ledBrightness = 0;
 
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -68,7 +70,7 @@ static int8_t ledBrightness = 0;
 #endif /* ENABLE_UART_DEBUGGING */
 
 // Init PwmArray var
-// i = [MinPw, MaxPw]
+// Set brightness to half value, enable pwm, and turn off
 void InitPwm(void)
 {
     ledBrightness = HalfBrightness;
@@ -80,6 +82,10 @@ void InitPwm(void)
     return;
 }
 
+// Decrease brightness by 1 (for button press) or 3 (for button hold)
+// This functions can be made to increase brightness value with the
+// REVERSE_BRIGHTNESS flag
+// Afterwards, set pwm output.
 void DecreaseBrightness( uint8_t button_held )
 {
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -147,6 +153,10 @@ void DecreaseBrightness( uint8_t button_held )
     return;
 }
 
+// Increase brightness by 1 (for button press) or 3 (for button hold)
+// This functions can be made to decrease brightness value with the
+// REVERSE_BRIGHTNESS flag
+// Afterwards, set pwm output.
 void IncreaseBrightness( uint8_t button_held )
 {
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -214,7 +224,7 @@ void IncreaseBrightness( uint8_t button_held )
     return;
 }
 
-// set PWM
+// set PWM based on pwm value
 void SetPwm( void )
 {
     uint32_t pulse_width = GetPwm();
@@ -241,11 +251,13 @@ void TurnOffPwm( void )
     #endif /* ENABLE_UART_DEBUGGING */
 }
 
+// Return ledBrightness variable
 int8_t GetBrightness( void )
 {
     return (ledBrightness);
 }
 
+// Set ledBrightness variable, guards to ensure we don't go over max or min
 void SetBrightness( int8_t brightness )
 {
     if      (brightness > MaxBrightness) ledBrightness = MaxBrightness;
@@ -254,6 +266,7 @@ void SetBrightness( int8_t brightness )
     return;
 }
 
+// Get the PWM value based on the brightness and the temperature range
 uint8_t GetPwm( void )
 {
     uint8_t pwm = 0;
