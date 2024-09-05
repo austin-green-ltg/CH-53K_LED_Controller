@@ -113,6 +113,8 @@ int main(void)
         MX_TIM15_Init();
         MX_USART2_UART_Init();
     #endif /* ENABLE_UART_DEBUGGING */
+    MX_ADC1_Init();
+    MX_SPI1_Init();
     /* USER CODE BEGIN 2 */
 
     InitPwm();

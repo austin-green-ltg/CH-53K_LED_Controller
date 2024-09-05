@@ -41,6 +41,7 @@ void MX_GPIO_Init(void)
 
     /* GPIO Ports Clock Enable */
     LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA);
+    LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOB);
 
     /**/
     GPIO_InitStruct.Pin = BRIGHT_Pin|DIM_Pin;

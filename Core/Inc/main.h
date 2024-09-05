@@ -27,10 +27,10 @@
     #endif
 
     /* Includes ------------------------------------------------------------------*/
-    #include "stm32l412xx-bsp.h"
 
     /* Private includes ----------------------------------------------------------*/
     /* USER CODE BEGIN Includes */
+    #include "stm32l412xx-bsp.h"
 
     /* USER CODE END Includes */
 

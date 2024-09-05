@@ -21,6 +21,7 @@ INCLUDES := -I. \
 # C source files...
 C_SRCS := \
 	stm32l412xx-bsp.c \
+	adc.c \
 	button_handler.c \
 	current_handler.c \
 	delay_handler.c \
@@ -29,16 +30,19 @@ C_SRCS := \
 	main.c \
 	my_printf.c \
 	pwm_handler.c \
+	spi.c \
 	stm32l4xx_it.c \
 	system_stm32l4xx.c \
 	temperature_handler.c \
 	tim.c \
 	usart.c \
 	voltage_handler.c \
+	stm32l4xx_ll_adc.c \
 	stm32l4xx_ll_dma.c \
 	stm32l4xx_ll_exti.c \
 	stm32l4xx_ll_gpio.c \
 	stm32l4xx_ll_rcc.c \
+	stm32l4xx_ll_spi.c \
 	stm32l4xx_ll_tim.c \
 	stm32l4xx_ll_usart.c \
 	stm32l4xx_ll_utils.c \

@@ -26,7 +26,7 @@
     /* Private defines -----------------------------------------------------------*/
     #ifdef STM32L412xx
 
-        /* Low Level ST API */
+        #include "stm32l4xx_ll_adc.h"
         #include "stm32l4xx_ll_crs.h"
         #include "stm32l4xx_ll_rcc.h"
         #include "stm32l4xx_ll_bus.h"
@@ -36,42 +36,66 @@
         #include "stm32l4xx_ll_utils.h"
         #include "stm32l4xx_ll_pwr.h"
         #include "stm32l4xx_ll_dma.h"
+        #include "stm32l4xx_ll_spi.h"
         #include "stm32l4xx_ll_tim.h"
         #include "stm32l4xx_ll_usart.h"
         #include "stm32l4xx_ll_gpio.h"
 
         #if defined(USE_FULL_ASSERT)
-            /* ST Assert */
             #include "stm32_assert.h"
         #endif /* USE_FULL_ASSERT */
 
         /* Peripherals */
-        #include "tim.h"
+        #include "adc.h"
         #include "gpio.h"
+        #include "spi.h"
+        #include "tim.h"
 
         #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
             /* Peripherals enabled for UART */
             #include "usart.h"
         #endif /* ENABLE_UART_DEBUGGING */
 
+        #define THERMISTOR_ADC_Pin LL_GPIO_PIN_0
+        #define THERMISTOR_ADC_GPIO_Port GPIOA
         #define BRIGHT_Pin LL_GPIO_PIN_1
         #define BRIGHT_GPIO_Port GPIOA
         #define DIM_Pin LL_GPIO_PIN_3
         #define DIM_GPIO_Port GPIOA
+        #define EEPROM_SCK_Pin LL_GPIO_PIN_5
+        #define EEPROM_SCK_GPIO_Port GPIOA
+        #define EEPROM_MISO_Pin LL_GPIO_PIN_6
+        #define EEPROM_MISO_GPIO_Port GPIOA
+        #define EEPROM_MOSI_Pin LL_GPIO_PIN_7
+        #define EEPROM_MOSI_GPIO_Port GPIOA
+        #define VOLTMETER_ADC_Pin LL_GPIO_PIN_0
+        #define VOLTMETER_ADC_GPIO_Port GPIOB
+        #define AMPMETER_ADC_Pin LL_GPIO_PIN_1
+        #define AMPMETER_ADC_GPIO_Port GPIOB
         #define PWM_OUT_Pin LL_GPIO_PIN_8
         #define PWM_OUT_GPIO_Port GPIOA
 
     #else /* STM32L412xx */
 
         /* Below is for debugging purposes */
-        #define BRIGHT_Pin 0
-        #define BRIGHT_GPIO_Port 0
-        #define DIM_Pin 0
-        #define DIM_GPIO_Port 0
-        #define SWITCH_LED_Pin 0
-        #define SWITCH_LED_GPIO_Port 0
-        #define PWM_OUT_Pin 0
-        #define PWM_OUT_GPIO_Port 0
+        #define THERMISTOR_ADC_Pin          0
+        #define THERMISTOR_ADC_GPIO_Port    0
+        #define BRIGHT_Pin                  0
+        #define BRIGHT_GPIO_Port            0
+        #define DIM_Pin                     0
+        #define DIM_GPIO_Port               0
+        #define EEPROM_SCK_Pin              0
+        #define EEPROM_SCK_GPIO_Port        0
+        #define EEPROM_MISO_Pin             0
+        #define EEPROM_MISO_GPIO_Port       0
+        #define EEPROM_MOSI_Pin             0
+        #define EEPROM_MOSI_GPIO_Port       0
+        #define VOLTMETER_ADC_Pin           0
+        #define VOLTMETER_ADC_GPIO_Port     0
+        #define AMPMETER_ADC_Pin            0
+        #define AMPMETER_ADC_GPIO_Port      0
+        #define PWM_OUT_Pin                 0
+        #define PWM_OUT_GPIO_Port           0
 
         typedef struct
         {

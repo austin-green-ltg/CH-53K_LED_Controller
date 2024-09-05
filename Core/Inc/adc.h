@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
-/****
+/**
     ******************************************************************************
-    * @file    gpio.h
+    * @file    adc.h
     * @brief   This file contains all the function prototypes for
-    *          the gpio.c file
+    *          the adc.c file
     ******************************************************************************
     * @attention
     *
@@ -18,8 +18,8 @@
     */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef INC_gpioh
-    #define INC_gpioh
+#ifndef INC_adch
+    #define INC_adch
 
     #ifdef __cplusplus
         extern "C" {
@@ -36,7 +36,7 @@
 
     /* USER CODE END Private defines */
 
-    void MX_GPIO_Init(void);
+    void MX_ADC1_Init(void);
 
     /* USER CODE BEGIN Prototypes */
 
@@ -45,5 +45,6 @@
     #ifdef __cplusplus
         }
     #endif
-#endif /*__ GPIO_H__ */
+
+#endif /* INC_adch */
 
