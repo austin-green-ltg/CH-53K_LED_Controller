@@ -7,9 +7,9 @@ TimerStruct timer;
 GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
 GPIO_PinState bright_pin = 0;
-int32_t thermistor_value = 0;
-int32_t current_value_mA = 0;
-int32_t voltage_value_mV = 28000;
+int16_t thermistor_value_dC = 0;
+int16_t current_value_dA = 0;
+int16_t voltage_value_dV = 280;
 FILE* file_ptr;
 
 GPIO_PinState ReadDimPin( void )
@@ -67,22 +67,22 @@ uint32_t GetTIM2Cnt( void )
     return timer.time;
 }
 
-int32_t GetThermistorValue( void )
+int16_t GetThermistorValue( void )
 {
-    // assumes value is mC, i.e. 1000 = 1 C
-    return thermistor_value;
+    // assumes value is dC, i.e. 10 = 1 C
+    return thermistor_value_dC;
 }
 
-int32_t GetCurrentValue( void )
+int16_t GetCurrentValue( void )
 {
-    // assumes value is mA, i.e. 1000 = 1 A
-    return current_value_mA;
+    // assumes value is dA, i.e. 10 = 1 A
+    return current_value_dA;
 }
 
-int32_t GetVoltageValue( void )
+int16_t GetVoltageValue( void )
 {
-    // assumes value is mV, i.e. 1000 = 1 V
-    return voltage_value_mV;
+    // assumes value is dV, i.e. 10 = 1 V
+    return voltage_value_dV;
 }
 
 void WriteMem( const uint32_t address, const char* const string, const uint32_t bytes )

@@ -6,12 +6,12 @@
 #define PRESS (0)
 #define HOLD  (1)
 
-#define HEATING_WARM_THERM (100000)
-#define HEATING_HOT_THERM  (120000)
-#define COOLING_COOL_THERM (80000)
-#define COOLING_WARM_THERM (100000)
+#define HEATING_WARM_THERM (1000)
+#define HEATING_HOT_THERM  (1200)
+#define COOLING_COOL_THERM (800)
+#define COOLING_WARM_THERM (1000)
 
-extern int32_t thermistor_value;
+extern int16_t thermistor_value_dC;
 
 extern const uint8_t    MinBrightness   ;
 extern const uint8_t    MaxBrightness   ;
@@ -32,7 +32,7 @@ TEST_SETUP(PWM_Handler)
 TEST_TEAR_DOWN(PWM_Handler)
 {
     /* executed after *every* non-skipped and non-failing test */
-    thermistor_value = 0; // return to default value
+    thermistor_value_dC = 0; // return to default value
     GetTemperatureRange(); // set thermistor range
 }
 
@@ -173,13 +173,13 @@ TEST(PWM_Handler, GetPwmThermistorNiceCase)
     const uint8_t expected_hot_pwm  = (uint8_t)(expected_pwm * HotPwmRatio + 0.5);
     SetBrightness(brightness);
 
-    thermistor_value = HEATING_WARM_THERM;
+    thermistor_value_dC = HEATING_WARM_THERM;
     TEST_ASSERT(GetPwm() == expected_warm_pwm);
 
-    thermistor_value = HEATING_HOT_THERM;
+    thermistor_value_dC = HEATING_HOT_THERM;
     TEST_ASSERT(GetPwm() == expected_hot_pwm);
 
-    thermistor_value = COOLING_COOL_THERM;
+    thermistor_value_dC = COOLING_COOL_THERM;
     TEST_ASSERT(GetPwm() == expected_cool_pwm);
 }
 

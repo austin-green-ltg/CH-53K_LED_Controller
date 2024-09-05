@@ -26,14 +26,14 @@
 #include "stm32l412xx-bsp.h"
 #include "logger.h"
 
-const int32_t  ThermistorTomCelcius = (1);
-const int32_t  mCelciusToThermistor = (1);
+const int32_t  ThermistorTodCelcius = (1);
+const int32_t  dCelciusToThermistor = (1);
 
-// Temperature Thresholds (mC)
-const int32_t   HeatingThreshold1_mC = (100000);
-const int32_t   HeatingThreshold2_mC = (120000);
-const int32_t   CoolingThreshold1_mC = (80000) ;
-const int32_t   CoolingThreshold2_mC = (100000);
+// Temperature Thresholds (dC)
+const int32_t   HeatingThreshold1_dC = (1000);
+const int32_t   HeatingThreshold2_dC = (1200);
+const int32_t   CoolingThreshold1_dC = (800) ;
+const int32_t   CoolingThreshold2_dC = (1000);
 
 // Normal Temperature is Cool
 static TemperatureRange_e temperature_threshold = TempCool;
@@ -88,7 +88,7 @@ static void LogTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
 // Get temperature from thermistor
 int32_t GetTemperature( void )
 {
-    int32_t temperature = GetThermistorValue() * ThermistorTomCelcius;
+    int32_t temperature = GetThermistorValue() * ThermistorTodCelcius;
     return (temperature);
 }
 
@@ -109,12 +109,12 @@ TemperatureRange_e GetTemperatureRange( void )
     {
         case TempCool:
             // no cooling check needed
-            if (temperature >= HeatingThreshold2_mC)
+            if (temperature >= HeatingThreshold2_dC)
             {
                 temperature_threshold = TempHot;
                 LogTempChange(TempCool, temperature_threshold);
             }
-            else if (temperature >= HeatingThreshold1_mC)
+            else if (temperature >= HeatingThreshold1_dC)
             {
                 temperature_threshold = TempWarm;
                 LogTempChange(TempCool, temperature_threshold);
@@ -123,12 +123,12 @@ TemperatureRange_e GetTemperatureRange( void )
 
         case TempWarm:
             // check if cooled down or heated up
-            if (temperature <= CoolingThreshold1_mC)
+            if (temperature <= CoolingThreshold1_dC)
             {
                 temperature_threshold = TempCool;
                 LogTempChange(TempWarm, temperature_threshold);
             }
-            else if (temperature >= HeatingThreshold2_mC)
+            else if (temperature >= HeatingThreshold2_dC)
             {
                 temperature_threshold = TempHot;
                 LogTempChange(TempWarm, temperature_threshold);
@@ -137,12 +137,12 @@ TemperatureRange_e GetTemperatureRange( void )
 
         case TempHot:
             // check if cooled down
-            if (temperature <= CoolingThreshold1_mC)
+            if (temperature <= CoolingThreshold1_dC)
             {
                 temperature_threshold = TempCool;
                 LogTempChange(TempHot, temperature_threshold);
             }
-            else if (temperature <= CoolingThreshold2_mC)
+            else if (temperature <= CoolingThreshold2_dC)
             {
                 temperature_threshold = TempWarm;
                 LogTempChange(TempHot, temperature_threshold);

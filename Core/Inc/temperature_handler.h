@@ -34,7 +34,7 @@
     } TemperatureRange_e;
 
     /* Get Temperature */
-    int32_t GetTemperature( void ); // in mC
+    int32_t GetTemperature( void ); // in dC
     TemperatureRange_e GetTemperatureRange( void );
 
 #endif /* INC_temperature_handlerh */

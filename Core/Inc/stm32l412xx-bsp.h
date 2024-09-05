@@ -148,11 +148,11 @@
     void RestartTIM2( void );
     uint32_t GetTIM2Cnt( void );
     /* Thermistor */
-    int32_t GetThermistorValue( void );
+    int16_t GetThermistorValue( void );
     /* Current Sensing */
-    int32_t GetCurrentValue( void );
+    int16_t GetCurrentValue( void );
     /* Voltage Sensing */
-    int32_t GetVoltageValue( void );
+    int16_t GetVoltageValue( void );
     /* Logging */
     void WriteMem( const uint32_t address, const char* const string, const uint32_t bytes );
     void ReadMem(  const uint32_t address, char* string, const uint32_t bytes );

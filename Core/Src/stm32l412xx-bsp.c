@@ -81,39 +81,46 @@ uint32_t GetTIM2Cnt( void )
 }
 
 // Returns raw thermistor ADC value
-int32_t GetThermistorValue( void )
+int16_t GetThermistorValue( void )
 {
-    // TODO
-    return -1;
+    return LL_ADC_INJ_ReadConversionData12(ADC1, LL_ADC_INJ_RANK_1);
 }
 
 // Returns raw current ADC value
-int32_t GetCurrentValue( void )
+int16_t GetCurrentValue( void )
 {
-    // TODO
-    return -1;
+    return LL_ADC_INJ_ReadConversionData12(ADC1, LL_ADC_INJ_RANK_2);
 }
 
 // Returns raw voltage ADC value
-int32_t GetVoltageValue( void )
+int16_t GetVoltageValue( void )
 {
-    // TODO
-    return -1;
+    return LL_ADC_INJ_ReadConversionData12(ADC1, LL_ADC_INJ_RANK_3);
 }
 
 void WriteMem( const uint32_t address, const char* const string, const uint32_t bytes )
 {
     // TODO
+    // look at yokohama code for writing fram
     (void) address;
     (void) string;
     (void) bytes;
+    for (uint32_t i = 0; i < bytes; i++)
+    {
+        LL_SPI_TransmitData8(SPI1, string[i]);
+    }
 }
 void ReadMem( const uint32_t address, char* string, const uint32_t bytes )
 {
     // TODO
+    // look at yokohama code for reading fram
     (void) address;
     (void) string;
     (void) bytes;
+    for (uint32_t i = 0; i < bytes; i++)
+    {
+        string[i] = LL_SPI_ReceiveData8(SPI1);
+    }
 }
 
 void sendUARTChar(char c)

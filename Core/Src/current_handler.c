@@ -24,12 +24,12 @@
 #include "stm32l412xx-bsp.h"
 #include "logger.h"
 
-const uint16_t  RawTomAmps = (1);
-const uint16_t  mAmpsToRaw = (1);
+const uint16_t  RawTodAmps = (1);
+const uint16_t  dAmpsToRaw = (1);
 
-// Current Thresholds (mA)
-const uint16_t CurrentHighThreshold_mA  = 3500u;
-const uint16_t CurrentErrorThreshold_mA = 4000u;
+// Current Thresholds (dA)
+const uint16_t CurrentHighThreshold_dA  = 35u;
+const uint16_t CurrentErrorThreshold_dA = 40u;
 
 // Default Current is Normal
 static CurrentRange_e current_threshold = CurrentNormal;
@@ -58,14 +58,14 @@ static void LogCurrentChange(CurrentRange_e range, uint16_t currentValue)
 
     LogNumber(currentValue, 0);
 
-    LogString(" mA\n", 0);
+    LogString(" dA\n", 0);
 
 }
 
 // Get voltage from ampmeter
 uint16_t GetCurrent( void )
 {
-    uint16_t current = GetCurrentValue() * RawTomAmps;
+    uint16_t current = GetCurrentValue() * RawTodAmps;
     return (current);
 }
 
@@ -81,11 +81,11 @@ CurrentRange_e GetCurrentRange( void )
     uint16_t current = GetCurrent();
     CurrentRange_e prev_threshold = current_threshold;
 
-    if (current >= CurrentErrorThreshold_mA)
+    if (current >= CurrentErrorThreshold_dA)
     {
         current_threshold = CurrentError;
     }
-    else if (current >= CurrentHighThreshold_mA)
+    else if (current >= CurrentHighThreshold_dA)
     {
         current_threshold = CurrentHigh;
     }

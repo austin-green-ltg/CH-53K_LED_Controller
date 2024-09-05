@@ -5,11 +5,11 @@
 #include "logger.h"             /* CUT */
 #include "stm32l412xx-bsp.h"    /* CUT */
 
-const uint16_t CurrentNormalValue   = 3000u;
-const uint16_t CurrentHighValue     = 3500u;
-const uint16_t CurrentErrorValue    = 4000u;
+const uint16_t CurrentNormalValue   = 30u;
+const uint16_t CurrentHighValue     = 35u;
+const uint16_t CurrentErrorValue    = 40u;
 
-extern uint16_t current_value_mA;
+extern uint16_t current_value_dA;
 
 TEST_GROUP(Current_Handler);
 
@@ -21,7 +21,7 @@ TEST_SETUP(Current_Handler)
 TEST_TEAR_DOWN(Current_Handler)
 {
     /* executed after *every* non-skipped and non-failing test */
-    current_value_mA = CurrentNormalValue; // return to default value
+    current_value_dA = CurrentNormalValue; // return to default value
     GetCurrentRange(); // set current range
 }
 
@@ -36,125 +36,125 @@ TEST(Current_Handler, GetDefaultCurrentRange)
 }
 TEST(Current_Handler, GetCurrent)
 {
-    current_value_mA = 1000u;
-    TEST_ASSERT_EQUAL_UINT16(1000u, GetCurrent());
-    current_value_mA = 2523u;
-    TEST_ASSERT_EQUAL_UINT16(2523u, GetCurrent());
+    current_value_dA = 10u;
+    TEST_ASSERT_EQUAL_UINT16(10u, GetCurrent());
+    current_value_dA = 25u;
+    TEST_ASSERT_EQUAL_UINT16(25u, GetCurrent());
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_UINT16(CurrentHighValue, GetCurrent());
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_UINT16(CurrentErrorValue, GetCurrent());
 }
 TEST(Current_Handler, CurrentRangeNormalStepping)
 {
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = CurrentNormalValue;
+    current_value_dA = CurrentNormalValue;
     TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeNormalTesting)
 {
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = CurrentNormalValue;
+    current_value_dA = CurrentNormalValue;
     TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeHighTesting)
 {
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = CurrentNormalValue;
+    current_value_dA = CurrentNormalValue;
     TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeErrorTesting)
 {
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
-    current_value_mA = CurrentNormalValue;
+    current_value_dA = CurrentNormalValue;
     TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeNormalBoundaryTesting)
 {
-    current_value_mA = (CurrentHighValue - 1);
+    current_value_dA = (CurrentHighValue - 1);
     TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = CurrentNormalValue;
+    current_value_dA = CurrentNormalValue;
     TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
-    current_value_mA = (CurrentErrorValue - 1);
+    current_value_dA = (CurrentErrorValue - 1);
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = CurrentNormalValue;
+    current_value_dA = CurrentNormalValue;
     TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeHighBoundaryTesting)
 {
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = (CurrentHighValue - 1);
+    current_value_dA = (CurrentHighValue - 1);
     TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = (CurrentErrorValue - 1);
+    current_value_dA = (CurrentErrorValue - 1);
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 }
 TEST(Current_Handler, CurrentRangeErrorBoundaryTesting)
 {
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
-    current_value_mA = (CurrentErrorValue - 1);
+    current_value_dA = (CurrentErrorValue - 1);
     TEST_ASSERT_EQUAL_INT(CurrentHigh, GetCurrentRange());
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 
-    current_value_mA = (CurrentHighValue - 1);
+    current_value_dA = (CurrentHighValue - 1);
     TEST_ASSERT_EQUAL_INT(CurrentNormal, GetCurrentRange());
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     TEST_ASSERT_EQUAL_INT(CurrentError, GetCurrentRange());
 }
 
@@ -163,14 +163,14 @@ TEST(Current_Handler, NormalToHighPrintout)
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     GetCurrentRange();
 
     fclose(file_ptr);
 
     file_ptr = fopen("testFile.txt", "r");
 
-    char* expected = "High Current 3500 mA\n";
+    char* expected = "High Current 35 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
     ReadLog(0, string,  strlen(expected));
@@ -186,14 +186,14 @@ TEST(Current_Handler, NormalToErrorPrintout)
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     GetCurrentRange();
 
     fclose(file_ptr);
 
     file_ptr = fopen("testFile.txt", "r");
 
-    char* expected = "Error Current 4000 mA\n";
+    char* expected = "Error Current 40 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
     ReadLog(0, string,  strlen(expected));
@@ -209,7 +209,7 @@ TEST(Current_Handler, NormalToNormalNoPrintout)
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
 
-    current_value_mA = CurrentNormalValue;
+    current_value_dA = CurrentNormalValue;
     GetCurrentRange();
 
     fclose(file_ptr);
@@ -232,20 +232,20 @@ TEST(Current_Handler, HighToNormalPrintout)
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     GetCurrentRange();
 
-    current_value_mA = CurrentNormalValue;
+    current_value_dA = CurrentNormalValue;
     GetCurrentRange();
 
     fclose(file_ptr);
 
     file_ptr = fopen("testFile.txt", "r");
 
-    char* expected = "Normal Current 3000 mA\n";
+    char* expected = "Normal Current 30 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Current 3500 mA\n") + 1, string,  strlen(expected));
+    ReadLog(strlen("High Current 35 dA\n") + 1, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
     fclose(file_ptr);        // close file
@@ -258,20 +258,20 @@ TEST(Current_Handler, HighToErrorPrintout)
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     GetCurrentRange();
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     GetCurrentRange();
 
     fclose(file_ptr);
 
     file_ptr = fopen("testFile.txt", "r");
 
-    char* expected = "Error Current 4000 mA\n";
+    char* expected = "Error Current 40 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Current 3500 mA\n") + 1, string,  strlen(expected));
+    ReadLog(strlen("High Current 35 dA\n") + 1, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
     fclose(file_ptr);        // close file
@@ -284,12 +284,12 @@ TEST(Current_Handler, HighToHighNoPrintout)
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     GetCurrentRange();
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     GetCurrentRange();
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     GetCurrentRange();
 
     fclose(file_ptr);
@@ -299,7 +299,7 @@ TEST(Current_Handler, HighToHighNoPrintout)
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Current 3500 mA\n") + 1, string,  strlen(expected));
+    ReadLog(strlen("High Current 35 dA\n") + 1, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
     fclose(file_ptr);        // close file
@@ -312,20 +312,20 @@ TEST(Current_Handler, ErrorToNormalPrintout)
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     GetCurrentRange();
 
-    current_value_mA = CurrentNormalValue;
+    current_value_dA = CurrentNormalValue;
     GetCurrentRange();
 
     fclose(file_ptr);
 
     file_ptr = fopen("testFile.txt", "r");
 
-    char* expected = "Normal Current 3000 mA\n";
+    char* expected = "Normal Current 30 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Current 4000 mA\n") + 1, string,  strlen(expected));
+    ReadLog(strlen("Error Current 40 dA\n") + 1, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
     fclose(file_ptr);        // close file
@@ -338,20 +338,20 @@ TEST(Current_Handler, ErrorToHighPrintout)
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     GetCurrentRange();
 
-    current_value_mA = CurrentHighValue;
+    current_value_dA = CurrentHighValue;
     GetCurrentRange();
 
     fclose(file_ptr);
 
     file_ptr = fopen("testFile.txt", "r");
 
-    char* expected = "High Current 3500 mA\n";
+    char* expected = "High Current 35 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Current 4000 mA\n") + 1, string,  strlen(expected));
+    ReadLog(strlen("Error Current 40 dA\n") + 1, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
     fclose(file_ptr);        // close file
@@ -364,10 +364,10 @@ TEST(Current_Handler, ErrorToErrorNoPrintout)
     extern FILE* file_ptr;
     file_ptr = fopen("testFile.txt", "w");
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     GetCurrentRange();
 
-    current_value_mA = CurrentErrorValue;
+    current_value_dA = CurrentErrorValue;
     GetCurrentRange();
 
     fclose(file_ptr);
@@ -377,7 +377,7 @@ TEST(Current_Handler, ErrorToErrorNoPrintout)
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Current 4000 mA\n") + 1, string,  strlen(expected));
+    ReadLog(strlen("Error Current 40 dA\n") + 1, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
     fclose(file_ptr);        // close file

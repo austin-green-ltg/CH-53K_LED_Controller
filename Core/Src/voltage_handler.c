@@ -24,14 +24,14 @@
 #include "stm32l412xx-bsp.h"
 #include "logger.h"
 
-const uint16_t  RawTomVolts = (1);
-const uint16_t  mVoltsToRaw = (1);
+const uint16_t  RawTodColts = (1);
+const uint16_t  dColtsToRaw = (1);
 
-// Voltage Thresholds (mv)
-const uint16_t VoltageErrorLowThreshold_mV  = 24000u;
-const uint16_t VoltageLowThreshold_mV       = 26000u;
-const uint16_t VoltageHighThreshold_mV      = 30000u;
-const uint16_t VoltageErrorHighThreshold_mV = 32000u;
+// Voltage Thresholds (dV)
+const uint16_t VoltageErrorLowThreshold_dC  = 240u;
+const uint16_t VoltageLowThreshold_dC       = 260u;
+const uint16_t VoltageHighThreshold_dC      = 300u;
+const uint16_t VoltageErrorHighThreshold_dC = 320u;
 
 // default voltage state is normal
 static VoltageRange_e voltage_threshold = VoltageNormal;
@@ -68,14 +68,14 @@ static void LogVoltageChange(VoltageRange_e range, uint16_t voltageValue)
 
     LogNumber(voltageValue, 0);
 
-    LogString(" mV\n", 0);
+    LogString(" dV\n", 0);
 
 }
 
 // Get voltage from voltmeter
 uint16_t GetVoltage( void )
 {
-    uint16_t voltage = GetVoltageValue() * RawTomVolts;
+    uint16_t voltage = GetVoltageValue() * RawTodColts;
     return (voltage);
 }
 
@@ -93,19 +93,19 @@ VoltageRange_e GetVoltageRange( void )
     uint16_t voltage = GetVoltage();
     VoltageRange_e prev_threshold = voltage_threshold;
 
-    if (voltage <= VoltageErrorLowThreshold_mV)
+    if (voltage <= VoltageErrorLowThreshold_dC)
     {
         voltage_threshold = VoltageErrorLow;
     }
-    else if (voltage <= VoltageLowThreshold_mV)
+    else if (voltage <= VoltageLowThreshold_dC)
     {
         voltage_threshold = VoltageLow;
     }
-    else if (voltage >= VoltageErrorHighThreshold_mV)
+    else if (voltage >= VoltageErrorHighThreshold_dC)
     {
         voltage_threshold = VoltageErrorHigh;
     }
-    else if (voltage >= VoltageHighThreshold_mV)
+    else if (voltage >= VoltageHighThreshold_dC)
     {
         voltage_threshold = VoltageHigh;
     }
