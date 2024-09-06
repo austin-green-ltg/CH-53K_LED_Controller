@@ -5,11 +5,14 @@
 #include "logger.h"                 /* CUT */
 #include "stm32l412xx-bsp.h"        /* CUT */
 
-#define HEATING_WARM_THERM (1000)
-#define HEATING_HOT_THERM  (1200)
-#define COOLING_COOL_THERM (800)
-#define COOLING_WARM_THERM (1000)
+const uint16_t HeatingWarmTherm = 1000u;
+const uint16_t HeatingHotTherm  = 1200u;
+const uint16_t CoolingCoolTherm = 800u;
+const uint16_t CoolingWarmTherm = 1000u;
 
+extern void initFram( void );
+
+extern uint32_t address; // last written to address
 extern int32_t thermistor_value_dC;
 
 TEST_GROUP(Temperature_Handler);
@@ -17,6 +20,7 @@ TEST_GROUP(Temperature_Handler);
 TEST_SETUP(Temperature_Handler)
 {
     /* executed before *every* non-skipped test */
+    initFram();
 }
 
 TEST_TEAR_DOWN(Temperature_Handler)
@@ -46,17 +50,17 @@ TEST(Temperature_Handler, GetTemperature)
     thermistor_value_dC = 700;
     TEST_ASSERT_EQUAL_INT32(700, GetTemperature());
 
-    thermistor_value_dC = HEATING_WARM_THERM;
-    TEST_ASSERT_EQUAL_INT32(HEATING_WARM_THERM, GetTemperature());
+    thermistor_value_dC = HeatingWarmTherm;
+    TEST_ASSERT_EQUAL_INT32(HeatingWarmTherm, GetTemperature());
 
-    thermistor_value_dC = HEATING_HOT_THERM;
-    TEST_ASSERT_EQUAL_INT32(HEATING_HOT_THERM, GetTemperature());
+    thermistor_value_dC = HeatingHotTherm;
+    TEST_ASSERT_EQUAL_INT32(HeatingHotTherm, GetTemperature());
 
-    thermistor_value_dC = COOLING_COOL_THERM;
-    TEST_ASSERT_EQUAL_INT32(COOLING_COOL_THERM, GetTemperature());
+    thermistor_value_dC = CoolingCoolTherm;
+    TEST_ASSERT_EQUAL_INT32(CoolingCoolTherm, GetTemperature());
 
-    thermistor_value_dC = COOLING_WARM_THERM;
-    TEST_ASSERT_EQUAL_INT32(COOLING_WARM_THERM, GetTemperature());
+    thermistor_value_dC = CoolingWarmTherm;
+    TEST_ASSERT_EQUAL_INT32(CoolingWarmTherm, GetTemperature());
 
     thermistor_value_dC = 1500;
     TEST_ASSERT_EQUAL_INT32(1500, GetTemperature());
@@ -75,348 +79,276 @@ TEST(Temperature_Handler, GetTemperature)
 }
 TEST(Temperature_Handler, TemperatureRangeNormalStepping)
 {
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 
-    thermistor_value_dC = COOLING_WARM_THERM;
+    thermistor_value_dC = CoolingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     TEST_ASSERT(GetTemperatureRange() == TempCool);
     }
     TEST(Temperature_Handler, TemperatureRangeCoolTesting)
     {
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 }
 TEST(Temperature_Handler, TemperatureRangeWarmTesting)
 {
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 
-    thermistor_value_dC = COOLING_WARM_THERM;
+    thermistor_value_dC = CoolingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 }
 TEST(Temperature_Handler, TemperatureRangeHotTesting)
 {
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 
-    thermistor_value_dC = COOLING_WARM_THERM;
+    thermistor_value_dC = CoolingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 }
 TEST(Temperature_Handler, TemperatureRangeCoolBoundaryTesting)
 {
-    thermistor_value_dC = (HEATING_WARM_THERM - 10);
+    thermistor_value_dC = (HeatingWarmTherm - 10);
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 
-    thermistor_value_dC = (HEATING_HOT_THERM - 10);
+    thermistor_value_dC = (HeatingHotTherm - 10);
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 }
 TEST(Temperature_Handler, TemperatureRangeWarmBoundaryTesting)
 {
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = (COOLING_COOL_THERM + 10);
+    thermistor_value_dC = (CoolingCoolTherm + 10);
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = (HEATING_HOT_THERM - 10);
+    thermistor_value_dC = (HeatingHotTherm - 10);
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 }
 TEST(Temperature_Handler, TemperatureRangeHotBoundaryTesting)
 {
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 
-    thermistor_value_dC = (COOLING_WARM_THERM + 10);
+    thermistor_value_dC = (CoolingWarmTherm + 10);
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 
-    thermistor_value_dC = COOLING_WARM_THERM;
+    thermistor_value_dC = CoolingWarmTherm;
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 
-    thermistor_value_dC = (COOLING_COOL_THERM + 10);
+    thermistor_value_dC = (CoolingCoolTherm + 10);
     TEST_ASSERT(GetTemperatureRange() == TempWarm);
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     TEST_ASSERT(GetTemperatureRange() == TempHot);
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     TEST_ASSERT(GetTemperatureRange() == TempCool);
 }
 
 TEST(Temperature_Handler, CoolToWarmPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     GetTemperatureRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "Temp Cool->Warm\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Temperature_Handler, CoolToHotPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     GetTemperatureRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "Temp Cool->Hot\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Temperature_Handler, CoolToCoolNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     GetTemperatureRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Temperature_Handler, WarmToCoolPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     GetTemperatureRange();
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     GetTemperatureRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "Temp Warm->Cool\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Temp Cool->Warm\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Temperature_Handler, WarmToHotPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     GetTemperatureRange();
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     GetTemperatureRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "Temp Warm->Hot\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Temp Cool->Warm\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Temperature_Handler, WarmToWarmNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     GetTemperatureRange();
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value_dC = HeatingWarmTherm;
     GetTemperatureRange();
-    thermistor_value_dC = COOLING_WARM_THERM;
+    thermistor_value_dC = CoolingWarmTherm;
     GetTemperatureRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Temp Cool->Warm\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Temperature_Handler, HotToCoolPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     GetTemperatureRange();
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value_dC = CoolingCoolTherm;
     GetTemperatureRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "Temp Hot->Cool\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Temp Cool->Hot\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Temperature_Handler, HotToWarmPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     GetTemperatureRange();
 
-    thermistor_value_dC = COOLING_WARM_THERM;
+    thermistor_value_dC = CoolingWarmTherm;
     GetTemperatureRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "Temp Hot->Warm\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Temp Cool->Hot\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Temperature_Handler, HotToHotNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     GetTemperatureRange();
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value_dC = HeatingHotTherm;
     GetTemperatureRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Temp Cool->Hot\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 /* end temperature_handler tests */

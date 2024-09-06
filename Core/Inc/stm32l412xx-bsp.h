@@ -74,6 +74,10 @@
         #define AMPMETER_ADC_GPIO_Port GPIOB
         #define PWM_OUT_Pin LL_GPIO_PIN_8
         #define PWM_OUT_GPIO_Port GPIOA
+        #define SPI_WP_Pin LL_GPIO_PIN_10
+        #define SPI_WP_GPIO_Port GPIOA
+        #define SPI_NSS_Pin LL_GPIO_PIN_11
+        #define SPI_NSS_GPIO_Port GPIOA
 
     #else /* STM32L412xx */
 
@@ -96,6 +100,10 @@
         #define AMPMETER_ADC_GPIO_Port      0
         #define PWM_OUT_Pin                 0
         #define PWM_OUT_GPIO_Port           0
+        #define SPI_WP_Pin                  0
+        #define SPI_WP_GPIO_Port            0
+        #define SPI_NSS_Pin                 0
+        #define SPI_NSS_GPIO_Port           0
 
         typedef struct
         {
@@ -128,6 +136,7 @@
     /* Button Defines */
     typedef uint8_t GPIO_PinState;
     enum { BUTTON_PRESSED = 1, BUTTON_UNPRESSED = 0};
+    enum { PIN_SET = 1, PIN_RESET = 0};
 
     /* Clock frequency Values */
     #define CLK_FREQ_HZ  (8000000)
@@ -154,8 +163,12 @@
     /* Voltage Sensing */
     int16_t GetVoltageValue( void );
     /* Logging */
-    void WriteMem( const uint32_t address, const char* const string, const uint32_t bytes );
-    void ReadMem(  const uint32_t address, char* string, const uint32_t bytes );
+    void enableWriteProtect( void );
+    void disableWriteProtect( void );
+    void enableChipSelect( void );
+    void disableChipSelect( void );
+    void transferData( const unsigned char* const txData, const uint32_t bytes );
+    void receiveData( unsigned char* rxData, const uint32_t bytes );
     /* UART Output */
     void sendUARTChar(char c);
     /* Errors */

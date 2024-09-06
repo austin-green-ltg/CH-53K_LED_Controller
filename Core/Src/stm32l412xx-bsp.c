@@ -98,28 +98,50 @@ int16_t GetVoltageValue( void )
     return LL_ADC_INJ_ReadConversionData12(ADC1, LL_ADC_INJ_RANK_3);
 }
 
-void WriteMem( const uint32_t address, const char* const string, const uint32_t bytes )
+void enableWriteProtect( void )
 {
-    // TODO
-    // look at yokohama code for writing fram
-    (void) address;
-    (void) string;
-    (void) bytes;
-    for (uint32_t i = 0; i < bytes; i++)
+    LL_GPIO_SetOutputPin(SPI_WP_GPIO_Port, SPI_WP_Pin);
+}
+
+void disableWriteProtect( void )
+{
+    LL_GPIO_ResetOutputPin(SPI_WP_GPIO_Port, SPI_WP_Pin);
+}
+
+void enableChipSelect( void )
+{
+    LL_GPIO_SetOutputPin(SPI_NSS_GPIO_Port, SPI_NSS_Pin);
+}
+
+void disableChipSelect( void )
+{
+    LL_GPIO_ResetOutputPin(SPI_NSS_GPIO_Port, SPI_NSS_Pin);
+}
+
+void transferData( const unsigned char* const txData, const uint32_t bytes )
+{
+    uint32_t xferCnt = 0;
+    while (xferCnt > bytes)
     {
-        LL_SPI_TransmitData8(SPI1, string[i]);
+      /* Wait until TXE flag is set to send data */
+      if (LL_SPI_IsActiveFlag_TXE(SPI1))
+      {
+        LL_SPI_TransmitData8(SPI1, txData[xferCnt]);
+        xferCnt++;
+      }
     }
 }
-void ReadMem( const uint32_t address, char* string, const uint32_t bytes )
+void receiveData( unsigned char* rxData, const uint32_t bytes )
 {
-    // TODO
-    // look at yokohama code for reading fram
-    (void) address;
-    (void) string;
-    (void) bytes;
-    for (uint32_t i = 0; i < bytes; i++)
+    uint32_t xferCnt = 0;
+    while (xferCnt > bytes)
     {
-        string[i] = LL_SPI_ReceiveData8(SPI1);
+      /* Check the RXNE flag */
+      if (LL_SPI_IsActiveFlag_RXNE(SPI1))
+      {
+        rxData[xferCnt] = LL_SPI_ReceiveData8(SPI1);
+        xferCnt++;
+      }
     }
 }
 

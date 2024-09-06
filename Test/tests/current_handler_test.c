@@ -9,6 +9,9 @@ const uint16_t CurrentNormalValue   = 30u;
 const uint16_t CurrentHighValue     = 35u;
 const uint16_t CurrentErrorValue    = 40u;
 
+extern void initFram( void );
+
+extern uint32_t address; // last written to address
 extern uint16_t current_value_dA;
 
 TEST_GROUP(Current_Handler);
@@ -16,6 +19,7 @@ TEST_GROUP(Current_Handler);
 TEST_SETUP(Current_Handler)
 {
     /* executed before *every* non-skipped test */
+    initFram();
 }
 
 TEST_TEAR_DOWN(Current_Handler)
@@ -160,77 +164,51 @@ TEST(Current_Handler, CurrentRangeErrorBoundaryTesting)
 
 TEST(Current_Handler, NormalToHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     current_value_dA = CurrentHighValue;
     GetCurrentRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "High Current 35 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Current_Handler, NormalToErrorPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     current_value_dA = CurrentErrorValue;
     GetCurrentRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error Current 40 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Current_Handler, NormalToNormalNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     current_value_dA = CurrentNormalValue;
     GetCurrentRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Current_Handler, HighToNormalPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     current_value_dA = CurrentHighValue;
     GetCurrentRange();
@@ -238,25 +216,17 @@ TEST(Current_Handler, HighToNormalPrintout)
     current_value_dA = CurrentNormalValue;
     GetCurrentRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Normal Current 30 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Current 35 dA\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Current_Handler, HighToErrorPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     current_value_dA = CurrentHighValue;
     GetCurrentRange();
@@ -264,25 +234,17 @@ TEST(Current_Handler, HighToErrorPrintout)
     current_value_dA = CurrentErrorValue;
     GetCurrentRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error Current 40 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Current 35 dA\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Current_Handler, HighToHighNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     current_value_dA = CurrentHighValue;
     GetCurrentRange();
@@ -291,26 +253,18 @@ TEST(Current_Handler, HighToHighNoPrintout)
     GetCurrentRange();
     current_value_dA = CurrentHighValue;
     GetCurrentRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Current 35 dA\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Current_Handler, ErrorToNormalPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     current_value_dA = CurrentErrorValue;
     GetCurrentRange();
@@ -318,25 +272,17 @@ TEST(Current_Handler, ErrorToNormalPrintout)
     current_value_dA = CurrentNormalValue;
     GetCurrentRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Normal Current 30 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Current 40 dA\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Current_Handler, ErrorToHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     current_value_dA = CurrentErrorValue;
     GetCurrentRange();
@@ -344,44 +290,30 @@ TEST(Current_Handler, ErrorToHighPrintout)
     current_value_dA = CurrentHighValue;
     GetCurrentRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "High Current 35 dA\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Current 40 dA\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Current_Handler, ErrorToErrorNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     current_value_dA = CurrentErrorValue;
     GetCurrentRange();
 
     current_value_dA = CurrentErrorValue;
     GetCurrentRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Current 40 dA\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 /* end Current_Handler tests */

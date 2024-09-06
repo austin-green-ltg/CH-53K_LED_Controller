@@ -22,6 +22,8 @@
 // ***************************************************************************
 
 /* Private includes ----------------------------------------------------------*/
+#include <string.h>
+
 #include "temperature_handler.h"
 #include "stm32l412xx-bsp.h"
 #include "logger.h"
@@ -41,18 +43,19 @@ static TemperatureRange_e temperature_threshold = TempCool;
 // Logs temperature change to storage
 static void LogTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
 {
+    char str[20];
     switch(temp1)
     {
         case TempCool:
-            LogString("Temp Cool", 0);
+            strcpy(str, "Temp Cool");
             break;
 
         case TempWarm:
-            LogString("Temp Warm", 0);
+            strcpy(str, "Temp Warm");
             break;
 
         case TempHot:
-            LogString("Temp Hot", 0);
+            strcpy(str, "Temp Hot");
             break;
 
         default:
@@ -60,28 +63,29 @@ static void LogTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
 
     }
 
-    LogString("->", 0);
+    strcat(str, "->");
 
     switch(temp2)
     {
-    case TempCool:
-        LogString("Cool", 0);
-        break;
+        case TempCool:
+            strcat(str, "Cool");
+            break;
 
-    case TempWarm:
-        LogString("Warm", 0);
-        break;
+        case TempWarm:
+            strcat(str, "Warm");
+            break;
 
-    case TempHot:
-        LogString("Hot", 0);
-        break;
+        case TempHot:
+            strcat(str, "Hot");
+            break;
 
-    default:
-        break;
+        default:
+            break;
 
     }
 
-    LogString("\n", 0);
+    strcat(str, "\n");
+    LogString(str, 0);
 
 }
 

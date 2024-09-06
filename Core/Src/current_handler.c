@@ -20,6 +20,8 @@
 // ***************************************************************************
 
 /* Private includes ----------------------------------------------------------*/
+#include <stdio.h>
+
 #include "current_handler.h"
 #include "stm32l412xx-bsp.h"
 #include "logger.h"
@@ -37,18 +39,20 @@ static CurrentRange_e current_threshold = CurrentNormal;
 // Logs current change to storage
 static void LogCurrentChange(CurrentRange_e range, uint16_t currentValue)
 {
+    char str[25];
+
     switch(range)
     {
         case CurrentNormal:
-            LogString("Normal Current ", 0);
+            sprintf(str, "Normal Current %d dA\n", currentValue);
             break;
 
         case CurrentHigh:
-            LogString("High Current ", 0);
+            sprintf(str, "High Current %d dA\n", currentValue);
             break;
 
         case CurrentError:
-            LogString("Error Current ", 0);
+            sprintf(str, "Error Current %d dA\n", currentValue);
             break;
 
         default:
@@ -56,10 +60,7 @@ static void LogCurrentChange(CurrentRange_e range, uint16_t currentValue)
 
     }
 
-    LogNumber(currentValue, 0);
-
-    LogString(" dA\n", 0);
-
+    LogString(str, 0);
 }
 
 // Get voltage from ampmeter

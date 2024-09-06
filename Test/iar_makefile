@@ -26,6 +26,7 @@ C_SRCS := \
 	current_handler.c \
 	delay_handler.c \
 	gpio.c \
+	fram.c \
 	logger.c \
 	main.c \
 	my_printf.c \

@@ -11,6 +11,9 @@ const uint16_t VoltageNormalValue       = 280u;
 const uint16_t VoltageHighValue         = 300u;
 const uint16_t VoltageErrorHighValue    = 320u;
 
+extern void initFram( void );
+
+extern uint32_t address; // last written to address
 extern uint16_t voltage_value_dV;
 
 TEST_GROUP(Voltage_Handler);
@@ -18,6 +21,7 @@ TEST_GROUP(Voltage_Handler);
 TEST_SETUP(Voltage_Handler)
 {
     /* executed before *every* non-skipped test */
+    initFram();
 }
 
 TEST_TEAR_DOWN(Voltage_Handler)
@@ -336,122 +340,80 @@ TEST(Voltage_Handler, VoltageRangeErrorHighBoundaryTesting)
 
 TEST(Voltage_Handler, NormalToErrorLowPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error Low Voltage 240 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, NormalToLowPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Low Voltage 260 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, NormalToHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "High Voltage 300 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, NormalToErrorHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error High Voltage 320 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 TEST(Voltage_Handler, NormalToNormalNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageNormalValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(0, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorLowToLowPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
@@ -459,25 +421,17 @@ TEST(Voltage_Handler, ErrorLowToLowPrintout)
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Low Voltage 260 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Low Voltage 240 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorLowToNormalPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
@@ -485,25 +439,17 @@ TEST(Voltage_Handler, ErrorLowToNormalPrintout)
     voltage_value_dV = VoltageNormalValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Normal Voltage 280 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Low Voltage 240 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorLowToHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
@@ -511,25 +457,17 @@ TEST(Voltage_Handler, ErrorLowToHighPrintout)
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "High Voltage 300 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Low Voltage 240 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorLowToErrorHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
@@ -537,51 +475,35 @@ TEST(Voltage_Handler, ErrorLowToErrorHighPrintout)
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error High Voltage 320 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Low Voltage 240 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorLowToErrorLowNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
 
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error Low Voltage 240 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, LowToErrorLowPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
@@ -589,25 +511,17 @@ TEST(Voltage_Handler, LowToErrorLowPrintout)
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error Low Voltage 240 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Low Voltage 260 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, LowToNormalPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
@@ -615,25 +529,17 @@ TEST(Voltage_Handler, LowToNormalPrintout)
     voltage_value_dV = VoltageNormalValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Normal Voltage 280 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Low Voltage 260 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, LowToHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
@@ -641,25 +547,17 @@ TEST(Voltage_Handler, LowToHighPrintout)
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "High Voltage 300 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Low Voltage 260 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, LowToErrorHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
@@ -667,51 +565,35 @@ TEST(Voltage_Handler, LowToErrorHighPrintout)
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error High Voltage 320 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Low Voltage 260 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, LowToLowNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
 
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Low Voltage 260 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, HighToErrorLowPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
@@ -719,25 +601,17 @@ TEST(Voltage_Handler, HighToErrorLowPrintout)
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error Low Voltage 240 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Voltage 300 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, HighToLowPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
@@ -745,25 +619,17 @@ TEST(Voltage_Handler, HighToLowPrintout)
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Low Voltage 260 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Voltage 300 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, HighToNormalPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
@@ -771,25 +637,17 @@ TEST(Voltage_Handler, HighToNormalPrintout)
     voltage_value_dV = VoltageNormalValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Normal Voltage 280 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Voltage 300 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, HighToErrorHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
@@ -797,25 +655,17 @@ TEST(Voltage_Handler, HighToErrorHighPrintout)
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error High Voltage 320 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Voltage 300 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, HighToHighNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
@@ -824,26 +674,18 @@ TEST(Voltage_Handler, HighToHighNoPrintout)
     GetVoltageRange();
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("High Voltage 300 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorHighToErrorLowPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
@@ -851,25 +693,17 @@ TEST(Voltage_Handler, ErrorHighToErrorLowPrintout)
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Error Low Voltage 240 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error High Voltage 320 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorHighToLowPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
@@ -877,25 +711,17 @@ TEST(Voltage_Handler, ErrorHighToLowPrintout)
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Low Voltage 260 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error High Voltage 320 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorHighToNormalPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
@@ -903,25 +729,17 @@ TEST(Voltage_Handler, ErrorHighToNormalPrintout)
     voltage_value_dV = VoltageNormalValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "Normal Voltage 280 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error High Voltage 320 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorHighToHighPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
@@ -929,44 +747,30 @@ TEST(Voltage_Handler, ErrorHighToHighPrintout)
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
 
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
-
     char* expected = "High Voltage 300 dV\n";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error High Voltage 320 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 
 TEST(Voltage_Handler, ErrorHighToErrorHighNoPrintout)
 {
-    extern FILE* file_ptr;
-    file_ptr = fopen("testFile.txt", "w");
 
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
 
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
-
-    fclose(file_ptr);
-
-    file_ptr = fopen("testFile.txt", "r");
 
     char* expected = "";
     char* string = (char*)calloc(100 , sizeof(char));
 
-    ReadLog(strlen("Error High Voltage 320 dV\n") + 1, string,  strlen(expected));
+    ReadLog(address, string,  strlen(expected));
     TEST_ASSERT_EQUAL_STRING(expected, string);
 
-    fclose(file_ptr);        // close file
-    remove("testFile.txt");  // delete file
     free(string);
 }
 /* end Voltage_Handler tests */

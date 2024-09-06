@@ -10,7 +10,11 @@ GPIO_PinState bright_pin = 0;
 int16_t thermistor_value_dC = 0;
 int16_t current_value_dA = 0;
 int16_t voltage_value_dV = 280;
-FILE* file_ptr;
+uint8_t writeProtect = 0;
+uint8_t chipEnable = 0;
+uint8_t writeEnable = 0;
+uint8_t statusRegister = 0;
+uint8_t readStatusRegisterSignal = 0;
 
 GPIO_PinState ReadDimPin( void )
 {
@@ -85,17 +89,90 @@ int16_t GetVoltageValue( void )
     return voltage_value_dV;
 }
 
-void WriteMem( const uint32_t address, const char* const string, const uint32_t bytes )
-{
-    if (address == 0) rewind(file_ptr);
 
-    fwrite(string, sizeof(char), bytes, file_ptr);
+typedef enum {
+
+  OC_WREN  = 6 ,  /**< set write enable latch */
+  OC_WRDI  = 4 ,  /**< write disable          */
+  OC_RDSR  = 5 ,  /**< read status register   */
+  OC_WRSR  = 1 ,  /**< write status register  */
+  OC_READ  = 3 ,  /**< read memory data       */
+  OC_WRITE = 2 ,  /**< write memory data      */
+
+} OPCODE_COMMANDS ;
+
+void enableWriteProtect( void )
+{
+    writeProtect = 1;
 }
-void ReadMem( const uint32_t address, char* string, const uint32_t bytes )
-{
-    fseek(file_ptr, address, SEEK_SET);
 
-    fread(string, sizeof(char), bytes, file_ptr);
+void disableWriteProtect( void )
+{
+    writeProtect = 0;
+}
+
+void enableChipSelect( void )
+{
+    chipEnable = 1;
+}
+
+void disableChipSelect( void )
+{
+    chipEnable = 0;
+}
+
+#define FRAM_SIZE 0xFFFF
+static uint8_t framMem[FRAM_SIZE];
+uint32_t address = 0;
+void initFram( void );
+void initFram( void )
+{
+    for (uint32_t i = 0; i < FRAM_SIZE; i++) framMem[i] = 0;
+}
+
+void transferData( const unsigned char* const txData, const uint32_t bytes )
+{
+    if ((txData[0] == OC_WRDI || txData[0] == OC_WREN) && bytes == 1)
+    {
+        writeEnable = (txData[0] == OC_WRDI) ? 0 : 1;
+    }
+    // Write Status Register
+    else if (txData[0] == OC_WRSR && bytes == 2)
+    {
+        statusRegister = txData[1];
+    }
+    // Signal Read Status Register
+    else if (txData[0] == OC_RDSR && bytes == 2)
+    {
+        readStatusRegisterSignal = 1;
+    }
+    else if ((txData[0] == OC_READ || txData[0] == OC_WRITE) && bytes == 3)
+    {
+        address = (txData[1] << 8) + txData[2];
+    }
+    else
+    {
+        for (uint32_t i = address; i < bytes + address; i++)
+        {
+            framMem[i] = txData[i - address];
+        }
+    }
+}
+
+void receiveData( unsigned char* rxData, const uint32_t bytes )
+{
+    if (readStatusRegisterSignal)
+    {
+        rxData[1] = statusRegister;
+        readStatusRegisterSignal = 0;
+    }
+    else
+    {
+        for (uint32_t i = address; i < bytes + address; i++)
+        {
+            rxData[i - address] = framMem[i];
+        }
+    }
 }
 
 void sendUARTChar(char c)

@@ -49,6 +49,7 @@
 		<Unit filename="../Core/Inc/button_handler.h" />
 		<Unit filename="../Core/Inc/current_handler.h" />
 		<Unit filename="../Core/Inc/delay_handler.h" />
+		<Unit filename="../Core/Inc/fram.h" />
 		<Unit filename="../Core/Inc/gpio.h" />
 		<Unit filename="../Core/Inc/logger.h" />
 		<Unit filename="../Core/Inc/main.h" />
@@ -69,6 +70,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Core/Src/delay_handler.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Core/Src/fram.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Core/Src/logger.c">
@@ -96,6 +100,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="tests/delay_handler_test.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tests/fram_test.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="tests/logger_test.c">

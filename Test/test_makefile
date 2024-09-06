@@ -25,6 +25,7 @@ C_SRCS := \
 	button_handler.c \
 	current_handler.c \
 	delay_handler.c \
+	fram.c \
 	logger.c \
 	pwm_handler.c \
 	temperature_handler.c \
@@ -35,6 +36,7 @@ TEST_SRCS := \
 	button_handler_test.c \
 	current_handler_test.c \
 	delay_handler_test.c \
+	fram_test.c \
 	logger_test.c \
 	pwm_handler_test.c \
 	requirements_test.c \
