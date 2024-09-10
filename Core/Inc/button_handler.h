@@ -1,10 +1,10 @@
 /*****************************************************************************
  *
  * @attention
- * Copyright © 2007 Luminator Mark IV
- * All rights reserved.
- * Any use without the prior written consent of Luminator Mark IV
- * is strictly prohibited.
+ *  Copyright (c) 2022, 2023 Luminator, An LTG Company
+ *  All rights reserved.
+ *  Any use without the prior written consent of Luminator,
+ *  An LTG Company is strictly prohibited.
  *
  *****************************************************************************
  *****************************************************************************
