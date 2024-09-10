@@ -109,20 +109,28 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a9e440816ccf6e7ae8f8bdea60b99fe99" id="r_a9e440816ccf6e7ae8f8bdea60b99fe99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e440816ccf6e7ae8f8bdea60b99fe99">InitPwm</a> (void)</td></tr>
+<tr class="memdesc:a9e440816ccf6e7ae8f8bdea60b99fe99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init PwmArray var Set brightness to half value, enable pwm, and turn off.  <br /></td></tr>
 <tr class="separator:a9e440816ccf6e7ae8f8bdea60b99fe99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a60c53e0ebfe90372ea3c89749710eb51" id="r_a60c53e0ebfe90372ea3c89749710eb51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60c53e0ebfe90372ea3c89749710eb51">DecreaseBrightness</a> (uint8_t button_held)</td></tr>
+<tr class="memdesc:a60c53e0ebfe90372ea3c89749710eb51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrease brightness by 1 (for button press) or 3 (for button hold) This functions can be made to increase brightness value with the REVERSE_BRIGHTNESS flag Afterwards, set pwm output.  <br /></td></tr>
 <tr class="separator:a60c53e0ebfe90372ea3c89749710eb51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c06b547eea80cb6c871750831709fe4" id="r_a0c06b547eea80cb6c871750831709fe4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c06b547eea80cb6c871750831709fe4">IncreaseBrightness</a> (uint8_t button_held)</td></tr>
+<tr class="memdesc:a0c06b547eea80cb6c871750831709fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase brightness by 1 (for button press) or 3 (for button hold) This functions can be made to decrease brightness value with the REVERSE_BRIGHTNESS flag Afterwards, set pwm output.  <br /></td></tr>
 <tr class="separator:a0c06b547eea80cb6c871750831709fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaa12e879fd29b225bef3eb6337aff72" id="r_adaa12e879fd29b225bef3eb6337aff72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adaa12e879fd29b225bef3eb6337aff72">SetPwm</a> (void)</td></tr>
+<tr class="memdesc:adaa12e879fd29b225bef3eb6337aff72"><td class="mdescLeft">&#160;</td><td class="mdescRight">set PWM based on pwm value  <br /></td></tr>
 <tr class="separator:adaa12e879fd29b225bef3eb6337aff72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90359218ff4b8771a3764beeecfb8e14" id="r_a90359218ff4b8771a3764beeecfb8e14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90359218ff4b8771a3764beeecfb8e14">TurnOffPwm</a> (void)</td></tr>
+<tr class="memdesc:a90359218ff4b8771a3764beeecfb8e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">turn off PWM  <br /></td></tr>
 <tr class="separator:a90359218ff4b8771a3764beeecfb8e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac59f8a6b413fe6bcf1b17a0321a2eb83" id="r_ac59f8a6b413fe6bcf1b17a0321a2eb83"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac59f8a6b413fe6bcf1b17a0321a2eb83">GetBrightness</a> (void)</td></tr>
+<tr class="memdesc:ac59f8a6b413fe6bcf1b17a0321a2eb83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return ledBrightness variable.  <br /></td></tr>
 <tr class="separator:ac59f8a6b413fe6bcf1b17a0321a2eb83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbd970e115607eca2d51db189d67cd14" id="r_acbd970e115607eca2d51db189d67cd14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbd970e115607eca2d51db189d67cd14">SetBrightness</a> (int8_t brightness)</td></tr>
+<tr class="memdesc:acbd970e115607eca2d51db189d67cd14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set ledBrightness variable, guards to ensure we don't go over max or min.  <br /></td></tr>
 <tr class="separator:acbd970e115607eca2d51db189d67cd14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add3ae8a15c377108bff5270b8c2f1a96" id="r_add3ae8a15c377108bff5270b8c2f1a96"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add3ae8a15c377108bff5270b8c2f1a96">GetPwm</a> (void)</td></tr>
+<tr class="memdesc:add3ae8a15c377108bff5270b8c2f1a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the PWM value based on the brightness and the temperature range.  <br /></td></tr>
 <tr class="separator:add3ae8a15c377108bff5270b8c2f1a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -173,6 +181,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Decrease brightness by 1 (for button press) or 3 (for button hold) This functions can be made to increase brightness value with the REVERSE_BRIGHTNESS flag Afterwards, set pwm output. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">button_held</td><td>If the button is being held (decrements by 3 if so) </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="ac59f8a6b413fe6bcf1b17a0321a2eb83" name="ac59f8a6b413fe6bcf1b17a0321a2eb83"></a>
@@ -189,6 +205,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Return ledBrightness variable. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">Current</td><td>LED brightness level </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -207,6 +231,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get the PWM value based on the brightness and the temperature range. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">Current</td><td>PWM value </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a0c06b547eea80cb6c871750831709fe4" name="a0c06b547eea80cb6c871750831709fe4"></a>
@@ -223,6 +255,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Increase brightness by 1 (for button press) or 3 (for button hold) This functions can be made to decrease brightness value with the REVERSE_BRIGHTNESS flag Afterwards, set pwm output. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">button_held</td><td>If the button is being held (increments by 3 if so) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -241,6 +281,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Init PwmArray var Set brightness to half value, enable pwm, and turn off. </p>
+
 </div>
 </div>
 <a id="acbd970e115607eca2d51db189d67cd14" name="acbd970e115607eca2d51db189d67cd14"></a>
@@ -257,6 +299,14 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set ledBrightness variable, guards to ensure we don't go over max or min. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">brightness</td><td>Brightess to set </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -275,6 +325,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>set PWM based on pwm value </p>
+
 </div>
 </div>
 <a id="a90359218ff4b8771a3764beeecfb8e14" name="a90359218ff4b8771a3764beeecfb8e14"></a>
@@ -292,6 +344,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>turn off PWM </p>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -306,6 +360,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Half Brightness Step (24) </p>
 
 </div>
 </div>
@@ -320,6 +375,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Hot thermal state pwm constant </p>
 
 </div>
 </div>
@@ -334,6 +390,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Max Brightness Step (49) </p>
 
 </div>
 </div>
@@ -348,6 +405,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Max pulse width value (<a class="el" href="#a0be5620d1275557da247a47aa2a88f17">PW_PERIOD(255)</a>) </p>
 
 </div>
 </div>
@@ -362,6 +420,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Min Brightness Step (0) </p>
 
 </div>
 </div>
@@ -376,6 +435,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Min pulse width value (0) </p>
 
 </div>
 </div>
@@ -390,6 +450,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Warm thermal state pwm constant </p>
 
 </div>
 </div>

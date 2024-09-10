@@ -115,8 +115,10 @@ Enumerations</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a4955e8a43489319badeaa2662335d973" id="r_a4955e8a43489319badeaa2662335d973"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4955e8a43489319badeaa2662335d973">GetVoltage</a> (void)</td></tr>
+<tr class="memdesc:a4955e8a43489319badeaa2662335d973"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get voltage from voltmeter.  <br /></td></tr>
 <tr class="separator:a4955e8a43489319badeaa2662335d973"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9181a4920cc377e8fe19d337eacd1f30" id="r_a9181a4920cc377e8fe19d337eacd1f30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a9df5e007c9e7817a315de169e5d2f293">VoltageRange_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9181a4920cc377e8fe19d337eacd1f30">GetVoltageRange</a> (void)</td></tr>
+<tr class="memdesc:a9181a4920cc377e8fe19d337eacd1f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get range that the voltage falls into Possible ranges are Normal - Normal Operating Voltage Low - Voltage low, but ok High - Voltage high, but ok ErrorLow - Voltage too low ErrorHigh - Voltage too high.  <br /></td></tr>
 <tr class="separator:a9181a4920cc377e8fe19d337eacd1f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
@@ -131,12 +133,22 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Voltage Range Enum </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293a18715e876a20eecbbfbd84bebc7c2330" name="a9df5e007c9e7817a315de169e5d2f293a18715e876a20eecbbfbd84bebc7c2330"></a>VoltageNormal&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293ad99608c8998c7de0f754ab49dbb5c003" name="a9df5e007c9e7817a315de169e5d2f293ad99608c8998c7de0f754ab49dbb5c003"></a>VoltageLow&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293a0e20227e2fe974f393c038e6b38b13dc" name="a9df5e007c9e7817a315de169e5d2f293a0e20227e2fe974f393c038e6b38b13dc"></a>VoltageHigh&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293a891d5ad01d6a7fcd68f60ae8d3226ecb" name="a9df5e007c9e7817a315de169e5d2f293a891d5ad01d6a7fcd68f60ae8d3226ecb"></a>VoltageErrorLow&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293ab3fb82ade36d19227cecf624f4773e39" name="a9df5e007c9e7817a315de169e5d2f293ab3fb82ade36d19227cecf624f4773e39"></a>VoltageErrorHigh&#160;</td><td class="fielddoc"></td></tr>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293a18715e876a20eecbbfbd84bebc7c2330" name="a9df5e007c9e7817a315de169e5d2f293a18715e876a20eecbbfbd84bebc7c2330"></a>VoltageNormal&#160;</td><td class="fielddoc"><p>Normal Operating Voltage </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293ad99608c8998c7de0f754ab49dbb5c003" name="a9df5e007c9e7817a315de169e5d2f293ad99608c8998c7de0f754ab49dbb5c003"></a>VoltageLow&#160;</td><td class="fielddoc"><p>Voltage low, but ok <br  />
+ </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293a0e20227e2fe974f393c038e6b38b13dc" name="a9df5e007c9e7817a315de169e5d2f293a0e20227e2fe974f393c038e6b38b13dc"></a>VoltageHigh&#160;</td><td class="fielddoc"><p>Voltage high, but ok <br  />
+ </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293a891d5ad01d6a7fcd68f60ae8d3226ecb" name="a9df5e007c9e7817a315de169e5d2f293a891d5ad01d6a7fcd68f60ae8d3226ecb"></a>VoltageErrorLow&#160;</td><td class="fielddoc"><p>Voltage too low <br  />
+ </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9df5e007c9e7817a315de169e5d2f293ab3fb82ade36d19227cecf624f4773e39" name="a9df5e007c9e7817a315de169e5d2f293ab3fb82ade36d19227cecf624f4773e39"></a>VoltageErrorHigh&#160;</td><td class="fielddoc"><p>Voltage too high <br  />
+ </p>
+</td></tr>
 </table>
 
 </div>
@@ -157,6 +169,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get voltage from voltmeter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">voltage</td><td>level in dV </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a9181a4920cc377e8fe19d337eacd1f30" name="a9181a4920cc377e8fe19d337eacd1f30"></a>
@@ -173,6 +193,14 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Get range that the voltage falls into Possible ranges are Normal - Normal Operating Voltage Low - Voltage low, but ok High - Voltage high, but ok ErrorLow - Voltage too low ErrorHigh - Voltage too high. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">Current</td><td>voltage range </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

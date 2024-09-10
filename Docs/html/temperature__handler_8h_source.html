@@ -92,54 +92,57 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">temperature_handler.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="temperature__handler_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// ***************************************************************************</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Copyright © 2007 Luminator Mark IV</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// All rights reserved.</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Any use without the prior written consent of Luminator Mark IV</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// is strictly prohibited.</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// ***************************************************************************</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// ***************************************************************************</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// Filename: temperature_handler.h</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// Description: Handles getting this temperature and transitioning</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//                between temperature states.</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">//</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Revision History:</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Date       - Name         -  Ver -  Remarks</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// 07/31/2024 - Austin Green -  1.0 -  Initial Document</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// 08/05/2024 - Austin Green -  1.1 -  Refactor to not use floats</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">//</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">// Notes:</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">//</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">// ***************************************************************************</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifndef INC_temperature_handlerh</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">    #define INC_temperature_handlerh</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">    #include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="comment">/* Temperature Range Enum */</span></div>
-<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527d">   29</a></span>    <span class="keyword">typedef</span> <span class="keyword">enum</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dabbecdf8592beff86da3b7f01238afa1a">   31</a></span>        <a class="code hl_enumvalue" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dabbecdf8592beff86da3b7f01238afa1a">TempCool</a>    = 0,</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dac8e3a45b078eb2bf83542b28428a5471">   32</a></span>        <a class="code hl_enumvalue" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dac8e3a45b078eb2bf83542b28428a5471">TempWarm</a>    = 1,</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <a class="code hl_enumvalue" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527da29ab1fd9f680f177723faf2fe9e0adf1">TempHot</a>     = 2</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527da29ab1fd9f680f177723faf2fe9e0adf1">   34</a></span>    } <a class="code hl_enumeration" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527d">TemperatureRange_e</a>;</div>
+<a href="temperature__handler_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*****************************************************************************</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *  @attention</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright © 2007 Luminator Mark IV</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * All rights reserved.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * Any use without the prior written consent of Luminator Mark IV</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * is strictly prohibited.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *****************************************************************************</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *****************************************************************************</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> * @file temperature_handler.h</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> * @brief Handles getting this temperature and transitioning between</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> *          temperature states.</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * Revision History:</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * Date       - Name         -  Ver -  Remarks</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * 07/31/2024 - Austin Green -  1.0 -  Initial Document</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * 08/05/2024 - Austin Green -  1.1 -  Refactor to not use floats</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> * 09/10/2024 - Austin Green -  2.0 -  Doxyfile documentation</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * Notes:</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> *****************************************************************************/</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#ifndef INC_temperature_handlerh</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">    #define INC_temperature_handlerh</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">    #include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527d">   33</a></span>    <span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dabbecdf8592beff86da3b7f01238afa1a">   35</a></span>        <a class="code hl_enumvalue" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dabbecdf8592beff86da3b7f01238afa1a">TempCool</a>    = 0,    </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dac8e3a45b078eb2bf83542b28428a5471">   36</a></span>        <a class="code hl_enumvalue" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dac8e3a45b078eb2bf83542b28428a5471">TempWarm</a>    = 1,    </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <a class="code hl_enumvalue" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527da29ab1fd9f680f177723faf2fe9e0adf1">TempHot</a>     = 2     </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527da29ab1fd9f680f177723faf2fe9e0adf1">   38</a></span>    } <a class="code hl_enumeration" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527d">TemperatureRange_e</a>;</div>
 </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="comment">/* Get Temperature */</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    int32_t <a class="code hl_function" href="temperature__handler_8h.html#add816e02169640482b7bae2ece0e3e27">GetTemperature</a>( <span class="keywordtype">void</span> ); <span class="comment">// in dC</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_enumeration" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527d">TemperatureRange_e</a> <a class="code hl_function" href="temperature__handler_8h.html#abd6b48119e055d2cb0290db86bf144f4">GetTemperatureRange</a>( <span class="keywordtype">void</span> );</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="preprocessor">#endif </span><span class="comment">/* INC_temperature_handlerh */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="atemperature__handler_8h_html_abd6b48119e055d2cb0290db86bf144f4"><div class="ttname"><a href="temperature__handler_8h.html#abd6b48119e055d2cb0290db86bf144f4">GetTemperatureRange</a></div><div class="ttdeci">TemperatureRange_e GetTemperatureRange(void)</div><div class="ttdef"><b>Definition</b> temperature_handler.c:108</div></div>
-<div class="ttc" id="atemperature__handler_8h_html_ac1f79fe4324645df017591625773527d"><div class="ttname"><a href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527d">TemperatureRange_e</a></div><div class="ttdeci">TemperatureRange_e</div><div class="ttdef"><b>Definition</b> temperature_handler.h:30</div></div>
-<div class="ttc" id="atemperature__handler_8h_html_ac1f79fe4324645df017591625773527da29ab1fd9f680f177723faf2fe9e0adf1"><div class="ttname"><a href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527da29ab1fd9f680f177723faf2fe9e0adf1">TempHot</a></div><div class="ttdeci">@ TempHot</div><div class="ttdef"><b>Definition</b> temperature_handler.h:33</div></div>
-<div class="ttc" id="atemperature__handler_8h_html_ac1f79fe4324645df017591625773527dabbecdf8592beff86da3b7f01238afa1a"><div class="ttname"><a href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dabbecdf8592beff86da3b7f01238afa1a">TempCool</a></div><div class="ttdeci">@ TempCool</div><div class="ttdef"><b>Definition</b> temperature_handler.h:31</div></div>
-<div class="ttc" id="atemperature__handler_8h_html_ac1f79fe4324645df017591625773527dac8e3a45b078eb2bf83542b28428a5471"><div class="ttname"><a href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dac8e3a45b078eb2bf83542b28428a5471">TempWarm</a></div><div class="ttdeci">@ TempWarm</div><div class="ttdef"><b>Definition</b> temperature_handler.h:32</div></div>
-<div class="ttc" id="atemperature__handler_8h_html_add816e02169640482b7bae2ece0e3e27"><div class="ttname"><a href="temperature__handler_8h.html#add816e02169640482b7bae2ece0e3e27">GetTemperature</a></div><div class="ttdeci">int32_t GetTemperature(void)</div><div class="ttdef"><b>Definition</b> temperature_handler.c:93</div></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    int32_t <a class="code hl_function" href="temperature__handler_8h.html#add816e02169640482b7bae2ece0e3e27">GetTemperature</a>( <span class="keywordtype">void</span> );</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_enumeration" href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527d">TemperatureRange_e</a> <a class="code hl_function" href="temperature__handler_8h.html#abd6b48119e055d2cb0290db86bf144f4">GetTemperatureRange</a>( <span class="keywordtype">void</span> );</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="preprocessor">#endif </span><span class="comment">/* INC_temperature_handlerh */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="atemperature__handler_8h_html_abd6b48119e055d2cb0290db86bf144f4"><div class="ttname"><a href="temperature__handler_8h.html#abd6b48119e055d2cb0290db86bf144f4">GetTemperatureRange</a></div><div class="ttdeci">TemperatureRange_e GetTemperatureRange(void)</div><div class="ttdoc">Get range that the temperature falls into. There is an increased threshold to fall back into the prev...</div><div class="ttdef"><b>Definition</b> temperature_handler.c:126</div></div>
+<div class="ttc" id="atemperature__handler_8h_html_ac1f79fe4324645df017591625773527d"><div class="ttname"><a href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527d">TemperatureRange_e</a></div><div class="ttdeci">TemperatureRange_e</div><div class="ttdef"><b>Definition</b> temperature_handler.h:34</div></div>
+<div class="ttc" id="atemperature__handler_8h_html_ac1f79fe4324645df017591625773527da29ab1fd9f680f177723faf2fe9e0adf1"><div class="ttname"><a href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527da29ab1fd9f680f177723faf2fe9e0adf1">TempHot</a></div><div class="ttdeci">@ TempHot</div><div class="ttdef"><b>Definition</b> temperature_handler.h:37</div></div>
+<div class="ttc" id="atemperature__handler_8h_html_ac1f79fe4324645df017591625773527dabbecdf8592beff86da3b7f01238afa1a"><div class="ttname"><a href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dabbecdf8592beff86da3b7f01238afa1a">TempCool</a></div><div class="ttdeci">@ TempCool</div><div class="ttdef"><b>Definition</b> temperature_handler.h:35</div></div>
+<div class="ttc" id="atemperature__handler_8h_html_ac1f79fe4324645df017591625773527dac8e3a45b078eb2bf83542b28428a5471"><div class="ttname"><a href="temperature__handler_8h.html#ac1f79fe4324645df017591625773527dac8e3a45b078eb2bf83542b28428a5471">TempWarm</a></div><div class="ttdeci">@ TempWarm</div><div class="ttdef"><b>Definition</b> temperature_handler.h:36</div></div>
+<div class="ttc" id="atemperature__handler_8h_html_add816e02169640482b7bae2ece0e3e27"><div class="ttname"><a href="temperature__handler_8h.html#add816e02169640482b7bae2ece0e3e27">GetTemperature</a></div><div class="ttdeci">int32_t GetTemperature(void)</div><div class="ttdoc">Get temperature from thermistor.</div><div class="ttdef"><b>Definition</b> temperature_handler.c:111</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

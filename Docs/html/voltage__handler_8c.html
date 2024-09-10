@@ -103,16 +103,18 @@ $(function(){ initResizable(false); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a4955e8a43489319badeaa2662335d973" id="r_a4955e8a43489319badeaa2662335d973"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4955e8a43489319badeaa2662335d973">GetVoltage</a> (void)</td></tr>
+<tr class="memdesc:a4955e8a43489319badeaa2662335d973"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get voltage from voltmeter.  <br /></td></tr>
 <tr class="separator:a4955e8a43489319badeaa2662335d973"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9181a4920cc377e8fe19d337eacd1f30" id="r_a9181a4920cc377e8fe19d337eacd1f30"><td class="memItemLeft" align="right" valign="top"><a class="el" href="voltage__handler_8h.html#a9df5e007c9e7817a315de169e5d2f293">VoltageRange_e</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9181a4920cc377e8fe19d337eacd1f30">GetVoltageRange</a> (void)</td></tr>
+<tr class="memdesc:a9181a4920cc377e8fe19d337eacd1f30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get range that the voltage falls into Possible ranges are Normal - Normal Operating Voltage Low - Voltage low, but ok High - Voltage high, but ok ErrorLow - Voltage too low ErrorHigh - Voltage too high.  <br /></td></tr>
 <tr class="separator:a9181a4920cc377e8fe19d337eacd1f30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a9993902105c9d06c8177ba1ded49d242" id="r_a9993902105c9d06c8177ba1ded49d242"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9993902105c9d06c8177ba1ded49d242">RawTodColts</a> = (1)</td></tr>
-<tr class="separator:a9993902105c9d06c8177ba1ded49d242"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9689adc2bff35a3d4e5d30e2977b2dfb" id="r_a9689adc2bff35a3d4e5d30e2977b2dfb"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9689adc2bff35a3d4e5d30e2977b2dfb">dColtsToRaw</a> = (1)</td></tr>
-<tr class="separator:a9689adc2bff35a3d4e5d30e2977b2dfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b9e0535144a8b6c5b82de3986a61d7d" id="r_a9b9e0535144a8b6c5b82de3986a61d7d"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b9e0535144a8b6c5b82de3986a61d7d">RawTodVolts</a> = (1)</td></tr>
+<tr class="separator:a9b9e0535144a8b6c5b82de3986a61d7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a227954955ab3ced135cea43d2336c53e" id="r_a227954955ab3ced135cea43d2336c53e"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a227954955ab3ced135cea43d2336c53e">dVoltsToRaw</a> = (1)</td></tr>
+<tr class="separator:a227954955ab3ced135cea43d2336c53e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9986bb42123fcc69ec41db68f4ace9b7" id="r_a9986bb42123fcc69ec41db68f4ace9b7"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9986bb42123fcc69ec41db68f4ace9b7">VoltageErrorLowThreshold_dV</a> = 240u</td></tr>
 <tr class="separator:a9986bb42123fcc69ec41db68f4ace9b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad2d8201d0085372691e2f3801f97e6e5" id="r_ad2d8201d0085372691e2f3801f97e6e5"><td class="memItemLeft" align="right" valign="top">const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad2d8201d0085372691e2f3801f97e6e5">VoltageLowThreshold_dV</a> = 260u</td></tr>
@@ -138,6 +140,14 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get voltage from voltmeter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">voltage</td><td>level in dV </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a9181a4920cc377e8fe19d337eacd1f30" name="a9181a4920cc377e8fe19d337eacd1f30"></a>
@@ -155,34 +165,44 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Get range that the voltage falls into Possible ranges are Normal - Normal Operating Voltage Low - Voltage low, but ok High - Voltage high, but ok ErrorLow - Voltage too low ErrorHigh - Voltage too high. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">Current</td><td>voltage range </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
-<a id="a9689adc2bff35a3d4e5d30e2977b2dfb" name="a9689adc2bff35a3d4e5d30e2977b2dfb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9689adc2bff35a3d4e5d30e2977b2dfb">&#9670;&#160;</a></span>dColtsToRaw</h2>
+<a id="a227954955ab3ced135cea43d2336c53e" name="a227954955ab3ced135cea43d2336c53e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a227954955ab3ced135cea43d2336c53e">&#9670;&#160;</a></span>dVoltsToRaw</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint16_t dColtsToRaw = (1)</td>
+          <td class="memname">const uint16_t dVoltsToRaw = (1)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>DeciCelcius (C*0.1) to raw value out of voltmeter </p>
 
 </div>
 </div>
-<a id="a9993902105c9d06c8177ba1ded49d242" name="a9993902105c9d06c8177ba1ded49d242"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9993902105c9d06c8177ba1ded49d242">&#9670;&#160;</a></span>RawTodColts</h2>
+<a id="a9b9e0535144a8b6c5b82de3986a61d7d" name="a9b9e0535144a8b6c5b82de3986a61d7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b9e0535144a8b6c5b82de3986a61d7d">&#9670;&#160;</a></span>RawTodVolts</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const uint16_t RawTodColts = (1)</td>
+          <td class="memname">const uint16_t RawTodVolts = (1)</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Raw value out of voltmeter to deciVolts (V*0.1) </p>
 
 </div>
 </div>
@@ -197,6 +217,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>High Voltage Error Level in dV </p>
 
 </div>
 </div>
@@ -211,6 +232,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Low Voltage Error Level in dV </p>
 
 </div>
 </div>
@@ -225,6 +247,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>High Voltage Level in dV </p>
 
 </div>
 </div>
@@ -239,6 +262,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Low Voltage Level in dV </p>
 
 </div>
 </div>

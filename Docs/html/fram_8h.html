@@ -95,9 +95,6 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">fram.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>This module contains definitions and structures to support SPI FRAM operations.  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="stm32l412xx-bsp_8h_source.html">stm32l412xx-bsp.h</a>&quot;</code><br />
 </div>
 <p><a href="fram_8h_source.html">Go to the source code of this file.</a></p>
@@ -141,23 +138,20 @@ Functions</h2></td></tr>
 <tr class="memitem:ac737a2768b12f0024b0f8dedc13b7ab5" id="r_ac737a2768b12f0024b0f8dedc13b7ab5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac737a2768b12f0024b0f8dedc13b7ab5">framWriteSr</a> (unsigned char sr)</td></tr>
 <tr class="separator:ac737a2768b12f0024b0f8dedc13b7ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ffb673dd7a356af306c1743be126f32" id="r_a2ffb673dd7a356af306c1743be126f32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ffb673dd7a356af306c1743be126f32">framWriteDisable</a> (void)</td></tr>
+<tr class="memdesc:a2ffb673dd7a356af306c1743be126f32"><td class="mdescLeft">&#160;</td><td class="mdescRight">This routine resets the write enable latch.  <br /></td></tr>
 <tr class="separator:a2ffb673dd7a356af306c1743be126f32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb185ced7935a54189236f881375faa0" id="r_acb185ced7935a54189236f881375faa0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acb185ced7935a54189236f881375faa0">framWriteEnable</a> (void)</td></tr>
+<tr class="memdesc:acb185ced7935a54189236f881375faa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This routine resets the write enable latch.  <br /></td></tr>
 <tr class="separator:acb185ced7935a54189236f881375faa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a846ddd3d47bcd581b49e778e70980fc1" id="r_a846ddd3d47bcd581b49e778e70980fc1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a846ddd3d47bcd581b49e778e70980fc1">framReadMemory</a> (unsigned short addr, unsigned char *rdBufP, unsigned short len)</td></tr>
 <tr class="separator:a846ddd3d47bcd581b49e778e70980fc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abad0fbfb7245cc5a79e994680676140b" id="r_abad0fbfb7245cc5a79e994680676140b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abad0fbfb7245cc5a79e994680676140b">framWriteMemory</a> (unsigned short addr, const unsigned char *const wrBufP, unsigned short len)</td></tr>
 <tr class="separator:abad0fbfb7245cc5a79e994680676140b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a177b1c03338f9f1cddb4200e412c1f11" id="r_a177b1c03338f9f1cddb4200e412c1f11"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a177b1c03338f9f1cddb4200e412c1f11">framTest</a> (void)</td></tr>
+<tr class="memdesc:a177b1c03338f9f1cddb4200e412c1f11"><td class="mdescLeft">&#160;</td><td class="mdescRight">This routine is a test function for FRAM access. It writes "TLEN" bytes of an incrementing pattern into FRAM at address "TADD". It reads the same length into a buffer and verifies the pattern.  <br /></td></tr>
 <tr class="separator:a177b1c03338f9f1cddb4200e412c1f11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This module contains definitions and structures to support SPI FRAM operations. </p>
-<dl class="section attention"><dt>Attention</dt><dd>Copyright (c) 2022, 2023 Luminator, An LTG Company All rights reserved. Any use without the prior written consent of Luminator, An LTG Company is strictly prohibited.</dd></dl>
-<p>Revision History: Date Name Ver Remarks </p><hr  />
-<p> 04/09/2023 Mark Lane 0 Original Version</p>
-<p>Notes: </p>
-</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="aa29a92e6bc02acfd837e5918e24e3546" name="aa29a92e6bc02acfd837e5918e24e3546"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa29a92e6bc02acfd837e5918e24e3546">&#9670;&#160;</a></span>CHIP_SELECT_STATE</h2>
 
@@ -278,14 +272,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine sets the chip select pin to the correct "state".</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">state</td><td>assert = 0, release = 1 </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">none</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -312,16 +298,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine reads FRAM memory starting at "addr" for "len" byte(s). The FRAM read data is stored at the pointer referenced by "rdBufP".</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">addr</td><td>FRAM memory address to read data </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">rdBufP</td><td>destination pointer to store read data </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>number of byte(s) to read </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">none</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -339,14 +315,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine reads the FRAM status register</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">destination</td><td>pointer for FRAM status register </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">none</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -364,9 +332,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine is a test function for FRAM access. It writes "TLEN" bytes of an incrementing pattern into FRAM at address "TADD". It reads the same length into a buffer and verifies the pattern. </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>This routine is a test function for FRAM access. It writes "TLEN" bytes of an incrementing pattern into FRAM at address "TADD". It reads the same length into a buffer and verifies the pattern. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[out]</td><td class="paramname">pass</td><td>= 1, fail = 0 </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">1</td><td>= pass, 0 = fail </td></tr>
   </table>
   </dd>
 </dl>
@@ -387,7 +357,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine resets the write enable latch </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>This routine resets the write enable latch. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">none</td><td></td></tr>
   </table>
@@ -410,7 +382,9 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine sets the write enable latch </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>This routine resets the write enable latch. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">none</td><td></td></tr>
   </table>
@@ -442,16 +416,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine writes FRAM memory starting at "addr" for "len" byte(s). The data referenced by the pointer "wrBufP" is written into FRAM memory.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">addr</td><td>FRAM memory address to write data </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">wrBufP</td><td>pointer to data to write </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">len</td><td>number of byte(s) to write </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">none</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -469,14 +433,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine sets the hardware write protect pin to the correct "state".</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">state</td><td>disable = 0, enable = 1 </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">none</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -494,14 +450,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This routine writes the FRAM status register</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">data</td><td>value written to FRAM status register </td></tr>
-    <tr><td class="paramdir">[out]</td><td class="paramname">none</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

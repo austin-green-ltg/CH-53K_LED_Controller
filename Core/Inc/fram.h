@@ -1,38 +1,34 @@
-/**
-  *******************************************************************************
-  *
-  *  @attention
-  *  Copyright (c) 2022, 2023 Luminator, An LTG Company
-  *  All rights reserved.
-  *  Any use without the prior written consent of Luminator,
-  *  An LTG Company is strictly prohibited.
-  *
-  *******************************************************************************
-  *
-  *******************************************************************************
-  *
-  *  @file fram.h
-  *
-  *  @brief This module contains definitions and structures to support
-  *      SPI FRAM operations.
-  *
-  *  Revision History:
-  *    Date         Name        Ver  Remarks
-  *    -----------  ----------  ---  -------------------------------------------
-  *    04/09/2023   Mark Lane   0    Original Version
-  *
-  *
-  *  Notes:
-  *
-  *
-  *******************************************************************************
-  */
+/*****************************************************************************
+ *
+ *  @attention
+ *  Copyright (c) 2022, 2023 Luminator, An LTG Company
+ *  All rights reserved.
+ *  Any use without the prior written consent of Luminator,
+ *  An LTG Company is strictly prohibited.
+ *
+ *****************************************************************************
+ *****************************************************************************
+ *
+ *  @file fram.h
+ *
+ *  @brief This module contains definitions and structures to support
+ *          fram.c SPI FRAM operations.
+ *
+ *  Revision History:
+ *    Date         Name            Ver     Remarks
+ *    -----------  ----------      ---     ---------------------------------
+ *    04/09/2023   Mark Lane       0       Original Version
+ *    09/10/2024 - Austin Green -  2.0 -   Doxyfile documentation
+ *
+ *  Notes:
+ *
+ *****************************************************************************/
 #ifndef _FRAM_H_
 #define _FRAM_H_
 
 #include "stm32l412xx-bsp.h"
 
-/* Definition */
+/* ------------------------- Local Definition(s) ---------------------------- */
 /**
   * opcode command
   */
@@ -82,11 +78,12 @@ typedef enum {
 
 } CHIP_SELECT_STATE ;
 
-
 /* Prototype Definition */
-
 /**
-  * This routine sets the hardware write protect pin to the correct "state".
+  * @fn framWriteProtect
+  *
+  * @brief This routine sets the hardware write protect pin to the correct
+  *          "state".
   *
   * @param[in] state disable = 0, enable = 1
   * @param[out] none
@@ -94,72 +91,92 @@ typedef enum {
 void framWriteProtect( WRITE_PROTECT_STATE state  ) ;
 
 /**
-  * This routine sets the chip select pin to the correct "state".
+  * @fn framChipSelect
+  *
+  * @brief This routine sets the chip select pin to the correct "state".
   *
   * @param[in] state assert = 0, release = 1
   * @param[out] none
   */
 void framChipSelect( CHIP_SELECT_STATE state  ) ;
 
-
 /**
-  * This routine reads the FRAM status register
+  * @fn framReadSr
   *
-  * @param[in] destination pointer for FRAM status register
+  * @brief This routine reads the FRAM status register
+  *
+  * @param[in] srP destination pointer for FRAM status register
   * @param[out] none
   */
 void framReadSr( unsigned char *srP ) ;
 
 /**
-  * This routine writes the FRAM status register
+  * @fn framWriteSr
   *
-  * @param[in] data value written to FRAM status register
+  * @brief This routine writes the FRAM status register
+  *
+  * @param[in] sr data value written to FRAM status register
   * @param[out] none
   */
 void framWriteSr( unsigned char sr ) ;
 
-
 /**
-  * This routine resets the write enable latch
+  * @fn framWriteDisable
+  *
+  * @brief This routine resets the write enable latch
   * @param[out] none
   */
 void framWriteDisable( void ) ;
 
 /**
-  * This routine sets the write enable latch
+  * @fn framWriteEnable
+  *
+  * @brief This routine resets the write enable latch
   * @param[out] none
   */
 void framWriteEnable( void )  ;
 
-
 /**
-  * This routine reads FRAM memory starting at "addr" for "len" byte(s). The
-  * FRAM read data is stored at the pointer referenced by "rdBufP".
+  * @fn framReadMemory
+  *
+  * @brief This routine reads FRAM memory starting at "addr" for "len"
+  *         byte(s). The FRAM read data is stored at the pointer referenced by
+  *         "rdBufP".
   *
   * @param[in] addr FRAM memory address to read data
   * @param[in] rdBufP destination pointer to store read data
   * @param[in] len number of byte(s) to read
-  * @param[out] none
-  */
+ *
+ *  NOTE    : argument len must not be greater than 256
+ *
+ */
 void framReadMemory ( unsigned short addr, unsigned char *rdBufP, unsigned short len ) ;
 
 /**
-  * This routine writes FRAM memory starting at "addr" for "len" byte(s). The
-  * data referenced by the pointer "wrBufP" is written into FRAM memory.
+  * @fn framWriteMemory
   *
-  * @param[in] addr FRAM memory address to write data
+  * @brief This routine writes FRAM memory starting at "addr" for "len"
+  *         byte(s). The data referenced by the pointer "wrBufP" is written
+  *         into FRAM memory.
+  *
+  * @param[in] addr FRAM memory address to read data
   * @param[in] wrBufP pointer to data to write
   * @param[in] len number of byte(s) to write
-  * @param[out] none
-  */
+ *
+ *  NOTE    : argument len must not be greater than 256
+ *
+ */
 void framWriteMemory( unsigned short addr, const unsigned char* const wrBufP, unsigned short len ) ;
 
-
 /**
-  * This routine is a test function for FRAM access. It writes "TLEN" bytes of
-  * an incrementing pattern into FRAM at address "TADD". It reads the same length
-  * into a buffer and verifies the pattern.
-  * @param[out] pass = 1, fail = 0
+  * @fn framTest
+  *
+  * @brief This routine is a test function for FRAM access. It writes "TLEN"
+  *         bytes of an incrementing pattern into FRAM at address "TADD". It
+  *         reads the same length into a buffer and verifies the pattern.
+  *
+  * @param[out] 1 = pass, 0 = fail
+  *
   */
 uint8_t framTest( void ) ;
 

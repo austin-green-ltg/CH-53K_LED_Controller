@@ -2,50 +2,56 @@
 \hypertarget{pwm__handler_8h_source}{}\label{pwm__handler_8h_source}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/pwm\_handler.h@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/pwm\_handler.h}}
 \mbox{\hyperlink{pwm__handler_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ \textcolor{comment}{//\ ***************************************************************************}}
-\DoxyCodeLine{00002\ \textcolor{comment}{//\ Copyright\ ©\ 2007\ Luminator\ Mark\ IV}}
-\DoxyCodeLine{00003\ \textcolor{comment}{//\ All\ rights\ reserved.}}
-\DoxyCodeLine{00004\ \textcolor{comment}{//\ Any\ use\ without\ the\ prior\ written\ consent\ of\ Luminator\ Mark\ IV}}
-\DoxyCodeLine{00005\ \textcolor{comment}{//\ is\ strictly\ prohibited.}}
-\DoxyCodeLine{00006\ \textcolor{comment}{//\ ***************************************************************************}}
-\DoxyCodeLine{00007\ \textcolor{comment}{//\ ***************************************************************************}}
-\DoxyCodeLine{00008\ \textcolor{comment}{//}}
-\DoxyCodeLine{00009\ \textcolor{comment}{//\ Filename:\ pwm\_handler.h}}
-\DoxyCodeLine{00010\ \textcolor{comment}{//}}
-\DoxyCodeLine{00011\ \textcolor{comment}{//\ Description:\ Handles\ the\ PWM\ output\ of\ the\ lights.\ Output\ is}}
-\DoxyCodeLine{00012\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ determined\ by\ a\ Brightness\ variable\ that\ is}}
-\DoxyCodeLine{00013\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ controlled\ by\ this\ file.}}
-\DoxyCodeLine{00014\ \textcolor{comment}{//}}
-\DoxyCodeLine{00015\ \textcolor{comment}{//\ Revision\ History:}}
-\DoxyCodeLine{00016\ \textcolor{comment}{//\ Date\ \ \ \ \ \ \ -\/\ Name\ \ \ \ \ \ \ \ \ -\/\ \ Ver\ -\/\ \ Remarks}}
-\DoxyCodeLine{00017\ \textcolor{comment}{//\ 07/31/2024\ -\/\ Austin\ Green\ -\/\ \ 1.0\ -\/\ \ Initial\ Document}}
-\DoxyCodeLine{00018\ \textcolor{comment}{//}}
-\DoxyCodeLine{00019\ \textcolor{comment}{//\ Notes:}}
-\DoxyCodeLine{00020\ \textcolor{comment}{//}}
-\DoxyCodeLine{00021\ \textcolor{comment}{//\ ***************************************************************************}}
-\DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#ifndef\ INC\_pwm\_handlerh}}
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ \#define\ INC\_pwm\_handlerh}}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*****************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ \ @attention}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Copyright\ ©\ 2007\ Luminator\ Mark\ IV}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ All\ rights\ reserved.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Any\ use\ without\ the\ prior\ written\ consent\ of\ Luminator\ Mark\ IV}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ is\ strictly\ prohibited.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *****************************************************************************}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *****************************************************************************}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ @file\ pwm\_handler.h}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ @brief\ Handles\ the\ PWM\ output\ of\ the\ lights.\ Output\ is\ determined\ by\ a}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ Brightness\ variable\ that\ is\ controlled\ by\ this\ file.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Revision\ History:}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ Date\ \ \ \ \ \ \ -\/\ Name\ \ \ \ \ \ \ \ \ -\/\ \ Ver\ -\/\ \ Remarks}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ 07/31/2024\ -\/\ Austin\ Green\ -\/\ \ 1.0\ -\/\ \ Initial\ Document}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ 09/10/2024\ -\/\ Austin\ Green\ -\/\ \ 2.0\ -\/\ \ Doxyfile\ documentation}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Notes:}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *****************************************************************************/}}
 \DoxyCodeLine{00025\ }
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ \#include\ <stdint.h>}}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{/*\ Brightness\ Steps\ */}}
-\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ \ \ \#define\ BRIGHTNESS\_STEPS\ \ \ \ \ \ \ \ (50)}}
-\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ \ \ \#define\ HOLD\_BRIGHTNESS\_JUMP\ \ \ \ (3)}}
-\DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ system\ */}}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_a9e440816ccf6e7ae8f8bdea60b99fe99}{InitPwm}}(\textcolor{keywordtype}{void});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Init\ Pwm\ var}}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{/*\ Decrease/Increase\ brightness\ levels\ */}}
-\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_a60c53e0ebfe90372ea3c89749710eb51}{DecreaseBrightness}}(\ uint8\_t\ button\_held\ );\ \ \textcolor{comment}{//\ decrease\ brightness}}
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_a0c06b547eea80cb6c871750831709fe4}{IncreaseBrightness}}(\ uint8\_t\ button\_held\ );\ \ \textcolor{comment}{//\ increase\ brightness}}
-\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{/*\ Set\ PWM\ value\ based\ on\ internal\ brightness\ */}}
-\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_adaa12e879fd29b225bef3eb6337aff72}{SetPwm}}(\ \textcolor{keywordtype}{void}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ turn\ on\ and\ set\ PWM}}
-\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_a90359218ff4b8771a3764beeecfb8e14}{TurnOffPwm}}(\ \textcolor{keywordtype}{void}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ turn\ of\ PWM}}
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{/*\ Get\ or\ set\ internal\ values\ */}}
-\DoxyCodeLine{00041\ \ \ \ \ int8\_t\ \ \mbox{\hyperlink{pwm__handler_8h_ac59f8a6b413fe6bcf1b17a0321a2eb83}{GetBrightness}}(\ \textcolor{keywordtype}{void}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ get\ value\ of\ Brightness}}
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_acbd970e115607eca2d51db189d67cd14}{SetBrightness}}(\ int8\_t\ brightness\ );\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ set\ value\ of\ Brightness}}
-\DoxyCodeLine{00043\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{pwm__handler_8h_add3ae8a15c377108bff5270b8c2f1a96}{GetPwm}}(\ \textcolor{keywordtype}{void}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ get\ value\ of\ current\ PWM}}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_pwm\_handlerh\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#ifndef\ INC\_pwm\_handlerh}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ \#define\ INC\_pwm\_handlerh}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ \ \ \#include\ <stdint.h>}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{/*\ Brightness\ Steps\ */}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ \#define\ BRIGHTNESS\_STEPS\ \ \ \ \ \ \ \ (50)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ \#define\ HOLD\_BRIGHTNESS\_JUMP\ \ \ \ (3)}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_a9e440816ccf6e7ae8f8bdea60b99fe99}{InitPwm}}(\textcolor{keywordtype}{void});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Init\ Pwm\ var}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00048\ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_a60c53e0ebfe90372ea3c89749710eb51}{DecreaseBrightness}}(\ uint8\_t\ button\_held\ );\ \ \textcolor{comment}{//\ decrease\ brightness}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_a0c06b547eea80cb6c871750831709fe4}{IncreaseBrightness}}(\ uint8\_t\ button\_held\ );\ \ \textcolor{comment}{//\ increase\ brightness}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00062\ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_adaa12e879fd29b225bef3eb6337aff72}{SetPwm}}(\ \textcolor{keywordtype}{void}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ turn\ on\ and\ set\ PWM}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_a90359218ff4b8771a3764beeecfb8e14}{TurnOffPwm}}(\ \textcolor{keywordtype}{void}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ turn\ of\ PWM}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ int8\_t\ \ \mbox{\hyperlink{pwm__handler_8h_ac59f8a6b413fe6bcf1b17a0321a2eb83}{GetBrightness}}(\ \textcolor{keywordtype}{void}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ get\ value\ of\ Brightness}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{pwm__handler_8h_acbd970e115607eca2d51db189d67cd14}{SetBrightness}}(\ int8\_t\ brightness\ );\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ set\ value\ of\ Brightness}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ uint8\_t\ \mbox{\hyperlink{pwm__handler_8h_add3ae8a15c377108bff5270b8c2f1a96}{GetPwm}}(\ \textcolor{keywordtype}{void}\ );\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ get\ value\ of\ current\ PWM}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_pwm\_handlerh\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

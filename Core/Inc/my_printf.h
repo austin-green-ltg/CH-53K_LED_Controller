@@ -1,22 +1,26 @@
-// ***************************************************************************
-// Copyright © 2007 Luminator Mark IV
-// All rights reserved.
-// Any use without the prior written consent of Luminator Mark IV
-// is strictly prohibited.
-// ***************************************************************************
-// ***************************************************************************
-//
-// Filename: my_printf.h
-//
-// Description: Prints characters to a terminal for debugging purposes
-//
-// Revision History:
-// Date       - Name         -  Ver -  Remarks
-// 07/31/2024 - Austin Green -  1.0 -  Initial Document
-//
-// Notes:
-//
-// ***************************************************************************
+/*****************************************************************************
+ *
+ *  @attention
+ * Copyright © 2007 Luminator Mark IV
+ * All rights reserved.
+ * Any use without the prior written consent of Luminator Mark IV
+ * is strictly prohibited.
+ *
+ *****************************************************************************
+ *****************************************************************************
+ *
+ * @file my_printf.h
+ *
+ * @brief Prints characters to a terminal for debugging purposes
+ *
+ * Revision History:
+ * Date       - Name         -  Ver -  Remarks
+ * 07/31/2024 - Austin Green -  1.0 -  Initial Document
+ * 09/10/2024 - Austin Green -  2.0 -  Doxyfile documentation
+ *
+ * Notes:
+ *
+ *****************************************************************************/
 
 // Software tracing with printf()
 #ifndef INC_my_printfh

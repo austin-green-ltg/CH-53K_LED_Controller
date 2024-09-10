@@ -1,28 +1,31 @@
-// ***************************************************************************
-// Copyright © 2007 Luminator Mark IV
-// All rights reserved.
-// Any use without the prior written consent of Luminator Mark IV
-// is strictly prohibited.
-// ***************************************************************************
-// ***************************************************************************
-//
-// Filename: pwm_handler.c
-//
-// Description: Handles the PWM output of the lights for both IR and
-//                visible light. Output is determined by a ledBrightness
-//                variable that is controlled by this file.
-//
-// Revision History:
-// Date       - Name         -  Ver -  Remarks
-// 07/31/2024 - Austin Green -  1.0 -  Initial Document
-//
-// Notes: Depends on the board support package bsp
-//        temperature_handler is for getting the temperature range of
-//          of the device. Lowers output at higher temperatures
-//        my_printf is for debugging purposes, doesn't do anything if
-//          ENABLE_UART_DEBUGGING is not defined
-//
-// ***************************************************************************
+/*****************************************************************************
+ *
+ *  @attention
+ * Copyright © 2007 Luminator Mark IV
+ * All rights reserved.
+ * Any use without the prior written consent of Luminator Mark IV
+ * is strictly prohibited.
+ *
+ *****************************************************************************
+ *****************************************************************************
+ *
+ * @file pwm_handler.c
+ *
+ * @brief Handles the PWM output of the lights. Output is determined by a
+ *          Brightness variable that is controlled by this file.
+ *
+ * Revision History:
+ * Date       - Name         -  Ver -  Remarks
+ * 07/31/2024 - Austin Green -  1.0 -  Initial Document
+ * 09/10/2024 - Austin Green -  2.0 -  Doxyfile documentation
+ *
+ * Notes: Depends on the board support package bsp
+ *        temperature_handler is for getting the temperature range of
+ *          of the device. Lowers output at higher temperatures
+ *        my_printf is for debugging purposes, doesn't do anything if
+ *          ENABLE_UART_DEBUGGING is not defined
+ *
+ *****************************************************************************/
 
 /* Private includes ----------------------------------------------------------*/
 #include "pwm_handler.h"
@@ -30,6 +33,7 @@
 #include "temperature_handler.h"
 #include "my_printf.h"
 
+/* uncommment to reverse brightness direction (dim brightens and bight dims) */
 // #define REVERSE_BRIGHTNESS
 
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -38,29 +42,36 @@
 #endif /* ENABLE_UART_DEBUGGING */
 
 /* Brightness Steps */
+/** Max Brightness Step (49) */
 const uint8_t MaxBrightness     = (BRIGHTNESS_STEPS - 1)                    ; // 49
+/** Min Brightness Step (0) */
 const uint8_t MinBrightness     = (0)                                       ; // 0
+/** Half Brightness Step (24) */
 const uint8_t HalfBrightness    = ((uint8_t)((BRIGHTNESS_STEPS - 1) / 2.0f)); // Rounds down to 24
 
 /* Pulse Width Values */
 #define PW_PERIOD (255)             // Period of PWM timer
+/** Min pulse width value (0) */
 const float MinPw  = (0)        ;   // relative pulse width
+/** Max pulse width value (PW_PERIOD(255)) */
 const float MaxPw  = (PW_PERIOD);   // relative pulse width
 
 /* Thermal State Constants */
+/** Warm thermal state pwm constant */
 const float WarmPwmRatio    = (0.90f);
+/** Hot thermal state pwm constant */
 const float HotPwmRatio     = (0.50f);
 
 /* Private define ------------------------------------------------------------*/
 
 /* Private variables ---------------------------------------------------------*/
-// Brightness to PWM value array (out of 255)
+/** Brightness to PWM value array (out of 255) */
 static const uint8_t PwmArray [ BRIGHTNESS_STEPS ] = {  0, 5, 10, 16, 21, 26, 31, 36, 42, 47,
                                                         52, 57, 62, 68, 73, 78, 83, 88, 94, 99,
                                                         104, 109, 114, 120, 125, 130, 135, 141, 146, 151,
                                                         156, 161, 167, 172, 177, 182, 187, 193, 198, 203,
                                                         208, 213, 219, 224, 229, 234, 239, 245, 250, 255 };
-// Initial led brightness, changed to half brightness on init
+/** Initial led brightness, changed to half brightness on init */
 static int8_t ledBrightness = 0;
 
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -69,8 +80,10 @@ static int8_t ledBrightness = 0;
     static uint16_t half_time = 0;
 #endif /* ENABLE_UART_DEBUGGING */
 
-// Init PwmArray var
-// Set brightness to half value, enable pwm, and turn off
+/**
+  * @brief Init PwmArray var
+  * Set brightness to half value, enable pwm, and turn off
+  */
 void InitPwm(void)
 {
     ledBrightness = HalfBrightness;
@@ -82,10 +95,13 @@ void InitPwm(void)
     return;
 }
 
-// Decrease brightness by 1 (for button press) or 3 (for button hold)
-// This functions can be made to increase brightness value with the
-// REVERSE_BRIGHTNESS flag
-// Afterwards, set pwm output.
+/**
+  * @brief Decrease brightness by 1 (for button press) or 3 (for button hold)
+  *         This functions can be made to increase brightness value with the
+  *         REVERSE_BRIGHTNESS flag
+  *         Afterwards, set pwm output.
+  * @param[in] button_held If the button is being held (decrements by 3 if so)
+  */
 void DecreaseBrightness( uint8_t button_held )
 {
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -153,10 +169,13 @@ void DecreaseBrightness( uint8_t button_held )
     return;
 }
 
-// Increase brightness by 1 (for button press) or 3 (for button hold)
-// This functions can be made to decrease brightness value with the
-// REVERSE_BRIGHTNESS flag
-// Afterwards, set pwm output.
+/**
+  * @brief Increase brightness by 1 (for button press) or 3 (for button hold)
+  *         This functions can be made to decrease brightness value with the
+  *         REVERSE_BRIGHTNESS flag
+  *         Afterwards, set pwm output.
+  * @param[in] button_held If the button is being held (increments by 3 if so)
+  */
 void IncreaseBrightness( uint8_t button_held )
 {
     #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -224,7 +243,9 @@ void IncreaseBrightness( uint8_t button_held )
     return;
 }
 
-// set PWM based on pwm value
+/**
+  * @brief set PWM based on pwm value
+  */
 void SetPwm( void )
 {
     uint32_t pulse_width = GetPwm();
@@ -242,7 +263,9 @@ void SetPwm( void )
     #endif /* ENABLE_UART_DEBUGGING */
 }
 
-// turn off PWM
+/**
+  * @brief turn off PWM
+  */
 void TurnOffPwm( void )
 {
     StopPWM11();
@@ -251,13 +274,19 @@ void TurnOffPwm( void )
     #endif /* ENABLE_UART_DEBUGGING */
 }
 
-// Return ledBrightness variable
+/**
+  * @brief Return ledBrightness variable
+  * @param[out] Current LED brightness level
+  */
 int8_t GetBrightness( void )
 {
     return (ledBrightness);
 }
 
-// Set ledBrightness variable, guards to ensure we don't go over max or min
+/**
+  * @brief Set ledBrightness variable, guards to ensure we don't go over max or min
+  * @param[in] brightness Brightess to set
+  */
 void SetBrightness( int8_t brightness )
 {
     if      (brightness > MaxBrightness) ledBrightness = MaxBrightness;
@@ -266,7 +295,10 @@ void SetBrightness( int8_t brightness )
     return;
 }
 
-// Get the PWM value based on the brightness and the temperature range
+/**
+  * @brief Get the PWM value based on the brightness and the temperature range
+  * @param[out] Current PWM value
+  */
 uint8_t GetPwm( void )
 {
     uint8_t pwm = 0;

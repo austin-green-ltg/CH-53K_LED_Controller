@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.4)  10 SEP 2024 08:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.4)  10 SEP 2024 11:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1105,7 +1105,7 @@ LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 10.79993pt on input line 16.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 7.19995pt on input line 20.
+(Font)              scaled to size 7.19995pt on input line 23.
 ) (struct_timer_struct.tex
 
 [5])
@@ -1117,85 +1117,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
  []
 
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 8.09995pt on input line 9.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 9.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 9.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
 (Font)              Font shape `T1/pcr/m/sl' tried instead on input line 19.
-) (button__handler_8h_source.tex
-LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 6
-.
- (C:\Programs\MiKTeX\tex/latex/psnfss\ts1pcr.fd
-File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
-)
+
 
 [7
 
-]) (current__handler_8h.tex
+]) (button__handler_8h_source.tex
+LaTeX Font Info:    Trying to load font information for TS1+pcr on input line 8
+.
+
+(C:\Programs\MiKTeX\tex/latex/psnfss\ts1pcr.fd
+File: ts1pcr.fd 2001/06/04 font definitions for TS1/pcr.
+)) (current__handler_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
 
 
 
-[8]) (current__handler_8h_source.tex) (delay__handler_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
-
- []
-
-
-
-[9]
-LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 28.
-) (delay__handler_8h_source.tex) (fram_8h.tex
-
-[10]
-Underfull \hbox (badness 10000) in paragraph at lines 8--9
-
- []
-
-
-Underfull \hbox (badness 10000) detected at line 62
-[][][]
- []
-
-
-
-[11]
-
-[12]
-
-[13]) (fram_8h_source.tex
-
-[14]) (logger_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
-
- []
-
-
-
-[15]) (logger_8h_source.tex) (main_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
-
- []
-
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.09995pt on input line 8.
-
-
-[16]
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 8.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 8.
-) (main_8h_source.tex
-
-[17]) (my__printf_8h.tex) (my__printf_8h_source.tex) (pwm__handler_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
-
- []
-
-
-
-[18]) (pwm__handler_8h_source.tex
+[8]) (current__handler_8h_source.tex
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1205,14 +1152,65 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[19]) (stm32l412xx-bsp_8h.tex
+[9]) (delay__handler_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
 
 
 
-[20]
+[10]
+LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <7> not available
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 39.
+) (delay__handler_8h_source.tex
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[11]) (fram_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+
+[12]
+
+[13]
+
+[14]) (fram_8h_source.tex
+
+[15]
+
+[16]) (logger_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+
+[17]
+
+[18]) (logger_8h_source.tex) (main_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+
+[19]) (main_8h_source.tex
+
+[20]) (my__printf_8h.tex) (my__printf_8h_source.tex) (pwm__handler_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1223,6 +1221,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
 [21]
+LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 27.
+LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 27.
+
 
 [22]
 
@@ -1234,7 +1237,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[23]
+[23]) (pwm__handler_8h_source.tex) (stm32l412xx-bsp_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
 
 [24]
 
@@ -1246,35 +1254,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[25]) (stm32l412xx-bsp_8h_source.tex
+[25]
 
 [26]
-
-[27]) (temperature__handler_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
-
- []
-
-[28]) (temperature__handler_8h_source.tex) (voltage__handler_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
-
- []
-
-
-
-[29]) (voltage__handler_8h_source.tex
-
-[30]) (button__handler_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--5
-
- []
-
-) (current__handler_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--7
-
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1284,52 +1266,50 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[31]) (delay__handler_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--5
+[27]
 
- []
+[28]
 
 
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[29]
+
+[30]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[31]
 
 [32]
-Underfull \hbox (badness 10000) in paragraph at lines 55--56
-\T1/pcr/m/n/8 const float Tim2[]Clk[]Khz = ([] / (float)[] / (float)[] /
- []
-
-) (fram_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 8--12
-
- []
 
 
-Underfull \hbox (badness 10000) detected at line 45
-[][][]
- []
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
 
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-
-[33]
+[33]) (stm32l412xx-bsp_8h_source.tex
 
 [34]
 
 [35]
 
-[36]) (logger_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--8
-
- []
-
-) (main_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--11
-
- []
-
-
-
-[37]
-
-[38]) (my__printf_8c.tex) (pwm__handler_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--7
+[36]) (temperature__handler_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
 
@@ -1343,10 +1323,32 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[39]
+[37]) (temperature__handler_8h_source.tex
 
-[40]) (stm32l412xx-bsp_8c.tex
+[38]) (voltage__handler_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[39]) (voltage__handler_8h_source.tex) (button__handler_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+
+
+[40]) (current__handler_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
 
  []
 
@@ -1362,7 +1364,114 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [41]
 
-[42]) (temperature__handler_8c.tex
+[42]) (delay__handler_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
+\T1/pcr/m/n/8 const float Tim2[]Clk[]Khz = ([] / (float)[] / (float)[] /
+ []
+
+) (fram_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+
+
+[44]
+
+[45]) (logger_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--8
+
+ []
+
+
+
+[46]
+
+[47]) (main_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--11
+
+ []
+
+
+
+[48]
+
+[49]) (my__printf_8c.tex) (pwm__handler_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+
+
+[50]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[51]
+
+[52]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[53]) (stm32l412xx-bsp_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+
+[54]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[55]
+
+[56]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[57]
+
+[58]) (temperature__handler_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--7
 
  []
@@ -1377,14 +1486,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[43]) (voltage__handler_8c.tex
+[59]
+
+[60]) (voltage__handler_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--7
 
  []
 
 
-
-[44])
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1394,9 +1503,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[45]
+[61]
 
-[46
+[62])
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[63]
+
+[64
 
 ] (refman.ind
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
@@ -1537,30 +1658,30 @@ Core/Src/voltage_handler.c,
 
 
 
-[47
+[65
 
 
 ]
 
 
 
-[48]
+[66]
 
 
 
-[49]
+[67]
 
 
 
-[50]
+[68]
 
 
 
-[51]
+[69]
 
 
 
-[52]) (refman.aux)
+[70]) (refman.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-08-16>
@@ -1570,16 +1691,16 @@ L3 programming layer <2024-08-16>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 89F0113947327065A5FC695D45B0974C;64164.
+(rerunfilecheck)             Checksum: B19BF791EC734997D436BA7FFB1596F8;64157.
  ) 
 Here is how much of TeX's memory you used:
- 19354 strings out of 473899
- 326701 string characters out of 5738692
- 1977960 words of memory out of 5000000
- 41162 multiletter control sequences out of 15000+600000
- 612706 words of font info for 104 fonts, out of 8000000 for 9000
+ 19459 strings out of 473899
+ 327489 string characters out of 5738692
+ 1976960 words of memory out of 5000000
+ 41204 multiletter control sequences out of 15000+600000
+ 613057 words of font info for 105 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 101i,16n,117p,1289b,753s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,16n,117p,1289b,749s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmsy10.pfb><C:/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
@@ -1589,9 +1710,9 @@ grams/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Programs/MiKTeX/fonts/type1
 b><C:/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8ac.pfb><C:/Programs/MiKTeX/
 fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Programs/MiKTeX/fonts/type1/urw/helveti
 c/uhvro8a.pfb>
-Output written on refman.pdf (62 pages, 670155 bytes).
+Output written on refman.pdf (80 pages, 709128 bytes).
 PDF statistics:
- 3102 PDF objects out of 3580 (max. 8388607)
- 655 named destinations out of 1000 (max. 500000)
+ 3235 PDF objects out of 3580 (max. 8388607)
+ 717 named destinations out of 1000 (max. 500000)
  2193 words of extra memory for PDF output out of 10000 (max. 10000000)
 

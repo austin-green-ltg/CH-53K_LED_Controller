@@ -101,12 +101,16 @@ $(function(){ initResizable(false); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a01130f2e8b22877cdbef9d1dce5140a2" id="r_a01130f2e8b22877cdbef9d1dce5140a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a01130f2e8b22877cdbef9d1dce5140a2">StartDelayCounter</a> (void)</td></tr>
+<tr class="memdesc:a01130f2e8b22877cdbef9d1dce5140a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the delay counter, only needs to be called once on init.  <br /></td></tr>
 <tr class="separator:a01130f2e8b22877cdbef9d1dce5140a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31c598a04fd5ed54cde4bf3cf137672c" id="r_a31c598a04fd5ed54cde4bf3cf137672c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31c598a04fd5ed54cde4bf3cf137672c">RestartDelayCounter</a> (void)</td></tr>
+<tr class="memdesc:a31c598a04fd5ed54cde4bf3cf137672c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Restart the delay counter.  <br /></td></tr>
 <tr class="separator:a31c598a04fd5ed54cde4bf3cf137672c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e5217a33cd44ab8dd8942d99b1fd0ef" id="r_a8e5217a33cd44ab8dd8942d99b1fd0ef"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e5217a33cd44ab8dd8942d99b1fd0ef">DelayHit</a> (uint32_t delay_ms)</td></tr>
+<tr class="memdesc:a8e5217a33cd44ab8dd8942d99b1fd0ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the delay (ms) was hit based on timer value.  <br /></td></tr>
 <tr class="separator:a8e5217a33cd44ab8dd8942d99b1fd0ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbef77c80230ea92a864d85fb769561d" id="r_adbef77c80230ea92a864d85fb769561d"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbef77c80230ea92a864d85fb769561d">BrightnessDelay</a> (int8_t brightness)</td></tr>
+<tr class="memdesc:adbef77c80230ea92a864d85fb769561d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a delay value for a brightness level.  <br /></td></tr>
 <tr class="separator:adbef77c80230ea92a864d85fb769561d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
@@ -130,6 +134,15 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns a delay value for a brightness level. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">brightness</td><td>Current brightness level </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">Returns</td><td>delay to satisfy specs at current brightness level </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a8e5217a33cd44ab8dd8942d99b1fd0ef" name="a8e5217a33cd44ab8dd8942d99b1fd0ef"></a>
@@ -146,6 +159,15 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Checks if the delay (ms) was hit based on timer value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">delay_ms</td><td>Time in ms to check if timer has hit </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">Returns</td><td>1 if delay has been hit </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -164,6 +186,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Restart the delay counter. </p>
+
 </div>
 </div>
 <a id="a01130f2e8b22877cdbef9d1dce5140a2" name="a01130f2e8b22877cdbef9d1dce5140a2"></a>
@@ -181,6 +205,8 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Starts the delay counter, only needs to be called once on init. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -195,6 +221,7 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Timer clock used to check the delay values in <a class="el" href="stm32l412xx-bsp_8h.html">stm32l412xx-bsp.h</a> </p>
 
 </div>
 </div>

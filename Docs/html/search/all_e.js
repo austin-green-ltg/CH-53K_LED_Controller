@@ -1,7 +1,7 @@
 var searchData=
 [
   ['rawtodamps_0',['RawTodAmps',['../current__handler_8c.html#a626dd7cbff1d93ea456c98a6a3db25d9',1,'current_handler.c']]],
-  ['rawtodcolts_1',['RawTodColts',['../voltage__handler_8c.html#a9993902105c9d06c8177ba1ded49d242',1,'voltage_handler.c']]],
+  ['rawtodvolts_1',['RawTodVolts',['../voltage__handler_8c.html#a9b9e0535144a8b6c5b82de3986a61d7d',1,'voltage_handler.c']]],
   ['readbrightpin_2',['ReadBrightPin',['../stm32l412xx-bsp_8h.html#acf26ef503b4853b39e91017a7a88aa4d',1,'ReadBrightPin(void):&#160;stm32l412xx-bsp.c'],['../stm32l412xx-bsp_8c.html#acf26ef503b4853b39e91017a7a88aa4d',1,'ReadBrightPin(void):&#160;stm32l412xx-bsp.c']]],
   ['readdimpin_3',['ReadDimPin',['../stm32l412xx-bsp_8h.html#a592b35fea37a6a5786d20ad01da8ebd0',1,'ReadDimPin(void):&#160;stm32l412xx-bsp.c'],['../stm32l412xx-bsp_8c.html#a592b35fea37a6a5786d20ad01da8ebd0',1,'ReadDimPin(void):&#160;stm32l412xx-bsp.c']]],
   ['readlog_4',['ReadLog',['../logger_8h.html#a95b8b07d579b8eb2105092a4d6fba6d5',1,'ReadLog(const uint32_t address, char *string, const uint32_t bytes):&#160;logger.c'],['../logger_8c.html#a95b8b07d579b8eb2105092a4d6fba6d5',1,'ReadLog(const uint32_t address, char *string, const uint32_t bytes):&#160;logger.c']]],

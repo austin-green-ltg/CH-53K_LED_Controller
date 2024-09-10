@@ -103,10 +103,13 @@ $(function(){ initResizable(false); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:aacc4d019decf6ea90bac1fdd5f7e3da7" id="r_aacc4d019decf6ea90bac1fdd5f7e3da7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aacc4d019decf6ea90bac1fdd5f7e3da7">LogString</a> (const char *const string, uint8_t write_beginning)</td></tr>
+<tr class="memdesc:aacc4d019decf6ea90bac1fdd5f7e3da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log a string to tail_pointer, use write_beginning flag to write the beginning.  <br /></td></tr>
 <tr class="separator:aacc4d019decf6ea90bac1fdd5f7e3da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae52af1b312f9fc4a02e4697af496e23e" id="r_ae52af1b312f9fc4a02e4697af496e23e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae52af1b312f9fc4a02e4697af496e23e">LogNumber</a> (const int32_t number, uint8_t write_beginning)</td></tr>
+<tr class="memdesc:ae52af1b312f9fc4a02e4697af496e23e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logs a number by converting the number to a string and using the LogString function.  <br /></td></tr>
 <tr class="separator:ae52af1b312f9fc4a02e4697af496e23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95b8b07d579b8eb2105092a4d6fba6d5" id="r_a95b8b07d579b8eb2105092a4d6fba6d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a95b8b07d579b8eb2105092a4d6fba6d5">ReadLog</a> (const uint32_t address, char *string, const uint32_t bytes)</td></tr>
+<tr class="memdesc:a95b8b07d579b8eb2105092a4d6fba6d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the log at a given address and size.  <br /></td></tr>
 <tr class="separator:a95b8b07d579b8eb2105092a4d6fba6d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -129,6 +132,15 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Logs a number by converting the number to a string and using the LogString function. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">number</td><td>Number to log </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">write_beginning</td><td>Write log at the beginning of log area </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="aacc4d019decf6ea90bac1fdd5f7e3da7" name="aacc4d019decf6ea90bac1fdd5f7e3da7"></a>
@@ -149,6 +161,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Log a string to tail_pointer, use write_beginning flag to write the beginning. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">string</td><td>Pointer to string to log </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">write_beginning</td><td>Write log at the beginning of log area </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -175,6 +196,16 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reads the log at a given address and size. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">address</td><td>Address to read from </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">string</td><td>Pointer to return data string </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">bytes</td><td>Number of bytes to read </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

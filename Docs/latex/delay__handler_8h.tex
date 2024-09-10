@@ -5,13 +5,13 @@
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{delay__handler_8h_a01130f2e8b22877cdbef9d1dce5140a2}{Start\+Delay\+Counter}} (void)
-\item 
+\begin{DoxyCompactList}\small\item\em Starts the delay counter, only needs to be called once on init. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{delay__handler_8h_a31c598a04fd5ed54cde4bf3cf137672c}{Restart\+Delay\+Counter}} (void)
-\item 
+\begin{DoxyCompactList}\small\item\em Restart the delay counter. \end{DoxyCompactList}\item 
 uint8\+\_\+t \mbox{\hyperlink{delay__handler_8h_a8e5217a33cd44ab8dd8942d99b1fd0ef}{Delay\+Hit}} (uint32\+\_\+t delay\+\_\+ms)
-\item 
+\begin{DoxyCompactList}\small\item\em Checks if the delay (ms) was hit based on timer value. \end{DoxyCompactList}\item 
 uint16\+\_\+t \mbox{\hyperlink{delay__handler_8h_adbef77c80230ea92a864d85fb769561d}{Brightness\+Delay}} (int8\+\_\+t brightness)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Returns a delay value for a brightness level. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -21,21 +21,51 @@ uint16\+\_\+t \mbox{\hyperlink{delay__handler_8h_adbef77c80230ea92a864d85fb76956
 {\footnotesize\ttfamily \label{delay__handler_8h_adbef77c80230ea92a864d85fb769561d} 
 uint16\+\_\+t Brightness\+Delay (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{brightness}{}\end{DoxyParamCaption})}
 
+
+
+Returns a delay value for a brightness level. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em brightness} & Current brightness level \\
+\hline
+\mbox{\texttt{ out}}  & {\em Returns} & delay to satisfy specs at current brightness level \\
+\hline
+\end{DoxyParams}
 \Hypertarget{delay__handler_8h_a8e5217a33cd44ab8dd8942d99b1fd0ef}\index{delay\_handler.h@{delay\_handler.h}!DelayHit@{DelayHit}}
 \index{DelayHit@{DelayHit}!delay\_handler.h@{delay\_handler.h}}
 \doxysubsubsection{\texorpdfstring{DelayHit()}{DelayHit()}}
 {\footnotesize\ttfamily \label{delay__handler_8h_a8e5217a33cd44ab8dd8942d99b1fd0ef} 
 uint8\+\_\+t Delay\+Hit (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{delay\+\_\+ms}{}\end{DoxyParamCaption})}
 
+
+
+Checks if the delay (ms) was hit based on timer value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em delay\+\_\+ms} & Time in ms to check if timer has hit \\
+\hline
+\mbox{\texttt{ out}}  & {\em Returns} & 1 if delay has been hit \\
+\hline
+\end{DoxyParams}
 \Hypertarget{delay__handler_8h_a31c598a04fd5ed54cde4bf3cf137672c}\index{delay\_handler.h@{delay\_handler.h}!RestartDelayCounter@{RestartDelayCounter}}
 \index{RestartDelayCounter@{RestartDelayCounter}!delay\_handler.h@{delay\_handler.h}}
 \doxysubsubsection{\texorpdfstring{RestartDelayCounter()}{RestartDelayCounter()}}
 {\footnotesize\ttfamily \label{delay__handler_8h_a31c598a04fd5ed54cde4bf3cf137672c} 
 void Restart\+Delay\+Counter (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
+
+
+Restart the delay counter. 
+
 \Hypertarget{delay__handler_8h_a01130f2e8b22877cdbef9d1dce5140a2}\index{delay\_handler.h@{delay\_handler.h}!StartDelayCounter@{StartDelayCounter}}
 \index{StartDelayCounter@{StartDelayCounter}!delay\_handler.h@{delay\_handler.h}}
 \doxysubsubsection{\texorpdfstring{StartDelayCounter()}{StartDelayCounter()}}
 {\footnotesize\ttfamily \label{delay__handler_8h_a01130f2e8b22877cdbef9d1dce5140a2} 
 void Start\+Delay\+Counter (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the delay counter, only needs to be called once on init. 
 

@@ -13,9 +13,9 @@ enum \mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9}{Cur
 \begin{DoxyCompactItemize}
 \item 
 uint16\+\_\+t \mbox{\hyperlink{current__handler_8h_a95eb31cc890c352c57fe793085fd51d5}{Get\+Current}} (void)
-\item 
+\begin{DoxyCompactList}\small\item\em Get current from ammeter. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9}{Current\+Range\+\_\+e}} \mbox{\hyperlink{current__handler_8h_a40d6c981d70b2e2dbf03d7c359cee4e3}{Get\+Current\+Range}} (void)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get range that the current falls into Possible ranges are Normal -\/ Normal Operating Current High -\/ Current high, but ok Error -\/ Current too high. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Enumeration Type Documentation}
@@ -25,17 +25,19 @@ uint16\+\_\+t \mbox{\hyperlink{current__handler_8h_a95eb31cc890c352c57fe793085fd
 {\footnotesize\ttfamily \label{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9} 
 enum \mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9}{Current\+Range\+\_\+e}}}
 
-\begin{DoxyEnumFields}[2]{Enumerator}
+Current Range Enum \begin{DoxyEnumFields}[2]{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{CurrentNormal@{CurrentNormal}!current\_handler.h@{current\_handler.h}}\index{current\_handler.h@{current\_handler.h}!CurrentNormal@{CurrentNormal}}}\Hypertarget{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9a2290470927e05d1f15617c0705640ce9}\label{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9} 
-Current\+Normal&\\
+Current\+Normal&Normal Operating Current \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{CurrentHigh@{CurrentHigh}!current\_handler.h@{current\_handler.h}}\index{current\_handler.h@{current\_handler.h}!CurrentHigh@{CurrentHigh}}}\Hypertarget{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9a519bdd204e301dd5eff1d943c9a237d6}\label{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9} 
-Current\+High&\\
+Current\+High&Current high, but ok ~\newline
+ \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{CurrentError@{CurrentError}!current\_handler.h@{current\_handler.h}}\index{current\_handler.h@{current\_handler.h}!CurrentError@{CurrentError}}}\Hypertarget{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9ab474ffd3cfd3bcd6dca585ea4147b48a}\label{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9} 
-Current\+Error&\\
+Current\+Error&Current too high ~\newline
+ \\
 \hline
 
 \end{DoxyEnumFields}
@@ -48,9 +50,27 @@ Current\+Error&\\
 {\footnotesize\ttfamily \label{current__handler_8h_a95eb31cc890c352c57fe793085fd51d5} 
 uint16\+\_\+t Get\+Current (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
+
+
+Get current from ammeter. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em current} & level in dA \\
+\hline
+\end{DoxyParams}
 \Hypertarget{current__handler_8h_a40d6c981d70b2e2dbf03d7c359cee4e3}\index{current\_handler.h@{current\_handler.h}!GetCurrentRange@{GetCurrentRange}}
 \index{GetCurrentRange@{GetCurrentRange}!current\_handler.h@{current\_handler.h}}
 \doxysubsubsection{\texorpdfstring{GetCurrentRange()}{GetCurrentRange()}}
 {\footnotesize\ttfamily \label{current__handler_8h_a40d6c981d70b2e2dbf03d7c359cee4e3} 
 \mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9}{Current\+Range\+\_\+e}} Get\+Current\+Range (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
+
+
+Get range that the current falls into Possible ranges are Normal -\/ Normal Operating Current High -\/ Current high, but ok Error -\/ Current too high. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em Current} & current range \\
+\hline
+\end{DoxyParams}

@@ -13,9 +13,9 @@ enum \mbox{\hyperlink{temperature__handler_8h_ac1f79fe4324645df017591625773527d}
 \begin{DoxyCompactItemize}
 \item 
 int32\+\_\+t \mbox{\hyperlink{temperature__handler_8h_add816e02169640482b7bae2ece0e3e27}{Get\+Temperature}} (void)
-\item 
+\begin{DoxyCompactList}\small\item\em Get temperature from thermistor. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{temperature__handler_8h_ac1f79fe4324645df017591625773527d}{Temperature\+Range\+\_\+e}} \mbox{\hyperlink{temperature__handler_8h_abd6b48119e055d2cb0290db86bf144f4}{Get\+Temperature\+Range}} (void)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Get range that the temperature falls into. There is an increased threshold to fall back into the previous state. Possible ranges are Cool -\/ Normal Operating Temperature Warm -\/ Temperature is elevated, decrease brightness Hot -\/ Temperature is hot, lower brightness significantly. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Enumeration Type Documentation}
@@ -25,17 +25,19 @@ int32\+\_\+t \mbox{\hyperlink{temperature__handler_8h_add816e02169640482b7bae2ec
 {\footnotesize\ttfamily \label{temperature__handler_8h_ac1f79fe4324645df017591625773527d} 
 enum \mbox{\hyperlink{temperature__handler_8h_ac1f79fe4324645df017591625773527d}{Temperature\+Range\+\_\+e}}}
 
-\begin{DoxyEnumFields}[2]{Enumerator}
+Temperature Range Enum \begin{DoxyEnumFields}[2]{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{TempCool@{TempCool}!temperature\_handler.h@{temperature\_handler.h}}\index{temperature\_handler.h@{temperature\_handler.h}!TempCool@{TempCool}}}\Hypertarget{temperature__handler_8h_ac1f79fe4324645df017591625773527dabbecdf8592beff86da3b7f01238afa1a}\label{temperature__handler_8h_ac1f79fe4324645df017591625773527d} 
-Temp\+Cool&\\
+Temp\+Cool&Normal Operating Temperature ~\newline
+ \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{TempWarm@{TempWarm}!temperature\_handler.h@{temperature\_handler.h}}\index{temperature\_handler.h@{temperature\_handler.h}!TempWarm@{TempWarm}}}\Hypertarget{temperature__handler_8h_ac1f79fe4324645df017591625773527dac8e3a45b078eb2bf83542b28428a5471}\label{temperature__handler_8h_ac1f79fe4324645df017591625773527d} 
-Temp\+Warm&\\
+Temp\+Warm&Temperature is elevated, decrease brightness ~\newline
+ \\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{TempHot@{TempHot}!temperature\_handler.h@{temperature\_handler.h}}\index{temperature\_handler.h@{temperature\_handler.h}!TempHot@{TempHot}}}\Hypertarget{temperature__handler_8h_ac1f79fe4324645df017591625773527da29ab1fd9f680f177723faf2fe9e0adf1}\label{temperature__handler_8h_ac1f79fe4324645df017591625773527d} 
-Temp\+Hot&\\
+Temp\+Hot&Temperature is hot, lower brightness significantly \\
 \hline
 
 \end{DoxyEnumFields}
@@ -48,9 +50,27 @@ Temp\+Hot&\\
 {\footnotesize\ttfamily \label{temperature__handler_8h_add816e02169640482b7bae2ece0e3e27} 
 int32\+\_\+t Get\+Temperature (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
+
+
+Get temperature from thermistor. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em temperature} & level in dC \\
+\hline
+\end{DoxyParams}
 \Hypertarget{temperature__handler_8h_abd6b48119e055d2cb0290db86bf144f4}\index{temperature\_handler.h@{temperature\_handler.h}!GetTemperatureRange@{GetTemperatureRange}}
 \index{GetTemperatureRange@{GetTemperatureRange}!temperature\_handler.h@{temperature\_handler.h}}
 \doxysubsubsection{\texorpdfstring{GetTemperatureRange()}{GetTemperatureRange()}}
 {\footnotesize\ttfamily \label{temperature__handler_8h_abd6b48119e055d2cb0290db86bf144f4} 
 \mbox{\hyperlink{temperature__handler_8h_ac1f79fe4324645df017591625773527d}{Temperature\+Range\+\_\+e}} Get\+Temperature\+Range (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
+
+
+Get range that the temperature falls into. There is an increased threshold to fall back into the previous state. Possible ranges are Cool -\/ Normal Operating Temperature Warm -\/ Temperature is elevated, decrease brightness Hot -\/ Temperature is hot, lower brightness significantly. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em Current} & temperature range \\
+\hline
+\end{DoxyParams}

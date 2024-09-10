@@ -92,41 +92,47 @@ $(function(){ initResizable(false); });
   <div class="headertitle"><div class="title">logger.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="logger_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">// ***************************************************************************</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment">// Copyright © 2007 Luminator Mark IV</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// All rights reserved.</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Any use without the prior written consent of Luminator Mark IV</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment">// is strictly prohibited.</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// ***************************************************************************</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">// ***************************************************************************</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment">//</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment">// Filename: logger.h</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">//</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// Description: Handles logging and reading of data to memory</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment">//</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Revision History:</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">// Date       - Name         -  Ver -  Remarks</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// 07/31/2024 - Austin Green -  1.0 -  Initial Document</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">// 08/05/2024 - Austin Green -  1.1 -  Added Log Number</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">//</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// Notes:</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">//</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">// ***************************************************************************</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#ifndef INC_loggerh</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">    #define INC_loggerh</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">    #include &lt;stdint.h&gt;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="comment">/* Store and Read Logs */</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="logger_8h.html#aacc4d019decf6ea90bac1fdd5f7e3da7">LogString</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <span class="keywordtype">string</span>, uint8_t write_beginning );</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="logger_8h.html#ae52af1b312f9fc4a02e4697af496e23e">LogNumber</a>( <span class="keyword">const</span> int32_t number, uint8_t write_beginning );</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="logger_8h.html#a95b8b07d579b8eb2105092a4d6fba6d5">ReadLog</a>(  <span class="keyword">const</span> uint32_t address, <span class="keywordtype">char</span>* <span class="keywordtype">string</span>, <span class="keyword">const</span> uint32_t bytes );</div>
+<a href="logger_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/*****************************************************************************</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * @attention</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * Copyright © 2007 Luminator Mark IV</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * All rights reserved.</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * Any use without the prior written consent of Luminator Mark IV</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * is strictly prohibited.</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *****************************************************************************</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *****************************************************************************</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> * @file logger.h</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> * @brief Handles logging and reading of data to memory</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * Revision History:</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * Date       - Name         -  Ver -  Remarks</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * 07/31/2024 - Austin Green -  1.0 -  Initial Document</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * 08/05/2024 - Austin Green -  1.1 -  Added Log Number</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * 09/10/2024 - Austin Green -  2.0 -  Doxyfile documentation</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * Notes:</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> *****************************************************************************/</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifndef INC_loggerh</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">  #define INC_loggerh</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">  #include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif </span><span class="comment">/* INC_loggerh */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="alogger_8h_html_a95b8b07d579b8eb2105092a4d6fba6d5"><div class="ttname"><a href="logger_8h.html#a95b8b07d579b8eb2105092a4d6fba6d5">ReadLog</a></div><div class="ttdeci">void ReadLog(const uint32_t address, char *string, const uint32_t bytes)</div><div class="ttdef"><b>Definition</b> logger.c:55</div></div>
-<div class="ttc" id="alogger_8h_html_aacc4d019decf6ea90bac1fdd5f7e3da7"><div class="ttname"><a href="logger_8h.html#aacc4d019decf6ea90bac1fdd5f7e3da7">LogString</a></div><div class="ttdeci">void LogString(const char *const string, uint8_t write_beginning)</div><div class="ttdef"><b>Definition</b> logger.c:32</div></div>
-<div class="ttc" id="alogger_8h_html_ae52af1b312f9fc4a02e4697af496e23e"><div class="ttname"><a href="logger_8h.html#ae52af1b312f9fc4a02e4697af496e23e">LogNumber</a></div><div class="ttdeci">void LogNumber(const int32_t number, uint8_t write_beginning)</div><div class="ttdef"><b>Definition</b> logger.c:47</div></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="logger_8h.html#aacc4d019decf6ea90bac1fdd5f7e3da7">LogString</a>( <span class="keyword">const</span> <span class="keywordtype">char</span>* <span class="keyword">const</span> <span class="keywordtype">string</span>, uint8_t write_beginning );</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="logger_8h.html#ae52af1b312f9fc4a02e4697af496e23e">LogNumber</a>( <span class="keyword">const</span> int32_t number, uint8_t write_beginning );</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordtype">void</span> <a class="code hl_function" href="logger_8h.html#a95b8b07d579b8eb2105092a4d6fba6d5">ReadLog</a>(  <span class="keyword">const</span> uint32_t address, <span class="keywordtype">char</span>* <span class="keywordtype">string</span>, <span class="keyword">const</span> uint32_t bytes );</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="preprocessor">#endif </span><span class="comment">/* INC_loggerh */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="alogger_8h_html_a95b8b07d579b8eb2105092a4d6fba6d5"><div class="ttname"><a href="logger_8h.html#a95b8b07d579b8eb2105092a4d6fba6d5">ReadLog</a></div><div class="ttdeci">void ReadLog(const uint32_t address, char *string, const uint32_t bytes)</div><div class="ttdoc">Reads the log at a given address and size.</div><div class="ttdef"><b>Definition</b> logger.c:73</div></div>
+<div class="ttc" id="alogger_8h_html_aacc4d019decf6ea90bac1fdd5f7e3da7"><div class="ttname"><a href="logger_8h.html#aacc4d019decf6ea90bac1fdd5f7e3da7">LogString</a></div><div class="ttdeci">void LogString(const char *const string, uint8_t write_beginning)</div><div class="ttdoc">Log a string to tail_pointer, use write_beginning flag to write the beginning.</div><div class="ttdef"><b>Definition</b> logger.c:40</div></div>
+<div class="ttc" id="alogger_8h_html_ae52af1b312f9fc4a02e4697af496e23e"><div class="ttname"><a href="logger_8h.html#ae52af1b312f9fc4a02e4697af496e23e">LogNumber</a></div><div class="ttdeci">void LogNumber(const int32_t number, uint8_t write_beginning)</div><div class="ttdoc">Logs a number by converting the number to a string and using the LogString function.</div><div class="ttdef"><b>Definition</b> logger.c:59</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

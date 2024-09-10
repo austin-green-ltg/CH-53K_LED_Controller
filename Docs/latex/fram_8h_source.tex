@@ -2,72 +2,90 @@
 \hypertarget{fram_8h_source}{}\label{fram_8h_source}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/fram.h@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/fram.h}}
 \mbox{\hyperlink{fram_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ }
-\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifndef\ \_FRAM\_H\_}}
-\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ \_FRAM\_H\_}}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{stm32l412xx-bsp_8h}{stm32l412xx-\/bsp.h}}"{}}}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \textcolor{comment}{/*\ Definition\ */}}
-\DoxyCodeLine{00039\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a7aa1e22f400e62db9f6a8bca54ef0aa8}{OC\_WREN}}\ \ =\ 6\ ,\ \ }
-\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a8bac6293c6a01fe7efb7599b6614b92f}{OC\_WRDI}}\ \ =\ 4\ ,\ \ }
-\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a6ed267b2cbc4feb3ad34ed375fa873b0}{OC\_RDSR}}\ \ =\ 5\ ,\ \ }
-\DoxyCodeLine{00044\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854acbe51a8f70dbebd6920478a27105325b}{OC\_WRSR}}\ \ =\ 1\ ,\ \ }
-\DoxyCodeLine{00045\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854ae0c03aff0bc19f5cd2d76bf7f9e09872}{OC\_READ}}\ \ =\ 3\ ,\ \ }
-\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854aaf4c300c8a3d1de4ce852374b24c13f6}{OC\_WRITE}}\ =\ 2\ ,\ \ }
-\DoxyCodeLine{00048\ \}\ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854}{OPCODE\_COMMANDS}}\ ;}
-\DoxyCodeLine{00049\ }
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00054\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0ae2fd8af39fd0ba582dc82a971cde8ba8}{SR\_WEL}}\ \ =\ 0x2\ \ ,\ \ }
-\DoxyCodeLine{00057\ \ \ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0a41a6fa47f1600a7e9defbb572acd2f8d}{SR\_BP0}}\ \ =\ 0x4\ \ ,\ \ }
-\DoxyCodeLine{00058\ \ \ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0addacc56961775d92bc81b5eb3f205dd8}{SR\_BP1}}\ \ =\ 0x8\ \ ,\ \ }
-\DoxyCodeLine{00059\ \ \ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0a274182b507a40db5524a9b834e122630}{SR\_WPEN}}\ =\ 0x80\ ,\ \ }
-\DoxyCodeLine{00061\ \}\ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0}{STATUS\_REGISTER}}\ ;}
-\DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00067\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00068\ }
-\DoxyCodeLine{00069\ \ \ \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60a0ed108df29e26592ad196b6f9b44da31}{WPS\_PROTECTED}}\ =\ 0\ ,\ \ }
-\DoxyCodeLine{00070\ \ \ \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60a7c69694a7e8378f32fb3c40afa0050b6}{WPS\_WRITEABLE}}\ =\ 1\ ,\ \ }
-\DoxyCodeLine{00072\ \}\ \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\_PROTECT\_STATE}}\ ;}
-\DoxyCodeLine{00073\ }
-\DoxyCodeLine{00074\ }
-\DoxyCodeLine{00078\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
-\DoxyCodeLine{00079\ }
-\DoxyCodeLine{00080\ \ \ \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546a141dd526a0014829f5ee2282776961ff}{CSS\_ASSERT}}\ \ =\ 0\ ,\ \ }
-\DoxyCodeLine{00081\ \ \ \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546abf473f174b4f2e0a513084245902459d}{CSS\_RELEASE}}\ =\ 1\ ,\ \ }
-\DoxyCodeLine{00083\ \}\ \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\_SELECT\_STATE}}\ ;}
-\DoxyCodeLine{00084\ }
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00086\ \textcolor{comment}{/*\ Prototype\ Definition\ */}}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00094\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_ab161ab3aba124eb0f3b73a15e3c737b1}{framWriteProtect}}(\ \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\_PROTECT\_STATE}}\ state\ \ )\ ;}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00102\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_a1cc4c164fcdbd54ca4d5b19508cef750}{framChipSelect}}(\ \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\_SELECT\_STATE}}\ state\ \ )\ ;}
-\DoxyCodeLine{00103\ }
-\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00001\ \textcolor{comment}{/*****************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ \ @attention}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ \ Copyright\ (c)\ 2022,\ 2023\ Luminator,\ An\ LTG\ Company}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ All\ rights\ reserved.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \ Any\ use\ without\ the\ prior\ written\ consent\ of\ Luminator,}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \ An\ LTG\ Company\ is\ strictly\ prohibited.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *****************************************************************************}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *****************************************************************************}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ \ @file\ fram.h}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ \ @brief\ This\ module\ contains\ definitions\ and\ structures\ to\ support}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ fram.c\ SPI\ FRAM\ operations.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ \ Revision\ History:}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ \ \ \ Date\ \ \ \ \ \ \ \ \ Name\ \ \ \ \ \ \ \ \ \ \ \ Ver\ \ \ \ \ Remarks}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ \ \ \ \ \ -\/-\/-\/\ \ \ \ \ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ \ \ \ 04/09/2023\ \ \ Mark\ Lane\ \ \ \ \ \ \ 0\ \ \ \ \ \ \ Original\ Version}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ \ \ \ 09/10/2024\ -\/\ Austin\ Green\ -\/\ \ 2.0\ -\/\ \ \ Doxyfile\ documentation}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ \ Notes:}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *****************************************************************************/}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#ifndef\ \_FRAM\_H\_}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#define\ \_FRAM\_H\_}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{stm32l412xx-bsp_8h}{stm32l412xx-\/bsp.h}}"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Local\ Definition(s)\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00035\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a7aa1e22f400e62db9f6a8bca54ef0aa8}{OC\_WREN}}\ \ =\ 6\ ,\ \ }
+\DoxyCodeLine{00038\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a8bac6293c6a01fe7efb7599b6614b92f}{OC\_WRDI}}\ \ =\ 4\ ,\ \ }
+\DoxyCodeLine{00039\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a6ed267b2cbc4feb3ad34ed375fa873b0}{OC\_RDSR}}\ \ =\ 5\ ,\ \ }
+\DoxyCodeLine{00040\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854acbe51a8f70dbebd6920478a27105325b}{OC\_WRSR}}\ \ =\ 1\ ,\ \ }
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854ae0c03aff0bc19f5cd2d76bf7f9e09872}{OC\_READ}}\ \ =\ 3\ ,\ \ }
+\DoxyCodeLine{00042\ \ \ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854aaf4c300c8a3d1de4ce852374b24c13f6}{OC\_WRITE}}\ =\ 2\ ,\ \ }
+\DoxyCodeLine{00044\ \}\ \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854}{OPCODE\_COMMANDS}}\ ;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0ae2fd8af39fd0ba582dc82a971cde8ba8}{SR\_WEL}}\ \ =\ 0x2\ \ ,\ \ }
+\DoxyCodeLine{00053\ \ \ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0a41a6fa47f1600a7e9defbb572acd2f8d}{SR\_BP0}}\ \ =\ 0x4\ \ ,\ \ }
+\DoxyCodeLine{00054\ \ \ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0addacc56961775d92bc81b5eb3f205dd8}{SR\_BP1}}\ \ =\ 0x8\ \ ,\ \ }
+\DoxyCodeLine{00055\ \ \ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0a274182b507a40db5524a9b834e122630}{SR\_WPEN}}\ =\ 0x80\ ,\ \ }
+\DoxyCodeLine{00057\ \}\ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0}{STATUS\_REGISTER}}\ ;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60a0ed108df29e26592ad196b6f9b44da31}{WPS\_PROTECTED}}\ =\ 0\ ,\ \ }
+\DoxyCodeLine{00066\ \ \ \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60a7c69694a7e8378f32fb3c40afa0050b6}{WPS\_WRITEABLE}}\ =\ 1\ ,\ \ }
+\DoxyCodeLine{00068\ \}\ \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\_PROTECT\_STATE}}\ ;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546a141dd526a0014829f5ee2282776961ff}{CSS\_ASSERT}}\ \ =\ 0\ ,\ \ }
+\DoxyCodeLine{00077\ \ \ \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546abf473f174b4f2e0a513084245902459d}{CSS\_RELEASE}}\ =\ 1\ ,\ \ }
+\DoxyCodeLine{00079\ \}\ \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\_SELECT\_STATE}}\ ;}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{comment}{/*\ Prototype\ Definition\ */}}
+\DoxyCodeLine{00091\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_ab161ab3aba124eb0f3b73a15e3c737b1}{framWriteProtect}}(\ \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\_PROTECT\_STATE}}\ state\ \ )\ ;}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_a1cc4c164fcdbd54ca4d5b19508cef750}{framChipSelect}}(\ \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\_SELECT\_STATE}}\ state\ \ )\ ;}
+\DoxyCodeLine{00102\ }
 \DoxyCodeLine{00111\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_a0005b800457c3882707e63b8b923bd06}{framReadSr}}(\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *srP\ )\ ;}
 \DoxyCodeLine{00112\ }
-\DoxyCodeLine{00119\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_ac737a2768b12f0024b0f8dedc13b7ab5}{framWriteSr}}(\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ sr\ )\ ;}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00121\ }
-\DoxyCodeLine{00126\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_a2ffb673dd7a356af306c1743be126f32}{framWriteDisable}}(\ \textcolor{keywordtype}{void}\ )\ ;}
-\DoxyCodeLine{00127\ }
-\DoxyCodeLine{00132\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_acb185ced7935a54189236f881375faa0}{framWriteEnable}}(\ \textcolor{keywordtype}{void}\ )\ \ ;}
-\DoxyCodeLine{00133\ }
-\DoxyCodeLine{00134\ }
-\DoxyCodeLine{00144\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_a846ddd3d47bcd581b49e778e70980fc1}{framReadMemory}}\ (\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ addr,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *rdBufP,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ len\ )\ ;}
-\DoxyCodeLine{00145\ }
-\DoxyCodeLine{00155\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_abad0fbfb7245cc5a79e994680676140b}{framWriteMemory}}(\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ addr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ wrBufP,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ len\ )\ ;}
-\DoxyCodeLine{00156\ }
-\DoxyCodeLine{00157\ }
-\DoxyCodeLine{00164\ uint8\_t\ \mbox{\hyperlink{fram_8h_a177b1c03338f9f1cddb4200e412c1f11}{framTest}}(\ \textcolor{keywordtype}{void}\ )\ ;}
-\DoxyCodeLine{00165\ }
-\DoxyCodeLine{00166\ }
-\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00121\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_ac737a2768b12f0024b0f8dedc13b7ab5}{framWriteSr}}(\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ sr\ )\ ;}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00129\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_a2ffb673dd7a356af306c1743be126f32}{framWriteDisable}}(\ \textcolor{keywordtype}{void}\ )\ ;}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00137\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_acb185ced7935a54189236f881375faa0}{framWriteEnable}}(\ \textcolor{keywordtype}{void}\ )\ \ ;}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00153\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_a846ddd3d47bcd581b49e778e70980fc1}{framReadMemory}}\ (\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ addr,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *rdBufP,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ len\ )\ ;}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00169\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{fram_8h_abad0fbfb7245cc5a79e994680676140b}{framWriteMemory}}(\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ addr,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ wrBufP,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{short}\ len\ )\ ;}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00181\ uint8\_t\ \mbox{\hyperlink{fram_8h_a177b1c03338f9f1cddb4200e412c1f11}{framTest}}(\ \textcolor{keywordtype}{void}\ )\ ;}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}
