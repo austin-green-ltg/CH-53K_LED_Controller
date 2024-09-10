@@ -1,0 +1,38 @@
+\doxysection{button\+\_\+handler.\+h}
+\hypertarget{button__handler_8h_source}{}\label{button__handler_8h_source}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/button\_handler.h@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/button\_handler.h}}
+\mbox{\hyperlink{button__handler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Copyright\ ©\ 2007\ Luminator\ Mark\ IV}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ All\ rights\ reserved.}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Any\ use\ without\ the\ prior\ written\ consent\ of\ Luminator\ Mark\ IV}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ is\ strictly\ prohibited.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Filename:\ button\_handler.h}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Description:\ Returns\ the\ button\ state\ of\ the\ three\ board\ buttons}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Revision\ History:}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ Date\ \ \ \ \ \ \ -\/\ Name\ \ \ \ \ \ \ \ \ -\/\ \ Ver\ -\/\ \ Remarks}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ 07/31/2024\ -\/\ Austin\ Green\ -\/\ \ 1.0\ -\/\ \ Initial\ Document}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ Notes:\ Depends\ on\ the\ board\ support\ package\ bsp\ for\ GPIO\_PinState}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ INC\_button\_handlerh}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ \ \#define\ INC\_button\_handlerh}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ \#include\ <stdint.h>}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}\mbox{\hyperlink{stm32l412xx-bsp_8h}{stm32l412xx-\/bsp.h}}"{}}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{/*\ Return\ state\ of\ buttons\ */}}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\_PinState}}\ \mbox{\hyperlink{button__handler_8h_af20dbb6e0d588172fe914ab9c1c3bc33}{IsDimPressed}}\ \ \ \ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\_PinState}}\ \mbox{\hyperlink{button__handler_8h_a0849c80841cb7ae79629ef359c8510a3}{IsBrightPressed}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_button\_handlerh\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

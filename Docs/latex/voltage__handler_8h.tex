@@ -1,0 +1,68 @@
+\doxysection{C\+:/\+Users/agreen/\+Documents/\+Projects/\+Aveo/\+CH-\/53\+K\+\_\+\+LED\+\_\+\+Controller/\+Core/\+Inc/voltage\+\_\+handler.h File Reference}
+\hypertarget{voltage__handler_8h}{}\label{voltage__handler_8h}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/voltage\_handler.h@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/voltage\_handler.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293}{Voltage\+Range\+\_\+e}} \{ \newline
+\mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293a18715e876a20eecbbfbd84bebc7c2330}{Voltage\+Normal}} = 0
+, \mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293ad99608c8998c7de0f754ab49dbb5c003}{Voltage\+Low}} = 1
+, \mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293a0e20227e2fe974f393c038e6b38b13dc}{Voltage\+High}} = 2
+, \mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293a891d5ad01d6a7fcd68f60ae8d3226ecb}{Voltage\+Error\+Low}} = 3
+, \newline
+\mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293ab3fb82ade36d19227cecf624f4773e39}{Voltage\+Error\+High}} = 4
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{voltage__handler_8h_a4955e8a43489319badeaa2662335d973}{Get\+Voltage}} (void)
+\item 
+\mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293}{Voltage\+Range\+\_\+e}} \mbox{\hyperlink{voltage__handler_8h_a9181a4920cc377e8fe19d337eacd1f30}{Get\+Voltage\+Range}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293}\index{voltage\_handler.h@{voltage\_handler.h}!VoltageRange\_e@{VoltageRange\_e}}
+\index{VoltageRange\_e@{VoltageRange\_e}!voltage\_handler.h@{voltage\_handler.h}}
+\doxysubsubsection{\texorpdfstring{VoltageRange\_e}{VoltageRange\_e}}
+{\footnotesize\ttfamily \label{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293} 
+enum \mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293}{Voltage\+Range\+\_\+e}}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VoltageNormal@{VoltageNormal}!voltage\_handler.h@{voltage\_handler.h}}\index{voltage\_handler.h@{voltage\_handler.h}!VoltageNormal@{VoltageNormal}}}\Hypertarget{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293a18715e876a20eecbbfbd84bebc7c2330}\label{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293} 
+Voltage\+Normal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VoltageLow@{VoltageLow}!voltage\_handler.h@{voltage\_handler.h}}\index{voltage\_handler.h@{voltage\_handler.h}!VoltageLow@{VoltageLow}}}\Hypertarget{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293ad99608c8998c7de0f754ab49dbb5c003}\label{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293} 
+Voltage\+Low&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VoltageHigh@{VoltageHigh}!voltage\_handler.h@{voltage\_handler.h}}\index{voltage\_handler.h@{voltage\_handler.h}!VoltageHigh@{VoltageHigh}}}\Hypertarget{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293a0e20227e2fe974f393c038e6b38b13dc}\label{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293} 
+Voltage\+High&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VoltageErrorLow@{VoltageErrorLow}!voltage\_handler.h@{voltage\_handler.h}}\index{voltage\_handler.h@{voltage\_handler.h}!VoltageErrorLow@{VoltageErrorLow}}}\Hypertarget{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293a891d5ad01d6a7fcd68f60ae8d3226ecb}\label{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293} 
+Voltage\+Error\+Low&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VoltageErrorHigh@{VoltageErrorHigh}!voltage\_handler.h@{voltage\_handler.h}}\index{voltage\_handler.h@{voltage\_handler.h}!VoltageErrorHigh@{VoltageErrorHigh}}}\Hypertarget{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293ab3fb82ade36d19227cecf624f4773e39}\label{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293} 
+Voltage\+Error\+High&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{voltage__handler_8h_a4955e8a43489319badeaa2662335d973}\index{voltage\_handler.h@{voltage\_handler.h}!GetVoltage@{GetVoltage}}
+\index{GetVoltage@{GetVoltage}!voltage\_handler.h@{voltage\_handler.h}}
+\doxysubsubsection{\texorpdfstring{GetVoltage()}{GetVoltage()}}
+{\footnotesize\ttfamily \label{voltage__handler_8h_a4955e8a43489319badeaa2662335d973} 
+uint16\+\_\+t Get\+Voltage (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{voltage__handler_8h_a9181a4920cc377e8fe19d337eacd1f30}\index{voltage\_handler.h@{voltage\_handler.h}!GetVoltageRange@{GetVoltageRange}}
+\index{GetVoltageRange@{GetVoltageRange}!voltage\_handler.h@{voltage\_handler.h}}
+\doxysubsubsection{\texorpdfstring{GetVoltageRange()}{GetVoltageRange()}}
+{\footnotesize\ttfamily \label{voltage__handler_8h_a9181a4920cc377e8fe19d337eacd1f30} 
+\mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293}{Voltage\+Range\+\_\+e}} Get\+Voltage\+Range (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+

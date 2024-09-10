@@ -1,0 +1,275 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Data Structure Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Data Structures}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}File Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}File List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Data Structure Documentation}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Pwm\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Struct Struct Reference}{5}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Field Documentation}{5}{subsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}is\_running}{5}{subsubsection.3.1.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.2}pulse\_width}{5}{subsubsection.3.1.1.2}%
+\contentsline {section}{\numberline {3.2}Timer\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Struct Struct Reference}{5}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Field Documentation}{6}{subsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.1}is\_running}{6}{subsubsection.3.2.1.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.2}time}{6}{subsubsection.3.2.1.2}%
+\contentsline {chapter}{\numberline {4}File Documentation}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/button\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.h File Reference}{7}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Function Documentation}{7}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.1}IsBrightPressed()}{7}{subsubsection.4.1.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.2}IsDimPressed()}{7}{subsubsection.4.1.1.2}%
+\contentsline {section}{\numberline {4.2}button\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{8}{section.4.2}%
+\contentsline {section}{\numberline {4.3}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/current\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.h File Reference}{8}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Enumeration Type Documentation}{8}{subsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.1}CurrentRange\_e}{8}{subsubsection.4.3.1.1}%
+\contentsline {subsection}{\numberline {4.3.2}Function Documentation}{9}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.1}GetCurrent()}{9}{subsubsection.4.3.2.1}%
+\contentsline {subsubsection}{\numberline {4.3.2.2}GetCurrentRange()}{9}{subsubsection.4.3.2.2}%
+\contentsline {section}{\numberline {4.4}current\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{9}{section.4.4}%
+\contentsline {section}{\numberline {4.5}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/delay\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.h File Reference}{9}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Function Documentation}{10}{subsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.1.1}BrightnessDelay()}{10}{subsubsection.4.5.1.1}%
+\contentsline {subsubsection}{\numberline {4.5.1.2}DelayHit()}{10}{subsubsection.4.5.1.2}%
+\contentsline {subsubsection}{\numberline {4.5.1.3}RestartDelayCounter()}{10}{subsubsection.4.5.1.3}%
+\contentsline {subsubsection}{\numberline {4.5.1.4}StartDelayCounter()}{10}{subsubsection.4.5.1.4}%
+\contentsline {section}{\numberline {4.6}delay\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{10}{section.4.6}%
+\contentsline {section}{\numberline {4.7}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/fram.h File Reference}{11}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Detailed Description}{11}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Enumeration Type Documentation}{11}{subsection.4.7.2}%
+\contentsline {subsubsection}{\numberline {4.7.2.1}CHIP\_SELECT\_STATE}{11}{subsubsection.4.7.2.1}%
+\contentsline {subsubsection}{\numberline {4.7.2.2}OPCODE\_COMMANDS}{12}{subsubsection.4.7.2.2}%
+\contentsline {subsubsection}{\numberline {4.7.2.3}STATUS\_REGISTER}{12}{subsubsection.4.7.2.3}%
+\contentsline {subsubsection}{\numberline {4.7.2.4}WRITE\_PROTECT\_STATE}{12}{subsubsection.4.7.2.4}%
+\contentsline {subsection}{\numberline {4.7.3}Function Documentation}{13}{subsection.4.7.3}%
+\contentsline {subsubsection}{\numberline {4.7.3.1}framChipSelect()}{13}{subsubsection.4.7.3.1}%
+\contentsline {subsubsection}{\numberline {4.7.3.2}framReadMemory()}{13}{subsubsection.4.7.3.2}%
+\contentsline {subsubsection}{\numberline {4.7.3.3}framReadSr()}{13}{subsubsection.4.7.3.3}%
+\contentsline {subsubsection}{\numberline {4.7.3.4}framTest()}{13}{subsubsection.4.7.3.4}%
+\contentsline {subsubsection}{\numberline {4.7.3.5}framWriteDisable()}{13}{subsubsection.4.7.3.5}%
+\contentsline {subsubsection}{\numberline {4.7.3.6}framWriteEnable()}{14}{subsubsection.4.7.3.6}%
+\contentsline {subsubsection}{\numberline {4.7.3.7}framWriteMemory()}{14}{subsubsection.4.7.3.7}%
+\contentsline {subsubsection}{\numberline {4.7.3.8}framWriteProtect()}{14}{subsubsection.4.7.3.8}%
+\contentsline {subsubsection}{\numberline {4.7.3.9}framWriteSr()}{14}{subsubsection.4.7.3.9}%
+\contentsline {section}{\numberline {4.8}fram.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{15}{section.4.8}%
+\contentsline {section}{\numberline {4.9}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/logger.h File Reference}{15}{section.4.9}%
+\contentsline {subsection}{\numberline {4.9.1}Function Documentation}{16}{subsection.4.9.1}%
+\contentsline {subsubsection}{\numberline {4.9.1.1}LogNumber()}{16}{subsubsection.4.9.1.1}%
+\contentsline {subsubsection}{\numberline {4.9.1.2}LogString()}{16}{subsubsection.4.9.1.2}%
+\contentsline {subsubsection}{\numberline {4.9.1.3}ReadLog()}{16}{subsubsection.4.9.1.3}%
+\contentsline {section}{\numberline {4.10}logger.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{16}{section.4.10}%
+\contentsline {section}{\numberline {4.11}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/main.h File Reference}{16}{section.4.11}%
+\contentsline {subsection}{\numberline {4.11.1}Function Documentation}{17}{subsection.4.11.1}%
+\contentsline {subsubsection}{\numberline {4.11.1.1}Error\_Handler()}{17}{subsubsection.4.11.1.1}%
+\contentsline {section}{\numberline {4.12}main.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{17}{section.4.12}%
+\contentsline {section}{\numberline {4.13}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/my\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}printf.h File Reference}{18}{section.4.13}%
+\contentsline {section}{\numberline {4.14}my\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}printf.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{18}{section.4.14}%
+\contentsline {section}{\numberline {4.15}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/pwm\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.h File Reference}{18}{section.4.15}%
+\contentsline {subsection}{\numberline {4.15.1}Macro Definition Documentation}{19}{subsection.4.15.1}%
+\contentsline {subsubsection}{\numberline {4.15.1.1}BRIGHTNESS\_STEPS}{19}{subsubsection.4.15.1.1}%
+\contentsline {subsubsection}{\numberline {4.15.1.2}HOLD\_BRIGHTNESS\_JUMP}{19}{subsubsection.4.15.1.2}%
+\contentsline {subsection}{\numberline {4.15.2}Function Documentation}{19}{subsection.4.15.2}%
+\contentsline {subsubsection}{\numberline {4.15.2.1}DecreaseBrightness()}{19}{subsubsection.4.15.2.1}%
+\contentsline {subsubsection}{\numberline {4.15.2.2}GetBrightness()}{19}{subsubsection.4.15.2.2}%
+\contentsline {subsubsection}{\numberline {4.15.2.3}GetPwm()}{19}{subsubsection.4.15.2.3}%
+\contentsline {subsubsection}{\numberline {4.15.2.4}IncreaseBrightness()}{19}{subsubsection.4.15.2.4}%
+\contentsline {subsubsection}{\numberline {4.15.2.5}InitPwm()}{19}{subsubsection.4.15.2.5}%
+\contentsline {subsubsection}{\numberline {4.15.2.6}SetBrightness()}{19}{subsubsection.4.15.2.6}%
+\contentsline {subsubsection}{\numberline {4.15.2.7}SetPwm()}{19}{subsubsection.4.15.2.7}%
+\contentsline {subsubsection}{\numberline {4.15.2.8}TurnOffPwm()}{19}{subsubsection.4.15.2.8}%
+\contentsline {section}{\numberline {4.16}pwm\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{20}{section.4.16}%
+\contentsline {section}{\numberline {4.17}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/stm32l412xx-\/bsp.h File Reference}{20}{section.4.17}%
+\contentsline {subsection}{\numberline {4.17.1}Macro Definition Documentation}{22}{subsection.4.17.1}%
+\contentsline {subsubsection}{\numberline {4.17.1.1}AMPMETER\_ADC\_GPIO\_Port}{22}{subsubsection.4.17.1.1}%
+\contentsline {subsubsection}{\numberline {4.17.1.2}AMPMETER\_ADC\_Pin}{22}{subsubsection.4.17.1.2}%
+\contentsline {subsubsection}{\numberline {4.17.1.3}BRIGHT\_GPIO\_Port}{22}{subsubsection.4.17.1.3}%
+\contentsline {subsubsection}{\numberline {4.17.1.4}BRIGHT\_Pin}{22}{subsubsection.4.17.1.4}%
+\contentsline {subsubsection}{\numberline {4.17.1.5}CLK\_FREQ\_HZ}{22}{subsubsection.4.17.1.5}%
+\contentsline {subsubsection}{\numberline {4.17.1.6}DIM\_GPIO\_Port}{22}{subsubsection.4.17.1.6}%
+\contentsline {subsubsection}{\numberline {4.17.1.7}DIM\_Pin}{22}{subsubsection.4.17.1.7}%
+\contentsline {subsubsection}{\numberline {4.17.1.8}EEPROM\_MISO\_GPIO\_Port}{22}{subsubsection.4.17.1.8}%
+\contentsline {subsubsection}{\numberline {4.17.1.9}EEPROM\_MISO\_Pin}{22}{subsubsection.4.17.1.9}%
+\contentsline {subsubsection}{\numberline {4.17.1.10}EEPROM\_MOSI\_GPIO\_Port}{22}{subsubsection.4.17.1.10}%
+\contentsline {subsubsection}{\numberline {4.17.1.11}EEPROM\_MOSI\_Pin}{22}{subsubsection.4.17.1.11}%
+\contentsline {subsubsection}{\numberline {4.17.1.12}EEPROM\_SCK\_GPIO\_Port}{22}{subsubsection.4.17.1.12}%
+\contentsline {subsubsection}{\numberline {4.17.1.13}EEPROM\_SCK\_Pin}{22}{subsubsection.4.17.1.13}%
+\contentsline {subsubsection}{\numberline {4.17.1.14}NVIC\_PRIORITYGROUP\_0}{22}{subsubsection.4.17.1.14}%
+\contentsline {subsubsection}{\numberline {4.17.1.15}NVIC\_PRIORITYGROUP\_1}{23}{subsubsection.4.17.1.15}%
+\contentsline {subsubsection}{\numberline {4.17.1.16}NVIC\_PRIORITYGROUP\_2}{23}{subsubsection.4.17.1.16}%
+\contentsline {subsubsection}{\numberline {4.17.1.17}NVIC\_PRIORITYGROUP\_3}{23}{subsubsection.4.17.1.17}%
+\contentsline {subsubsection}{\numberline {4.17.1.18}NVIC\_PRIORITYGROUP\_4}{23}{subsubsection.4.17.1.18}%
+\contentsline {subsubsection}{\numberline {4.17.1.19}PWM\_OUT\_GPIO\_Port}{23}{subsubsection.4.17.1.19}%
+\contentsline {subsubsection}{\numberline {4.17.1.20}PWM\_OUT\_Pin}{23}{subsubsection.4.17.1.20}%
+\contentsline {subsubsection}{\numberline {4.17.1.21}SPI\_NSS\_GPIO\_Port}{23}{subsubsection.4.17.1.21}%
+\contentsline {subsubsection}{\numberline {4.17.1.22}SPI\_NSS\_Pin}{23}{subsubsection.4.17.1.22}%
+\contentsline {subsubsection}{\numberline {4.17.1.23}SPI\_WP\_GPIO\_Port}{23}{subsubsection.4.17.1.23}%
+\contentsline {subsubsection}{\numberline {4.17.1.24}SPI\_WP\_Pin}{23}{subsubsection.4.17.1.24}%
+\contentsline {subsubsection}{\numberline {4.17.1.25}THERMISTOR\_ADC\_GPIO\_Port}{23}{subsubsection.4.17.1.25}%
+\contentsline {subsubsection}{\numberline {4.17.1.26}THERMISTOR\_ADC\_Pin}{23}{subsubsection.4.17.1.26}%
+\contentsline {subsubsection}{\numberline {4.17.1.27}TIM2\_CLK\_DEV}{23}{subsubsection.4.17.1.27}%
+\contentsline {subsubsection}{\numberline {4.17.1.28}TIM2\_CLK\_PRESCALER}{23}{subsubsection.4.17.1.28}%
+\contentsline {subsubsection}{\numberline {4.17.1.29}VOLTMETER\_ADC\_GPIO\_Port}{24}{subsubsection.4.17.1.29}%
+\contentsline {subsubsection}{\numberline {4.17.1.30}VOLTMETER\_ADC\_Pin}{24}{subsubsection.4.17.1.30}%
+\contentsline {subsection}{\numberline {4.17.2}Typedef Documentation}{24}{subsection.4.17.2}%
+\contentsline {subsubsection}{\numberline {4.17.2.1}GPIO\_PinState}{24}{subsubsection.4.17.2.1}%
+\contentsline {subsection}{\numberline {4.17.3}Enumeration Type Documentation}{24}{subsection.4.17.3}%
+\contentsline {subsubsection}{\numberline {4.17.3.1}anonymous enum}{24}{subsubsection.4.17.3.1}%
+\contentsline {subsubsection}{\numberline {4.17.3.2}anonymous enum}{24}{subsubsection.4.17.3.2}%
+\contentsline {subsection}{\numberline {4.17.4}Function Documentation}{24}{subsection.4.17.4}%
+\contentsline {subsubsection}{\numberline {4.17.4.1}disableChipSelect()}{24}{subsubsection.4.17.4.1}%
+\contentsline {subsubsection}{\numberline {4.17.4.2}DisablePWM1()}{24}{subsubsection.4.17.4.2}%
+\contentsline {subsubsection}{\numberline {4.17.4.3}disableWriteProtect()}{24}{subsubsection.4.17.4.3}%
+\contentsline {subsubsection}{\numberline {4.17.4.4}enableChipSelect()}{24}{subsubsection.4.17.4.4}%
+\contentsline {subsubsection}{\numberline {4.17.4.5}EnablePWM1()}{25}{subsubsection.4.17.4.5}%
+\contentsline {subsubsection}{\numberline {4.17.4.6}enableWriteProtect()}{25}{subsubsection.4.17.4.6}%
+\contentsline {subsubsection}{\numberline {4.17.4.7}Error\_Handler()}{25}{subsubsection.4.17.4.7}%
+\contentsline {subsubsection}{\numberline {4.17.4.8}GetCurrentValue()}{25}{subsubsection.4.17.4.8}%
+\contentsline {subsubsection}{\numberline {4.17.4.9}GetThermistorValue()}{25}{subsubsection.4.17.4.9}%
+\contentsline {subsubsection}{\numberline {4.17.4.10}GetTIM2Cnt()}{25}{subsubsection.4.17.4.10}%
+\contentsline {subsubsection}{\numberline {4.17.4.11}GetVoltageValue()}{25}{subsubsection.4.17.4.11}%
+\contentsline {subsubsection}{\numberline {4.17.4.12}ReadBrightPin()}{25}{subsubsection.4.17.4.12}%
+\contentsline {subsubsection}{\numberline {4.17.4.13}ReadDimPin()}{25}{subsubsection.4.17.4.13}%
+\contentsline {subsubsection}{\numberline {4.17.4.14}receiveData()}{25}{subsubsection.4.17.4.14}%
+\contentsline {subsubsection}{\numberline {4.17.4.15}RestartTIM2()}{25}{subsubsection.4.17.4.15}%
+\contentsline {subsubsection}{\numberline {4.17.4.16}sendUARTChar()}{26}{subsubsection.4.17.4.16}%
+\contentsline {subsubsection}{\numberline {4.17.4.17}SetPW11()}{26}{subsubsection.4.17.4.17}%
+\contentsline {subsubsection}{\numberline {4.17.4.18}StartPWM11()}{26}{subsubsection.4.17.4.18}%
+\contentsline {subsubsection}{\numberline {4.17.4.19}StartTIM2()}{26}{subsubsection.4.17.4.19}%
+\contentsline {subsubsection}{\numberline {4.17.4.20}StopPWM11()}{26}{subsubsection.4.17.4.20}%
+\contentsline {subsubsection}{\numberline {4.17.4.21}transferData()}{26}{subsubsection.4.17.4.21}%
+\contentsline {section}{\numberline {4.18}stm32l412xx-\/bsp.h}{26}{section.4.18}%
+\contentsline {section}{\numberline {4.19}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/temperature\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.h File Reference}{28}{section.4.19}%
+\contentsline {subsection}{\numberline {4.19.1}Enumeration Type Documentation}{28}{subsection.4.19.1}%
+\contentsline {subsubsection}{\numberline {4.19.1.1}TemperatureRange\_e}{28}{subsubsection.4.19.1.1}%
+\contentsline {subsection}{\numberline {4.19.2}Function Documentation}{29}{subsection.4.19.2}%
+\contentsline {subsubsection}{\numberline {4.19.2.1}GetTemperature()}{29}{subsubsection.4.19.2.1}%
+\contentsline {subsubsection}{\numberline {4.19.2.2}GetTemperatureRange()}{29}{subsubsection.4.19.2.2}%
+\contentsline {section}{\numberline {4.20}temperature\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{29}{section.4.20}%
+\contentsline {section}{\numberline {4.21}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Inc/voltage\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.h File Reference}{29}{section.4.21}%
+\contentsline {subsection}{\numberline {4.21.1}Enumeration Type Documentation}{30}{subsection.4.21.1}%
+\contentsline {subsubsection}{\numberline {4.21.1.1}VoltageRange\_e}{30}{subsubsection.4.21.1.1}%
+\contentsline {subsection}{\numberline {4.21.2}Function Documentation}{30}{subsection.4.21.2}%
+\contentsline {subsubsection}{\numberline {4.21.2.1}GetVoltage()}{30}{subsubsection.4.21.2.1}%
+\contentsline {subsubsection}{\numberline {4.21.2.2}GetVoltageRange()}{30}{subsubsection.4.21.2.2}%
+\contentsline {section}{\numberline {4.22}voltage\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}h}{30}{section.4.22}%
+\contentsline {section}{\numberline {4.23}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/button\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.c File Reference}{31}{section.4.23}%
+\contentsline {subsection}{\numberline {4.23.1}Function Documentation}{31}{subsection.4.23.1}%
+\contentsline {subsubsection}{\numberline {4.23.1.1}IsBrightPressed()}{31}{subsubsection.4.23.1.1}%
+\contentsline {subsubsection}{\numberline {4.23.1.2}IsDimPressed()}{31}{subsubsection.4.23.1.2}%
+\contentsline {section}{\numberline {4.24}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/current\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.c File Reference}{31}{section.4.24}%
+\contentsline {subsection}{\numberline {4.24.1}Function Documentation}{32}{subsection.4.24.1}%
+\contentsline {subsubsection}{\numberline {4.24.1.1}GetCurrent()}{32}{subsubsection.4.24.1.1}%
+\contentsline {subsubsection}{\numberline {4.24.1.2}GetCurrentRange()}{32}{subsubsection.4.24.1.2}%
+\contentsline {subsection}{\numberline {4.24.2}Variable Documentation}{32}{subsection.4.24.2}%
+\contentsline {subsubsection}{\numberline {4.24.2.1}CurrentErrorThreshold\_dA}{32}{subsubsection.4.24.2.1}%
+\contentsline {subsubsection}{\numberline {4.24.2.2}CurrentHighThreshold\_dA}{32}{subsubsection.4.24.2.2}%
+\contentsline {subsubsection}{\numberline {4.24.2.3}dAmpsToRaw}{32}{subsubsection.4.24.2.3}%
+\contentsline {subsubsection}{\numberline {4.24.2.4}RawTodAmps}{32}{subsubsection.4.24.2.4}%
+\contentsline {section}{\numberline {4.25}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/delay\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.c File Reference}{32}{section.4.25}%
+\contentsline {subsection}{\numberline {4.25.1}Function Documentation}{32}{subsection.4.25.1}%
+\contentsline {subsubsection}{\numberline {4.25.1.1}BrightnessDelay()}{32}{subsubsection.4.25.1.1}%
+\contentsline {subsubsection}{\numberline {4.25.1.2}DelayHit()}{32}{subsubsection.4.25.1.2}%
+\contentsline {subsubsection}{\numberline {4.25.1.3}RestartDelayCounter()}{33}{subsubsection.4.25.1.3}%
+\contentsline {subsubsection}{\numberline {4.25.1.4}StartDelayCounter()}{33}{subsubsection.4.25.1.4}%
+\contentsline {subsection}{\numberline {4.25.2}Variable Documentation}{33}{subsection.4.25.2}%
+\contentsline {subsubsection}{\numberline {4.25.2.1}Tim2ClkKhz}{33}{subsubsection.4.25.2.1}%
+\contentsline {section}{\numberline {4.26}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/fram.c File Reference}{33}{section.4.26}%
+\contentsline {subsection}{\numberline {4.26.1}Detailed Description}{33}{subsection.4.26.1}%
+\contentsline {subsection}{\numberline {4.26.2}Macro Definition Documentation}{34}{subsection.4.26.2}%
+\contentsline {subsubsection}{\numberline {4.26.2.1}TADD}{34}{subsubsection.4.26.2.1}%
+\contentsline {subsubsection}{\numberline {4.26.2.2}TLEN}{34}{subsubsection.4.26.2.2}%
+\contentsline {subsection}{\numberline {4.26.3}Function Documentation}{34}{subsection.4.26.3}%
+\contentsline {subsubsection}{\numberline {4.26.3.1}framChipSelect()}{34}{subsubsection.4.26.3.1}%
+\contentsline {subsubsection}{\numberline {4.26.3.2}framReadMemory()}{34}{subsubsection.4.26.3.2}%
+\contentsline {subsubsection}{\numberline {4.26.3.3}framReadSr()}{34}{subsubsection.4.26.3.3}%
+\contentsline {subsubsection}{\numberline {4.26.3.4}framTest()}{34}{subsubsection.4.26.3.4}%
+\contentsline {subsubsection}{\numberline {4.26.3.5}framWriteDisable()}{35}{subsubsection.4.26.3.5}%
+\contentsline {subsubsection}{\numberline {4.26.3.6}framWriteEnable()}{35}{subsubsection.4.26.3.6}%
+\contentsline {subsubsection}{\numberline {4.26.3.7}framWriteMemory()}{35}{subsubsection.4.26.3.7}%
+\contentsline {subsubsection}{\numberline {4.26.3.8}framWriteProtect()}{35}{subsubsection.4.26.3.8}%
+\contentsline {subsubsection}{\numberline {4.26.3.9}framWriteSr()}{36}{subsubsection.4.26.3.9}%
+\contentsline {section}{\numberline {4.27}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/logger.c File Reference}{37}{section.4.27}%
+\contentsline {subsection}{\numberline {4.27.1}Function Documentation}{37}{subsection.4.27.1}%
+\contentsline {subsubsection}{\numberline {4.27.1.1}LogNumber()}{37}{subsubsection.4.27.1.1}%
+\contentsline {subsubsection}{\numberline {4.27.1.2}LogString()}{37}{subsubsection.4.27.1.2}%
+\contentsline {subsubsection}{\numberline {4.27.1.3}ReadLog()}{37}{subsubsection.4.27.1.3}%
+\contentsline {section}{\numberline {4.28}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/main.c File Reference}{37}{section.4.28}%
+\contentsline {subsection}{\numberline {4.28.1}Macro Definition Documentation}{38}{subsection.4.28.1}%
+\contentsline {subsubsection}{\numberline {4.28.1.1}AVG\_STEP\_DIFF\_MS}{38}{subsubsection.4.28.1.1}%
+\contentsline {subsubsection}{\numberline {4.28.1.2}AVG\_STEP\_TIME\_MS}{38}{subsubsection.4.28.1.2}%
+\contentsline {subsubsection}{\numberline {4.28.1.3}LOWER\_STEP\_TIME\_MS}{38}{subsubsection.4.28.1.3}%
+\contentsline {subsubsection}{\numberline {4.28.1.4}LOWER\_SWEEP\_TIME\_MS}{38}{subsubsection.4.28.1.4}%
+\contentsline {subsubsection}{\numberline {4.28.1.5}TOTAL\_SWEEP\_TIME\_MS}{38}{subsubsection.4.28.1.5}%
+\contentsline {subsubsection}{\numberline {4.28.1.6}UPPER\_STEP\_TIME\_MS}{38}{subsubsection.4.28.1.6}%
+\contentsline {subsubsection}{\numberline {4.28.1.7}UPPER\_SWEEP\_TIME\_MS}{38}{subsubsection.4.28.1.7}%
+\contentsline {subsection}{\numberline {4.28.2}Function Documentation}{38}{subsection.4.28.2}%
+\contentsline {subsubsection}{\numberline {4.28.2.1}main()}{38}{subsubsection.4.28.2.1}%
+\contentsline {subsubsection}{\numberline {4.28.2.2}SystemClock\_Config()}{39}{subsubsection.4.28.2.2}%
+\contentsline {subsection}{\numberline {4.28.3}Variable Documentation}{39}{subsection.4.28.3}%
+\contentsline {subsubsection}{\numberline {4.28.3.1}HighStepTimeMs}{39}{subsubsection.4.28.3.1}%
+\contentsline {subsubsection}{\numberline {4.28.3.2}LowStepTimeMs}{39}{subsubsection.4.28.3.2}%
+\contentsline {section}{\numberline {4.29}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/my\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}printf.c File Reference}{39}{section.4.29}%
+\contentsline {section}{\numberline {4.30}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/pwm\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.c File Reference}{39}{section.4.30}%
+\contentsline {subsection}{\numberline {4.30.1}Macro Definition Documentation}{40}{subsection.4.30.1}%
+\contentsline {subsubsection}{\numberline {4.30.1.1}PW\_PERIOD}{40}{subsubsection.4.30.1.1}%
+\contentsline {subsection}{\numberline {4.30.2}Function Documentation}{40}{subsection.4.30.2}%
+\contentsline {subsubsection}{\numberline {4.30.2.1}DecreaseBrightness()}{40}{subsubsection.4.30.2.1}%
+\contentsline {subsubsection}{\numberline {4.30.2.2}GetBrightness()}{40}{subsubsection.4.30.2.2}%
+\contentsline {subsubsection}{\numberline {4.30.2.3}GetPwm()}{40}{subsubsection.4.30.2.3}%
+\contentsline {subsubsection}{\numberline {4.30.2.4}IncreaseBrightness()}{40}{subsubsection.4.30.2.4}%
+\contentsline {subsubsection}{\numberline {4.30.2.5}InitPwm()}{40}{subsubsection.4.30.2.5}%
+\contentsline {subsubsection}{\numberline {4.30.2.6}SetBrightness()}{40}{subsubsection.4.30.2.6}%
+\contentsline {subsubsection}{\numberline {4.30.2.7}SetPwm()}{40}{subsubsection.4.30.2.7}%
+\contentsline {subsubsection}{\numberline {4.30.2.8}TurnOffPwm()}{40}{subsubsection.4.30.2.8}%
+\contentsline {subsection}{\numberline {4.30.3}Variable Documentation}{41}{subsection.4.30.3}%
+\contentsline {subsubsection}{\numberline {4.30.3.1}HalfBrightness}{41}{subsubsection.4.30.3.1}%
+\contentsline {subsubsection}{\numberline {4.30.3.2}HotPwmRatio}{41}{subsubsection.4.30.3.2}%
+\contentsline {subsubsection}{\numberline {4.30.3.3}MaxBrightness}{41}{subsubsection.4.30.3.3}%
+\contentsline {subsubsection}{\numberline {4.30.3.4}MaxPw}{41}{subsubsection.4.30.3.4}%
+\contentsline {subsubsection}{\numberline {4.30.3.5}MinBrightness}{41}{subsubsection.4.30.3.5}%
+\contentsline {subsubsection}{\numberline {4.30.3.6}MinPw}{41}{subsubsection.4.30.3.6}%
+\contentsline {subsubsection}{\numberline {4.30.3.7}WarmPwmRatio}{41}{subsubsection.4.30.3.7}%
+\contentsline {section}{\numberline {4.31}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/stm32l412xx-\/bsp.c File Reference}{41}{section.4.31}%
+\contentsline {subsection}{\numberline {4.31.1}Function Documentation}{42}{subsection.4.31.1}%
+\contentsline {subsubsection}{\numberline {4.31.1.1}disableChipSelect()}{42}{subsubsection.4.31.1.1}%
+\contentsline {subsubsection}{\numberline {4.31.1.2}DisablePWM1()}{42}{subsubsection.4.31.1.2}%
+\contentsline {subsubsection}{\numberline {4.31.1.3}disableWriteProtect()}{42}{subsubsection.4.31.1.3}%
+\contentsline {subsubsection}{\numberline {4.31.1.4}enableChipSelect()}{42}{subsubsection.4.31.1.4}%
+\contentsline {subsubsection}{\numberline {4.31.1.5}EnablePWM1()}{42}{subsubsection.4.31.1.5}%
+\contentsline {subsubsection}{\numberline {4.31.1.6}enableWriteProtect()}{42}{subsubsection.4.31.1.6}%
+\contentsline {subsubsection}{\numberline {4.31.1.7}Error\_Handler()}{42}{subsubsection.4.31.1.7}%
+\contentsline {subsubsection}{\numberline {4.31.1.8}GetCurrentValue()}{42}{subsubsection.4.31.1.8}%
+\contentsline {subsubsection}{\numberline {4.31.1.9}GetThermistorValue()}{42}{subsubsection.4.31.1.9}%
+\contentsline {subsubsection}{\numberline {4.31.1.10}GetTIM2Cnt()}{42}{subsubsection.4.31.1.10}%
+\contentsline {subsubsection}{\numberline {4.31.1.11}GetVoltageValue()}{43}{subsubsection.4.31.1.11}%
+\contentsline {subsubsection}{\numberline {4.31.1.12}ReadBrightPin()}{43}{subsubsection.4.31.1.12}%
+\contentsline {subsubsection}{\numberline {4.31.1.13}ReadDimPin()}{43}{subsubsection.4.31.1.13}%
+\contentsline {subsubsection}{\numberline {4.31.1.14}receiveData()}{43}{subsubsection.4.31.1.14}%
+\contentsline {subsubsection}{\numberline {4.31.1.15}RestartTIM2()}{43}{subsubsection.4.31.1.15}%
+\contentsline {subsubsection}{\numberline {4.31.1.16}sendUARTChar()}{43}{subsubsection.4.31.1.16}%
+\contentsline {subsubsection}{\numberline {4.31.1.17}SetPW11()}{43}{subsubsection.4.31.1.17}%
+\contentsline {subsubsection}{\numberline {4.31.1.18}StartPWM11()}{43}{subsubsection.4.31.1.18}%
+\contentsline {subsubsection}{\numberline {4.31.1.19}StartTIM2()}{43}{subsubsection.4.31.1.19}%
+\contentsline {subsubsection}{\numberline {4.31.1.20}StopPWM11()}{43}{subsubsection.4.31.1.20}%
+\contentsline {subsubsection}{\numberline {4.31.1.21}transferData()}{43}{subsubsection.4.31.1.21}%
+\contentsline {section}{\numberline {4.32}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/temperature\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.c File Reference}{44}{section.4.32}%
+\contentsline {subsection}{\numberline {4.32.1}Function Documentation}{44}{subsection.4.32.1}%
+\contentsline {subsubsection}{\numberline {4.32.1.1}GetTemperature()}{44}{subsubsection.4.32.1.1}%
+\contentsline {subsubsection}{\numberline {4.32.1.2}GetTemperatureRange()}{44}{subsubsection.4.32.1.2}%
+\contentsline {subsection}{\numberline {4.32.2}Variable Documentation}{44}{subsection.4.32.2}%
+\contentsline {subsubsection}{\numberline {4.32.2.1}CoolingThreshold1\_dC}{44}{subsubsection.4.32.2.1}%
+\contentsline {subsubsection}{\numberline {4.32.2.2}CoolingThreshold2\_dC}{44}{subsubsection.4.32.2.2}%
+\contentsline {subsubsection}{\numberline {4.32.2.3}dCelciusToThermistor}{44}{subsubsection.4.32.2.3}%
+\contentsline {subsubsection}{\numberline {4.32.2.4}HeatingThreshold1\_dC}{44}{subsubsection.4.32.2.4}%
+\contentsline {subsubsection}{\numberline {4.32.2.5}HeatingThreshold2\_dC}{44}{subsubsection.4.32.2.5}%
+\contentsline {subsubsection}{\numberline {4.32.2.6}ThermistorTodCelcius}{44}{subsubsection.4.32.2.6}%
+\contentsline {section}{\numberline {4.33}C\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}:/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Users/agreen/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Documents/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Projects/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Aveo/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}CH-\/53\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}K\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}LED\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Controller/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Core/\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Src/voltage\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}\_\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}handler.c File Reference}{45}{section.4.33}%
+\contentsline {subsection}{\numberline {4.33.1}Function Documentation}{45}{subsection.4.33.1}%
+\contentsline {subsubsection}{\numberline {4.33.1.1}GetVoltage()}{45}{subsubsection.4.33.1.1}%
+\contentsline {subsubsection}{\numberline {4.33.1.2}GetVoltageRange()}{45}{subsubsection.4.33.1.2}%
+\contentsline {subsection}{\numberline {4.33.2}Variable Documentation}{45}{subsection.4.33.2}%
+\contentsline {subsubsection}{\numberline {4.33.2.1}dColtsToRaw}{45}{subsubsection.4.33.2.1}%
+\contentsline {subsubsection}{\numberline {4.33.2.2}RawTodColts}{45}{subsubsection.4.33.2.2}%
+\contentsline {subsubsection}{\numberline {4.33.2.3}VoltageErrorHighThreshold\_dV}{45}{subsubsection.4.33.2.3}%
+\contentsline {subsubsection}{\numberline {4.33.2.4}VoltageErrorLowThreshold\_dV}{45}{subsubsection.4.33.2.4}%
+\contentsline {subsubsection}{\numberline {4.33.2.5}VoltageHighThreshold\_dV}{45}{subsubsection.4.33.2.5}%
+\contentsline {subsubsection}{\numberline {4.33.2.6}VoltageLowThreshold\_dV}{45}{subsubsection.4.33.2.6}%
+\contentsline {chapter}{Index}{47}{section*.41}%

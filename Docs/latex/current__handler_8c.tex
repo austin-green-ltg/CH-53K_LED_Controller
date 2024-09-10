@@ -1,0 +1,66 @@
+\doxysection{C\+:/\+Users/agreen/\+Documents/\+Projects/\+Aveo/\+CH-\/53\+K\+\_\+\+LED\+\_\+\+Controller/\+Core/\+Src/current\+\_\+handler.c File Reference}
+\hypertarget{current__handler_8c}{}\label{current__handler_8c}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/current\_handler.c@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/current\_handler.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}current\+\_\+handler.\+h"{}}\newline
+{\ttfamily \#include "{}stm32l412xx-\/bsp.\+h"{}}\newline
+{\ttfamily \#include "{}logger.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{current__handler_8c_a95eb31cc890c352c57fe793085fd51d5}{Get\+Current}} (void)
+\item 
+\mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9}{Current\+Range\+\_\+e}} \mbox{\hyperlink{current__handler_8c_a40d6c981d70b2e2dbf03d7c359cee4e3}{Get\+Current\+Range}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{current__handler_8c_a626dd7cbff1d93ea456c98a6a3db25d9}{Raw\+Tod\+Amps}} = (1)
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{current__handler_8c_a85366da7bbbe78a7180b64b228fc23c9}{d\+Amps\+To\+Raw}} = (1)
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{current__handler_8c_add3f0822a811892d1129e0fba483a921}{Current\+High\+Threshold\+\_\+dA}} = 35u
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{current__handler_8c_a0f553263dc99751a63cf6f98ed420670}{Current\+Error\+Threshold\+\_\+dA}} = 40u
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{current__handler_8c_a95eb31cc890c352c57fe793085fd51d5}\index{current\_handler.c@{current\_handler.c}!GetCurrent@{GetCurrent}}
+\index{GetCurrent@{GetCurrent}!current\_handler.c@{current\_handler.c}}
+\doxysubsubsection{\texorpdfstring{GetCurrent()}{GetCurrent()}}
+{\footnotesize\ttfamily \label{current__handler_8c_a95eb31cc890c352c57fe793085fd51d5} 
+uint16\+\_\+t Get\+Current (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{current__handler_8c_a40d6c981d70b2e2dbf03d7c359cee4e3}\index{current\_handler.c@{current\_handler.c}!GetCurrentRange@{GetCurrentRange}}
+\index{GetCurrentRange@{GetCurrentRange}!current\_handler.c@{current\_handler.c}}
+\doxysubsubsection{\texorpdfstring{GetCurrentRange()}{GetCurrentRange()}}
+{\footnotesize\ttfamily \label{current__handler_8c_a40d6c981d70b2e2dbf03d7c359cee4e3} 
+\mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9}{Current\+Range\+\_\+e}} Get\+Current\+Range (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{current__handler_8c_a0f553263dc99751a63cf6f98ed420670}\index{current\_handler.c@{current\_handler.c}!CurrentErrorThreshold\_dA@{CurrentErrorThreshold\_dA}}
+\index{CurrentErrorThreshold\_dA@{CurrentErrorThreshold\_dA}!current\_handler.c@{current\_handler.c}}
+\doxysubsubsection{\texorpdfstring{CurrentErrorThreshold\_dA}{CurrentErrorThreshold\_dA}}
+{\footnotesize\ttfamily \label{current__handler_8c_a0f553263dc99751a63cf6f98ed420670} 
+const uint16\+\_\+t Current\+Error\+Threshold\+\_\+dA = 40u}
+
+\Hypertarget{current__handler_8c_add3f0822a811892d1129e0fba483a921}\index{current\_handler.c@{current\_handler.c}!CurrentHighThreshold\_dA@{CurrentHighThreshold\_dA}}
+\index{CurrentHighThreshold\_dA@{CurrentHighThreshold\_dA}!current\_handler.c@{current\_handler.c}}
+\doxysubsubsection{\texorpdfstring{CurrentHighThreshold\_dA}{CurrentHighThreshold\_dA}}
+{\footnotesize\ttfamily \label{current__handler_8c_add3f0822a811892d1129e0fba483a921} 
+const uint16\+\_\+t Current\+High\+Threshold\+\_\+dA = 35u}
+
+\Hypertarget{current__handler_8c_a85366da7bbbe78a7180b64b228fc23c9}\index{current\_handler.c@{current\_handler.c}!dAmpsToRaw@{dAmpsToRaw}}
+\index{dAmpsToRaw@{dAmpsToRaw}!current\_handler.c@{current\_handler.c}}
+\doxysubsubsection{\texorpdfstring{dAmpsToRaw}{dAmpsToRaw}}
+{\footnotesize\ttfamily \label{current__handler_8c_a85366da7bbbe78a7180b64b228fc23c9} 
+const uint16\+\_\+t d\+Amps\+To\+Raw = (1)}
+
+\Hypertarget{current__handler_8c_a626dd7cbff1d93ea456c98a6a3db25d9}\index{current\_handler.c@{current\_handler.c}!RawTodAmps@{RawTodAmps}}
+\index{RawTodAmps@{RawTodAmps}!current\_handler.c@{current\_handler.c}}
+\doxysubsubsection{\texorpdfstring{RawTodAmps}{RawTodAmps}}
+{\footnotesize\ttfamily \label{current__handler_8c_a626dd7cbff1d93ea456c98a6a3db25d9} 
+const uint16\+\_\+t Raw\+Tod\+Amps = (1)}
+

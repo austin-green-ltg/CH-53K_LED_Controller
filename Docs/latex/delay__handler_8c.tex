@@ -1,0 +1,56 @@
+\doxysection{C\+:/\+Users/agreen/\+Documents/\+Projects/\+Aveo/\+CH-\/53\+K\+\_\+\+LED\+\_\+\+Controller/\+Core/\+Src/delay\+\_\+handler.c File Reference}
+\hypertarget{delay__handler_8c}{}\label{delay__handler_8c}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/delay\_handler.c@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/delay\_handler.c}}
+{\ttfamily \#include "{}delay\+\_\+handler.\+h"{}}\newline
+{\ttfamily \#include "{}stm32l412xx-\/bsp.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{delay__handler_8c_a01130f2e8b22877cdbef9d1dce5140a2}{Start\+Delay\+Counter}} (void)
+\item 
+void \mbox{\hyperlink{delay__handler_8c_a31c598a04fd5ed54cde4bf3cf137672c}{Restart\+Delay\+Counter}} (void)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{delay__handler_8c_a8e5217a33cd44ab8dd8942d99b1fd0ef}{Delay\+Hit}} (uint32\+\_\+t delay\+\_\+ms)
+\item 
+uint16\+\_\+t \mbox{\hyperlink{delay__handler_8c_adbef77c80230ea92a864d85fb769561d}{Brightness\+Delay}} (int8\+\_\+t brightness)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const float \mbox{\hyperlink{delay__handler_8c_a018871f2f98a37d6e958a7f41eec348f}{Tim2\+Clk\+Khz}} = (\mbox{\hyperlink{stm32l412xx-bsp_8h_a89bf1cb7ece86f095f3809b15a60e29c}{CLK\+\_\+\+FREQ\+\_\+\+HZ}} / (float)\mbox{\hyperlink{stm32l412xx-bsp_8h_a9092081c75861c95e642e032b6c48e45}{TIM2\+\_\+\+CLK\+\_\+\+DEV}} / (float)\mbox{\hyperlink{stm32l412xx-bsp_8h_afe4b25464c830cde3f147af692233ecb}{TIM2\+\_\+\+CLK\+\_\+\+PRESCALER}} / 1000.\+0f)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{delay__handler_8c_adbef77c80230ea92a864d85fb769561d}\index{delay\_handler.c@{delay\_handler.c}!BrightnessDelay@{BrightnessDelay}}
+\index{BrightnessDelay@{BrightnessDelay}!delay\_handler.c@{delay\_handler.c}}
+\doxysubsubsection{\texorpdfstring{BrightnessDelay()}{BrightnessDelay()}}
+{\footnotesize\ttfamily \label{delay__handler_8c_adbef77c80230ea92a864d85fb769561d} 
+uint16\+\_\+t Brightness\+Delay (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{brightness}{}\end{DoxyParamCaption})}
+
+\Hypertarget{delay__handler_8c_a8e5217a33cd44ab8dd8942d99b1fd0ef}\index{delay\_handler.c@{delay\_handler.c}!DelayHit@{DelayHit}}
+\index{DelayHit@{DelayHit}!delay\_handler.c@{delay\_handler.c}}
+\doxysubsubsection{\texorpdfstring{DelayHit()}{DelayHit()}}
+{\footnotesize\ttfamily \label{delay__handler_8c_a8e5217a33cd44ab8dd8942d99b1fd0ef} 
+uint8\+\_\+t Delay\+Hit (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{delay\+\_\+ms}{}\end{DoxyParamCaption})}
+
+\Hypertarget{delay__handler_8c_a31c598a04fd5ed54cde4bf3cf137672c}\index{delay\_handler.c@{delay\_handler.c}!RestartDelayCounter@{RestartDelayCounter}}
+\index{RestartDelayCounter@{RestartDelayCounter}!delay\_handler.c@{delay\_handler.c}}
+\doxysubsubsection{\texorpdfstring{RestartDelayCounter()}{RestartDelayCounter()}}
+{\footnotesize\ttfamily \label{delay__handler_8c_a31c598a04fd5ed54cde4bf3cf137672c} 
+void Restart\+Delay\+Counter (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{delay__handler_8c_a01130f2e8b22877cdbef9d1dce5140a2}\index{delay\_handler.c@{delay\_handler.c}!StartDelayCounter@{StartDelayCounter}}
+\index{StartDelayCounter@{StartDelayCounter}!delay\_handler.c@{delay\_handler.c}}
+\doxysubsubsection{\texorpdfstring{StartDelayCounter()}{StartDelayCounter()}}
+{\footnotesize\ttfamily \label{delay__handler_8c_a01130f2e8b22877cdbef9d1dce5140a2} 
+void Start\+Delay\+Counter (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{delay__handler_8c_a018871f2f98a37d6e958a7f41eec348f}\index{delay\_handler.c@{delay\_handler.c}!Tim2ClkKhz@{Tim2ClkKhz}}
+\index{Tim2ClkKhz@{Tim2ClkKhz}!delay\_handler.c@{delay\_handler.c}}
+\doxysubsubsection{\texorpdfstring{Tim2ClkKhz}{Tim2ClkKhz}}
+{\footnotesize\ttfamily \label{delay__handler_8c_a018871f2f98a37d6e958a7f41eec348f} 
+const float Tim2\+Clk\+Khz = (\mbox{\hyperlink{stm32l412xx-bsp_8h_a89bf1cb7ece86f095f3809b15a60e29c}{CLK\+\_\+\+FREQ\+\_\+\+HZ}} / (float)\mbox{\hyperlink{stm32l412xx-bsp_8h_a9092081c75861c95e642e032b6c48e45}{TIM2\+\_\+\+CLK\+\_\+\+DEV}} / (float)\mbox{\hyperlink{stm32l412xx-bsp_8h_afe4b25464c830cde3f147af692233ecb}{TIM2\+\_\+\+CLK\+\_\+\+PRESCALER}} / 1000.\+0f)}
+

@@ -1,0 +1,95 @@
+\doxysection{C\+:/\+Users/agreen/\+Documents/\+Projects/\+Aveo/\+CH-\/53\+K\+\_\+\+LED\+\_\+\+Controller/\+Core/\+Inc/pwm\+\_\+handler.h File Reference}
+\hypertarget{pwm__handler_8h}{}\label{pwm__handler_8h}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/pwm\_handler.h@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/pwm\_handler.h}}
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{pwm__handler_8h_a6c3df8dbdbdd67989551b1659654ae17}{BRIGHTNESS\+\_\+\+STEPS}}~(50)
+\item 
+\#define \mbox{\hyperlink{pwm__handler_8h_a981d0e522efb66f806ba2bc91ffa0dbe}{HOLD\+\_\+\+BRIGHTNESS\+\_\+\+JUMP}}~(3)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{pwm__handler_8h_a9e440816ccf6e7ae8f8bdea60b99fe99}{Init\+Pwm}} (void)
+\item 
+void \mbox{\hyperlink{pwm__handler_8h_a60c53e0ebfe90372ea3c89749710eb51}{Decrease\+Brightness}} (uint8\+\_\+t button\+\_\+held)
+\item 
+void \mbox{\hyperlink{pwm__handler_8h_a0c06b547eea80cb6c871750831709fe4}{Increase\+Brightness}} (uint8\+\_\+t button\+\_\+held)
+\item 
+void \mbox{\hyperlink{pwm__handler_8h_adaa12e879fd29b225bef3eb6337aff72}{Set\+Pwm}} (void)
+\item 
+void \mbox{\hyperlink{pwm__handler_8h_a90359218ff4b8771a3764beeecfb8e14}{Turn\+Off\+Pwm}} (void)
+\item 
+int8\+\_\+t \mbox{\hyperlink{pwm__handler_8h_ac59f8a6b413fe6bcf1b17a0321a2eb83}{Get\+Brightness}} (void)
+\item 
+void \mbox{\hyperlink{pwm__handler_8h_acbd970e115607eca2d51db189d67cd14}{Set\+Brightness}} (int8\+\_\+t brightness)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{pwm__handler_8h_add3ae8a15c377108bff5270b8c2f1a96}{Get\+Pwm}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{pwm__handler_8h_a6c3df8dbdbdd67989551b1659654ae17}\index{pwm\_handler.h@{pwm\_handler.h}!BRIGHTNESS\_STEPS@{BRIGHTNESS\_STEPS}}
+\index{BRIGHTNESS\_STEPS@{BRIGHTNESS\_STEPS}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{BRIGHTNESS\_STEPS}{BRIGHTNESS\_STEPS}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a6c3df8dbdbdd67989551b1659654ae17} 
+\#define BRIGHTNESS\+\_\+\+STEPS~(50)}
+
+\Hypertarget{pwm__handler_8h_a981d0e522efb66f806ba2bc91ffa0dbe}\index{pwm\_handler.h@{pwm\_handler.h}!HOLD\_BRIGHTNESS\_JUMP@{HOLD\_BRIGHTNESS\_JUMP}}
+\index{HOLD\_BRIGHTNESS\_JUMP@{HOLD\_BRIGHTNESS\_JUMP}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{HOLD\_BRIGHTNESS\_JUMP}{HOLD\_BRIGHTNESS\_JUMP}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a981d0e522efb66f806ba2bc91ffa0dbe} 
+\#define HOLD\+\_\+\+BRIGHTNESS\+\_\+\+JUMP~(3)}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{pwm__handler_8h_a60c53e0ebfe90372ea3c89749710eb51}\index{pwm\_handler.h@{pwm\_handler.h}!DecreaseBrightness@{DecreaseBrightness}}
+\index{DecreaseBrightness@{DecreaseBrightness}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{DecreaseBrightness()}{DecreaseBrightness()}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a60c53e0ebfe90372ea3c89749710eb51} 
+void Decrease\+Brightness (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{button\+\_\+held}{}\end{DoxyParamCaption})}
+
+\Hypertarget{pwm__handler_8h_ac59f8a6b413fe6bcf1b17a0321a2eb83}\index{pwm\_handler.h@{pwm\_handler.h}!GetBrightness@{GetBrightness}}
+\index{GetBrightness@{GetBrightness}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{GetBrightness()}{GetBrightness()}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_ac59f8a6b413fe6bcf1b17a0321a2eb83} 
+int8\+\_\+t Get\+Brightness (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{pwm__handler_8h_add3ae8a15c377108bff5270b8c2f1a96}\index{pwm\_handler.h@{pwm\_handler.h}!GetPwm@{GetPwm}}
+\index{GetPwm@{GetPwm}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{GetPwm()}{GetPwm()}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_add3ae8a15c377108bff5270b8c2f1a96} 
+uint8\+\_\+t Get\+Pwm (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{pwm__handler_8h_a0c06b547eea80cb6c871750831709fe4}\index{pwm\_handler.h@{pwm\_handler.h}!IncreaseBrightness@{IncreaseBrightness}}
+\index{IncreaseBrightness@{IncreaseBrightness}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{IncreaseBrightness()}{IncreaseBrightness()}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a0c06b547eea80cb6c871750831709fe4} 
+void Increase\+Brightness (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{button\+\_\+held}{}\end{DoxyParamCaption})}
+
+\Hypertarget{pwm__handler_8h_a9e440816ccf6e7ae8f8bdea60b99fe99}\index{pwm\_handler.h@{pwm\_handler.h}!InitPwm@{InitPwm}}
+\index{InitPwm@{InitPwm}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{InitPwm()}{InitPwm()}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a9e440816ccf6e7ae8f8bdea60b99fe99} 
+void Init\+Pwm (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{pwm__handler_8h_acbd970e115607eca2d51db189d67cd14}\index{pwm\_handler.h@{pwm\_handler.h}!SetBrightness@{SetBrightness}}
+\index{SetBrightness@{SetBrightness}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{SetBrightness()}{SetBrightness()}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_acbd970e115607eca2d51db189d67cd14} 
+void Set\+Brightness (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{brightness}{}\end{DoxyParamCaption})}
+
+\Hypertarget{pwm__handler_8h_adaa12e879fd29b225bef3eb6337aff72}\index{pwm\_handler.h@{pwm\_handler.h}!SetPwm@{SetPwm}}
+\index{SetPwm@{SetPwm}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{SetPwm()}{SetPwm()}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_adaa12e879fd29b225bef3eb6337aff72} 
+void Set\+Pwm (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{pwm__handler_8h_a90359218ff4b8771a3764beeecfb8e14}\index{pwm\_handler.h@{pwm\_handler.h}!TurnOffPwm@{TurnOffPwm}}
+\index{TurnOffPwm@{TurnOffPwm}!pwm\_handler.h@{pwm\_handler.h}}
+\doxysubsubsection{\texorpdfstring{TurnOffPwm()}{TurnOffPwm()}}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a90359218ff4b8771a3764beeecfb8e14} 
+void Turn\+Off\+Pwm (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+

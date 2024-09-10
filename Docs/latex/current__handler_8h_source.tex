@@ -1,0 +1,44 @@
+\doxysection{current\+\_\+handler.\+h}
+\hypertarget{current__handler_8h_source}{}\label{current__handler_8h_source}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/current\_handler.h@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/current\_handler.h}}
+\mbox{\hyperlink{current__handler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Copyright\ ©\ 2007\ Luminator\ Mark\ IV}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ All\ rights\ reserved.}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Any\ use\ without\ the\ prior\ written\ consent\ of\ Luminator\ Mark\ IV}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ is\ strictly\ prohibited.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Filename:\ current\_handler.h}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Description:\ Handles\ getting\ current\ and\ reporting\ values.}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Revision\ History:}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ Date\ \ \ \ \ \ \ -\/\ Name\ \ \ \ \ \ \ \ \ -\/\ \ Ver\ -\/\ \ Remarks}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ 08/05/2024\ -\/\ Austin\ Green\ -\/\ \ 1.0\ -\/\ \ Initial\ Document}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ Notes:}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#ifndef\ INC\_current\_handlerh}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ \ \#define\ INC\_current\_handlerh}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ \#include\ <stdint.h>}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{/*\ Current\ Range\ Enum\ */}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9a2290470927e05d1f15617c0705640ce9}{CurrentNormal}}\ \ \ =\ 0,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9a519bdd204e301dd5eff1d943c9a237d6}{CurrentHigh}}\ \ \ \ \ =\ 1,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9ab474ffd3cfd3bcd6dca585ea4147b48a}{CurrentError}}\ \ \ \ =\ 2}
+\DoxyCodeLine{00032\ \ \ \ \ \}\ \mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9}{CurrentRange\_e}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{/*\ Get\ Current\ */}}
+\DoxyCodeLine{00035\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{current__handler_8h_a95eb31cc890c352c57fe793085fd51d5}{GetCurrent}}(\ \textcolor{keywordtype}{void}\ );\ \textcolor{comment}{//\ in\ dA}}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{current__handler_8h_a7c642c4146e90b830b50cccac4f759f9}{CurrentRange\_e}}\ \mbox{\hyperlink{current__handler_8h_a40d6c981d70b2e2dbf03d7c359cee4e3}{GetCurrentRange}}(\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_current\_handlerh\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

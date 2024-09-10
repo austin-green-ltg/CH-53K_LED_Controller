@@ -1,0 +1,201 @@
+\doxysection{C\+:/\+Users/agreen/\+Documents/\+Projects/\+Aveo/\+CH-\/53\+K\+\_\+\+LED\+\_\+\+Controller/\+Core/\+Src/fram.c File Reference}
+\hypertarget{fram_8c}{}\label{fram_8c}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/fram.c@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/fram.c}}
+
+
+This module contains routines to access the SPI FRAM. The FRAM used in the device is 32Kx8 with an operating frequency up to 20 MHz. It supports SPI Mode 0 \& 3. The hardware supports the external Write Protect pin. The nature of this FRAM supports unlimited read/writes and data retention beyond the human life span.  
+
+
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include "{}fram.\+h"{}}\newline
+{\ttfamily \#include "{}stm32l412xx-\/bsp.\+h"{}}\newline
+{\ttfamily \#include "{}spi.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fram_8c_a96014a5c4f5d29b39497c7b092664a4d}{TLEN}}~(16)
+\item 
+\#define \mbox{\hyperlink{fram_8c_a5dae32b33805cf2d1e07fed61a3c7a18}{TADD}}~(0x200)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{fram_8c_ab161ab3aba124eb0f3b73a15e3c737b1}{fram\+Write\+Protect}} (\mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\+\_\+\+PROTECT\+\_\+\+STATE}} state)
+\item 
+void \mbox{\hyperlink{fram_8c_a1cc4c164fcdbd54ca4d5b19508cef750}{fram\+Chip\+Select}} (\mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\+\_\+\+SELECT\+\_\+\+STATE}} state)
+\item 
+void \mbox{\hyperlink{fram_8c_a0005b800457c3882707e63b8b923bd06}{fram\+Read\+Sr}} (unsigned char \texorpdfstring{$\ast$}{*}srP)
+\item 
+void \mbox{\hyperlink{fram_8c_ac737a2768b12f0024b0f8dedc13b7ab5}{fram\+Write\+Sr}} (unsigned char sr)
+\item 
+void \mbox{\hyperlink{fram_8c_a2ffb673dd7a356af306c1743be126f32}{fram\+Write\+Disable}} (void)
+\item 
+void \mbox{\hyperlink{fram_8c_acb185ced7935a54189236f881375faa0}{fram\+Write\+Enable}} (void)
+\item 
+void \mbox{\hyperlink{fram_8c_a846ddd3d47bcd581b49e778e70980fc1}{fram\+Read\+Memory}} (unsigned short addr, unsigned char \texorpdfstring{$\ast$}{*}rd\+BufP, unsigned short len)
+\item 
+void \mbox{\hyperlink{fram_8c_abad0fbfb7245cc5a79e994680676140b}{fram\+Write\+Memory}} (unsigned short addr, const unsigned char \texorpdfstring{$\ast$}{*}const wr\+BufP, unsigned short len)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{fram_8c_a177b1c03338f9f1cddb4200e412c1f11}{fram\+Test}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This module contains routines to access the SPI FRAM. The FRAM used in the device is 32Kx8 with an operating frequency up to 20 MHz. It supports SPI Mode 0 \& 3. The hardware supports the external Write Protect pin. The nature of this FRAM supports unlimited read/writes and data retention beyond the human life span. 
+
+\begin{DoxyAttention}{Attention}
+Copyright (c) 2022, 2023 Luminator, An LTG Company All rights reserved. Any use without the prior written consent of Luminator, An LTG Company is strictly prohibited.
+\end{DoxyAttention}
+
+
+Revision History\+: Date Name Ver Remarks \DoxyHorRuler{0}
+ 04/09/2023 Mark Lane 0 Original Version 06/10/2024 Austin Green 1 Add Logging 08/12/2024 Austin Green 1.\+2 Remove Mirror References
+
+Notes\+: 
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{fram_8c_a5dae32b33805cf2d1e07fed61a3c7a18}\index{fram.c@{fram.c}!TADD@{TADD}}
+\index{TADD@{TADD}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{TADD}{TADD}}
+{\footnotesize\ttfamily \label{fram_8c_a5dae32b33805cf2d1e07fed61a3c7a18} 
+\#define TADD~(0x200)}
+
+\Hypertarget{fram_8c_a96014a5c4f5d29b39497c7b092664a4d}\index{fram.c@{fram.c}!TLEN@{TLEN}}
+\index{TLEN@{TLEN}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{TLEN}{TLEN}}
+{\footnotesize\ttfamily \label{fram_8c_a96014a5c4f5d29b39497c7b092664a4d} 
+\#define TLEN~(16)}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{fram_8c_a1cc4c164fcdbd54ca4d5b19508cef750}\index{fram.c@{fram.c}!framChipSelect@{framChipSelect}}
+\index{framChipSelect@{framChipSelect}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{framChipSelect()}{framChipSelect()}}
+{\footnotesize\ttfamily \label{fram_8c_a1cc4c164fcdbd54ca4d5b19508cef750} 
+void fram\+Chip\+Select (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\+\_\+\+SELECT\+\_\+\+STATE}}}]{state}{}\end{DoxyParamCaption})}
+
+This routine sets the chip select pin to the correct "{}state"{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em state} & assert = 0, release = 1 \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8c_a846ddd3d47bcd581b49e778e70980fc1}\index{fram.c@{fram.c}!framReadMemory@{framReadMemory}}
+\index{framReadMemory@{framReadMemory}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{framReadMemory()}{framReadMemory()}}
+{\footnotesize\ttfamily \label{fram_8c_a846ddd3d47bcd581b49e778e70980fc1} 
+void fram\+Read\+Memory (\begin{DoxyParamCaption}\item[{unsigned short}]{addr}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{rd\+BufP}{, }\item[{unsigned short}]{len}{}\end{DoxyParamCaption})}
+
+This routine reads FRAM memory starting at "{}addr"{} for "{}len"{} byte(s). The FRAM read data is stored at the pointer referenced by "{}rd\+Buf\+P"{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em addr} & FRAM memory address to read data \\
+\hline
+\mbox{\texttt{ in}}  & {\em rd\+BufP} & destination pointer to store read data \\
+\hline
+\mbox{\texttt{ in}}  & {\em len} & number of byte(s) to read \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8c_a0005b800457c3882707e63b8b923bd06}\index{fram.c@{fram.c}!framReadSr@{framReadSr}}
+\index{framReadSr@{framReadSr}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{framReadSr()}{framReadSr()}}
+{\footnotesize\ttfamily \label{fram_8c_a0005b800457c3882707e63b8b923bd06} 
+void fram\+Read\+Sr (\begin{DoxyParamCaption}\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{srP}{}\end{DoxyParamCaption})}
+
+This routine reads the FRAM status register
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em destination} & pointer for FRAM status register \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8c_a177b1c03338f9f1cddb4200e412c1f11}\index{fram.c@{fram.c}!framTest@{framTest}}
+\index{framTest@{framTest}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{framTest()}{framTest()}}
+{\footnotesize\ttfamily \label{fram_8c_a177b1c03338f9f1cddb4200e412c1f11} 
+uint8\+\_\+t fram\+Test (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+This routine is a test function for FRAM access. It writes "{}\+TLEN"{} bytes of an incrementing pattern into FRAM at address "{}\+TADD"{}. It reads the same length into a buffer and verifies the pattern. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em pass} & = 1, fail = 0 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8c_a2ffb673dd7a356af306c1743be126f32}\index{fram.c@{fram.c}!framWriteDisable@{framWriteDisable}}
+\index{framWriteDisable@{framWriteDisable}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{framWriteDisable()}{framWriteDisable()}}
+{\footnotesize\ttfamily \label{fram_8c_a2ffb673dd7a356af306c1743be126f32} 
+void fram\+Write\+Disable (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+This routine resets the write enable latch 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8c_acb185ced7935a54189236f881375faa0}\index{fram.c@{fram.c}!framWriteEnable@{framWriteEnable}}
+\index{framWriteEnable@{framWriteEnable}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{framWriteEnable()}{framWriteEnable()}}
+{\footnotesize\ttfamily \label{fram_8c_acb185ced7935a54189236f881375faa0} 
+void fram\+Write\+Enable (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+This routine sets the write enable latch 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8c_abad0fbfb7245cc5a79e994680676140b}\index{fram.c@{fram.c}!framWriteMemory@{framWriteMemory}}
+\index{framWriteMemory@{framWriteMemory}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{framWriteMemory()}{framWriteMemory()}}
+{\footnotesize\ttfamily \label{fram_8c_abad0fbfb7245cc5a79e994680676140b} 
+void fram\+Write\+Memory (\begin{DoxyParamCaption}\item[{unsigned short}]{addr}{, }\item[{const unsigned char \texorpdfstring{$\ast$}{*}const}]{wr\+BufP}{, }\item[{unsigned short}]{len}{}\end{DoxyParamCaption})}
+
+This routine writes FRAM memory starting at "{}addr"{} for "{}len"{} byte(s). The data referenced by the pointer "{}wr\+Buf\+P"{} is written into FRAM memory.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em addr} & FRAM memory address to write data \\
+\hline
+\mbox{\texttt{ in}}  & {\em wr\+BufP} & pointer to data to write \\
+\hline
+\mbox{\texttt{ in}}  & {\em len} & number of byte(s) to write \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8c_ab161ab3aba124eb0f3b73a15e3c737b1}\index{fram.c@{fram.c}!framWriteProtect@{framWriteProtect}}
+\index{framWriteProtect@{framWriteProtect}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{framWriteProtect()}{framWriteProtect()}}
+{\footnotesize\ttfamily \label{fram_8c_ab161ab3aba124eb0f3b73a15e3c737b1} 
+void fram\+Write\+Protect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\+\_\+\+PROTECT\+\_\+\+STATE}}}]{state}{}\end{DoxyParamCaption})}
+
+This routine sets the hardware write protect pin to the correct "{}state"{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em state} & disable = 0, enable = 1 \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8c_ac737a2768b12f0024b0f8dedc13b7ab5}\index{fram.c@{fram.c}!framWriteSr@{framWriteSr}}
+\index{framWriteSr@{framWriteSr}!fram.c@{fram.c}}
+\doxysubsubsection{\texorpdfstring{framWriteSr()}{framWriteSr()}}
+{\footnotesize\ttfamily \label{fram_8c_ac737a2768b12f0024b0f8dedc13b7ab5} 
+void fram\+Write\+Sr (\begin{DoxyParamCaption}\item[{unsigned char}]{sr}{}\end{DoxyParamCaption})}
+
+This routine writes the FRAM status register
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em data} & value written to FRAM status register \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}

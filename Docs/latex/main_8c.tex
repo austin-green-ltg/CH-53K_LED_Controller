@@ -1,0 +1,134 @@
+\doxysection{C\+:/\+Users/agreen/\+Documents/\+Projects/\+Aveo/\+CH-\/53\+K\+\_\+\+LED\+\_\+\+Controller/\+Core/\+Src/main.c File Reference}
+\hypertarget{main_8c}{}\label{main_8c}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/main.c@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/main.c}}
+{\ttfamily \#include "{}main.\+h"{}}\newline
+{\ttfamily \#include "{}stm32l412xx-\/bsp.\+h"{}}\newline
+{\ttfamily \#include "{}pwm\+\_\+handler.\+h"{}}\newline
+{\ttfamily \#include "{}delay\+\_\+handler.\+h"{}}\newline
+{\ttfamily \#include "{}button\+\_\+handler.\+h"{}}\newline
+{\ttfamily \#include "{}current\+\_\+handler.\+h"{}}\newline
+{\ttfamily \#include "{}voltage\+\_\+handler.\+h"{}}\newline
+{\ttfamily \#include "{}my\+\_\+printf.\+h"{}}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8c_a34be7c33080b399a0f4e7fcd76daa499}{LOWER\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS}}~(3375)
+\item 
+\#define \mbox{\hyperlink{main_8c_a04b3db09bb7811f8e33a8b53712749aa}{UPPER\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS}}~(4000)
+\item 
+\#define \mbox{\hyperlink{main_8c_ace0215e3e3e6ed2db57518cb850a3e40}{TOTAL\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS}}~(7375)
+\item 
+\#define \mbox{\hyperlink{main_8c_aab3fbd2b48b170a9920de0305d08b7c7}{LOWER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}}~(\mbox{\hyperlink{main_8c_a34be7c33080b399a0f4e7fcd76daa499}{LOWER\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS}} / (\mbox{\hyperlink{pwm__handler_8h_a6c3df8dbdbdd67989551b1659654ae17}{BRIGHTNESS\+\_\+\+STEPS}} / 2.\+0f))
+\item 
+\#define \mbox{\hyperlink{main_8c_a63592cf1162ebc5bddbfb8b7c39ac7fa}{UPPER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}}~(\mbox{\hyperlink{main_8c_a04b3db09bb7811f8e33a8b53712749aa}{UPPER\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS}} / (\mbox{\hyperlink{pwm__handler_8h_a6c3df8dbdbdd67989551b1659654ae17}{BRIGHTNESS\+\_\+\+STEPS}} / 2.\+0f))
+\item 
+\#define \mbox{\hyperlink{main_8c_a15e4eb9add2d6b401da27faa199f3c8e}{AVG\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}}~((\mbox{\hyperlink{main_8c_a63592cf1162ebc5bddbfb8b7c39ac7fa}{UPPER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}} + \mbox{\hyperlink{main_8c_aab3fbd2b48b170a9920de0305d08b7c7}{LOWER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}}) / 2.\+0f)
+\item 
+\#define \mbox{\hyperlink{main_8c_afca894146d4d752300278e8bedbfe9d9}{AVG\+\_\+\+STEP\+\_\+\+DIFF\+\_\+\+MS}}~(\mbox{\hyperlink{main_8c_a15e4eb9add2d6b401da27faa199f3c8e}{AVG\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}}    -\/ \mbox{\hyperlink{main_8c_aab3fbd2b48b170a9920de0305d08b7c7}{LOWER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8c_a70af21c671abfcc773614a9a4f63d920}{System\+Clock\+\_\+\+Config}} (void)
+\begin{DoxyCompactList}\small\item\em System Clock Configuration. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em The application entry point. Initialize variables and go into bare metal loop. Polls buttons and sensors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const float \mbox{\hyperlink{main_8c_a97a574e44c78e227cc3d1dbdb6208154}{Low\+Step\+Time\+Ms}} = (\mbox{\hyperlink{main_8c_aab3fbd2b48b170a9920de0305d08b7c7}{LOWER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}} -\/ \mbox{\hyperlink{main_8c_afca894146d4d752300278e8bedbfe9d9}{AVG\+\_\+\+STEP\+\_\+\+DIFF\+\_\+\+MS}})
+\item 
+const float \mbox{\hyperlink{main_8c_ad9c4944c90a603edf2c35ad3681d8ad1}{High\+Step\+Time\+Ms}} = (\mbox{\hyperlink{main_8c_a63592cf1162ebc5bddbfb8b7c39ac7fa}{UPPER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}} + \mbox{\hyperlink{main_8c_afca894146d4d752300278e8bedbfe9d9}{AVG\+\_\+\+STEP\+\_\+\+DIFF\+\_\+\+MS}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main_8c_afca894146d4d752300278e8bedbfe9d9}\index{main.c@{main.c}!AVG\_STEP\_DIFF\_MS@{AVG\_STEP\_DIFF\_MS}}
+\index{AVG\_STEP\_DIFF\_MS@{AVG\_STEP\_DIFF\_MS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{AVG\_STEP\_DIFF\_MS}{AVG\_STEP\_DIFF\_MS}}
+{\footnotesize\ttfamily \label{main_8c_afca894146d4d752300278e8bedbfe9d9} 
+\#define AVG\+\_\+\+STEP\+\_\+\+DIFF\+\_\+\+MS~(\mbox{\hyperlink{main_8c_a15e4eb9add2d6b401da27faa199f3c8e}{AVG\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}}    -\/ \mbox{\hyperlink{main_8c_aab3fbd2b48b170a9920de0305d08b7c7}{LOWER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}})}
+
+\Hypertarget{main_8c_a15e4eb9add2d6b401da27faa199f3c8e}\index{main.c@{main.c}!AVG\_STEP\_TIME\_MS@{AVG\_STEP\_TIME\_MS}}
+\index{AVG\_STEP\_TIME\_MS@{AVG\_STEP\_TIME\_MS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{AVG\_STEP\_TIME\_MS}{AVG\_STEP\_TIME\_MS}}
+{\footnotesize\ttfamily \label{main_8c_a15e4eb9add2d6b401da27faa199f3c8e} 
+\#define AVG\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS~((\mbox{\hyperlink{main_8c_a63592cf1162ebc5bddbfb8b7c39ac7fa}{UPPER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}} + \mbox{\hyperlink{main_8c_aab3fbd2b48b170a9920de0305d08b7c7}{LOWER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}}) / 2.\+0f)}
+
+\Hypertarget{main_8c_aab3fbd2b48b170a9920de0305d08b7c7}\index{main.c@{main.c}!LOWER\_STEP\_TIME\_MS@{LOWER\_STEP\_TIME\_MS}}
+\index{LOWER\_STEP\_TIME\_MS@{LOWER\_STEP\_TIME\_MS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{LOWER\_STEP\_TIME\_MS}{LOWER\_STEP\_TIME\_MS}}
+{\footnotesize\ttfamily \label{main_8c_aab3fbd2b48b170a9920de0305d08b7c7} 
+\#define LOWER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS~(\mbox{\hyperlink{main_8c_a34be7c33080b399a0f4e7fcd76daa499}{LOWER\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS}} / (\mbox{\hyperlink{pwm__handler_8h_a6c3df8dbdbdd67989551b1659654ae17}{BRIGHTNESS\+\_\+\+STEPS}} / 2.\+0f))}
+
+\Hypertarget{main_8c_a34be7c33080b399a0f4e7fcd76daa499}\index{main.c@{main.c}!LOWER\_SWEEP\_TIME\_MS@{LOWER\_SWEEP\_TIME\_MS}}
+\index{LOWER\_SWEEP\_TIME\_MS@{LOWER\_SWEEP\_TIME\_MS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{LOWER\_SWEEP\_TIME\_MS}{LOWER\_SWEEP\_TIME\_MS}}
+{\footnotesize\ttfamily \label{main_8c_a34be7c33080b399a0f4e7fcd76daa499} 
+\#define LOWER\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS~(3375)}
+
+\Hypertarget{main_8c_ace0215e3e3e6ed2db57518cb850a3e40}\index{main.c@{main.c}!TOTAL\_SWEEP\_TIME\_MS@{TOTAL\_SWEEP\_TIME\_MS}}
+\index{TOTAL\_SWEEP\_TIME\_MS@{TOTAL\_SWEEP\_TIME\_MS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{TOTAL\_SWEEP\_TIME\_MS}{TOTAL\_SWEEP\_TIME\_MS}}
+{\footnotesize\ttfamily \label{main_8c_ace0215e3e3e6ed2db57518cb850a3e40} 
+\#define TOTAL\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS~(7375)}
+
+\Hypertarget{main_8c_a63592cf1162ebc5bddbfb8b7c39ac7fa}\index{main.c@{main.c}!UPPER\_STEP\_TIME\_MS@{UPPER\_STEP\_TIME\_MS}}
+\index{UPPER\_STEP\_TIME\_MS@{UPPER\_STEP\_TIME\_MS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{UPPER\_STEP\_TIME\_MS}{UPPER\_STEP\_TIME\_MS}}
+{\footnotesize\ttfamily \label{main_8c_a63592cf1162ebc5bddbfb8b7c39ac7fa} 
+\#define UPPER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS~(\mbox{\hyperlink{main_8c_a04b3db09bb7811f8e33a8b53712749aa}{UPPER\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS}} / (\mbox{\hyperlink{pwm__handler_8h_a6c3df8dbdbdd67989551b1659654ae17}{BRIGHTNESS\+\_\+\+STEPS}} / 2.\+0f))}
+
+\Hypertarget{main_8c_a04b3db09bb7811f8e33a8b53712749aa}\index{main.c@{main.c}!UPPER\_SWEEP\_TIME\_MS@{UPPER\_SWEEP\_TIME\_MS}}
+\index{UPPER\_SWEEP\_TIME\_MS@{UPPER\_SWEEP\_TIME\_MS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{UPPER\_SWEEP\_TIME\_MS}{UPPER\_SWEEP\_TIME\_MS}}
+{\footnotesize\ttfamily \label{main_8c_a04b3db09bb7811f8e33a8b53712749aa} 
+\#define UPPER\+\_\+\+SWEEP\+\_\+\+TIME\+\_\+\+MS~(4000)}
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8c_a840291bc02cba5474a4cb46a9b9566fe}\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8c_a840291bc02cba5474a4cb46a9b9566fe} 
+int main (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+The application entry point. Initialize variables and go into bare metal loop. Polls buttons and sensors. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em int} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{main_8c_a70af21c671abfcc773614a9a4f63d920}\index{main.c@{main.c}!SystemClock\_Config@{SystemClock\_Config}}
+\index{SystemClock\_Config@{SystemClock\_Config}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{SystemClock\_Config()}{SystemClock\_Config()}}
+{\footnotesize\ttfamily \label{main_8c_a70af21c671abfcc773614a9a4f63d920} 
+void System\+Clock\+\_\+\+Config (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+System Clock Configuration. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8c_ad9c4944c90a603edf2c35ad3681d8ad1}\index{main.c@{main.c}!HighStepTimeMs@{HighStepTimeMs}}
+\index{HighStepTimeMs@{HighStepTimeMs}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{HighStepTimeMs}{HighStepTimeMs}}
+{\footnotesize\ttfamily \label{main_8c_ad9c4944c90a603edf2c35ad3681d8ad1} 
+const float High\+Step\+Time\+Ms = (\mbox{\hyperlink{main_8c_a63592cf1162ebc5bddbfb8b7c39ac7fa}{UPPER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}} + \mbox{\hyperlink{main_8c_afca894146d4d752300278e8bedbfe9d9}{AVG\+\_\+\+STEP\+\_\+\+DIFF\+\_\+\+MS}})}
+
+\Hypertarget{main_8c_a97a574e44c78e227cc3d1dbdb6208154}\index{main.c@{main.c}!LowStepTimeMs@{LowStepTimeMs}}
+\index{LowStepTimeMs@{LowStepTimeMs}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{LowStepTimeMs}{LowStepTimeMs}}
+{\footnotesize\ttfamily \label{main_8c_a97a574e44c78e227cc3d1dbdb6208154} 
+const float Low\+Step\+Time\+Ms = (\mbox{\hyperlink{main_8c_aab3fbd2b48b170a9920de0305d08b7c7}{LOWER\+\_\+\+STEP\+\_\+\+TIME\+\_\+\+MS}} -\/ \mbox{\hyperlink{main_8c_afca894146d4d752300278e8bedbfe9d9}{AVG\+\_\+\+STEP\+\_\+\+DIFF\+\_\+\+MS}})}
+

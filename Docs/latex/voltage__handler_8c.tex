@@ -1,0 +1,82 @@
+\doxysection{C\+:/\+Users/agreen/\+Documents/\+Projects/\+Aveo/\+CH-\/53\+K\+\_\+\+LED\+\_\+\+Controller/\+Core/\+Src/voltage\+\_\+handler.c File Reference}
+\hypertarget{voltage__handler_8c}{}\label{voltage__handler_8c}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/voltage\_handler.c@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/voltage\_handler.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include "{}voltage\+\_\+handler.\+h"{}}\newline
+{\ttfamily \#include "{}stm32l412xx-\/bsp.\+h"{}}\newline
+{\ttfamily \#include "{}logger.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{voltage__handler_8c_a4955e8a43489319badeaa2662335d973}{Get\+Voltage}} (void)
+\item 
+\mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293}{Voltage\+Range\+\_\+e}} \mbox{\hyperlink{voltage__handler_8c_a9181a4920cc377e8fe19d337eacd1f30}{Get\+Voltage\+Range}} (void)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{voltage__handler_8c_a9993902105c9d06c8177ba1ded49d242}{Raw\+Tod\+Colts}} = (1)
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{voltage__handler_8c_a9689adc2bff35a3d4e5d30e2977b2dfb}{d\+Colts\+To\+Raw}} = (1)
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{voltage__handler_8c_a9986bb42123fcc69ec41db68f4ace9b7}{Voltage\+Error\+Low\+Threshold\+\_\+dV}} = 240u
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{voltage__handler_8c_ad2d8201d0085372691e2f3801f97e6e5}{Voltage\+Low\+Threshold\+\_\+dV}} = 260u
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{voltage__handler_8c_a6ccadb3c923f3e0688e656db23c5ab4a}{Voltage\+High\+Threshold\+\_\+dV}} = 300u
+\item 
+const uint16\+\_\+t \mbox{\hyperlink{voltage__handler_8c_ac6341e961fd6a44211a97a6104bd802f}{Voltage\+Error\+High\+Threshold\+\_\+dV}} = 320u
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{voltage__handler_8c_a4955e8a43489319badeaa2662335d973}\index{voltage\_handler.c@{voltage\_handler.c}!GetVoltage@{GetVoltage}}
+\index{GetVoltage@{GetVoltage}!voltage\_handler.c@{voltage\_handler.c}}
+\doxysubsubsection{\texorpdfstring{GetVoltage()}{GetVoltage()}}
+{\footnotesize\ttfamily \label{voltage__handler_8c_a4955e8a43489319badeaa2662335d973} 
+uint16\+\_\+t Get\+Voltage (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{voltage__handler_8c_a9181a4920cc377e8fe19d337eacd1f30}\index{voltage\_handler.c@{voltage\_handler.c}!GetVoltageRange@{GetVoltageRange}}
+\index{GetVoltageRange@{GetVoltageRange}!voltage\_handler.c@{voltage\_handler.c}}
+\doxysubsubsection{\texorpdfstring{GetVoltageRange()}{GetVoltageRange()}}
+{\footnotesize\ttfamily \label{voltage__handler_8c_a9181a4920cc377e8fe19d337eacd1f30} 
+\mbox{\hyperlink{voltage__handler_8h_a9df5e007c9e7817a315de169e5d2f293}{Voltage\+Range\+\_\+e}} Get\+Voltage\+Range (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{voltage__handler_8c_a9689adc2bff35a3d4e5d30e2977b2dfb}\index{voltage\_handler.c@{voltage\_handler.c}!dColtsToRaw@{dColtsToRaw}}
+\index{dColtsToRaw@{dColtsToRaw}!voltage\_handler.c@{voltage\_handler.c}}
+\doxysubsubsection{\texorpdfstring{dColtsToRaw}{dColtsToRaw}}
+{\footnotesize\ttfamily \label{voltage__handler_8c_a9689adc2bff35a3d4e5d30e2977b2dfb} 
+const uint16\+\_\+t d\+Colts\+To\+Raw = (1)}
+
+\Hypertarget{voltage__handler_8c_a9993902105c9d06c8177ba1ded49d242}\index{voltage\_handler.c@{voltage\_handler.c}!RawTodColts@{RawTodColts}}
+\index{RawTodColts@{RawTodColts}!voltage\_handler.c@{voltage\_handler.c}}
+\doxysubsubsection{\texorpdfstring{RawTodColts}{RawTodColts}}
+{\footnotesize\ttfamily \label{voltage__handler_8c_a9993902105c9d06c8177ba1ded49d242} 
+const uint16\+\_\+t Raw\+Tod\+Colts = (1)}
+
+\Hypertarget{voltage__handler_8c_ac6341e961fd6a44211a97a6104bd802f}\index{voltage\_handler.c@{voltage\_handler.c}!VoltageErrorHighThreshold\_dV@{VoltageErrorHighThreshold\_dV}}
+\index{VoltageErrorHighThreshold\_dV@{VoltageErrorHighThreshold\_dV}!voltage\_handler.c@{voltage\_handler.c}}
+\doxysubsubsection{\texorpdfstring{VoltageErrorHighThreshold\_dV}{VoltageErrorHighThreshold\_dV}}
+{\footnotesize\ttfamily \label{voltage__handler_8c_ac6341e961fd6a44211a97a6104bd802f} 
+const uint16\+\_\+t Voltage\+Error\+High\+Threshold\+\_\+dV = 320u}
+
+\Hypertarget{voltage__handler_8c_a9986bb42123fcc69ec41db68f4ace9b7}\index{voltage\_handler.c@{voltage\_handler.c}!VoltageErrorLowThreshold\_dV@{VoltageErrorLowThreshold\_dV}}
+\index{VoltageErrorLowThreshold\_dV@{VoltageErrorLowThreshold\_dV}!voltage\_handler.c@{voltage\_handler.c}}
+\doxysubsubsection{\texorpdfstring{VoltageErrorLowThreshold\_dV}{VoltageErrorLowThreshold\_dV}}
+{\footnotesize\ttfamily \label{voltage__handler_8c_a9986bb42123fcc69ec41db68f4ace9b7} 
+const uint16\+\_\+t Voltage\+Error\+Low\+Threshold\+\_\+dV = 240u}
+
+\Hypertarget{voltage__handler_8c_a6ccadb3c923f3e0688e656db23c5ab4a}\index{voltage\_handler.c@{voltage\_handler.c}!VoltageHighThreshold\_dV@{VoltageHighThreshold\_dV}}
+\index{VoltageHighThreshold\_dV@{VoltageHighThreshold\_dV}!voltage\_handler.c@{voltage\_handler.c}}
+\doxysubsubsection{\texorpdfstring{VoltageHighThreshold\_dV}{VoltageHighThreshold\_dV}}
+{\footnotesize\ttfamily \label{voltage__handler_8c_a6ccadb3c923f3e0688e656db23c5ab4a} 
+const uint16\+\_\+t Voltage\+High\+Threshold\+\_\+dV = 300u}
+
+\Hypertarget{voltage__handler_8c_ad2d8201d0085372691e2f3801f97e6e5}\index{voltage\_handler.c@{voltage\_handler.c}!VoltageLowThreshold\_dV@{VoltageLowThreshold\_dV}}
+\index{VoltageLowThreshold\_dV@{VoltageLowThreshold\_dV}!voltage\_handler.c@{voltage\_handler.c}}
+\doxysubsubsection{\texorpdfstring{VoltageLowThreshold\_dV}{VoltageLowThreshold\_dV}}
+{\footnotesize\ttfamily \label{voltage__handler_8c_ad2d8201d0085372691e2f3801f97e6e5} 
+const uint16\+\_\+t Voltage\+Low\+Threshold\+\_\+dV = 260u}
+

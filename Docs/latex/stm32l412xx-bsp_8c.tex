@@ -1,0 +1,186 @@
+\doxysection{C\+:/\+Users/agreen/\+Documents/\+Projects/\+Aveo/\+CH-\/53\+K\+\_\+\+LED\+\_\+\+Controller/\+Core/\+Src/stm32l412xx-\/bsp.c File Reference}
+\hypertarget{stm32l412xx-bsp_8c}{}\label{stm32l412xx-bsp_8c}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/stm32l412xx-\/bsp.c@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/stm32l412xx-\/bsp.c}}
+{\ttfamily \#include "{}stm32l412xx-\/bsp.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{stm32l412xx-bsp_8c_a592b35fea37a6a5786d20ad01da8ebd0}{Read\+Dim\+Pin}} (void)
+\item 
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{stm32l412xx-bsp_8c_acf26ef503b4853b39e91017a7a88aa4d}{Read\+Bright\+Pin}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a675fed9bf5609c7bb38e53ccf6e688ff}{Enable\+PWM1}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a788e8a49edbe621a47fd0c00dd9a03a8}{Disable\+PWM1}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a777f2f61eed8154b12d938cb4d8c6bd2}{Start\+PWM11}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a03091f501e219ec8815f84a532a9b628}{Stop\+PWM11}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a53c1adb0805fad4069d835fa3f309d23}{Set\+PW11}} (uint32\+\_\+t pulse\+\_\+width)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a4f204e0a112a0eb5f575c5c896114ada}{Start\+TIM2}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a4aabf3596c59b2fadc4dbcaed98eee80}{Restart\+TIM2}} (void)
+\item 
+uint32\+\_\+t \mbox{\hyperlink{stm32l412xx-bsp_8c_a022e77db964e86b426cf89d4a79e1414}{Get\+TIM2\+Cnt}} (void)
+\item 
+int16\+\_\+t \mbox{\hyperlink{stm32l412xx-bsp_8c_af36ad1f9bd2e3dcbea2cf846da6da574}{Get\+Thermistor\+Value}} (void)
+\item 
+int16\+\_\+t \mbox{\hyperlink{stm32l412xx-bsp_8c_adc10fd0a6d96b6cebbfc030f45f28bee}{Get\+Current\+Value}} (void)
+\item 
+int16\+\_\+t \mbox{\hyperlink{stm32l412xx-bsp_8c_a42c7df0f7332ef35b29acfd1fefb73c3}{Get\+Voltage\+Value}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_ad18c863b1fd8814cd1cdc317e6d1bb57}{enable\+Write\+Protect}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a4177cae560421f9acf1f61d5609fb84e}{disable\+Write\+Protect}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_ab0eaacbd41b43489907c5d804fcc0e27}{enable\+Chip\+Select}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a9d14801c40acff3953247ae971371529}{disable\+Chip\+Select}} (void)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a6f89ccdfbb99b0acbf97aa09be1cde3d}{transfer\+Data}} (const unsigned char \texorpdfstring{$\ast$}{*}const tx\+Data, const uint32\+\_\+t bytes)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a902bd11e69418f9a4fad38cbc8195e79}{receive\+Data}} (unsigned char \texorpdfstring{$\ast$}{*}rx\+Data, const uint32\+\_\+t bytes)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a31cb479ffb8be9316c448a548ef7c55b}{send\+UARTChar}} (char c)
+\item 
+void \mbox{\hyperlink{stm32l412xx-bsp_8c_a1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Handler}} (void)
+\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{stm32l412xx-bsp_8c_a9d14801c40acff3953247ae971371529}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!disableChipSelect@{disableChipSelect}}
+\index{disableChipSelect@{disableChipSelect}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{disableChipSelect()}{disableChipSelect()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a9d14801c40acff3953247ae971371529} 
+void disable\+Chip\+Select (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a788e8a49edbe621a47fd0c00dd9a03a8}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!DisablePWM1@{DisablePWM1}}
+\index{DisablePWM1@{DisablePWM1}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{DisablePWM1()}{DisablePWM1()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a788e8a49edbe621a47fd0c00dd9a03a8} 
+void Disable\+PWM1 (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a4177cae560421f9acf1f61d5609fb84e}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!disableWriteProtect@{disableWriteProtect}}
+\index{disableWriteProtect@{disableWriteProtect}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{disableWriteProtect()}{disableWriteProtect()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a4177cae560421f9acf1f61d5609fb84e} 
+void disable\+Write\+Protect (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_ab0eaacbd41b43489907c5d804fcc0e27}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!enableChipSelect@{enableChipSelect}}
+\index{enableChipSelect@{enableChipSelect}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{enableChipSelect()}{enableChipSelect()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_ab0eaacbd41b43489907c5d804fcc0e27} 
+void enable\+Chip\+Select (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a675fed9bf5609c7bb38e53ccf6e688ff}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!EnablePWM1@{EnablePWM1}}
+\index{EnablePWM1@{EnablePWM1}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{EnablePWM1()}{EnablePWM1()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a675fed9bf5609c7bb38e53ccf6e688ff} 
+void Enable\+PWM1 (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_ad18c863b1fd8814cd1cdc317e6d1bb57}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!enableWriteProtect@{enableWriteProtect}}
+\index{enableWriteProtect@{enableWriteProtect}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{enableWriteProtect()}{enableWriteProtect()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_ad18c863b1fd8814cd1cdc317e6d1bb57} 
+void enable\+Write\+Protect (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a1730ffe1e560465665eb47d9264826f9}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!Error\_Handler@{Error\_Handler}}
+\index{Error\_Handler@{Error\_Handler}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{Error\_Handler()}{Error\_Handler()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a1730ffe1e560465665eb47d9264826f9} 
+void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+This function is executed in case of error occurrence. 
+
+
+\begin{DoxyRetVals}{Return values}
+{\em None} & \\
+\hline
+\end{DoxyRetVals}
+\Hypertarget{stm32l412xx-bsp_8c_adc10fd0a6d96b6cebbfc030f45f28bee}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!GetCurrentValue@{GetCurrentValue}}
+\index{GetCurrentValue@{GetCurrentValue}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{GetCurrentValue()}{GetCurrentValue()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_adc10fd0a6d96b6cebbfc030f45f28bee} 
+int16\+\_\+t Get\+Current\+Value (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_af36ad1f9bd2e3dcbea2cf846da6da574}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!GetThermistorValue@{GetThermistorValue}}
+\index{GetThermistorValue@{GetThermistorValue}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{GetThermistorValue()}{GetThermistorValue()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_af36ad1f9bd2e3dcbea2cf846da6da574} 
+int16\+\_\+t Get\+Thermistor\+Value (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a022e77db964e86b426cf89d4a79e1414}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!GetTIM2Cnt@{GetTIM2Cnt}}
+\index{GetTIM2Cnt@{GetTIM2Cnt}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{GetTIM2Cnt()}{GetTIM2Cnt()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a022e77db964e86b426cf89d4a79e1414} 
+uint32\+\_\+t Get\+TIM2\+Cnt (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a42c7df0f7332ef35b29acfd1fefb73c3}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!GetVoltageValue@{GetVoltageValue}}
+\index{GetVoltageValue@{GetVoltageValue}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{GetVoltageValue()}{GetVoltageValue()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a42c7df0f7332ef35b29acfd1fefb73c3} 
+int16\+\_\+t Get\+Voltage\+Value (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_acf26ef503b4853b39e91017a7a88aa4d}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!ReadBrightPin@{ReadBrightPin}}
+\index{ReadBrightPin@{ReadBrightPin}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{ReadBrightPin()}{ReadBrightPin()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_acf26ef503b4853b39e91017a7a88aa4d} 
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} Read\+Bright\+Pin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a592b35fea37a6a5786d20ad01da8ebd0}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!ReadDimPin@{ReadDimPin}}
+\index{ReadDimPin@{ReadDimPin}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{ReadDimPin()}{ReadDimPin()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a592b35fea37a6a5786d20ad01da8ebd0} 
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} Read\+Dim\+Pin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a902bd11e69418f9a4fad38cbc8195e79}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!receiveData@{receiveData}}
+\index{receiveData@{receiveData}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{receiveData()}{receiveData()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a902bd11e69418f9a4fad38cbc8195e79} 
+void receive\+Data (\begin{DoxyParamCaption}\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{rx\+Data}{, }\item[{const uint32\+\_\+t}]{bytes}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a4aabf3596c59b2fadc4dbcaed98eee80}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!RestartTIM2@{RestartTIM2}}
+\index{RestartTIM2@{RestartTIM2}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{RestartTIM2()}{RestartTIM2()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a4aabf3596c59b2fadc4dbcaed98eee80} 
+void Restart\+TIM2 (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a31cb479ffb8be9316c448a548ef7c55b}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!sendUARTChar@{sendUARTChar}}
+\index{sendUARTChar@{sendUARTChar}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{sendUARTChar()}{sendUARTChar()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a31cb479ffb8be9316c448a548ef7c55b} 
+void send\+UARTChar (\begin{DoxyParamCaption}\item[{char}]{c}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a53c1adb0805fad4069d835fa3f309d23}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!SetPW11@{SetPW11}}
+\index{SetPW11@{SetPW11}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{SetPW11()}{SetPW11()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a53c1adb0805fad4069d835fa3f309d23} 
+void Set\+PW11 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{pulse\+\_\+width}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a777f2f61eed8154b12d938cb4d8c6bd2}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!StartPWM11@{StartPWM11}}
+\index{StartPWM11@{StartPWM11}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{StartPWM11()}{StartPWM11()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a777f2f61eed8154b12d938cb4d8c6bd2} 
+void Start\+PWM11 (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a4f204e0a112a0eb5f575c5c896114ada}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!StartTIM2@{StartTIM2}}
+\index{StartTIM2@{StartTIM2}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{StartTIM2()}{StartTIM2()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a4f204e0a112a0eb5f575c5c896114ada} 
+void Start\+TIM2 (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a03091f501e219ec8815f84a532a9b628}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!StopPWM11@{StopPWM11}}
+\index{StopPWM11@{StopPWM11}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{StopPWM11()}{StopPWM11()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a03091f501e219ec8815f84a532a9b628} 
+void Stop\+PWM11 (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{stm32l412xx-bsp_8c_a6f89ccdfbb99b0acbf97aa09be1cde3d}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!transferData@{transferData}}
+\index{transferData@{transferData}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{transferData()}{transferData()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a6f89ccdfbb99b0acbf97aa09be1cde3d} 
+void transfer\+Data (\begin{DoxyParamCaption}\item[{const unsigned char \texorpdfstring{$\ast$}{*}const}]{tx\+Data}{, }\item[{const uint32\+\_\+t}]{bytes}{}\end{DoxyParamCaption})}
+

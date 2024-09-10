@@ -1,0 +1,303 @@
+\doxysection{C\+:/\+Users/agreen/\+Documents/\+Projects/\+Aveo/\+CH-\/53\+K\+\_\+\+LED\+\_\+\+Controller/\+Core/\+Inc/fram.h File Reference}
+\hypertarget{fram_8h}{}\label{fram_8h}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/fram.h@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/fram.h}}
+
+
+This module contains definitions and structures to support SPI FRAM operations.  
+
+
+{\ttfamily \#include "{}stm32l412xx-\/bsp.\+h"{}}\newline
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854}{OPCODE\+\_\+\+COMMANDS}} \{ \newline
+\mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a7aa1e22f400e62db9f6a8bca54ef0aa8}{OC\+\_\+\+WREN}} = 6
+, \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a8bac6293c6a01fe7efb7599b6614b92f}{OC\+\_\+\+WRDI}} = 4
+, \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a6ed267b2cbc4feb3ad34ed375fa873b0}{OC\+\_\+\+RDSR}} = 5
+, \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854acbe51a8f70dbebd6920478a27105325b}{OC\+\_\+\+WRSR}} = 1
+, \newline
+\mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854ae0c03aff0bc19f5cd2d76bf7f9e09872}{OC\+\_\+\+READ}} = 3
+, \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854aaf4c300c8a3d1de4ce852374b24c13f6}{OC\+\_\+\+WRITE}} = 2
+ \}
+\item 
+enum \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0}{STATUS\+\_\+\+REGISTER}} \{ \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0ae2fd8af39fd0ba582dc82a971cde8ba8}{SR\+\_\+\+WEL}} = 0x2
+, \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0a41a6fa47f1600a7e9defbb572acd2f8d}{SR\+\_\+\+BP0}} = 0x4
+, \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0addacc56961775d92bc81b5eb3f205dd8}{SR\+\_\+\+BP1}} = 0x8
+, \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0a274182b507a40db5524a9b834e122630}{SR\+\_\+\+WPEN}} = 0x80
+ \}
+\item 
+enum \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\+\_\+\+PROTECT\+\_\+\+STATE}} \{ \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60a0ed108df29e26592ad196b6f9b44da31}{WPS\+\_\+\+PROTECTED}} = 0
+, \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60a7c69694a7e8378f32fb3c40afa0050b6}{WPS\+\_\+\+WRITEABLE}} = 1
+ \}
+\item 
+enum \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\+\_\+\+SELECT\+\_\+\+STATE}} \{ \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546a141dd526a0014829f5ee2282776961ff}{CSS\+\_\+\+ASSERT}} = 0
+, \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546abf473f174b4f2e0a513084245902459d}{CSS\+\_\+\+RELEASE}} = 1
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{fram_8h_ab161ab3aba124eb0f3b73a15e3c737b1}{fram\+Write\+Protect}} (\mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\+\_\+\+PROTECT\+\_\+\+STATE}} state)
+\item 
+void \mbox{\hyperlink{fram_8h_a1cc4c164fcdbd54ca4d5b19508cef750}{fram\+Chip\+Select}} (\mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\+\_\+\+SELECT\+\_\+\+STATE}} state)
+\item 
+void \mbox{\hyperlink{fram_8h_a0005b800457c3882707e63b8b923bd06}{fram\+Read\+Sr}} (unsigned char \texorpdfstring{$\ast$}{*}srP)
+\item 
+void \mbox{\hyperlink{fram_8h_ac737a2768b12f0024b0f8dedc13b7ab5}{fram\+Write\+Sr}} (unsigned char sr)
+\item 
+void \mbox{\hyperlink{fram_8h_a2ffb673dd7a356af306c1743be126f32}{fram\+Write\+Disable}} (void)
+\item 
+void \mbox{\hyperlink{fram_8h_acb185ced7935a54189236f881375faa0}{fram\+Write\+Enable}} (void)
+\item 
+void \mbox{\hyperlink{fram_8h_a846ddd3d47bcd581b49e778e70980fc1}{fram\+Read\+Memory}} (unsigned short addr, unsigned char \texorpdfstring{$\ast$}{*}rd\+BufP, unsigned short len)
+\item 
+void \mbox{\hyperlink{fram_8h_abad0fbfb7245cc5a79e994680676140b}{fram\+Write\+Memory}} (unsigned short addr, const unsigned char \texorpdfstring{$\ast$}{*}const wr\+BufP, unsigned short len)
+\item 
+uint8\+\_\+t \mbox{\hyperlink{fram_8h_a177b1c03338f9f1cddb4200e412c1f11}{fram\+Test}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This module contains definitions and structures to support SPI FRAM operations. 
+
+\begin{DoxyAttention}{Attention}
+Copyright (c) 2022, 2023 Luminator, An LTG Company All rights reserved. Any use without the prior written consent of Luminator, An LTG Company is strictly prohibited.
+\end{DoxyAttention}
+
+
+Revision History\+: Date Name Ver Remarks \DoxyHorRuler{0}
+ 04/09/2023 Mark Lane 0 Original Version
+
+Notes\+: 
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}\index{fram.h@{fram.h}!CHIP\_SELECT\_STATE@{CHIP\_SELECT\_STATE}}
+\index{CHIP\_SELECT\_STATE@{CHIP\_SELECT\_STATE}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{CHIP\_SELECT\_STATE}{CHIP\_SELECT\_STATE}}
+{\footnotesize\ttfamily \label{fram_8h_aa29a92e6bc02acfd837e5918e24e3546} 
+enum \mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\+\_\+\+SELECT\+\_\+\+STATE}}}
+
+chip select state \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CSS\_ASSERT@{CSS\_ASSERT}!fram.h@{fram.h}}\index{fram.h@{fram.h}!CSS\_ASSERT@{CSS\_ASSERT}}}\Hypertarget{fram_8h_aa29a92e6bc02acfd837e5918e24e3546a141dd526a0014829f5ee2282776961ff}\label{fram_8h_aa29a92e6bc02acfd837e5918e24e3546} 
+CSS\+\_\+\+ASSERT&chip select disabled \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CSS\_RELEASE@{CSS\_RELEASE}!fram.h@{fram.h}}\index{fram.h@{fram.h}!CSS\_RELEASE@{CSS\_RELEASE}}}\Hypertarget{fram_8h_aa29a92e6bc02acfd837e5918e24e3546abf473f174b4f2e0a513084245902459d}\label{fram_8h_aa29a92e6bc02acfd837e5918e24e3546} 
+CSS\+\_\+\+RELEASE&chip select enabled \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854}\index{fram.h@{fram.h}!OPCODE\_COMMANDS@{OPCODE\_COMMANDS}}
+\index{OPCODE\_COMMANDS@{OPCODE\_COMMANDS}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{OPCODE\_COMMANDS}{OPCODE\_COMMANDS}}
+{\footnotesize\ttfamily \label{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854} 
+enum \mbox{\hyperlink{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854}{OPCODE\+\_\+\+COMMANDS}}}
+
+opcode command \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OC\_WREN@{OC\_WREN}!fram.h@{fram.h}}\index{fram.h@{fram.h}!OC\_WREN@{OC\_WREN}}}\Hypertarget{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a7aa1e22f400e62db9f6a8bca54ef0aa8}\label{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854} 
+OC\+\_\+\+WREN&set write enable latch \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OC\_WRDI@{OC\_WRDI}!fram.h@{fram.h}}\index{fram.h@{fram.h}!OC\_WRDI@{OC\_WRDI}}}\Hypertarget{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a8bac6293c6a01fe7efb7599b6614b92f}\label{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854} 
+OC\+\_\+\+WRDI&write disable ~\newline
+ \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OC\_RDSR@{OC\_RDSR}!fram.h@{fram.h}}\index{fram.h@{fram.h}!OC\_RDSR@{OC\_RDSR}}}\Hypertarget{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854a6ed267b2cbc4feb3ad34ed375fa873b0}\label{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854} 
+OC\+\_\+\+RDSR&read status register ~\newline
+ \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OC\_WRSR@{OC\_WRSR}!fram.h@{fram.h}}\index{fram.h@{fram.h}!OC\_WRSR@{OC\_WRSR}}}\Hypertarget{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854acbe51a8f70dbebd6920478a27105325b}\label{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854} 
+OC\+\_\+\+WRSR&write status register ~\newline
+ \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OC\_READ@{OC\_READ}!fram.h@{fram.h}}\index{fram.h@{fram.h}!OC\_READ@{OC\_READ}}}\Hypertarget{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854ae0c03aff0bc19f5cd2d76bf7f9e09872}\label{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854} 
+OC\+\_\+\+READ&read memory data ~\newline
+ \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OC\_WRITE@{OC\_WRITE}!fram.h@{fram.h}}\index{fram.h@{fram.h}!OC\_WRITE@{OC\_WRITE}}}\Hypertarget{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854aaf4c300c8a3d1de4ce852374b24c13f6}\label{fram_8h_aa682506abc3c09d2fcb4a3e7c3d2d854} 
+OC\+\_\+\+WRITE&write memory data ~\newline
+ \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0}\index{fram.h@{fram.h}!STATUS\_REGISTER@{STATUS\_REGISTER}}
+\index{STATUS\_REGISTER@{STATUS\_REGISTER}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{STATUS\_REGISTER}{STATUS\_REGISTER}}
+{\footnotesize\ttfamily \label{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0} 
+enum \mbox{\hyperlink{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0}{STATUS\+\_\+\+REGISTER}}}
+
+status register \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SR\_WEL@{SR\_WEL}!fram.h@{fram.h}}\index{fram.h@{fram.h}!SR\_WEL@{SR\_WEL}}}\Hypertarget{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0ae2fd8af39fd0ba582dc82a971cde8ba8}\label{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0} 
+SR\+\_\+\+WEL&write-\/enable latch ~\newline
+ \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SR\_BP0@{SR\_BP0}!fram.h@{fram.h}}\index{fram.h@{fram.h}!SR\_BP0@{SR\_BP0}}}\Hypertarget{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0a41a6fa47f1600a7e9defbb572acd2f8d}\label{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0} 
+SR\+\_\+\+BP0&block protect bit 0 ~\newline
+ \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SR\_BP1@{SR\_BP1}!fram.h@{fram.h}}\index{fram.h@{fram.h}!SR\_BP1@{SR\_BP1}}}\Hypertarget{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0addacc56961775d92bc81b5eb3f205dd8}\label{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0} 
+SR\+\_\+\+BP1&block protect bit 1 ~\newline
+ \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SR\_WPEN@{SR\_WPEN}!fram.h@{fram.h}}\index{fram.h@{fram.h}!SR\_WPEN@{SR\_WPEN}}}\Hypertarget{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0a274182b507a40db5524a9b834e122630}\label{fram_8h_ad79c233c62b0ea3893ddf0314677e5f0} 
+SR\+\_\+\+WPEN&enable write protect pin \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}\index{fram.h@{fram.h}!WRITE\_PROTECT\_STATE@{WRITE\_PROTECT\_STATE}}
+\index{WRITE\_PROTECT\_STATE@{WRITE\_PROTECT\_STATE}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{WRITE\_PROTECT\_STATE}{WRITE\_PROTECT\_STATE}}
+{\footnotesize\ttfamily \label{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60} 
+enum \mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\+\_\+\+PROTECT\+\_\+\+STATE}}}
+
+write protect state \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WPS\_PROTECTED@{WPS\_PROTECTED}!fram.h@{fram.h}}\index{fram.h@{fram.h}!WPS\_PROTECTED@{WPS\_PROTECTED}}}\Hypertarget{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60a0ed108df29e26592ad196b6f9b44da31}\label{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60} 
+WPS\+\_\+\+PROTECTED&write protected \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WPS\_WRITEABLE@{WPS\_WRITEABLE}!fram.h@{fram.h}}\index{fram.h@{fram.h}!WPS\_WRITEABLE@{WPS\_WRITEABLE}}}\Hypertarget{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60a7c69694a7e8378f32fb3c40afa0050b6}\label{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60} 
+WPS\+\_\+\+WRITEABLE&write enabled ~\newline
+ \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{fram_8h_a1cc4c164fcdbd54ca4d5b19508cef750}\index{fram.h@{fram.h}!framChipSelect@{framChipSelect}}
+\index{framChipSelect@{framChipSelect}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{framChipSelect()}{framChipSelect()}}
+{\footnotesize\ttfamily \label{fram_8h_a1cc4c164fcdbd54ca4d5b19508cef750} 
+void fram\+Chip\+Select (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fram_8h_aa29a92e6bc02acfd837e5918e24e3546}{CHIP\+\_\+\+SELECT\+\_\+\+STATE}}}]{state}{}\end{DoxyParamCaption})}
+
+This routine sets the chip select pin to the correct "{}state"{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em state} & assert = 0, release = 1 \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8h_a846ddd3d47bcd581b49e778e70980fc1}\index{fram.h@{fram.h}!framReadMemory@{framReadMemory}}
+\index{framReadMemory@{framReadMemory}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{framReadMemory()}{framReadMemory()}}
+{\footnotesize\ttfamily \label{fram_8h_a846ddd3d47bcd581b49e778e70980fc1} 
+void fram\+Read\+Memory (\begin{DoxyParamCaption}\item[{unsigned short}]{addr}{, }\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{rd\+BufP}{, }\item[{unsigned short}]{len}{}\end{DoxyParamCaption})}
+
+This routine reads FRAM memory starting at "{}addr"{} for "{}len"{} byte(s). The FRAM read data is stored at the pointer referenced by "{}rd\+Buf\+P"{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em addr} & FRAM memory address to read data \\
+\hline
+\mbox{\texttt{ in}}  & {\em rd\+BufP} & destination pointer to store read data \\
+\hline
+\mbox{\texttt{ in}}  & {\em len} & number of byte(s) to read \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8h_a0005b800457c3882707e63b8b923bd06}\index{fram.h@{fram.h}!framReadSr@{framReadSr}}
+\index{framReadSr@{framReadSr}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{framReadSr()}{framReadSr()}}
+{\footnotesize\ttfamily \label{fram_8h_a0005b800457c3882707e63b8b923bd06} 
+void fram\+Read\+Sr (\begin{DoxyParamCaption}\item[{unsigned char \texorpdfstring{$\ast$}{*}}]{srP}{}\end{DoxyParamCaption})}
+
+This routine reads the FRAM status register
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em destination} & pointer for FRAM status register \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8h_a177b1c03338f9f1cddb4200e412c1f11}\index{fram.h@{fram.h}!framTest@{framTest}}
+\index{framTest@{framTest}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{framTest()}{framTest()}}
+{\footnotesize\ttfamily \label{fram_8h_a177b1c03338f9f1cddb4200e412c1f11} 
+uint8\+\_\+t fram\+Test (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+This routine is a test function for FRAM access. It writes "{}\+TLEN"{} bytes of an incrementing pattern into FRAM at address "{}\+TADD"{}. It reads the same length into a buffer and verifies the pattern. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em pass} & = 1, fail = 0 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8h_a2ffb673dd7a356af306c1743be126f32}\index{fram.h@{fram.h}!framWriteDisable@{framWriteDisable}}
+\index{framWriteDisable@{framWriteDisable}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{framWriteDisable()}{framWriteDisable()}}
+{\footnotesize\ttfamily \label{fram_8h_a2ffb673dd7a356af306c1743be126f32} 
+void fram\+Write\+Disable (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+This routine resets the write enable latch 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8h_acb185ced7935a54189236f881375faa0}\index{fram.h@{fram.h}!framWriteEnable@{framWriteEnable}}
+\index{framWriteEnable@{framWriteEnable}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{framWriteEnable()}{framWriteEnable()}}
+{\footnotesize\ttfamily \label{fram_8h_acb185ced7935a54189236f881375faa0} 
+void fram\+Write\+Enable (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+This routine sets the write enable latch 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8h_abad0fbfb7245cc5a79e994680676140b}\index{fram.h@{fram.h}!framWriteMemory@{framWriteMemory}}
+\index{framWriteMemory@{framWriteMemory}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{framWriteMemory()}{framWriteMemory()}}
+{\footnotesize\ttfamily \label{fram_8h_abad0fbfb7245cc5a79e994680676140b} 
+void fram\+Write\+Memory (\begin{DoxyParamCaption}\item[{unsigned short}]{addr}{, }\item[{const unsigned char \texorpdfstring{$\ast$}{*}const}]{wr\+BufP}{, }\item[{unsigned short}]{len}{}\end{DoxyParamCaption})}
+
+This routine writes FRAM memory starting at "{}addr"{} for "{}len"{} byte(s). The data referenced by the pointer "{}wr\+Buf\+P"{} is written into FRAM memory.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em addr} & FRAM memory address to write data \\
+\hline
+\mbox{\texttt{ in}}  & {\em wr\+BufP} & pointer to data to write \\
+\hline
+\mbox{\texttt{ in}}  & {\em len} & number of byte(s) to write \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8h_ab161ab3aba124eb0f3b73a15e3c737b1}\index{fram.h@{fram.h}!framWriteProtect@{framWriteProtect}}
+\index{framWriteProtect@{framWriteProtect}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{framWriteProtect()}{framWriteProtect()}}
+{\footnotesize\ttfamily \label{fram_8h_ab161ab3aba124eb0f3b73a15e3c737b1} 
+void fram\+Write\+Protect (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{fram_8h_a3448c8a3cbec1c8208d12c5304bb4f60}{WRITE\+\_\+\+PROTECT\+\_\+\+STATE}}}]{state}{}\end{DoxyParamCaption})}
+
+This routine sets the hardware write protect pin to the correct "{}state"{}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em state} & disable = 0, enable = 1 \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fram_8h_ac737a2768b12f0024b0f8dedc13b7ab5}\index{fram.h@{fram.h}!framWriteSr@{framWriteSr}}
+\index{framWriteSr@{framWriteSr}!fram.h@{fram.h}}
+\doxysubsubsection{\texorpdfstring{framWriteSr()}{framWriteSr()}}
+{\footnotesize\ttfamily \label{fram_8h_ac737a2768b12f0024b0f8dedc13b7ab5} 
+void fram\+Write\+Sr (\begin{DoxyParamCaption}\item[{unsigned char}]{sr}{}\end{DoxyParamCaption})}
+
+This routine writes the FRAM status register
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em data} & value written to FRAM status register \\
+\hline
+\mbox{\texttt{ out}}  & {\em none} & \\
+\hline
+\end{DoxyParams}

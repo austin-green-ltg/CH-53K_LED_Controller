@@ -1,0 +1,40 @@
+\doxysection{delay\+\_\+handler.\+h}
+\hypertarget{delay__handler_8h_source}{}\label{delay__handler_8h_source}\index{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/delay\_handler.h@{C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/delay\_handler.h}}
+\mbox{\hyperlink{delay__handler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Copyright\ ©\ 2007\ Luminator\ Mark\ IV}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ All\ rights\ reserved.}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Any\ use\ without\ the\ prior\ written\ consent\ of\ Luminator\ Mark\ IV}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ is\ strictly\ prohibited.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Filename:\ delay\_handler.h}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Description:\ Handles\ system\ counters\ and\ delays}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Revision\ History:}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ Date\ \ \ \ \ \ \ -\/\ Name\ \ \ \ \ \ \ \ \ -\/\ \ Ver\ -\/\ \ Remarks}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ 07/31/2024\ -\/\ Austin\ Green\ -\/\ \ 1.0\ -\/\ \ Initial\ Document}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ Notes:}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ ***************************************************************************}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{/*\ Define\ to\ prevent\ recursive\ inclusion\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#ifndef\ INC\_delay\_handlerh}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ \ \#define\ INC\_delay\_handlerh}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ \#include\ <stdint.h>}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{/*\ Check\ if\ delay\ has\ been\ hit\ */}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{delay__handler_8h_a01130f2e8b22877cdbef9d1dce5140a2}{StartDelayCounter}}(\textcolor{keywordtype}{void});\ \ \ \ \ \textcolor{comment}{//\ start\ the\ counter}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \mbox{\hyperlink{delay__handler_8h_a31c598a04fd5ed54cde4bf3cf137672c}{RestartDelayCounter}}(\textcolor{keywordtype}{void});\ \ \ \textcolor{comment}{//\ restart\ the\ counter}}
+\DoxyCodeLine{00030\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{delay__handler_8h_a8e5217a33cd44ab8dd8942d99b1fd0ef}{DelayHit}}(uint32\_t\ delay\_ms);\ \textcolor{comment}{//\ is\ delay\ in\ ms\ hit}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{comment}{/*\ Get\ ms\ delay\ for\ given\ brightness\ */}}
+\DoxyCodeLine{00032\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{delay__handler_8h_adbef77c80230ea92a864d85fb769561d}{BrightnessDelay}}(int8\_t\ brightness);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_delay\_handlerh\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}
