@@ -32,9 +32,9 @@
   * @brief Return state of dim button
   * @param[out] Dim Pin State, pressed or not
   */
-GPIO_PinState IsDimPressed    ( void )
+GPIO_PinState IsDimPressed ( void )
 {
-    return ReadDimPin();
+  return ReadDimPin();
 }
 
 /**
@@ -43,5 +43,5 @@ GPIO_PinState IsDimPressed    ( void )
   */
 GPIO_PinState IsBrightPressed ( void )
 {
-    return ReadBrightPin();
+  return ReadBrightPin();
 }

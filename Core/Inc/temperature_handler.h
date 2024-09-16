@@ -25,34 +25,34 @@
  *****************************************************************************/
 
 #ifndef INC_temperature_handlerh
-    #define INC_temperature_handlerh
+#define INC_temperature_handlerh
 
-    #include <stdint.h>
+#include <stdint.h>
 
-    /** Temperature Range Enum */
-    typedef enum
-    {
-        TempCool    = 0,    /**< Normal Operating Temperature                       */
-        TempWarm    = 1,    /**< Temperature is elevated, decrease brightness       */
-        TempHot     = 2     /**< Temperature is hot, lower brightness significantly */
-    } TemperatureRange_e;
+/** Temperature Range Enum */
+typedef enum
+{
+  TempCool = 0, /**< Normal Operating Temperature                       */
+  TempWarm = 1, /**< Temperature is elevated, decrease brightness       */
+  TempHot = 2 /**< Temperature is hot, lower brightness significantly */
+} TemperatureRange_e;
 
-    /**
-      * @brief Get temperature from thermistor
-      *
-      * @param[out] temperature level in dC
-      */
-    int32_t GetTemperature( void );
+/**
+  * @brief Get temperature from thermistor
+  *
+  * @param[out] temperature level in dC
+  */
+int32_t GetTemperature ( void );
 
-    /**
-      * @brief Get range that the temperature falls into. There is an increased
-      *         threshold to fall back into the previous state.
-      *         Possible ranges are
-      *           Cool    - Normal Operating Temperature
-      *           Warm    - Temperature is elevated, decrease brightness
-      *           Hot     - Temperature is hot, lower brightness significantly
-      * @param[out] Current temperature range
-      */
-    TemperatureRange_e GetTemperatureRange( void );
+/**
+  * @brief Get range that the temperature falls into. There is an increased
+  *         threshold to fall back into the previous state.
+  *         Possible ranges are
+  *           Cool    - Normal Operating Temperature
+  *           Warm    - Temperature is elevated, decrease brightness
+  *           Hot     - Temperature is hot, lower brightness significantly
+  * @param[out] Current temperature range
+  */
+TemperatureRange_e GetTemperatureRange ( void );
 
 #endif /* INC_temperature_handlerh */

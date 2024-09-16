@@ -31,12 +31,12 @@
 #include "logger.h"
 
 /** Raw value out of ammeter to deciAmps (A*0.1) */
-const uint16_t  RawTodAmps = (1);
+const uint16_t RawTodAmps = ( 1 );
 /** DeciAmps (A*0.1) to raw value out of ammeter */
-const uint16_t  dAmpsToRaw = (1);
+const uint16_t dAmpsToRaw = ( 1 );
 
 /** High Current Level in dA */
-const uint16_t CurrentHighThreshold_dA  = 35u;
+const uint16_t CurrentHighThreshold_dA = 35u;
 /** High Current Error Level in dA */
 const uint16_t CurrentErrorThreshold_dA = 40u;
 
@@ -49,30 +49,30 @@ static CurrentRange_e current_threshold = CurrentNormal;
   * @param[in] range Range the current is in, see CurrentRange_e
   * @param[in] currentValue Current in dA
   */
-static void LogCurrentChange(CurrentRange_e range, uint16_t currentValue)
+static void LogCurrentChange ( CurrentRange_e range, uint16_t currentValue )
 {
-    char str[25];
+  char str [ 25 ];
 
-    switch(range)
-    {
-        case CurrentNormal:
-            sprintf(str, "Normal Current %d dA\n", currentValue);
-            break;
+  switch ( range )
+  {
+    case CurrentNormal:
+      sprintf ( str, "Normal Current %d dA\n", currentValue );
+      break;
 
-        case CurrentHigh:
-            sprintf(str, "High Current %d dA\n", currentValue);
-            break;
+    case CurrentHigh:
+      sprintf ( str, "High Current %d dA\n", currentValue );
+      break;
 
-        case CurrentError:
-            sprintf(str, "Error Current %d dA\n", currentValue);
-            break;
+    case CurrentError:
+      sprintf ( str, "Error Current %d dA\n", currentValue );
+      break;
 
-        default:
-            break;
+    default:
+      break;
 
-    }
+  }
 
-    LogString(str, 0);
+  LogString ( str, 0 );
 }
 
 /**
@@ -80,10 +80,10 @@ static void LogCurrentChange(CurrentRange_e range, uint16_t currentValue)
   *
   * @param[out] current level in dA
   */
-uint16_t GetCurrent( void )
+uint16_t GetCurrent ( void )
 {
-    uint16_t current = GetCurrentValue() * RawTodAmps;
-    return (current);
+  uint16_t current = GetCurrentValue() * RawTodAmps;
+  return ( current );
 }
 
 /**
@@ -94,25 +94,28 @@ uint16_t GetCurrent( void )
   *           Error   - Current too high
   * @param[out] Current current range
   */
-CurrentRange_e GetCurrentRange( void )
+CurrentRange_e GetCurrentRange ( void )
 {
-    uint16_t current = GetCurrent();
-    CurrentRange_e prev_threshold = current_threshold;
+  uint16_t current = GetCurrent();
+  CurrentRange_e prev_threshold = current_threshold;
 
-    if (current >= CurrentErrorThreshold_dA)
-    {
-        current_threshold = CurrentError;
-    }
-    else if (current >= CurrentHighThreshold_dA)
-    {
-        current_threshold = CurrentHigh;
-    }
-    else
-    {
-        current_threshold = CurrentNormal;
-    }
+  if ( current >= CurrentErrorThreshold_dA )
+  {
+    current_threshold = CurrentError;
+  }
+  else if ( current >= CurrentHighThreshold_dA )
+  {
+    current_threshold = CurrentHigh;
+  }
+  else
+  {
+    current_threshold = CurrentNormal;
+  }
 
-    if (prev_threshold != current_threshold) LogCurrentChange(current_threshold, current);
+  if ( prev_threshold != current_threshold )
+  {
+    LogCurrentChange ( current_threshold, current );
+  }
 
-    return current_threshold;
+  return current_threshold;
 }

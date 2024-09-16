@@ -45,10 +45,16 @@
   * @param[in] state disable = 0, enable = 1
   * @param[out] none
   */
-void framWriteProtect( WRITE_PROTECT_STATE state  )
+void framWriteProtect ( WRITE_PROTECT_STATE state )
 {
-  if (state == WPS_WRITEABLE)   enableWriteProtect();
-  else                          disableWriteProtect();
+  if ( state == WPS_WRITEABLE )
+  {
+    enableWriteProtect();
+  }
+  else
+  {
+    disableWriteProtect();
+  }
 }
 
 /**
@@ -59,10 +65,16 @@ void framWriteProtect( WRITE_PROTECT_STATE state  )
   * @param[in] state assert = 0, release = 1
   * @param[out] none
   */
-void framChipSelect( CHIP_SELECT_STATE state  )
+void framChipSelect ( CHIP_SELECT_STATE state )
 {
-  if (state == CSS_RELEASE) enableChipSelect();
-  else                      disableChipSelect();
+  if ( state == CSS_RELEASE )
+  {
+    enableChipSelect();
+  }
+  else
+  {
+    disableChipSelect();
+  }
 }
 
 /**
@@ -73,24 +85,24 @@ void framChipSelect( CHIP_SELECT_STATE state  )
   * @param[in] srP destination pointer for FRAM status register
   * @param[out] none
   */
-void framReadSr( unsigned char *srP )
+void framReadSr ( unsigned char* srP )
 {
-  unsigned char rxbuf[2] ;
-  unsigned char txbuf[2] ;
+  unsigned char rxbuf [ 2 ] ;
+  unsigned char txbuf [ 2 ] ;
 
-  memset( rxbuf, '\0', sizeof(rxbuf) ) ;
-  memset( txbuf, '\0', sizeof(txbuf) ) ;
+  memset ( rxbuf, '\0', sizeof ( rxbuf ) ) ;
+  memset ( txbuf, '\0', sizeof ( txbuf ) ) ;
 
-  txbuf[0] = OC_RDSR ;
+  txbuf [ 0 ] = OC_RDSR ;
 
-  framChipSelect( CSS_ASSERT ) ;
+  framChipSelect ( CSS_ASSERT ) ;
 
-  transferData(txbuf, sizeof(txbuf));
-  receiveData(rxbuf, sizeof(rxbuf));
+  transferData ( txbuf, sizeof ( txbuf ) );
+  receiveData ( rxbuf, sizeof ( rxbuf ) );
 
-  *srP = rxbuf[1] ;
+  *srP = rxbuf [ 1 ] ;
 
-  framChipSelect( CSS_RELEASE ) ;
+  framChipSelect ( CSS_RELEASE ) ;
 }
 
 /**
@@ -101,18 +113,18 @@ void framReadSr( unsigned char *srP )
   * @param[in] sr data value written to FRAM status register
   * @param[out] none
   */
-void framWriteSr( unsigned char sr )
+void framWriteSr ( unsigned char sr )
 {
-  unsigned char txbuf[2] ;
+  unsigned char txbuf [ 2 ] ;
 
-  txbuf[0] = OC_WRSR ;
-  txbuf[1] = sr ;
+  txbuf [ 0 ] = OC_WRSR ;
+  txbuf [ 1 ] = sr ;
 
-  framChipSelect( CSS_ASSERT ) ;
+  framChipSelect ( CSS_ASSERT ) ;
 
-  transferData(txbuf, sizeof(txbuf));
+  transferData ( txbuf, sizeof ( txbuf ) );
 
-  framChipSelect( CSS_RELEASE ) ;
+  framChipSelect ( CSS_RELEASE ) ;
 }
 
 /**
@@ -121,15 +133,15 @@ void framWriteSr( unsigned char sr )
   * @brief This routine resets the write enable latch
   * @param[out] none
   */
-void framWriteDisable( void )
+void framWriteDisable ( void )
 {
-  unsigned char txbuf[1] = { OC_WRDI } ;
+  unsigned char txbuf [ 1 ] = { OC_WRDI } ;
 
-  framChipSelect( CSS_ASSERT ) ;
+  framChipSelect ( CSS_ASSERT ) ;
 
-  transferData(txbuf, sizeof(txbuf));
+  transferData ( txbuf, sizeof ( txbuf ) );
 
-  framChipSelect( CSS_RELEASE ) ;
+  framChipSelect ( CSS_RELEASE ) ;
 }
 
 /**
@@ -138,15 +150,15 @@ void framWriteDisable( void )
   * @brief This routine resets the write enable latch
   * @param[out] none
   */
-void framWriteEnable( void )
+void framWriteEnable ( void )
 {
-  unsigned char txbuf[1] = { OC_WREN } ;
+  unsigned char txbuf [ 1 ] = { OC_WREN } ;
 
-  framChipSelect( CSS_ASSERT ) ;
+  framChipSelect ( CSS_ASSERT ) ;
 
-  transferData(txbuf, sizeof(txbuf));
+  transferData ( txbuf, sizeof ( txbuf ) );
 
-  framChipSelect( CSS_RELEASE ) ;
+  framChipSelect ( CSS_RELEASE ) ;
 }
 
 /**
@@ -163,23 +175,25 @@ void framWriteEnable( void )
  *  NOTE    : argument len must not be greater than 256
  *
  */
-void framReadMemory ( unsigned short addr, unsigned char *rdBufP, unsigned short len )
+void framReadMemory ( unsigned short addr, unsigned char* rdBufP,
+                      unsigned short len )
 {
-  unsigned char txbuf[3] ;
+  unsigned char txbuf [ 3 ] ;
 
-  txbuf[0] = OC_READ ;
-  txbuf[1] = *((unsigned char *)&addr + 1) ;  /* byte swap for big endian */
-  txbuf[2] = *((unsigned char *)&addr + 0) ;
+  txbuf [ 0 ] = OC_READ ;
+  txbuf [ 1 ] = * ( ( unsigned char* ) &addr + 1 )
+                ; /* byte swap for big endian */
+  txbuf [ 2 ] = * ( ( unsigned char* ) &addr + 0 ) ;
 
-  framChipSelect( CSS_ASSERT ) ;
+  framChipSelect ( CSS_ASSERT ) ;
 
   /* send the read command & address */
-  transferData(txbuf, sizeof(txbuf));
+  transferData ( txbuf, sizeof ( txbuf ) );
 
   /* read the fram data */
-  receiveData(rdBufP, len);
+  receiveData ( rdBufP, len );
 
-  framChipSelect( CSS_RELEASE ) ;
+  framChipSelect ( CSS_RELEASE ) ;
 }
 
 /**
@@ -196,27 +210,29 @@ void framReadMemory ( unsigned short addr, unsigned char *rdBufP, unsigned short
  *  NOTE    : argument len must not be greater than 256
  *
  */
-void framWriteMemory( unsigned short addr, const unsigned char* const wrBufP, unsigned short len )
+void framWriteMemory ( unsigned short addr, const unsigned char* const wrBufP,
+                       unsigned short len )
 {
-  unsigned char txbuf[3] ;
+  unsigned char txbuf [ 3 ] ;
   unsigned char sr ;
 
-  framWriteEnable() ;  /* set write enable latch */
+  framWriteEnable() ; /* set write enable latch */
   /* Read the FRAM status register and verify the SR_WEL was set */
-  framReadSr( &sr ) ;  /* read the FRAM status register */
+  framReadSr (&sr ) ; /* read the FRAM status register */
 
-  txbuf[0] = OC_WRITE ;
-  txbuf[1] = *((unsigned char *)&addr + 1) ;  /* byte swap for big endian */
-  txbuf[2] = *((unsigned char *)&addr + 0) ;
+  txbuf [ 0 ] = OC_WRITE ;
+  txbuf [ 1 ] = * ( ( unsigned char* ) &addr + 1 )
+                ; /* byte swap for big endian */
+  txbuf [ 2 ] = * ( ( unsigned char* ) &addr + 0 ) ;
 
-  framChipSelect( CSS_ASSERT ) ;
+  framChipSelect ( CSS_ASSERT ) ;
 
   /* send the write command & address */
-  transferData(txbuf, sizeof(txbuf));
+  transferData ( txbuf, sizeof ( txbuf ) );
 
-  transferData(wrBufP, len);
+  transferData ( wrBufP, len );
 
-  framChipSelect( CSS_RELEASE ) ;
+  framChipSelect ( CSS_RELEASE ) ;
 }
 
 /**
@@ -229,37 +245,43 @@ void framWriteMemory( unsigned short addr, const unsigned char* const wrBufP, un
   * @param[out] 1 = pass, 0 = fail
   *
   */
-uint8_t framTest( void )
+uint8_t framTest ( void )
 {
-  #define TLEN    (16)     /**< test length */
-  #define TADD    (0x200)  /**< test addresss */
+#define TLEN    (16)     /**< test length */
+#define TADD    (0x200)  /**< test addresss */
 
-  unsigned char txbuf[TLEN] ;
-  unsigned char rxbuf[TLEN] ;
+  unsigned char txbuf [ TLEN ] ;
+  unsigned char rxbuf [ TLEN ] ;
 
   int i, pass ;
 
   /* initialize txbuf to incrementing pattern */
   for ( i = 0; i < TLEN; i++ )
   {
-    txbuf[i] = i + 1 ;
-    rxbuf[i] = 0 ;  /* clear rxbuf */
+    txbuf [ i ] = i + 1 ;
+    rxbuf [ i ] = 0 ; /* clear rxbuf */
   }
 
-  framWriteMemory( TADD, txbuf, TLEN ) ;
+  framWriteMemory ( TADD, txbuf, TLEN ) ;
 
   framReadMemory ( TADD, rxbuf, TLEN ) ;
 
   for ( i = 0; i < TLEN; i++ )
   {
-    if ( rxbuf[i] != txbuf[i] )
+    if ( rxbuf [ i ] != txbuf [ i ] )
+    {
       break ;
+    }
   }
 
   if ( i == TLEN )
+  {
     pass = 1 ;
+  }
   else
+  {
     pass = 0 ;
+  }
 
   return pass;
 }

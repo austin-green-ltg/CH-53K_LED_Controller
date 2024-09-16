@@ -24,19 +24,20 @@
  *****************************************************************************/
 
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-  #include "my_printf.h"
-  #include "stm32l412xx-bsp.h"
+#include "my_printf.h"
+#include "stm32l412xx-bsp.h"
 
-  /**
-    * @brief sends character via uart
-    * @param[in] c Character to printf
-    * @param[in] stream Pointer to file stream (unused)
-    * @param[out] Character printed
-    */
-  int fputc(int c, FILE *stream)
-  {
-      (void)stream;
-      sendUARTChar(c);
-      return c;
-  }
+/**
+  * @brief sends character via uart
+  * @param[in] c Character to printf
+  * @param[in] stream Pointer to file stream (unused)
+  * @param[out] Character printed
+  */
+int fputc ( int c, FILE *stream )
+{
+  ( void ) stream;
+  sendUARTChar ( c );
+  return c;
+}
+
 #endif /* ENABLE_UART_DEBUGGING */

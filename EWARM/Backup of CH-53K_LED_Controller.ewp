@@ -225,17 +225,7 @@
         <option>
           <name>CCDefines</name>
           <state>USE_FULL_LL_DRIVER</state>
-          <state>HSE_VALUE=8000000</state>
-          <state>HSE_STARTUP_TIMEOUT=100</state>
-          <state>LSE_STARTUP_TIMEOUT=5000</state>
-          <state>LSE_VALUE=32768</state>
-          <state>MSI_VALUE=8000000</state>
-          <state>HSI_VALUE=16000000</state>
-          <state>LSI_VALUE=32000</state>
-          <state>VDD_VALUE=3300</state>
-          <state>PREFETCH_ENABLE=0</state>
-          <state>INSTRUCTION_CACHE_ENABLE=1</state>
-          <state>DATA_CACHE_ENABLE=1</state>
+          <state>USE_HAL_DRIVER</state>
           <state>STM32L412xx</state>
           <state></state>
         </option>
@@ -363,7 +353,12 @@
         <option>
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$/../Core/Inc</state>
+          <state>$PROJ_DIR$/../USB_DEVICE/App</state>
+          <state>$PROJ_DIR$/../USB_DEVICE/Target</state>
           <state>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Inc</state>
+          <state>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy</state>
+          <state>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc</state>
+          <state>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Inc</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Device/ST/STM32L4xx/Include</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Include</state>
         </option>
@@ -1076,6 +1071,12 @@
           <name>$PROJ_DIR$/../Core/Src/gpio.c</name>
         </file>
         <file>
+          <name>$PROJ_DIR$/../Core/Src/adc.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$/../Core/Src/spi.c</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$/../Core/Src/tim.c</name>
         </file>
         <file>
@@ -1084,6 +1085,30 @@
         <file>
           <name>$PROJ_DIR$/../Core/Src/stm32l4xx_it.c</name>
         </file>
+        <file>
+          <name>$PROJ_DIR$/../Core/Src/stm32l4xx_hal_msp.c</name>
+        </file>
+      </group>
+      <group>
+        <name>USB_DEVICE</name>
+        <group>
+          <name>App</name>
+          <file>
+            <name>$PROJ_DIR$/../USB_DEVICE/App/usb_device.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$/../USB_DEVICE/App/usbd_desc.c</name>
+          </file>
+          <file>
+            <name>$PROJ_DIR$/../USB_DEVICE/App/usbd_dfu_if.c</name>
+          </file>
+        </group>
+        <group>
+          <name>Target</name>
+          <file>
+            <name>$PROJ_DIR$/../USB_DEVICE/Target/usbd_conf.c</name>
+          </file>
+        </group>
       </group>
     </group>
   </group>
@@ -1101,13 +1126,76 @@
         <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_gpio.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_pwr.c</name>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_tim.c</name>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pcd_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usb.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_adc.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_dma.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_spi.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_tim.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_ll_usart.c</name>
@@ -1120,6 +1208,24 @@
       <name>CMSIS</name>
       <file>
         <name>$PROJ_DIR$/../Core/Src/system_stm32l4xx.c</name>
+      </file>
+    </group>
+  </group>
+  <group>
+    <name>Middlewares</name>
+    <group>
+      <name>USB_Device_Library</name>
+      <file>
+        <name>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ioreq.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Src/usbd_dfu.c</name>
       </file>
     </group>
   </group>

@@ -24,64 +24,64 @@
  *****************************************************************************/
 
 #ifndef INC_pwm_handlerh
-    #define INC_pwm_handlerh
+#define INC_pwm_handlerh
 
-    #include <stdint.h>
+#include <stdint.h>
 
-    /* Brightness Steps */
-    #define BRIGHTNESS_STEPS        (50)
-    #define HOLD_BRIGHTNESS_JUMP    (3)
+/* Brightness Steps */
+#define BRIGHTNESS_STEPS        (50)
+#define HOLD_BRIGHTNESS_JUMP    (3)
 
-  /**
-    * @brief Init PwmArray var
-    * Set brightness to half value, enable pwm, and turn off
-    */
-  void    InitPwm(void);                              // Init Pwm var
+/**
+  * @brief Init PwmArray var
+  * Set brightness to half value, enable pwm, and turn off
+  */
+void InitPwm ( void ); // Init Pwm var
 
-  /**
-    * @brief Decrease brightness by 1 (for button press) or 3 (for button hold)
-    *         This functions can be made to increase brightness value with the
-    *         REVERSE_BRIGHTNESS flag
-    *         Afterwards, set pwm output.
-    * @param[in] button_held If the button is being held (decrements by 3 if so)
-    */
-  void    DecreaseBrightness( uint8_t button_held );  // decrease brightness
+/**
+  * @brief Decrease brightness by 1 (for button press) or 3 (for button hold)
+  *         This functions can be made to increase brightness value with the
+  *         REVERSE_BRIGHTNESS flag
+  *         Afterwards, set pwm output.
+  * @param[in] button_held If the button is being held (decrements by 3 if so)
+  */
+void DecreaseBrightness ( uint8_t button_held ); // decrease brightness
 
-  /**
-    * @brief Increase brightness by 1 (for button press) or 3 (for button hold)
-    *         This functions can be made to decrease brightness value with the
-    *         REVERSE_BRIGHTNESS flag
-    *         Afterwards, set pwm output.
-    * @param[in] button_held If the button is being held (increments by 3 if so)
-    */
-  void    IncreaseBrightness( uint8_t button_held );  // increase brightness
+/**
+  * @brief Increase brightness by 1 (for button press) or 3 (for button hold)
+  *         This functions can be made to decrease brightness value with the
+  *         REVERSE_BRIGHTNESS flag
+  *         Afterwards, set pwm output.
+  * @param[in] button_held If the button is being held (increments by 3 if so)
+  */
+void IncreaseBrightness ( uint8_t button_held ); // increase brightness
 
-  /**
-    * @brief set PWM based on pwm value
-    */
-  void    SetPwm( void );                             // turn on and set PWM
+/**
+  * @brief set PWM based on pwm value
+  */
+void SetPwm ( void ); // turn on and set PWM
 
-  /**
-    * @brief turn off PWM
-    */
-  void    TurnOffPwm( void );                         // turn of PWM
+/**
+  * @brief turn off PWM
+  */
+void TurnOffPwm ( void ); // turn of PWM
 
-  /**
-    * @brief Return ledBrightness variable
-    * @param[out] Current LED brightness level
-    */
-  int8_t  GetBrightness( void );                      // get value of Brightness
+/**
+  * @brief Return ledBrightness variable
+  * @param[out] Current LED brightness level
+  */
+int8_t GetBrightness ( void ); // get value of Brightness
 
-  /**
-    * @brief Set ledBrightness variable, guards to ensure we don't go over max or min
-    * @param[in] brightness Brightess to set
-    */
-  void    SetBrightness( int8_t brightness );         // set value of Brightness
+/**
+  * @brief Set ledBrightness variable, guards to ensure we don't go over max or min
+  * @param[in] brightness Brightess to set
+  */
+void SetBrightness ( int8_t brightness ); // set value of Brightness
 
-  /**
-    * @brief Get the PWM value based on the brightness and the temperature range
-    * @param[out] Current PWM value
-    */
-  uint8_t GetPwm( void );                             // get value of current PWM
+/**
+  * @brief Get the PWM value based on the brightness and the temperature range
+  * @param[out] Current PWM value
+  */
+uint8_t GetPwm ( void ); // get value of current PWM
 
 #endif /* INC_pwm_handlerh */

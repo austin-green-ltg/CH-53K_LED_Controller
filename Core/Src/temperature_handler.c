@@ -33,18 +33,18 @@
 #include "logger.h"
 
 /** Raw value out of thermistor to deciCelcius (C*0.1) */
-const int32_t  ThermistorTodCelcius = (1);
+const int32_t ThermistorTodCelcius = ( 1 );
 /** DeciCelcius (V*0.1) to raw value out of thermistor */
-const int32_t  dCelciusToThermistor = (1);
+const int32_t dCelciusToThermistor = ( 1 );
 
 /** Heating Threshold 1 (heating up from Cool to Warm) in dC */
-const int32_t   HeatingThreshold1_dC = (1000);
+const int32_t HeatingThreshold1_dC = ( 1000 );
 /** Heating Threshold 2 (heating up from Warm to Hot) in dC */
-const int32_t   HeatingThreshold2_dC = (1200);
+const int32_t HeatingThreshold2_dC = ( 1200 );
 /** Cooling Threshold 1 (cooling down from Warm to Cool) in dC */
-const int32_t   CoolingThreshold1_dC = (800) ;
+const int32_t CoolingThreshold1_dC = ( 800 ) ;
 /** Cooling Threshold 2 (cooling down from Hot to Warm) in dC */
-const int32_t   CoolingThreshold2_dC = (1000);
+const int32_t CoolingThreshold2_dC = ( 1000 );
 
 /** default temperature state is TempCool */
 static TemperatureRange_e temperature_threshold = TempCool;
@@ -55,51 +55,52 @@ static TemperatureRange_e temperature_threshold = TempCool;
   * @param[in] temp1 Original range the temperature was in, see TemperatureRange_e
   * @param[in] temp2 New range the temperature is in, see TemperatureRange_e
   */
-static void LogTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
+static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
 {
-    char str[20];
-    switch(temp1)
-    {
-        case TempCool:
-            strcpy(str, "Temp Cool");
-            break;
+  char str [ 20 ];
 
-        case TempWarm:
-            strcpy(str, "Temp Warm");
-            break;
+  switch ( temp1 )
+  {
+    case TempCool:
+      strcpy ( str, "Temp Cool" );
+      break;
 
-        case TempHot:
-            strcpy(str, "Temp Hot");
-            break;
+    case TempWarm:
+      strcpy ( str, "Temp Warm" );
+      break;
 
-        default:
-            break;
+    case TempHot:
+      strcpy ( str, "Temp Hot" );
+      break;
 
-    }
+    default:
+      break;
 
-    strcat(str, "->");
+  }
 
-    switch(temp2)
-    {
-        case TempCool:
-            strcat(str, "Cool");
-            break;
+  strcat ( str, "->" );
 
-        case TempWarm:
-            strcat(str, "Warm");
-            break;
+  switch ( temp2 )
+  {
+    case TempCool:
+      strcat ( str, "Cool" );
+      break;
 
-        case TempHot:
-            strcat(str, "Hot");
-            break;
+    case TempWarm:
+      strcat ( str, "Warm" );
+      break;
 
-        default:
-            break;
+    case TempHot:
+      strcat ( str, "Hot" );
+      break;
 
-    }
+    default:
+      break;
 
-    strcat(str, "\n");
-    LogString(str, 0);
+  }
+
+  strcat ( str, "\n" );
+  LogString ( str, 0 );
 
 }
 
@@ -108,10 +109,10 @@ static void LogTempChange(TemperatureRange_e temp1, TemperatureRange_e temp2)
   *
   * @param[out] temperature level in dC
   */
-int32_t GetTemperature( void )
+int32_t GetTemperature ( void )
 {
-    int32_t temperature = GetThermistorValue() * ThermistorTodCelcius;
-    return (temperature);
+  int32_t temperature = GetThermistorValue() * ThermistorTodCelcius;
+  return ( temperature );
 }
 
 /**
@@ -123,58 +124,64 @@ int32_t GetTemperature( void )
   *           Hot     - Temperature is hot, lower brightness significantly
   * @param[out] Current temperature range
   */
-TemperatureRange_e GetTemperatureRange( void )
+TemperatureRange_e GetTemperatureRange ( void )
 {
-    int32_t temperature = GetTemperature();
+  int32_t temperature = GetTemperature();
 
-    switch(temperature_threshold)
-    {
-        case TempCool:
-            // no cooling check needed
-            if (temperature >= HeatingThreshold2_dC)
-            {
-                temperature_threshold = TempHot;
-                LogTempChange(TempCool, temperature_threshold);
-            }
-            else if (temperature >= HeatingThreshold1_dC)
-            {
-                temperature_threshold = TempWarm;
-                LogTempChange(TempCool, temperature_threshold);
-            }
-            break;
+  switch ( temperature_threshold )
+  {
+    case TempCool:
 
-        case TempWarm:
-            // check if cooled down or heated up
-            if (temperature <= CoolingThreshold1_dC)
-            {
-                temperature_threshold = TempCool;
-                LogTempChange(TempWarm, temperature_threshold);
-            }
-            else if (temperature >= HeatingThreshold2_dC)
-            {
-                temperature_threshold = TempHot;
-                LogTempChange(TempWarm, temperature_threshold);
-            }
-            break;
+      // no cooling check needed
+      if ( temperature >= HeatingThreshold2_dC )
+      {
+        temperature_threshold = TempHot;
+        LogTempChange ( TempCool, temperature_threshold );
+      }
+      else if ( temperature >= HeatingThreshold1_dC )
+      {
+        temperature_threshold = TempWarm;
+        LogTempChange ( TempCool, temperature_threshold );
+      }
 
-        case TempHot:
-            // check if cooled down
-            if (temperature <= CoolingThreshold1_dC)
-            {
-                temperature_threshold = TempCool;
-                LogTempChange(TempHot, temperature_threshold);
-            }
-            else if (temperature <= CoolingThreshold2_dC)
-            {
-                temperature_threshold = TempWarm;
-                LogTempChange(TempHot, temperature_threshold);
-            }
-            break;
+      break;
 
-        default:
-            break;
-    }
+    case TempWarm:
 
-    return temperature_threshold;
+      // check if cooled down or heated up
+      if ( temperature <= CoolingThreshold1_dC )
+      {
+        temperature_threshold = TempCool;
+        LogTempChange ( TempWarm, temperature_threshold );
+      }
+      else if ( temperature >= HeatingThreshold2_dC )
+      {
+        temperature_threshold = TempHot;
+        LogTempChange ( TempWarm, temperature_threshold );
+      }
+
+      break;
+
+    case TempHot:
+
+      // check if cooled down
+      if ( temperature <= CoolingThreshold1_dC )
+      {
+        temperature_threshold = TempCool;
+        LogTempChange ( TempHot, temperature_threshold );
+      }
+      else if ( temperature <= CoolingThreshold2_dC )
+      {
+        temperature_threshold = TempWarm;
+        LogTempChange ( TempHot, temperature_threshold );
+      }
+
+      break;
+
+    default:
+      break;
+  }
+
+  return temperature_threshold;
 
 }

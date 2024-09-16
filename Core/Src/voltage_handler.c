@@ -31,16 +31,16 @@
 #include "logger.h"
 
 /** Raw value out of voltmeter to deciVolts (V*0.1) */
-const uint16_t  RawTodVolts = (1);
+const uint16_t RawTodVolts = ( 1 );
 /** DeciCelcius (C*0.1) to raw value out of voltmeter */
-const uint16_t  dVoltsToRaw = (1);
+const uint16_t dVoltsToRaw = ( 1 );
 
 /** Low Voltage Error Level in dV */
-const uint16_t VoltageErrorLowThreshold_dV  = 240u;
+const uint16_t VoltageErrorLowThreshold_dV = 240u;
 /** Low Voltage Level in dV */
-const uint16_t VoltageLowThreshold_dV       = 260u;
+const uint16_t VoltageLowThreshold_dV = 260u;
 /** High Voltage Level in dV */
-const uint16_t VoltageHighThreshold_dV      = 300u;
+const uint16_t VoltageHighThreshold_dV = 300u;
 /** High Voltage Error Level in dV */
 const uint16_t VoltageErrorHighThreshold_dV = 320u;
 
@@ -53,38 +53,38 @@ static VoltageRange_e voltage_threshold = VoltageNormal;
   * @param[in] range Range the voltage is in, see VoltageRange_e
   * @param[in] voltageValue Voltage in dV
   */
-static void LogVoltageChange(VoltageRange_e range, uint16_t voltageValue)
+static void LogVoltageChange ( VoltageRange_e range, uint16_t voltageValue )
 {
-    char str[30];
+  char str [ 30 ];
 
-    switch(range)
-    {
-        case VoltageErrorLow:
-            sprintf(str, "Error Low Voltage %d dV\n", voltageValue);
-            break;
+  switch ( range )
+  {
+    case VoltageErrorLow:
+      sprintf ( str, "Error Low Voltage %d dV\n", voltageValue );
+      break;
 
-        case VoltageLow:
-            sprintf(str, "Low Voltage %d dV\n", voltageValue);
-            break;
+    case VoltageLow:
+      sprintf ( str, "Low Voltage %d dV\n", voltageValue );
+      break;
 
-        case VoltageNormal:
-            sprintf(str, "Normal Voltage %d dV\n", voltageValue);
-            break;
+    case VoltageNormal:
+      sprintf ( str, "Normal Voltage %d dV\n", voltageValue );
+      break;
 
-        case VoltageHigh:
-            sprintf(str, "High Voltage %d dV\n", voltageValue);
-            break;
+    case VoltageHigh:
+      sprintf ( str, "High Voltage %d dV\n", voltageValue );
+      break;
 
-        case VoltageErrorHigh:
-            sprintf(str, "Error High Voltage %d dV\n", voltageValue);
-            break;
+    case VoltageErrorHigh:
+      sprintf ( str, "Error High Voltage %d dV\n", voltageValue );
+      break;
 
-        default:
-            break;
+    default:
+      break;
 
-    }
+  }
 
-    LogString(str, 0);
+  LogString ( str, 0 );
 }
 
 /**
@@ -92,10 +92,10 @@ static void LogVoltageChange(VoltageRange_e range, uint16_t voltageValue)
   *
   * @param[out] voltage level in dV
   */
-uint16_t GetVoltage( void )
+uint16_t GetVoltage ( void )
 {
-    uint16_t voltage = GetVoltageValue() * RawTodVolts;
-    return (voltage);
+  uint16_t voltage = GetVoltageValue() * RawTodVolts;
+  return ( voltage );
 }
 
 /**
@@ -108,34 +108,37 @@ uint16_t GetVoltage( void )
   *         ErrorHigh   - Voltage too high
   * @param[out] Current voltage range
   */
-VoltageRange_e GetVoltageRange( void )
+VoltageRange_e GetVoltageRange ( void )
 {
-    uint16_t voltage = GetVoltage();
-    VoltageRange_e prev_threshold = voltage_threshold;
+  uint16_t voltage = GetVoltage();
+  VoltageRange_e prev_threshold = voltage_threshold;
 
-    if (voltage <= VoltageErrorLowThreshold_dV)
-    {
-        voltage_threshold = VoltageErrorLow;
-    }
-    else if (voltage <= VoltageLowThreshold_dV)
-    {
-        voltage_threshold = VoltageLow;
-    }
-    else if (voltage >= VoltageErrorHighThreshold_dV)
-    {
-        voltage_threshold = VoltageErrorHigh;
-    }
-    else if (voltage >= VoltageHighThreshold_dV)
-    {
-        voltage_threshold = VoltageHigh;
-    }
-    else
-    {
-        voltage_threshold = VoltageNormal;
-    }
+  if ( voltage <= VoltageErrorLowThreshold_dV )
+  {
+    voltage_threshold = VoltageErrorLow;
+  }
+  else if ( voltage <= VoltageLowThreshold_dV )
+  {
+    voltage_threshold = VoltageLow;
+  }
+  else if ( voltage >= VoltageErrorHighThreshold_dV )
+  {
+    voltage_threshold = VoltageErrorHigh;
+  }
+  else if ( voltage >= VoltageHighThreshold_dV )
+  {
+    voltage_threshold = VoltageHigh;
+  }
+  else
+  {
+    voltage_threshold = VoltageNormal;
+  }
 
-    if (prev_threshold != voltage_threshold) LogVoltageChange(voltage_threshold, voltage);
+  if ( prev_threshold != voltage_threshold )
+  {
+    LogVoltageChange ( voltage_threshold, voltage );
+  }
 
-    return voltage_threshold;
+  return voltage_threshold;
 
 }

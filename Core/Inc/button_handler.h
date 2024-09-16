@@ -23,22 +23,22 @@
  *****************************************************************************/
 
 #ifndef INC_button_handlerh
-    #define INC_button_handlerh
+#define INC_button_handlerh
 
-    #include <stdint.h>
+#include <stdint.h>
 
-    #include "stm32l412xx-bsp.h"
+#include "stm32l412xx-bsp.h"
 
-    /**
-      * @brief Return state of dim button
-      * @param[out] Dim Pin State, pressed or not
-      */
-    GPIO_PinState IsDimPressed    ( void );
+/**
+  * @brief Return state of dim button
+  * @param[out] Dim Pin State, pressed or not
+  */
+GPIO_PinState IsDimPressed ( void );
 
-    /**
-      * @brief Return state of brighten button
-      * @param[out] Bright Pin State, pressed or not
-      */
-    GPIO_PinState IsBrightPressed ( void );
+/**
+  * @brief Return state of brighten button
+  * @param[out] Bright Pin State, pressed or not
+  */
+GPIO_PinState IsBrightPressed ( void );
 
 #endif /* INC_button_handlerh */

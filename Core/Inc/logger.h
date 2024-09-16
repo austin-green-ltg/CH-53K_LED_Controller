@@ -24,31 +24,31 @@
  *****************************************************************************/
 
 #ifndef INC_loggerh
-  #define INC_loggerh
+#define INC_loggerh
 
-  #include <stdint.h>
+#include <stdint.h>
 
 
-  /**
-    * @brief Log a string to tail_pointer, use write_beginning flag to write the beginning
-    * @param[in] string Pointer to string to log
-    * @param[in] write_beginning Write log at the beginning of log area
-    */
-  void LogString( const char* const string, uint8_t write_beginning );
+/**
+  * @brief Log a string to tail_pointer, use write_beginning flag to write the beginning
+  * @param[in] string Pointer to string to log
+  * @param[in] write_beginning Write log at the beginning of log area
+  */
+void LogString ( const char* const string, uint8_t write_beginning );
 
-  /**
-    * @brief Logs a number by converting the number to a string and using the LogString function
-    * @param[in] number Number to log
-    * @param[in] write_beginning Write log at the beginning of log area
-    */
-  void LogNumber( const int32_t number, uint8_t write_beginning );
+/**
+  * @brief Logs a number by converting the number to a string and using the LogString function
+  * @param[in] number Number to log
+  * @param[in] write_beginning Write log at the beginning of log area
+  */
+void LogNumber ( const int32_t number, uint8_t write_beginning );
 
-  /**
-    * @brief Reads the log at a given address and size
-    * @param[in] address Address to read from
-    * @param[in] string Pointer to return data string
-    * @param[in] bytes Number of bytes to read
-    */
-  void ReadLog(  const uint32_t address, char* string, const uint32_t bytes );
+/**
+  * @brief Reads the log at a given address and size
+  * @param[in] address Address to read from
+  * @param[in] string Pointer to return data string
+  * @param[in] bytes Number of bytes to read
+  */
+void ReadLog ( const uint32_t address, char* string, const uint32_t bytes );
 
 #endif /* INC_loggerh */

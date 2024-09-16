@@ -23,37 +23,37 @@
  *****************************************************************************/
 
 #ifndef INC_voltage_handlerh
-    #define INC_voltage_handlerh
+#define INC_voltage_handlerh
 
-    #include <stdint.h>
+#include <stdint.h>
 
-    /** Voltage Range Enum */
-    typedef enum
-    {
-        VoltageNormal       = 0,    /**< Normal Operating Voltage */
-        VoltageLow          = 1,    /**< Voltage low, but ok      */
-        VoltageHigh         = 2,    /**< Voltage high, but ok     */
-        VoltageErrorLow     = 3,    /**< Voltage too low          */
-        VoltageErrorHigh    = 4     /**< Voltage too high         */
-    } VoltageRange_e;
+/** Voltage Range Enum */
+typedef enum
+{
+  VoltageNormal = 0, /**< Normal Operating Voltage */
+  VoltageLow = 1, /**< Voltage low, but ok      */
+  VoltageHigh = 2, /**< Voltage high, but ok     */
+  VoltageErrorLow = 3, /**< Voltage too low          */
+  VoltageErrorHigh = 4 /**< Voltage too high         */
+} VoltageRange_e;
 
-    /**
-      * @brief Get voltage from voltmeter
-      *
-      * @param[out] voltage level in dV
-      */
-    uint16_t GetVoltage( void );
+/**
+  * @brief Get voltage from voltmeter
+  *
+  * @param[out] voltage level in dV
+  */
+uint16_t GetVoltage ( void );
 
-    /**
-      * @brief Get range that the voltage falls into
-      *         Possible ranges are
-      *         Normal      - Normal Operating Voltage
-      *         Low         - Voltage low, but ok
-      *         High        - Voltage high, but ok
-      *         ErrorLow    - Voltage too low
-      *         ErrorHigh   - Voltage too high
-      * @param[out] Current voltage range
-      */
-    VoltageRange_e GetVoltageRange( void );
+/**
+  * @brief Get range that the voltage falls into
+  *         Possible ranges are
+  *         Normal      - Normal Operating Voltage
+  *         Low         - Voltage low, but ok
+  *         High        - Voltage high, but ok
+  *         ErrorLow    - Voltage too low
+  *         ErrorHigh   - Voltage too high
+  * @param[out] Current voltage range
+  */
+VoltageRange_e GetVoltageRange ( void );
 
 #endif /* INC_voltage_handlerh */
