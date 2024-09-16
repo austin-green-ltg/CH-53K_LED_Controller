@@ -36,7 +36,7 @@ extern "C" {
 
 /* USER CODE END Private defines */
 
-void MX_USART2_UART_Init(void);
+void MX_USART2_UART_Init ( void );
 
 /* USER CODE BEGIN Prototypes */
 
@@ -44,6 +44,7 @@ void MX_USART2_UART_Init(void);
 
 #ifdef __cplusplus
 }
+
 #endif
 
 #endif /* INC_usarth */

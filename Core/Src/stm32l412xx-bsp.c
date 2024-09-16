@@ -31,8 +31,8 @@
   */
 GPIO_PinState ReadDimPin ( void )
 {
-  return ( LL_GPIO_IsInputPinSet ( DIM_GPIO_Port,
-                                   DIM_Pin ) == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET );
+    return ( LL_GPIO_IsInputPinSet ( DIM_GPIO_Port,
+                                     DIM_Pin ) == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET );
 }
 
 /**
@@ -41,8 +41,8 @@ GPIO_PinState ReadDimPin ( void )
   */
 GPIO_PinState ReadBrightPin ( void )
 {
-  return ( LL_GPIO_IsInputPinSet ( BRIGHT_GPIO_Port,
-                                   BRIGHT_Pin ) == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET );
+    return ( LL_GPIO_IsInputPinSet ( BRIGHT_GPIO_Port,
+                                     BRIGHT_Pin ) == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET );
 }
 
 /**
@@ -50,9 +50,9 @@ GPIO_PinState ReadBrightPin ( void )
   */
 void EnablePWM1 ( void )
 {
-  LL_TIM_EnableAllOutputs ( TIM1 );
+    LL_TIM_EnableAllOutputs ( TIM1 );
 
-  LL_TIM_EnableCounter ( TIM1 );
+    LL_TIM_EnableCounter ( TIM1 );
 }
 
 /**
@@ -60,9 +60,9 @@ void EnablePWM1 ( void )
   */
 void DisablePWM1 ( void )
 {
-  LL_TIM_DisableAllOutputs ( TIM1 );
+    LL_TIM_DisableAllOutputs ( TIM1 );
 
-  LL_TIM_DisableCounter ( TIM1 );
+    LL_TIM_DisableCounter ( TIM1 );
 }
 
 /**
@@ -70,7 +70,7 @@ void DisablePWM1 ( void )
   */
 void StartPWM11 ( void )
 {
-  LL_TIM_CC_EnableChannel ( TIM1, LL_TIM_CHANNEL_CH1 );
+    LL_TIM_CC_EnableChannel ( TIM1, LL_TIM_CHANNEL_CH1 );
 }
 
 /**
@@ -78,7 +78,7 @@ void StartPWM11 ( void )
   */
 void StopPWM11 ( void )
 {
-  LL_TIM_CC_DisableChannel ( TIM1, LL_TIM_CHANNEL_CH1 );
+    LL_TIM_CC_DisableChannel ( TIM1, LL_TIM_CHANNEL_CH1 );
 }
 
 /**
@@ -87,7 +87,7 @@ void StopPWM11 ( void )
   */
 void SetPW11 ( uint32_t pulse_width )
 {
-  LL_TIM_OC_SetCompareCH1 ( TIM1, pulse_width );
+    LL_TIM_OC_SetCompareCH1 ( TIM1, pulse_width );
 }
 
 /**
@@ -95,9 +95,9 @@ void SetPW11 ( uint32_t pulse_width )
   */
 void StartTIM2 ( void )
 {
-  LL_TIM_EnableCounter ( TIM2 );
+    LL_TIM_EnableCounter ( TIM2 );
 
-  return;
+    return;
 }
 
 /**
@@ -105,9 +105,9 @@ void StartTIM2 ( void )
   */
 void RestartTIM2 ( void )
 {
-  LL_TIM_SetCounter ( TIM2, 0 );
+    LL_TIM_SetCounter ( TIM2, 0 );
 
-  return;
+    return;
 }
 
 /**
@@ -116,7 +116,7 @@ void RestartTIM2 ( void )
   */
 uint32_t GetTIM2Cnt ( void )
 {
-  return LL_TIM_GetCounter ( TIM2 );
+    return LL_TIM_GetCounter ( TIM2 );
 }
 
 /**
@@ -125,7 +125,7 @@ uint32_t GetTIM2Cnt ( void )
   */
 int16_t GetThermistorValue ( void )
 {
-  return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_1 );
+    return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_1 );
 }
 
 /**
@@ -134,7 +134,7 @@ int16_t GetThermistorValue ( void )
   */
 int16_t GetCurrentValue ( void )
 {
-  return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_2 );
+    return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_2 );
 }
 
 /**
@@ -143,7 +143,7 @@ int16_t GetCurrentValue ( void )
   */
 int16_t GetVoltageValue ( void )
 {
-  return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_3 );
+    return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_3 );
 }
 
 /**
@@ -151,7 +151,7 @@ int16_t GetVoltageValue ( void )
   */
 void enableWriteProtect ( void )
 {
-  LL_GPIO_SetOutputPin ( SPI_WP_GPIO_Port, SPI_WP_Pin );
+    LL_GPIO_SetOutputPin ( SPI_WP_GPIO_Port, SPI_WP_Pin );
 }
 
 /**
@@ -159,7 +159,7 @@ void enableWriteProtect ( void )
   */
 void disableWriteProtect ( void )
 {
-  LL_GPIO_ResetOutputPin ( SPI_WP_GPIO_Port, SPI_WP_Pin );
+    LL_GPIO_ResetOutputPin ( SPI_WP_GPIO_Port, SPI_WP_Pin );
 }
 
 /**
@@ -167,7 +167,7 @@ void disableWriteProtect ( void )
   */
 void enableChipSelect ( void )
 {
-  LL_GPIO_ResetOutputPin ( SPI_NSS_GPIO_Port, SPI_NSS_Pin );
+    LL_GPIO_ResetOutputPin ( SPI_NSS_GPIO_Port, SPI_NSS_Pin );
 }
 
 /**
@@ -175,7 +175,7 @@ void enableChipSelect ( void )
   */
 void disableChipSelect ( void )
 {
-  LL_GPIO_SetOutputPin ( SPI_NSS_GPIO_Port, SPI_NSS_Pin );
+    LL_GPIO_SetOutputPin ( SPI_NSS_GPIO_Port, SPI_NSS_Pin );
 }
 
 /**
@@ -185,17 +185,17 @@ void disableChipSelect ( void )
   */
 void transferData ( const unsigned char* const txData, const uint32_t bytes )
 {
-  uint32_t xferCnt = 0;
+    uint32_t xferCnt = 0;
 
-  while ( xferCnt > bytes )
-  {
-    /* Wait until TXE flag is set to send data */
-    if ( LL_SPI_IsActiveFlag_TXE ( SPI1 ) )
+    while ( xferCnt > bytes )
     {
-      LL_SPI_TransmitData8 ( SPI1, txData [ xferCnt ] );
-      xferCnt++;
+        /* Wait until TXE flag is set to send data */
+        if ( LL_SPI_IsActiveFlag_TXE ( SPI1 ) )
+        {
+            LL_SPI_TransmitData8 ( SPI1, txData [ xferCnt ] );
+            xferCnt++;
+        }
     }
-  }
 }
 
 /**
@@ -205,17 +205,17 @@ void transferData ( const unsigned char* const txData, const uint32_t bytes )
   */
 void receiveData ( unsigned char* rxData, const uint32_t bytes )
 {
-  uint32_t xferCnt = 0;
+    uint32_t xferCnt = 0;
 
-  while ( xferCnt > bytes )
-  {
-    /* Check the RXNE flag */
-    if ( LL_SPI_IsActiveFlag_RXNE ( SPI1 ) )
+    while ( xferCnt > bytes )
     {
-      rxData [ xferCnt ] = LL_SPI_ReceiveData8 ( SPI1 );
-      xferCnt++;
+        /* Check the RXNE flag */
+        if ( LL_SPI_IsActiveFlag_RXNE ( SPI1 ) )
+        {
+            rxData [ xferCnt ] = LL_SPI_ReceiveData8 ( SPI1 );
+            xferCnt++;
+        }
     }
-  }
 }
 
 /**
@@ -226,12 +226,12 @@ void sendUARTChar ( char c )
 {
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
 
-  while (!LL_USART_IsActiveFlag_TXE ( USART2 ) ) {};
+    while (!LL_USART_IsActiveFlag_TXE ( USART2 ) ) {};
 
-  LL_USART_TransmitData8 ( USART2, ( uint8_t ) ( c & 0xFFU ) );
+    LL_USART_TransmitData8 ( USART2, ( uint8_t ) ( c & 0xFFU ) );
 
-  while ( LL_USART_IsActiveFlag_TC ( USART2 ) ) {}
+    while ( LL_USART_IsActiveFlag_TC ( USART2 ) ) {}
 
-  return;
+    return;
 #endif /* ENABLE_UART_DEBUGGING */
 }

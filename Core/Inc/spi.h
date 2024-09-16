@@ -36,7 +36,7 @@ extern "C" {
 
 /* USER CODE END Private defines */
 
-void MX_SPI1_Init(void);
+void MX_SPI1_Init ( void );
 
 /* USER CODE BEGIN Prototypes */
 
@@ -44,6 +44,7 @@ void MX_SPI1_Init(void);
 
 #ifdef __cplusplus
 }
+
 #endif
 
 #endif /* INC_spih */

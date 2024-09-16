@@ -35,12 +35,12 @@
 typedef enum
 {
 
-  OC_WREN = 6,  /**< set write enable latch */
-  OC_WRDI = 4,  /**< write disable          */
-  OC_RDSR = 5,  /**< read status register   */
-  OC_WRSR = 1,  /**< write status register  */
-  OC_READ = 3,  /**< read memory data       */
-  OC_WRITE = 2, /**< write memory data      */
+    OC_WREN = 6, /**< set write enable latch */
+    OC_WRDI = 4, /**< write disable          */
+    OC_RDSR = 5, /**< read status register   */
+    OC_WRSR = 1, /**< write status register  */
+    OC_READ = 3, /**< read memory data       */
+    OC_WRITE = 2, /**< write memory data      */
 
 } OPCODE_COMMANDS ;
 
@@ -51,10 +51,10 @@ typedef enum
 typedef enum
 {
 
-  SR_WEL = 0x2,   /**< write-enable latch       */
-  SR_BP0 = 0x4,   /**< block protect bit 0      */
-  SR_BP1 = 0x8,   /**< block protect bit 1      */
-  SR_WPEN = 0x80, /**< enable write protect pin */
+    SR_WEL = 0x2, /**< write-enable latch       */
+    SR_BP0 = 0x4, /**< block protect bit 0      */
+    SR_BP1 = 0x8, /**< block protect bit 1      */
+    SR_WPEN = 0x80, /**< enable write protect pin */
 
 } STATUS_REGISTER ;
 
@@ -65,8 +65,8 @@ typedef enum
 typedef enum
 {
 
-  WPS_PROTECTED = 0, /**< write protected */
-  WPS_WRITEABLE = 1, /**< write enabled   */
+    WPS_PROTECTED = 0, /**< write protected */
+    WPS_WRITEABLE = 1, /**< write enabled   */
 
 } WRITE_PROTECT_STATE ;
 
@@ -77,8 +77,8 @@ typedef enum
 typedef enum
 {
 
-  CSS_ASSERT = 0,   /**< chip select disabled */
-  CSS_RELEASE = 1,  /**< chip select enabled */
+    CSS_ASSERT = 0, /**< chip select disabled */
+    CSS_RELEASE = 1, /**< chip select enabled */
 
 } CHIP_SELECT_STATE ;
 

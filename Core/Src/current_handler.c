@@ -51,28 +51,28 @@ static CurrentRange_e current_threshold = CurrentNormal;
   */
 static void LogCurrentChange ( CurrentRange_e range, uint16_t currentValue )
 {
-  char str [ 25 ];
+    char str [ 25 ];
 
-  switch ( range )
-  {
-    case CurrentNormal:
-      sprintf ( str, "Normal Current %d dA\n", currentValue );
-      break;
+    switch ( range )
+    {
+        case CurrentNormal:
+            sprintf ( str, "Normal Current %d dA\n", currentValue );
+            break;
 
-    case CurrentHigh:
-      sprintf ( str, "High Current %d dA\n", currentValue );
-      break;
+        case CurrentHigh:
+            sprintf ( str, "High Current %d dA\n", currentValue );
+            break;
 
-    case CurrentError:
-      sprintf ( str, "Error Current %d dA\n", currentValue );
-      break;
+        case CurrentError:
+            sprintf ( str, "Error Current %d dA\n", currentValue );
+            break;
 
-    default:
-      break;
+        default:
+            break;
 
-  }
+    }
 
-  LogString ( str, 0 );
+    LogString ( str, 0 );
 }
 
 /**
@@ -82,8 +82,8 @@ static void LogCurrentChange ( CurrentRange_e range, uint16_t currentValue )
   */
 uint16_t GetCurrent ( void )
 {
-  uint16_t current = GetCurrentValue() * RawTodAmps;
-  return ( current );
+    uint16_t current = GetCurrentValue() * RawTodAmps;
+    return ( current );
 }
 
 /**
@@ -96,26 +96,26 @@ uint16_t GetCurrent ( void )
   */
 CurrentRange_e GetCurrentRange ( void )
 {
-  uint16_t current = GetCurrent();
-  CurrentRange_e prev_threshold = current_threshold;
+    uint16_t current = GetCurrent();
+    CurrentRange_e prev_threshold = current_threshold;
 
-  if ( current >= CurrentErrorThreshold_dA )
-  {
-    current_threshold = CurrentError;
-  }
-  else if ( current >= CurrentHighThreshold_dA )
-  {
-    current_threshold = CurrentHigh;
-  }
-  else
-  {
-    current_threshold = CurrentNormal;
-  }
+    if ( current >= CurrentErrorThreshold_dA )
+    {
+        current_threshold = CurrentError;
+    }
+    else if ( current >= CurrentHighThreshold_dA )
+    {
+        current_threshold = CurrentHigh;
+    }
+    else
+    {
+        current_threshold = CurrentNormal;
+    }
 
-  if ( prev_threshold != current_threshold )
-  {
-    LogCurrentChange ( current_threshold, current );
-  }
+    if ( prev_threshold != current_threshold )
+    {
+        LogCurrentChange ( current_threshold, current );
+    }
 
-  return current_threshold;
+    return current_threshold;
 }

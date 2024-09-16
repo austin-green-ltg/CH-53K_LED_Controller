@@ -36,9 +36,9 @@ extern "C" {
 
 /* USER CODE END Private defines */
 
-void MX_TIM1_Init(void);
-void MX_TIM2_Init(void);
-void MX_TIM15_Init(void);
+void MX_TIM1_Init ( void );
+void MX_TIM2_Init ( void );
+void MX_TIM15_Init ( void );
 
 /* USER CODE BEGIN Prototypes */
 
@@ -46,6 +46,7 @@ void MX_TIM15_Init(void);
 
 #ifdef __cplusplus
 }
+
 #endif
 
 #endif /* INC_timh */

@@ -38,9 +38,9 @@ const float Tim2ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM2_CLK_DEV /
   */
 void StartDelayCounter ( void )
 {
-  StartTIM2();
-  RestartDelayCounter();
-  return;
+    StartTIM2();
+    RestartDelayCounter();
+    return;
 }
 
 /**
@@ -48,8 +48,8 @@ void StartDelayCounter ( void )
   */
 void RestartDelayCounter ( void )
 {
-  RestartTIM2();
-  return;
+    RestartTIM2();
+    return;
 }
 
 /**
@@ -59,9 +59,9 @@ void RestartDelayCounter ( void )
   */
 uint8_t DelayHit ( uint32_t delay_ms )
 {
-  uint8_t isDelayHit = ( GetTIM2Cnt() >= ( uint32_t ) ( delay_ms * Tim2ClkKhz +
-                         0.5f ) );
-  return isDelayHit;
+    uint8_t isDelayHit = ( GetTIM2Cnt() >= ( uint32_t ) ( delay_ms * Tim2ClkKhz +
+                           0.5f ) );
+    return isDelayHit;
 }
 
 /**
@@ -71,6 +71,6 @@ uint8_t DelayHit ( uint32_t delay_ms )
   */
 uint16_t BrightnessDelay ( int8_t brightness )
 {
-  /* formula to satisfy requirements */
-  return ( brightness * 5 + 250 );
+    /* formula to satisfy requirements */
+    return ( brightness * 5 + 250 );
 }

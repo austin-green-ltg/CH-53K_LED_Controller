@@ -30,9 +30,9 @@
 /** Current Range Enum */
 typedef enum
 {
-  CurrentNormal = 0,  /**< Normal Operating Current */
-  CurrentHigh = 1,    /**< Current high, but ok     */
-  CurrentError = 2    /**< Current too high         */
+    CurrentNormal = 0, /**< Normal Operating Current */
+    CurrentHigh = 1, /**< Current high, but ok     */
+    CurrentError = 2 /**< Current too high         */
 } CurrentRange_e;
 
 /**

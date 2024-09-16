@@ -34,7 +34,7 @@
   */
 GPIO_PinState IsDimPressed ( void )
 {
-  return ReadDimPin();
+    return ReadDimPin();
 }
 
 /**
@@ -43,5 +43,5 @@ GPIO_PinState IsDimPressed ( void )
   */
 GPIO_PinState IsBrightPressed ( void )
 {
-  return ReadBrightPin();
+    return ReadBrightPin();
 }

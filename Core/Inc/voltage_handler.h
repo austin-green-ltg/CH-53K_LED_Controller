@@ -30,11 +30,11 @@
 /** Voltage Range Enum */
 typedef enum
 {
-  VoltageNormal = 0, /**< Normal Operating Voltage */
-  VoltageLow = 1, /**< Voltage low, but ok      */
-  VoltageHigh = 2, /**< Voltage high, but ok     */
-  VoltageErrorLow = 3, /**< Voltage too low          */
-  VoltageErrorHigh = 4 /**< Voltage too high         */
+    VoltageNormal = 0, /**< Normal Operating Voltage */
+    VoltageLow = 1, /**< Voltage low, but ok      */
+    VoltageHigh = 2, /**< Voltage high, but ok     */
+    VoltageErrorLow = 3, /**< Voltage too low          */
+    VoltageErrorHigh = 4 /**< Voltage too high         */
 } VoltageRange_e;
 
 /**

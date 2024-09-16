@@ -35,9 +35,9 @@
   */
 int fputc ( int c, FILE *stream )
 {
-  ( void ) stream;
-  sendUARTChar ( c );
-  return c;
+    ( void ) stream;
+    sendUARTChar ( c );
+    return c;
 }
 
 #endif /* ENABLE_UART_DEBUGGING */

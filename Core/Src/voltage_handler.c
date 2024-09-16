@@ -55,36 +55,36 @@ static VoltageRange_e voltage_threshold = VoltageNormal;
   */
 static void LogVoltageChange ( VoltageRange_e range, uint16_t voltageValue )
 {
-  char str [ 30 ];
+    char str [ 30 ];
 
-  switch ( range )
-  {
-    case VoltageErrorLow:
-      sprintf ( str, "Error Low Voltage %d dV\n", voltageValue );
-      break;
+    switch ( range )
+    {
+        case VoltageErrorLow:
+            sprintf ( str, "Error Low Voltage %d dV\n", voltageValue );
+            break;
 
-    case VoltageLow:
-      sprintf ( str, "Low Voltage %d dV\n", voltageValue );
-      break;
+        case VoltageLow:
+            sprintf ( str, "Low Voltage %d dV\n", voltageValue );
+            break;
 
-    case VoltageNormal:
-      sprintf ( str, "Normal Voltage %d dV\n", voltageValue );
-      break;
+        case VoltageNormal:
+            sprintf ( str, "Normal Voltage %d dV\n", voltageValue );
+            break;
 
-    case VoltageHigh:
-      sprintf ( str, "High Voltage %d dV\n", voltageValue );
-      break;
+        case VoltageHigh:
+            sprintf ( str, "High Voltage %d dV\n", voltageValue );
+            break;
 
-    case VoltageErrorHigh:
-      sprintf ( str, "Error High Voltage %d dV\n", voltageValue );
-      break;
+        case VoltageErrorHigh:
+            sprintf ( str, "Error High Voltage %d dV\n", voltageValue );
+            break;
 
-    default:
-      break;
+        default:
+            break;
 
-  }
+    }
 
-  LogString ( str, 0 );
+    LogString ( str, 0 );
 }
 
 /**
@@ -94,8 +94,8 @@ static void LogVoltageChange ( VoltageRange_e range, uint16_t voltageValue )
   */
 uint16_t GetVoltage ( void )
 {
-  uint16_t voltage = GetVoltageValue() * RawTodVolts;
-  return ( voltage );
+    uint16_t voltage = GetVoltageValue() * RawTodVolts;
+    return ( voltage );
 }
 
 /**
@@ -110,35 +110,35 @@ uint16_t GetVoltage ( void )
   */
 VoltageRange_e GetVoltageRange ( void )
 {
-  uint16_t voltage = GetVoltage();
-  VoltageRange_e prev_threshold = voltage_threshold;
+    uint16_t voltage = GetVoltage();
+    VoltageRange_e prev_threshold = voltage_threshold;
 
-  if ( voltage <= VoltageErrorLowThreshold_dV )
-  {
-    voltage_threshold = VoltageErrorLow;
-  }
-  else if ( voltage <= VoltageLowThreshold_dV )
-  {
-    voltage_threshold = VoltageLow;
-  }
-  else if ( voltage >= VoltageErrorHighThreshold_dV )
-  {
-    voltage_threshold = VoltageErrorHigh;
-  }
-  else if ( voltage >= VoltageHighThreshold_dV )
-  {
-    voltage_threshold = VoltageHigh;
-  }
-  else
-  {
-    voltage_threshold = VoltageNormal;
-  }
+    if ( voltage <= VoltageErrorLowThreshold_dV )
+    {
+        voltage_threshold = VoltageErrorLow;
+    }
+    else if ( voltage <= VoltageLowThreshold_dV )
+    {
+        voltage_threshold = VoltageLow;
+    }
+    else if ( voltage >= VoltageErrorHighThreshold_dV )
+    {
+        voltage_threshold = VoltageErrorHigh;
+    }
+    else if ( voltage >= VoltageHighThreshold_dV )
+    {
+        voltage_threshold = VoltageHigh;
+    }
+    else
+    {
+        voltage_threshold = VoltageNormal;
+    }
 
-  if ( prev_threshold != voltage_threshold )
-  {
-    LogVoltageChange ( voltage_threshold, voltage );
-  }
+    if ( prev_threshold != voltage_threshold )
+    {
+        LogVoltageChange ( voltage_threshold, voltage );
+    }
 
-  return voltage_threshold;
+    return voltage_threshold;
 
 }

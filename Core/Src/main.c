@@ -53,10 +53,10 @@
 #define AVG_STEP_TIME_MS     ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2.0f) // 147.5
 #define AVG_STEP_DIFF_MS     (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)         // 12.5, distance between lower step time and average step time
 
-const float LowStepTimeMs =(LOWER_STEP_TIME_MS - AVG_STEP_DIFF_MS)
-                           ; // 122.5
-const float HighStepTimeMs =(UPPER_STEP_TIME_MS + AVG_STEP_DIFF_MS)
-                            ; // 172.5
+const float LowStepTimeMs = ( LOWER_STEP_TIME_MS - AVG_STEP_DIFF_MS )
+                            ; // 122.5
+const float HighStepTimeMs = ( UPPER_STEP_TIME_MS + AVG_STEP_DIFF_MS )
+                             ; // 172.5
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -71,7 +71,7 @@ const float HighStepTimeMs =(UPPER_STEP_TIME_MS + AVG_STEP_DIFF_MS)
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
+void SystemClock_Config ( void );
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -87,166 +87,175 @@ void SystemClock_Config(void);
   * Polls buttons and sensors.
   * @retval int
   */
-int main(void)
+int main ( void )
 {
 
-  /* USER CODE BEGIN 1 */
+    /* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
+    /* USER CODE END 1 */
 
-  /* MCU Configuration--------------------------------------------------------*/
+    /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+    /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+    HAL_Init();
 
-  /* USER CODE BEGIN Init */
+    /* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+    /* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+    /* Configure the system clock */
+    SystemClock_Config();
 
-  /* USER CODE BEGIN SysInit */
+    /* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
+    /* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_TIM1_Init();
-  MX_TIM2_Init();
+    /* Initialize all configured peripherals */
+    MX_GPIO_Init();
+    MX_TIM1_Init();
+    MX_TIM2_Init();
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-  /* Peripherals enabled for UART */
-  MX_TIM15_Init();
-  MX_USART2_UART_Init();
+    /* Peripherals enabled for UART */
+    MX_TIM15_Init();
+    MX_USART2_UART_Init();
 #endif /* ENABLE_UART_DEBUGGING */
-  MX_ADC1_Init();
-  MX_SPI1_Init();
-  MX_USB_DEVICE_Init();
-  /* USER CODE BEGIN 2 */
+    MX_ADC1_Init();
+    MX_SPI1_Init();
+    MX_USB_DEVICE_Init();
+    /* USER CODE BEGIN 2 */
 
-  InitPwm();
+    InitPwm();
 
-  GPIO_PinState prevDimPressed = BUTTON_UNPRESSED;
-  GPIO_PinState prevBrightPressed = BUTTON_UNPRESSED;
+    GPIO_PinState prevDimPressed = BUTTON_UNPRESSED;
+    GPIO_PinState prevBrightPressed = BUTTON_UNPRESSED;
 
-  SetPwm();
+    SetPwm();
 
-  StartDelayCounter();
+    StartDelayCounter();
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-  /* Peripherals enabled for UART */
-  LL_TIM_EnableCounter(TIM15);
-  TIM15->CNT = 0;
+    /* Peripherals enabled for UART */
+    LL_TIM_EnableCounter ( TIM15 );
+    TIM15->CNT = 0;
 #endif /* ENABLE_UART_DEBUGGING */
 
-  /* USER CODE END 2 */
+    /* USER CODE END 2 */
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
+    /* Infinite loop */
+    /* USER CODE BEGIN WHILE */
+    while ( 1 )
+    {
+        /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
+        /* USER CODE BEGIN 3 */
 
-     if(GetCurrentRange() == CurrentError)
-     {
-       // TODO: Do something
-     }
+        if ( GetCurrentRange() == CurrentError )
+        {
+            // TODO: Do something
+        }
 
-     if(GetVoltageRange() == VoltageErrorLow ||
-          GetVoltageRange() == VoltageErrorHigh)
-     {
-       // TODO: Do something
-     }
+        if ( GetVoltageRange() == VoltageErrorLow ||
+                GetVoltageRange() == VoltageErrorHigh )
+        {
+            // TODO: Do something
+        }
 
-     const int8_t CurrBrightness = GetBrightness();
-     const uint16_t BrightnessDelay_ms =(uint16_t)(( LowStepTimeMs +
-                                         CurrBrightness) * HOLD_BRIGHTNESS_JUMP);
+        const int8_t CurrBrightness = GetBrightness();
+        const uint16_t BrightnessDelay_ms = ( uint16_t ) ( ( LowStepTimeMs +
+                                            CurrBrightness ) * HOLD_BRIGHTNESS_JUMP );
 
-     uint8_t brightnessDelayHit = DelayHit(BrightnessDelay_ms);
+        uint8_t brightnessDelayHit = DelayHit ( BrightnessDelay_ms );
 
-     GPIO_PinState dimPressed = IsDimPressed();
-     GPIO_PinState brightPressed = IsBrightPressed();
+        GPIO_PinState dimPressed = IsDimPressed();
+        GPIO_PinState brightPressed = IsBrightPressed();
 
-     if(( dimPressed == BUTTON_PRESSED) && brightnessDelayHit)
-     {
-       DecreaseBrightness(prevDimPressed);
+        if ( ( dimPressed == BUTTON_PRESSED ) && brightnessDelayHit )
+        {
+            DecreaseBrightness ( prevDimPressed );
 
-       RestartDelayCounter();
-     }
-     else if(( brightPressed == BUTTON_PRESSED) && brightnessDelayHit)
-     {
-       IncreaseBrightness(prevBrightPressed);
+            RestartDelayCounter();
+        }
+        else if ( ( brightPressed == BUTTON_PRESSED ) && brightnessDelayHit )
+        {
+            IncreaseBrightness ( prevBrightPressed );
 
-       RestartDelayCounter();
-     }
+            RestartDelayCounter();
+        }
 
-     // save previous button state
-     prevDimPressed = dimPressed;
-     prevBrightPressed = brightPressed;
-  }
+        // save previous button state
+        prevDimPressed = dimPressed;
+        prevBrightPressed = brightPressed;
+    }
 
-  /* USER CODE END 3 */
+    /* USER CODE END 3 */
 }
 
 /**
   * @brief System Clock Configuration
   * @retval None
   */
-void SystemClock_Config(void)
+void SystemClock_Config ( void )
 {
-  LL_FLASH_SetLatency(LL_FLASH_LATENCY_4);
-  while(LL_FLASH_GetLatency()!= LL_FLASH_LATENCY_4)
-  {
-  }
-  LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE1);
-  while (LL_PWR_IsActiveFlag_VOS() != 0)
-  {
-  }
-  LL_RCC_HSI_Enable();
+    LL_FLASH_SetLatency ( LL_FLASH_LATENCY_4 );
 
-   /* Wait till HSI is ready */
-  while(LL_RCC_HSI_IsReady() != 1)
-  {
+    while ( LL_FLASH_GetLatency() != LL_FLASH_LATENCY_4 )
+    {
+    }
 
-  }
-  LL_RCC_HSI_SetCalibTrimming(64);
-  LL_RCC_MSI_Enable();
+    LL_PWR_SetRegulVoltageScaling ( LL_PWR_REGU_VOLTAGE_SCALE1 );
 
-   /* Wait till MSI is ready */
-  while(LL_RCC_MSI_IsReady() != 1)
-  {
+    while ( LL_PWR_IsActiveFlag_VOS() != 0 )
+    {
+    }
 
-  }
-  LL_RCC_MSI_EnableRangeSelection();
-  LL_RCC_MSI_SetRange(LL_RCC_MSIRANGE_11);
-  LL_RCC_MSI_SetCalibTrimming(0);
-  LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSI, LL_RCC_PLLM_DIV_1, 10, LL_RCC_PLLR_DIV_2);
-  LL_RCC_PLL_EnableDomain_SYS();
-  LL_RCC_PLL_Enable();
+    LL_RCC_HSI_Enable();
 
-   /* Wait till PLL is ready */
-  while(LL_RCC_PLL_IsReady() != 1)
-  {
+    /* Wait till HSI is ready */
+    while ( LL_RCC_HSI_IsReady() != 1 )
+    {
 
-  }
-  LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
+    }
 
-   /* Wait till System clock is ready */
-  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
-  {
+    LL_RCC_HSI_SetCalibTrimming ( 64 );
+    LL_RCC_MSI_Enable();
 
-  }
-  LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
-  LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_1);
-  LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
-  LL_SetSystemCoreClock(80000000);
+    /* Wait till MSI is ready */
+    while ( LL_RCC_MSI_IsReady() != 1 )
+    {
 
-   /* Update the time base */
-  if (HAL_InitTick (TICK_INT_PRIORITY) != HAL_OK)
-  {
-    Error_Handler();
-  }
+    }
+
+    LL_RCC_MSI_EnableRangeSelection();
+    LL_RCC_MSI_SetRange ( LL_RCC_MSIRANGE_11 );
+    LL_RCC_MSI_SetCalibTrimming ( 0 );
+    LL_RCC_PLL_ConfigDomain_SYS ( LL_RCC_PLLSOURCE_HSI, LL_RCC_PLLM_DIV_1, 10,
+                                  LL_RCC_PLLR_DIV_2 );
+    LL_RCC_PLL_EnableDomain_SYS();
+    LL_RCC_PLL_Enable();
+
+    /* Wait till PLL is ready */
+    while ( LL_RCC_PLL_IsReady() != 1 )
+    {
+
+    }
+
+    LL_RCC_SetSysClkSource ( LL_RCC_SYS_CLKSOURCE_PLL );
+
+    /* Wait till System clock is ready */
+    while ( LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL )
+    {
+
+    }
+
+    LL_RCC_SetAHBPrescaler ( LL_RCC_SYSCLK_DIV_1 );
+    LL_RCC_SetAPB1Prescaler ( LL_RCC_APB1_DIV_1 );
+    LL_RCC_SetAPB2Prescaler ( LL_RCC_APB2_DIV_1 );
+    LL_SetSystemCoreClock ( 80000000 );
+
+    /* Update the time base */
+    if ( HAL_InitTick ( TICK_INT_PRIORITY ) != HAL_OK )
+    {
+        Error_Handler();
+    }
 }
 
 /* USER CODE BEGIN 4 */
@@ -257,15 +266,17 @@ void SystemClock_Config(void)
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
-void Error_Handler(void)
+void Error_Handler ( void )
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-  __disable_irq();
-  while (1)
-  {
-  }
-  /* USER CODE END Error_Handler_Debug */
+    /* USER CODE BEGIN Error_Handler_Debug */
+    /* User can add his own implementation to report the HAL error return state */
+    __disable_irq();
+
+    while ( 1 )
+    {
+    }
+
+    /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -276,11 +287,12 @@ void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t *file, uint32_t line)
+void assert_failed ( uint8_t* file, uint32_t line )
 {
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
+    /* USER CODE BEGIN 6 */
+    /* User can add his own implementation to report the file name and line number,
+       ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+    /* USER CODE END 6 */
 }
+
 #endif /* USE_FULL_ASSERT */

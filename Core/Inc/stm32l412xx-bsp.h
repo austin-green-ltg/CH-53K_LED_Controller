@@ -30,126 +30,129 @@
 /* Private defines -----------------------------------------------------------*/
 #ifdef STM32L412xx
 
-  #include "stm32l4xx_hal.h"
+#include "stm32l4xx_hal.h"
 
-  #include "stm32l4xx_ll_adc.h"
-  #include "stm32l4xx_ll_crs.h"
-  #include "stm32l4xx_ll_rcc.h"
-  #include "stm32l4xx_ll_bus.h"
-  #include "stm32l4xx_ll_system.h"
-  #include "stm32l4xx_ll_exti.h"
-  #include "stm32l4xx_ll_cortex.h"
-  #include "stm32l4xx_ll_utils.h"
-  #include "stm32l4xx_ll_pwr.h"
-  #include "stm32l4xx_ll_dma.h"
-  #include "stm32l4xx_ll_spi.h"
-  #include "stm32l4xx_ll_tim.h"
-  #include "stm32l4xx_ll_usart.h"
-  #include "stm32l4xx_ll_gpio.h"
+#include "stm32l4xx_ll_adc.h"
+#include "stm32l4xx_ll_crs.h"
+#include "stm32l4xx_ll_rcc.h"
+#include "stm32l4xx_ll_bus.h"
+#include "stm32l4xx_ll_system.h"
+#include "stm32l4xx_ll_exti.h"
+#include "stm32l4xx_ll_cortex.h"
+#include "stm32l4xx_ll_utils.h"
+#include "stm32l4xx_ll_pwr.h"
+#include "stm32l4xx_ll_dma.h"
+#include "stm32l4xx_ll_spi.h"
+#include "stm32l4xx_ll_tim.h"
+#include "stm32l4xx_ll_usart.h"
+#include "stm32l4xx_ll_gpio.h"
 
-  /* Peripherals */
-  #include "adc.h"
-  #include "spi.h"
-  #include "tim.h"
-  #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
+/* Peripherals */
+#include "adc.h"
+#include "spi.h"
+#include "tim.h"
+#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
     /* Peripherals enabled for UART */
     #include "usart.h"
-  #endif /* ENABLE_UART_DEBUGGING */
-//  #include "usb_device.h"
-  #include "gpio.h"
+#endif /* ENABLE_UART_DEBUGGING */
+// #include "usb_device.h"
+#include "gpio.h"
 
-  #define THERMISTOR_ADC_Pin LL_GPIO_PIN_0
-  #define THERMISTOR_ADC_GPIO_Port GPIOA
-  #define BRIGHT_Pin LL_GPIO_PIN_1
-  #define BRIGHT_GPIO_Port GPIOA
-  #define DIM_Pin LL_GPIO_PIN_3
-  #define DIM_GPIO_Port GPIOA
-  #define VIS_IR_Pin LL_GPIO_PIN_4
-  #define VIS_IR_GPIO_Port GPIOA
-  #define EEPROM_SCK_Pin LL_GPIO_PIN_5
-  #define EEPROM_SCK_GPIO_Port GPIOA
-  #define EEPROM_MISO_Pin LL_GPIO_PIN_6
-  #define EEPROM_MISO_GPIO_Port GPIOA
-  #define EEPROM_MOSI_Pin LL_GPIO_PIN_7
-  #define EEPROM_MOSI_GPIO_Port GPIOA
-  #define VOLTMETER_ADC_Pin LL_GPIO_PIN_0
-  #define VOLTMETER_ADC_GPIO_Port GPIOB
-  #define AMPMETER_ADC_Pin LL_GPIO_PIN_1
-  #define AMPMETER_ADC_GPIO_Port GPIOB
-  #define PWM_OUT_Pin LL_GPIO_PIN_8
-  #define PWM_OUT_GPIO_Port GPIOA
-  #define USB_RENUM_N_Pin LL_GPIO_PIN_10
-  #define USB_RENUM_N_GPIO_Port GPIOA
-  #define SWDIO_Pin LL_GPIO_PIN_13
-  #define SWDIO_GPIO_Port GPIOA
-  #define SWCLK_Pin LL_GPIO_PIN_14
-  #define SWCLK_GPIO_Port GPIOA
-  #define SPI_WP_Pin LL_GPIO_PIN_5
-  #define SPI_WP_GPIO_Port GPIOB
-  #define SPI_NSS_Pin LL_GPIO_PIN_6
-  #define SPI_NSS_GPIO_Port GPIOB
-  #define BOOT0_Pin LL_GPIO_PIN_3
-  #define BOOT0_GPIO_Port GPIOH
+#define THERMISTOR_ADC_Pin LL_GPIO_PIN_0
+#define THERMISTOR_ADC_GPIO_Port GPIOA
+#define BRIGHT_Pin LL_GPIO_PIN_1
+#define BRIGHT_GPIO_Port GPIOA
+#define DIM_Pin LL_GPIO_PIN_3
+#define DIM_GPIO_Port GPIOA
+#define VIS_IR_Pin LL_GPIO_PIN_4
+#define VIS_IR_GPIO_Port GPIOA
+#define EEPROM_SCK_Pin LL_GPIO_PIN_5
+#define EEPROM_SCK_GPIO_Port GPIOA
+#define EEPROM_MISO_Pin LL_GPIO_PIN_6
+#define EEPROM_MISO_GPIO_Port GPIOA
+#define EEPROM_MOSI_Pin LL_GPIO_PIN_7
+#define EEPROM_MOSI_GPIO_Port GPIOA
+#define VOLTMETER_ADC_Pin LL_GPIO_PIN_0
+#define VOLTMETER_ADC_GPIO_Port GPIOB
+#define AMPMETER_ADC_Pin LL_GPIO_PIN_1
+#define AMPMETER_ADC_GPIO_Port GPIOB
+#define PWM_OUT_Pin LL_GPIO_PIN_8
+#define PWM_OUT_GPIO_Port GPIOA
+#define USB_RENUM_N_Pin LL_GPIO_PIN_10
+#define USB_RENUM_N_GPIO_Port GPIOA
+#define SWDIO_Pin LL_GPIO_PIN_13
+#define SWDIO_GPIO_Port GPIOA
+#define SWCLK_Pin LL_GPIO_PIN_14
+#define SWCLK_GPIO_Port GPIOA
+#define SPI_WP_Pin LL_GPIO_PIN_5
+#define SPI_WP_GPIO_Port GPIOB
+#define SPI_NSS_Pin LL_GPIO_PIN_6
+#define SPI_NSS_GPIO_Port GPIOB
+#define BOOT0_Pin LL_GPIO_PIN_3
+#define BOOT0_GPIO_Port GPIOH
 
 #else /* STM32L412xx */
 
-  /* Below is for debugging purposes */
-  #define SPI_NSS_Pin               0
-  #define SPI_NSS_GPIO_Port         0
-  #define SPI_WP_Pin                0
-  #define SPI_WP_GPIO_Port          0
-  #define THERMISTOR_ADC_Pin        0
-  #define THERMISTOR_ADC_GPIO_Port  0
-  #define BRIGHT_Pin                0
-  #define BRIGHT_GPIO_Port          0
-  #define DIM_Pin                   0
-  #define DIM_GPIO_Port             0
-  #define VIS_IR_Pin                0
-  #define VIS_IR_GPIO_Port          0
-  #define EEPROM_SCK_Pin            0
-  #define EEPROM_SCK_GPIO_Port      0
-  #define EEPROM_MISO_Pin           0
-  #define EEPROM_MISO_GPIO_Port     0
-  #define EEPROM_MOSI_Pin           0
-  #define EEPROM_MOSI_GPIO_Port     0
-  #define VOLTMETER_ADC_Pin         0
-  #define VOLTMETER_ADC_GPIO_Port   0
-  #define AMPMETER_ADC_Pin          0
-  #define AMPMETER_ADC_GPIO_Port    0
-  #define PWM_OUT_Pin               0
-  #define PWM_OUT_GPIO_Port         0
-  #define USB_RENUM_N_Pin           0
-  #define USB_RENUM_N_GPIO_Port     0
-  #define SWDIO_Pin                 0
-  #define SWDIO_GPIO_Port           0
-  #define SWCLK_Pin                 0
-  #define SWCLK_GPIO_Port           0
-  #define BOOT0_Pin                 0
-  #define BOOT0_GPIO_Port           0
+/* Below is for debugging purposes */
+#define SPI_NSS_Pin               0
+#define SPI_NSS_GPIO_Port         0
+#define SPI_WP_Pin                0
+#define SPI_WP_GPIO_Port          0
+#define THERMISTOR_ADC_Pin        0
+#define THERMISTOR_ADC_GPIO_Port  0
+#define BRIGHT_Pin                0
+#define BRIGHT_GPIO_Port          0
+#define DIM_Pin                   0
+#define DIM_GPIO_Port             0
+#define VIS_IR_Pin                0
+#define VIS_IR_GPIO_Port          0
+#define EEPROM_SCK_Pin            0
+#define EEPROM_SCK_GPIO_Port      0
+#define EEPROM_MISO_Pin           0
+#define EEPROM_MISO_GPIO_Port     0
+#define EEPROM_MOSI_Pin           0
+#define EEPROM_MOSI_GPIO_Port     0
+#define VOLTMETER_ADC_Pin         0
+#define VOLTMETER_ADC_GPIO_Port   0
+#define AMPMETER_ADC_Pin          0
+#define AMPMETER_ADC_GPIO_Port    0
+#define PWM_OUT_Pin               0
+#define PWM_OUT_GPIO_Port         0
+#define USB_RENUM_N_Pin           0
+#define USB_RENUM_N_GPIO_Port     0
+#define SWDIO_Pin                 0
+#define SWDIO_GPIO_Port           0
+#define SWCLK_Pin                 0
+#define SWCLK_GPIO_Port           0
+#define BOOT0_Pin                 0
+#define BOOT0_GPIO_Port           0
 
-  typedef enum
-  {
+/**
+  * GPIO_PinState for Testing
+  */
+typedef enum
+{
     GPIO_PIN_RESET = 0U,
     GPIO_PIN_SET
-  } GPIO_PinState;
+} GPIO_PinState;
 
-  /**
-    * Testing PWM Struct
-    */
-  typedef struct
-  {
+/**
+  * Testing PWM Struct
+  */
+typedef struct
+{
     uint8_t is_running; /**< pwm is running */
     uint32_t pulse_width; /**< pulse width value */
-  } PwmStruct;
+} PwmStruct;
 
-  /**
-    * Testing Timer Struct
-    */
-  typedef struct
-  {
+/**
+  * Testing Timer Struct
+  */
+typedef struct
+{
     uint8_t is_running; /**< timer is running */
     uint32_t time; /**< timer value */
-  } TimerStruct;
+} TimerStruct;
 
 #endif /* STM32L412xx */
 

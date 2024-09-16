@@ -39,17 +39,17 @@ static uint32_t tail_pointer = 0;
   */
 void LogString ( const char* const string, uint8_t write_beginning )
 {
-  uint32_t write_bytes = strlen ( string ) + 1;
-  uint32_t address = tail_pointer;
-  tail_pointer += write_bytes;
+    uint32_t write_bytes = strlen ( string ) + 1;
+    uint32_t address = tail_pointer;
+    tail_pointer += write_bytes;
 
-  if ( write_beginning )
-  {
-    address = 0;
-    tail_pointer = write_bytes;
-  }
+    if ( write_beginning )
+    {
+        address = 0;
+        tail_pointer = write_bytes;
+    }
 
-  framWriteMemory ( address, ( unsigned char* ) string, write_bytes );
+    framWriteMemory ( address, ( unsigned char* ) string, write_bytes );
 }
 
 /**
@@ -59,11 +59,11 @@ void LogString ( const char* const string, uint8_t write_beginning )
   */
 void LogNumber ( const int32_t number, uint8_t write_beginning )
 {
-  char str [ 12
-           ]; // max number of characters needed for 32 bit number 2 million = 10 numbers + "-" + '\0'
-  memset ( str, '\0', 12 );
-  sprintf ( str, "%d", number );
-  LogString ( str, write_beginning );
+    char str [ 12
+             ]; // max number of characters needed for 32 bit number 2 million = 10 numbers + "-" + '\0'
+    memset ( str, '\0', 12 );
+    sprintf ( str, "%d", number );
+    LogString ( str, write_beginning );
 }
 
 /**
@@ -74,18 +74,18 @@ void LogNumber ( const int32_t number, uint8_t write_beginning )
   */
 void ReadLog ( const uint32_t address, char* string, const uint32_t bytes )
 {
-  uint32_t read_bytes = bytes;
+    uint32_t read_bytes = bytes;
 
-  if ( string == NULL )
-  {
-    return;
-  }
+    if ( string == NULL )
+    {
+        return;
+    }
 
-  if ( bytes == 0 )
-  {
-    string = "";
-    return;
-  }
+    if ( bytes == 0 )
+    {
+        string = "";
+        return;
+    }
 
-  framReadMemory ( address, ( unsigned char* ) string, read_bytes );
+    framReadMemory ( address, ( unsigned char* ) string, read_bytes );
 }

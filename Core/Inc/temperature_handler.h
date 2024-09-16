@@ -32,9 +32,9 @@
 /** Temperature Range Enum */
 typedef enum
 {
-  TempCool = 0, /**< Normal Operating Temperature                       */
-  TempWarm = 1, /**< Temperature is elevated, decrease brightness       */
-  TempHot = 2 /**< Temperature is hot, lower brightness significantly */
+    TempCool = 0, /**< Normal Operating Temperature                       */
+    TempWarm = 1, /**< Temperature is elevated, decrease brightness       */
+    TempHot = 2 /**< Temperature is hot, lower brightness significantly */
 } TemperatureRange_e;
 
 /**
