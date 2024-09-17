@@ -29,6 +29,15 @@
 /* Private define ------------------------------------------------------------*/
 
 /**
+  * @brief Return state of toggle button
+  * @param[out] Toogle Pin State, pressed or not
+  */
+GPIO_PinState IsTogglePressed ( void )
+{
+    return ReadTogglePin();
+}
+
+/**
   * @brief Return state of dim button
   * @param[out] Dim Pin State, pressed or not
   */

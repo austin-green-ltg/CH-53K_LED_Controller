@@ -76,12 +76,16 @@ static const uint8_t PwmArray [ BRIGHTNESS_STEPS ] = { 0, 5, 10, 16, 21, 26, 31,
                                                        208, 213, 219, 224, 229, 234, 239, 245, 250, 255
                                                      };
 /** Initial led brightness, changed to half brightness on init */
-static int8_t ledBrightness = 0;
+static int8_t visBrightness = 0;
+static int8_t irBrightness = 0;
 
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-    static uint16_t min_time  = 0;
-    static uint16_t max_time  = 0;
-    static uint16_t half_time = 0;
+    static uint16_t vis_min_time  = 0;
+    static uint16_t vis_max_time  = 0;
+    static uint16_t vis_half_time = 0;
+    static uint16_t ir_min_time  = 0;
+    static uint16_t ir_max_time  = 0;
+    static uint16_t ir_half_time = 0;
 #endif /* ENABLE_UART_DEBUGGING */
 
 /**
@@ -90,7 +94,8 @@ static int8_t ledBrightness = 0;
   */
 void InitPwm ( void )
 {
-    ledBrightness = HalfBrightness;
+    visBrightness = HalfBrightness;
+    irBrightness = HalfBrightness;
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
     printf ( "Init PWM\n" );
 #endif /* ENABLE_UART_DEBUGGING */
@@ -105,125 +110,249 @@ void InitPwm ( void )
   *         REVERSE_BRIGHTNESS flag
   *         Afterwards, set pwm output.
   * @param[in] button_held If the button is being held (decrements by 3 if so)
+  * @param[in] isIr Are we controlling IR or Visible LEDs
   */
-void DecreaseBrightness ( uint8_t button_held )
+void DecreaseBrightness ( uint8_t button_held, uint8_t isIr )
 {
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
 
-    // set this to ensure that when we sweep we are using the exact value from when we start
-    if ( ledBrightness == MinBrightness )
+    if ( isIr )
     {
-        min_time = TIM15->CNT;
-        half_time = 0;
-        max_time = 0;
+        // set this to ensure that when we sweep we are using the exact value from when we start
+        if ( irBrightness == MinBrightness )
+        {
+            ir_min_time = TIM15->CNT;
+            ir_half_time = 0;
+            ir_max_time = 0;
+        }
+        else if ( irBrightness == HalfBrightness )
+        {
+            ir_half_time = TIM15->CNT;
+        }
+        else if ( irBrightness == MaxBrightness )
+        {
+            ir_min_time = 0;
+            ir_half_time = 0;
+            ir_max_time = TIM15->CNT;
+        }
     }
-    else if ( ledBrightness == HalfBrightness )
+    else
     {
-        half_time = TIM15->CNT;
-    }
-    else if ( ledBrightness == MaxBrightness )
-    {
-        min_time = 0;
-        half_time = 0;
-        max_time = TIM15->CNT;
+        // set this to ensure that when we sweep we are using the exact value from when we start
+        if ( visBrightness == MinBrightness )
+        {
+            vis_min_time = TIM15->CNT;
+            vis_half_time = 0;
+            vis_max_time = 0;
+        }
+        else if ( visBrightness == HalfBrightness )
+        {
+            vis_half_time = TIM15->CNT;
+        }
+        else if ( visBrightness == MaxBrightness )
+        {
+            vis_min_time = 0;
+            vis_half_time = 0;
+            vis_max_time = TIM15->CNT;
+        }
     }
 
 #endif /* ENABLE_UART_DEBUGGING */
 
 #ifdef REVERSE_BRIGHTNESS
 
-    // increase ledBrightness
-    if ( button_held == BUTTON_PRESSED )
+    if ( isIr )
     {
-        ledBrightness += HOLD_BRIGHTNESS_JUMP;
+        // increase irBrightness
+        if ( button_held == BUTTON_PRESSED )
+        {
+            irBrightness += HOLD_BRIGHTNESS_JUMP;
+        }
+        else
+        {
+            irBrightness++;
+        }
+
+        // prevent from going above MaxBrightness
+        if ( irBrightness > MaxBrightness )
+        {
+            irBrightness = MaxBrightness;
+        }
     }
     else
     {
-        ledBrightness++;
-    }
+        // increase visBrightness
+        if ( button_held == BUTTON_PRESSED )
+        {
+            visBrightness += HOLD_BRIGHTNESS_JUMP;
+        }
+        else
+        {
+            visBrightness++;
+        }
 
-    // prevent from going above MaxBrightness
-    if ( ledBrightness > MaxBrightness )
-    {
-        ledBrightness = MaxBrightness;
+        // prevent from going above MaxBrightness
+        if ( visBrightness > MaxBrightness )
+        {
+            visBrightness = MaxBrightness;
+        }
     }
 
 #else
 
-    // decrease ledBrightness
-    if ( button_held == BUTTON_PRESSED )
+    if ( isIr )
     {
-        ledBrightness -= HOLD_BRIGHTNESS_JUMP;
+        // decrease irBrightness
+        if ( button_held == BUTTON_PRESSED )
+        {
+            irBrightness -= HOLD_BRIGHTNESS_JUMP;
+        }
+        else
+        {
+            irBrightness--;
+        }
+
+        // prevent from going below MinBrightness
+        if ( irBrightness < MinBrightness )
+        {
+            irBrightness = MinBrightness;
+        }
     }
     else
     {
-        ledBrightness--;
-    }
+        // decrease visBrightness
+        if ( button_held == BUTTON_PRESSED )
+        {
+            visBrightness -= HOLD_BRIGHTNESS_JUMP;
+        }
+        else
+        {
+            visBrightness--;
+        }
 
-    // prevent from going below MinBrightness
-    if ( ledBrightness < MinBrightness )
-    {
-        ledBrightness = MinBrightness;
+        // prevent from going below MinBrightness
+        if ( visBrightness < MinBrightness )
+        {
+            visBrightness = MinBrightness;
+        }
     }
 
 #endif /* REVERSE_BRIGHTNESS */
 
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-    printf ( "Decreased to %d / %d\n", ledBrightness, MaxBrightness );
 
-    if ( ledBrightness == MinBrightness )
+    if ( isIr )
     {
-        min_time = TIM15->CNT;
+        printf ( "Decreased IR to %d / %d\n", irBrightness, MaxBrightness );
 
-        if ( ( half_time != 0 ) && button_held )
+        if ( irBrightness == MinBrightness )
         {
-            printf ( "Swept half time to min time in %f seconds\n",
-                     ( double ) ( min_time - half_time ) / ( double ) Tim15CntPerSec );
+            ir_min_time = TIM15->CNT;
+
+            if ( ( ir_half_time != 0 ) && button_held )
+            {
+                printf ( "Swept half time to min time in %f seconds\n",
+                         ( double ) ( ir_min_time - ir_half_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( ir_max_time != 0 ) && button_held )
+            {
+                printf ( "Swept max time to min time in %f seconds\n",
+                         ( double ) ( ir_min_time - ir_max_time ) / ( double ) Tim15CntPerSec );
+            }
         }
-
-        if ( ( max_time != 0 ) && button_held )
+        else if ( irBrightness == HalfBrightness )
         {
-            printf ( "Swept max time to min time in %f seconds\n",
-                     ( double ) ( min_time - max_time ) / ( double ) Tim15CntPerSec );
+            ir_half_time = TIM15->CNT;
+
+            if ( ( ir_min_time != 0 ) && button_held )
+            {
+                printf ( "Swept min time to half time in %f seconds\n",
+                         ( double ) ( ir_half_time - ir_min_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( ir_max_time != 0 ) && button_held )
+            {
+                printf ( "Swept max time to half time in %f seconds\n",
+                         ( double ) ( ir_half_time - ir_max_time ) / ( double ) Tim15CntPerSec );
+            }
+        }
+        else if ( irBrightness == MaxBrightness )
+        {
+            ir_max_time = TIM15->CNT;
+
+            if ( ( ir_min_time != 0 ) && button_held )
+            {
+                printf ( "Swept min time to max time in %f seconds\n",
+                         ( double ) ( ir_max_time - ir_min_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( ir_half_time != 0 ) && button_held )
+            {
+                printf ( "Swept half time to max time in %f seconds\n",
+                         ( double ) ( ir_max_time - ir_half_time ) / ( double ) Tim15CntPerSec );
+            }
         }
     }
-    else if ( ledBrightness == HalfBrightness )
+    else
     {
-        half_time = TIM15->CNT;
+        printf ( "Decreased Visible to %d / %d\n", visBrightness, MaxBrightness );
 
-        if ( ( min_time != 0 ) && button_held )
+        if ( visBrightness == MinBrightness )
         {
-            printf ( "Swept min time to half time in %f seconds\n",
-                     ( double ) ( half_time - min_time ) / ( double ) Tim15CntPerSec );
+            vis_min_time = TIM15->CNT;
+
+            if ( ( vis_half_time != 0 ) && button_held )
+            {
+                printf ( "Swept half time to min time in %f seconds\n",
+                         ( double ) ( vis_min_time - vis_half_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( vis_max_time != 0 ) && button_held )
+            {
+                printf ( "Swept max time to min time in %f seconds\n",
+                         ( double ) ( vis_min_time - vis_max_time ) / ( double ) Tim15CntPerSec );
+            }
         }
-
-        if ( ( max_time != 0 ) && button_held )
+        else if ( visBrightness == HalfBrightness )
         {
-            printf ( "Swept max time to half time in %f seconds\n",
-                     ( double ) ( half_time - max_time ) / ( double ) Tim15CntPerSec );
+            vis_half_time = TIM15->CNT;
+
+            if ( ( vis_min_time != 0 ) && button_held )
+            {
+                printf ( "Swept min time to half time in %f seconds\n",
+                         ( double ) ( vis_half_time - vis_min_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( vis_max_time != 0 ) && button_held )
+            {
+                printf ( "Swept max time to half time in %f seconds\n",
+                         ( double ) ( vis_half_time - vis_max_time ) / ( double ) Tim15CntPerSec );
+            }
+        }
+        else if ( visBrightness == MaxBrightness )
+        {
+            vis_max_time = TIM15->CNT;
+
+            if ( ( vis_min_time != 0 ) && button_held )
+            {
+                printf ( "Swept min time to max time in %f seconds\n",
+                         ( double ) ( vis_max_time - vis_min_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( vis_half_time != 0 ) && button_held )
+            {
+                printf ( "Swept half time to max time in %f seconds\n",
+                         ( double ) ( vis_max_time - vis_half_time ) / ( double ) Tim15CntPerSec );
+            }
         }
     }
-    else if ( ledBrightness == MaxBrightness )
-    {
-        max_time = TIM15->CNT;
 
-        if ( ( min_time != 0 ) && button_held )
-        {
-            printf ( "Swept min time to max time in %f seconds\n",
-                     ( double ) ( max_time - min_time ) / ( double ) Tim15CntPerSec );
-        }
-
-        if ( ( half_time != 0 ) && button_held )
-        {
-            printf ( "Swept half time to max time in %f seconds\n",
-                     ( double ) ( max_time - half_time ) / ( double ) Tim15CntPerSec );
-        }
-    }
 
 #endif /* ENABLE_UART_DEBUGGING */
 
-    // set ledBrightness
-    SetPwm();
+    // set irBrightness/visBrightness
+    SetPwm ( isIr );
 
     return;
 }
@@ -234,135 +363,260 @@ void DecreaseBrightness ( uint8_t button_held )
   *         REVERSE_BRIGHTNESS flag
   *         Afterwards, set pwm output.
   * @param[in] button_held If the button is being held (increments by 3 if so)
+  * @param[in] isIr Are we controlling IR or Visible LEDs
   */
-void IncreaseBrightness ( uint8_t button_held )
+void IncreaseBrightness ( uint8_t button_held, uint8_t isIr )
 {
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
 
-    // set this to ensure that when we sweep we are using the exact value from when we start
-    if ( ledBrightness == MinBrightness )
+    if ( isIr )
     {
-        min_time = TIM15->CNT;
-        half_time = 0;
-        max_time = 0;
+        // set this to ensure that when we sweep we are using the exact value from when we start
+        if ( irBrightness == MinBrightness )
+        {
+            ir_min_time = TIM15->CNT;
+            ir_half_time = 0;
+            ir_max_time = 0;
+        }
+        else if ( irBrightness == HalfBrightness )
+        {
+            ir_half_time = TIM15->CNT;
+        }
+        else if ( irBrightness == MaxBrightness )
+        {
+            ir_min_time = 0;
+            ir_half_time = 0;
+            ir_max_time = TIM15->CNT;
+        }
     }
-    else if ( ledBrightness == HalfBrightness )
+    else
     {
-        half_time = TIM15->CNT;
-    }
-    else if ( ledBrightness == MaxBrightness )
-    {
-        min_time = 0;
-        half_time = 0;
-        max_time = TIM15->CNT;
+        // set this to ensure that when we sweep we are using the exact value from when we start
+        if ( visBrightness == MinBrightness )
+        {
+            vis_min_time = TIM15->CNT;
+            vis_half_time = 0;
+            vis_max_time = 0;
+        }
+        else if ( visBrightness == HalfBrightness )
+        {
+            vis_half_time = TIM15->CNT;
+        }
+        else if ( visBrightness == MaxBrightness )
+        {
+            vis_min_time = 0;
+            vis_half_time = 0;
+            vis_max_time = TIM15->CNT;
+        }
     }
 
 #endif /* ENABLE_UART_DEBUGGING */
 
 #ifdef REVERSE_BRIGHTNESS
 
-    // decrease ledBrightness
-    if ( button_held == BUTTON_PRESSED )
+    if ( isIr )
     {
-        ledBrightness -= HOLD_BRIGHTNESS_JUMP;
+        // decrease irBrightness
+        if ( button_held == BUTTON_PRESSED )
+        {
+            irBrightness -= HOLD_BRIGHTNESS_JUMP;
+        }
+        else
+        {
+            irBrightness--;
+        }
+
+        // prevent from going below MinBrightness
+        if ( irBrightness < MinBrightness )
+        {
+            irBrightness = MinBrightness;
+        }
     }
     else
     {
-        ledBrightness--;
-    }
+        // decrease visBrightness
+        if ( button_held == BUTTON_PRESSED )
+        {
+            visBrightness -= HOLD_BRIGHTNESS_JUMP;
+        }
+        else
+        {
+            visBrightness--;
+        }
 
-    // prevent from going below MinBrightness
-    if ( ledBrightness < MinBrightness )
-    {
-        ledBrightness = MinBrightness;
+        // prevent from going below MinBrightness
+        if ( visBrightness < MinBrightness )
+        {
+            visBrightness = MinBrightness;
+        }
     }
 
 #else
 
-    // increase ledBrightness
-    if ( button_held == BUTTON_PRESSED )
+    if ( isIr )
     {
-        ledBrightness += HOLD_BRIGHTNESS_JUMP;
+        // increase irBrightness
+        if ( button_held == BUTTON_PRESSED )
+        {
+            irBrightness += HOLD_BRIGHTNESS_JUMP;
+        }
+        else
+        {
+            irBrightness++;
+        }
+
+        // prevent from going above MaxBrightness
+        if ( irBrightness > MaxBrightness )
+        {
+            irBrightness = MaxBrightness;
+        }
     }
     else
     {
-        ledBrightness++;
-    }
+        // increase visBrightness
+        if ( button_held == BUTTON_PRESSED )
+        {
+            visBrightness += HOLD_BRIGHTNESS_JUMP;
+        }
+        else
+        {
+            visBrightness++;
+        }
 
-    // prevent from going above MaxBrightness
-    if ( ledBrightness > MaxBrightness )
-    {
-        ledBrightness = MaxBrightness;
+        // prevent from going above MaxBrightness
+        if ( visBrightness > MaxBrightness )
+        {
+            visBrightness = MaxBrightness;
+        }
     }
 
 #endif /* REVERSE_BRIGHTNESS */
 
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-    printf ( "Increased to %d / %d\n", ledBrightness, MaxBrightness );
 
-    if ( ledBrightness == MinBrightness )
+    if ( isIr )
     {
-        min_time = TIM15->CNT;
+        printf ( "Increased IR to %d / %d\n", irBrightness, MaxBrightness );
 
-        if ( ( half_time != 0 ) && button_held )
+        if ( irBrightness == MinBrightness )
         {
-            printf ( "Swept half time to min time in %f seconds\n",
-                     ( double ) ( min_time - half_time ) / ( double ) Tim15CntPerSec );
+            ir_min_time = TIM15->CNT;
+
+            if ( ( ir_half_time != 0 ) && button_held )
+            {
+                printf ( "Swept half time to min time in %f seconds\n",
+                         ( double ) ( ir_min_time - ir_half_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( ir_max_time != 0 ) && button_held )
+            {
+                printf ( "Swept max time to min time in %f seconds\n",
+                         ( double ) ( ir_min_time - ir_max_time ) / ( double ) Tim15CntPerSec );
+            }
         }
-
-        if ( ( max_time != 0 ) && button_held )
+        else if ( irBrightness == HalfBrightness )
         {
-            printf ( "Swept max time to min time in %f seconds\n",
-                     ( double ) ( min_time - max_time ) / ( double ) Tim15CntPerSec );
+            ir_half_time = TIM15->CNT;
+
+            if ( ( ir_min_time != 0 ) && button_held )
+            {
+                printf ( "Swept min time to half time in %f seconds\n",
+                         ( double ) ( ir_half_time - ir_min_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( ir_max_time != 0 ) && button_held )
+            {
+                printf ( "Swept max time to half time in %f seconds\n",
+                         ( double ) ( ir_half_time - ir_max_time ) / ( double ) Tim15CntPerSec );
+            }
+        }
+        else if ( irBrightness == MaxBrightness )
+        {
+            ir_max_time = TIM15->CNT;
+
+            if ( ( ir_min_time != 0 ) && button_held )
+            {
+                printf ( "Swept min time to max time in %f seconds\n",
+                         ( double ) ( ir_max_time - ir_min_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( ir_half_time != 0 ) && button_held )
+            {
+                printf ( "Swept half time to max time in %f seconds\n",
+                         ( double ) ( ir_max_time - ir_half_time ) / ( double ) Tim15CntPerSec );
+            }
         }
     }
-    else if ( ledBrightness == HalfBrightness )
+    else
     {
-        half_time = TIM15->CNT;
+        printf ( "Increased Visible to %d / %d\n", visBrightness, MaxBrightness );
 
-        if ( ( min_time != 0 ) && button_held )
+        if ( visBrightness == MinBrightness )
         {
-            printf ( "Swept min time to half time in %f seconds\n",
-                     ( double ) ( half_time - min_time ) / ( double ) Tim15CntPerSec );
+            vis_min_time = TIM15->CNT;
+
+            if ( ( vis_half_time != 0 ) && button_held )
+            {
+                printf ( "Swept half time to min time in %f seconds\n",
+                         ( double ) ( vis_min_time - vis_half_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( vis_max_time != 0 ) && button_held )
+            {
+                printf ( "Swept max time to min time in %f seconds\n",
+                         ( double ) ( vis_min_time - vis_max_time ) / ( double ) Tim15CntPerSec );
+            }
         }
-
-        if ( ( max_time != 0 ) && button_held )
+        else if ( visBrightness == HalfBrightness )
         {
-            printf ( "Swept max time to half time in %f seconds\n",
-                     ( double ) ( half_time - max_time ) / ( double ) Tim15CntPerSec );
+            vis_half_time = TIM15->CNT;
+
+            if ( ( vis_min_time != 0 ) && button_held )
+            {
+                printf ( "Swept min time to half time in %f seconds\n",
+                         ( double ) ( vis_half_time - vis_min_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( vis_max_time != 0 ) && button_held )
+            {
+                printf ( "Swept max time to half time in %f seconds\n",
+                         ( double ) ( vis_half_time - vis_max_time ) / ( double ) Tim15CntPerSec );
+            }
+        }
+        else if ( visBrightness == MaxBrightness )
+        {
+            vis_max_time = TIM15->CNT;
+
+            if ( ( vis_min_time != 0 ) && button_held )
+            {
+                printf ( "Swept min time to max time in %f seconds\n",
+                         ( double ) ( vis_max_time - vis_min_time ) / ( double ) Tim15CntPerSec );
+            }
+
+            if ( ( vis_half_time != 0 ) && button_held )
+            {
+                printf ( "Swept half time to max time in %f seconds\n",
+                         ( double ) ( vis_max_time - vis_half_time ) / ( double ) Tim15CntPerSec );
+            }
         }
     }
-    else if ( ledBrightness == MaxBrightness )
-    {
-        max_time = TIM15->CNT;
 
-        if ( ( min_time != 0 ) && button_held )
-        {
-            printf ( "Swept min time to max time in %f seconds\n",
-                     ( double ) ( max_time - min_time ) / ( double ) Tim15CntPerSec );
-        }
-
-        if ( ( half_time != 0 ) && button_held )
-        {
-            printf ( "Swept half time to max time in %f seconds\n",
-                     ( double ) ( max_time - half_time ) / ( double ) Tim15CntPerSec );
-        }
-    }
 
 #endif /* ENABLE_UART_DEBUGGING */
 
-    // set ledBrightness
-    SetPwm();
+    // set irBrightness/visBrightness
+    SetPwm ( isIr );
 
     return;
 }
 
 /**
   * @brief set PWM based on pwm value
+  * @param[in] isIr Are we controlling IR or Visible LEDs
   */
-void SetPwm ( void )
+void SetPwm ( uint8_t isIr )
 {
-    uint32_t pulse_width = GetPwm();
+    uint32_t pulse_width = GetPwm ( isIr );
 
     SetPW11 ( pulse_width );
 #ifdef REVERSE_BRIGHTNESS
@@ -402,31 +656,51 @@ void TurnOffPwm ( void )
 }
 
 /**
-  * @brief Return ledBrightness variable
+  * @brief Return Brightness variable
+  * @param[in] isIr Are we controlling IR or Visible LEDs
   * @param[out] Current LED brightness level
   */
-int8_t GetBrightness ( void )
+int8_t GetBrightness ( uint8_t isIr )
 {
-    return ( ledBrightness );
+    return ( isIr ? irBrightness : visBrightness );
 }
 
 /**
-  * @brief Set ledBrightness variable, guards to ensure we don't go over max or min
-  * @param[in] brightness Brightess to set
+  * @brief Set Brightness variable, guards to ensure we don't go over max or min
+  * @param[in] brightness Brightness to set
+  * @param[in] isIr Are we controlling IR or Visible LEDs
   */
-void SetBrightness ( int8_t brightness )
+void SetBrightness ( int8_t brightness, uint8_t isIr )
 {
-    if ( brightness > MaxBrightness )
+    if ( isIr )
     {
-        ledBrightness = MaxBrightness;
-    }
-    else if ( brightness < MinBrightness )
-    {
-        ledBrightness = MinBrightness;
+        if ( brightness > MaxBrightness )
+        {
+            irBrightness = MaxBrightness;
+        }
+        else if ( brightness < MinBrightness )
+        {
+            irBrightness = MinBrightness;
+        }
+        else
+        {
+            irBrightness = brightness;
+        }
     }
     else
     {
-        ledBrightness = brightness;
+        if ( brightness > MaxBrightness )
+        {
+            visBrightness = MaxBrightness;
+        }
+        else if ( brightness < MinBrightness )
+        {
+            visBrightness = MinBrightness;
+        }
+        else
+        {
+            visBrightness = brightness;
+        }
     }
 
     return;
@@ -434,25 +708,26 @@ void SetBrightness ( int8_t brightness )
 
 /**
   * @brief Get the PWM value based on the brightness and the temperature range
+  * @param[in] isIr Are we controlling IR or Visible LEDs
   * @param[out] Current PWM value
   */
-uint8_t GetPwm ( void )
+uint8_t GetPwm ( uint8_t isIr )
 {
-    uint8_t pwm = 0;
+    uint8_t pwm = isIr ? PwmArray [ irBrightness ] : PwmArray [ visBrightness ];
     TemperatureRange_e temperature_range = GetTemperatureRange();
 
     switch ( temperature_range )
     {
         case TempCool:
-            pwm = PwmArray [ ledBrightness ];
+            // no change to PWM value
             break;
 
         case TempWarm:
-            pwm = ( uint8_t ) ( PwmArray [ ledBrightness ] * WarmPwmRatio + 0.5f );
+            pwm = ( uint8_t ) ( pwm * WarmPwmRatio + 0.5f );
             break;
 
         case TempHot:
-            pwm = ( uint8_t ) ( PwmArray [ ledBrightness ] * HotPwmRatio + 0.5f );
+            pwm = ( uint8_t ) ( pwm * HotPwmRatio + 0.5f );
             break;
 
         default:

@@ -129,7 +129,7 @@ int main ( void )
     GPIO_PinState prevDimPressed = BUTTON_UNPRESSED;
     GPIO_PinState prevBrightPressed = BUTTON_UNPRESSED;
 
-    SetPwm();
+    SetPwm ( 1 );
 
     StartDelayCounter();
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -159,7 +159,9 @@ int main ( void )
             // TODO: Do something
         }
 
-        const int8_t CurrBrightness = GetBrightness();
+        GPIO_PinState togglePressed = IsTogglePressed(); // 0 = IR, 1 = Visible
+
+        const int8_t CurrBrightness = GetBrightness (!togglePressed );;
         const uint16_t BrightnessDelay_ms = ( uint16_t ) ( ( LowStepTimeMs +
                                             CurrBrightness ) * HOLD_BRIGHTNESS_JUMP );
 
@@ -170,13 +172,13 @@ int main ( void )
 
         if ( ( dimPressed == BUTTON_PRESSED ) && brightnessDelayHit )
         {
-            DecreaseBrightness ( prevDimPressed );
+            DecreaseBrightness ( prevDimPressed, !togglePressed );
 
             RestartDelayCounter();
         }
         else if ( ( brightPressed == BUTTON_PRESSED ) && brightnessDelayHit )
         {
-            IncreaseBrightness ( prevBrightPressed );
+            IncreaseBrightness ( prevBrightPressed, !togglePressed );
 
             RestartDelayCounter();
         }
@@ -184,6 +186,8 @@ int main ( void )
         // save previous button state
         prevDimPressed = dimPressed;
         prevBrightPressed = brightPressed;
+
+        // log brightness levels
     }
 
     /* USER CODE END 3 */

@@ -99,10 +99,13 @@ $(function(){ initResizable(false); });
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af20dbb6e0d588172fe914ab9c1c3bc33" id="r_af20dbb6e0d588172fe914ab9c1c3bc33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a7625f300415e3570f27794c1e2a7b761">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af20dbb6e0d588172fe914ab9c1c3bc33">IsDimPressed</a> (void)</td></tr>
+<tr class="memitem:a69e3cb67c276ad85d1a9962b4e9adaa1" id="r_a69e3cb67c276ad85d1a9962b4e9adaa1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a69e3cb67c276ad85d1a9962b4e9adaa1">IsTogglePressed</a> (void)</td></tr>
+<tr class="memdesc:a69e3cb67c276ad85d1a9962b4e9adaa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return state of toggle button.  <br /></td></tr>
+<tr class="separator:a69e3cb67c276ad85d1a9962b4e9adaa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af20dbb6e0d588172fe914ab9c1c3bc33" id="r_af20dbb6e0d588172fe914ab9c1c3bc33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af20dbb6e0d588172fe914ab9c1c3bc33">IsDimPressed</a> (void)</td></tr>
 <tr class="memdesc:af20dbb6e0d588172fe914ab9c1c3bc33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return state of dim button.  <br /></td></tr>
 <tr class="separator:af20dbb6e0d588172fe914ab9c1c3bc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0849c80841cb7ae79629ef359c8510a3" id="r_a0849c80841cb7ae79629ef359c8510a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a7625f300415e3570f27794c1e2a7b761">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0849c80841cb7ae79629ef359c8510a3">IsBrightPressed</a> (void)</td></tr>
+<tr class="memitem:a0849c80841cb7ae79629ef359c8510a3" id="r_a0849c80841cb7ae79629ef359c8510a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0849c80841cb7ae79629ef359c8510a3">IsBrightPressed</a> (void)</td></tr>
 <tr class="memdesc:a0849c80841cb7ae79629ef359c8510a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return state of brighten button.  <br /></td></tr>
 <tr class="separator:a0849c80841cb7ae79629ef359c8510a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -114,7 +117,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a7625f300415e3570f27794c1e2a7b761">GPIO_PinState</a> IsBrightPressed </td>
+          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a> IsBrightPressed </td>
           <td>(</td>
           <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -139,7 +142,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a7625f300415e3570f27794c1e2a7b761">GPIO_PinState</a> IsDimPressed </td>
+          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a> IsDimPressed </td>
           <td>(</td>
           <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -151,6 +154,31 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">Dim</td><td>Pin State, pressed or not </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a69e3cb67c276ad85d1a9962b4e9adaa1" name="a69e3cb67c276ad85d1a9962b4e9adaa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69e3cb67c276ad85d1a9962b4e9adaa1">&#9670;&#160;</a></span>IsTogglePressed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a> IsTogglePressed </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return state of toggle button. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">Toogle</td><td>Pin State, pressed or not </td></tr>
   </table>
   </dd>
 </dl>

@@ -98,10 +98,13 @@ $(function(){ initResizable(false); });
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a592b35fea37a6a5786d20ad01da8ebd0" id="r_a592b35fea37a6a5786d20ad01da8ebd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a7625f300415e3570f27794c1e2a7b761">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a592b35fea37a6a5786d20ad01da8ebd0">ReadDimPin</a> (void)</td></tr>
+<tr class="memitem:a8aa99c6d8382c750b4373716782aeeaf" id="r_a8aa99c6d8382c750b4373716782aeeaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8aa99c6d8382c750b4373716782aeeaf">ReadTogglePin</a> (void)</td></tr>
+<tr class="memdesc:a8aa99c6d8382c750b4373716782aeeaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads toggle pin value.  <br /></td></tr>
+<tr class="separator:a8aa99c6d8382c750b4373716782aeeaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a592b35fea37a6a5786d20ad01da8ebd0" id="r_a592b35fea37a6a5786d20ad01da8ebd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a592b35fea37a6a5786d20ad01da8ebd0">ReadDimPin</a> (void)</td></tr>
 <tr class="memdesc:a592b35fea37a6a5786d20ad01da8ebd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads dim pin value.  <br /></td></tr>
 <tr class="separator:a592b35fea37a6a5786d20ad01da8ebd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf26ef503b4853b39e91017a7a88aa4d" id="r_acf26ef503b4853b39e91017a7a88aa4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a7625f300415e3570f27794c1e2a7b761">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf26ef503b4853b39e91017a7a88aa4d">ReadBrightPin</a> (void)</td></tr>
+<tr class="memitem:acf26ef503b4853b39e91017a7a88aa4d" id="r_acf26ef503b4853b39e91017a7a88aa4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acf26ef503b4853b39e91017a7a88aa4d">ReadBrightPin</a> (void)</td></tr>
 <tr class="memdesc:acf26ef503b4853b39e91017a7a88aa4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads bright pin value.  <br /></td></tr>
 <tr class="separator:acf26ef503b4853b39e91017a7a88aa4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a675fed9bf5609c7bb38e53ccf6e688ff" id="r_a675fed9bf5609c7bb38e53ccf6e688ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a675fed9bf5609c7bb38e53ccf6e688ff">EnablePWM1</a> (void)</td></tr>
@@ -158,9 +161,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a31cb479ffb8be9316c448a548ef7c55b" id="r_a31cb479ffb8be9316c448a548ef7c55b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a31cb479ffb8be9316c448a548ef7c55b">sendUARTChar</a> (char c)</td></tr>
 <tr class="memdesc:a31cb479ffb8be9316c448a548ef7c55b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends character via UART line.  <br /></td></tr>
 <tr class="separator:a31cb479ffb8be9316c448a548ef7c55b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1730ffe1e560465665eb47d9264826f9" id="r_a1730ffe1e560465665eb47d9264826f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1730ffe1e560465665eb47d9264826f9">Error_Handler</a> (void)</td></tr>
-<tr class="memdesc:a1730ffe1e560465665eb47d9264826f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is executed in case of error occurrence.  <br /></td></tr>
-<tr class="separator:a1730ffe1e560465665eb47d9264826f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a9d14801c40acff3953247ae971371529" name="a9d14801c40acff3953247ae971371529"></a>
@@ -277,31 +277,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1730ffe1e560465665eb47d9264826f9" name="a1730ffe1e560465665eb47d9264826f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1730ffe1e560465665eb47d9264826f9">&#9670;&#160;</a></span>Error_Handler()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Error_Handler </td>
-          <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This function is executed in case of error occurrence. </p>
-<dl class="retval"><dt>Return values</dt><dd>
-  <table class="retval">
-    <tr><td class="paramname">None</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="adc10fd0a6d96b6cebbfc030f45f28bee" name="adc10fd0a6d96b6cebbfc030f45f28bee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc10fd0a6d96b6cebbfc030f45f28bee">&#9670;&#160;</a></span>GetCurrentValue()</h2>
 
@@ -409,7 +384,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a7625f300415e3570f27794c1e2a7b761">GPIO_PinState</a> ReadBrightPin </td>
+          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a> ReadBrightPin </td>
           <td>(</td>
           <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -434,7 +409,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a7625f300415e3570f27794c1e2a7b761">GPIO_PinState</a> ReadDimPin </td>
+          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a> ReadDimPin </td>
           <td>(</td>
           <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -446,6 +421,31 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[out]</td><td class="paramname">Dim</td><td>pin state </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8aa99c6d8382c750b4373716782aeeaf" name="a8aa99c6d8382c750b4373716782aeeaf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aa99c6d8382c750b4373716782aeeaf">&#9670;&#160;</a></span>ReadTogglePin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43">GPIO_PinState</a> ReadTogglePin </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reads toggle pin value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[out]</td><td class="paramname">Toggle</td><td>pin state </td></tr>
   </table>
   </dd>
 </dl>

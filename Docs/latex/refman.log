@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.4)  10 SEP 2024 11:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.4)  17 SEP 2024 10:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -805,11 +805,11 @@ LaTeX Warning: Label `stm32l412xx-bsp_8h_a06fc87d81c62e9abb8790b6e5713c55b' mul
 tiply defined.
 
 
-LaTeX Warning: Label `stm32l412xx-bsp_8h_adf764cbdea00d65edcd07bb9953ad2b7' mul
+LaTeX Warning: Label `stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43' mul
 tiply defined.
 
 
-LaTeX Warning: Label `stm32l412xx-bsp_8h_adf764cbdea00d65edcd07bb9953ad2b7' mul
+LaTeX Warning: Label `stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43' mul
 tiply defined.
 
 
@@ -994,6 +994,8 @@ Underfull \hbox (badness 2134) in paragraph at lines 231--231
  []
 
 
+
+[2]
 Underfull \hbox (badness 10000) in paragraph at lines 231--231
  [][] [][]\T1/phv/m/n/10 4.17 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
 /[]CH-53[]K[]_[][]LED[]_[][]Controller/[]Core/[]Inc/stm32l412xx-bsp.h 
@@ -1001,61 +1003,69 @@ Underfull \hbox (badness 10000) in paragraph at lines 231--231
 
 
 
-[2]
-
 [3]
+
+[4]
+
+[5]
 Underfull \hbox (badness 10000) in paragraph at lines 231--231
- [][] [][]\T1/phv/m/n/10 4.19 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
+ [][] [][]\T1/phv/m/n/10 4.21 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
 /[]CH-53[]K[]_[][]LED[]_[][]Controller/[]Core/[]Inc/temperature[]_[] 
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 231--231
- [][] [][]\T1/phv/m/n/10 4.21 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
+ [][] [][]\T1/phv/m/n/10 4.23 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
 /[]CH-53[]K[]_[][]LED[]_[][]Controller/[]Core/[]Inc/voltage[]_[]handler.h 
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 231--231
- [][] [][]\T1/phv/m/n/10 4.24 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
+ [][] [][]\T1/phv/m/n/10 4.26 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
 /[]CH-53[]K[]_[][]LED[]_[][]Controller/[]Core/[]Src/current[]_[]handler.c 
  []
 
 
 
-[4]
+[6]
 
-[5]
+[7]
 Underfull \hbox (badness 1454) in paragraph at lines 231--231
- [][] [][]\T1/phv/m/n/10 4.30 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
+ [][] [][]\T1/phv/m/n/10 4.32 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
 /[]CH-53[]K[]_[][]LED[]_[][]Controller/[]Core/[]Src/pwm[]_[]handler.c File 
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 231--231
- [][] [][]\T1/phv/m/n/10 4.31 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
+ [][] [][]\T1/phv/m/n/10 4.33 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
 /[]CH-53[]K[]_[][]LED[]_[][]Controller/[]Core/[]Src/stm32l412xx-bsp.c 
  []
 
 
 
-[6]
+[8]
 Underfull \hbox (badness 10000) in paragraph at lines 231--231
- [][] [][]\T1/phv/m/n/10 4.32 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
+ [][] [][]\T1/phv/m/n/10 4.34 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
+/[]CH-53[]K[]_[][]LED[]_[][]Controller/[]Core/[]Src/stm32l4xx[]_[]hal[]_[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 231--231
+ [][] [][]\T1/phv/m/n/10 4.35 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
 /[]CH-53[]K[]_[][]LED[]_[][]Controller/[]Core/[]Src/temperature[]_[] 
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 231--231
- [][] [][]\T1/phv/m/n/10 4.33 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
+ [][] [][]\T1/phv/m/n/10 4.36 C[]:/[]Users/agreen/[]Documents/[]Projects/[]Aveo
 /[]CH-53[]K[]_[][]LED[]_[][]Controller/[]Core/[]Src/voltage[]_[]handler.c 
  []
 
 
 
-[7]
+[9]
 
-[8
+[10
 
 ]
 Package hyperref Info: Option `pageanchor' set `true' on input line 234.
@@ -1124,7 +1134,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 (Font)              scaled to size 8.09995pt on input line 9.
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 19.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 21.
 
 
 [7
@@ -1136,7 +1146,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
 
 
-[8]) (current__handler_8h_source.tex
+[8]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1146,7 +1156,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[9]) (delay__handler_8h.tex
+[9]) (current__handler_8h_source.tex) (delay__handler_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
@@ -1188,22 +1198,31 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
 
 
-[17]
+[17]) (logger_8h_source.tex) (main_8h.tex
 
-[18]) (logger_8h_source.tex) (main_8h.tex
+[18]
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 19
+[][][]
+ []
+
+) (main_8h_source.tex
+
+[19]) (my__printf_8h.tex) (my__printf_8h_source.tex
+
+[20]) (pwm__handler_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
 
-
-
-[19]) (main_8h_source.tex
-
-[20]) (my__printf_8h.tex) (my__printf_8h_source.tex) (pwm__handler_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
-
- []
-
+LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
+(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 27.
+LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
+(Font)              scaled to size 8.09995pt on input line 27.
 
 
 
@@ -1215,13 +1234,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
 [21]
-LaTeX Font Info:    Font shape `TS1/phv/m/it' in size <9> not available
-(Font)              Font shape `TS1/phv/m/sl' tried instead on input line 27.
-LaTeX Font Info:    Font shape `TS1/phv/m/sl' will be
-(Font)              scaled to size 8.09995pt on input line 27.
-
 
 [22]
+Overfull \hbox (3.48268pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 is[] 
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1296,14 +1315,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[33]) (stm32l412xx-bsp_8h_source.tex
+[33]
 
-[34]
+[34]) (stm32l412xx-bsp_8h_source.tex
 
 [35]
 
-[36]) (temperature__handler_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
+[36]) (stm32l4xx__hal__conf_8h.tex
+Underfull \hbox (badness 1668) in paragraph at lines 5--6
+\T1/phv/m/n/10 HAL con-fig-u-ra-tion tem-plate file. This file should be copied
+ to the ap-pli-ca-tion folder and re-named to
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 8--16
 
  []
 
@@ -1317,11 +1342,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[37]) (temperature__handler_8h_source.tex
+[37]
 
-[38]) (voltage__handler_8h.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--4
+[38]
+Underfull \hbox (badness 1668) in paragraph at lines 144--145
+\T1/phv/m/n/10 HAL con-fig-u-ra-tion tem-plate file. This file should be copied
+ to the ap-pli-ca-tion folder and re-named to
+ []
 
+
+Underfull \hbox (badness 10000) detected at line 146
+[][][]
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 149
+[][][]
  []
 
 
@@ -1334,19 +1370,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[39]) (voltage__handler_8h_source.tex) (button__handler_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--5
+[39]
 
- []
-
-
-
-[40]) (current__handler_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--7
-
- []
-
-
+[40]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1358,12 +1384,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [41]
 
-[42]) (delay__handler_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--5
-
- []
-
-
+[42]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1374,75 +1395,34 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
 [43]
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
-\T1/pcr/m/n/8 const float Tim2[]Clk[]Khz = ([] / (float)[] / (float)[] /
- []
-
-) (fram_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--7
-
- []
-
-
 
 [44]
 
-[45]) (logger_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--8
 
- []
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
 
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
+[45]) (stm32l4xx__hal__conf_8h_source.tex
 
 [46]
 
-[47]) (main_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--11
-
- []
-
-
+[47]
 
 [48]
 
-[49]) (my__printf_8c.tex) (pwm__handler_8c.tex
-Underfull \hbox (badness 10000) in paragraph at lines 3--7
+[49]
 
- []
-
-
-
-[50]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 22.16548pt, for example:
-(fancyhdr)                \setlength{\headheight}{22.16548pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
-
-[51]
-
-[52]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 22.16548pt, for example:
-(fancyhdr)                \setlength{\headheight}{22.16548pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
-
-[53]) (stm32l412xx-bsp_8c.tex
+[50]) (temperature__handler_8h.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--4
 
  []
 
 
 
-[54]
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.16548pt, for example:
@@ -1451,7 +1431,30 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[55]
+[51]) (temperature__handler_8h_source.tex
+
+[52]) (voltage__handler_8h.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+
+[53]) (voltage__handler_8h_source.tex
+
+[54]) (button__handler_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
+
+ []
+
+
+
+[55]) (current__handler_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+
 
 [56]
 
@@ -1463,9 +1466,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[57]
+[57]) (delay__handler_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
-[58]) (temperature__handler_8c.tex
+ []
+
+
+
+[58]) (fram_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--7
 
  []
@@ -1482,7 +1490,107 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [59]
 
-[60]) (voltage__handler_8c.tex
+[60]
+
+[61]) (logger_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--8
+
+ []
+
+
+
+[62]) (main_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--16
+
+ []
+
+
+
+[63]
+Underfull \hbox (badness 10000) detected at line 54
+[][][]
+ []
+
+
+
+[64]
+
+[65]) (my__printf_8c.tex) (pwm__handler_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
+
+ []
+
+
+
+[66]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[67]
+Overfull \hbox (3.48268pt too wide) in paragraph at lines 1--1
+[]\T1/phv/m/sl/10 is[] 
+ []
+
+
+
+[68]) (stm32l412xx-bsp_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--4
+
+ []
+
+
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[69]
+
+[70]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[71]
+
+[72]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[73]
+
+[74]) (stm32l4xx__hal__msp_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 8--9
+
+ []
+
+
+Underfull \hbox (badness 10000) detected at line 19
+[][][]
+ []
+
+) (temperature__handler_8c.tex
 Underfull \hbox (badness 10000) in paragraph at lines 3--7
 
  []
@@ -1497,9 +1605,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[61]
+[75]
 
-[62])
+[76]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1509,173 +1617,214 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
 
-[63]
+[77]) (voltage__handler_8c.tex
+Underfull \hbox (badness 10000) in paragraph at lines 3--7
 
-[64
+ []
 
-] (refman.ind
+
+
+[78]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.16548pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.16548pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.16548pt}.
+
+[79])
+
+[80] (refman.ind
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 22.39185pt on input line 1.
 
-Overfull \hbox (157.71051pt too wide) in paragraph at lines 36--38
+Overfull \hbox (157.71051pt too wide) in paragraph at lines 44--46
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/button_handler.h,
  []
 
 
-Overfull \hbox (160.87851pt too wide) in paragraph at lines 38--40
+Overfull \hbox (160.87851pt too wide) in paragraph at lines 46--48
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/current_handler.h,
  []
 
 
-Overfull \hbox (154.11076pt too wide) in paragraph at lines 40--42
+Overfull \hbox (154.11076pt too wide) in paragraph at lines 48--50
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/delay_handler.h,
  []
 
 
-Overfull \hbox (116.21239pt too wide) in paragraph at lines 42--44
+Overfull \hbox (116.21239pt too wide) in paragraph at lines 50--52
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/fram.h,
  []
 
 
-Overfull \hbox (122.86325pt too wide) in paragraph at lines 44--46
+Overfull \hbox (122.86325pt too wide) in paragraph at lines 52--54
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/logger.h,
  []
 
 
-Overfull \hbox (117.80542pt too wide) in paragraph at lines 46--48
+Overfull \hbox (117.80542pt too wide) in paragraph at lines 54--56
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/main.h,
  []
 
 
-Overfull \hbox (135.04005pt too wide) in paragraph at lines 48--50
+Overfull \hbox (135.04005pt too wide) in paragraph at lines 56--58
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/my_printf.h,
  []
 
 
-Overfull \hbox (151.8698pt too wide) in paragraph at lines 50--52
+
+
+Overfull \hbox (151.8698pt too wide) in paragraph at lines 58--60
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/pwm_handler.h,
  []
 
 
-Overfull \hbox (141.80818pt too wide) in paragraph at lines 52--54
+Overfull \hbox (141.80818pt too wide) in paragraph at lines 60--62
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/stm32l412xx-
  []
 
 
-Overfull \hbox (181.29906pt too wide) in paragraph at lines 54--56
+Overfull \hbox (177.56444pt too wide) in paragraph at lines 62--64
+[]\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
+Core/Inc/stm32l4xx_hal_conf.h,
+ []
+
+
+Overfull \hbox (181.29906pt too wide) in paragraph at lines 64--66
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/temperature_handler.h,
  []
 
 
-Overfull \hbox (161.6615pt too wide) in paragraph at lines 56--58
+Overfull \hbox (161.6615pt too wide) in paragraph at lines 66--68
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Inc/voltage_handler.h,
  []
 
 
-
-
-Overfull \hbox (158.70059pt too wide) in paragraph at lines 58--60
+Overfull \hbox (158.70059pt too wide) in paragraph at lines 68--70
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/button_handler.c,
  []
 
 
-Overfull \hbox (161.86859pt too wide) in paragraph at lines 60--62
+Overfull \hbox (161.86859pt too wide) in paragraph at lines 70--72
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/current_handler.c,
  []
 
 
-Overfull \hbox (155.10085pt too wide) in paragraph at lines 62--64
+Overfull \hbox (155.10085pt too wide) in paragraph at lines 72--74
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/delay_handler.c,
  []
 
 
-Overfull \hbox (117.20247pt too wide) in paragraph at lines 64--66
+Overfull \hbox (117.20247pt too wide) in paragraph at lines 74--76
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/fram.c,
  []
 
 
-Overfull \hbox (123.85333pt too wide) in paragraph at lines 66--68
+Overfull \hbox (123.85333pt too wide) in paragraph at lines 76--78
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/logger.c,
  []
 
 
-Overfull \hbox (118.7955pt too wide) in paragraph at lines 68--70
+Overfull \hbox (118.7955pt too wide) in paragraph at lines 78--80
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/main.c,
  []
 
 
-Overfull \hbox (136.03014pt too wide) in paragraph at lines 70--72
+Overfull \hbox (136.03014pt too wide) in paragraph at lines 80--82
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/my_printf.c,
  []
 
 
-Overfull \hbox (152.85988pt too wide) in paragraph at lines 72--74
+Overfull \hbox (152.85988pt too wide) in paragraph at lines 82--84
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/pwm_handler.c,
  []
 
 
-Overfull \hbox (143.3022pt too wide) in paragraph at lines 74--76
+Overfull \hbox (143.3022pt too wide) in paragraph at lines 84--86
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/stm32l412xx-
  []
 
 
-Overfull \hbox (182.28914pt too wide) in paragraph at lines 76--78
+Overfull \hbox (178.50058pt too wide) in paragraph at lines 86--88
+[]\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
+Core/Src/stm32l4xx_hal_msp.c,
+ []
+
+
+Overfull \hbox (182.28914pt too wide) in paragraph at lines 88--90
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/temperature_handler.c,
  []
 
 
-Overfull \hbox (162.65158pt too wide) in paragraph at lines 78--80
+Overfull \hbox (162.65158pt too wide) in paragraph at lines 90--92
 []\T1/phv/m/n/10 C:/Users/agreen/Documents/Projects/Aveo/CH-53K_LED_Controller/
 Core/Src/voltage_handler.c,
  []
 
 
 
-[65
+[81
+
 
 
 ]
 
 
 
-[66]
+[82]
 
 
 
-[67]
+[83]
 
 
 
-[68]
+[84]
 
 
 
-[69]
+[85]
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 697--698
+[]| \T1/phv/m/n/10 USE_HAL_GFXMMU_REGISTER_CALLBACKS,
+ []
 
 
 
-[70]) (refman.aux)
+[86]
+
+
+
+[87]
+
+
+
+[88]) (refman.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-08-16>
@@ -1685,16 +1834,16 @@ L3 programming layer <2024-08-16>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: B19BF791EC734997D436BA7FFB1596F8;64157.
+(rerunfilecheck)             Checksum: 6D7F46E7837DD55DDC0A14377489F421;84517.
  ) 
 Here is how much of TeX's memory you used:
- 19435 strings out of 473899
- 327140 string characters out of 5738692
- 1976960 words of memory out of 5000000
- 41184 multiletter control sequences out of 15000+600000
+ 19799 strings out of 473899
+ 340476 string characters out of 5738692
+ 1983960 words of memory out of 5000000
+ 41364 multiletter control sequences out of 15000+600000
  612764 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 101i,16n,117p,1289b,749s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 101i,16n,117p,1411b,749s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Programs/Mi
 KTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmsy10.pfb><C:/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
@@ -1704,9 +1853,9 @@ grams/MiKTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Programs/MiKTeX/fonts/type1
 b><C:/Programs/MiKTeX/fonts/type1/urw/helvetic/uhvb8ac.pfb><C:/Programs/MiKTeX/
 fonts/type1/urw/helvetic/uhvr8a.pfb><C:/Programs/MiKTeX/fonts/type1/urw/helveti
 c/uhvro8a.pfb>
-Output written on refman.pdf (80 pages, 708088 bytes).
+Output written on refman.pdf (100 pages, 867440 bytes).
 PDF statistics:
- 3235 PDF objects out of 3580 (max. 8388607)
- 717 named destinations out of 1000 (max. 500000)
- 2193 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4069 PDF objects out of 4296 (max. 8388607)
+ 894 named destinations out of 1000 (max. 500000)
+ 2825 words of extra memory for PDF output out of 10000 (max. 10000000)
 

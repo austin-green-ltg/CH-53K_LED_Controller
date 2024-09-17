@@ -1,16 +1,22 @@
 \begin{theindex}
 
   \item {AMPMETER\_ADC\_GPIO\_Port}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{26}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
   \item {AMPMETER\_ADC\_Pin}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{26}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
+  \item {assert\_param}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{39}
   \item {AVG\_STEP\_DIFF\_MS}
-    \subitem {main.c}, \hyperpage{49}
+    \subitem {main.c}, \hyperpage{64}
   \item {AVG\_STEP\_TIME\_MS}
-    \subitem {main.c}, \hyperpage{49}
+    \subitem {main.c}, \hyperpage{64}
 
   \indexspace
 
+  \item {BOOT0\_GPIO\_Port}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
+  \item {BOOT0\_Pin}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
   \item {BRIGHT\_GPIO\_Port}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
   \item {BRIGHT\_Pin}
@@ -18,18 +24,20 @@
   \item {BRIGHTNESS\_STEPS}
     \subitem {pwm\_handler.h}, \hyperpage{22}
   \item {BrightnessDelay}
-    \subitem {delay\_handler.c}, \hyperpage{43}
+    \subitem {delay\_handler.c}, \hyperpage{58}
     \subitem {delay\_handler.h}, \hyperpage{11}
   \item {button\_handler.c}
-    \subitem {IsBrightPressed}, \hyperpage{41}
-    \subitem {IsDimPressed}, \hyperpage{41}
+    \subitem {IsBrightPressed}, \hyperpage{56}
+    \subitem {IsDimPressed}, \hyperpage{56}
+    \subitem {IsTogglePressed}, \hyperpage{56}
   \item {button\_handler.h}
     \subitem {IsBrightPressed}, \hyperpage{7}
     \subitem {IsDimPressed}, \hyperpage{7}
+    \subitem {IsTogglePressed}, \hyperpage{8}
   \item {BUTTON\_PRESSED}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
   \item {BUTTON\_UNPRESSED}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
 
   \indexspace
 
@@ -42,60 +50,64 @@
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/fram.h}, 
 		\hyperpage{12}, \hyperpage{16}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/logger.h}, 
-		\hyperpage{17}, \hyperpage{19}
+		\hyperpage{17, 18}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/main.h}, 
 		\hyperpage{19, 20}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/my\_printf.h}, 
-		\hyperpage{21}
+		\hyperpage{20}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/pwm\_handler.h}, 
 		\hyperpage{21}, \hyperpage{24}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/stm32l412xx-\/bsp.h}, 
 		\hyperpage{25}, \hyperpage{35}
+  \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/stm32l4xx\_hal\_conf.h}, 
+		\hyperpage{37}, \hyperpage{47}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/temperature\_handler.h}, 
-		\hyperpage{37, 38}
+		\hyperpage{51}, \hyperpage{53}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Inc/voltage\_handler.h}, 
-		\hyperpage{39, 40}
+		\hyperpage{53}, \hyperpage{55}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/button\_handler.c}, 
-		\hyperpage{41}
+		\hyperpage{55}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/current\_handler.c}, 
-		\hyperpage{41}
+		\hyperpage{56}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/delay\_handler.c}, 
-		\hyperpage{43}
+		\hyperpage{58}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/fram.c}, 
-		\hyperpage{44}
+		\hyperpage{60}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/logger.c}, 
-		\hyperpage{47}
+		\hyperpage{62}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/main.c}, 
-		\hyperpage{48}
+		\hyperpage{63}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/my\_printf.c}, 
-		\hyperpage{50}
+		\hyperpage{66}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/pwm\_handler.c}, 
-		\hyperpage{50}
+		\hyperpage{66}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/stm32l412xx-\/bsp.c}, 
-		\hyperpage{54}
+		\hyperpage{70}
+  \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/stm32l4xx\_hal\_msp.c}, 
+		\hyperpage{75}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/temperature\_handler.c}, 
-		\hyperpage{59}
+		\hyperpage{76}
   \item {C:/Users/agreen/Documents/Projects/Aveo/CH-\/53K\_LED\_Controller/Core/Src/voltage\_handler.c}, 
-		\hyperpage{61}
+		\hyperpage{79}
   \item {CHIP\_SELECT\_STATE}
     \subitem {fram.h}, \hyperpage{13}
   \item {CLK\_FREQ\_HZ}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
   \item {CoolingThreshold1\_dC}
-    \subitem {temperature\_handler.c}, \hyperpage{60}
+    \subitem {temperature\_handler.c}, \hyperpage{78}
   \item {CoolingThreshold2\_dC}
-    \subitem {temperature\_handler.c}, \hyperpage{60}
+    \subitem {temperature\_handler.c}, \hyperpage{78}
   \item {CSS\_ASSERT}
     \subitem {fram.h}, \hyperpage{13}
   \item {CSS\_RELEASE}
     \subitem {fram.h}, \hyperpage{13}
   \item {current\_handler.c}
-    \subitem {CurrentErrorThreshold\_dA}, \hyperpage{42}
-    \subitem {CurrentHighThreshold\_dA}, \hyperpage{42}
-    \subitem {dAmpsToRaw}, \hyperpage{43}
-    \subitem {GetCurrent}, \hyperpage{42}
-    \subitem {GetCurrentRange}, \hyperpage{42}
-    \subitem {RawTodAmps}, \hyperpage{43}
+    \subitem {CurrentErrorThreshold\_dA}, \hyperpage{57}
+    \subitem {CurrentHighThreshold\_dA}, \hyperpage{57}
+    \subitem {dAmpsToRaw}, \hyperpage{58}
+    \subitem {GetCurrent}, \hyperpage{57}
+    \subitem {GetCurrentRange}, \hyperpage{57}
+    \subitem {RawTodAmps}, \hyperpage{58}
   \item {current\_handler.h}
     \subitem {CurrentError}, \hyperpage{9}
     \subitem {CurrentHigh}, \hyperpage{9}
@@ -106,11 +118,11 @@
   \item {CurrentError}
     \subitem {current\_handler.h}, \hyperpage{9}
   \item {CurrentErrorThreshold\_dA}
-    \subitem {current\_handler.c}, \hyperpage{42}
+    \subitem {current\_handler.c}, \hyperpage{57}
   \item {CurrentHigh}
     \subitem {current\_handler.h}, \hyperpage{9}
   \item {CurrentHighThreshold\_dA}
-    \subitem {current\_handler.c}, \hyperpage{42}
+    \subitem {current\_handler.c}, \hyperpage{57}
   \item {CurrentNormal}
     \subitem {current\_handler.h}, \hyperpage{9}
   \item {CurrentRange\_e}
@@ -119,84 +131,89 @@
   \indexspace
 
   \item {dAmpsToRaw}
-    \subitem {current\_handler.c}, \hyperpage{43}
+    \subitem {current\_handler.c}, \hyperpage{58}
+  \item {DATA\_CACHE\_ENABLE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{39}
   \item {dCelciusToThermistor}
-    \subitem {temperature\_handler.c}, \hyperpage{61}
+    \subitem {temperature\_handler.c}, \hyperpage{78}
   \item {DecreaseBrightness}
-    \subitem {pwm\_handler.c}, \hyperpage{51}
+    \subitem {pwm\_handler.c}, \hyperpage{67}
     \subitem {pwm\_handler.h}, \hyperpage{22}
   \item {delay\_handler.c}
-    \subitem {BrightnessDelay}, \hyperpage{43}
-    \subitem {DelayHit}, \hyperpage{44}
-    \subitem {RestartDelayCounter}, \hyperpage{44}
-    \subitem {StartDelayCounter}, \hyperpage{44}
-    \subitem {Tim2ClkKhz}, \hyperpage{44}
+    \subitem {BrightnessDelay}, \hyperpage{58}
+    \subitem {DelayHit}, \hyperpage{59}
+    \subitem {RestartDelayCounter}, \hyperpage{59}
+    \subitem {StartDelayCounter}, \hyperpage{59}
+    \subitem {Tim2ClkKhz}, \hyperpage{59}
   \item {delay\_handler.h}
     \subitem {BrightnessDelay}, \hyperpage{11}
     \subitem {DelayHit}, \hyperpage{11}
     \subitem {RestartDelayCounter}, \hyperpage{11}
     \subitem {StartDelayCounter}, \hyperpage{11}
   \item {DelayHit}
-    \subitem {delay\_handler.c}, \hyperpage{44}
+    \subitem {delay\_handler.c}, \hyperpage{59}
     \subitem {delay\_handler.h}, \hyperpage{11}
   \item {DIM\_GPIO\_Port}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
   \item {DIM\_Pin}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
   \item {disableChipSelect}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{55}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{71}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
   \item {DisablePWM1}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{55}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{71}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
   \item {disableWriteProtect}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{55}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{71}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
   \item {dVoltsToRaw}
-    \subitem {voltage\_handler.c}, \hyperpage{62}
+    \subitem {voltage\_handler.c}, \hyperpage{80}
 
   \indexspace
 
   \item {EEPROM\_MISO\_GPIO\_Port}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
   \item {EEPROM\_MISO\_Pin}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
   \item {EEPROM\_MOSI\_GPIO\_Port}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
   \item {EEPROM\_MOSI\_Pin}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
   \item {EEPROM\_SCK\_GPIO\_Port}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{27}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
   \item {EEPROM\_SCK\_Pin}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
   \item {enableChipSelect}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{55}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{71}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
   \item {EnablePWM1}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{56}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{71}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
   \item {enableWriteProtect}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{56}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{72}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
   \item {Error\_Handler}
-    \subitem {main.h}, \hyperpage{20}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{56}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
+    \subitem {main.c}, \hyperpage{65}
+    \subitem {main.h}, \hyperpage{19}
+  \item {EXTERNAL\_SAI1\_CLOCK\_VALUE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{40}
+  \item {EXTERNAL\_SAI2\_CLOCK\_VALUE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{40}
 
   \indexspace
 
   \item {fram.c}
-    \subitem {framChipSelect}, \hyperpage{45}
-    \subitem {framReadMemory}, \hyperpage{45}
-    \subitem {framReadSr}, \hyperpage{45}
-    \subitem {framTest}, \hyperpage{46}
-    \subitem {framWriteDisable}, \hyperpage{46}
-    \subitem {framWriteEnable}, \hyperpage{46}
-    \subitem {framWriteMemory}, \hyperpage{46}
-    \subitem {framWriteProtect}, \hyperpage{46}
-    \subitem {framWriteSr}, \hyperpage{47}
-    \subitem {TADD}, \hyperpage{45}
-    \subitem {TLEN}, \hyperpage{45}
+    \subitem {framChipSelect}, \hyperpage{60}
+    \subitem {framReadMemory}, \hyperpage{60}
+    \subitem {framReadSr}, \hyperpage{61}
+    \subitem {framTest}, \hyperpage{61}
+    \subitem {framWriteDisable}, \hyperpage{61}
+    \subitem {framWriteEnable}, \hyperpage{61}
+    \subitem {framWriteMemory}, \hyperpage{61}
+    \subitem {framWriteProtect}, \hyperpage{62}
+    \subitem {framWriteSr}, \hyperpage{62}
+    \subitem {TADD}, \hyperpage{60}
+    \subitem {TLEN}, \hyperpage{60}
   \item {fram.h}
     \subitem {CHIP\_SELECT\_STATE}, \hyperpage{13}
     \subitem {CSS\_ASSERT}, \hyperpage{13}
@@ -226,169 +243,202 @@
     \subitem {WPS\_WRITEABLE}, \hyperpage{14}
     \subitem {WRITE\_PROTECT\_STATE}, \hyperpage{14}
   \item {framChipSelect}
-    \subitem {fram.c}, \hyperpage{45}
+    \subitem {fram.c}, \hyperpage{60}
     \subitem {fram.h}, \hyperpage{14}
   \item {framReadMemory}
-    \subitem {fram.c}, \hyperpage{45}
+    \subitem {fram.c}, \hyperpage{60}
     \subitem {fram.h}, \hyperpage{14}
   \item {framReadSr}
-    \subitem {fram.c}, \hyperpage{45}
+    \subitem {fram.c}, \hyperpage{61}
     \subitem {fram.h}, \hyperpage{14}
   \item {framTest}
-    \subitem {fram.c}, \hyperpage{46}
+    \subitem {fram.c}, \hyperpage{61}
     \subitem {fram.h}, \hyperpage{14}
   \item {framWriteDisable}
-    \subitem {fram.c}, \hyperpage{46}
+    \subitem {fram.c}, \hyperpage{61}
     \subitem {fram.h}, \hyperpage{15}
   \item {framWriteEnable}
-    \subitem {fram.c}, \hyperpage{46}
+    \subitem {fram.c}, \hyperpage{61}
     \subitem {fram.h}, \hyperpage{15}
   \item {framWriteMemory}
-    \subitem {fram.c}, \hyperpage{46}
+    \subitem {fram.c}, \hyperpage{61}
     \subitem {fram.h}, \hyperpage{15}
   \item {framWriteProtect}
-    \subitem {fram.c}, \hyperpage{46}
+    \subitem {fram.c}, \hyperpage{62}
     \subitem {fram.h}, \hyperpage{15}
   \item {framWriteSr}
-    \subitem {fram.c}, \hyperpage{47}
+    \subitem {fram.c}, \hyperpage{62}
     \subitem {fram.h}, \hyperpage{15}
 
   \indexspace
 
   \item {GetBrightness}
-    \subitem {pwm\_handler.c}, \hyperpage{52}
+    \subitem {pwm\_handler.c}, \hyperpage{67}
     \subitem {pwm\_handler.h}, \hyperpage{22}
   \item {GetCurrent}
-    \subitem {current\_handler.c}, \hyperpage{42}
+    \subitem {current\_handler.c}, \hyperpage{57}
     \subitem {current\_handler.h}, \hyperpage{9}
   \item {GetCurrentRange}
-    \subitem {current\_handler.c}, \hyperpage{42}
+    \subitem {current\_handler.c}, \hyperpage{57}
     \subitem {current\_handler.h}, \hyperpage{9}
   \item {GetCurrentValue}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{56}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{72}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
   \item {GetPwm}
-    \subitem {pwm\_handler.c}, \hyperpage{52}
-    \subitem {pwm\_handler.h}, \hyperpage{23}
+    \subitem {pwm\_handler.c}, \hyperpage{67}
+    \subitem {pwm\_handler.h}, \hyperpage{22}
   \item {GetTemperature}
-    \subitem {temperature\_handler.c}, \hyperpage{60}
-    \subitem {temperature\_handler.h}, \hyperpage{38}
+    \subitem {temperature\_handler.c}, \hyperpage{76}
+    \subitem {temperature\_handler.h}, \hyperpage{52}
   \item {GetTemperatureRange}
-    \subitem {temperature\_handler.c}, \hyperpage{60}
-    \subitem {temperature\_handler.h}, \hyperpage{38}
+    \subitem {temperature\_handler.c}, \hyperpage{76}
+    \subitem {temperature\_handler.h}, \hyperpage{52}
   \item {GetThermistorValue}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{56}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{72}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{32}
   \item {GetTIM2Cnt}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{57}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{72}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{32}
   \item {GetVoltage}
-    \subitem {voltage\_handler.c}, \hyperpage{62}
-    \subitem {voltage\_handler.h}, \hyperpage{40}
+    \subitem {voltage\_handler.c}, \hyperpage{79}
+    \subitem {voltage\_handler.h}, \hyperpage{54}
   \item {GetVoltageRange}
-    \subitem {voltage\_handler.c}, \hyperpage{62}
-    \subitem {voltage\_handler.h}, \hyperpage{40}
+    \subitem {voltage\_handler.c}, \hyperpage{79}
+    \subitem {voltage\_handler.h}, \hyperpage{54}
   \item {GetVoltageValue}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{57}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{72}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{32}
+  \item {GPIO\_PIN\_RESET}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
+  \item {GPIO\_PIN\_SET}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{31}
   \item {GPIO\_PinState}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
 
   \indexspace
 
+  \item {HAL\_CORTEX\_MODULE\_ENABLED}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{40}
+  \item {HAL\_DMA\_MODULE\_ENABLED}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{40}
+  \item {HAL\_EXTI\_MODULE\_ENABLED}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{40}
+  \item {HAL\_FLASH\_MODULE\_ENABLED}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{40}
+  \item {HAL\_GPIO\_MODULE\_ENABLED}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{40}
+  \item {HAL\_MODULE\_ENABLED}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{40}
+  \item {HAL\_MspInit}
+    \subitem {stm32l4xx\_hal\_msp.c}, \hyperpage{76}
+  \item {HAL\_PCD\_MODULE\_ENABLED}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{41}
+  \item {HAL\_PWR\_MODULE\_ENABLED}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{41}
+  \item {HAL\_RCC\_MODULE\_ENABLED}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{41}
   \item {HalfBrightness}
-    \subitem {pwm\_handler.c}, \hyperpage{53}
+    \subitem {pwm\_handler.c}, \hyperpage{69}
   \item {HeatingThreshold1\_dC}
-    \subitem {temperature\_handler.c}, \hyperpage{61}
+    \subitem {temperature\_handler.c}, \hyperpage{78}
   \item {HeatingThreshold2\_dC}
-    \subitem {temperature\_handler.c}, \hyperpage{61}
+    \subitem {temperature\_handler.c}, \hyperpage{78}
   \item {HighStepTimeMs}
-    \subitem {main.c}, \hyperpage{50}
+    \subitem {main.c}, \hyperpage{66}
   \item {HOLD\_BRIGHTNESS\_JUMP}
     \subitem {pwm\_handler.h}, \hyperpage{22}
   \item {HotPwmRatio}
-    \subitem {pwm\_handler.c}, \hyperpage{53}
+    \subitem {pwm\_handler.c}, \hyperpage{69}
+  \item {HSE\_STARTUP\_TIMEOUT}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{41}
+  \item {HSE\_VALUE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{41}
+  \item {HSI48\_VALUE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{41}
+  \item {HSI\_VALUE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{41}
 
   \indexspace
 
   \item {IncreaseBrightness}
-    \subitem {pwm\_handler.c}, \hyperpage{52}
+    \subitem {pwm\_handler.c}, \hyperpage{68}
     \subitem {pwm\_handler.h}, \hyperpage{23}
   \item {InitPwm}
-    \subitem {pwm\_handler.c}, \hyperpage{52}
+    \subitem {pwm\_handler.c}, \hyperpage{68}
     \subitem {pwm\_handler.h}, \hyperpage{23}
+  \item {INSTRUCTION\_CACHE\_ENABLE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{42}
   \item {is\_running}
     \subitem {PwmStruct}, \hyperpage{5}
     \subitem {TimerStruct}, \hyperpage{6}
   \item {IsBrightPressed}
-    \subitem {button\_handler.c}, \hyperpage{41}
+    \subitem {button\_handler.c}, \hyperpage{56}
     \subitem {button\_handler.h}, \hyperpage{7}
   \item {IsDimPressed}
-    \subitem {button\_handler.c}, \hyperpage{41}
+    \subitem {button\_handler.c}, \hyperpage{56}
     \subitem {button\_handler.h}, \hyperpage{7}
+  \item {IsTogglePressed}
+    \subitem {button\_handler.c}, \hyperpage{56}
+    \subitem {button\_handler.h}, \hyperpage{8}
 
   \indexspace
 
   \item {logger.c}
-    \subitem {LogNumber}, \hyperpage{47}
-    \subitem {LogString}, \hyperpage{47}
-    \subitem {ReadLog}, \hyperpage{48}
+    \subitem {LogNumber}, \hyperpage{62}
+    \subitem {LogString}, \hyperpage{63}
+    \subitem {ReadLog}, \hyperpage{63}
   \item {logger.h}
     \subitem {LogNumber}, \hyperpage{17}
     \subitem {LogString}, \hyperpage{17}
-    \subitem {ReadLog}, \hyperpage{17}
+    \subitem {ReadLog}, \hyperpage{18}
   \item {LogNumber}
-    \subitem {logger.c}, \hyperpage{47}
+    \subitem {logger.c}, \hyperpage{62}
     \subitem {logger.h}, \hyperpage{17}
   \item {LogString}
-    \subitem {logger.c}, \hyperpage{47}
+    \subitem {logger.c}, \hyperpage{63}
     \subitem {logger.h}, \hyperpage{17}
   \item {LOWER\_STEP\_TIME\_MS}
-    \subitem {main.c}, \hyperpage{49}
+    \subitem {main.c}, \hyperpage{64}
   \item {LOWER\_SWEEP\_TIME\_MS}
-    \subitem {main.c}, \hyperpage{49}
+    \subitem {main.c}, \hyperpage{65}
   \item {LowStepTimeMs}
-    \subitem {main.c}, \hyperpage{50}
+    \subitem {main.c}, \hyperpage{66}
+  \item {LSE\_STARTUP\_TIMEOUT}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{42}
+  \item {LSE\_VALUE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{42}
+  \item {LSI\_VALUE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{42}
 
   \indexspace
 
   \item {main}
-    \subitem {main.c}, \hyperpage{49}
+    \subitem {main.c}, \hyperpage{65}
   \item {main.c}
-    \subitem {AVG\_STEP\_DIFF\_MS}, \hyperpage{49}
-    \subitem {AVG\_STEP\_TIME\_MS}, \hyperpage{49}
-    \subitem {HighStepTimeMs}, \hyperpage{50}
-    \subitem {LOWER\_STEP\_TIME\_MS}, \hyperpage{49}
-    \subitem {LOWER\_SWEEP\_TIME\_MS}, \hyperpage{49}
-    \subitem {LowStepTimeMs}, \hyperpage{50}
-    \subitem {main}, \hyperpage{49}
-    \subitem {SystemClock\_Config}, \hyperpage{50}
-    \subitem {TOTAL\_SWEEP\_TIME\_MS}, \hyperpage{49}
-    \subitem {UPPER\_STEP\_TIME\_MS}, \hyperpage{49}
-    \subitem {UPPER\_SWEEP\_TIME\_MS}, \hyperpage{49}
+    \subitem {AVG\_STEP\_DIFF\_MS}, \hyperpage{64}
+    \subitem {AVG\_STEP\_TIME\_MS}, \hyperpage{64}
+    \subitem {Error\_Handler}, \hyperpage{65}
+    \subitem {HighStepTimeMs}, \hyperpage{66}
+    \subitem {LOWER\_STEP\_TIME\_MS}, \hyperpage{64}
+    \subitem {LOWER\_SWEEP\_TIME\_MS}, \hyperpage{65}
+    \subitem {LowStepTimeMs}, \hyperpage{66}
+    \subitem {main}, \hyperpage{65}
+    \subitem {SystemClock\_Config}, \hyperpage{65}
+    \subitem {TOTAL\_SWEEP\_TIME\_MS}, \hyperpage{65}
+    \subitem {UPPER\_STEP\_TIME\_MS}, \hyperpage{65}
+    \subitem {UPPER\_SWEEP\_TIME\_MS}, \hyperpage{65}
   \item {main.h}
-    \subitem {Error\_Handler}, \hyperpage{20}
+    \subitem {Error\_Handler}, \hyperpage{19}
   \item {MaxBrightness}
-    \subitem {pwm\_handler.c}, \hyperpage{53}
+    \subitem {pwm\_handler.c}, \hyperpage{69}
   \item {MaxPw}
-    \subitem {pwm\_handler.c}, \hyperpage{53}
+    \subitem {pwm\_handler.c}, \hyperpage{69}
   \item {MinBrightness}
-    \subitem {pwm\_handler.c}, \hyperpage{53}
+    \subitem {pwm\_handler.c}, \hyperpage{69}
   \item {MinPw}
-    \subitem {pwm\_handler.c}, \hyperpage{54}
-
-  \indexspace
-
-  \item {NVIC\_PRIORITYGROUP\_0}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
-  \item {NVIC\_PRIORITYGROUP\_1}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
-  \item {NVIC\_PRIORITYGROUP\_2}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
-  \item {NVIC\_PRIORITYGROUP\_3}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
-  \item {NVIC\_PRIORITYGROUP\_4}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
+    \subitem {pwm\_handler.c}, \hyperpage{69}
+  \item {MSI\_VALUE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{42}
 
   \indexspace
 
@@ -413,32 +463,34 @@
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
   \item {PIN\_SET}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
+  \item {PREFETCH\_ENABLE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{42}
   \item {pulse\_width}
     \subitem {PwmStruct}, \hyperpage{5}
   \item {PW\_PERIOD}
-    \subitem {pwm\_handler.c}, \hyperpage{51}
+    \subitem {pwm\_handler.c}, \hyperpage{67}
   \item {pwm\_handler.c}
-    \subitem {DecreaseBrightness}, \hyperpage{51}
-    \subitem {GetBrightness}, \hyperpage{52}
-    \subitem {GetPwm}, \hyperpage{52}
-    \subitem {HalfBrightness}, \hyperpage{53}
-    \subitem {HotPwmRatio}, \hyperpage{53}
-    \subitem {IncreaseBrightness}, \hyperpage{52}
-    \subitem {InitPwm}, \hyperpage{52}
-    \subitem {MaxBrightness}, \hyperpage{53}
-    \subitem {MaxPw}, \hyperpage{53}
-    \subitem {MinBrightness}, \hyperpage{53}
-    \subitem {MinPw}, \hyperpage{54}
-    \subitem {PW\_PERIOD}, \hyperpage{51}
-    \subitem {SetBrightness}, \hyperpage{52}
-    \subitem {SetPwm}, \hyperpage{53}
-    \subitem {TurnOffPwm}, \hyperpage{53}
-    \subitem {WarmPwmRatio}, \hyperpage{54}
+    \subitem {DecreaseBrightness}, \hyperpage{67}
+    \subitem {GetBrightness}, \hyperpage{67}
+    \subitem {GetPwm}, \hyperpage{67}
+    \subitem {HalfBrightness}, \hyperpage{69}
+    \subitem {HotPwmRatio}, \hyperpage{69}
+    \subitem {IncreaseBrightness}, \hyperpage{68}
+    \subitem {InitPwm}, \hyperpage{68}
+    \subitem {MaxBrightness}, \hyperpage{69}
+    \subitem {MaxPw}, \hyperpage{69}
+    \subitem {MinBrightness}, \hyperpage{69}
+    \subitem {MinPw}, \hyperpage{69}
+    \subitem {PW\_PERIOD}, \hyperpage{67}
+    \subitem {SetBrightness}, \hyperpage{68}
+    \subitem {SetPwm}, \hyperpage{68}
+    \subitem {TurnOffPwm}, \hyperpage{69}
+    \subitem {WarmPwmRatio}, \hyperpage{70}
   \item {pwm\_handler.h}
     \subitem {BRIGHTNESS\_STEPS}, \hyperpage{22}
     \subitem {DecreaseBrightness}, \hyperpage{22}
     \subitem {GetBrightness}, \hyperpage{22}
-    \subitem {GetPwm}, \hyperpage{23}
+    \subitem {GetPwm}, \hyperpage{22}
     \subitem {HOLD\_BRIGHTNESS\_JUMP}, \hyperpage{22}
     \subitem {IncreaseBrightness}, \hyperpage{23}
     \subitem {InitPwm}, \hyperpage{23}
@@ -456,46 +508,49 @@
   \indexspace
 
   \item {RawTodAmps}
-    \subitem {current\_handler.c}, \hyperpage{43}
+    \subitem {current\_handler.c}, \hyperpage{58}
   \item {RawTodVolts}
-    \subitem {voltage\_handler.c}, \hyperpage{62}
+    \subitem {voltage\_handler.c}, \hyperpage{80}
   \item {ReadBrightPin}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{57}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{73}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{32}
   \item {ReadDimPin}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{57}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{73}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{33}
   \item {ReadLog}
-    \subitem {logger.c}, \hyperpage{48}
-    \subitem {logger.h}, \hyperpage{17}
+    \subitem {logger.c}, \hyperpage{63}
+    \subitem {logger.h}, \hyperpage{18}
+  \item {ReadTogglePin}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{73}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{33}
   \item {receiveData}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{58}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{73}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{33}
   \item {RestartDelayCounter}
-    \subitem {delay\_handler.c}, \hyperpage{44}
+    \subitem {delay\_handler.c}, \hyperpage{59}
     \subitem {delay\_handler.h}, \hyperpage{11}
   \item {RestartTIM2}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{58}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{74}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{33}
 
   \indexspace
 
   \item {sendUARTChar}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{58}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{74}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{33}
   \item {SetBrightness}
-    \subitem {pwm\_handler.c}, \hyperpage{52}
+    \subitem {pwm\_handler.c}, \hyperpage{68}
     \subitem {pwm\_handler.h}, \hyperpage{23}
   \item {SetPW11}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{58}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{33}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{74}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{34}
   \item {SetPwm}
-    \subitem {pwm\_handler.c}, \hyperpage{53}
+    \subitem {pwm\_handler.c}, \hyperpage{68}
     \subitem {pwm\_handler.h}, \hyperpage{23}
   \item {SPI\_NSS\_GPIO\_Port}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
   \item {SPI\_NSS\_Pin}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{28}
   \item {SPI\_WP\_GPIO\_Port}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
   \item {SPI\_WP\_Pin}
@@ -509,213 +564,376 @@
   \item {SR\_WPEN}
     \subitem {fram.h}, \hyperpage{14}
   \item {StartDelayCounter}
-    \subitem {delay\_handler.c}, \hyperpage{44}
+    \subitem {delay\_handler.c}, \hyperpage{59}
     \subitem {delay\_handler.h}, \hyperpage{11}
   \item {StartPWM11}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{58}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{74}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{34}
   \item {StartTIM2}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{59}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{74}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{34}
   \item {STATUS\_REGISTER}
     \subitem {fram.h}, \hyperpage{13}
   \item {stm32l412xx-\/bsp.c}
-    \subitem {disableChipSelect}, \hyperpage{55}
-    \subitem {DisablePWM1}, \hyperpage{55}
-    \subitem {disableWriteProtect}, \hyperpage{55}
-    \subitem {enableChipSelect}, \hyperpage{55}
-    \subitem {EnablePWM1}, \hyperpage{56}
-    \subitem {enableWriteProtect}, \hyperpage{56}
-    \subitem {Error\_Handler}, \hyperpage{56}
-    \subitem {GetCurrentValue}, \hyperpage{56}
-    \subitem {GetThermistorValue}, \hyperpage{56}
-    \subitem {GetTIM2Cnt}, \hyperpage{57}
-    \subitem {GetVoltageValue}, \hyperpage{57}
-    \subitem {ReadBrightPin}, \hyperpage{57}
-    \subitem {ReadDimPin}, \hyperpage{57}
-    \subitem {receiveData}, \hyperpage{58}
-    \subitem {RestartTIM2}, \hyperpage{58}
-    \subitem {sendUARTChar}, \hyperpage{58}
-    \subitem {SetPW11}, \hyperpage{58}
-    \subitem {StartPWM11}, \hyperpage{58}
-    \subitem {StartTIM2}, \hyperpage{59}
-    \subitem {StopPWM11}, \hyperpage{59}
-    \subitem {transferData}, \hyperpage{59}
+    \subitem {disableChipSelect}, \hyperpage{71}
+    \subitem {DisablePWM1}, \hyperpage{71}
+    \subitem {disableWriteProtect}, \hyperpage{71}
+    \subitem {enableChipSelect}, \hyperpage{71}
+    \subitem {EnablePWM1}, \hyperpage{71}
+    \subitem {enableWriteProtect}, \hyperpage{72}
+    \subitem {GetCurrentValue}, \hyperpage{72}
+    \subitem {GetThermistorValue}, \hyperpage{72}
+    \subitem {GetTIM2Cnt}, \hyperpage{72}
+    \subitem {GetVoltageValue}, \hyperpage{72}
+    \subitem {ReadBrightPin}, \hyperpage{73}
+    \subitem {ReadDimPin}, \hyperpage{73}
+    \subitem {ReadTogglePin}, \hyperpage{73}
+    \subitem {receiveData}, \hyperpage{73}
+    \subitem {RestartTIM2}, \hyperpage{74}
+    \subitem {sendUARTChar}, \hyperpage{74}
+    \subitem {SetPW11}, \hyperpage{74}
+    \subitem {StartPWM11}, \hyperpage{74}
+    \subitem {StartTIM2}, \hyperpage{74}
+    \subitem {StopPWM11}, \hyperpage{74}
+    \subitem {transferData}, \hyperpage{75}
   \item {stm32l412xx-\/bsp.h}
-    \subitem {AMPMETER\_ADC\_GPIO\_Port}, \hyperpage{26}
-    \subitem {AMPMETER\_ADC\_Pin}, \hyperpage{26}
+    \subitem {AMPMETER\_ADC\_GPIO\_Port}, \hyperpage{27}
+    \subitem {AMPMETER\_ADC\_Pin}, \hyperpage{27}
+    \subitem {BOOT0\_GPIO\_Port}, \hyperpage{27}
+    \subitem {BOOT0\_Pin}, \hyperpage{27}
     \subitem {BRIGHT\_GPIO\_Port}, \hyperpage{27}
     \subitem {BRIGHT\_Pin}, \hyperpage{27}
-    \subitem {BUTTON\_PRESSED}, \hyperpage{30}
-    \subitem {BUTTON\_UNPRESSED}, \hyperpage{30}
+    \subitem {BUTTON\_PRESSED}, \hyperpage{27}
+    \subitem {BUTTON\_UNPRESSED}, \hyperpage{27}
     \subitem {CLK\_FREQ\_HZ}, \hyperpage{27}
     \subitem {DIM\_GPIO\_Port}, \hyperpage{27}
     \subitem {DIM\_Pin}, \hyperpage{27}
-    \subitem {disableChipSelect}, \hyperpage{30}
-    \subitem {DisablePWM1}, \hyperpage{30}
-    \subitem {disableWriteProtect}, \hyperpage{30}
-    \subitem {EEPROM\_MISO\_GPIO\_Port}, \hyperpage{27}
-    \subitem {EEPROM\_MISO\_Pin}, \hyperpage{27}
-    \subitem {EEPROM\_MOSI\_GPIO\_Port}, \hyperpage{27}
-    \subitem {EEPROM\_MOSI\_Pin}, \hyperpage{27}
-    \subitem {EEPROM\_SCK\_GPIO\_Port}, \hyperpage{27}
+    \subitem {disableChipSelect}, \hyperpage{31}
+    \subitem {DisablePWM1}, \hyperpage{31}
+    \subitem {disableWriteProtect}, \hyperpage{31}
+    \subitem {EEPROM\_MISO\_GPIO\_Port}, \hyperpage{28}
+    \subitem {EEPROM\_MISO\_Pin}, \hyperpage{28}
+    \subitem {EEPROM\_MOSI\_GPIO\_Port}, \hyperpage{28}
+    \subitem {EEPROM\_MOSI\_Pin}, \hyperpage{28}
+    \subitem {EEPROM\_SCK\_GPIO\_Port}, \hyperpage{28}
     \subitem {EEPROM\_SCK\_Pin}, \hyperpage{28}
     \subitem {enableChipSelect}, \hyperpage{31}
     \subitem {EnablePWM1}, \hyperpage{31}
     \subitem {enableWriteProtect}, \hyperpage{31}
-    \subitem {Error\_Handler}, \hyperpage{31}
     \subitem {GetCurrentValue}, \hyperpage{31}
     \subitem {GetThermistorValue}, \hyperpage{32}
     \subitem {GetTIM2Cnt}, \hyperpage{32}
     \subitem {GetVoltageValue}, \hyperpage{32}
+    \subitem {GPIO\_PIN\_RESET}, \hyperpage{31}
+    \subitem {GPIO\_PIN\_SET}, \hyperpage{31}
     \subitem {GPIO\_PinState}, \hyperpage{30}
-    \subitem {NVIC\_PRIORITYGROUP\_0}, \hyperpage{28}
-    \subitem {NVIC\_PRIORITYGROUP\_1}, \hyperpage{28}
-    \subitem {NVIC\_PRIORITYGROUP\_2}, \hyperpage{28}
-    \subitem {NVIC\_PRIORITYGROUP\_3}, \hyperpage{28}
-    \subitem {NVIC\_PRIORITYGROUP\_4}, \hyperpage{28}
     \subitem {PIN\_RESET}, \hyperpage{30}
     \subitem {PIN\_SET}, \hyperpage{30}
     \subitem {PWM\_OUT\_GPIO\_Port}, \hyperpage{28}
     \subitem {PWM\_OUT\_Pin}, \hyperpage{28}
     \subitem {ReadBrightPin}, \hyperpage{32}
     \subitem {ReadDimPin}, \hyperpage{33}
+    \subitem {ReadTogglePin}, \hyperpage{33}
     \subitem {receiveData}, \hyperpage{33}
     \subitem {RestartTIM2}, \hyperpage{33}
     \subitem {sendUARTChar}, \hyperpage{33}
-    \subitem {SetPW11}, \hyperpage{33}
-    \subitem {SPI\_NSS\_GPIO\_Port}, \hyperpage{29}
-    \subitem {SPI\_NSS\_Pin}, \hyperpage{29}
+    \subitem {SetPW11}, \hyperpage{34}
+    \subitem {SPI\_NSS\_GPIO\_Port}, \hyperpage{28}
+    \subitem {SPI\_NSS\_Pin}, \hyperpage{28}
     \subitem {SPI\_WP\_GPIO\_Port}, \hyperpage{29}
     \subitem {SPI\_WP\_Pin}, \hyperpage{29}
     \subitem {StartPWM11}, \hyperpage{34}
     \subitem {StartTIM2}, \hyperpage{34}
     \subitem {StopPWM11}, \hyperpage{34}
+    \subitem {SWCLK\_GPIO\_Port}, \hyperpage{29}
+    \subitem {SWCLK\_Pin}, \hyperpage{29}
+    \subitem {SWDIO\_GPIO\_Port}, \hyperpage{29}
+    \subitem {SWDIO\_Pin}, \hyperpage{29}
     \subitem {THERMISTOR\_ADC\_GPIO\_Port}, \hyperpage{29}
     \subitem {THERMISTOR\_ADC\_Pin}, \hyperpage{29}
     \subitem {TIM2\_CLK\_DEV}, \hyperpage{29}
     \subitem {TIM2\_CLK\_PRESCALER}, \hyperpage{29}
     \subitem {transferData}, \hyperpage{34}
-    \subitem {VOLTMETER\_ADC\_GPIO\_Port}, \hyperpage{29}
-    \subitem {VOLTMETER\_ADC\_Pin}, \hyperpage{29}
+    \subitem {USB\_RENUM\_N\_GPIO\_Port}, \hyperpage{30}
+    \subitem {USB\_RENUM\_N\_Pin}, \hyperpage{30}
+    \subitem {VIS\_IR\_GPIO\_Port}, \hyperpage{30}
+    \subitem {VIS\_IR\_Pin}, \hyperpage{30}
+    \subitem {VOLTMETER\_ADC\_GPIO\_Port}, \hyperpage{30}
+    \subitem {VOLTMETER\_ADC\_Pin}, \hyperpage{30}
+  \item {stm32l4xx\_hal\_conf.h}
+    \subitem {assert\_param}, \hyperpage{39}
+    \subitem {DATA\_CACHE\_ENABLE}, \hyperpage{39}
+    \subitem {EXTERNAL\_SAI1\_CLOCK\_VALUE}, \hyperpage{40}
+    \subitem {EXTERNAL\_SAI2\_CLOCK\_VALUE}, \hyperpage{40}
+    \subitem {HAL\_CORTEX\_MODULE\_ENABLED}, \hyperpage{40}
+    \subitem {HAL\_DMA\_MODULE\_ENABLED}, \hyperpage{40}
+    \subitem {HAL\_EXTI\_MODULE\_ENABLED}, \hyperpage{40}
+    \subitem {HAL\_FLASH\_MODULE\_ENABLED}, \hyperpage{40}
+    \subitem {HAL\_GPIO\_MODULE\_ENABLED}, \hyperpage{40}
+    \subitem {HAL\_MODULE\_ENABLED}, \hyperpage{40}
+    \subitem {HAL\_PCD\_MODULE\_ENABLED}, \hyperpage{41}
+    \subitem {HAL\_PWR\_MODULE\_ENABLED}, \hyperpage{41}
+    \subitem {HAL\_RCC\_MODULE\_ENABLED}, \hyperpage{41}
+    \subitem {HSE\_STARTUP\_TIMEOUT}, \hyperpage{41}
+    \subitem {HSE\_VALUE}, \hyperpage{41}
+    \subitem {HSI48\_VALUE}, \hyperpage{41}
+    \subitem {HSI\_VALUE}, \hyperpage{41}
+    \subitem {INSTRUCTION\_CACHE\_ENABLE}, \hyperpage{42}
+    \subitem {LSE\_STARTUP\_TIMEOUT}, \hyperpage{42}
+    \subitem {LSE\_VALUE}, \hyperpage{42}
+    \subitem {LSI\_VALUE}, \hyperpage{42}
+    \subitem {MSI\_VALUE}, \hyperpage{42}
+    \subitem {PREFETCH\_ENABLE}, \hyperpage{42}
+    \subitem {TICK\_INT\_PRIORITY}, \hyperpage{42}
+    \subitem {USE\_HAL\_ADC\_REGISTER\_CALLBACKS}, \hyperpage{43}
+    \subitem {USE\_HAL\_CAN\_REGISTER\_CALLBACKS}, \hyperpage{43}
+    \subitem {USE\_HAL\_COMP\_REGISTER\_CALLBACKS}, \hyperpage{43}
+    \subitem {USE\_HAL\_CRYP\_REGISTER\_CALLBACKS}, \hyperpage{43}
+    \subitem {USE\_HAL\_DAC\_REGISTER\_CALLBACKS}, \hyperpage{43}
+    \subitem {USE\_HAL\_DCMI\_REGISTER\_CALLBACKS}, \hyperpage{43}
+    \subitem {USE\_HAL\_DFSDM\_REGISTER\_CALLBACKS}, \hyperpage{43}
+    \subitem {USE\_HAL\_DMA2D\_REGISTER\_CALLBACKS}, \hyperpage{43}
+    \subitem {USE\_HAL\_DSI\_REGISTER\_CALLBACKS}, \hyperpage{43}
+    \subitem {USE\_HAL\_GFXMMU\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_HASH\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_HCD\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_I2C\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_IRDA\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_LPTIM\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_LTDC\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_MMC\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_OPAMP\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_OSPI\_REGISTER\_CALLBACKS}, \hyperpage{44}
+    \subitem {USE\_HAL\_PCD\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_QSPI\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_RNG\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_RTC\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_SAI\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_SD\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_SMARTCARD\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_SMBUS\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_SPI\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_SWPMI\_REGISTER\_CALLBACKS}, \hyperpage{45}
+    \subitem {USE\_HAL\_TIM\_REGISTER\_CALLBACKS}, \hyperpage{46}
+    \subitem {USE\_HAL\_TSC\_REGISTER\_CALLBACKS}, \hyperpage{46}
+    \subitem {USE\_HAL\_UART\_REGISTER\_CALLBACKS}, \hyperpage{46}
+    \subitem {USE\_HAL\_USART\_REGISTER\_CALLBACKS}, \hyperpage{46}
+    \subitem {USE\_HAL\_WWDG\_REGISTER\_CALLBACKS}, \hyperpage{46}
+    \subitem {USE\_RTOS}, \hyperpage{46}
+    \subitem {USE\_SPI\_CRC}, \hyperpage{46}
+    \subitem {VDD\_VALUE}, \hyperpage{46}
+  \item {stm32l4xx\_hal\_msp.c}
+    \subitem {HAL\_MspInit}, \hyperpage{76}
   \item {StopPWM11}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{59}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{74}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{34}
+  \item {SWCLK\_GPIO\_Port}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
+  \item {SWCLK\_Pin}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
+  \item {SWDIO\_GPIO\_Port}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
+  \item {SWDIO\_Pin}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
   \item {SystemClock\_Config}
-    \subitem {main.c}, \hyperpage{50}
+    \subitem {main.c}, \hyperpage{65}
 
   \indexspace
 
   \item {TADD}
-    \subitem {fram.c}, \hyperpage{45}
+    \subitem {fram.c}, \hyperpage{60}
   \item {TempCool}
-    \subitem {temperature\_handler.h}, \hyperpage{37}
+    \subitem {temperature\_handler.h}, \hyperpage{52}
   \item {temperature\_handler.c}
-    \subitem {CoolingThreshold1\_dC}, \hyperpage{60}
-    \subitem {CoolingThreshold2\_dC}, \hyperpage{60}
-    \subitem {dCelciusToThermistor}, \hyperpage{61}
-    \subitem {GetTemperature}, \hyperpage{60}
-    \subitem {GetTemperatureRange}, \hyperpage{60}
-    \subitem {HeatingThreshold1\_dC}, \hyperpage{61}
-    \subitem {HeatingThreshold2\_dC}, \hyperpage{61}
-    \subitem {ThermistorTodCelcius}, \hyperpage{61}
+    \subitem {CoolingThreshold1\_dC}, \hyperpage{78}
+    \subitem {CoolingThreshold2\_dC}, \hyperpage{78}
+    \subitem {dCelciusToThermistor}, \hyperpage{78}
+    \subitem {GetTemperature}, \hyperpage{76}
+    \subitem {GetTemperatureRange}, \hyperpage{76}
+    \subitem {HeatingThreshold1\_dC}, \hyperpage{78}
+    \subitem {HeatingThreshold2\_dC}, \hyperpage{78}
+    \subitem {ThermistorTodCelcius}, \hyperpage{78}
   \item {temperature\_handler.h}
-    \subitem {GetTemperature}, \hyperpage{38}
-    \subitem {GetTemperatureRange}, \hyperpage{38}
-    \subitem {TempCool}, \hyperpage{37}
-    \subitem {TemperatureRange\_e}, \hyperpage{37}
-    \subitem {TempHot}, \hyperpage{37}
-    \subitem {TempWarm}, \hyperpage{37}
+    \subitem {GetTemperature}, \hyperpage{52}
+    \subitem {GetTemperatureRange}, \hyperpage{52}
+    \subitem {TempCool}, \hyperpage{52}
+    \subitem {TemperatureRange\_e}, \hyperpage{52}
+    \subitem {TempHot}, \hyperpage{52}
+    \subitem {TempWarm}, \hyperpage{52}
   \item {TemperatureRange\_e}
-    \subitem {temperature\_handler.h}, \hyperpage{37}
+    \subitem {temperature\_handler.h}, \hyperpage{52}
   \item {TempHot}
-    \subitem {temperature\_handler.h}, \hyperpage{37}
+    \subitem {temperature\_handler.h}, \hyperpage{52}
   \item {TempWarm}
-    \subitem {temperature\_handler.h}, \hyperpage{37}
+    \subitem {temperature\_handler.h}, \hyperpage{52}
   \item {THERMISTOR\_ADC\_GPIO\_Port}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
   \item {THERMISTOR\_ADC\_Pin}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
   \item {ThermistorTodCelcius}
-    \subitem {temperature\_handler.c}, \hyperpage{61}
+    \subitem {temperature\_handler.c}, \hyperpage{78}
+  \item {TICK\_INT\_PRIORITY}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{42}
   \item {TIM2\_CLK\_DEV}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
   \item {TIM2\_CLK\_PRESCALER}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
   \item {Tim2ClkKhz}
-    \subitem {delay\_handler.c}, \hyperpage{44}
+    \subitem {delay\_handler.c}, \hyperpage{59}
   \item {time}
     \subitem {TimerStruct}, \hyperpage{6}
   \item {TimerStruct}, \hyperpage{6}
     \subitem {is\_running}, \hyperpage{6}
     \subitem {time}, \hyperpage{6}
   \item {TLEN}
-    \subitem {fram.c}, \hyperpage{45}
+    \subitem {fram.c}, \hyperpage{60}
   \item {TOTAL\_SWEEP\_TIME\_MS}
-    \subitem {main.c}, \hyperpage{49}
+    \subitem {main.c}, \hyperpage{65}
   \item {transferData}
-    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{59}
+    \subitem {stm32l412xx-\/bsp.c}, \hyperpage{75}
     \subitem {stm32l412xx-\/bsp.h}, \hyperpage{34}
   \item {TurnOffPwm}
-    \subitem {pwm\_handler.c}, \hyperpage{53}
+    \subitem {pwm\_handler.c}, \hyperpage{69}
     \subitem {pwm\_handler.h}, \hyperpage{24}
 
   \indexspace
 
   \item {UPPER\_STEP\_TIME\_MS}
-    \subitem {main.c}, \hyperpage{49}
+    \subitem {main.c}, \hyperpage{65}
   \item {UPPER\_SWEEP\_TIME\_MS}
-    \subitem {main.c}, \hyperpage{49}
+    \subitem {main.c}, \hyperpage{65}
+  \item {USB\_RENUM\_N\_GPIO\_Port}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
+  \item {USB\_RENUM\_N\_Pin}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
+  \item {USE\_HAL\_ADC\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{43}
+  \item {USE\_HAL\_CAN\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{43}
+  \item {USE\_HAL\_COMP\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{43}
+  \item {USE\_HAL\_CRYP\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{43}
+  \item {USE\_HAL\_DAC\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{43}
+  \item {USE\_HAL\_DCMI\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{43}
+  \item {USE\_HAL\_DFSDM\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{43}
+  \item {USE\_HAL\_DMA2D\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{43}
+  \item {USE\_HAL\_DSI\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{43}
+  \item {USE\_HAL\_GFXMMU\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_HASH\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_HCD\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_I2C\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_IRDA\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_LPTIM\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_LTDC\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_MMC\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_OPAMP\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_OSPI\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{44}
+  \item {USE\_HAL\_PCD\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_QSPI\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_RNG\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_RTC\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_SAI\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_SD\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_SMARTCARD\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_SMBUS\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_SPI\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_SWPMI\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{45}
+  \item {USE\_HAL\_TIM\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{46}
+  \item {USE\_HAL\_TSC\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{46}
+  \item {USE\_HAL\_UART\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{46}
+  \item {USE\_HAL\_USART\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{46}
+  \item {USE\_HAL\_WWDG\_REGISTER\_CALLBACKS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{46}
+  \item {USE\_RTOS}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{46}
+  \item {USE\_SPI\_CRC}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{46}
 
   \indexspace
 
+  \item {VDD\_VALUE}
+    \subitem {stm32l4xx\_hal\_conf.h}, \hyperpage{46}
+  \item {VIS\_IR\_GPIO\_Port}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
+  \item {VIS\_IR\_Pin}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
   \item {voltage\_handler.c}
-    \subitem {dVoltsToRaw}, \hyperpage{62}
-    \subitem {GetVoltage}, \hyperpage{62}
-    \subitem {GetVoltageRange}, \hyperpage{62}
-    \subitem {RawTodVolts}, \hyperpage{62}
-    \subitem {VoltageErrorHighThreshold\_dV}, \hyperpage{62}
-    \subitem {VoltageErrorLowThreshold\_dV}, \hyperpage{63}
-    \subitem {VoltageHighThreshold\_dV}, \hyperpage{63}
-    \subitem {VoltageLowThreshold\_dV}, \hyperpage{63}
+    \subitem {dVoltsToRaw}, \hyperpage{80}
+    \subitem {GetVoltage}, \hyperpage{79}
+    \subitem {GetVoltageRange}, \hyperpage{79}
+    \subitem {RawTodVolts}, \hyperpage{80}
+    \subitem {VoltageErrorHighThreshold\_dV}, \hyperpage{80}
+    \subitem {VoltageErrorLowThreshold\_dV}, \hyperpage{80}
+    \subitem {VoltageHighThreshold\_dV}, \hyperpage{80}
+    \subitem {VoltageLowThreshold\_dV}, \hyperpage{80}
   \item {voltage\_handler.h}
-    \subitem {GetVoltage}, \hyperpage{40}
-    \subitem {GetVoltageRange}, \hyperpage{40}
-    \subitem {VoltageErrorHigh}, \hyperpage{39}
-    \subitem {VoltageErrorLow}, \hyperpage{39}
-    \subitem {VoltageHigh}, \hyperpage{39}
-    \subitem {VoltageLow}, \hyperpage{39}
-    \subitem {VoltageNormal}, \hyperpage{39}
-    \subitem {VoltageRange\_e}, \hyperpage{39}
+    \subitem {GetVoltage}, \hyperpage{54}
+    \subitem {GetVoltageRange}, \hyperpage{54}
+    \subitem {VoltageErrorHigh}, \hyperpage{54}
+    \subitem {VoltageErrorLow}, \hyperpage{54}
+    \subitem {VoltageHigh}, \hyperpage{54}
+    \subitem {VoltageLow}, \hyperpage{54}
+    \subitem {VoltageNormal}, \hyperpage{54}
+    \subitem {VoltageRange\_e}, \hyperpage{54}
   \item {VoltageErrorHigh}
-    \subitem {voltage\_handler.h}, \hyperpage{39}
+    \subitem {voltage\_handler.h}, \hyperpage{54}
   \item {VoltageErrorHighThreshold\_dV}
-    \subitem {voltage\_handler.c}, \hyperpage{62}
+    \subitem {voltage\_handler.c}, \hyperpage{80}
   \item {VoltageErrorLow}
-    \subitem {voltage\_handler.h}, \hyperpage{39}
+    \subitem {voltage\_handler.h}, \hyperpage{54}
   \item {VoltageErrorLowThreshold\_dV}
-    \subitem {voltage\_handler.c}, \hyperpage{63}
+    \subitem {voltage\_handler.c}, \hyperpage{80}
   \item {VoltageHigh}
-    \subitem {voltage\_handler.h}, \hyperpage{39}
+    \subitem {voltage\_handler.h}, \hyperpage{54}
   \item {VoltageHighThreshold\_dV}
-    \subitem {voltage\_handler.c}, \hyperpage{63}
+    \subitem {voltage\_handler.c}, \hyperpage{80}
   \item {VoltageLow}
-    \subitem {voltage\_handler.h}, \hyperpage{39}
+    \subitem {voltage\_handler.h}, \hyperpage{54}
   \item {VoltageLowThreshold\_dV}
-    \subitem {voltage\_handler.c}, \hyperpage{63}
+    \subitem {voltage\_handler.c}, \hyperpage{80}
   \item {VoltageNormal}
-    \subitem {voltage\_handler.h}, \hyperpage{39}
+    \subitem {voltage\_handler.h}, \hyperpage{54}
   \item {VoltageRange\_e}
-    \subitem {voltage\_handler.h}, \hyperpage{39}
+    \subitem {voltage\_handler.h}, \hyperpage{54}
   \item {VOLTMETER\_ADC\_GPIO\_Port}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
   \item {VOLTMETER\_ADC\_Pin}
-    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{29}
+    \subitem {stm32l412xx-\/bsp.h}, \hyperpage{30}
 
   \indexspace
 
   \item {WarmPwmRatio}
-    \subitem {pwm\_handler.c}, \hyperpage{54}
+    \subitem {pwm\_handler.c}, \hyperpage{70}
   \item {WPS\_PROTECTED}
     \subitem {fram.h}, \hyperpage{14}
   \item {WPS\_WRITEABLE}

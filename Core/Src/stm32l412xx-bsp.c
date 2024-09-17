@@ -26,6 +26,16 @@
 
 /* Private variables ---------------------------------------------------------*/
 /**
+  * @brief Reads toggle pin value
+  * @param[out] Toggle pin state
+  */
+GPIO_PinState ReadTogglePin ( void )
+{
+    return ( LL_GPIO_IsInputPinSet ( VIS_IR_GPIO_Port,
+                                     VIS_IR_Pin ) == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET );
+}
+
+/**
   * @brief Reads dim pin value
   * @param[out] Dim pin state
   */

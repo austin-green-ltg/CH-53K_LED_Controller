@@ -16,7 +16,7 @@ uint16\+\_\+t \mbox{\hyperlink{delay__handler_8c_adbef77c80230ea92a864d85fb76956
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-const float \mbox{\hyperlink{delay__handler_8c_a018871f2f98a37d6e958a7f41eec348f}{Tim2\+Clk\+Khz}} = (\mbox{\hyperlink{stm32l412xx-bsp_8h_a89bf1cb7ece86f095f3809b15a60e29c}{CLK\+\_\+\+FREQ\+\_\+\+HZ}} / (float)\mbox{\hyperlink{stm32l412xx-bsp_8h_a9092081c75861c95e642e032b6c48e45}{TIM2\+\_\+\+CLK\+\_\+\+DEV}} / (float)\mbox{\hyperlink{stm32l412xx-bsp_8h_afe4b25464c830cde3f147af692233ecb}{TIM2\+\_\+\+CLK\+\_\+\+PRESCALER}} / 1000.\+0f)
+const float \mbox{\hyperlink{delay__handler_8c_a018871f2f98a37d6e958a7f41eec348f}{Tim2\+Clk\+Khz}}
 \end{DoxyCompactItemize}
 
 
@@ -82,6 +82,12 @@ Starts the delay counter, only needs to be called once on init.
 \index{Tim2ClkKhz@{Tim2ClkKhz}!delay\_handler.c@{delay\_handler.c}}
 \doxysubsubsection{\texorpdfstring{Tim2ClkKhz}{Tim2ClkKhz}}
 {\footnotesize\ttfamily \label{delay__handler_8c_a018871f2f98a37d6e958a7f41eec348f} 
-const float Tim2\+Clk\+Khz = (\mbox{\hyperlink{stm32l412xx-bsp_8h_a89bf1cb7ece86f095f3809b15a60e29c}{CLK\+\_\+\+FREQ\+\_\+\+HZ}} / (float)\mbox{\hyperlink{stm32l412xx-bsp_8h_a9092081c75861c95e642e032b6c48e45}{TIM2\+\_\+\+CLK\+\_\+\+DEV}} / (float)\mbox{\hyperlink{stm32l412xx-bsp_8h_afe4b25464c830cde3f147af692233ecb}{TIM2\+\_\+\+CLK\+\_\+\+PRESCALER}} / 1000.\+0f)}
+const float Tim2\+Clk\+Khz}
 
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ (\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a89bf1cb7ece86f095f3809b15a60e29c}{CLK\_FREQ\_HZ}}\ /\ (\ float\ )\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a9092081c75861c95e642e032b6c48e45}{TIM2\_CLK\_DEV}}\ /}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\ float\ )\ \mbox{\hyperlink{stm32l412xx-bsp_8h_afe4b25464c830cde3f147af692233ecb}{TIM2\_CLK\_PRESCALER}}\ /\ 1000.0f\ )}
+
+\end{DoxyCode}
 Timer clock used to check the delay values in \doxylink{stm32l412xx-bsp_8h}{stm32l412xx-\/bsp.\+h} 

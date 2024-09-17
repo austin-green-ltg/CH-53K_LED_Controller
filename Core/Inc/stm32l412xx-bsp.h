@@ -168,6 +168,12 @@ enum { PIN_SET = 1, PIN_RESET = 0};
 
 /* Returns button state */
 /**
+  * @brief Reads toggle pin value
+  * @param[out] Toggle pin state
+  */
+GPIO_PinState ReadTogglePin ( void );
+
+/**
   * @brief Reads dim pin value
   * @param[out] Dim pin state
   */

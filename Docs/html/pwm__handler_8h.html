@@ -111,27 +111,27 @@ Functions</h2></td></tr>
 <tr class="memitem:a9e440816ccf6e7ae8f8bdea60b99fe99" id="r_a9e440816ccf6e7ae8f8bdea60b99fe99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e440816ccf6e7ae8f8bdea60b99fe99">InitPwm</a> (void)</td></tr>
 <tr class="memdesc:a9e440816ccf6e7ae8f8bdea60b99fe99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Init PwmArray var Set brightness to half value, enable pwm, and turn off.  <br /></td></tr>
 <tr class="separator:a9e440816ccf6e7ae8f8bdea60b99fe99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60c53e0ebfe90372ea3c89749710eb51" id="r_a60c53e0ebfe90372ea3c89749710eb51"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60c53e0ebfe90372ea3c89749710eb51">DecreaseBrightness</a> (uint8_t button_held)</td></tr>
-<tr class="memdesc:a60c53e0ebfe90372ea3c89749710eb51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrease brightness by 1 (for button press) or 3 (for button hold) This functions can be made to increase brightness value with the REVERSE_BRIGHTNESS flag Afterwards, set pwm output.  <br /></td></tr>
-<tr class="separator:a60c53e0ebfe90372ea3c89749710eb51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c06b547eea80cb6c871750831709fe4" id="r_a0c06b547eea80cb6c871750831709fe4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0c06b547eea80cb6c871750831709fe4">IncreaseBrightness</a> (uint8_t button_held)</td></tr>
-<tr class="memdesc:a0c06b547eea80cb6c871750831709fe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase brightness by 1 (for button press) or 3 (for button hold) This functions can be made to decrease brightness value with the REVERSE_BRIGHTNESS flag Afterwards, set pwm output.  <br /></td></tr>
-<tr class="separator:a0c06b547eea80cb6c871750831709fe4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adaa12e879fd29b225bef3eb6337aff72" id="r_adaa12e879fd29b225bef3eb6337aff72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adaa12e879fd29b225bef3eb6337aff72">SetPwm</a> (void)</td></tr>
-<tr class="memdesc:adaa12e879fd29b225bef3eb6337aff72"><td class="mdescLeft">&#160;</td><td class="mdescRight">set PWM based on pwm value  <br /></td></tr>
-<tr class="separator:adaa12e879fd29b225bef3eb6337aff72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48727f45bdc5237463baf264e8e5d706" id="r_a48727f45bdc5237463baf264e8e5d706"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48727f45bdc5237463baf264e8e5d706">DecreaseBrightness</a> (uint8_t button_held, uint8_t isIr)</td></tr>
+<tr class="memdesc:a48727f45bdc5237463baf264e8e5d706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decrease brightness by 1 (for button press) or 3 (for button hold) This functions can be made to increase brightness value with the REVERSE_BRIGHTNESS flag Afterwards, set pwm output.  <br /></td></tr>
+<tr class="separator:a48727f45bdc5237463baf264e8e5d706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79fe1926935a52243ab75394e65e05cb" id="r_a79fe1926935a52243ab75394e65e05cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79fe1926935a52243ab75394e65e05cb">IncreaseBrightness</a> (uint8_t button_held, uint8_t isIr)</td></tr>
+<tr class="memdesc:a79fe1926935a52243ab75394e65e05cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Increase brightness by 1 (for button press) or 3 (for button hold) This functions can be made to decrease brightness value with the REVERSE_BRIGHTNESS flag Afterwards, set pwm output.  <br /></td></tr>
+<tr class="separator:a79fe1926935a52243ab75394e65e05cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e2bc7e471b367a9d3f877ce5af05796" id="r_a8e2bc7e471b367a9d3f877ce5af05796"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8e2bc7e471b367a9d3f877ce5af05796">SetPwm</a> (uint8_t isIr)</td></tr>
+<tr class="memdesc:a8e2bc7e471b367a9d3f877ce5af05796"><td class="mdescLeft">&#160;</td><td class="mdescRight">set PWM based on pwm value  <br /></td></tr>
+<tr class="separator:a8e2bc7e471b367a9d3f877ce5af05796"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90359218ff4b8771a3764beeecfb8e14" id="r_a90359218ff4b8771a3764beeecfb8e14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90359218ff4b8771a3764beeecfb8e14">TurnOffPwm</a> (void)</td></tr>
 <tr class="memdesc:a90359218ff4b8771a3764beeecfb8e14"><td class="mdescLeft">&#160;</td><td class="mdescRight">turn off PWM  <br /></td></tr>
 <tr class="separator:a90359218ff4b8771a3764beeecfb8e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac59f8a6b413fe6bcf1b17a0321a2eb83" id="r_ac59f8a6b413fe6bcf1b17a0321a2eb83"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac59f8a6b413fe6bcf1b17a0321a2eb83">GetBrightness</a> (void)</td></tr>
-<tr class="memdesc:ac59f8a6b413fe6bcf1b17a0321a2eb83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return ledBrightness variable.  <br /></td></tr>
-<tr class="separator:ac59f8a6b413fe6bcf1b17a0321a2eb83"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acbd970e115607eca2d51db189d67cd14" id="r_acbd970e115607eca2d51db189d67cd14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbd970e115607eca2d51db189d67cd14">SetBrightness</a> (int8_t brightness)</td></tr>
-<tr class="memdesc:acbd970e115607eca2d51db189d67cd14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set ledBrightness variable, guards to ensure we don't go over max or min.  <br /></td></tr>
-<tr class="separator:acbd970e115607eca2d51db189d67cd14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add3ae8a15c377108bff5270b8c2f1a96" id="r_add3ae8a15c377108bff5270b8c2f1a96"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add3ae8a15c377108bff5270b8c2f1a96">GetPwm</a> (void)</td></tr>
-<tr class="memdesc:add3ae8a15c377108bff5270b8c2f1a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the PWM value based on the brightness and the temperature range.  <br /></td></tr>
-<tr class="separator:add3ae8a15c377108bff5270b8c2f1a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77ea589d9b01990f67fa3402f3f8cfa8" id="r_a77ea589d9b01990f67fa3402f3f8cfa8"><td class="memItemLeft" align="right" valign="top">int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a77ea589d9b01990f67fa3402f3f8cfa8">GetBrightness</a> (uint8_t isIr)</td></tr>
+<tr class="memdesc:a77ea589d9b01990f67fa3402f3f8cfa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return Brightness variable.  <br /></td></tr>
+<tr class="separator:a77ea589d9b01990f67fa3402f3f8cfa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a6c2c1c8f63b789a2f18b7402b046d9" id="r_a8a6c2c1c8f63b789a2f18b7402b046d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a6c2c1c8f63b789a2f18b7402b046d9">SetBrightness</a> (int8_t brightness, uint8_t isIr)</td></tr>
+<tr class="memdesc:a8a6c2c1c8f63b789a2f18b7402b046d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Brightness variable, guards to ensure we don't go over max or min.  <br /></td></tr>
+<tr class="separator:a8a6c2c1c8f63b789a2f18b7402b046d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab23730a61ee18a06b9b440fae2a4f0f" id="r_aab23730a61ee18a06b9b440fae2a4f0f"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aab23730a61ee18a06b9b440fae2a4f0f">GetPwm</a> (uint8_t isIr)</td></tr>
+<tr class="memdesc:aab23730a61ee18a06b9b440fae2a4f0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the PWM value based on the brightness and the temperature range.  <br /></td></tr>
+<tr class="separator:aab23730a61ee18a06b9b440fae2a4f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a6c3df8dbdbdd67989551b1659654ae17" name="a6c3df8dbdbdd67989551b1659654ae17"></a>
@@ -163,8 +163,8 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a60c53e0ebfe90372ea3c89749710eb51" name="a60c53e0ebfe90372ea3c89749710eb51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60c53e0ebfe90372ea3c89749710eb51">&#9670;&#160;</a></span>DecreaseBrightness()</h2>
+<a id="a48727f45bdc5237463baf264e8e5d706" name="a48727f45bdc5237463baf264e8e5d706"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48727f45bdc5237463baf264e8e5d706">&#9670;&#160;</a></span>DecreaseBrightness()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,8 +172,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void DecreaseBrightness </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>button_held</em></span></td><td>)</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>button_held</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>isIr</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -182,14 +186,15 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">button_held</td><td>If the button is being held (decrements by 3 if so) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">isIr</td><td>Are we controlling IR or Visible LEDs </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="ac59f8a6b413fe6bcf1b17a0321a2eb83" name="ac59f8a6b413fe6bcf1b17a0321a2eb83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac59f8a6b413fe6bcf1b17a0321a2eb83">&#9670;&#160;</a></span>GetBrightness()</h2>
+<a id="a77ea589d9b01990f67fa3402f3f8cfa8" name="a77ea589d9b01990f67fa3402f3f8cfa8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77ea589d9b01990f67fa3402f3f8cfa8">&#9670;&#160;</a></span>GetBrightness()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -197,15 +202,16 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">int8_t GetBrightness </td>
           <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>isIr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Return ledBrightness variable. </p>
+<p>Return Brightness variable. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">isIr</td><td>Are we controlling IR or Visible LEDs </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">Current</td><td>LED brightness level </td></tr>
   </table>
   </dd>
@@ -213,8 +219,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="add3ae8a15c377108bff5270b8c2f1a96" name="add3ae8a15c377108bff5270b8c2f1a96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add3ae8a15c377108bff5270b8c2f1a96">&#9670;&#160;</a></span>GetPwm()</h2>
+<a id="aab23730a61ee18a06b9b440fae2a4f0f" name="aab23730a61ee18a06b9b440fae2a4f0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab23730a61ee18a06b9b440fae2a4f0f">&#9670;&#160;</a></span>GetPwm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,7 +228,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">uint8_t GetPwm </td>
           <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>isIr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -231,6 +237,7 @@ Functions</h2></td></tr>
 <p>Get the PWM value based on the brightness and the temperature range. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">isIr</td><td>Are we controlling IR or Visible LEDs </td></tr>
     <tr><td class="paramdir">[out]</td><td class="paramname">Current</td><td>PWM value </td></tr>
   </table>
   </dd>
@@ -238,8 +245,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a0c06b547eea80cb6c871750831709fe4" name="a0c06b547eea80cb6c871750831709fe4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c06b547eea80cb6c871750831709fe4">&#9670;&#160;</a></span>IncreaseBrightness()</h2>
+<a id="a79fe1926935a52243ab75394e65e05cb" name="a79fe1926935a52243ab75394e65e05cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79fe1926935a52243ab75394e65e05cb">&#9670;&#160;</a></span>IncreaseBrightness()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -247,8 +254,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void IncreaseBrightness </td>
           <td>(</td>
-          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>button_held</em></span></td><td>)</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>button_held</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>isIr</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -257,6 +268,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">button_held</td><td>If the button is being held (increments by 3 if so) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">isIr</td><td>Are we controlling IR or Visible LEDs </td></tr>
   </table>
   </dd>
 </dl>
@@ -282,8 +294,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="acbd970e115607eca2d51db189d67cd14" name="acbd970e115607eca2d51db189d67cd14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acbd970e115607eca2d51db189d67cd14">&#9670;&#160;</a></span>SetBrightness()</h2>
+<a id="a8a6c2c1c8f63b789a2f18b7402b046d9" name="a8a6c2c1c8f63b789a2f18b7402b046d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a6c2c1c8f63b789a2f18b7402b046d9">&#9670;&#160;</a></span>SetBrightness()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -291,24 +303,31 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void SetBrightness </td>
           <td>(</td>
-          <td class="paramtype">int8_t</td>          <td class="paramname"><span class="paramname"><em>brightness</em></span></td><td>)</td>
+          <td class="paramtype">int8_t</td>          <td class="paramname"><span class="paramname"><em>brightness</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>isIr</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set ledBrightness variable, guards to ensure we don't go over max or min. </p>
+<p>Set Brightness variable, guards to ensure we don't go over max or min. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">brightness</td><td>Brightess to set </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">isIr</td><td>Are we controlling IR or Visible LEDs </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">brightness</td><td>Brightness to set</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">brightness</td><td>Brightness to set </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">isIr</td><td>Are we controlling IR or Visible LEDs </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="adaa12e879fd29b225bef3eb6337aff72" name="adaa12e879fd29b225bef3eb6337aff72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adaa12e879fd29b225bef3eb6337aff72">&#9670;&#160;</a></span>SetPwm()</h2>
+<a id="a8e2bc7e471b367a9d3f877ce5af05796" name="a8e2bc7e471b367a9d3f877ce5af05796"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e2bc7e471b367a9d3f877ce5af05796">&#9670;&#160;</a></span>SetPwm()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -316,13 +335,19 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void SetPwm </td>
           <td>(</td>
-          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>isIr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>set PWM based on pwm value </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">isIr</td><td>Are we controlling IR or Visible LEDs </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

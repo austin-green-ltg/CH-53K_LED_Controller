@@ -5,26 +5,26 @@
 #include "logger.h"             /* CUT */
 #include "stm32l412xx-bsp.h"    /* CUT */
 
-const uint16_t VoltageErrorLowValue     = 240u;
-const uint16_t VoltageLowValue          = 260u;
-const uint16_t VoltageNormalValue       = 280u;
-const uint16_t VoltageHighValue         = 300u;
-const uint16_t VoltageErrorHighValue    = 320u;
+const uint16_t VoltageErrorLowValue = 240u;
+const uint16_t VoltageLowValue = 260u;
+const uint16_t VoltageNormalValue = 280u;
+const uint16_t VoltageHighValue = 300u;
+const uint16_t VoltageErrorHighValue = 320u;
 
-extern void initFram( void );
+extern void initFram ( void );
 
 extern uint32_t address; // last written to address
 extern uint16_t voltage_value_dV;
 
-TEST_GROUP(Voltage_Handler);
+TEST_GROUP ( Voltage_Handler );
 
-TEST_SETUP(Voltage_Handler)
+TEST_SETUP ( Voltage_Handler )
 {
     /* executed before *every* non-skipped test */
     initFram();
 }
 
-TEST_TEAR_DOWN(Voltage_Handler)
+TEST_TEAR_DOWN ( Voltage_Handler )
 {
     /* executed after *every* non-skipped and non-failing test */
     voltage_value_dV = VoltageNormalValue; // return to default value
@@ -32,387 +32,401 @@ TEST_TEAR_DOWN(Voltage_Handler)
 }
 
 /* start Voltage_Handler tests */
-TEST(Voltage_Handler, GetDefaultVoltage)
+TEST ( Voltage_Handler, GetDefaultVoltage )
 {
-    TEST_ASSERT_EQUAL_UINT16(VoltageNormalValue, GetVoltage()); // Default value
+    TEST_ASSERT_EQUAL_UINT16 ( VoltageNormalValue, GetVoltage() ); // Default value
 }
-TEST(Voltage_Handler, GetDefaultVoltageRange)
+
+TEST ( Voltage_Handler, GetDefaultVoltageRange )
 {
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 }
-TEST(Voltage_Handler, GetVoltage)
+
+TEST ( Voltage_Handler, GetVoltage )
 {
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageNormalValue, GetVoltage());
+    TEST_ASSERT_EQUAL_UINT16 ( VoltageNormalValue, GetVoltage() );
     voltage_value_dV = 292u;
-    TEST_ASSERT_EQUAL_UINT16(292u, GetVoltage());
+    TEST_ASSERT_EQUAL_UINT16 ( 292u, GetVoltage() );
 
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageErrorLowValue, GetVoltage());
+    TEST_ASSERT_EQUAL_UINT16 ( VoltageErrorLowValue, GetVoltage() );
 
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageLowValue, GetVoltage());
+    TEST_ASSERT_EQUAL_UINT16 ( VoltageLowValue, GetVoltage() );
 
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageHighValue, GetVoltage());
+    TEST_ASSERT_EQUAL_UINT16 ( VoltageHighValue, GetVoltage() );
 
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_UINT16(VoltageErrorHighValue, GetVoltage());
+    TEST_ASSERT_EQUAL_UINT16 ( VoltageErrorHighValue, GetVoltage() );
 }
-TEST(Voltage_Handler, VoltageRangeNormalStepping)
+
+TEST ( Voltage_Handler, VoltageRangeNormalStepping )
 {
     // VoltageNormal -> VoltageHigh
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     // VoltageHigh -> Error VoltageHigh
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 
     // Error VoltageHigh -> VoltageHigh
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     // VoltageHigh -> VoltageNormal
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     // VoltageNormal -> VoltageLow
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     // VoltageLow -> Error VoltageLow
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorLow, GetVoltageRange() );
 
     // Error VoltageLow -> VoltageLow
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     // VoltageLow -> VoltageNormal
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeErrorLowTesting)
+
+TEST ( Voltage_Handler, VoltageRangeErrorLowTesting )
 {
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorLow, GetVoltageRange() );
 
     // Error VoltageLow -> VoltageLow
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorLow, GetVoltageRange() );
 
     // Error VoltageLow -> VoltageNormal
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorLow, GetVoltageRange() );
 
     // Error VoltageLow -> VoltageHigh
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorLow, GetVoltageRange() );
 
     // Error VoltageLow -> Error VoltageHigh
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeLowTesting)
+
+TEST ( Voltage_Handler, VoltageRangeLowTesting )
 {
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     // VoltageLow -> Error VoltageLow
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorLow, GetVoltageRange() );
 
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     // VoltageLow -> VoltageNormal
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     // VoltageLow -> VoltageHigh
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     // VoltageLow -> Error VoltageHigh
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeNormalTesting)
+
+TEST ( Voltage_Handler, VoltageRangeNormalTesting )
 {
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     // VoltageNormal -> Error VoltageLow
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorLow, GetVoltageRange() );
 
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     // VoltageNormal -> VoltageLow
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     // VoltageNormal -> VoltageHigh
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     // VoltageNormal -> Error VoltageHigh
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeHighTesting)
+
+TEST ( Voltage_Handler, VoltageRangeHighTesting )
 {
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     // VoltageHigh -> Error VoltageLow
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorLow, GetVoltageRange() );
 
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     // VoltageHigh -> VoltageLow
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     // VoltageHigh -> VoltageNormal
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     // VoltageHigh -> Error VoltageHigh
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeErrorHighTesting)
+
+TEST ( Voltage_Handler, VoltageRangeErrorHighTesting )
 {
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 
     // Error VoltageHigh -> Error VoltageLow
     voltage_value_dV = VoltageErrorLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorLow, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 
     // Error VoltageHigh -> VoltageLow
     voltage_value_dV = VoltageLowValue;
-    TEST_ASSERT_EQUAL_INT(VoltageLow, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageLow, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 
     // Error VoltageHigh -> VoltageNormal
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 
     // Error VoltageHigh -> VoltageHigh
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeErrorLowBoundaryTesting)
+
+TEST ( Voltage_Handler, VoltageRangeErrorLowBoundaryTesting )
 {
-    voltage_value_dV = (VoltageHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    voltage_value_dV = ( VoltageHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
-    voltage_value_dV = (VoltageErrorHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    voltage_value_dV = ( VoltageErrorHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeLowBoundaryTesting)
+
+TEST ( Voltage_Handler, VoltageRangeLowBoundaryTesting )
 {
-    voltage_value_dV = (VoltageHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    voltage_value_dV = ( VoltageHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
-    voltage_value_dV = (VoltageErrorHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    voltage_value_dV = ( VoltageErrorHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeNormalBoundaryTesting)
+
+TEST ( Voltage_Handler, VoltageRangeNormalBoundaryTesting )
 {
-    voltage_value_dV = (VoltageHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    voltage_value_dV = ( VoltageHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
-    voltage_value_dV = (VoltageErrorHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    voltage_value_dV = ( VoltageErrorHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageNormalValue;
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeHighBoundaryTesting)
+
+TEST ( Voltage_Handler, VoltageRangeHighBoundaryTesting )
 {
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
-    voltage_value_dV = (VoltageHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    voltage_value_dV = ( VoltageHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
 
     voltage_value_dV = VoltageHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
-    voltage_value_dV = (VoltageErrorHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
+    voltage_value_dV = ( VoltageErrorHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 }
-TEST(Voltage_Handler, VoltageRangeErrorHighBoundaryTesting)
+
+TEST ( Voltage_Handler, VoltageRangeErrorHighBoundaryTesting )
 {
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 
-    voltage_value_dV = (VoltageErrorHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageHigh, GetVoltageRange());
-
-    voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
-
-    voltage_value_dV = (VoltageHighValue - 1);
-    TEST_ASSERT_EQUAL_INT(VoltageNormal, GetVoltageRange());
+    voltage_value_dV = ( VoltageErrorHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageHigh, GetVoltageRange() );
 
     voltage_value_dV = VoltageErrorHighValue;
-    TEST_ASSERT_EQUAL_INT(VoltageErrorHigh, GetVoltageRange());
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
+
+    voltage_value_dV = ( VoltageHighValue - 1 );
+    TEST_ASSERT_EQUAL_INT ( VoltageNormal, GetVoltageRange() );
+
+    voltage_value_dV = VoltageErrorHighValue;
+    TEST_ASSERT_EQUAL_INT ( VoltageErrorHigh, GetVoltageRange() );
 }
 
-TEST(Voltage_Handler, NormalToErrorLowPrintout)
+TEST ( Voltage_Handler, NormalToErrorLowPrintout )
 {
 
     voltage_value_dV = VoltageErrorLowValue;
     GetVoltageRange();
 
     char* expected = "Error Low Voltage 240 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, NormalToLowPrintout)
+TEST ( Voltage_Handler, NormalToLowPrintout )
 {
 
     voltage_value_dV = VoltageLowValue;
     GetVoltageRange();
 
     char* expected = "Low Voltage 260 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, NormalToHighPrintout)
+TEST ( Voltage_Handler, NormalToHighPrintout )
 {
 
     voltage_value_dV = VoltageHighValue;
     GetVoltageRange();
 
     char* expected = "High Voltage 300 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, NormalToErrorHighPrintout)
+TEST ( Voltage_Handler, NormalToErrorHighPrintout )
 {
 
     voltage_value_dV = VoltageErrorHighValue;
     GetVoltageRange();
 
     char* expected = "Error High Voltage 320 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
-TEST(Voltage_Handler, NormalToNormalNoPrintout)
+
+TEST ( Voltage_Handler, NormalToNormalNoPrintout )
 {
 
     voltage_value_dV = VoltageNormalValue;
     GetVoltageRange();
 
     char* expected = "";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorLowToLowPrintout)
+TEST ( Voltage_Handler, ErrorLowToLowPrintout )
 {
 
     voltage_value_dV = VoltageErrorLowValue;
@@ -422,15 +436,15 @@ TEST(Voltage_Handler, ErrorLowToLowPrintout)
     GetVoltageRange();
 
     char* expected = "Low Voltage 260 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorLowToNormalPrintout)
+TEST ( Voltage_Handler, ErrorLowToNormalPrintout )
 {
 
     voltage_value_dV = VoltageErrorLowValue;
@@ -440,15 +454,15 @@ TEST(Voltage_Handler, ErrorLowToNormalPrintout)
     GetVoltageRange();
 
     char* expected = "Normal Voltage 280 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorLowToHighPrintout)
+TEST ( Voltage_Handler, ErrorLowToHighPrintout )
 {
 
     voltage_value_dV = VoltageErrorLowValue;
@@ -458,15 +472,15 @@ TEST(Voltage_Handler, ErrorLowToHighPrintout)
     GetVoltageRange();
 
     char* expected = "High Voltage 300 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorLowToErrorHighPrintout)
+TEST ( Voltage_Handler, ErrorLowToErrorHighPrintout )
 {
 
     voltage_value_dV = VoltageErrorLowValue;
@@ -476,15 +490,15 @@ TEST(Voltage_Handler, ErrorLowToErrorHighPrintout)
     GetVoltageRange();
 
     char* expected = "Error High Voltage 320 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorLowToErrorLowNoPrintout)
+TEST ( Voltage_Handler, ErrorLowToErrorLowNoPrintout )
 {
 
     voltage_value_dV = VoltageErrorLowValue;
@@ -494,15 +508,15 @@ TEST(Voltage_Handler, ErrorLowToErrorLowNoPrintout)
     GetVoltageRange();
 
     char* expected = "";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, LowToErrorLowPrintout)
+TEST ( Voltage_Handler, LowToErrorLowPrintout )
 {
 
     voltage_value_dV = VoltageLowValue;
@@ -512,15 +526,15 @@ TEST(Voltage_Handler, LowToErrorLowPrintout)
     GetVoltageRange();
 
     char* expected = "Error Low Voltage 240 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, LowToNormalPrintout)
+TEST ( Voltage_Handler, LowToNormalPrintout )
 {
 
     voltage_value_dV = VoltageLowValue;
@@ -530,15 +544,15 @@ TEST(Voltage_Handler, LowToNormalPrintout)
     GetVoltageRange();
 
     char* expected = "Normal Voltage 280 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, LowToHighPrintout)
+TEST ( Voltage_Handler, LowToHighPrintout )
 {
 
     voltage_value_dV = VoltageLowValue;
@@ -548,15 +562,15 @@ TEST(Voltage_Handler, LowToHighPrintout)
     GetVoltageRange();
 
     char* expected = "High Voltage 300 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, LowToErrorHighPrintout)
+TEST ( Voltage_Handler, LowToErrorHighPrintout )
 {
 
     voltage_value_dV = VoltageLowValue;
@@ -566,15 +580,15 @@ TEST(Voltage_Handler, LowToErrorHighPrintout)
     GetVoltageRange();
 
     char* expected = "Error High Voltage 320 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, LowToLowNoPrintout)
+TEST ( Voltage_Handler, LowToLowNoPrintout )
 {
 
     voltage_value_dV = VoltageLowValue;
@@ -584,15 +598,15 @@ TEST(Voltage_Handler, LowToLowNoPrintout)
     GetVoltageRange();
 
     char* expected = "";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, HighToErrorLowPrintout)
+TEST ( Voltage_Handler, HighToErrorLowPrintout )
 {
 
     voltage_value_dV = VoltageHighValue;
@@ -602,15 +616,15 @@ TEST(Voltage_Handler, HighToErrorLowPrintout)
     GetVoltageRange();
 
     char* expected = "Error Low Voltage 240 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, HighToLowPrintout)
+TEST ( Voltage_Handler, HighToLowPrintout )
 {
 
     voltage_value_dV = VoltageHighValue;
@@ -620,15 +634,15 @@ TEST(Voltage_Handler, HighToLowPrintout)
     GetVoltageRange();
 
     char* expected = "Low Voltage 260 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, HighToNormalPrintout)
+TEST ( Voltage_Handler, HighToNormalPrintout )
 {
 
     voltage_value_dV = VoltageHighValue;
@@ -638,15 +652,15 @@ TEST(Voltage_Handler, HighToNormalPrintout)
     GetVoltageRange();
 
     char* expected = "Normal Voltage 280 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, HighToErrorHighPrintout)
+TEST ( Voltage_Handler, HighToErrorHighPrintout )
 {
 
     voltage_value_dV = VoltageHighValue;
@@ -656,15 +670,15 @@ TEST(Voltage_Handler, HighToErrorHighPrintout)
     GetVoltageRange();
 
     char* expected = "Error High Voltage 320 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, HighToHighNoPrintout)
+TEST ( Voltage_Handler, HighToHighNoPrintout )
 {
 
     voltage_value_dV = VoltageHighValue;
@@ -676,15 +690,15 @@ TEST(Voltage_Handler, HighToHighNoPrintout)
     GetVoltageRange();
 
     char* expected = "";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorHighToErrorLowPrintout)
+TEST ( Voltage_Handler, ErrorHighToErrorLowPrintout )
 {
 
     voltage_value_dV = VoltageErrorHighValue;
@@ -694,15 +708,15 @@ TEST(Voltage_Handler, ErrorHighToErrorLowPrintout)
     GetVoltageRange();
 
     char* expected = "Error Low Voltage 240 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorHighToLowPrintout)
+TEST ( Voltage_Handler, ErrorHighToLowPrintout )
 {
 
     voltage_value_dV = VoltageErrorHighValue;
@@ -712,15 +726,15 @@ TEST(Voltage_Handler, ErrorHighToLowPrintout)
     GetVoltageRange();
 
     char* expected = "Low Voltage 260 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorHighToNormalPrintout)
+TEST ( Voltage_Handler, ErrorHighToNormalPrintout )
 {
 
     voltage_value_dV = VoltageErrorHighValue;
@@ -730,15 +744,15 @@ TEST(Voltage_Handler, ErrorHighToNormalPrintout)
     GetVoltageRange();
 
     char* expected = "Normal Voltage 280 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorHighToHighPrintout)
+TEST ( Voltage_Handler, ErrorHighToHighPrintout )
 {
 
     voltage_value_dV = VoltageErrorHighValue;
@@ -748,15 +762,15 @@ TEST(Voltage_Handler, ErrorHighToHighPrintout)
     GetVoltageRange();
 
     char* expected = "High Voltage 300 dV\n";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
 
-TEST(Voltage_Handler, ErrorHighToErrorHighNoPrintout)
+TEST ( Voltage_Handler, ErrorHighToErrorHighNoPrintout )
 {
 
     voltage_value_dV = VoltageErrorHighValue;
@@ -766,55 +780,56 @@ TEST(Voltage_Handler, ErrorHighToErrorHighNoPrintout)
     GetVoltageRange();
 
     char* expected = "";
-    char* string = (char*)calloc(100 , sizeof(char));
+    char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog(address, string,  strlen(expected));
-    TEST_ASSERT_EQUAL_STRING(expected, string);
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
 
-    free(string);
+    free ( string );
 }
+
 /* end Voltage_Handler tests */
 
 
-TEST_GROUP_RUNNER(Voltage_Handler)
+TEST_GROUP_RUNNER ( Voltage_Handler )
 {
-    RUN_TEST_CASE(Voltage_Handler, GetDefaultVoltage);
-    RUN_TEST_CASE(Voltage_Handler, GetDefaultVoltageRange);
-    RUN_TEST_CASE(Voltage_Handler, GetVoltage);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeNormalStepping);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeErrorLowTesting);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeLowTesting);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeNormalTesting);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeHighTesting);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeErrorHighTesting);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeErrorLowBoundaryTesting);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeLowBoundaryTesting);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeNormalBoundaryTesting);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeHighBoundaryTesting);
-    RUN_TEST_CASE(Voltage_Handler, VoltageRangeErrorHighBoundaryTesting);
-    RUN_TEST_CASE(Voltage_Handler, NormalToErrorLowPrintout);
-    RUN_TEST_CASE(Voltage_Handler, NormalToLowPrintout);
-    RUN_TEST_CASE(Voltage_Handler, NormalToHighPrintout);
-    RUN_TEST_CASE(Voltage_Handler, NormalToErrorHighPrintout);
-    RUN_TEST_CASE(Voltage_Handler, NormalToNormalNoPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorLowToLowPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorLowToNormalPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorLowToHighPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorLowToErrorHighPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorLowToErrorLowNoPrintout);
-    RUN_TEST_CASE(Voltage_Handler, LowToErrorLowPrintout);
-    RUN_TEST_CASE(Voltage_Handler, LowToNormalPrintout);
-    RUN_TEST_CASE(Voltage_Handler, LowToHighPrintout);
-    RUN_TEST_CASE(Voltage_Handler, LowToErrorHighPrintout);
-    RUN_TEST_CASE(Voltage_Handler, LowToLowNoPrintout);
-    RUN_TEST_CASE(Voltage_Handler, HighToErrorLowPrintout);
-    RUN_TEST_CASE(Voltage_Handler, HighToLowPrintout);
-    RUN_TEST_CASE(Voltage_Handler, HighToNormalPrintout);
-    RUN_TEST_CASE(Voltage_Handler, HighToErrorHighPrintout);
-    RUN_TEST_CASE(Voltage_Handler, HighToHighNoPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorHighToErrorLowPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorHighToLowPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorHighToNormalPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorHighToHighPrintout);
-    RUN_TEST_CASE(Voltage_Handler, ErrorHighToErrorHighNoPrintout);
+    RUN_TEST_CASE ( Voltage_Handler, GetDefaultVoltage );
+    RUN_TEST_CASE ( Voltage_Handler, GetDefaultVoltageRange );
+    RUN_TEST_CASE ( Voltage_Handler, GetVoltage );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeNormalStepping );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeErrorLowTesting );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeLowTesting );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeNormalTesting );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeHighTesting );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeErrorHighTesting );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeErrorLowBoundaryTesting );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeLowBoundaryTesting );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeNormalBoundaryTesting );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeHighBoundaryTesting );
+    RUN_TEST_CASE ( Voltage_Handler, VoltageRangeErrorHighBoundaryTesting );
+    RUN_TEST_CASE ( Voltage_Handler, NormalToErrorLowPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, NormalToLowPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, NormalToHighPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, NormalToErrorHighPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, NormalToNormalNoPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorLowToLowPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorLowToNormalPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorLowToHighPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorLowToErrorHighPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorLowToErrorLowNoPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, LowToErrorLowPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, LowToNormalPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, LowToHighPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, LowToErrorHighPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, LowToLowNoPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, HighToErrorLowPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, HighToLowPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, HighToNormalPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, HighToErrorHighPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, HighToHighNoPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorHighToErrorLowPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorHighToLowPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorHighToNormalPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorHighToHighPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, ErrorHighToErrorHighNoPrintout );
 }

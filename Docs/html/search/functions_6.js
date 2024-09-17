@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['lognumber_0',['LogNumber',['../logger_8h.html#ae52af1b312f9fc4a02e4697af496e23e',1,'LogNumber(const int32_t number, uint8_t write_beginning):&#160;logger.c'],['../logger_8c.html#ae52af1b312f9fc4a02e4697af496e23e',1,'LogNumber(const int32_t number, uint8_t write_beginning):&#160;logger.c']]],
-  ['logstring_1',['LogString',['../logger_8h.html#aacc4d019decf6ea90bac1fdd5f7e3da7',1,'LogString(const char *const string, uint8_t write_beginning):&#160;logger.c'],['../logger_8c.html#aacc4d019decf6ea90bac1fdd5f7e3da7',1,'LogString(const char *const string, uint8_t write_beginning):&#160;logger.c']]]
+  ['increasebrightness_0',['IncreaseBrightness',['../pwm__handler_8h.html#a79fe1926935a52243ab75394e65e05cb',1,'IncreaseBrightness(uint8_t button_held, uint8_t isIr):&#160;pwm_handler.c'],['../pwm__handler_8c.html#a79fe1926935a52243ab75394e65e05cb',1,'IncreaseBrightness(uint8_t button_held, uint8_t isIr):&#160;pwm_handler.c']]],
+  ['initpwm_1',['InitPwm',['../pwm__handler_8h.html#a9e440816ccf6e7ae8f8bdea60b99fe99',1,'InitPwm(void):&#160;pwm_handler.c'],['../pwm__handler_8c.html#a9e440816ccf6e7ae8f8bdea60b99fe99',1,'InitPwm(void):&#160;pwm_handler.c']]],
+  ['isbrightpressed_2',['IsBrightPressed',['../button__handler_8h.html#a0849c80841cb7ae79629ef359c8510a3',1,'IsBrightPressed(void):&#160;button_handler.c'],['../button__handler_8c.html#a0849c80841cb7ae79629ef359c8510a3',1,'IsBrightPressed(void):&#160;button_handler.c']]],
+  ['isdimpressed_3',['IsDimPressed',['../button__handler_8h.html#af20dbb6e0d588172fe914ab9c1c3bc33',1,'IsDimPressed(void):&#160;button_handler.c'],['../button__handler_8c.html#af20dbb6e0d588172fe914ab9c1c3bc33',1,'IsDimPressed(void):&#160;button_handler.c']]],
+  ['istogglepressed_4',['IsTogglePressed',['../button__handler_8h.html#a69e3cb67c276ad85d1a9962b4e9adaa1',1,'IsTogglePressed(void):&#160;button_handler.c'],['../button__handler_8c.html#a69e3cb67c276ad85d1a9962b4e9adaa1',1,'IsTogglePressed(void):&#160;button_handler.c']]]
 ];

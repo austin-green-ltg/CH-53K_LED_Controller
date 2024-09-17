@@ -13,19 +13,19 @@
 \item 
 void \mbox{\hyperlink{pwm__handler_8h_a9e440816ccf6e7ae8f8bdea60b99fe99}{Init\+Pwm}} (void)
 \begin{DoxyCompactList}\small\item\em Init Pwm\+Array var Set brightness to half value, enable pwm, and turn off. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{pwm__handler_8h_a60c53e0ebfe90372ea3c89749710eb51}{Decrease\+Brightness}} (uint8\+\_\+t button\+\_\+held)
+void \mbox{\hyperlink{pwm__handler_8h_a48727f45bdc5237463baf264e8e5d706}{Decrease\+Brightness}} (uint8\+\_\+t button\+\_\+held, uint8\+\_\+t is\+Ir)
 \begin{DoxyCompactList}\small\item\em Decrease brightness by 1 (for button press) or 3 (for button hold) This functions can be made to increase brightness value with the REVERSE\+\_\+\+BRIGHTNESS flag Afterwards, set pwm output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{pwm__handler_8h_a0c06b547eea80cb6c871750831709fe4}{Increase\+Brightness}} (uint8\+\_\+t button\+\_\+held)
+void \mbox{\hyperlink{pwm__handler_8h_a79fe1926935a52243ab75394e65e05cb}{Increase\+Brightness}} (uint8\+\_\+t button\+\_\+held, uint8\+\_\+t is\+Ir)
 \begin{DoxyCompactList}\small\item\em Increase brightness by 1 (for button press) or 3 (for button hold) This functions can be made to decrease brightness value with the REVERSE\+\_\+\+BRIGHTNESS flag Afterwards, set pwm output. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{pwm__handler_8h_adaa12e879fd29b225bef3eb6337aff72}{Set\+Pwm}} (void)
+void \mbox{\hyperlink{pwm__handler_8h_a8e2bc7e471b367a9d3f877ce5af05796}{Set\+Pwm}} (uint8\+\_\+t is\+Ir)
 \begin{DoxyCompactList}\small\item\em set PWM based on pwm value \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{pwm__handler_8h_a90359218ff4b8771a3764beeecfb8e14}{Turn\+Off\+Pwm}} (void)
 \begin{DoxyCompactList}\small\item\em turn off PWM \end{DoxyCompactList}\item 
-int8\+\_\+t \mbox{\hyperlink{pwm__handler_8h_ac59f8a6b413fe6bcf1b17a0321a2eb83}{Get\+Brightness}} (void)
-\begin{DoxyCompactList}\small\item\em Return led\+Brightness variable. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{pwm__handler_8h_acbd970e115607eca2d51db189d67cd14}{Set\+Brightness}} (int8\+\_\+t brightness)
-\begin{DoxyCompactList}\small\item\em Set led\+Brightness variable, guards to ensure we don\textquotesingle{}t go over max or min. \end{DoxyCompactList}\item 
-uint8\+\_\+t \mbox{\hyperlink{pwm__handler_8h_add3ae8a15c377108bff5270b8c2f1a96}{Get\+Pwm}} (void)
+int8\+\_\+t \mbox{\hyperlink{pwm__handler_8h_a77ea589d9b01990f67fa3402f3f8cfa8}{Get\+Brightness}} (uint8\+\_\+t is\+Ir)
+\begin{DoxyCompactList}\small\item\em Return Brightness variable. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{pwm__handler_8h_a8a6c2c1c8f63b789a2f18b7402b046d9}{Set\+Brightness}} (int8\+\_\+t brightness, uint8\+\_\+t is\+Ir)
+\begin{DoxyCompactList}\small\item\em Set Brightness variable, guards to ensure we don\textquotesingle{}t go over max or min. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{pwm__handler_8h_aab23730a61ee18a06b9b440fae2a4f0f}{Get\+Pwm}} (uint8\+\_\+t is\+Ir)
 \begin{DoxyCompactList}\small\item\em Get the PWM value based on the brightness and the temperature range. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -45,11 +45,11 @@ uint8\+\_\+t \mbox{\hyperlink{pwm__handler_8h_add3ae8a15c377108bff5270b8c2f1a96}
 
 
 \doxysubsection{Function Documentation}
-\Hypertarget{pwm__handler_8h_a60c53e0ebfe90372ea3c89749710eb51}\index{pwm\_handler.h@{pwm\_handler.h}!DecreaseBrightness@{DecreaseBrightness}}
+\Hypertarget{pwm__handler_8h_a48727f45bdc5237463baf264e8e5d706}\index{pwm\_handler.h@{pwm\_handler.h}!DecreaseBrightness@{DecreaseBrightness}}
 \index{DecreaseBrightness@{DecreaseBrightness}!pwm\_handler.h@{pwm\_handler.h}}
 \doxysubsubsection{\texorpdfstring{DecreaseBrightness()}{DecreaseBrightness()}}
-{\footnotesize\ttfamily \label{pwm__handler_8h_a60c53e0ebfe90372ea3c89749710eb51} 
-void Decrease\+Brightness (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{button\+\_\+held}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a48727f45bdc5237463baf264e8e5d706} 
+void Decrease\+Brightness (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{button\+\_\+held}{, }\item[{uint8\+\_\+t}]{is\+Ir}{}\end{DoxyParamCaption})}
 
 
 
@@ -59,27 +59,31 @@ Decrease brightness by 1 (for button press) or 3 (for button hold) This function
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em button\+\_\+held} & If the button is being held (decrements by 3 if so) \\
 \hline
+\mbox{\texttt{ in}}  & {\em is\+Ir} & Are we controlling IR or Visible LEDs \\
+\hline
 \end{DoxyParams}
-\Hypertarget{pwm__handler_8h_ac59f8a6b413fe6bcf1b17a0321a2eb83}\index{pwm\_handler.h@{pwm\_handler.h}!GetBrightness@{GetBrightness}}
+\Hypertarget{pwm__handler_8h_a77ea589d9b01990f67fa3402f3f8cfa8}\index{pwm\_handler.h@{pwm\_handler.h}!GetBrightness@{GetBrightness}}
 \index{GetBrightness@{GetBrightness}!pwm\_handler.h@{pwm\_handler.h}}
 \doxysubsubsection{\texorpdfstring{GetBrightness()}{GetBrightness()}}
-{\footnotesize\ttfamily \label{pwm__handler_8h_ac59f8a6b413fe6bcf1b17a0321a2eb83} 
-int8\+\_\+t Get\+Brightness (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a77ea589d9b01990f67fa3402f3f8cfa8} 
+int8\+\_\+t Get\+Brightness (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{is\+Ir}{}\end{DoxyParamCaption})}
 
 
 
-Return led\+Brightness variable. 
+Return Brightness variable. 
 
 
 \begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em is\+Ir} & Are we controlling IR or Visible LEDs \\
+\hline
 \mbox{\texttt{ out}}  & {\em Current} & LED brightness level \\
 \hline
 \end{DoxyParams}
-\Hypertarget{pwm__handler_8h_add3ae8a15c377108bff5270b8c2f1a96}\index{pwm\_handler.h@{pwm\_handler.h}!GetPwm@{GetPwm}}
+\Hypertarget{pwm__handler_8h_aab23730a61ee18a06b9b440fae2a4f0f}\index{pwm\_handler.h@{pwm\_handler.h}!GetPwm@{GetPwm}}
 \index{GetPwm@{GetPwm}!pwm\_handler.h@{pwm\_handler.h}}
 \doxysubsubsection{\texorpdfstring{GetPwm()}{GetPwm()}}
-{\footnotesize\ttfamily \label{pwm__handler_8h_add3ae8a15c377108bff5270b8c2f1a96} 
-uint8\+\_\+t Get\+Pwm (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{pwm__handler_8h_aab23730a61ee18a06b9b440fae2a4f0f} 
+uint8\+\_\+t Get\+Pwm (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{is\+Ir}{}\end{DoxyParamCaption})}
 
 
 
@@ -87,14 +91,16 @@ Get the PWM value based on the brightness and the temperature range.
 
 
 \begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em is\+Ir} & Are we controlling IR or Visible LEDs \\
+\hline
 \mbox{\texttt{ out}}  & {\em Current} & PWM value \\
 \hline
 \end{DoxyParams}
-\Hypertarget{pwm__handler_8h_a0c06b547eea80cb6c871750831709fe4}\index{pwm\_handler.h@{pwm\_handler.h}!IncreaseBrightness@{IncreaseBrightness}}
+\Hypertarget{pwm__handler_8h_a79fe1926935a52243ab75394e65e05cb}\index{pwm\_handler.h@{pwm\_handler.h}!IncreaseBrightness@{IncreaseBrightness}}
 \index{IncreaseBrightness@{IncreaseBrightness}!pwm\_handler.h@{pwm\_handler.h}}
 \doxysubsubsection{\texorpdfstring{IncreaseBrightness()}{IncreaseBrightness()}}
-{\footnotesize\ttfamily \label{pwm__handler_8h_a0c06b547eea80cb6c871750831709fe4} 
-void Increase\+Brightness (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{button\+\_\+held}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a79fe1926935a52243ab75394e65e05cb} 
+void Increase\+Brightness (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{button\+\_\+held}{, }\item[{uint8\+\_\+t}]{is\+Ir}{}\end{DoxyParamCaption})}
 
 
 
@@ -103,6 +109,8 @@ Increase brightness by 1 (for button press) or 3 (for button hold) This function
 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ in}}  & {\em button\+\_\+held} & If the button is being held (increments by 3 if so) \\
+\hline
+\mbox{\texttt{ in}}  & {\em is\+Ir} & Are we controlling IR or Visible LEDs \\
 \hline
 \end{DoxyParams}
 \Hypertarget{pwm__handler_8h_a9e440816ccf6e7ae8f8bdea60b99fe99}\index{pwm\_handler.h@{pwm\_handler.h}!InitPwm@{InitPwm}}
@@ -115,31 +123,42 @@ void Init\+Pwm (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})
 
 Init Pwm\+Array var Set brightness to half value, enable pwm, and turn off. 
 
-\Hypertarget{pwm__handler_8h_acbd970e115607eca2d51db189d67cd14}\index{pwm\_handler.h@{pwm\_handler.h}!SetBrightness@{SetBrightness}}
+\Hypertarget{pwm__handler_8h_a8a6c2c1c8f63b789a2f18b7402b046d9}\index{pwm\_handler.h@{pwm\_handler.h}!SetBrightness@{SetBrightness}}
 \index{SetBrightness@{SetBrightness}!pwm\_handler.h@{pwm\_handler.h}}
 \doxysubsubsection{\texorpdfstring{SetBrightness()}{SetBrightness()}}
-{\footnotesize\ttfamily \label{pwm__handler_8h_acbd970e115607eca2d51db189d67cd14} 
-void Set\+Brightness (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{brightness}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a8a6c2c1c8f63b789a2f18b7402b046d9} 
+void Set\+Brightness (\begin{DoxyParamCaption}\item[{int8\+\_\+t}]{brightness}{, }\item[{uint8\+\_\+t}]{is\+Ir}{}\end{DoxyParamCaption})}
 
 
 
-Set led\+Brightness variable, guards to ensure we don\textquotesingle{}t go over max or min. 
+Set Brightness variable, guards to ensure we don\textquotesingle{}t go over max or min. 
 
 
 \begin{DoxyParams}[1]{Parameters}
-\mbox{\texttt{ in}}  & {\em brightness} & Brightess to set \\
+\mbox{\texttt{ in}}  & {\em is\+Ir} & Are we controlling IR or Visible LEDs \\
+\hline
+\mbox{\texttt{ in}}  & {\em brightness} & Brightness to set\\
+\hline
+\mbox{\texttt{ in}}  & {\em brightness} & Brightness to set \\
+\hline
+\mbox{\texttt{ in}}  & {\em is\+Ir} & Are we controlling IR or Visible LEDs \\
 \hline
 \end{DoxyParams}
-\Hypertarget{pwm__handler_8h_adaa12e879fd29b225bef3eb6337aff72}\index{pwm\_handler.h@{pwm\_handler.h}!SetPwm@{SetPwm}}
+\Hypertarget{pwm__handler_8h_a8e2bc7e471b367a9d3f877ce5af05796}\index{pwm\_handler.h@{pwm\_handler.h}!SetPwm@{SetPwm}}
 \index{SetPwm@{SetPwm}!pwm\_handler.h@{pwm\_handler.h}}
 \doxysubsubsection{\texorpdfstring{SetPwm()}{SetPwm()}}
-{\footnotesize\ttfamily \label{pwm__handler_8h_adaa12e879fd29b225bef3eb6337aff72} 
-void Set\+Pwm (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{pwm__handler_8h_a8e2bc7e471b367a9d3f877ce5af05796} 
+void Set\+Pwm (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{is\+Ir}{}\end{DoxyParamCaption})}
 
 
 
 set PWM based on pwm value 
 
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em is\+Ir} & Are we controlling IR or Visible LEDs \\
+\hline
+\end{DoxyParams}
 \Hypertarget{pwm__handler_8h_a90359218ff4b8771a3764beeecfb8e14}\index{pwm\_handler.h@{pwm\_handler.h}!TurnOffPwm@{TurnOffPwm}}
 \index{TurnOffPwm@{TurnOffPwm}!pwm\_handler.h@{pwm\_handler.h}}
 \doxysubsubsection{\texorpdfstring{TurnOffPwm()}{TurnOffPwm()}}

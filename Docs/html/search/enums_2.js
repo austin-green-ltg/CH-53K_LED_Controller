@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['status_5fregister_0',['STATUS_REGISTER',['../fram_8h.html#ad79c233c62b0ea3893ddf0314677e5f0',1,'fram.h']]]
+  ['opcode_5fcommands_0',['OPCODE_COMMANDS',['../fram_8h.html#aa682506abc3c09d2fcb4a3e7c3d2d854',1,'fram.h']]]
 ];

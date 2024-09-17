@@ -4,9 +4,11 @@
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{stm32l412xx-bsp_8c_a592b35fea37a6a5786d20ad01da8ebd0}{Read\+Dim\+Pin}} (void)
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{stm32l412xx-bsp_8c_a8aa99c6d8382c750b4373716782aeeaf}{Read\+Toggle\+Pin}} (void)
+\begin{DoxyCompactList}\small\item\em Reads toggle pin value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{stm32l412xx-bsp_8c_a592b35fea37a6a5786d20ad01da8ebd0}{Read\+Dim\+Pin}} (void)
 \begin{DoxyCompactList}\small\item\em Reads dim pin value. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{stm32l412xx-bsp_8c_acf26ef503b4853b39e91017a7a88aa4d}{Read\+Bright\+Pin}} (void)
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{stm32l412xx-bsp_8c_acf26ef503b4853b39e91017a7a88aa4d}{Read\+Bright\+Pin}} (void)
 \begin{DoxyCompactList}\small\item\em Reads bright pin value. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{stm32l412xx-bsp_8c_a675fed9bf5609c7bb38e53ccf6e688ff}{Enable\+PWM1}} (void)
 \begin{DoxyCompactList}\small\item\em Enables Timer 1. \end{DoxyCompactList}\item 
@@ -43,9 +45,7 @@ void \mbox{\hyperlink{stm32l412xx-bsp_8c_a6f89ccdfbb99b0acbf97aa09be1cde3d}{tran
 void \mbox{\hyperlink{stm32l412xx-bsp_8c_a902bd11e69418f9a4fad38cbc8195e79}{receive\+Data}} (unsigned char \texorpdfstring{$\ast$}{*}rx\+Data, const uint32\+\_\+t bytes)
 \begin{DoxyCompactList}\small\item\em Gets data from SPI lines. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{stm32l412xx-bsp_8c_a31cb479ffb8be9316c448a548ef7c55b}{send\+UARTChar}} (char c)
-\begin{DoxyCompactList}\small\item\em Sends character via UART line. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{stm32l412xx-bsp_8c_a1730ffe1e560465665eb47d9264826f9}{Error\+\_\+\+Handler}} (void)
-\begin{DoxyCompactList}\small\item\em This function is executed in case of error occurrence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Sends character via UART line. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Function Documentation}
@@ -109,21 +109,6 @@ void enable\+Write\+Protect (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyP
 
 Enables SPI write protect line (active high) 
 
-\Hypertarget{stm32l412xx-bsp_8c_a1730ffe1e560465665eb47d9264826f9}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!Error\_Handler@{Error\_Handler}}
-\index{Error\_Handler@{Error\_Handler}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
-\doxysubsubsection{\texorpdfstring{Error\_Handler()}{Error\_Handler()}}
-{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a1730ffe1e560465665eb47d9264826f9} 
-void Error\+\_\+\+Handler (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
-
-
-
-This function is executed in case of error occurrence. 
-
-
-\begin{DoxyRetVals}{Return values}
-{\em None} & \\
-\hline
-\end{DoxyRetVals}
 \Hypertarget{stm32l412xx-bsp_8c_adc10fd0a6d96b6cebbfc030f45f28bee}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!GetCurrentValue@{GetCurrentValue}}
 \index{GetCurrentValue@{GetCurrentValue}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
 \doxysubsubsection{\texorpdfstring{GetCurrentValue()}{GetCurrentValue()}}
@@ -188,7 +173,7 @@ Returns raw ADC value from voltmeter.
 \index{ReadBrightPin@{ReadBrightPin}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
 \doxysubsubsection{\texorpdfstring{ReadBrightPin()}{ReadBrightPin()}}
 {\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_acf26ef503b4853b39e91017a7a88aa4d} 
-\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} Read\+Bright\+Pin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} Read\+Bright\+Pin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
 
@@ -203,7 +188,7 @@ Reads bright pin value.
 \index{ReadDimPin@{ReadDimPin}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
 \doxysubsubsection{\texorpdfstring{ReadDimPin()}{ReadDimPin()}}
 {\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a592b35fea37a6a5786d20ad01da8ebd0} 
-\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} Read\+Dim\+Pin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} Read\+Dim\+Pin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
 
@@ -212,6 +197,21 @@ Reads dim pin value.
 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ out}}  & {\em Dim} & pin state \\
+\hline
+\end{DoxyParams}
+\Hypertarget{stm32l412xx-bsp_8c_a8aa99c6d8382c750b4373716782aeeaf}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!ReadTogglePin@{ReadTogglePin}}
+\index{ReadTogglePin@{ReadTogglePin}!stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}}
+\doxysubsubsection{\texorpdfstring{ReadTogglePin()}{ReadTogglePin()}}
+{\footnotesize\ttfamily \label{stm32l412xx-bsp_8c_a8aa99c6d8382c750b4373716782aeeaf} 
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} Read\+Toggle\+Pin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Reads toggle pin value. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em Toggle} & pin state \\
 \hline
 \end{DoxyParams}
 \Hypertarget{stm32l412xx-bsp_8c_a902bd11e69418f9a4fad38cbc8195e79}\index{stm32l412xx-\/bsp.c@{stm32l412xx-\/bsp.c}!receiveData@{receiveData}}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['temperaturerange_5fe_0',['TemperatureRange_e',['../temperature__handler_8h.html#ac1f79fe4324645df017591625773527d',1,'temperature_handler.h']]]
+  ['status_5fregister_0',['STATUS_REGISTER',['../fram_8h.html#ad79c233c62b0ea3893ddf0314677e5f0',1,'fram.h']]]
 ];

@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['getbrightness_0',['GetBrightness',['../pwm__handler_8h.html#ac59f8a6b413fe6bcf1b17a0321a2eb83',1,'GetBrightness(void):&#160;pwm_handler.c'],['../pwm__handler_8c.html#ac59f8a6b413fe6bcf1b17a0321a2eb83',1,'GetBrightness(void):&#160;pwm_handler.c']]],
+  ['getbrightness_0',['GetBrightness',['../pwm__handler_8h.html#a77ea589d9b01990f67fa3402f3f8cfa8',1,'GetBrightness(uint8_t isIr):&#160;pwm_handler.c'],['../pwm__handler_8c.html#a77ea589d9b01990f67fa3402f3f8cfa8',1,'GetBrightness(uint8_t isIr):&#160;pwm_handler.c']]],
   ['getcurrent_1',['GetCurrent',['../current__handler_8h.html#a95eb31cc890c352c57fe793085fd51d5',1,'GetCurrent(void):&#160;current_handler.c'],['../current__handler_8c.html#a95eb31cc890c352c57fe793085fd51d5',1,'GetCurrent(void):&#160;current_handler.c']]],
   ['getcurrentrange_2',['GetCurrentRange',['../current__handler_8h.html#a40d6c981d70b2e2dbf03d7c359cee4e3',1,'GetCurrentRange(void):&#160;current_handler.c'],['../current__handler_8c.html#a40d6c981d70b2e2dbf03d7c359cee4e3',1,'GetCurrentRange(void):&#160;current_handler.c']]],
   ['getcurrentvalue_3',['GetCurrentValue',['../stm32l412xx-bsp_8h.html#adc10fd0a6d96b6cebbfc030f45f28bee',1,'GetCurrentValue(void):&#160;stm32l412xx-bsp.c'],['../stm32l412xx-bsp_8c.html#adc10fd0a6d96b6cebbfc030f45f28bee',1,'GetCurrentValue(void):&#160;stm32l412xx-bsp.c']]],
-  ['getpwm_4',['GetPwm',['../pwm__handler_8h.html#add3ae8a15c377108bff5270b8c2f1a96',1,'GetPwm(void):&#160;pwm_handler.c'],['../pwm__handler_8c.html#add3ae8a15c377108bff5270b8c2f1a96',1,'GetPwm(void):&#160;pwm_handler.c']]],
+  ['getpwm_4',['GetPwm',['../pwm__handler_8h.html#aab23730a61ee18a06b9b440fae2a4f0f',1,'GetPwm(uint8_t isIr):&#160;pwm_handler.c'],['../pwm__handler_8c.html#aab23730a61ee18a06b9b440fae2a4f0f',1,'GetPwm(uint8_t isIr):&#160;pwm_handler.c']]],
   ['gettemperature_5',['GetTemperature',['../temperature__handler_8h.html#add816e02169640482b7bae2ece0e3e27',1,'GetTemperature(void):&#160;temperature_handler.c'],['../temperature__handler_8c.html#add816e02169640482b7bae2ece0e3e27',1,'GetTemperature(void):&#160;temperature_handler.c']]],
   ['gettemperaturerange_6',['GetTemperatureRange',['../temperature__handler_8h.html#abd6b48119e055d2cb0290db86bf144f4',1,'GetTemperatureRange(void):&#160;temperature_handler.c'],['../temperature__handler_8c.html#abd6b48119e055d2cb0290db86bf144f4',1,'GetTemperatureRange(void):&#160;temperature_handler.c']]],
   ['getthermistorvalue_7',['GetThermistorValue',['../stm32l412xx-bsp_8h.html#af36ad1f9bd2e3dcbea2cf846da6da574',1,'GetThermistorValue(void):&#160;stm32l412xx-bsp.c'],['../stm32l412xx-bsp_8c.html#af36ad1f9bd2e3dcbea2cf846da6da574',1,'GetThermistorValue(void):&#160;stm32l412xx-bsp.c']]],
@@ -12,5 +12,7 @@ var searchData=
   ['getvoltage_9',['GetVoltage',['../voltage__handler_8h.html#a4955e8a43489319badeaa2662335d973',1,'GetVoltage(void):&#160;voltage_handler.c'],['../voltage__handler_8c.html#a4955e8a43489319badeaa2662335d973',1,'GetVoltage(void):&#160;voltage_handler.c']]],
   ['getvoltagerange_10',['GetVoltageRange',['../voltage__handler_8h.html#a9181a4920cc377e8fe19d337eacd1f30',1,'GetVoltageRange(void):&#160;voltage_handler.c'],['../voltage__handler_8c.html#a9181a4920cc377e8fe19d337eacd1f30',1,'GetVoltageRange(void):&#160;voltage_handler.c']]],
   ['getvoltagevalue_11',['GetVoltageValue',['../stm32l412xx-bsp_8h.html#a42c7df0f7332ef35b29acfd1fefb73c3',1,'GetVoltageValue(void):&#160;stm32l412xx-bsp.c'],['../stm32l412xx-bsp_8c.html#a42c7df0f7332ef35b29acfd1fefb73c3',1,'GetVoltageValue(void):&#160;stm32l412xx-bsp.c']]],
-  ['gpio_5fpinstate_12',['GPIO_PinState',['../stm32l412xx-bsp_8h.html#a7625f300415e3570f27794c1e2a7b761',1,'stm32l412xx-bsp.h']]]
+  ['gpio_5fpin_5freset_12',['GPIO_PIN_RESET',['../stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43a90af2af95004ea61d76950ff3f2f6ec2',1,'stm32l412xx-bsp.h']]],
+  ['gpio_5fpin_5fset_13',['GPIO_PIN_SET',['../stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43a746c062509db3ad1e47beed7527f9f8a',1,'stm32l412xx-bsp.h']]],
+  ['gpio_5fpinstate_14',['GPIO_PinState',['../stm32l412xx-bsp_8h.html#a5b3ef0486b179415581eb342e0ea6b43',1,'stm32l412xx-bsp.h']]]
 ];

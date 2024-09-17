@@ -16,6 +16,11 @@ uint8_t writeEnable = 0;
 uint8_t statusRegister = 0;
 uint8_t readStatusRegisterSignal = 0;
 
+GPIO_PinState ReadTogglePin( void )
+{
+    return toggle_pin;
+}
+
 GPIO_PinState ReadDimPin( void )
 {
     return dim_pin;
@@ -178,10 +183,5 @@ void receiveData( unsigned char* rxData, const uint32_t bytes )
 void sendUARTChar(char c)
 {
     (void)c;
-    return;
-}
-
-void Error_Handler(void)
-{
     return;
 }

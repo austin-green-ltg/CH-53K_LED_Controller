@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['voltagerange_5fe_0',['VoltageRange_e',['../voltage__handler_8h.html#a9df5e007c9e7817a315de169e5d2f293',1,'voltage_handler.h']]]
+  ['temperaturerange_5fe_0',['TemperatureRange_e',['../temperature__handler_8h.html#ac1f79fe4324645df017591625773527d',1,'temperature_handler.h']]]
 ];

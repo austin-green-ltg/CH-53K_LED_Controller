@@ -5,9 +5,11 @@
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{button__handler_8c_af20dbb6e0d588172fe914ab9c1c3bc33}{Is\+Dim\+Pressed}} (void)
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{button__handler_8c_a69e3cb67c276ad85d1a9962b4e9adaa1}{Is\+Toggle\+Pressed}} (void)
+\begin{DoxyCompactList}\small\item\em Return state of toggle button. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{button__handler_8c_af20dbb6e0d588172fe914ab9c1c3bc33}{Is\+Dim\+Pressed}} (void)
 \begin{DoxyCompactList}\small\item\em Return state of dim button. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{button__handler_8c_a0849c80841cb7ae79629ef359c8510a3}{Is\+Bright\+Pressed}} (void)
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} \mbox{\hyperlink{button__handler_8c_a0849c80841cb7ae79629ef359c8510a3}{Is\+Bright\+Pressed}} (void)
 \begin{DoxyCompactList}\small\item\em Return state of brighten button. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -16,7 +18,7 @@
 \index{IsBrightPressed@{IsBrightPressed}!button\_handler.c@{button\_handler.c}}
 \doxysubsubsection{\texorpdfstring{IsBrightPressed()}{IsBrightPressed()}}
 {\footnotesize\ttfamily \label{button__handler_8c_a0849c80841cb7ae79629ef359c8510a3} 
-\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} Is\+Bright\+Pressed (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} Is\+Bright\+Pressed (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
 
@@ -31,7 +33,7 @@ Return state of brighten button.
 \index{IsDimPressed@{IsDimPressed}!button\_handler.c@{button\_handler.c}}
 \doxysubsubsection{\texorpdfstring{IsDimPressed()}{IsDimPressed()}}
 {\footnotesize\ttfamily \label{button__handler_8c_af20dbb6e0d588172fe914ab9c1c3bc33} 
-\mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\+\_\+\+Pin\+State}} Is\+Dim\+Pressed (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} Is\+Dim\+Pressed (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
 
 
 
@@ -40,5 +42,20 @@ Return state of dim button.
 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\texttt{ out}}  & {\em Dim} & Pin State, pressed or not \\
+\hline
+\end{DoxyParams}
+\Hypertarget{button__handler_8c_a69e3cb67c276ad85d1a9962b4e9adaa1}\index{button\_handler.c@{button\_handler.c}!IsTogglePressed@{IsTogglePressed}}
+\index{IsTogglePressed@{IsTogglePressed}!button\_handler.c@{button\_handler.c}}
+\doxysubsubsection{\texorpdfstring{IsTogglePressed()}{IsTogglePressed()}}
+{\footnotesize\ttfamily \label{button__handler_8c_a69e3cb67c276ad85d1a9962b4e9adaa1} 
+\mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\+\_\+\+Pin\+State}} Is\+Toggle\+Pressed (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Return state of toggle button. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em Toogle} & Pin State, pressed or not \\
 \hline
 \end{DoxyParams}

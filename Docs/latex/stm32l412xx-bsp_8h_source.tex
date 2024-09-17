@@ -27,170 +27,184 @@
 \DoxyCodeLine{00023\ \textcolor{comment}{\ *****************************************************************************/}}
 \DoxyCodeLine{00024\ }
 \DoxyCodeLine{00025\ \textcolor{preprocessor}{\#ifndef\ INC\_bsph}}
-\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \#define\ INC\_bsph}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ INC\_bsph}}
 \DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \#include\ <stdint.h>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
 \DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \textcolor{comment}{/*\ Private\ defines\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
-\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ \#ifdef\ STM32L412xx}}
+\DoxyCodeLine{00030\ \textcolor{comment}{/*\ Private\ defines\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#ifdef\ STM32L412xx}}
 \DoxyCodeLine{00032\ }
-\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_adc.h"{}}}
-\DoxyCodeLine{00034\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_crs.h"{}}}
-\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_rcc.h"{}}}
-\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_bus.h"{}}}
-\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_system.h"{}}}
-\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_exti.h"{}}}
-\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_cortex.h"{}}}
-\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_utils.h"{}}}
-\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_pwr.h"{}}}
-\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_dma.h"{}}}
-\DoxyCodeLine{00043\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_spi.h"{}}}
-\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_tim.h"{}}}
-\DoxyCodeLine{00045\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_usart.h"{}}}
-\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}stm32l4xx\_ll\_gpio.h"{}}}
-\DoxyCodeLine{00047\ }
-\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(USE\_FULL\_ASSERT)}}
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ "{}stm32\_assert.h"{}}}
-\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ \ \#endif\ }\textcolor{comment}{/*\ USE\_FULL\_ASSERT\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00051\ }
-\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{/*\ Peripherals\ */}}
-\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}adc.h"{}}}
-\DoxyCodeLine{00054\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}gpio.h"{}}}
-\DoxyCodeLine{00055\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}spi.h"{}}}
-\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}tim.h"{}}}
-\DoxyCodeLine{00057\ }
-\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ ENABLE\_UART\_DEBUGGING\ }\textcolor{comment}{/*\ tracing\ enabled\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Peripherals\ enabled\ for\ UART\ */}}
-\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#include\ "{}usart.h"{}}}
-\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \#endif\ }\textcolor{comment}{/*\ ENABLE\_UART\_DEBUGGING\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00062\ }
-\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \#define\ THERMISTOR\_ADC\_Pin\ LL\_GPIO\_PIN\_0}}
-\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ \#define\ THERMISTOR\_ADC\_GPIO\_Port\ GPIOA}}
-\DoxyCodeLine{00065\ \textcolor{preprocessor}{\ \ \ \ \#define\ BRIGHT\_Pin\ LL\_GPIO\_PIN\_1}}
-\DoxyCodeLine{00066\ \textcolor{preprocessor}{\ \ \ \ \#define\ BRIGHT\_GPIO\_Port\ GPIOA}}
-\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \ \ \#define\ DIM\_Pin\ LL\_GPIO\_PIN\_3}}
-\DoxyCodeLine{00068\ \textcolor{preprocessor}{\ \ \ \ \#define\ DIM\_GPIO\_Port\ GPIOA}}
-\DoxyCodeLine{00069\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_SCK\_Pin\ LL\_GPIO\_PIN\_5}}
-\DoxyCodeLine{00070\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_SCK\_GPIO\_Port\ GPIOA}}
-\DoxyCodeLine{00071\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_MISO\_Pin\ LL\_GPIO\_PIN\_6}}
-\DoxyCodeLine{00072\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_MISO\_GPIO\_Port\ GPIOA}}
-\DoxyCodeLine{00073\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_MOSI\_Pin\ LL\_GPIO\_PIN\_7}}
-\DoxyCodeLine{00074\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_MOSI\_GPIO\_Port\ GPIOA}}
-\DoxyCodeLine{00075\ \textcolor{preprocessor}{\ \ \ \ \#define\ VOLTMETER\_ADC\_Pin\ LL\_GPIO\_PIN\_0}}
-\DoxyCodeLine{00076\ \textcolor{preprocessor}{\ \ \ \ \#define\ VOLTMETER\_ADC\_GPIO\_Port\ GPIOB}}
-\DoxyCodeLine{00077\ \textcolor{preprocessor}{\ \ \ \ \#define\ AMPMETER\_ADC\_Pin\ LL\_GPIO\_PIN\_1}}
-\DoxyCodeLine{00078\ \textcolor{preprocessor}{\ \ \ \ \#define\ AMPMETER\_ADC\_GPIO\_Port\ GPIOB}}
-\DoxyCodeLine{00079\ \textcolor{preprocessor}{\ \ \ \ \#define\ PWM\_OUT\_Pin\ LL\_GPIO\_PIN\_8}}
-\DoxyCodeLine{00080\ \textcolor{preprocessor}{\ \ \ \ \#define\ PWM\_OUT\_GPIO\_Port\ GPIOA}}
-\DoxyCodeLine{00081\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPI\_WP\_Pin\ LL\_GPIO\_PIN\_10}}
-\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPI\_WP\_GPIO\_Port\ GPIOA}}
-\DoxyCodeLine{00083\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPI\_NSS\_Pin\ LL\_GPIO\_PIN\_11}}
-\DoxyCodeLine{00084\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPI\_NSS\_GPIO\_Port\ GPIOA}}
-\DoxyCodeLine{00085\ }
-\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \#else\ }\textcolor{comment}{/*\ STM32L412xx\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00087\ }
-\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{/*\ Below\ is\ for\ debugging\ purposes\ */}}
-\DoxyCodeLine{00089\ \textcolor{preprocessor}{\ \ \ \ \#define\ THERMISTOR\_ADC\_Pin\ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00090\ \textcolor{preprocessor}{\ \ \ \ \#define\ THERMISTOR\_ADC\_GPIO\_Port\ \ \ \ 0}}
-\DoxyCodeLine{00091\ \textcolor{preprocessor}{\ \ \ \ \#define\ BRIGHT\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00092\ \textcolor{preprocessor}{\ \ \ \ \#define\ BRIGHT\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00093\ \textcolor{preprocessor}{\ \ \ \ \#define\ DIM\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00094\ \textcolor{preprocessor}{\ \ \ \ \#define\ DIM\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00095\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_SCK\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00096\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_SCK\_GPIO\_Port\ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00097\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_MISO\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00098\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_MISO\_GPIO\_Port\ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00099\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_MOSI\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00100\ \textcolor{preprocessor}{\ \ \ \ \#define\ EEPROM\_MOSI\_GPIO\_Port\ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00101\ \textcolor{preprocessor}{\ \ \ \ \#define\ VOLTMETER\_ADC\_Pin\ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00102\ \textcolor{preprocessor}{\ \ \ \ \#define\ VOLTMETER\_ADC\_GPIO\_Port\ \ \ \ \ 0}}
-\DoxyCodeLine{00103\ \textcolor{preprocessor}{\ \ \ \ \#define\ AMPMETER\_ADC\_Pin\ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00104\ \textcolor{preprocessor}{\ \ \ \ \#define\ AMPMETER\_ADC\_GPIO\_Port\ \ \ \ \ \ 0}}
-\DoxyCodeLine{00105\ \textcolor{preprocessor}{\ \ \ \ \#define\ PWM\_OUT\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00106\ \textcolor{preprocessor}{\ \ \ \ \#define\ PWM\_OUT\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00107\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPI\_WP\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00108\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPI\_WP\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00109\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPI\_NSS\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00110\ \textcolor{preprocessor}{\ \ \ \ \#define\ SPI\_NSS\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ \ 0}}
-\DoxyCodeLine{00111\ }
-\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
-\DoxyCodeLine{00116\ \ \ \ \ \{}
-\DoxyCodeLine{00117\ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_pwm_struct_ab21d8ab042b1bce7f47522d91408f0dc}{is\_running}};\ \ \ }
-\DoxyCodeLine{00118\ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_pwm_struct_a3518827b17ce0b14d217385dc01c673e}{pulse\_width}};\ }
-\DoxyCodeLine{00119\ \ \ \ \ \}\ \mbox{\hyperlink{struct_pwm_struct}{PwmStruct}};}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
-\DoxyCodeLine{00125\ \ \ \ \ \{}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_timer_struct_ab21d8ab042b1bce7f47522d91408f0dc}{is\_running}};\ }
-\DoxyCodeLine{00127\ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_timer_struct_ae73654f333e4363463ad8c594eca1905}{time}};\ \ \ \ \ \ }
-\DoxyCodeLine{00128\ \ \ \ \ \}\ \mbox{\hyperlink{struct_timer_struct}{TimerStruct}};}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_hal.h"{}}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_adc.h"{}}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_crs.h"{}}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_rcc.h"{}}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_bus.h"{}}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_system.h"{}}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_exti.h"{}}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_cortex.h"{}}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_utils.h"{}}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_pwr.h"{}}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_dma.h"{}}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_spi.h"{}}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_tim.h"{}}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_usart.h"{}}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#include\ "{}stm32l4xx\_ll\_gpio.h"{}}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{comment}{/*\ Peripherals\ */}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#include\ "{}adc.h"{}}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#include\ "{}spi.h"{}}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#include\ "{}tim.h"{}}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#ifdef\ ENABLE\_UART\_DEBUGGING\ }\textcolor{comment}{/*\ tracing\ enabled\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{/*\ Peripherals\ enabled\ for\ UART\ */}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}usart.h"{}}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ENABLE\_UART\_DEBUGGING\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ \#include\ "{}usb\_device.h"{}}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#include\ "{}gpio.h"{}}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ THERMISTOR\_ADC\_Pin\ LL\_GPIO\_PIN\_0}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ THERMISTOR\_ADC\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ BRIGHT\_Pin\ LL\_GPIO\_PIN\_1}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ BRIGHT\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ DIM\_Pin\ LL\_GPIO\_PIN\_3}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ DIM\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#define\ VIS\_IR\_Pin\ LL\_GPIO\_PIN\_4}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ VIS\_IR\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ EEPROM\_SCK\_Pin\ LL\_GPIO\_PIN\_5}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ EEPROM\_SCK\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ EEPROM\_MISO\_Pin\ LL\_GPIO\_PIN\_6}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ EEPROM\_MISO\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ EEPROM\_MOSI\_Pin\ LL\_GPIO\_PIN\_7}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ EEPROM\_MOSI\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ VOLTMETER\_ADC\_Pin\ LL\_GPIO\_PIN\_0}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ VOLTMETER\_ADC\_GPIO\_Port\ GPIOB}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ AMPMETER\_ADC\_Pin\ LL\_GPIO\_PIN\_1}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ AMPMETER\_ADC\_GPIO\_Port\ GPIOB}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ PWM\_OUT\_Pin\ LL\_GPIO\_PIN\_8}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ PWM\_OUT\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ USB\_RENUM\_N\_Pin\ LL\_GPIO\_PIN\_10}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#define\ USB\_RENUM\_N\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#define\ SWDIO\_Pin\ LL\_GPIO\_PIN\_13}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#define\ SWDIO\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ SWCLK\_Pin\ LL\_GPIO\_PIN\_14}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#define\ SWCLK\_GPIO\_Port\ GPIOA}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ SPI\_WP\_Pin\ LL\_GPIO\_PIN\_5}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ SPI\_WP\_GPIO\_Port\ GPIOB}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ SPI\_NSS\_Pin\ LL\_GPIO\_PIN\_6}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ SPI\_NSS\_GPIO\_Port\ GPIOB}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#define\ BOOT0\_Pin\ LL\_GPIO\_PIN\_3}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ BOOT0\_GPIO\_Port\ GPIOH}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ STM32L412xx\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{/*\ Below\ is\ for\ debugging\ purposes\ */}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#define\ SPI\_NSS\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ SPI\_NSS\_GPIO\_Port\ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ SPI\_WP\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ SPI\_WP\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ THERMISTOR\_ADC\_Pin\ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ THERMISTOR\_ADC\_GPIO\_Port\ \ 0}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#define\ BRIGHT\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#define\ BRIGHT\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#define\ DIM\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ DIM\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#define\ VIS\_IR\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ VIS\_IR\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#define\ EEPROM\_SCK\_Pin\ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#define\ EEPROM\_SCK\_GPIO\_Port\ \ \ \ \ \ 0}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#define\ EEPROM\_MISO\_Pin\ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#define\ EEPROM\_MISO\_GPIO\_Port\ \ \ \ \ 0}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ EEPROM\_MOSI\_Pin\ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ EEPROM\_MOSI\_GPIO\_Port\ \ \ \ \ 0}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#define\ VOLTMETER\_ADC\_Pin\ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ VOLTMETER\_ADC\_GPIO\_Port\ \ \ 0}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ AMPMETER\_ADC\_Pin\ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\#define\ AMPMETER\_ADC\_GPIO\_Port\ \ \ \ 0}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#define\ PWM\_OUT\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#define\ PWM\_OUT\_GPIO\_Port\ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#define\ USB\_RENUM\_N\_Pin\ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\#define\ USB\_RENUM\_N\_GPIO\_Port\ \ \ \ \ 0}}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\#define\ SWDIO\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#define\ SWDIO\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#define\ SWCLK\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#define\ SWCLK\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#define\ BOOT0\_Pin\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#define\ BOOT0\_GPIO\_Port\ \ \ \ \ \ \ \ \ \ \ 0}}
 \DoxyCodeLine{00129\ }
-\DoxyCodeLine{00130\ \textcolor{preprocessor}{\ \ \#endif\ }\textcolor{comment}{/*\ STM32L412xx\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00131\ }
-\DoxyCodeLine{00132\ \ \ \textcolor{comment}{/*\ Interrupt\ Handlers\ */}}
-\DoxyCodeLine{00133\ \textcolor{preprocessor}{\ \ \#ifndef\ NVIC\_PRIORITYGROUP\_0}}
-\DoxyCodeLine{00134\ \textcolor{preprocessor}{\ \ \ \ \#define\ NVIC\_PRIORITYGROUP\_0\ \ \ \ \ \ \ \ \ ((uint32\_t)0x00000007)\ }}
-\DoxyCodeLine{00136\ \textcolor{preprocessor}{\ \ \ \ \#define\ NVIC\_PRIORITYGROUP\_1\ \ \ \ \ \ \ \ \ ((uint32\_t)0x00000006)\ }}
-\DoxyCodeLine{00138\ \textcolor{preprocessor}{\ \ \ \ \#define\ NVIC\_PRIORITYGROUP\_2\ \ \ \ \ \ \ \ \ ((uint32\_t)0x00000005)\ }}
-\DoxyCodeLine{00140\ \textcolor{preprocessor}{\ \ \ \ \#define\ NVIC\_PRIORITYGROUP\_3\ \ \ \ \ \ \ \ \ ((uint32\_t)0x00000004)\ }}
-\DoxyCodeLine{00142\ \textcolor{preprocessor}{\ \ \ \ \#define\ NVIC\_PRIORITYGROUP\_4\ \ \ \ \ \ \ \ \ ((uint32\_t)0x00000003)\ }}
-\DoxyCodeLine{00144\ \textcolor{preprocessor}{\ \ \#endif}}
-\DoxyCodeLine{00145\ }
-\DoxyCodeLine{00146\ \ \ \textcolor{comment}{/*\ Button\ Defines\ */}}
-\DoxyCodeLine{00147\ \ \ \textcolor{keyword}{typedef}\ uint8\_t\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\_PinState}};}
-\DoxyCodeLine{00148\ \ \ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a06fc87d81c62e9abb8790b6e5713c55babd19dea9e19d02d7d39464dfdde1e48b}{BUTTON\_PRESSED}}\ =\ 1,\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a06fc87d81c62e9abb8790b6e5713c55ba804e8da62a491e1d9a17e50d7a87656f}{BUTTON\_UNPRESSED}}\ =\ 0\};}
-\DoxyCodeLine{00149\ \ \ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{stm32l412xx-bsp_8h_adf764cbdea00d65edcd07bb9953ad2b7ae64b5d0218c2b0251b0fb64926ffcb44}{PIN\_SET}}\ =\ 1,\ \mbox{\hyperlink{stm32l412xx-bsp_8h_adf764cbdea00d65edcd07bb9953ad2b7a9564715ffe1fcccfdaf9221d5d5cebe7}{PIN\_RESET}}\ =\ 0\};}
-\DoxyCodeLine{00150\ }
-\DoxyCodeLine{00151\ \ \ \textcolor{comment}{/*\ Clock\ frequency\ Values\ */}}
-\DoxyCodeLine{00152\ \textcolor{preprocessor}{\ \ \#define\ CLK\_FREQ\_HZ\ \ (8000000)}}
-\DoxyCodeLine{00153\ \textcolor{preprocessor}{\ \ \#define\ TIM2\_CLK\_DEV\ \ (1)}}
-\DoxyCodeLine{00154\ \textcolor{preprocessor}{\ \ \#define\ TIM2\_CLK\_PRESCALER\ \ (8000)}}
-\DoxyCodeLine{00155\ }
-\DoxyCodeLine{00156\ \ \ \textcolor{comment}{/*\ Returns\ button\ state\ */}}
-\DoxyCodeLine{00161\ \ \ \mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\_PinState}}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a592b35fea37a6a5786d20ad01da8ebd0}{ReadDimPin}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00162\ }
-\DoxyCodeLine{00167\ \ \ \mbox{\hyperlink{stm32l412xx-bsp_8h_a7625f300415e3570f27794c1e2a7b761}{GPIO\_PinState}}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_acf26ef503b4853b39e91017a7a88aa4d}{ReadBrightPin}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00168\ \ \ \textcolor{comment}{/*\ PWM\ Outputs\ */}}
-\DoxyCodeLine{00172\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a675fed9bf5609c7bb38e53ccf6e688ff}{EnablePWM1}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00173\ }
-\DoxyCodeLine{00177\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a788e8a49edbe621a47fd0c00dd9a03a8}{DisablePWM1}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00178\ }
-\DoxyCodeLine{00182\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a777f2f61eed8154b12d938cb4d8c6bd2}{StartPWM11}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00183\ }
-\DoxyCodeLine{00187\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a03091f501e219ec8815f84a532a9b628}{StopPWM11}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00188\ }
-\DoxyCodeLine{00193\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a53c1adb0805fad4069d835fa3f309d23}{SetPW11}}(\ uint32\_t\ pulse\_width\ );}
-\DoxyCodeLine{00194\ }
-\DoxyCodeLine{00195\ \ \ \textcolor{comment}{/*\ Timers\ */}}
-\DoxyCodeLine{00199\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a4f204e0a112a0eb5f575c5c896114ada}{StartTIM2}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00200\ }
-\DoxyCodeLine{00204\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a4aabf3596c59b2fadc4dbcaed98eee80}{RestartTIM2}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00205\ }
-\DoxyCodeLine{00210\ \ \ uint32\_t\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a022e77db964e86b426cf89d4a79e1414}{GetTIM2Cnt}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00211\ }
-\DoxyCodeLine{00216\ \ \ int16\_t\ \mbox{\hyperlink{stm32l412xx-bsp_8h_af36ad1f9bd2e3dcbea2cf846da6da574}{GetThermistorValue}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00217\ }
-\DoxyCodeLine{00222\ \ \ int16\_t\ \mbox{\hyperlink{stm32l412xx-bsp_8h_adc10fd0a6d96b6cebbfc030f45f28bee}{GetCurrentValue}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00223\ }
-\DoxyCodeLine{00228\ \ \ int16\_t\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a42c7df0f7332ef35b29acfd1fefb73c3}{GetVoltageValue}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00229\ }
-\DoxyCodeLine{00233\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_ad18c863b1fd8814cd1cdc317e6d1bb57}{enableWriteProtect}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00234\ }
-\DoxyCodeLine{00238\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a4177cae560421f9acf1f61d5609fb84e}{disableWriteProtect}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00239\ }
-\DoxyCodeLine{00243\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_ab0eaacbd41b43489907c5d804fcc0e27}{enableChipSelect}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00244\ }
-\DoxyCodeLine{00248\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a9d14801c40acff3953247ae971371529}{disableChipSelect}}(\ \textcolor{keywordtype}{void}\ );}
-\DoxyCodeLine{00249\ }
-\DoxyCodeLine{00255\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a6f89ccdfbb99b0acbf97aa09be1cde3d}{transferData}}(\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ txData,\ \textcolor{keyword}{const}\ uint32\_t\ bytes\ );}
-\DoxyCodeLine{00256\ }
-\DoxyCodeLine{00262\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a902bd11e69418f9a4fad38cbc8195e79}{receiveData}}(\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ rxData,\ \textcolor{keyword}{const}\ uint32\_t\ bytes\ );}
+\DoxyCodeLine{00133\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00134\ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43a90af2af95004ea61d76950ff3f2f6ec2}{GPIO\_PIN\_RESET}}\ =\ 0U,}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43a746c062509db3ad1e47beed7527f9f8a}{GPIO\_PIN\_SET}}}
+\DoxyCodeLine{00137\ \}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\_PinState}};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00142\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00143\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_pwm_struct_ab21d8ab042b1bce7f47522d91408f0dc}{is\_running}};\ }
+\DoxyCodeLine{00145\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_pwm_struct_a3518827b17ce0b14d217385dc01c673e}{pulse\_width}};\ }
+\DoxyCodeLine{00146\ \}\ \mbox{\hyperlink{struct_pwm_struct}{PwmStruct}};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00151\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00152\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{struct_timer_struct_ab21d8ab042b1bce7f47522d91408f0dc}{is\_running}};\ }
+\DoxyCodeLine{00154\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{struct_timer_struct_ae73654f333e4363463ad8c594eca1905}{time}};\ }
+\DoxyCodeLine{00155\ \}\ \mbox{\hyperlink{struct_timer_struct}{TimerStruct}};}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ STM32L412xx\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{comment}{/*\ Button\ Defines\ */}}
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#define\ BUTTON\_UNPRESSED\ (GPIO\_PIN\_RESET)}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#define\ BUTTON\_PRESSED\ (GPIO\_PIN\_SET)}}
+\DoxyCodeLine{00162\ \textcolor{keyword}{enum}\ \{\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a06fc87d81c62e9abb8790b6e5713c55bae64b5d0218c2b0251b0fb64926ffcb44}{PIN\_SET}}\ =\ 1,\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a06fc87d81c62e9abb8790b6e5713c55ba9564715ffe1fcccfdaf9221d5d5cebe7}{PIN\_RESET}}\ =\ 0\};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{comment}{/*\ Clock\ frequency\ Values\ */}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#define\ CLK\_FREQ\_HZ\ \ (8000000)}}
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\#define\ TIM2\_CLK\_DEV\ \ (1)}}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#define\ TIM2\_CLK\_PRESCALER\ \ (8000)}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{comment}{/*\ Returns\ button\ state\ */}}
+\DoxyCodeLine{00174\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\_PinState}}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a8aa99c6d8382c750b4373716782aeeaf}{ReadTogglePin}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00180\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\_PinState}}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a592b35fea37a6a5786d20ad01da8ebd0}{ReadDimPin}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00186\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a5b3ef0486b179415581eb342e0ea6b43}{GPIO\_PinState}}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_acf26ef503b4853b39e91017a7a88aa4d}{ReadBrightPin}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00187\ \textcolor{comment}{/*\ PWM\ Outputs\ */}}
+\DoxyCodeLine{00191\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a675fed9bf5609c7bb38e53ccf6e688ff}{EnablePWM1}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00196\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a788e8a49edbe621a47fd0c00dd9a03a8}{DisablePWM1}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00201\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a777f2f61eed8154b12d938cb4d8c6bd2}{StartPWM11}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00206\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a03091f501e219ec8815f84a532a9b628}{StopPWM11}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00212\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a53c1adb0805fad4069d835fa3f309d23}{SetPW11}}\ (\ uint32\_t\ pulse\_width\ );}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \textcolor{comment}{/*\ Timers\ */}}
+\DoxyCodeLine{00218\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a4f204e0a112a0eb5f575c5c896114ada}{StartTIM2}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00223\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a4aabf3596c59b2fadc4dbcaed98eee80}{RestartTIM2}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00229\ uint32\_t\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a022e77db964e86b426cf89d4a79e1414}{GetTIM2Cnt}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00235\ int16\_t\ \mbox{\hyperlink{stm32l412xx-bsp_8h_af36ad1f9bd2e3dcbea2cf846da6da574}{GetThermistorValue}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00241\ int16\_t\ \mbox{\hyperlink{stm32l412xx-bsp_8h_adc10fd0a6d96b6cebbfc030f45f28bee}{GetCurrentValue}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00247\ int16\_t\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a42c7df0f7332ef35b29acfd1fefb73c3}{GetVoltageValue}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00252\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_ad18c863b1fd8814cd1cdc317e6d1bb57}{enableWriteProtect}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00257\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a4177cae560421f9acf1f61d5609fb84e}{disableWriteProtect}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00262\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_ab0eaacbd41b43489907c5d804fcc0e27}{enableChipSelect}}\ (\ \textcolor{keywordtype}{void}\ );}
 \DoxyCodeLine{00263\ }
-\DoxyCodeLine{00268\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a31cb479ffb8be9316c448a548ef7c55b}{sendUARTChar}}(\textcolor{keywordtype}{char}\ c);}
-\DoxyCodeLine{00269\ }
-\DoxyCodeLine{00274\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a1730ffe1e560465665eb47d9264826f9}{Error\_Handler}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00267\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a9d14801c40acff3953247ae971371529}{disableChipSelect}}\ (\ \textcolor{keywordtype}{void}\ );}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00274\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a6f89ccdfbb99b0acbf97aa09be1cde3d}{transferData}}\ (\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ \textcolor{keyword}{const}\ txData,\ \textcolor{keyword}{const}\ uint32\_t\ bytes\ );}
 \DoxyCodeLine{00275\ }
-\DoxyCodeLine{00276\ }
-\DoxyCodeLine{00277\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_bsph\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00281\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a902bd11e69418f9a4fad38cbc8195e79}{receiveData}}\ (\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}*\ rxData,\ \textcolor{keyword}{const}\ uint32\_t\ bytes\ );}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00287\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{stm32l412xx-bsp_8h_a31cb479ffb8be9316c448a548ef7c55b}{sendUARTChar}}\ (\ \textcolor{keywordtype}{char}\ c\ );}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ INC\_bsph\ */}\textcolor{preprocessor}{}}
 
 \end{DoxyCode}

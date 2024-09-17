@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write_5fprotect_5fstate_0',['WRITE_PROTECT_STATE',['../fram_8h.html#a3448c8a3cbec1c8208d12c5304bb4f60',1,'fram.h']]]
+  ['voltagerange_5fe_0',['VoltageRange_e',['../voltage__handler_8h.html#a9df5e007c9e7817a315de169e5d2f293',1,'voltage_handler.h']]]
 ];
