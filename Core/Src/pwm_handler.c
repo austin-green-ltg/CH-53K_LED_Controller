@@ -100,7 +100,8 @@ void InitPwm ( void )
     printf ( "Init PWM\n" );
 #endif /* ENABLE_UART_DEBUGGING */
     EnablePWM1();
-    TurnOffPwm();
+    TurnOffPwm ( 0 ); // turn off Visible
+    TurnOffPwm ( 1 ); // Turn off IR
     return;
 }
 
@@ -617,26 +618,27 @@ void IncreaseBrightness ( uint8_t button_held, uint8_t isIr )
 void SetPwm ( uint8_t isIr )
 {
     uint32_t pulse_width = GetPwm ( isIr );
+    TurnOffPwm (!isIr ); // turn off other pwm signal
 
-    SetPW11 ( pulse_width );
+    isIr ? SetPW12 ( pulse_width ) : SetPW11 ( pulse_width );
 #ifdef REVERSE_BRIGHTNESS
 
     if ( pulse_width == MaxPw )
     {
-        TurnOffPwm();
+        TurnOffPwm ( isIr );
     }
 
 #else
 
     if ( pulse_width == MinPw )
     {
-        TurnOffPwm();
+        TurnOffPwm ( isIr );
     }
 
 #endif /* REVERSE_BRIGHTNESS */
     else
     {
-        StartPWM11();
+        isIr ? StartPWM12() : StartPWM11();
     }
 
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
@@ -646,12 +648,14 @@ void SetPwm ( uint8_t isIr )
 
 /**
   * @brief turn off PWM
+  * @param[in] isIr Are we controlling IR or Visible LEDs
   */
-void TurnOffPwm ( void )
+void TurnOffPwm ( uint8_t isIr )
 {
-    StopPWM11();
+    isIr ? StopPWM12() : StopPWM11();
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-    printf ( "Turn off\n" );
+    printf ( "Turn off" );
+    isIr ? printf ( " IR\n" ) : printf ( " Visible\n" );
 #endif /* ENABLE_UART_DEBUGGING */
 }
 

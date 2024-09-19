@@ -42,183 +42,217 @@ TEST_TEAR_DOWN ( PWM_Handler )
 // verify nice case of DecreaseBrightness
 TEST ( PWM_Handler, DecreaseBrightnessNiceCase )
 {
-    extern PwmStruct pwm;
+    extern PwmStruct pwm_vis;
+    extern PwmStruct pwm_ir;
 
     /* Visible Tests */
     DecreaseBrightness ( PRESS, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == HalfBrightness - 1 );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     DecreaseBrightness ( HOLD, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == HalfBrightness - 1 -
                   HOLD_BRIGHTNESS_JUMP );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     InitPwm();
 
     DecreaseBrightness ( HOLD, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == HalfBrightness -
                   HOLD_BRIGHTNESS_JUMP );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
 
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
     DecreaseBrightness ( PRESS, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == HalfBrightness -
                   HOLD_BRIGHTNESS_JUMP - 1 );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
     InitPwm();
 
     DecreaseBrightness ( PRESS, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == HalfBrightness - 1 );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     DecreaseBrightness ( HOLD, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == HalfBrightness - 1 -
                   HOLD_BRIGHTNESS_JUMP );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     InitPwm();
 
     DecreaseBrightness ( HOLD, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == HalfBrightness -
                   HOLD_BRIGHTNESS_JUMP );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     DecreaseBrightness ( PRESS, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == HalfBrightness -
                   HOLD_BRIGHTNESS_JUMP - 1 );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 }
 
 // verify nice case of IncreaseBrightness
 TEST ( PWM_Handler, IncreaseBrightnessNiceCase )
 {
-    extern PwmStruct pwm;
+    extern PwmStruct pwm_vis;
+    extern PwmStruct pwm_ir;
 
     /* Visible Tests */
     IncreaseBrightness ( PRESS, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == HalfBrightness + 1 );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     IncreaseBrightness ( HOLD, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == HalfBrightness + 1 +
                   HOLD_BRIGHTNESS_JUMP );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     InitPwm();
 
     IncreaseBrightness ( HOLD, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == HalfBrightness +
                   HOLD_BRIGHTNESS_JUMP );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     IncreaseBrightness ( PRESS, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == HalfBrightness +
                   HOLD_BRIGHTNESS_JUMP + 1 );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
     InitPwm();
 
     IncreaseBrightness ( PRESS, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == HalfBrightness + 1 );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     IncreaseBrightness ( HOLD, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == HalfBrightness + 1 +
                   HOLD_BRIGHTNESS_JUMP );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     InitPwm();
 
     IncreaseBrightness ( HOLD, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == HalfBrightness +
                   HOLD_BRIGHTNESS_JUMP );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     IncreaseBrightness ( PRESS, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == HalfBrightness +
                   HOLD_BRIGHTNESS_JUMP + 1 );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 }
 
 // verify nice case of SetPwm
 TEST ( PWM_Handler, SetPwmNiceCase )
 {
-    extern PwmStruct pwm;
+    extern PwmStruct pwm_vis;
+    extern PwmStruct pwm_ir;
 
     /* Visible Tests */
     SetPwm ( LED_VISIBLE );
-    // Visible should be on and be set to visible pwm
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    // White should be on and be set to white pwm
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
+    // IR should be off
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
+    InitPwm();
 
     SetPwm ( LED_IR );
     // IR should be on and be set to IR pwm
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
+    // White should be off
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
 }
 
 // verify nice case of TurnOffPwm
 TEST ( PWM_Handler, TurnOffPwmNiceCase )
 {
-    extern PwmStruct pwm;
+    extern PwmStruct pwm_vis;
+    extern PwmStruct pwm_ir;
 
+    /* Visible Tests */
     SetPwm ( LED_VISIBLE );
-    TurnOffPwm();
-    // Visible should be off
-    TEST_ASSERT ( pwm.is_running == 0 );
+    TurnOffPwm ( LED_VISIBLE );
+    // White should be off
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
+
+    /* IR Tests */
+    InitPwm();
+
+    SetPwm ( LED_IR );
+    TurnOffPwm ( LED_IR );
+    // IR should be off
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 }
 
 // verify nice case of SetBrightness
@@ -332,7 +366,7 @@ TEST ( PWM_Handler, GetPwmThermistorNiceCase )
     const uint8_t expected_warm_vis_pwm = ( uint8_t ) ( expected_vis_pwm *
                                           WarmPwmRatio + 0.5 );
     const uint8_t expected_hot_vis_pwm = ( uint8_t ) ( expected_vis_pwm *
-                                          HotPwmRatio + 0.5 );
+                                         HotPwmRatio + 0.5 );
     SetBrightness ( brightness, LED_VISIBLE );
 
     thermistor_value_dC = HEATING_WARM_THERM;
@@ -353,7 +387,7 @@ TEST ( PWM_Handler, GetPwmThermistorNiceCase )
     const uint8_t expected_warm_IR_pwm = ( uint8_t ) ( expected_IR_pwm *
                                          WarmPwmRatio + 0.5 );
     const uint8_t expected_hot_IR_pwm = ( uint8_t ) ( expected_IR_pwm * HotPwmRatio
-                                         + 0.5 );
+                                        + 0.5 );
     SetBrightness ( brightness, LED_IR );
 
     thermistor_value_dC = HEATING_WARM_THERM;
@@ -370,44 +404,45 @@ TEST ( PWM_Handler, GetPwmThermistorNiceCase )
 // verify edge case of DecreaseBrightness
 TEST ( PWM_Handler, DecreaseBrightnessEdgeCase )
 {
-    extern PwmStruct pwm;
+    extern PwmStruct pwm_vis;
+    extern PwmStruct pwm_ir;
 
     /* Visible Tests */
     SetBrightness ( MinBrightness, LED_VISIBLE );
     DecreaseBrightness ( PRESS, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == MinBrightness );
-    TEST_ASSERT ( pwm.is_running == 0 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
-    TEST_ASSERT ( pwm.is_running == 0 );
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     DecreaseBrightness ( HOLD, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == MinBrightness );
-    TEST_ASSERT ( pwm.is_running == 0 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
-    TEST_ASSERT ( pwm.is_running == 0 );
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     InitPwm();
 
     SetBrightness ( MinBrightness, LED_VISIBLE );
     DecreaseBrightness ( HOLD, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == MinBrightness );
-    TEST_ASSERT ( pwm.is_running == 0 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
 
-    TEST_ASSERT ( pwm.is_running == 0 );
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
     DecreaseBrightness ( PRESS, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == MinBrightness );
-    TEST_ASSERT ( pwm.is_running == 0 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
-    TEST_ASSERT ( pwm.is_running == 0 );
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
     InitPwm();
@@ -415,77 +450,82 @@ TEST ( PWM_Handler, DecreaseBrightnessEdgeCase )
     SetBrightness ( MinBrightness, LED_IR );
     DecreaseBrightness ( PRESS, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
-    TEST_ASSERT ( pwm.is_running == 0 );
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == MinBrightness );
-    TEST_ASSERT ( pwm.is_running == 0 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     DecreaseBrightness ( HOLD, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
-    TEST_ASSERT ( pwm.is_running == 0 );
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == MinBrightness );
-    TEST_ASSERT ( pwm.is_running == 0 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     InitPwm();
 
     SetBrightness ( MinBrightness, LED_IR );
     DecreaseBrightness ( HOLD, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
-    TEST_ASSERT ( pwm.is_running == 0 );
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == MinBrightness );
-    TEST_ASSERT ( pwm.is_running == 0 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     DecreaseBrightness ( PRESS, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
-    TEST_ASSERT ( pwm.is_running == 0 );
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == MinBrightness );
-    TEST_ASSERT ( pwm.is_running == 0 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 }
 
 // verify edge case of IncreaseBrightness
 TEST ( PWM_Handler, IncreaseBrightnessEdgeCase )
 {
-    extern PwmStruct pwm;
+    extern PwmStruct pwm_vis;
+    extern PwmStruct pwm_ir;
 
     /* Visible Tests */
     SetBrightness ( MaxBrightness, LED_VISIBLE );
     IncreaseBrightness ( PRESS, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == MaxBrightness );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     IncreaseBrightness ( HOLD, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == MaxBrightness );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     InitPwm();
 
     SetBrightness ( MaxBrightness, LED_VISIBLE );
     IncreaseBrightness ( HOLD, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == MaxBrightness );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     IncreaseBrightness ( PRESS, LED_VISIBLE );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == MaxBrightness );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_VISIBLE ) );
+    TEST_ASSERT ( pwm_vis.is_running == 1 );
+    TEST_ASSERT ( pwm_vis.pulse_width == GetPwm ( LED_VISIBLE ) );
     TEST_ASSERT ( GetBrightness ( LED_IR ) ==
                   HalfBrightness ); // IR should not change
+    TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
     InitPwm();
@@ -493,34 +533,38 @@ TEST ( PWM_Handler, IncreaseBrightnessEdgeCase )
     SetBrightness ( MaxBrightness, LED_IR );
     IncreaseBrightness ( PRESS, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == MaxBrightness );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     IncreaseBrightness ( HOLD, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == MaxBrightness );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     InitPwm();
 
     SetBrightness ( MaxBrightness, LED_IR );
     IncreaseBrightness ( HOLD, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == MaxBrightness );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
     IncreaseBrightness ( PRESS, LED_IR );
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) ==
-                  HalfBrightness ); // Visible should not change
+                  HalfBrightness ); // White should not change
+    TEST_ASSERT ( pwm_vis.is_running == 0 );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == MaxBrightness );
-    TEST_ASSERT ( pwm.is_running == 1 );
-    TEST_ASSERT ( pwm.pulse_width == GetPwm ( LED_IR ) );
+    TEST_ASSERT ( pwm_ir.is_running == 1 );
+    TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 }
 
 // verify edge case of SetBrightness

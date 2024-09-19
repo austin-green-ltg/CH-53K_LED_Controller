@@ -76,8 +76,10 @@
 #define VOLTMETER_ADC_GPIO_Port GPIOB
 #define AMPMETER_ADC_Pin LL_GPIO_PIN_1
 #define AMPMETER_ADC_GPIO_Port GPIOB
-#define PWM_OUT_Pin LL_GPIO_PIN_8
-#define PWM_OUT_GPIO_Port GPIOA
+#define PWM_VIS_OUT_Pin LL_GPIO_PIN_8
+#define PWM_VIS_OUT_GPIO_Port GPIOA
+#define PWM_IR_OUT_Pin LL_GPIO_PIN_9
+#define PWM_IR_OUT_GPIO_Port GPIOA
 #define USB_RENUM_N_Pin LL_GPIO_PIN_10
 #define USB_RENUM_N_GPIO_Port GPIOA
 #define SWDIO_Pin LL_GPIO_PIN_13
@@ -88,44 +90,51 @@
 #define SPI_WP_GPIO_Port GPIOB
 #define SPI_NSS_Pin LL_GPIO_PIN_6
 #define SPI_NSS_GPIO_Port GPIOB
+#define LED_ON_OFF_Pin LL_GPIO_PIN_7
+#define LED_ON_OFF_GPIO_Port GPIOB
 #define BOOT0_Pin LL_GPIO_PIN_3
 #define BOOT0_GPIO_Port GPIOH
 
 #else /* STM32L412xx */
 
 /* Below is for debugging purposes */
-#define SPI_NSS_Pin               0
-#define SPI_NSS_GPIO_Port         0
-#define SPI_WP_Pin                0
-#define SPI_WP_GPIO_Port          0
-#define THERMISTOR_ADC_Pin        0
-#define THERMISTOR_ADC_GPIO_Port  0
-#define BRIGHT_Pin                0
-#define BRIGHT_GPIO_Port          0
-#define DIM_Pin                   0
-#define DIM_GPIO_Port             0
-#define VIS_IR_Pin                0
-#define VIS_IR_GPIO_Port          0
-#define EEPROM_SCK_Pin            0
-#define EEPROM_SCK_GPIO_Port      0
-#define EEPROM_MISO_Pin           0
-#define EEPROM_MISO_GPIO_Port     0
-#define EEPROM_MOSI_Pin           0
-#define EEPROM_MOSI_GPIO_Port     0
-#define VOLTMETER_ADC_Pin         0
-#define VOLTMETER_ADC_GPIO_Port   0
-#define AMPMETER_ADC_Pin          0
-#define AMPMETER_ADC_GPIO_Port    0
-#define PWM_OUT_Pin               0
-#define PWM_OUT_GPIO_Port         0
-#define USB_RENUM_N_Pin           0
-#define USB_RENUM_N_GPIO_Port     0
-#define SWDIO_Pin                 0
-#define SWDIO_GPIO_Port           0
-#define SWCLK_Pin                 0
-#define SWCLK_GPIO_Port           0
-#define BOOT0_Pin                 0
-#define BOOT0_GPIO_Port           0
+
+#define THERMISTOR_ADC_Pin          0
+#define THERMISTOR_ADC_GPIO_Port    0
+#define BRIGHT_Pin                  0
+#define BRIGHT_GPIO_Port            0
+#define DIM_Pin                     0
+#define DIM_GPIO_Port               0
+#define VIS_IR_Pin                  0
+#define VIS_IR_GPIO_Port            0
+#define EEPROM_SCK_Pin              0
+#define EEPROM_SCK_GPIO_Port        0
+#define EEPROM_MISO_Pin             0
+#define EEPROM_MISO_GPIO_Port       0
+#define EEPROM_MOSI_Pin             0
+#define EEPROM_MOSI_GPIO_Port       0
+#define VOLTMETER_ADC_Pin           0
+#define VOLTMETER_ADC_GPIO_Port     0
+#define AMPMETER_ADC_Pin            0
+#define AMPMETER_ADC_GPIO_Port      0
+#define PWM_VIS_OUT_Pin             0
+#define PWM_VIS_OUT_GPIO_Port       0
+#define PWM_IR_OUT_Pin              0
+#define PWM_IR_OUT_GPIO_Port        0
+#define USB_RENUM_N_Pin             0
+#define USB_RENUM_N_GPIO_Port       0
+#define SWDIO_Pin                   0
+#define SWDIO_GPIO_Port             0
+#define SWCLK_Pin                   0
+#define SWCLK_GPIO_Port             0
+#define SPI_WP_Pin                  0
+#define SPI_WP_GPIO_Port            0
+#define SPI_NSS_Pin                 0
+#define SPI_NSS_GPIO_Port           0
+#define LED_ON_OFF_Pin              0
+#define LED_ON_OFF_GPIO_Port        0
+#define BOOT0_Pin                   0
+#define BOOT0_GPIO_Port             0
 
 /**
   * GPIO_PinState for Testing
@@ -168,6 +177,12 @@ enum { PIN_SET = 1, PIN_RESET = 0};
 
 /* Returns button state */
 /**
+  * @brief Reads on/off pin value
+  * @param[out] On/Off pin state
+  */
+GPIO_PinState ReadOnOffPin ( void );
+
+/**
   * @brief Reads toggle pin value
   * @param[out] Toggle pin state
   */
@@ -201,15 +216,31 @@ void DisablePWM1 ( void );
 void StartPWM11 ( void );
 
 /**
+  * @brief Starts PWM Timer 1 Channel 2 output
+  */
+void StartPWM12 ( void );
+
+/**
   * @brief Stops PWM Timer 1 Channel 1 output
   */
 void StopPWM11 ( void );
+
+/**
+  * @brief Stops PWM Timer 1 Channel 2 output
+  */
+void StopPWM12 ( void );
 
 /**
   * @brief Sets PWM Timer 1 Channel 1 value
   * @param[in] pulse_width Value out of 255 to set pulse width to
   */
 void SetPW11 ( uint32_t pulse_width );
+
+/**
+  * @brief Sets PWM Timer 1 Channel 2 value
+  * @param[in] pulse_width Value out of 255 to set pulse width to
+  */
+void SetPW12 ( uint32_t pulse_width );
 
 /* Timers */
 /**

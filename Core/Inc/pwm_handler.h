@@ -68,8 +68,9 @@ void SetPwm ( uint8_t isIr ); // turn on and set PWM
 
 /**
   * @brief turn off PWM
+  * @param[in] isIr Are we controlling IR or Visible LEDs
   */
-void TurnOffPwm ( void ); // turn of PWM
+void TurnOffPwm ( uint8_t isIr ); // turn of PWM
 
 /**
   * @brief Return Brightness variable

@@ -24,7 +24,16 @@
 
 #include "stm32l412xx-bsp.h"
 
-/* Private variables ---------------------------------------------------------*/
+/**
+  * @brief Reads on/off pin value
+  * @param[out] On/Off pin state
+  */
+GPIO_PinState ReadOnOffPin ( void )
+{
+    return ( LL_GPIO_IsInputPinSet ( LED_ON_OFF_GPIO_Port,
+                                     LED_ON_OFF_Pin ) == 0 ? GPIO_PIN_RESET : GPIO_PIN_SET );
+}
+
 /**
   * @brief Reads toggle pin value
   * @param[out] Toggle pin state
@@ -84,11 +93,27 @@ void StartPWM11 ( void )
 }
 
 /**
+  * @brief Starts PWM Timer 1 Channel 2 output
+  */
+void StartPWM12 ( void )
+{
+    LL_TIM_CC_EnableChannel ( TIM1, LL_TIM_CHANNEL_CH2 );
+}
+
+/**
   * @brief Stops PWM Timer 1 Channel 1 output
   */
 void StopPWM11 ( void )
 {
     LL_TIM_CC_DisableChannel ( TIM1, LL_TIM_CHANNEL_CH1 );
+}
+
+/**
+  * @brief Stops PWM Timer 1 Channel 2 output
+  */
+void StopPWM12 ( void )
+{
+    LL_TIM_CC_DisableChannel ( TIM1, LL_TIM_CHANNEL_CH2 );
 }
 
 /**
@@ -98,6 +123,15 @@ void StopPWM11 ( void )
 void SetPW11 ( uint32_t pulse_width )
 {
     LL_TIM_OC_SetCompareCH1 ( TIM1, pulse_width );
+}
+
+/**
+  * @brief Sets PWM Timer 1 Channel 2 value
+  * @param[in] pulse_width Value out of 255 to set pulse width to
+  */
+void SetPW12 ( uint32_t pulse_width )
+{
+    LL_TIM_OC_SetCompareCH2 ( TIM1, pulse_width );
 }
 
 /**

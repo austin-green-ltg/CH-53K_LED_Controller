@@ -62,6 +62,9 @@ void MX_TIM1_Init ( void )
     TIM_OC_InitStruct.OCNIdleState = LL_TIM_OCIDLESTATE_LOW;
     LL_TIM_OC_Init ( TIM1, LL_TIM_CHANNEL_CH1, &TIM_OC_InitStruct );
     LL_TIM_OC_DisableFast ( TIM1, LL_TIM_CHANNEL_CH1 );
+    TIM_OC_InitStruct.OCMode = LL_TIM_OCMODE_FROZEN;
+    LL_TIM_OC_Init ( TIM1, LL_TIM_CHANNEL_CH2, &TIM_OC_InitStruct );
+    LL_TIM_OC_DisableFast ( TIM1, LL_TIM_CHANNEL_CH2 );
     LL_TIM_SetOCRefClearInputSource ( TIM1, LL_TIM_OCREF_CLR_INT_NC );
     LL_TIM_DisableExternalClock ( TIM1 );
     LL_TIM_ConfigETR ( TIM1, LL_TIM_ETR_POLARITY_NONINVERTED,
@@ -87,14 +90,15 @@ void MX_TIM1_Init ( void )
     LL_AHB2_GRP1_EnableClock ( LL_AHB2_GRP1_PERIPH_GPIOA );
     /**TIM1 GPIO Configuration
     PA8     ------> TIM1_CH1
+    PA9     ------> TIM1_CH2
     */
-    GPIO_InitStruct.Pin = PWM_OUT_Pin;
+    GPIO_InitStruct.Pin = PWM_VIS_OUT_Pin | PWM_IR_OUT_Pin;
     GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
     GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
     GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
     GPIO_InitStruct.Alternate = LL_GPIO_AF_1;
-    LL_GPIO_Init ( PWM_OUT_GPIO_Port, &GPIO_InitStruct );
+    LL_GPIO_Init ( GPIOA, &GPIO_InitStruct );
 
 }
 

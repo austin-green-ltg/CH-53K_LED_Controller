@@ -2,8 +2,10 @@
 
 #include "stm32l412xx-bsp.h"
 
-PwmStruct pwm;
+PwmStruct pwm_vis;
+PwmStruct pwm_ir;
 TimerStruct timer;
+GPIO_PinState on_off_pin = 0;
 GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
 GPIO_PinState bright_pin = 0;
@@ -15,6 +17,11 @@ uint8_t chipEnable = 0;
 uint8_t writeEnable = 0;
 uint8_t statusRegister = 0;
 uint8_t readStatusRegisterSignal = 0;
+
+GPIO_PinState ReadOnOffPin( void )
+{
+    return on_off_pin;
+}
 
 GPIO_PinState ReadTogglePin( void )
 {
@@ -43,19 +50,37 @@ void DisablePWM1( void )
 
 void StartPWM11( void )
 {
-    pwm.is_running = 1;
+    pwm_vis.is_running = 1;
+    return;
+}
+
+void StartPWM12( void )
+{
+    pwm_ir.is_running = 1;
     return;
 }
 
 void StopPWM11( void )
 {
-    pwm.is_running = 0;
+    pwm_vis.is_running = 0;
+    return;
+}
+
+void StopPWM12( void )
+{
+    pwm_ir.is_running = 0;
     return;
 }
 
 void SetPW11( uint32_t pulse_width )
 {
-    pwm.pulse_width = pulse_width;
+    pwm_vis.pulse_width = pulse_width;
+    return;
+}
+
+void SetPW12( uint32_t pulse_width )
+{
+    pwm_ir.pulse_width = pulse_width;
     return;
 }
 

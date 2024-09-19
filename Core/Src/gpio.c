@@ -78,6 +78,12 @@ void MX_GPIO_Init ( void )
     LL_GPIO_Init ( GPIOB, &GPIO_InitStruct );
 
     /**/
+    GPIO_InitStruct.Pin = LED_ON_OFF_Pin;
+    GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
+    GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
+    LL_GPIO_Init ( LED_ON_OFF_GPIO_Port, &GPIO_InitStruct );
+
+    /**/
     GPIO_InitStruct.Pin = BOOT0_Pin;
     GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;

@@ -159,33 +159,46 @@ int main ( void )
             // TODO: Do something
         }
 
-        GPIO_PinState togglePressed = IsTogglePressed(); // 0 = IR, 1 = Visible
+        GPIO_PinState onOffPressed = IsOnOffPressed(); // 0 = Off, 1 = On
 
-        const int8_t CurrBrightness = GetBrightness (!togglePressed );;
-        const uint16_t BrightnessDelay_ms = ( uint16_t ) ( ( LowStepTimeMs +
-                                            CurrBrightness ) * HOLD_BRIGHTNESS_JUMP );
-
-        uint8_t brightnessDelayHit = DelayHit ( BrightnessDelay_ms );
-
-        GPIO_PinState dimPressed = IsDimPressed();
-        GPIO_PinState brightPressed = IsBrightPressed();
-
-        if ( ( dimPressed == BUTTON_PRESSED ) && brightnessDelayHit )
+        if ( onOffPressed )
         {
-            DecreaseBrightness ( prevDimPressed, !togglePressed );
+            EnablePWM1();
+            GPIO_PinState togglePressed = IsTogglePressed(); // 0 = IR, 1 = Visible
+            SetPwm (!togglePressed );
 
-            RestartDelayCounter();
+            const int8_t CurrBrightness = GetBrightness (!togglePressed );;
+            const uint16_t BrightnessDelay_ms = ( uint16_t ) ( ( LowStepTimeMs +
+                                                CurrBrightness ) * HOLD_BRIGHTNESS_JUMP );
+
+            uint8_t brightnessDelayHit = DelayHit ( BrightnessDelay_ms );
+
+            GPIO_PinState dimPressed = IsDimPressed();
+            GPIO_PinState brightPressed = IsBrightPressed();
+
+            if ( ( dimPressed == BUTTON_PRESSED ) && brightnessDelayHit )
+            {
+                DecreaseBrightness ( prevDimPressed, !togglePressed );
+
+                RestartDelayCounter();
+            }
+            else if ( ( brightPressed == BUTTON_PRESSED ) && brightnessDelayHit )
+            {
+                IncreaseBrightness ( prevBrightPressed, !togglePressed );
+
+                RestartDelayCounter();
+            }
+
+            // save previous button state
+            prevDimPressed = dimPressed;
+            prevBrightPressed = brightPressed;
         }
-        else if ( ( brightPressed == BUTTON_PRESSED ) && brightnessDelayHit )
+        else
         {
-            IncreaseBrightness ( prevBrightPressed, !togglePressed );
-
-            RestartDelayCounter();
+            DisablePWM1();
+            prevDimPressed = BUTTON_UNPRESSED;
+            prevBrightPressed = BUTTON_UNPRESSED;
         }
-
-        // save previous button state
-        prevDimPressed = dimPressed;
-        prevBrightPressed = brightPressed;
 
         // log brightness levels
     }

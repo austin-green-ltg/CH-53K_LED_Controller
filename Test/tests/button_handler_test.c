@@ -5,6 +5,7 @@
 #define PRESS (0)
 #define HOLD  (1)
 
+extern GPIO_PinState on_off_pin;
 extern GPIO_PinState toggle_pin;
 extern GPIO_PinState dim_pin;
 extern GPIO_PinState bright_pin;
@@ -22,6 +23,14 @@ TEST_TEAR_DOWN ( Button_Handler )
 }
 
 /* start button_handler tests */
+TEST ( Button_Handler, OnOffPin )
+{
+    on_off_pin = 0;
+    TEST_ASSERT_EQUAL_INT ( 0, IsOnOffPressed() );
+    on_off_pin = 1;
+    TEST_ASSERT_EQUAL_INT ( 1, IsOnOffPressed() );
+}
+
 TEST ( Button_Handler, TogglePin )
 {
     toggle_pin = 0;
@@ -50,6 +59,7 @@ TEST ( Button_Handler, BrightPin )
 
 TEST_GROUP_RUNNER ( Button_Handler )
 {
+    RUN_TEST_CASE ( Button_Handler, OnOffPin );
     RUN_TEST_CASE ( Button_Handler, TogglePin );
     RUN_TEST_CASE ( Button_Handler, DimPin );
     RUN_TEST_CASE ( Button_Handler, BrightPin );

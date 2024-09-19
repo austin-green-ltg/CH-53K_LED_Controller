@@ -29,8 +29,17 @@
 /* Private define ------------------------------------------------------------*/
 
 /**
+  * @brief Return state of on off button
+  * @param[out] On/Off Pin State, pressed or not
+  */
+GPIO_PinState IsOnOffPressed ( void )
+{
+    return ReadOnOffPin();
+}
+
+/**
   * @brief Return state of toggle button
-  * @param[out] Toogle Pin State, pressed or not
+  * @param[out] Toggle Pin State, pressed or not
   */
 GPIO_PinState IsTogglePressed ( void )
 {
