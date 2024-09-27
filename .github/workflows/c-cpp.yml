@@ -1,0 +1,24 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build_windows:
+      runs-on: windows-latest
+
+      steps:
+      - uses: actions/checkout@v4
+      - name: Run Test Windows
+        run: cd Test; make -f test_makefile clean; make -f test_makefile 
+        
+  build_ubuntu:
+      runs-on: ubuntu-latest
+
+      steps:
+      - uses: actions/checkout@v4
+      - name: Run Test Ubuntu
+        run: cd Test; make -f test_makefile clean; make -f test_makefile 
