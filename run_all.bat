@@ -1,0 +1,10 @@
+cd .\Core
+call format.bat
+cd ..
+cd .\Docs\latex
+call make.bat
+cd ..\..
+cd .\Test
+call format.bat
+call run_tests_rebuild.bat
+cd ..
