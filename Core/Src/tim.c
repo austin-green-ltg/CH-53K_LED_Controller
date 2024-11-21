@@ -62,7 +62,7 @@ void MX_TIM1_Init ( void )
     TIM_OC_InitStruct.OCNIdleState = LL_TIM_OCIDLESTATE_LOW;
     LL_TIM_OC_Init ( TIM1, LL_TIM_CHANNEL_CH1, &TIM_OC_InitStruct );
     LL_TIM_OC_DisableFast ( TIM1, LL_TIM_CHANNEL_CH1 );
-    TIM_OC_InitStruct.OCMode = LL_TIM_OCMODE_FROZEN;
+    LL_TIM_OC_EnablePreload ( TIM1, LL_TIM_CHANNEL_CH2 );
     LL_TIM_OC_Init ( TIM1, LL_TIM_CHANNEL_CH2, &TIM_OC_InitStruct );
     LL_TIM_OC_DisableFast ( TIM1, LL_TIM_CHANNEL_CH2 );
     LL_TIM_SetOCRefClearInputSource ( TIM1, LL_TIM_OCREF_CLR_INT_NC );
