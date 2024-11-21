@@ -225,3 +225,224 @@
 	"stm32l412xx-bsp.h"
 	"fram.h"
 
+1726688557 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\src\button_handler.c
+	"button_handler.h"
+	"stm32l412xx-bsp.h"
+
+1726688560 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\button_handler.h
+	<stdint.h>
+	"stm32l412xx-bsp.h"
+
+1726688454 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\stm32l412xx-bsp.h
+	<stdint.h>
+	"stm32l4xx_hal.h"
+	"stm32l4xx_ll_adc.h"
+	"stm32l4xx_ll_crs.h"
+	"stm32l4xx_ll_rcc.h"
+	"stm32l4xx_ll_bus.h"
+	"stm32l4xx_ll_system.h"
+	"stm32l4xx_ll_exti.h"
+	"stm32l4xx_ll_cortex.h"
+	"stm32l4xx_ll_utils.h"
+	"stm32l4xx_ll_pwr.h"
+	"stm32l4xx_ll_dma.h"
+	"stm32l4xx_ll_spi.h"
+	"stm32l4xx_ll_tim.h"
+	"stm32l4xx_ll_usart.h"
+	"stm32l4xx_ll_gpio.h"
+	"adc.h"
+	"spi.h"
+	"tim.h"
+	"usart.h"
+	"gpio.h"
+
+1726686655 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\adc.h
+	"stm32l412xx-bsp.h"
+
+1726686661 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\spi.h
+	"stm32l412xx-bsp.h"
+
+1726686681 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\tim.h
+	"stm32l412xx-bsp.h"
+
+1726686684 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\usart.h
+	"stm32l412xx-bsp.h"
+
+1726686657 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\gpio.h
+	"stm32l412xx-bsp.h"
+
+1726575599 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\src\current_handler.c
+	<stdio.h>
+	"current_handler.h"
+	"stm32l412xx-bsp.h"
+	"logger.h"
+
+1726575599 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\current_handler.h
+	<stdint.h>
+
+1726575322 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\logger.h
+	<stdint.h>
+
+1726575599 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\src\delay_handler.c
+	"delay_handler.h"
+	"stm32l412xx-bsp.h"
+
+1726575322 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\delay_handler.h
+	<stdint.h>
+
+1726575599 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\src\fram.c
+	<string.h>
+	"fram.h"
+	"stm32l412xx-bsp.h"
+	"spi.h"
+
+1726575599 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\fram.h
+	"stm32l412xx-bsp.h"
+
+1726575599 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\src\logger.c
+	<string.h>
+	<stdio.h>
+	"logger.h"
+	"fram.h"
+	"stm32l412xx-bsp.h"
+
+1726688144 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\src\pwm_handler.c
+	"pwm_handler.h"
+	"stm32l412xx-bsp.h"
+	"temperature_handler.h"
+	"my_printf.h"
+
+1726687579 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\pwm_handler.h
+	<stdint.h>
+
+1732218785 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\temperature_handler.h
+	<stdint.h>
+
+1726575599 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\my_printf.h
+	<stdio.h>
+
+1732218885 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\src\temperature_handler.c
+	<string.h>
+	"temperature_handler.h"
+	"stm32l412xx-bsp.h"
+	"logger.h"
+
+1726575599 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\src\voltage_handler.c
+	<stdio.h>
+	"voltage_handler.h"
+	"stm32l412xx-bsp.h"
+	"logger.h"
+
+1726575599 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\core\inc\voltage_handler.h
+	<stdint.h>
+
+1732216980 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\mocks\bsp_mock.c
+	<stdio.h>
+	"stm32l412xx-bsp.h"
+
+1726746487 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\tests\button_handler_test.c
+	"unity_fixture.h"
+	"button_handler.h"
+	"stm32l412xx-bsp.h"
+
+1726583782 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\unity\unity_fixture.h
+	"unity.h"
+	"unity_fixture_internals.h"
+	"unity_memory.h"
+	"unity_internals.h"
+
+1726583782 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\unity\unity.h
+	"unity_internals.h"
+
+1726583782 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\unity\unity_internals.h
+	"unity_config.h"
+	<setjmp.h>
+	<math.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdint.h>
+	<limits.h>
+	<sdkddkver.h>
+	<stdnoreturn.h>
+	<stdio.h>
+	<stdio.h>
+	<time.h>
+	<time.h>
+
+1726583782 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\unity\unity_fixture_internals.h
+
+1726583782 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\unity\unity_memory.h
+	<stddef.h>
+	<stdlib.h>
+
+1726583825 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\tests\current_handler_test.c
+	<string.h>
+	"unity_fixture.h"
+	"current_handler.h"
+	"logger.h"
+	"stm32l412xx-bsp.h"
+
+1726583825 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\tests\delay_handler_test.c
+	<stdlib.h>
+	"unity_fixture.h"
+	"delay_handler.h"
+	"stm32l412xx-bsp.h"
+
+1726583825 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\tests\fram_test.c
+	<stdlib.h>
+	<string.h>
+	"unity_fixture.h"
+	"stm32l412xx-bsp.h"
+	"fram.h"
+
+1726583825 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\tests\logger_test.c
+	<string.h>
+	"unity_fixture.h"
+	"logger.h"
+	"stm32l412xx-bsp.h"
+
+1732218820 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\tests\pwm_handler_test.c
+	"unity_fixture.h"
+	"pwm_handler.h"
+	"temperature_handler.h"
+	"stm32l412xx-bsp.h"
+
+1726583825 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\tests\requirements_test.c
+	"unity_fixture.h"
+	"button_handler.h"
+	"delay_handler.h"
+	"pwm_handler.h"
+	"temperature_handler.h"
+	"stm32l412xx-bsp.h"
+
+1732218839 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\tests\temperature_handler_test.c
+	<string.h>
+	"unity_fixture.h"
+	"temperature_handler.h"
+	"logger.h"
+	"stm32l412xx-bsp.h"
+
+1726583825 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\tests\voltage_handler_test.c
+	<string.h>
+	"unity_fixture.h"
+	"voltage_handler.h"
+	"logger.h"
+	"stm32l412xx-bsp.h"
+
+1726583782 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\unity\unity.c
+	"unity.h"
+
+1726583782 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\unity\unity_fixture.c
+	"unity_fixture.h"
+	"unity_internals.h"
+	<string.h>
+
+1726583782 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\unity\unity_memory.c
+	"unity.h"
+	"unity_memory.h"
+	<string.h>
+	<stdlib.h>
+
+1732202278 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller - thermistor\test\test_runner.c
+	"unity_fixture.h"
+

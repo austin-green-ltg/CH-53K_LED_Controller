@@ -164,7 +164,8 @@ uint32_t GetTIM2Cnt ( void )
 }
 
 /**
-  * @brief Returns raw ADC value from thermistor
+  * @brief Returns raw ADC value 0x0 to 0xFFF from thermistor.
+  *         0x0 = 0V, 0xFFF = 3.3V
   * @param[out] Thermistor raw ADC value
   */
 int16_t GetThermistorValue ( void )

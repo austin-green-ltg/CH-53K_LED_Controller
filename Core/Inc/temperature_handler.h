@@ -55,4 +55,9 @@ int32_t GetTemperature ( void );
   */
 TemperatureRange_e GetTemperatureRange ( void );
 
+/**
+  * @brief Logs the Temperature. Always takes up 16 bits
+  */
+void LogTemperature ( void );
+
 #endif /* INC_temperature_handlerh */

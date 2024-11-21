@@ -7,12 +7,13 @@
 #define HOLD  (1)
 enum {LED_VISIBLE = 0, LED_IR = 1};
 
-#define HEATING_WARM_THERM (1000)
-#define HEATING_HOT_THERM  (1200)
-#define COOLING_COOL_THERM (800)
-#define COOLING_WARM_THERM (1000)
+#define HEATING_WARM_THERM_DC (1000)
+#define HEATING_HOT_THERM_DC  (1200)
+#define COOLING_COOL_THERM_DC (800)
+#define COOLING_WARM_THERM_DC (1000)
 
-extern int16_t thermistor_value_dC;
+extern int16_t thermistor_value;
+extern const float dC_to_thermistor;
 
 extern const uint8_t MinBrightness ;
 extern const uint8_t MaxBrightness ;
@@ -33,7 +34,7 @@ TEST_SETUP ( PWM_Handler )
 TEST_TEAR_DOWN ( PWM_Handler )
 {
     /* executed after *every* non-skipped and non-failing test */
-    thermistor_value_dC = 0; // return to default value
+    thermistor_value = 0; // return to default value
     GetTemperatureRange(); // set thermistor range
 }
 
@@ -369,13 +370,16 @@ TEST ( PWM_Handler, GetPwmThermistorNiceCase )
                                          HotPwmRatio + 0.5 );
     SetBrightness ( brightness, LED_VISIBLE );
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value = ( uint16_t ) ( ( HEATING_WARM_THERM_DC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetPwm ( LED_VISIBLE ) == expected_warm_vis_pwm );
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value = ( uint16_t ) ( ( HEATING_HOT_THERM_DC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetPwm ( LED_VISIBLE ) == expected_hot_vis_pwm );
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value = ( uint16_t ) ( ( COOLING_COOL_THERM_DC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetPwm ( LED_VISIBLE ) == expected_cool_vis_pwm );
 
     /* IR Tests */
@@ -390,13 +394,16 @@ TEST ( PWM_Handler, GetPwmThermistorNiceCase )
                                         + 0.5 );
     SetBrightness ( brightness, LED_IR );
 
-    thermistor_value_dC = HEATING_WARM_THERM;
+    thermistor_value = ( uint16_t ) ( ( HEATING_WARM_THERM_DC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetPwm ( LED_IR ) == expected_warm_IR_pwm );
 
-    thermistor_value_dC = HEATING_HOT_THERM;
+    thermistor_value = ( uint16_t ) ( ( HEATING_HOT_THERM_DC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetPwm ( LED_IR ) == expected_hot_IR_pwm );
 
-    thermistor_value_dC = COOLING_COOL_THERM;
+    thermistor_value = ( uint16_t ) ( ( COOLING_COOL_THERM_DC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetPwm ( LED_IR ) == expected_cool_IR_pwm );
 }
 

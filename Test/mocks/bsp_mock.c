@@ -9,7 +9,7 @@ GPIO_PinState on_off_pin = 0;
 GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
 GPIO_PinState bright_pin = 0;
-int16_t thermistor_value_dC = 0;
+uint16_t thermistor_value = 0;
 int16_t current_value_dA = 0;
 int16_t voltage_value_dV = 280;
 uint8_t writeProtect = 0;
@@ -103,8 +103,8 @@ uint32_t GetTIM2Cnt( void )
 
 int16_t GetThermistorValue( void )
 {
-    // assumes value is dC, i.e. 10 = 1 C
-    return thermistor_value_dC;
+    // assumes (value * 3.3 / 0xFFF) = Volts
+    return thermistor_value;
 }
 
 int16_t GetCurrentValue( void )
