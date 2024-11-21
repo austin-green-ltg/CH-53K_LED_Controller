@@ -32,11 +32,6 @@
 #include "stm32l412xx-bsp.h"
 #include "logger.h"
 
-/** Raw value out of thermistor to deciCelcius (C*0.1) */
-const int32_t ThermistorTodCelcius = ( 1 );
-/** DeciCelcius (V*0.1) to raw value out of thermistor */
-const int32_t dCelciusToThermistor = ( 1 );
-
 /** Heating Threshold 1 (heating up from Cool to Warm) in dC */
 const int32_t HeatingThreshold1_dC = ( 1000 );
 /** Heating Threshold 2 (heating up from Warm to Hot) in dC */
@@ -45,6 +40,20 @@ const int32_t HeatingThreshold2_dC = ( 1200 );
 const int32_t CoolingThreshold1_dC = ( 800 ) ;
 /** Cooling Threshold 2 (cooling down from Hot to Warm) in dC */
 const int32_t CoolingThreshold2_dC = ( 1000 );
+
+/**
+  * Temperature Thermistor to dC Conversion Constant
+  * Multiply by below then subtract 500 to go from thermistor to dC value
+  * Make sure you add 0.5 to round int
+  */
+const float thermistor_to_dC = 3300.0f / 4095.0f;
+
+/**
+  * Temperature dC to Thermistor Conversion Constant
+  * Add 500 and then multiply by below to go from dC to thermistor value
+  * Make sure you add 0.5 to round int
+  */
+const float dC_to_thermistor = 4095.0f / 3300.0f;
 
 /** default temperature state is TempCool */
 static TemperatureRange_e temperature_threshold = TempCool;
@@ -106,12 +115,17 @@ static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
 
 /**
   * @brief Get temperature from thermistor
+  *         Conversion is (thermistor * 3300 / 0xFFF ~ 0.806) = millivolts
+  *         Millivolts / 10 - 50 = Temperature C
+  *         We multiply everything by 10 to get dC
+  *         To reverse (dC + 500) * 4095 / 3300 ~ 1.241
   *
   * @param[out] temperature level in dC
   */
 int32_t GetTemperature ( void )
 {
-    int32_t temperature = GetThermistorValue() * ThermistorTodCelcius;
+    int32_t temperature = ( int32_t ) ( ( float ) GetThermistorValue() *
+                                        thermistor_to_dC + 0.5f ) + (-500 );
     return ( temperature );
 }
 

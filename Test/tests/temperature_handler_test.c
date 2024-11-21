@@ -5,15 +5,16 @@
 #include "logger.h"                 /* CUT */
 #include "stm32l412xx-bsp.h"        /* CUT */
 
-const uint16_t HeatingWarmTherm = 1000u;
-const uint16_t HeatingHotTherm = 1200u;
-const uint16_t CoolingCoolTherm = 800u;
-const uint16_t CoolingWarmTherm = 1000u;
+const uint16_t HeatingWarmTherm_dC = 1000u;
+const uint16_t HeatingHotTherm_dC = 1200u;
+const uint16_t CoolingCoolTherm_dC = 800u;
+const uint16_t CoolingWarmTherm_dC = 1000u;
 
 extern void initFram ( void );
 
 extern uint32_t address; // last written to address
-extern int32_t thermistor_value_dC;
+extern uint16_t thermistor_value;
+extern const float dC_to_thermistor;
 
 TEST_GROUP ( Temperature_Handler );
 
@@ -26,7 +27,8 @@ TEST_SETUP ( Temperature_Handler )
 TEST_TEAR_DOWN ( Temperature_Handler )
 {
     /* executed after *every* non-skipped and non-failing test */
-    thermistor_value_dC = 0; // return to default value
+    thermistor_value = ( uint16_t ) ( 500 * dC_to_thermistor +
+                                      0.5f ); // return to default value
     GetTemperatureRange(); // set temperature range
 }
 
@@ -39,7 +41,7 @@ TEST_TEAR_DOWN ( Temperature_Handler )
 /* start temperature_handler tests */
 TEST ( Temperature_Handler, GetDefaultTemperature )
 {
-    TEST_ASSERT_EQUAL_INT32 ( 0, GetTemperature() ); // Default value
+    TEST_ASSERT_EQUAL_INT32 (-500, GetTemperature() ); // Default value
 }
 
 TEST ( Temperature_Handler, GetDefaultTemperatureRange )
@@ -49,167 +51,207 @@ TEST ( Temperature_Handler, GetDefaultTemperatureRange )
 
 TEST ( Temperature_Handler, GetTemperature )
 {
-    thermistor_value_dC = 700;
+    thermistor_value = ( uint16_t ) ( 700 * dC_to_thermistor + 0.5f );
+    TEST_ASSERT_EQUAL_INT32 ( 200, GetTemperature() );
+
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
+    TEST_ASSERT_EQUAL_INT32 ( HeatingWarmTherm_dC, GetTemperature() );
+
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
+    TEST_ASSERT_EQUAL_INT32 ( HeatingHotTherm_dC, GetTemperature() );
+
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
+    TEST_ASSERT_EQUAL_INT32 ( CoolingCoolTherm_dC, GetTemperature() );
+
+    thermistor_value = ( uint16_t ) ( ( CoolingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
+    TEST_ASSERT_EQUAL_INT32 ( CoolingWarmTherm_dC, GetTemperature() );
+
+    thermistor_value = ( uint16_t ) ( 1500 * dC_to_thermistor + 0.5f );
+    TEST_ASSERT_EQUAL_INT32 ( 1000, GetTemperature() );
+
+    thermistor_value = ( uint16_t ) ( 700 * dC_to_thermistor + 0.5f );
+    TEST_ASSERT_EQUAL_INT32 ( 200, GetTemperature() );
+
+    thermistor_value = ( uint16_t ) ( 1000 * dC_to_thermistor + 0.5f );
+    TEST_ASSERT_EQUAL_INT32 ( 500, GetTemperature() );
+
+    thermistor_value = ( uint16_t ) ( 1200 * dC_to_thermistor + 0.5f );
     TEST_ASSERT_EQUAL_INT32 ( 700, GetTemperature() );
 
-    thermistor_value_dC = HeatingWarmTherm;
-    TEST_ASSERT_EQUAL_INT32 ( HeatingWarmTherm, GetTemperature() );
-
-    thermistor_value_dC = HeatingHotTherm;
-    TEST_ASSERT_EQUAL_INT32 ( HeatingHotTherm, GetTemperature() );
-
-    thermistor_value_dC = CoolingCoolTherm;
-    TEST_ASSERT_EQUAL_INT32 ( CoolingCoolTherm, GetTemperature() );
-
-    thermistor_value_dC = CoolingWarmTherm;
-    TEST_ASSERT_EQUAL_INT32 ( CoolingWarmTherm, GetTemperature() );
-
-    thermistor_value_dC = 1500;
-    TEST_ASSERT_EQUAL_INT32 ( 1500, GetTemperature() );
-
-    thermistor_value_dC = -700;
-    TEST_ASSERT_EQUAL_INT32 (-700, GetTemperature() );
-
-    thermistor_value_dC = -1000;
-    TEST_ASSERT_EQUAL_INT32 (-1000, GetTemperature() );
-
-    thermistor_value_dC = -1200;
-    TEST_ASSERT_EQUAL_INT32 (-1200, GetTemperature() );
-
-    thermistor_value_dC = -1500;
-    TEST_ASSERT_EQUAL_INT32 (-1500, GetTemperature() );
+    thermistor_value = ( uint16_t ) ( 1500 * dC_to_thermistor + 0.5f );
+    TEST_ASSERT_EQUAL_INT32 ( 1000, GetTemperature() );
 }
 
 TEST ( Temperature_Handler, TemperatureRangeNormalStepping )
 {
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 
-    thermistor_value_dC = CoolingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempCool );
 }
 
 TEST ( Temperature_Handler, TemperatureRangeCoolTesting )
 {
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempCool );
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 }
 
 TEST ( Temperature_Handler, TemperatureRangeWarmTesting )
 {
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempCool );
 
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 
-    thermistor_value_dC = CoolingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 }
 
 TEST ( Temperature_Handler, TemperatureRangeHotTesting )
 {
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempCool );
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 
-    thermistor_value_dC = CoolingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 }
 
 TEST ( Temperature_Handler, TemperatureRangeCoolBoundaryTesting )
 {
-    thermistor_value_dC = ( HeatingWarmTherm - 10 );
+    thermistor_value = ( ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                        dC_to_thermistor + 0.5f ) - 10 );
     TEST_ASSERT ( GetTemperatureRange() == TempCool );
 
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempCool );
 
-    thermistor_value_dC = ( HeatingHotTherm - 10 );
+    thermistor_value = ( ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                        dC_to_thermistor + 0.5f ) - 10 );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempCool );
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 }
 
 TEST ( Temperature_Handler, TemperatureRangeWarmBoundaryTesting )
 {
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = ( CoolingCoolTherm + 10 );
+    thermistor_value = ( ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                        dC_to_thermistor + 0.5f ) + 10 );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempCool );
 
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = ( HeatingHotTherm - 10 );
+    thermistor_value = ( ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                        dC_to_thermistor + 0.5f ) - 10 );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 }
 
 TEST ( Temperature_Handler, TemperatureRangeHotBoundaryTesting )
 {
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 
-    thermistor_value_dC = ( CoolingWarmTherm + 10 );
+    thermistor_value = ( ( uint16_t ) ( ( CoolingWarmTherm_dC + 500 ) *
+                                        dC_to_thermistor + 0.5f ) + 10 );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 
-    thermistor_value_dC = CoolingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 
-    thermistor_value_dC = ( CoolingCoolTherm + 10 );
+    thermistor_value = ( ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                        dC_to_thermistor + 0.5f ) + 10 );
     TEST_ASSERT ( GetTemperatureRange() == TempWarm );
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempHot );
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     TEST_ASSERT ( GetTemperatureRange() == TempCool );
 }
 
 TEST ( Temperature_Handler, CoolToWarmPrintout )
 {
 
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
     char* expected = "Temp Cool->Warm\n";
@@ -224,7 +266,8 @@ TEST ( Temperature_Handler, CoolToWarmPrintout )
 TEST ( Temperature_Handler, CoolToHotPrintout )
 {
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
     char* expected = "Temp Cool->Hot\n";
@@ -239,7 +282,8 @@ TEST ( Temperature_Handler, CoolToHotPrintout )
 TEST ( Temperature_Handler, CoolToCoolNoPrintout )
 {
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
     char* expected = "";
@@ -254,10 +298,12 @@ TEST ( Temperature_Handler, CoolToCoolNoPrintout )
 TEST ( Temperature_Handler, WarmToCoolPrintout )
 {
 
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
     char* expected = "Temp Warm->Cool\n";
@@ -272,10 +318,12 @@ TEST ( Temperature_Handler, WarmToCoolPrintout )
 TEST ( Temperature_Handler, WarmToHotPrintout )
 {
 
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
     char* expected = "Temp Warm->Hot\n";
@@ -290,12 +338,15 @@ TEST ( Temperature_Handler, WarmToHotPrintout )
 TEST ( Temperature_Handler, WarmToWarmNoPrintout )
 {
 
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
-    thermistor_value_dC = HeatingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
-    thermistor_value_dC = CoolingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
     char* expected = "";
@@ -310,10 +361,12 @@ TEST ( Temperature_Handler, WarmToWarmNoPrintout )
 TEST ( Temperature_Handler, HotToCoolPrintout )
 {
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
-    thermistor_value_dC = CoolingCoolTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingCoolTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
     char* expected = "Temp Hot->Cool\n";
@@ -328,10 +381,12 @@ TEST ( Temperature_Handler, HotToCoolPrintout )
 TEST ( Temperature_Handler, HotToWarmPrintout )
 {
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
-    thermistor_value_dC = CoolingWarmTherm;
+    thermistor_value = ( uint16_t ) ( ( CoolingWarmTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
     char* expected = "Temp Hot->Warm\n";
@@ -346,10 +401,12 @@ TEST ( Temperature_Handler, HotToWarmPrintout )
 TEST ( Temperature_Handler, HotToHotNoPrintout )
 {
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
-    thermistor_value_dC = HeatingHotTherm;
+    thermistor_value = ( uint16_t ) ( ( HeatingHotTherm_dC + 500 ) *
+                                      dC_to_thermistor + 0.5f );
     GetTemperatureRange();
 
     char* expected = "";
