@@ -57,6 +57,8 @@
 // #include "usb_device.h"
 #include "gpio.h"
 
+#define THERMISTOR_ADC_Pin LL_GPIO_PIN_0
+#define THERMISTOR_ADC_GPIO_Port GPIOA
 #define BRIGHT_Pin LL_GPIO_PIN_1
 #define BRIGHT_GPIO_Port GPIOA
 #define DIM_Pin LL_GPIO_PIN_3
@@ -69,6 +71,8 @@
 #define EEPROM_MISO_GPIO_Port GPIOA
 #define EEPROM_MOSI_Pin LL_GPIO_PIN_7
 #define EEPROM_MOSI_GPIO_Port GPIOA
+#define VOLTMETER_ADC_Pin LL_GPIO_PIN_0
+#define VOLTMETER_ADC_GPIO_Port GPIOB
 #define AMPMETER_ADC_Pin LL_GPIO_PIN_1
 #define AMPMETER_ADC_GPIO_Port GPIOB
 #define PWM_VIS_OUT_Pin LL_GPIO_PIN_8
