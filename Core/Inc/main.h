@@ -60,6 +60,30 @@ void Error_Handler ( void );
 
 /* USER CODE BEGIN Private defines */
 
+/**
+  * @brief  Perform ADC activation procedure to make it ready to convert
+  *         (ADC instance: ADC1).
+  * @param  None
+  * @retval None
+  */
+void ADC_Activate ( void );
+
+/**
+  * @brief  Perform ADC group regular conversion start, poll for conversion
+  *         completion.
+  *         (ADC instance: ADC1).
+  * @note   This function does not perform ADC group regular conversion stop:
+  *         intended to be used with ADC in single mode, trigger SW start
+  *         (only 1 ADC conversion done at each trigger, no conversion stop
+  *         needed).
+  *         In case of continuous mode or conversion trigger set to
+  *         external trigger, ADC group regular conversion stop must be added
+  *         after polling for conversion data.
+  * @param  None
+  * @retval None
+  */
+void ConversionStartPoll_ADC_GrpRegular ( void );
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

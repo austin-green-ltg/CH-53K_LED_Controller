@@ -199,7 +199,7 @@ uint32_t GetTIM6Cnt ( void )
   */
 uint16_t GetThermistorValue ( void )
 {
-    return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_1 );
+    return LL_ADC_REG_ReadConversionData12 ( ADC1 );
 }
 
 /**
@@ -208,7 +208,7 @@ uint16_t GetThermistorValue ( void )
   */
 uint16_t GetCurrentValue ( void )
 {
-    return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_2 );
+    return LL_ADC_REG_ReadConversionData12 ( ADC1 );
 }
 
 /**
@@ -217,7 +217,7 @@ uint16_t GetCurrentValue ( void )
   */
 uint16_t GetVoltageValue ( void )
 {
-    return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_3 );
+    return LL_ADC_REG_ReadConversionData12 ( ADC1 );
 }
 
 /**

@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    adc.h
+  * @file    dma.h
   * @brief   This file contains all the function prototypes for
-  *          the adc.c file
+  *          the dma.c file
   ******************************************************************************
   * @attention
   *
@@ -18,27 +18,27 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef INC_adch
-#define INC_adch
+#ifndef INC_dmah
+#define INC_dmah
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+/* DMA memory to memory transfer handles -------------------------------------*/
 
 /* USER CODE BEGIN Includes */
-#include "stm32l412xx-bsp.h"
 
 /* USER CODE END Includes */
-
-extern ADC_HandleTypeDef hadc1;
 
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
 
-void MX_ADC1_Init ( void );
+void MX_DMA_Init ( void );
 
 /* USER CODE BEGIN Prototypes */
 
@@ -49,5 +49,5 @@ void MX_ADC1_Init ( void );
 
 #endif
 
-#endif /* INC_adch */
+#endif /* INC_dmah */
 
