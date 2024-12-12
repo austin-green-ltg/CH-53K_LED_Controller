@@ -31,7 +31,8 @@
   * values in stm32l412xx-bsp.h
   */
 const float Tim2ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM2_CLK_DEV /
-                           ( float ) TIM2_CLK_PRESCALER / 1000.0f ); // 1 / ms
+                           ( float ) AHB_CLK_PRESCALER / ( float ) APB1_CLK_PRESCALER /
+                           ( float ) TIM2_CLK_PRESCALER / 1000.0f ); // 10 / ms
 
 /**
   * @brief Starts the delay counter, only needs to be called once on init

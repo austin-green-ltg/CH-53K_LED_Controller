@@ -171,8 +171,10 @@ typedef struct
 enum { PIN_SET = 1, PIN_RESET = 0};
 
 /* Clock frequency Values */
-#define CLK_FREQ_HZ  (8000000)
-#define TIM2_CLK_DEV  (1)
+#define CLK_FREQ_HZ         (80000000)
+#define TIM2_CLK_DEV        (1)
+#define AHB_CLK_PRESCALER   (1)
+#define APB1_CLK_PRESCALER  (1)
 #define TIM2_CLK_PRESCALER  (8000)
 
 /* Returns button state */

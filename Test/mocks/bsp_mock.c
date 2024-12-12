@@ -96,9 +96,10 @@ void RestartTIM2( void )
     timer.time = 0;
 }
 
+extern const float Tim2ClkKhz;
 uint32_t GetTIM2Cnt( void )
 {
-    return timer.time;
+    return (uint32_t)(timer.time * Tim2ClkKhz);
 }
 
 int16_t GetThermistorValue( void )
