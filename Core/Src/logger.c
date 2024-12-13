@@ -49,7 +49,7 @@ void LogString ( const char* const string, uint8_t write_beginning )
         tail_pointer = write_bytes;
     }
 
-    framWriteMemory ( address, ( unsigned char* ) string, write_bytes );
+    WriteLog ( address, string, write_bytes );
 }
 
 /**
@@ -64,6 +64,25 @@ void LogNumber ( const int32_t number, uint8_t write_beginning )
     memset ( str, '\0', 12 );
     sprintf ( str, "%d", number );
     LogString ( str, write_beginning );
+}
+
+/**
+  * @brief Writes the log at a given address and size
+  * @param[in] address Address to write from
+  * @param[in] string Pointer to string to write
+  * @param[in] bytes Number of bytes to write
+  */
+void WriteLog ( const uint32_t address, const char* const string,
+                const uint32_t bytes )
+{
+    uint32_t write_bytes = bytes;
+
+    if ( string == NULL || bytes == 0 )
+    {
+        return;
+    }
+
+    framWriteMemory ( address, ( unsigned char* ) string, write_bytes );
 }
 
 /**

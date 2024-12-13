@@ -623,14 +623,14 @@ void SetPwm ( uint8_t isIr )
     isIr ? SetPW12 ( pulse_width ) : SetPW11 ( pulse_width );
 #ifdef REVERSE_BRIGHTNESS
 
-    if ( pulse_width == MaxPw )
+    if ( pulse_width >= MaxPw )
     {
         TurnOffPwm ( isIr );
     }
 
 #else
 
-    if ( pulse_width == MinPw )
+    if ( pulse_width <= MinPw )
     {
         TurnOffPwm ( isIr );
     }

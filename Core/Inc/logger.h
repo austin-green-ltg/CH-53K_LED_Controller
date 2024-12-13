@@ -44,6 +44,15 @@ void LogString ( const char* const string, uint8_t write_beginning );
 void LogNumber ( const int32_t number, uint8_t write_beginning );
 
 /**
+  * @brief Writes the log at a given address and size
+  * @param[in] address Address to write from
+  * @param[in] string Pointer to string to write
+  * @param[in] bytes Number of bytes to write
+  */
+void WriteLog ( const uint32_t address, const char* const string,
+                const uint32_t bytes );
+
+/**
   * @brief Reads the log at a given address and size
   * @param[in] address Address to read from
   * @param[in] string Pointer to return data string

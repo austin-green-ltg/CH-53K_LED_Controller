@@ -197,6 +197,16 @@ TEST ( Logger, ReadPositionPastWrite )
     TEST_ASSERT_EQUAL_STRING ( "", string );
 }
 
+TEST ( Logger, WriteLog )
+{
+    const char* const expected = "test string";
+
+    WriteLog ( address, expected, strlen ( expected ) );
+
+    ReadLog ( address, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+}
+
 /* end Logger tests */
 
 TEST_GROUP_RUNNER ( Logger )
@@ -217,4 +227,5 @@ TEST_GROUP_RUNNER ( Logger )
     RUN_TEST_CASE ( Logger, ReadMoreThanWrite );
     RUN_TEST_CASE ( Logger, ReadPosition );
     RUN_TEST_CASE ( Logger, ReadPositionPastWrite );
+    RUN_TEST_CASE ( Logger, WriteLog );
 }
