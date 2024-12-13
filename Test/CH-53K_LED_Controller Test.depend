@@ -44,16 +44,16 @@
 1725562413 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\main.h
 	"stm32l412xx-bsp.h"
 
-1734118954 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\current_handler.c
+1734124297 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\current_handler.c
 	<stdio.h>
 	"current_handler.h"
 	"stm32l412xx-bsp.h"
 	"logger.h"
 
-1734118211 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\current_handler.h
+1734121295 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\current_handler.h
 	<stdint.h>
 
-1734118211 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\logger.h
+1734123934 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\logger.h
 	<stdint.h>
 
 1734035641 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\delay_handler.c
@@ -85,13 +85,13 @@
 1726575599 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\my_printf.h
 	<stdio.h>
 
-1734119370 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\temperature_handler.c
+1734121158 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\temperature_handler.c
 	<string.h>
 	"temperature_handler.h"
 	"stm32l412xx-bsp.h"
 	"logger.h"
 
-1734121088 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\voltage_handler.c
+1734121158 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\voltage_handler.c
 	<stdio.h>
 	"voltage_handler.h"
 	"stm32l412xx-bsp.h"
@@ -142,7 +142,7 @@
 	"button_handler.h"
 	"stm32l412xx-bsp.h"
 
-1734118211 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\current_handler_test.c
+1734124133 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\current_handler_test.c
 	<string.h>
 	"unity_fixture.h"
 	"current_handler.h"
@@ -175,14 +175,14 @@
 	"temperature_handler.h"
 	"stm32l412xx-bsp.h"
 
-1734120554 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\temperature_handler_test.c
+1734121172 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\temperature_handler_test.c
 	<string.h>
 	"unity_fixture.h"
 	"temperature_handler.h"
 	"logger.h"
 	"stm32l412xx-bsp.h"
 
-1734120645 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\voltage_handler_test.c
+1734121172 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\voltage_handler_test.c
 	<string.h>
 	"unity_fixture.h"
 	"voltage_handler.h"

@@ -43,6 +43,8 @@ const uint16_t CurrentErrorThreshold_dA = 40u;
 /** default current state is CurrentNormal */
 static CurrentRange_e current_threshold = CurrentNormal;
 
+static uint32_t numCurrentLogs = 0;
+
 /**
   * @brief Logs current change to storage
   *
@@ -73,6 +75,26 @@ static void LogCurrentChange ( CurrentRange_e range, uint16_t currentValue )
     }
 
     LogString ( str, 0 );
+}
+
+/**
+  * @brief Logs current to storage
+  */
+void LogCurrent ( void )
+{
+    char str [ CURRENT_LOG_SIZE ];
+
+    sprintf ( str, "%hu", GetCurrent() );
+
+    if ( numCurrentLogs * CURRENT_LOG_SIZE >= CURRENT_LOG_SPACE )
+    {
+        numCurrentLogs = 0;
+    }
+
+    WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, str,
+               CURRENT_LOG_SIZE );
+
+    numCurrentLogs++;
 }
 
 /**

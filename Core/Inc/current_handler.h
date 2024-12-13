@@ -36,6 +36,11 @@ typedef enum
 } CurrentRange_e;
 
 /**
+  * @brief Logs current to storage
+  */
+void LogCurrent ( void );
+
+/**
   * @brief Get current from ammeter
   *
   * @param[out] current level in dA

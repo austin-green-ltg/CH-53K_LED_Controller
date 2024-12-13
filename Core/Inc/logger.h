@@ -28,6 +28,29 @@
 
 #include <stdint.h>
 
+#define CHAR_LOG_SIZE   (2) // 1 byte plus null pointer
+#define SHORT_LOG_SIZE  (3) // 2 bytes plus null pointer
+#define INT_LOG_SIZE    (5) // 4 bytes plus null pointer
+
+#define PWM_LOG_SIZE            (CHAR_LOG_SIZE)
+#define CURRENT_LOG_SIZE        (SHORT_LOG_SIZE)
+#define TEMPERATURE_LOG_SIZE    (SHORT_LOG_SIZE)
+#define VOLTAGE_LOG_SIZE        (SHORT_LOG_SIZE)
+
+#define TOTAL_PWM_LOGS          (2) // IR and VIS
+#define TOTAL_CURRENT_LOGS      (100)
+#define TOTAL_TEMPERATURE_LOGS  (100)
+#define TOTAL_VOLTAGE_LOGS      (100)
+
+#define PWM_LOG_SPACE           (PWM_LOG_SIZE * TOTAL_PWM_LOGS)
+#define CURRENT_LOG_SPACE       (CURRENT_LOG_SIZE * TOTAL_CURRENT_LOGS)
+#define TEMPERATURE_LOG_SPACE   (TEMPERATURE_LOG_SIZE * TOTAL_TEMPERATURE_LOGS)
+#define VOLTAGE_LOG_SPACE       (VOLTAGE_LOG_SIZE * TOTAL_VOLTAGE_LOGS)
+
+#define STARTING_PWM_ADDRESS            (0x0)
+#define STARTING_CURRENT_ADDRESS        (STARTING_PWM_ADDRESS + PWM_LOG_SPACE)
+#define STARTING_TEMPERATURE_ADDRESS    (STARTING_CURRENT_ADDRESS + CURRENT_LOG_SPACE)
+#define STARTING_VOLTAGE_ADDRESS        (STARTING_TEMPERATURE_ADDRESS + TEMPERATURE_LOG_SPACE)
 
 /**
   * @brief Log a string to tail_pointer, use write_beginning flag to write the beginning

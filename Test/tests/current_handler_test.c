@@ -14,6 +14,8 @@ extern void initFram ( void );
 extern uint32_t address; // last written to address
 extern uint16_t current_value_dA;
 
+static uint32_t numCurrentLogs = 0;
+
 TEST_GROUP ( Current_Handler );
 
 TEST_SETUP ( Current_Handler )
@@ -326,6 +328,139 @@ TEST ( Current_Handler, ErrorToErrorNoPrintout )
     free ( string );
 }
 
+TEST ( Current_Handler, LogCurrent )
+{
+    char expected [ CURRENT_LOG_SIZE ] = "10";
+    char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
+
+    current_value_dA = 10;
+
+    LogCurrent();
+
+    ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, string,
+              strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+
+    numCurrentLogs++;
+
+    if ( numCurrentLogs >= TOTAL_CURRENT_LOGS )
+    {
+        numCurrentLogs = 0;
+    }
+
+    free ( string );
+}
+
+TEST ( Current_Handler, LogCurrentAgain )
+{
+    char expected [ CURRENT_LOG_SIZE ] = "1";
+    char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
+
+    current_value_dA = 1;
+
+    LogCurrent();
+
+    ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, string,
+              strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+
+    numCurrentLogs++;
+
+    if ( numCurrentLogs >= TOTAL_CURRENT_LOGS )
+    {
+        numCurrentLogs = 0;
+    }
+
+    free ( string );
+}
+
+TEST ( Current_Handler, LogFiftyCurrents )
+{
+    char expected [ CURRENT_LOG_SIZE ];
+    char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
+
+    const uint8_t logs_to_write = 50;
+
+    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    {
+        current_value_dA = i;
+        LogCurrent();
+    }
+
+    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    {
+        sprintf ( expected, "%hu", i );
+        ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, string,
+                  strlen ( expected ) );
+        TEST_ASSERT_EQUAL_STRING ( expected, string );
+        numCurrentLogs++;
+
+        if ( numCurrentLogs >= TOTAL_CURRENT_LOGS )
+        {
+            numCurrentLogs = 0;
+        }
+    }
+
+    free ( string );
+}
+
+TEST ( Current_Handler, ReadWholeLog )
+{
+    // This just ensures that we don't crash if we write the entire thing
+
+    char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
+
+    const uint8_t logs_to_read = TOTAL_CURRENT_LOGS;
+
+    for ( uint8_t i = 0; i < logs_to_read; i++ )
+    {
+        ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, string,
+                  CURRENT_LOG_SIZE );
+        numCurrentLogs++;
+
+        if ( numCurrentLogs >= TOTAL_CURRENT_LOGS )
+        {
+            numCurrentLogs = 0;
+        }
+    }
+
+    free ( string );
+}
+
+TEST ( Current_Handler, WriteLogOverflow )
+{
+    char expected [ CURRENT_LOG_SIZE ];
+    char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
+
+    // Fill Log Up
+    while ( numCurrentLogs < TOTAL_CURRENT_LOGS )
+    {
+        LogCurrent();
+        numCurrentLogs++;
+    }
+
+    numCurrentLogs = 0;
+
+    // Write One More
+    current_value_dA = 27;
+    sprintf ( expected, "%hu", current_value_dA );
+
+    LogCurrent();
+
+    // Make sure that last log was written at STARTING_CURRENT_ADDRESS
+    ReadLog ( STARTING_CURRENT_ADDRESS, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+    numCurrentLogs++;
+
+    if ( numCurrentLogs > TOTAL_CURRENT_LOGS )
+    {
+        numCurrentLogs = 0;
+    }
+
+    free ( string );
+
+}
+
 /* end Current_Handler tests */
 
 
@@ -350,4 +485,9 @@ TEST_GROUP_RUNNER ( Current_Handler )
     RUN_TEST_CASE ( Current_Handler, ErrorToNormalPrintout );
     RUN_TEST_CASE ( Current_Handler, ErrorToHighPrintout );
     RUN_TEST_CASE ( Current_Handler, ErrorToErrorNoPrintout );
+    RUN_TEST_CASE ( Current_Handler, LogCurrent );
+    RUN_TEST_CASE ( Current_Handler, LogCurrentAgain );
+    RUN_TEST_CASE ( Current_Handler, LogFiftyCurrents );
+    RUN_TEST_CASE ( Current_Handler, ReadWholeLog );
+    RUN_TEST_CASE ( Current_Handler, WriteLogOverflow );
 }
