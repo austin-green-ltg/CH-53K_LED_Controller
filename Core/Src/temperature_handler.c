@@ -26,6 +26,7 @@
  *****************************************************************************/
 
 /* Private includes ----------------------------------------------------------*/
+#include <stdio.h>
 #include <string.h>
 
 #include "temperature_handler.h"
@@ -57,6 +58,8 @@ const float dC_to_thermistor = MV_TO_RAW;
 
 /** default temperature state is TempCool */
 static TemperatureRange_e temperature_threshold = TempCool;
+
+static uint32_t numTemperatureLogs = 0;
 
 /**
   * @brief Logs temperature change to storage
@@ -111,6 +114,27 @@ static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
     strcat ( str, "\n" );
     LogString ( str, 0 );
 
+}
+
+/**
+  * @brief Logs temperature to storage
+  */
+void LogTemperature ( void )
+{
+    char str [ TEMPERATURE_LOG_SIZE ];
+
+    sprintf ( str, "%hu", GetTemperature() );
+
+    if ( numTemperatureLogs * TEMPERATURE_LOG_SIZE >= TEMPERATURE_LOG_SPACE )
+    {
+        numTemperatureLogs = 0;
+    }
+
+    WriteLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+               TEMPERATURE_LOG_SIZE, str,
+               TEMPERATURE_LOG_SIZE );
+
+    numTemperatureLogs++;
 }
 
 /**

@@ -38,6 +38,11 @@ typedef enum
 } TemperatureRange_e;
 
 /**
+  * @brief Logs temperature to storage
+  */
+void LogTemperature ( void );
+
+/**
   * @brief Get temperature from thermistor
   *
   * @param[out] temperature level in dC

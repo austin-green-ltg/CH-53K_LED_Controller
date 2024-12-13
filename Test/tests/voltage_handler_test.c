@@ -16,6 +16,8 @@ extern void initFram ( void );
 extern uint32_t address; // last written to address
 extern uint16_t voltage_value_dV;
 
+static uint32_t numVoltageLogs = 0;
+
 TEST_GROUP ( Voltage_Handler );
 
 TEST_SETUP ( Voltage_Handler )
@@ -789,6 +791,139 @@ TEST ( Voltage_Handler, ErrorHighToErrorHighNoPrintout )
     free ( string );
 }
 
+TEST ( Voltage_Handler, LogVoltage )
+{
+    char expected [ VOLTAGE_LOG_SIZE ] = "10";
+    char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
+
+    voltage_value_dV = 10;
+
+    LogVoltage();
+
+    ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
+              strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+
+    numVoltageLogs++;
+
+    if ( numVoltageLogs >= TOTAL_VOLTAGE_LOGS )
+    {
+        numVoltageLogs = 0;
+    }
+
+    free ( string );
+}
+
+TEST ( Voltage_Handler, LogVoltageAgain )
+{
+    char expected [ VOLTAGE_LOG_SIZE ] = "1";
+    char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
+
+    voltage_value_dV = 1;
+
+    LogVoltage();
+
+    ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
+              strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+
+    numVoltageLogs++;
+
+    if ( numVoltageLogs >= TOTAL_VOLTAGE_LOGS )
+    {
+        numVoltageLogs = 0;
+    }
+
+    free ( string );
+}
+
+TEST ( Voltage_Handler, LogFiftyVoltages )
+{
+    char expected [ VOLTAGE_LOG_SIZE ];
+    char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
+
+    const uint8_t logs_to_write = 50;
+
+    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    {
+        voltage_value_dV = i;
+        LogVoltage();
+    }
+
+    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    {
+        sprintf ( expected, "%hu", i );
+        ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
+                  strlen ( expected ) );
+        TEST_ASSERT_EQUAL_STRING ( expected, string );
+        numVoltageLogs++;
+
+        if ( numVoltageLogs >= TOTAL_VOLTAGE_LOGS )
+        {
+            numVoltageLogs = 0;
+        }
+    }
+
+    free ( string );
+}
+
+TEST ( Voltage_Handler, ReadWholeLog )
+{
+    // This just ensures that we don't crash if we write the entire thing
+
+    char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
+
+    const uint8_t logs_to_read = TOTAL_VOLTAGE_LOGS;
+
+    for ( uint8_t i = 0; i < logs_to_read; i++ )
+    {
+        ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
+                  VOLTAGE_LOG_SIZE );
+        numVoltageLogs++;
+
+        if ( numVoltageLogs >= TOTAL_VOLTAGE_LOGS )
+        {
+            numVoltageLogs = 0;
+        }
+    }
+
+    free ( string );
+}
+
+TEST ( Voltage_Handler, WriteLogOverflow )
+{
+    char expected [ VOLTAGE_LOG_SIZE ];
+    char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
+
+    // Fill Log Up
+    while ( numVoltageLogs < TOTAL_VOLTAGE_LOGS )
+    {
+        LogVoltage();
+        numVoltageLogs++;
+    }
+
+    numVoltageLogs = 0;
+
+    // Write One More
+    voltage_value_dV = 27;
+    sprintf ( expected, "%hu", voltage_value_dV );
+
+    LogVoltage();
+
+    // Make sure that last log was written at STARTING_VOLTAGE_ADDRESS
+    ReadLog ( STARTING_VOLTAGE_ADDRESS, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+    numVoltageLogs++;
+
+    if ( numVoltageLogs > TOTAL_VOLTAGE_LOGS )
+    {
+        numVoltageLogs = 0;
+    }
+
+    free ( string );
+
+}
+
 /* end Voltage_Handler tests */
 
 
@@ -833,4 +968,9 @@ TEST_GROUP_RUNNER ( Voltage_Handler )
     RUN_TEST_CASE ( Voltage_Handler, ErrorHighToNormalPrintout );
     RUN_TEST_CASE ( Voltage_Handler, ErrorHighToHighPrintout );
     RUN_TEST_CASE ( Voltage_Handler, ErrorHighToErrorHighNoPrintout );
+    RUN_TEST_CASE ( Voltage_Handler, LogVoltage );
+    RUN_TEST_CASE ( Voltage_Handler, LogVoltageAgain );
+    RUN_TEST_CASE ( Voltage_Handler, LogFiftyVoltages );
+    RUN_TEST_CASE ( Voltage_Handler, ReadWholeLog );
+    RUN_TEST_CASE ( Voltage_Handler, WriteLogOverflow );
 }

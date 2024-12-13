@@ -50,6 +50,8 @@ const uint16_t VoltageErrorHighThreshold_dV = 320u;
 /** default voltage state is VoltageNormal */
 static VoltageRange_e voltage_threshold = VoltageNormal;
 
+static uint32_t numVoltageLogs = 0;
+
 /**
   * @brief Logs voltage change to storage
   *
@@ -88,6 +90,26 @@ static void LogVoltageChange ( VoltageRange_e range, uint16_t voltageValue )
     }
 
     LogString ( str, 0 );
+}
+
+/**
+  * @brief Logs voltage to storage
+  */
+void LogVoltage ( void )
+{
+    char str [ VOLTAGE_LOG_SIZE ];
+
+    sprintf ( str, "%hu", GetVoltage() );
+
+    if ( numVoltageLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
+    {
+        numVoltageLogs = 0;
+    }
+
+    WriteLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, str,
+               VOLTAGE_LOG_SIZE );
+
+    numVoltageLogs++;
 }
 
 /**

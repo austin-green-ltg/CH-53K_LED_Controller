@@ -15,6 +15,8 @@ extern void initFram ( void );
 extern uint32_t address; // last written to address
 extern uint16_t thermistor_value_dC;
 
+static uint32_t numTemperatureLogs = 0;
+
 TEST_GROUP ( Temperature_Handler );
 
 TEST_SETUP ( Temperature_Handler )
@@ -361,6 +363,143 @@ TEST ( Temperature_Handler, HotToHotNoPrintout )
     free ( string );
 }
 
+TEST ( Temperature_Handler, LogTemperature )
+{
+    char expected [ TEMPERATURE_LOG_SIZE ] = "10";
+    char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
+
+    thermistor_value_dC = 10;
+
+    LogTemperature();
+
+    ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+              TEMPERATURE_LOG_SIZE, string,
+              strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+
+    numTemperatureLogs++;
+
+    if ( numTemperatureLogs >= TOTAL_TEMPERATURE_LOGS )
+    {
+        numTemperatureLogs = 0;
+    }
+
+    free ( string );
+}
+
+TEST ( Temperature_Handler, LogTemperatureAgain )
+{
+    char expected [ TEMPERATURE_LOG_SIZE ] = "1";
+    char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
+
+    thermistor_value_dC = 1;
+
+    LogTemperature();
+
+    ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+              TEMPERATURE_LOG_SIZE, string,
+              strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+
+    numTemperatureLogs++;
+
+    if ( numTemperatureLogs >= TOTAL_TEMPERATURE_LOGS )
+    {
+        numTemperatureLogs = 0;
+    }
+
+    free ( string );
+}
+
+TEST ( Temperature_Handler, LogFiftyTemperatures )
+{
+    char expected [ TEMPERATURE_LOG_SIZE ];
+    char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
+
+    const uint8_t logs_to_write = 50;
+
+    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    {
+        thermistor_value_dC = i;
+        LogTemperature();
+    }
+
+    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    {
+        sprintf ( expected, "%hu", i );
+        ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+                  TEMPERATURE_LOG_SIZE, string,
+                  strlen ( expected ) );
+        TEST_ASSERT_EQUAL_STRING ( expected, string );
+        numTemperatureLogs++;
+
+        if ( numTemperatureLogs >= TOTAL_TEMPERATURE_LOGS )
+        {
+            numTemperatureLogs = 0;
+        }
+    }
+
+    free ( string );
+}
+
+TEST ( Temperature_Handler, ReadWholeLog )
+{
+    // This just ensures that we don't crash if we write the entire thing
+
+    char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
+
+    const uint8_t logs_to_read = TOTAL_TEMPERATURE_LOGS;
+
+    for ( uint8_t i = 0; i < logs_to_read; i++ )
+    {
+        ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+                  TEMPERATURE_LOG_SIZE, string,
+                  TEMPERATURE_LOG_SIZE );
+        numTemperatureLogs++;
+
+        if ( numTemperatureLogs >= TOTAL_TEMPERATURE_LOGS )
+        {
+            numTemperatureLogs = 0;
+        }
+    }
+
+    free ( string );
+}
+
+TEST ( Temperature_Handler, WriteLogOverflow )
+{
+    char expected [ TEMPERATURE_LOG_SIZE ];
+    char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
+
+    // Fill Log Up
+    while ( numTemperatureLogs < TOTAL_TEMPERATURE_LOGS )
+    {
+        LogTemperature();
+        numTemperatureLogs++;
+    }
+
+    numTemperatureLogs = 0;
+
+    // Write One More
+    thermistor_value_dC = 27;
+    sprintf ( expected, "%hu", thermistor_value_dC );
+
+    LogTemperature();
+
+    // Make sure that last log was written at STARTING_TEMPERATURE_ADDRESS
+    ReadLog ( STARTING_TEMPERATURE_ADDRESS, string, strlen ( expected ) );
+    TEST_ASSERT_EQUAL_STRING ( expected, string );
+    numTemperatureLogs++;
+
+    if ( numTemperatureLogs > TOTAL_TEMPERATURE_LOGS )
+    {
+        numTemperatureLogs = 0;
+    }
+
+    free ( string );
+
+}
+
 /* end temperature_handler tests */
 
 
@@ -385,4 +524,9 @@ TEST_GROUP_RUNNER ( Temperature_Handler )
     RUN_TEST_CASE ( Temperature_Handler, HotToCoolPrintout );
     RUN_TEST_CASE ( Temperature_Handler, HotToWarmPrintout );
     RUN_TEST_CASE ( Temperature_Handler, HotToHotNoPrintout );
+    RUN_TEST_CASE ( Temperature_Handler, LogTemperature );
+    RUN_TEST_CASE ( Temperature_Handler, LogTemperatureAgain );
+    RUN_TEST_CASE ( Temperature_Handler, LogFiftyTemperatures );
+    RUN_TEST_CASE ( Temperature_Handler, ReadWholeLog );
+    RUN_TEST_CASE ( Temperature_Handler, WriteLogOverflow );
 }

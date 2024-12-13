@@ -38,6 +38,11 @@ typedef enum
 } VoltageRange_e;
 
 /**
+  * @brief Logs voltage to storage
+  */
+void LogVoltage ( void );
+
+/**
   * @brief Get voltage from voltmeter
   *
   * @param[out] voltage level in dV
