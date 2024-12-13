@@ -31,9 +31,9 @@
 #include "logger.h"
 
 /** Raw value out of ammeter to deciAmps (A*0.1) */
-const uint16_t RawTodAmps = ( 1 );
+const float RawTodAmps = ( RAW_TO_MV * 2.0f / 100.0f );
 /** DeciAmps (A*0.1) to raw value out of ammeter */
-const uint16_t dAmpsToRaw = ( 1 );
+const float dAmpsToRaw = ( MV_TO_RAW / 2.0f * 100.0f );
 
 /** High Current Level in dA */
 const uint16_t CurrentHighThreshold_dA = 35u;
@@ -82,7 +82,8 @@ static void LogCurrentChange ( CurrentRange_e range, uint16_t currentValue )
   */
 uint16_t GetCurrent ( void )
 {
-    uint16_t current = GetCurrentValue() * RawTodAmps;
+    uint16_t current = ( uint16_t ) ( ( float ) GetCurrentValue() * RawTodAmps +
+                                      0.5f );
     return ( current );
 }
 

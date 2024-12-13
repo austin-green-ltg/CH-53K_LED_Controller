@@ -46,14 +46,14 @@ const int32_t CoolingThreshold2_dC = ( 1000 );
   * Multiply by below then subtract 500 to go from thermistor to dC value
   * Make sure you add 0.5 to round int
   */
-const float thermistor_to_dC = 3300.0f / 4095.0f;
+const float thermistor_to_dC = RAW_TO_MV;
 
 /**
   * Temperature dC to Thermistor Conversion Constant
   * Add 500 and then multiply by below to go from dC to thermistor value
   * Make sure you add 0.5 to round int
   */
-const float dC_to_thermistor = 4095.0f / 3300.0f;
+const float dC_to_thermistor = MV_TO_RAW;
 
 /** default temperature state is TempCool */
 static TemperatureRange_e temperature_threshold = TempCool;

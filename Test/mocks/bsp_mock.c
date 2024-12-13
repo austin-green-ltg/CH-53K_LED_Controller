@@ -9,7 +9,7 @@ GPIO_PinState on_off_pin = 0;
 GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
 GPIO_PinState bright_pin = 0;
-uint16_t thermistor_value = 0;
+uint16_t thermistor_value_dC = 0;
 int16_t current_value_dA = 0;
 int16_t voltage_value_dV = 280;
 uint8_t writeProtect = 0;
@@ -104,20 +104,30 @@ uint32_t GetTIM2Cnt( void )
 
 int16_t GetThermistorValue( void )
 {
-    // assumes (value * 3.3 / 0xFFF) = Volts
-    return thermistor_value;
+    // value is in dC
+    // to get to raw, add 500 to get mV
+    // then multiply by 0xFFF / 3300 to get raw value
+    return (int16_t)((thermistor_value_dC + 500.0f) * MV_TO_RAW + 0.5f) ;
 }
 
 int16_t GetCurrentValue( void )
 {
-    // assumes value is dA, i.e. 10 = 1 A
-    return current_value_dA;
+    // value is in dA
+    // to get to raw, multiply by 100 to get mA
+    // divide by 2 to get mV
+    // then multiply by 0xFFF / 3300 to get raw value
+    return (int16_t)((current_value_dA * 100.0f / 2.0f) * MV_TO_RAW + 0.5f);
 }
 
 int16_t GetVoltageValue( void )
 {
-    // assumes value is dV, i.e. 10 = 1 V
-    return voltage_value_dV;
+    const float voltage_divider = 15.0f / 264.0f;
+
+    // value is in dC
+    // to get to raw, multiply by 100 to get mV
+    // divide by voltage divider value to get mV
+    // then multiply by 0xFFF / 3300 to get raw value
+    return (int16_t)((voltage_value_dV * 100.0f * voltage_divider) * MV_TO_RAW + 0.5f);
 }
 
 

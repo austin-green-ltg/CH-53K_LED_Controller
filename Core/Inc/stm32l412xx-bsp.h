@@ -177,6 +177,9 @@ enum { PIN_SET = 1, PIN_RESET = 0};
 #define APB1_CLK_PRESCALER  (1)
 #define TIM2_CLK_PRESCALER  (8000)
 
+#define RAW_TO_MV (3300.0f / 4095.0f)
+#define MV_TO_RAW (4095.0f / 3300.0f)
+
 /* Returns button state */
 /**
   * @brief Reads on/off pin value

@@ -30,10 +30,13 @@
 #include "stm32l412xx-bsp.h"
 #include "logger.h"
 
-/** Raw value out of voltmeter to deciVolts (V*0.1) */
-const uint16_t RawTodVolts = ( 1 );
-/** DeciCelcius (C*0.1) to raw value out of voltmeter */
-const uint16_t dVoltsToRaw = ( 1 );
+/****
+    * Raw value out of voltmeter to deciVolts (V*0.1)
+    * Comes from voltage divider 15K and 249K resistor
+    */
+const float RawTodVolts = ( RAW_TO_MV * 264.0f / 15.0f / 100.0f );
+/** DeciVolts (V*0.1) to raw value out of voltmeter */
+const float dVoltsToRaw = ( MV_TO_RAW * 15.0f / 264.0f * 100.0f );
 
 /** Low Voltage Error Level in dV */
 const uint16_t VoltageErrorLowThreshold_dV = 240u;
@@ -94,7 +97,7 @@ static void LogVoltageChange ( VoltageRange_e range, uint16_t voltageValue )
   */
 uint16_t GetVoltage ( void )
 {
-    uint16_t voltage = GetVoltageValue() * RawTodVolts;
+    uint16_t voltage = ( uint16_t ) ( GetVoltageValue() * RawTodVolts + 0.5f );
     return ( voltage );
 }
 
