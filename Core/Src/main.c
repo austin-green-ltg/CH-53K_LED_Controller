@@ -32,6 +32,7 @@
 #include "button_handler.h"
 #include "current_handler.h"
 #include "voltage_handler.h"
+#include "temperature_handler.h"
 #include "my_printf.h"
 
 /* USER CODE END Includes */
@@ -73,6 +74,8 @@ const float HighStepTimeMs = ( UPPER_STEP_TIME_MS + AVG_STEP_DIFF_MS )
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config ( void );
 /* USER CODE BEGIN PFP */
+
+void LogVitals ( void );
 
 /* USER CODE END PFP */
 
@@ -148,17 +151,6 @@ int main ( void )
 
         /* USER CODE BEGIN 3 */
 
-        if ( GetCurrentRange() == CurrentError )
-        {
-            // TODO: Do something
-        }
-
-        if ( GetVoltageRange() == VoltageErrorLow ||
-                GetVoltageRange() == VoltageErrorHigh )
-        {
-            // TODO: Do something
-        }
-
         GPIO_PinState onOffPressed = IsOnOffPressed(); // 0 = Off, 1 = On
 
         if ( onOffPressed )
@@ -188,6 +180,11 @@ int main ( void )
 
                 RestartDelayCounter();
             }
+            else
+            {
+                LogPwm();
+                LogVitals();
+            }
 
             // save previous button state
             prevDimPressed = dimPressed;
@@ -198,6 +195,8 @@ int main ( void )
             DisablePWM1();
             prevDimPressed = BUTTON_UNPRESSED;
             prevBrightPressed = BUTTON_UNPRESSED;
+            LogPwm();
+            LogVitals();
         }
 
         // log brightness levels
@@ -276,6 +275,13 @@ void SystemClock_Config ( void )
 }
 
 /* USER CODE BEGIN 4 */
+
+void LogVitals( void )
+{
+    LogTemperature();
+    LogCurrent();
+    LogVoltage();
+}
 
 /* USER CODE END 4 */
 

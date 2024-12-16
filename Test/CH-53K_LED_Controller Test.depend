@@ -53,7 +53,7 @@
 1734121295 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\current_handler.h
 	<stdint.h>
 
-1734368824 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\logger.h
+1734374697 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\logger.h
 	<stdint.h>
 
 1734035641 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\delay_handler.c
@@ -70,7 +70,7 @@
 	"fram.h"
 	"stm32l412xx-bsp.h"
 
-1734369003 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\pwm_handler.c
+1734369838 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\pwm_handler.c
 	<stdio.h>
 	"pwm_handler.h"
 	"stm32l412xx-bsp.h"
@@ -103,11 +103,11 @@
 1734124818 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\voltage_handler.h
 	<stdint.h>
 
-1734120908 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\mocks\bsp_mock.c
+1734374556 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\mocks\bsp_mock.c
 	<stdio.h>
 	"stm32l412xx-bsp.h"
 
-1726583822 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\test_runner.c
+1734374535 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\test_runner.c
 	"unity_fixture.h"
 
 1726583782 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\unity\unity_fixture.h
@@ -158,13 +158,13 @@
 	"delay_handler.h"
 	"stm32l412xx-bsp.h"
 
-1734112748 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\logger_test.c
+1734374520 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\logger_test.c
 	<string.h>
 	"unity_fixture.h"
 	"logger.h"
 	"stm32l412xx-bsp.h"
 
-1734369716 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\pwm_handler_test.c
+1734369751 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\pwm_handler_test.c
 	<stdio.h>
 	<string.h>
 	"unity_fixture.h"
@@ -188,17 +188,17 @@
 	"logger.h"
 	"stm32l412xx-bsp.h"
 
-1734124737 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\voltage_handler_test.c
+1734374166 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\voltage_handler_test.c
 	<string.h>
 	"unity_fixture.h"
 	"voltage_handler.h"
 	"logger.h"
 	"stm32l412xx-bsp.h"
 
-1726583782 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\unity\unity.c
+1734374516 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\unity\unity.c
 	"unity.h"
 
-1726583782 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\unity\unity_fixture.c
+1734374516 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\unity\unity_fixture.c
 	"unity_fixture.h"
 	"unity_internals.h"
 	<string.h>

@@ -15,5 +15,5 @@ static void RunAllTests(void)
 
 int main(int argc, const char * argv[])
 {
-  return UnityMain(argc, argv, RunAllTests);
+    return UnityMain(argc, argv, RunAllTests);
 }

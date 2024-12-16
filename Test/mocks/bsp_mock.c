@@ -169,6 +169,7 @@ void initFram( void );
 void initFram( void )
 {
     for (uint32_t i = 0; i < FRAM_SIZE; i++) framMem[i] = 0;
+    address = 0;
 }
 
 void transferData( const unsigned char* const txData, const uint32_t bytes )
