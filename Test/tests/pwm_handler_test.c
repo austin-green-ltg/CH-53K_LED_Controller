@@ -613,10 +613,10 @@ TEST ( PWM_Handler, LogPwm )
 
     uint8_t brightness = HalfBrightness;
     SetBrightness ( brightness, LED_VISIBLE );
-    sprintf ( expectedVis, "%hc", GetPwm(LED_VISIBLE) );
+    sprintf ( expectedVis, "%hc", brightness );
 
     SetBrightness ( brightness, LED_IR );
-    sprintf ( expectedIr, "%hc", GetPwm(LED_IR)  );
+    sprintf ( expectedIr, "%hc", brightness );
 
     LogPwm();
 
@@ -644,11 +644,11 @@ TEST ( PWM_Handler, LogPwmAgain )
 
     uint8_t brightness = MinBrightness;
     SetBrightness ( brightness, LED_VISIBLE );
-    sprintf ( expectedVis, "%hc", GetPwm(LED_VISIBLE) );
+    sprintf ( expectedVis, "%hc", brightness );
 
     brightness = MaxBrightness;
     SetBrightness ( brightness, LED_IR );
-    sprintf ( expectedIr, "%hc", GetPwm(LED_IR)  );
+    sprintf ( expectedIr, "%hc", brightness );
 
     LogPwm();
 
@@ -677,19 +677,22 @@ TEST ( PWM_Handler, LogFiftyPWMs )
     const uint8_t logs_to_write = 50;
 
     uint8_t brightness = 0;
+
     for ( uint8_t i = 0; i < logs_to_write; i++ )
     {
-        brightness = rand();
-        if(i % 2 == 0)
+        brightness = rand() % ( MaxBrightness + 1 ) % 50;
+
+        if ( i % 2 == 0 )
         {
             SetBrightness ( brightness, LED_VISIBLE );
-            sprintf ( expectedVis, "%hc", GetPwm(LED_VISIBLE) );
+            sprintf ( expectedVis, "%hc", brightness );
         }
         else
         {
             SetBrightness ( brightness, LED_IR );
-            sprintf ( expectedIr, "%hc", GetPwm(LED_IR) );
+            sprintf ( expectedIr, "%hc", brightness );
         }
+
         LogPwm();
     }
 
@@ -738,13 +741,13 @@ TEST ( PWM_Handler, WriteLogOverflow )
     LogPwm();
 
     // Write One More
-    uint8_t brightness = rand();
+    uint8_t brightness = rand() % ( MaxBrightness + 1 );
     SetBrightness ( brightness, LED_VISIBLE );
-    sprintf ( expectedVis, "%hc", GetPwm(LED_VISIBLE) );
+    sprintf ( expectedVis, "%hc", brightness );
 
-    brightness = rand();
+    brightness = rand() % ( MaxBrightness + 1 );
     SetBrightness ( brightness, LED_IR );
-    sprintf ( expectedIr, "%hc", GetPwm(LED_IR)  );
+    sprintf ( expectedIr, "%hc", brightness );
 
     LogPwm();
 
