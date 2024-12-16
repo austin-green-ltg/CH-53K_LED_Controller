@@ -58,15 +58,15 @@ static void LogCurrentChange ( CurrentRange_e range, uint16_t currentValue )
     switch ( range )
     {
         case CurrentNormal:
-            sprintf ( str, "Normal Current %d dA\n", currentValue );
+            snprintf ( str, sizeof ( str ), "Normal Current %d dA\n", currentValue );
             break;
 
         case CurrentHigh:
-            sprintf ( str, "High Current %d dA\n", currentValue );
+            snprintf ( str, sizeof ( str ), "High Current %d dA\n", currentValue );
             break;
 
         case CurrentError:
-            sprintf ( str, "Error Current %d dA\n", currentValue );
+            snprintf ( str, sizeof ( str ), "Error Current %d dA\n", currentValue );
             break;
 
         default:
@@ -84,7 +84,7 @@ void LogCurrent ( void )
 {
     char str [ CURRENT_LOG_SIZE ];
 
-    sprintf ( str, "%hu", GetCurrent() );
+    snprintf ( str, sizeof ( str ), "%hu", GetCurrent() );
 
     if ( numCurrentLogs * CURRENT_LOG_SIZE >= CURRENT_LOG_SPACE )
     {

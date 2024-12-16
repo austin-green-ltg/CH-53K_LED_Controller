@@ -65,23 +65,23 @@ static void LogVoltageChange ( VoltageRange_e range, uint16_t voltageValue )
     switch ( range )
     {
         case VoltageErrorLow:
-            sprintf ( str, "Error Low Voltage %d dV\n", voltageValue );
+            snprintf ( str, sizeof ( str ), "Error Low Voltage %d dV\n", voltageValue );
             break;
 
         case VoltageLow:
-            sprintf ( str, "Low Voltage %d dV\n", voltageValue );
+            snprintf ( str, sizeof ( str ), "Low Voltage %d dV\n", voltageValue );
             break;
 
         case VoltageNormal:
-            sprintf ( str, "Normal Voltage %d dV\n", voltageValue );
+            snprintf ( str, sizeof ( str ), "Normal Voltage %d dV\n", voltageValue );
             break;
 
         case VoltageHigh:
-            sprintf ( str, "High Voltage %d dV\n", voltageValue );
+            snprintf ( str, sizeof ( str ), "High Voltage %d dV\n", voltageValue );
             break;
 
         case VoltageErrorHigh:
-            sprintf ( str, "Error High Voltage %d dV\n", voltageValue );
+            snprintf ( str, sizeof ( str ), "Error High Voltage %d dV\n", voltageValue );
             break;
 
         default:
@@ -99,7 +99,7 @@ void LogVoltage ( void )
 {
     char str [ VOLTAGE_LOG_SIZE ];
 
-    sprintf ( str, "%hu", GetVoltage() );
+    snprintf ( str, sizeof ( str ), "%hu", GetVoltage() );
 
     if ( numVoltageLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
     {

@@ -630,10 +630,10 @@ TEST ( PWM_Handler, LogPwm )
 
     uint8_t brightness = HalfBrightness;
     SetBrightness ( brightness, LED_VISIBLE );
-    sprintf ( expectedVis, "%hc", brightness );
+    snprintf ( expectedVis, sizeof ( expectedVis ), "%c", brightness );
 
     SetBrightness ( brightness, LED_IR );
-    sprintf ( expectedIr, "%hc", brightness );
+    snprintf ( expectedIr, sizeof ( expectedIr ), "%c", brightness );
 
     LogPwm();
 
@@ -661,11 +661,11 @@ TEST ( PWM_Handler, LogPwmAgain )
 
     uint8_t brightness = MinBrightness;
     SetBrightness ( brightness, LED_VISIBLE );
-    sprintf ( expectedVis, "%hc", brightness );
+    snprintf ( expectedVis, sizeof ( expectedVis ), "%c", brightness );
 
     brightness = MaxBrightness;
     SetBrightness ( brightness, LED_IR );
-    sprintf ( expectedIr, "%hc", brightness );
+    snprintf ( expectedIr, sizeof ( expectedIr ), "%c", brightness );
 
     LogPwm();
 
@@ -702,12 +702,12 @@ TEST ( PWM_Handler, LogFiftyPWMs )
         if ( i % 2 == 0 )
         {
             SetBrightness ( brightness, LED_VISIBLE );
-            sprintf ( expectedVis, "%hc", brightness );
+            snprintf ( expectedVis, sizeof ( expectedVis ), "%c", brightness );
         }
         else
         {
             SetBrightness ( brightness, LED_IR );
-            sprintf ( expectedIr, "%hc", brightness );
+            snprintf ( expectedIr, sizeof ( expectedIr ), "%c", brightness );
         }
 
         LogPwm();
@@ -760,11 +760,11 @@ TEST ( PWM_Handler, WriteLogOverflow )
     // Write One More
     uint8_t brightness = rand() % ( MaxBrightness + 1 );
     SetBrightness ( brightness, LED_VISIBLE );
-    sprintf ( expectedVis, "%hc", brightness );
+    snprintf ( expectedVis, sizeof ( expectedVis ), "%c", brightness );
 
     brightness = rand() % ( MaxBrightness + 1 );
     SetBrightness ( brightness, LED_IR );
-    sprintf ( expectedIr, "%hc", brightness );
+    snprintf ( expectedIr, sizeof ( expectedIr ), "%c", brightness );
 
     LogPwm();
 

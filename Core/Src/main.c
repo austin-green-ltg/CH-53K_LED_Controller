@@ -276,7 +276,7 @@ void SystemClock_Config ( void )
 
 /* USER CODE BEGIN 4 */
 
-void LogVitals( void )
+void LogVitals ( void )
 {
     LogTemperature();
     LogCurrent();

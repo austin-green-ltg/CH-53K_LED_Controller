@@ -62,7 +62,7 @@ void LogNumber ( const int32_t number, uint8_t write_beginning )
     char str [ 12
              ]; // max number of characters needed for 32 bit number 2 million = 10 numbers + "-" + '\0'
     memset ( str, '\0', 12 );
-    sprintf ( str, "%d", number );
+    snprintf ( str, sizeof ( str ), "%d", number );
     LogString ( str, write_beginning );
 }
 
@@ -102,7 +102,7 @@ void ReadLog ( const uint32_t address, char* string, const uint32_t bytes )
 
     if ( bytes == 0 )
     {
-        string = "";
+        string [ 0 ] = '\0';
         return;
     }
 

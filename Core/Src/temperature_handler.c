@@ -74,15 +74,15 @@ static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
     switch ( temp1 )
     {
         case TempCool:
-            strcpy ( str, "Temp Cool" );
+            strncpy ( str, "Temp Cool", sizeof ( str ) - 1 );
             break;
 
         case TempWarm:
-            strcpy ( str, "Temp Warm" );
+            strncpy ( str, "Temp Warm", sizeof ( str ) - 1 );
             break;
 
         case TempHot:
-            strcpy ( str, "Temp Hot" );
+            strncpy ( str, "Temp Hot", sizeof ( str ) - 1 );
             break;
 
         default:
@@ -90,20 +90,20 @@ static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
 
     }
 
-    strcat ( str, "->" );
+    strncat ( str, "->", sizeof ( str ) - 1 );
 
     switch ( temp2 )
     {
         case TempCool:
-            strcat ( str, "Cool" );
+            strncat ( str, "Cool", sizeof ( str ) - 1 );
             break;
 
         case TempWarm:
-            strcat ( str, "Warm" );
+            strncat ( str, "Warm", sizeof ( str ) - 1 );
             break;
 
         case TempHot:
-            strcat ( str, "Hot" );
+            strncat ( str, "Hot", sizeof ( str ) - 1 );
             break;
 
         default:
@@ -111,7 +111,7 @@ static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
 
     }
 
-    strcat ( str, "\n" );
+    strncat ( str, "\n", sizeof ( str ) - 1 );
     LogString ( str, 0 );
 
 }
@@ -123,7 +123,7 @@ void LogTemperature ( void )
 {
     char str [ TEMPERATURE_LOG_SIZE ];
 
-    sprintf ( str, "%hu", GetTemperature() );
+    snprintf ( str, sizeof ( str ), "%hu", GetTemperature() );
 
     if ( numTemperatureLogs * TEMPERATURE_LOG_SIZE >= TEMPERATURE_LOG_SPACE )
     {
@@ -146,10 +146,10 @@ void LogTemperature ( void )
   *
   * @param[out] temperature level in dC
   */
-int32_t GetTemperature ( void )
+uint16_t GetTemperature ( void )
 {
-    int32_t temperature = ( int32_t ) ( ( float ) GetThermistorValue() *
-                                        thermistor_to_dC + 0.5f ) + (-500 );
+    uint16_t temperature = ( uint16_t ) ( ( float ) GetThermistorValue() *
+                                          thermistor_to_dC + 0.5f ) + (-500 );
     return ( temperature );
 }
 

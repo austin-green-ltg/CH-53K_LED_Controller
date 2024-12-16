@@ -47,7 +47,7 @@ void LogTemperature ( void );
   *
   * @param[out] temperature level in dC
   */
-int32_t GetTemperature ( void );
+uint16_t GetTemperature ( void );
 
 /**
   * @brief Get range that the temperature falls into. There is an increased

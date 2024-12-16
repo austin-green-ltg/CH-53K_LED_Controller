@@ -2,64 +2,74 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="test_runner.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\Core\Src\temperature_handler.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="432" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="unity\unity.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="75090" topLine="2199" />
-		</Cursor>
-	</File>
-	<File name="..\Core\Inc\logger.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1804" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="..\Core\Inc\current_handler.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1046" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\Core\Src\fram.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="81" />
-		</Cursor>
-	</File>
-	<File name="tests\voltage_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1385" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="unity\unity_fixture.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="950" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\Core\Src\button_handler.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1027" topLine="15" />
+			<Cursor1 position="3405" topLine="76" />
 		</Cursor>
 	</File>
 	<File name="mocks\bsp_mock.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4089" topLine="185" />
+			<Cursor1 position="3951" topLine="185" />
 		</Cursor>
 	</File>
-	<File name="..\Core\Inc\fram.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\Core\Inc\temperature_handler.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="129" />
+			<Cursor1 position="1491" topLine="29" />
 		</Cursor>
 	</File>
-	<File name="unity\unity_internals.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="unity\unity_memory.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="30077" topLine="807" />
+			<Cursor1 position="2889" topLine="76" />
 		</Cursor>
 	</File>
-	<File name="tests\logger_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="tests\pwm_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="714" topLine="0" />
+			<Cursor1 position="29240" topLine="729" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\current_handler.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1904" topLine="17" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\pwm_handler.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="23660" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="tests\voltage_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="12830" topLine="328" />
+		</Cursor>
+	</File>
+	<File name="unity\unity_fixture.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4891" topLine="163" />
+		</Cursor>
+	</File>
+	<File name="unity\unity.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11882" topLine="318" />
+		</Cursor>
+	</File>
+	<File name="unity\unity_fixture.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="591" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\fram.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5030" topLine="171" />
+		</Cursor>
+	</File>
+	<File name="tests\button_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="9" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\button_handler.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="652" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

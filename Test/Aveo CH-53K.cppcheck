@@ -4,6 +4,7 @@
     <analyze-all-vs-configs>false</analyze-all-vs-configs>
     <check-headers>true</check-headers>
     <check-unused-templates>true</check-unused-templates>
+    <inline-suppression>true</inline-suppression>
     <max-ctu-depth>2</max-ctu-depth>
     <max-template-recursion>100</max-template-recursion>
     <includedir>
@@ -11,6 +12,7 @@
         <dir name="../Core/Src/"/>
         <dir name="tests/"/>
         <dir name="mocks/"/>
+        <dir name="./"/>
     </includedir>
     <defines>
         <define name="STM32F303x8, USE_FULL_LL_DRIVER, ENABLE_UART_DEBUGGING"/>
@@ -20,9 +22,17 @@
         <dir name="../Core/Src"/>
         <dir name="tests"/>
         <dir name="mocks"/>
+        <dir name="."/>
     </paths>
+    <exclude>
+        <path name="unity/"/>
+    </exclude>
     <safe-checks>
         <class-public/>
     </safe-checks>
+    <tools>
+        <tool>clang-tidy</tool>
+    </tools>
+    <check-level-exhaustive/>
     <project-name>Aveo CH-53K</project-name>
 </project>

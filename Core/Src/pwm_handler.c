@@ -781,7 +781,7 @@ void LogPwm ( void )
     for ( uint8_t i = 0; i < TOTAL_PWM_LOGS; i++ )
     {
 
-        sprintf ( str, "%hc", GetBrightness ( i ) );
+        snprintf ( str, sizeof ( str ), "%c", GetBrightness ( i ) );
 
         WriteLog ( STARTING_PWM_ADDRESS + i * PWM_LOG_SIZE, str,
                    PWM_LOG_SIZE );

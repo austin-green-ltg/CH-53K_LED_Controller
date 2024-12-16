@@ -387,9 +387,9 @@ TEST ( Current_Handler, LogFiftyCurrents )
         LogCurrent();
     }
 
-    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    for ( uint16_t i = 0; i < logs_to_write; i++ )
     {
-        sprintf ( expected, "%hu", i );
+        snprintf ( expected, sizeof ( expected ), "%hu", i );
         ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, string,
                   strlen ( expected ) );
         TEST_ASSERT_EQUAL_STRING ( expected, string );
@@ -443,7 +443,7 @@ TEST ( Current_Handler, WriteLogOverflow )
 
     // Write One More
     current_value_dA = 27;
-    sprintf ( expected, "%hu", current_value_dA );
+    snprintf ( expected, sizeof ( expected ), "%hu", current_value_dA );
 
     LogCurrent();
 

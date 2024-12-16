@@ -424,9 +424,9 @@ TEST ( Temperature_Handler, LogFiftyTemperatures )
         LogTemperature();
     }
 
-    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    for ( uint16_t i = 0; i < logs_to_write; i++ )
     {
-        sprintf ( expected, "%hu", i );
+        snprintf ( expected, sizeof ( expected ), "%hu", i );
         ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
                   TEMPERATURE_LOG_SIZE, string,
                   strlen ( expected ) );
@@ -482,7 +482,7 @@ TEST ( Temperature_Handler, WriteLogOverflow )
 
     // Write One More
     thermistor_value_dC = 27;
-    sprintf ( expected, "%hu", thermistor_value_dC );
+    snprintf ( expected, sizeof ( expected ), "%hu", thermistor_value_dC );
 
     LogTemperature();
 

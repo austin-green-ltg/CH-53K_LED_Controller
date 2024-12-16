@@ -850,9 +850,9 @@ TEST ( Voltage_Handler, LogFiftyVoltages )
         LogVoltage();
     }
 
-    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    for ( uint16_t i = 0; i < logs_to_write; i++ )
     {
-        sprintf ( expected, "%hu", i );
+        snprintf ( expected, sizeof ( expected ), "%hu", i );
         ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
                   strlen ( expected ) );
         TEST_ASSERT_EQUAL_STRING ( expected, string );
@@ -906,7 +906,7 @@ TEST ( Voltage_Handler, WriteLogOverflow )
 
     // Write One More
     voltage_value_dV = 27;
-    sprintf ( expected, "%hu", voltage_value_dV );
+    snprintf ( expected, sizeof ( expected ), "%hu", voltage_value_dV );
 
     LogVoltage();
 
