@@ -97,8 +97,33 @@ static int8_t irBrightness = 0;
   */
 void InitPwm ( void )
 {
-    visBrightness = HalfBrightness;
-    irBrightness = HalfBrightness;
+    char stringVis [ PWM_LOG_SIZE ];
+    char stringIr [ PWM_LOG_SIZE ];
+    char stringPrevInit [ PWM_LOG_SIZE ];
+
+    ReadLog ( STARTING_PWM_ADDRESS, stringVis,
+              PWM_LOG_SIZE );
+
+    ReadLog ( STARTING_PWM_ADDRESS + PWM_LOG_SIZE, stringIr,
+              PWM_LOG_SIZE );
+
+    ReadLog ( STARTING_PWM_ADDRESS + 2 * PWM_LOG_SIZE, stringPrevInit,
+              PWM_LOG_SIZE );
+
+    if ( stringPrevInit [ 0 ] == 0 )
+    {
+        visBrightness = HalfBrightness;
+        irBrightness = HalfBrightness;
+    }
+    else
+    {
+        visBrightness = ( uint8_t ) stringVis [ 0 ];
+        irBrightness = ( uint8_t ) stringIr [ 0 ];
+    }
+
+    WriteLog ( STARTING_PWM_ADDRESS + 2 * PWM_LOG_SIZE, "1",
+               PWM_LOG_SIZE );
+
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
     printf ( "Init PWM\n" );
 #endif /* ENABLE_UART_DEBUGGING */

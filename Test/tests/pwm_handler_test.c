@@ -16,6 +16,8 @@ enum {LED_VISIBLE = 0, LED_IR = 1};
 #define COOLING_COOL_THERM_DC (800)
 #define COOLING_WARM_THERM_DC (1000)
 
+extern void initFram ( void );
+
 extern int16_t thermistor_value_dC;
 
 extern const uint8_t MinBrightness ;
@@ -31,6 +33,7 @@ TEST_GROUP ( PWM_Handler );
 TEST_SETUP ( PWM_Handler )
 {
     /* executed before *every* non-skipped test */
+    initFram();
     InitPwm();
 }
 
@@ -67,6 +70,7 @@ TEST ( PWM_Handler, DecreaseBrightnessNiceCase )
                   HalfBrightness ); // IR should not change
     TEST_ASSERT ( pwm_ir.is_running == 0 );
 
+    initFram();
     InitPwm();
 
     DecreaseBrightness ( HOLD, LED_VISIBLE );
@@ -88,6 +92,7 @@ TEST ( PWM_Handler, DecreaseBrightnessNiceCase )
     TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
+    initFram();
     InitPwm();
 
     DecreaseBrightness ( PRESS, LED_IR );
@@ -107,6 +112,7 @@ TEST ( PWM_Handler, DecreaseBrightnessNiceCase )
     TEST_ASSERT ( pwm_ir.is_running == 1 );
     TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
+    initFram();
     InitPwm();
 
     DecreaseBrightness ( HOLD, LED_IR );
@@ -152,6 +158,7 @@ TEST ( PWM_Handler, IncreaseBrightnessNiceCase )
                   HalfBrightness ); // IR should not change
     TEST_ASSERT ( pwm_ir.is_running == 0 );
 
+    initFram();
     InitPwm();
 
     IncreaseBrightness ( HOLD, LED_VISIBLE );
@@ -173,6 +180,7 @@ TEST ( PWM_Handler, IncreaseBrightnessNiceCase )
     TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
+    initFram();
     InitPwm();
 
     IncreaseBrightness ( PRESS, LED_IR );
@@ -192,6 +200,7 @@ TEST ( PWM_Handler, IncreaseBrightnessNiceCase )
     TEST_ASSERT ( pwm_ir.is_running == 1 );
     TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
+    initFram();
     InitPwm();
 
     IncreaseBrightness ( HOLD, LED_IR );
@@ -228,6 +237,7 @@ TEST ( PWM_Handler, SetPwmNiceCase )
     TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
+    initFram();
     InitPwm();
 
     SetPwm ( LED_IR );
@@ -251,6 +261,7 @@ TEST ( PWM_Handler, TurnOffPwmNiceCase )
     TEST_ASSERT ( pwm_vis.is_running == 0 );
 
     /* IR Tests */
+    initFram();
     InitPwm();
 
     SetPwm ( LED_IR );
@@ -429,6 +440,7 @@ TEST ( PWM_Handler, DecreaseBrightnessEdgeCase )
                   HalfBrightness ); // IR should not change
     TEST_ASSERT ( pwm_ir.is_running == 0 );
 
+    initFram();
     InitPwm();
 
     SetBrightness ( MinBrightness, LED_VISIBLE );
@@ -449,6 +461,7 @@ TEST ( PWM_Handler, DecreaseBrightnessEdgeCase )
     TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
+    initFram();
     InitPwm();
 
     SetBrightness ( MinBrightness, LED_IR );
@@ -468,6 +481,7 @@ TEST ( PWM_Handler, DecreaseBrightnessEdgeCase )
     TEST_ASSERT ( pwm_ir.is_running == 0 );
     TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
+    initFram();
     InitPwm();
 
     SetBrightness ( MinBrightness, LED_IR );
@@ -512,6 +526,7 @@ TEST ( PWM_Handler, IncreaseBrightnessEdgeCase )
                   HalfBrightness ); // IR should not change
     TEST_ASSERT ( pwm_ir.is_running == 0 );
 
+    initFram();
     InitPwm();
 
     SetBrightness ( MaxBrightness, LED_VISIBLE );
@@ -532,6 +547,7 @@ TEST ( PWM_Handler, IncreaseBrightnessEdgeCase )
     TEST_ASSERT ( pwm_ir.is_running == 0 );
 
     /* IR Tests */
+    initFram();
     InitPwm();
 
     SetBrightness ( MaxBrightness, LED_IR );
@@ -551,6 +567,7 @@ TEST ( PWM_Handler, IncreaseBrightnessEdgeCase )
     TEST_ASSERT ( pwm_ir.is_running == 1 );
     TEST_ASSERT ( pwm_ir.pulse_width == GetPwm ( LED_IR ) );
 
+    initFram();
     InitPwm();
 
     SetBrightness ( MaxBrightness, LED_IR );
@@ -680,7 +697,7 @@ TEST ( PWM_Handler, LogFiftyPWMs )
 
     for ( uint8_t i = 0; i < logs_to_write; i++ )
     {
-        brightness = rand() % ( MaxBrightness + 1 ) % 50;
+        brightness = rand() % ( MaxBrightness + 1 );
 
         if ( i % 2 == 0 )
         {
@@ -768,6 +785,22 @@ TEST ( PWM_Handler, WriteLogOverflow )
 
 }
 
+TEST ( PWM_Handler, PwmRetainsValueThroughReset )
+{
+    uint8_t brightnessVis = rand() % ( MaxBrightness + 1 );
+    SetBrightness ( brightnessVis, LED_VISIBLE );
+    uint8_t brightnessIr = rand() % ( MaxBrightness + 1 );
+    SetBrightness ( brightnessIr, LED_IR );
+
+    LogPwm();
+
+    InitPwm();
+
+    TEST_ASSERT_EQUAL_UINT8 ( brightnessVis, GetBrightness ( LED_VISIBLE ) );
+    TEST_ASSERT_EQUAL_UINT8 ( brightnessIr, GetBrightness ( LED_IR ) );
+
+}
+
 /* end pwm_handler tests */
 
 TEST_GROUP_RUNNER ( PWM_Handler )
@@ -787,4 +820,5 @@ TEST_GROUP_RUNNER ( PWM_Handler )
     RUN_TEST_CASE ( PWM_Handler, LogFiftyPWMs );
     RUN_TEST_CASE ( PWM_Handler, ReadWholeLog );
     RUN_TEST_CASE ( PWM_Handler, WriteLogOverflow );
+    RUN_TEST_CASE ( PWM_Handler, PwmRetainsValueThroughReset );
 }

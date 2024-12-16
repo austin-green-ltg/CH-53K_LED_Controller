@@ -53,7 +53,7 @@
 1734121295 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\current_handler.h
 	<stdint.h>
 
-1734123934 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\logger.h
+1734368824 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\logger.h
 	<stdint.h>
 
 1734035641 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\delay_handler.c
@@ -70,7 +70,7 @@
 	"fram.h"
 	"stm32l412xx-bsp.h"
 
-1734367964 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\pwm_handler.c
+1734369003 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\pwm_handler.c
 	<stdio.h>
 	"pwm_handler.h"
 	"stm32l412xx-bsp.h"
@@ -164,7 +164,7 @@
 	"logger.h"
 	"stm32l412xx-bsp.h"
 
-1734368121 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\pwm_handler_test.c
+1734369716 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\pwm_handler_test.c
 	<stdio.h>
 	<string.h>
 	"unity_fixture.h"

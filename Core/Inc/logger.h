@@ -37,7 +37,7 @@
 #define TEMPERATURE_LOG_SIZE    (SHORT_LOG_SIZE)
 #define VOLTAGE_LOG_SIZE        (SHORT_LOG_SIZE)
 
-#define TOTAL_PWM_LOGS          (2) // IR and VIS
+#define TOTAL_PWM_LOGS          (3) // IR, VIS, Previous Init
 #define TOTAL_CURRENT_LOGS      (100)
 #define TOTAL_TEMPERATURE_LOGS  (100)
 #define TOTAL_VOLTAGE_LOGS      (100)

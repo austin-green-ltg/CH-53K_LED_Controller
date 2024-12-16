@@ -2,34 +2,54 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="..\Core\Inc\temperature_handler.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="tests\current_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="9" />
+			<Cursor1 position="322" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="tests\temperature_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\Core\Src\logger.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="346" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\Core\Src\pwm_handler.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="22973" topLine="726" />
-		</Cursor>
-	</File>
-	<File name="tests\pwm_handler_test.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="25953" topLine="631" />
+			<Cursor1 position="2982" topLine="71" />
 		</Cursor>
 	</File>
 	<File name="..\Core\Inc\logger.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1149" topLine="24" />
+			<Cursor1 position="1386" topLine="45" />
 		</Cursor>
 	</File>
-	<File name="..\Core\Src\temperature_handler.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\Core\Src\pwm_handler.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3341" topLine="108" />
+			<Cursor1 position="4699" topLine="83" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Inc\fram.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="64" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\current_handler.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="unity\unity_fixture.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2844" topLine="89" />
+		</Cursor>
+	</File>
+	<File name="mocks\bsp_mock.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3170" topLine="160" />
+		</Cursor>
+	</File>
+	<File name="tests\fram_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1812" topLine="83" />
+		</Cursor>
+	</File>
+	<File name="tests\pwm_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="30445" topLine="785" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
