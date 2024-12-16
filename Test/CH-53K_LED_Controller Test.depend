@@ -70,10 +70,12 @@
 	"fram.h"
 	"stm32l412xx-bsp.h"
 
-1734112271 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\pwm_handler.c
+1734357545 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\pwm_handler.c
+	<stdio.h>
 	"pwm_handler.h"
 	"stm32l412xx-bsp.h"
 	"temperature_handler.h"
+	"logger.h"
 	"my_printf.h"
 
 1734124910 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\pwm_handler.h
@@ -85,13 +87,14 @@
 1726575599 c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\inc\my_printf.h
 	<stdio.h>
 
-1734121158 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\temperature_handler.c
+1734125172 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\temperature_handler.c
+	<stdio.h>
 	<string.h>
 	"temperature_handler.h"
 	"stm32l412xx-bsp.h"
 	"logger.h"
 
-1734121158 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\voltage_handler.c
+1734125117 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\core\src\voltage_handler.c
 	<stdio.h>
 	"voltage_handler.h"
 	"stm32l412xx-bsp.h"
@@ -161,10 +164,13 @@
 	"logger.h"
 	"stm32l412xx-bsp.h"
 
-1734120276 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\pwm_handler_test.c
+1734367683 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\pwm_handler_test.c
+	<stdio.h>
+	<string.h>
 	"unity_fixture.h"
 	"pwm_handler.h"
 	"temperature_handler.h"
+	"logger.h"
 	"stm32l412xx-bsp.h"
 
 1726583825 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\requirements_test.c
@@ -175,7 +181,7 @@
 	"temperature_handler.h"
 	"stm32l412xx-bsp.h"
 
-1734124724 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\temperature_handler_test.c
+1734125188 source:c:\users\agreen\documents\projects\aveo\ch-53k_led_controller\test\tests\temperature_handler_test.c
 	<string.h>
 	"unity_fixture.h"
 	"temperature_handler.h"

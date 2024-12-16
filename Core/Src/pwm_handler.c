@@ -28,9 +28,12 @@
  *****************************************************************************/
 
 /* Private includes ----------------------------------------------------------*/
+#include <stdio.h>
+
 #include "pwm_handler.h"
 #include "stm32l412xx-bsp.h"
 #include "temperature_handler.h"
+#include "logger.h"
 #include "my_printf.h"
 
 /* uncommment to reverse brightness direction (dim brightens and bight dims) */
@@ -741,4 +744,22 @@ uint8_t GetPwm ( uint8_t isIr )
     }
 
     return ( pwm );
+}
+
+/**
+  * @brief Logs PWM to storage
+  */
+void LogPwm ( void )
+{
+    char str [ PWM_LOG_SIZE ];
+
+    for (uint8_t i = 0; i < TOTAL_PWM_LOGS; i++ )
+    {
+
+        sprintf ( str, "%hc", GetPwm(i) );
+
+        WriteLog ( STARTING_PWM_ADDRESS + i * PWM_LOG_SIZE, str,
+                   PWM_LOG_SIZE );
+
+    }
 }

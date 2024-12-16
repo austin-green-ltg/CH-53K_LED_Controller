@@ -1,6 +1,10 @@
+#include <stdio.h>
+#include <string.h>
+
 #include "unity_fixture.h"          /* UNITY */
 #include "pwm_handler.h"            /* CUT */
 #include "temperature_handler.h"    /* CUT */
+#include "logger.h"                 /* CUT */
 #include "stm32l412xx-bsp.h"        /* CUT */
 
 #define PRESS (0)
@@ -600,6 +604,167 @@ TEST ( PWM_Handler, SetBrightnessEdgeCase )
     TEST_ASSERT ( GetBrightness ( LED_IR ) == MinBrightness );
 }
 
+TEST ( PWM_Handler, LogPwm )
+{
+    char expectedIr [ PWM_LOG_SIZE ];
+    char expectedVis [ PWM_LOG_SIZE ];
+    char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+    char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+
+    uint8_t brightness = HalfBrightness;
+    SetBrightness ( brightness, LED_VISIBLE );
+    sprintf ( expectedVis, "%hc", GetPwm(LED_VISIBLE) );
+
+    SetBrightness ( brightness, LED_IR );
+    sprintf ( expectedIr, "%hc", GetPwm(LED_IR)  );
+
+    LogPwm();
+
+    ReadLog ( STARTING_PWM_ADDRESS + LED_VISIBLE *
+              PWM_LOG_SIZE, stringVis,
+              strlen ( expectedVis ) );
+
+    ReadLog ( STARTING_PWM_ADDRESS + LED_IR *
+              PWM_LOG_SIZE, stringIr,
+              strlen ( expectedIr ) );
+
+    TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
+    TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
+
+    free ( stringVis );
+    free ( stringIr );
+}
+
+TEST ( PWM_Handler, LogPwmAgain )
+{
+    char expectedIr [ PWM_LOG_SIZE ];
+    char expectedVis [ PWM_LOG_SIZE ];
+    char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+    char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+
+    uint8_t brightness = MinBrightness;
+    SetBrightness ( brightness, LED_VISIBLE );
+    sprintf ( expectedVis, "%hc", GetPwm(LED_VISIBLE) );
+
+    brightness = MaxBrightness;
+    SetBrightness ( brightness, LED_IR );
+    sprintf ( expectedIr, "%hc", GetPwm(LED_IR)  );
+
+    LogPwm();
+
+    ReadLog ( STARTING_PWM_ADDRESS + LED_VISIBLE *
+              PWM_LOG_SIZE, stringVis,
+              strlen ( expectedVis ) );
+
+    ReadLog ( STARTING_PWM_ADDRESS + LED_IR *
+              PWM_LOG_SIZE, stringIr,
+              strlen ( expectedIr ) );
+
+    TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
+    TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
+
+    free ( stringVis );
+    free ( stringIr );
+}
+
+TEST ( PWM_Handler, LogFiftyPWMs )
+{
+    char expectedIr [ PWM_LOG_SIZE ];
+    char expectedVis [ PWM_LOG_SIZE ];
+    char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+    char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+
+    const uint8_t logs_to_write = 50;
+
+    uint8_t brightness = 0;
+    for ( uint8_t i = 0; i < logs_to_write; i++ )
+    {
+        brightness = rand();
+        if(i % 2 == 0)
+        {
+            SetBrightness ( brightness, LED_VISIBLE );
+            sprintf ( expectedVis, "%hc", GetPwm(LED_VISIBLE) );
+        }
+        else
+        {
+            SetBrightness ( brightness, LED_IR );
+            sprintf ( expectedIr, "%hc", GetPwm(LED_IR) );
+        }
+        LogPwm();
+    }
+
+    ReadLog ( STARTING_PWM_ADDRESS + LED_VISIBLE *
+              PWM_LOG_SIZE, stringVis,
+              strlen ( expectedVis ) );
+
+    ReadLog ( STARTING_PWM_ADDRESS + LED_IR *
+              PWM_LOG_SIZE, stringIr,
+              strlen ( expectedIr ) );
+
+    TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
+    TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
+
+    free ( stringVis );
+    free ( stringIr );
+}
+
+TEST ( PWM_Handler, ReadWholeLog )
+{
+    // This just ensures that we don't crash if we write the entire thing
+
+    char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+    char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+
+    ReadLog ( STARTING_PWM_ADDRESS + LED_VISIBLE *
+              PWM_LOG_SIZE, stringVis,
+              PWM_LOG_SIZE );
+
+    ReadLog ( STARTING_PWM_ADDRESS + LED_IR *
+              PWM_LOG_SIZE, stringIr,
+              PWM_LOG_SIZE );
+
+    free ( stringVis );
+    free ( stringIr );
+}
+
+TEST ( PWM_Handler, WriteLogOverflow )
+{
+    char expectedIr [ PWM_LOG_SIZE ];
+    char expectedVis [ PWM_LOG_SIZE ];
+    char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+    char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+
+    // Fill Log Up
+    LogPwm();
+
+    // Write One More
+    uint8_t brightness = rand();
+    SetBrightness ( brightness, LED_VISIBLE );
+    sprintf ( expectedVis, "%hc", GetPwm(LED_VISIBLE) );
+
+    brightness = rand();
+    SetBrightness ( brightness, LED_IR );
+    sprintf ( expectedIr, "%hc", GetPwm(LED_IR)  );
+
+    LogPwm();
+
+    // Make sure that last log was written at STARTING_PWM_ADDRESS
+    ReadLog ( STARTING_PWM_ADDRESS + LED_VISIBLE *
+              PWM_LOG_SIZE, stringVis,
+              strlen ( expectedVis ) );
+
+    ReadLog ( STARTING_PWM_ADDRESS + LED_IR *
+              PWM_LOG_SIZE, stringIr,
+              strlen ( expectedIr ) );
+
+    TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
+    TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
+
+    free ( stringVis );
+    free ( stringIr );
+
+}
+
 /* end pwm_handler tests */
 
 TEST_GROUP_RUNNER ( PWM_Handler )
@@ -614,4 +779,9 @@ TEST_GROUP_RUNNER ( PWM_Handler )
     RUN_TEST_CASE ( PWM_Handler, DecreaseBrightnessEdgeCase );
     RUN_TEST_CASE ( PWM_Handler, IncreaseBrightnessEdgeCase );
     RUN_TEST_CASE ( PWM_Handler, SetBrightnessEdgeCase );
+    RUN_TEST_CASE ( PWM_Handler, LogPwm );
+    RUN_TEST_CASE ( PWM_Handler, LogPwmAgain );
+    RUN_TEST_CASE ( PWM_Handler, LogFiftyPWMs );
+    RUN_TEST_CASE ( PWM_Handler, ReadWholeLog );
+    RUN_TEST_CASE ( PWM_Handler, WriteLogOverflow );
 }

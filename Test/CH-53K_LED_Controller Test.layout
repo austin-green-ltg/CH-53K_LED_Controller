@@ -2,4 +2,74 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="..\Core\Src\pwm_handler.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3638" topLine="69" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Inc\current_handler.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="21" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Inc\logger.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1614" topLine="25" />
+		</Cursor>
+	</File>
+	<File name="tests\temperature_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10686" topLine="333" />
+		</Cursor>
+	</File>
+	<File name="tests\current_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="11668" topLine="398" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\current_handler.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1615" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\voltage_handler.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1918" topLine="24" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\logger.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2504" topLine="60" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\fram.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6238" topLine="208" />
+		</Cursor>
+	</File>
+	<File name="unity\unity_fixture.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1084" topLine="5" />
+		</Cursor>
+	</File>
+	<File name="tests\voltage_handler_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="23448" topLine="763" />
+		</Cursor>
+	</File>
+	<File name="..\Core\Src\temperature_handler.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2277" topLine="31" />
+		</Cursor>
+	</File>
+	<File name="tests\logger_test.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="192" />
+		</Cursor>
+	</File>
+	<File name="mocks\bsp_mock.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3730" topLine="164" />
+		</Cursor>
+	</File>
 </CodeBlocks_layout_file>

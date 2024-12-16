@@ -94,4 +94,9 @@ void SetBrightness ( int8_t brightness,
   */
 uint8_t GetPwm ( uint8_t isIr ); // get value of current PWM
 
+/**
+  * @brief Logs PWM to storage
+  */
+void LogPwm ( void );
+
 #endif /* INC_pwm_handlerh */
