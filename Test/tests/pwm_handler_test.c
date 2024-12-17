@@ -368,7 +368,8 @@ TEST ( PWM_Handler, GetPwmNiceCase )
 }
 
 // verify nice case of GetPwm
-TEST ( PWM_Handler, GetPwmThermistorNiceCase )
+/* Disable temperature based PWM */
+IGNORE_TEST ( PWM_Handler, GetPwmThermistorNiceCase )
 {
 
     /* Visible Tests */

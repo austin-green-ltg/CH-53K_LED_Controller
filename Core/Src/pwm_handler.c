@@ -746,27 +746,29 @@ void SetBrightness ( int8_t brightness, uint8_t isIr )
 uint8_t GetPwm ( uint8_t isIr )
 {
     uint8_t pwm = isIr ? PwmArray [ irBrightness ] : PwmArray [ visBrightness ];
-    TemperatureRange_e temperature_range = GetTemperatureRange();
 
-    switch ( temperature_range )
-    {
-        case TempCool:
-            // no change to PWM value
-            break;
-
-        case TempWarm:
-            pwm = ( uint8_t ) ( pwm * WarmPwmRatio + 0.5f );
-            break;
-
-        case TempHot:
-            pwm = ( uint8_t ) ( pwm * HotPwmRatio + 0.5f );
-            break;
-
-        default:
-            pwm = 0;
-            break;
-
-    }
+    /* Disable temperature based PWM */
+    // TemperatureRange_e temperature_range = GetTemperatureRange();
+    //
+    // switch ( temperature_range )
+    // {
+    // case TempCool:
+    // // no change to PWM value
+    // break;
+    //
+    // case TempWarm:
+    // pwm = ( uint8_t ) ( pwm * WarmPwmRatio + 0.5f );
+    // break;
+    //
+    // case TempHot:
+    // pwm = ( uint8_t ) ( pwm * HotPwmRatio + 0.5f );
+    // break;
+    //
+    // default:
+    // pwm = 0;
+    // break;
+    //
+    // }
 
     return ( pwm );
 }
