@@ -91,6 +91,7 @@ static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
 
     }
 
+    str [ 19 ] = '\0';
     strncat ( str, "->", sizeof ( str ) - 1 );
 
     switch ( temp2 )
