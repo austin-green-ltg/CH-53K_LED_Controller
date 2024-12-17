@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "unity_fixture.h"      /* UNITY */
+#include <unity_fixture.h>      /* UNITY */
 #include "delay_handler.h"      /* CUT */
 #include "stm32l412xx-bsp.h"    /* CUT */
 
@@ -72,7 +72,7 @@ TEST ( Delay_Handler, BrightnessDelay )
     // SrchLt.01256 In the IR Mode, the Controllable Searchlight shall brighten from Minimum to Full Bright in 6 +/-1.5 seconds.
     for ( int i = 0; i < ITERATIONS; i++ )
     {
-        int8_t brightness = rand();
+        int8_t brightness = ( int8_t ) rand();
         TEST_ASSERT_EQUAL_INT16 ( ( brightness * 5 ) + 250,
                                   BrightnessDelay ( brightness ) );
     }

@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 #include <stdio.h>
+#include <string.h>
 
 #include "current_handler.h"
 #include "stm32l412xx-bsp.h"
@@ -54,6 +55,7 @@ static uint32_t numCurrentLogs = 0;
 static void LogCurrentChange ( CurrentRange_e range, uint16_t currentValue )
 {
     char str [ 25 ];
+    memset ( str, '\0', 25 );
 
     switch ( range )
     {

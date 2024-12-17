@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "unity_fixture.h"          /* UNITY */
+#include <unity_fixture.h>          /* UNITY */
 #include "pwm_handler.h"            /* CUT */
 #include "temperature_handler.h"    /* CUT */
 #include "logger.h"                 /* CUT */
@@ -627,6 +627,8 @@ TEST ( PWM_Handler, LogPwm )
     char expectedVis [ PWM_LOG_SIZE ];
     char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
     char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+    memset ( expectedIr, '\0', PWM_LOG_SIZE );
+    memset ( expectedVis, '\0', PWM_LOG_SIZE );
 
     uint8_t brightness = HalfBrightness;
     SetBrightness ( brightness, LED_VISIBLE );
@@ -639,11 +641,11 @@ TEST ( PWM_Handler, LogPwm )
 
     ReadLog ( STARTING_PWM_ADDRESS + LED_VISIBLE *
               PWM_LOG_SIZE, stringVis,
-              strlen ( expectedVis ) );
+              PWM_LOG_SIZE );
 
     ReadLog ( STARTING_PWM_ADDRESS + LED_IR *
               PWM_LOG_SIZE, stringIr,
-              strlen ( expectedIr ) );
+              PWM_LOG_SIZE );
 
     TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
     TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
@@ -658,6 +660,8 @@ TEST ( PWM_Handler, LogPwmAgain )
     char expectedVis [ PWM_LOG_SIZE ];
     char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
     char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+    memset ( expectedIr, '\0', PWM_LOG_SIZE );
+    memset ( expectedVis, '\0', PWM_LOG_SIZE );
 
     uint8_t brightness = MinBrightness;
     SetBrightness ( brightness, LED_VISIBLE );
@@ -671,11 +675,11 @@ TEST ( PWM_Handler, LogPwmAgain )
 
     ReadLog ( STARTING_PWM_ADDRESS + LED_VISIBLE *
               PWM_LOG_SIZE, stringVis,
-              strlen ( expectedVis ) );
+              PWM_LOG_SIZE );
 
     ReadLog ( STARTING_PWM_ADDRESS + LED_IR *
               PWM_LOG_SIZE, stringIr,
-              strlen ( expectedIr ) );
+              PWM_LOG_SIZE );
 
     TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
     TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
@@ -690,6 +694,8 @@ TEST ( PWM_Handler, LogFiftyPWMs )
     char expectedVis [ PWM_LOG_SIZE ];
     char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
     char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+    memset ( expectedIr, '\0', PWM_LOG_SIZE );
+    memset ( expectedVis, '\0', PWM_LOG_SIZE );
 
     const uint8_t logs_to_write = 50;
 
@@ -715,11 +721,11 @@ TEST ( PWM_Handler, LogFiftyPWMs )
 
     ReadLog ( STARTING_PWM_ADDRESS + LED_VISIBLE *
               PWM_LOG_SIZE, stringVis,
-              strlen ( expectedVis ) );
+              PWM_LOG_SIZE );
 
     ReadLog ( STARTING_PWM_ADDRESS + LED_IR *
               PWM_LOG_SIZE, stringIr,
-              strlen ( expectedIr ) );
+              PWM_LOG_SIZE );
 
     TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
     TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
@@ -753,6 +759,8 @@ TEST ( PWM_Handler, WriteLogOverflow )
     char expectedVis [ PWM_LOG_SIZE ];
     char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
     char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
+    memset ( expectedIr, '\0', PWM_LOG_SIZE );
+    memset ( expectedVis, '\0', PWM_LOG_SIZE );
 
     // Fill Log Up
     LogPwm();
@@ -771,11 +779,11 @@ TEST ( PWM_Handler, WriteLogOverflow )
     // Make sure that last log was written at STARTING_PWM_ADDRESS
     ReadLog ( STARTING_PWM_ADDRESS + LED_VISIBLE *
               PWM_LOG_SIZE, stringVis,
-              strlen ( expectedVis ) );
+              PWM_LOG_SIZE );
 
     ReadLog ( STARTING_PWM_ADDRESS + LED_IR *
               PWM_LOG_SIZE, stringIr,
-              strlen ( expectedIr ) );
+              PWM_LOG_SIZE );
 
     TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
     TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );

@@ -154,8 +154,8 @@ void framWriteEnable ( void ) ;
  *  NOTE    : argument len must not be greater than 256
  *
  */
-void framReadMemory ( unsigned short addr, unsigned char* rdBufP,
-                      unsigned short len ) ;
+void framReadMemory ( uint32_t addr, unsigned char* rdBufP,
+                      uint32_t len ) ;
 
 /**
   * @fn framWriteMemory
@@ -171,8 +171,8 @@ void framReadMemory ( unsigned short addr, unsigned char* rdBufP,
  *  NOTE    : argument len must not be greater than 256
  *
  */
-void framWriteMemory ( unsigned short addr, const unsigned char* const wrBufP,
-                       unsigned short len ) ;
+void framWriteMemory ( uint32_t addr, const unsigned char* const wrBufP,
+                       uint32_t len ) ;
 
 /**
   * @fn framTest

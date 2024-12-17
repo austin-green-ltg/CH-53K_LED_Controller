@@ -1,7 +1,7 @@
 #include <stdlib.h>         /* rand */
 #include <string.h>         /* rand */
 
-#include "unity_fixture.h"      /* UNITY */
+#include <unity_fixture.h>      /* UNITY */
 #include "stm32l412xx-bsp.h"    /* CUT */
 #include "fram.h"               /* CUT */
 
@@ -127,7 +127,7 @@ TEST ( Fram, WRMemory )
 
     for ( int i = 0; i < len; i++ )
     {
-        txchar [ i ] = rand();
+        txchar [ i ] = ( unsigned char ) rand();
         rxchar [ i ] = 0;
     }
 

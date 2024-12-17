@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "unity_fixture.h"          /* UNITY */
+#include <unity_fixture.h>          /* UNITY */
 #include "temperature_handler.h"    /* CUT */
 #include "logger.h"                 /* CUT */
 #include "stm32l412xx-bsp.h"        /* CUT */
@@ -217,7 +217,7 @@ TEST ( Temperature_Handler, CoolToWarmPrintout )
     char* expected = "Temp Cool->Warm\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -232,7 +232,7 @@ TEST ( Temperature_Handler, CoolToHotPrintout )
     char* expected = "Temp Cool->Hot\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -247,7 +247,7 @@ TEST ( Temperature_Handler, CoolToCoolNoPrintout )
     char* expected = "";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -265,7 +265,7 @@ TEST ( Temperature_Handler, WarmToCoolPrintout )
     char* expected = "Temp Warm->Cool\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -283,7 +283,7 @@ TEST ( Temperature_Handler, WarmToHotPrintout )
     char* expected = "Temp Warm->Hot\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -303,7 +303,7 @@ TEST ( Temperature_Handler, WarmToWarmNoPrintout )
     char* expected = "";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -321,7 +321,7 @@ TEST ( Temperature_Handler, HotToCoolPrintout )
     char* expected = "Temp Hot->Cool\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -339,7 +339,7 @@ TEST ( Temperature_Handler, HotToWarmPrintout )
     char* expected = "Temp Hot->Warm\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -357,7 +357,7 @@ TEST ( Temperature_Handler, HotToHotNoPrintout )
     char* expected = "";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -374,7 +374,7 @@ TEST ( Temperature_Handler, LogTemperature )
 
     ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
               TEMPERATURE_LOG_SIZE, string,
-              strlen ( expected ) );
+              ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     numTemperatureLogs++;
@@ -398,7 +398,7 @@ TEST ( Temperature_Handler, LogTemperatureAgain )
 
     ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
               TEMPERATURE_LOG_SIZE, string,
-              strlen ( expected ) );
+              ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     numTemperatureLogs++;
@@ -429,7 +429,7 @@ TEST ( Temperature_Handler, LogFiftyTemperatures )
         snprintf ( expected, sizeof ( expected ), "%hu", i );
         ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
                   TEMPERATURE_LOG_SIZE, string,
-                  strlen ( expected ) );
+                  ( const uint32_t ) strlen ( expected ) );
         TEST_ASSERT_EQUAL_STRING ( expected, string );
         numTemperatureLogs++;
 
@@ -487,7 +487,8 @@ TEST ( Temperature_Handler, WriteLogOverflow )
     LogTemperature();
 
     // Make sure that last log was written at STARTING_TEMPERATURE_ADDRESS
-    ReadLog ( STARTING_TEMPERATURE_ADDRESS, string, strlen ( expected ) );
+    ReadLog ( STARTING_TEMPERATURE_ADDRESS, string,
+              ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
     numTemperatureLogs++;
 

@@ -1,4 +1,4 @@
-#include "unity_fixture.h"      /* UNITY */
+#include <unity_fixture.h>      /* UNITY */
 #include "button_handler.h"     /* CUT */
 #include "stm32l412xx-bsp.h"    /* CUT */
 

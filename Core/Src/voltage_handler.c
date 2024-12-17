@@ -25,6 +25,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 #include <stdio.h>
+#include <string.h>
 
 #include "voltage_handler.h"
 #include "stm32l412xx-bsp.h"
@@ -61,6 +62,7 @@ static uint32_t numVoltageLogs = 0;
 static void LogVoltageChange ( VoltageRange_e range, uint16_t voltageValue )
 {
     char str [ 30 ];
+    memset ( str, '\0', 30 );
 
     switch ( range )
     {

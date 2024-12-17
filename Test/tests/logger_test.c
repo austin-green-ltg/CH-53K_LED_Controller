@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "unity_fixture.h"      /* UNITY */
+#include <unity_fixture.h>      /* UNITY */
 #include "logger.h"             /* CUT */
 #include "stm32l412xx-bsp.h"    /* CUT */
 
@@ -31,7 +31,7 @@ TEST ( Logger, WriteRead )
 
     LogString ( expected, 0 );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 }
 
@@ -41,7 +41,7 @@ TEST ( Logger, WriteSpace )
 
     LogString ( expected, 0 );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 }
 
@@ -51,7 +51,7 @@ TEST ( Logger, WriteEmpty )
 
     LogString ( expected, 0 );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 }
 
@@ -64,8 +64,8 @@ TEST ( Logger, WriteMultiple )
     LogString ( expected2, 0 );
 
     // reverse ReadLog address because we wrote two strings
-    ReadLog ( address - strlen ( expected ) - 1, string,
-              strlen ( expected ) + strlen ( expected2 ) + 2 );
+    ReadLog ( ( const uint32_t ) ( address - strlen ( expected ) - 1 ), string,
+              ( const uint32_t ) ( strlen ( expected ) + strlen ( expected2 ) + 2 ) );
     TEST_ASSERT_EQUAL_UINT8_ARRAY ( "wm-test string\0wm-test2", string,
                                     strlen ( expected ) + strlen ( expected2 ) + 2 );
 }
@@ -78,7 +78,7 @@ TEST ( Logger, WriteBegging )
     LogString ( expected, 0 );
     LogString ( expected2, 1 );
 
-    ReadLog ( address, string, strlen ( expected2 ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected2 ) );
     TEST_ASSERT_EQUAL_STRING ( expected2, string );
 }
 
@@ -91,8 +91,8 @@ TEST ( Logger, WriteRestart )
     LogString ( expected2, 1 );
     LogString ( expected, 0 );
 
-    ReadLog ( address - strlen ( expected2 ) - 1, string,
-              strlen ( expected ) + strlen ( expected2 ) + 2 );
+    ReadLog ( ( const uint32_t ) ( address - strlen ( expected2 ) - 1 ), string,
+              ( const uint32_t ) ( strlen ( expected ) + strlen ( expected2 ) + 2 ) );
     TEST_ASSERT_EQUAL_UINT8_ARRAY ( "wr-test2\0wr-test string", string,
                                     strlen ( expected ) + strlen ( expected2 ) + 2 );
 }
@@ -173,7 +173,7 @@ TEST ( Logger, ReadMoreThanWrite )
 
     LogString ( expected, 0 );
 
-    ReadLog ( address, string, strlen ( expected ) + 10 );
+    ReadLog ( address, string, ( const uint32_t ) ( strlen ( expected ) + 10 ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 }
 
@@ -183,7 +183,7 @@ TEST ( Logger, ReadPosition )
 
     LogString ( expected, 0 );
 
-    ReadLog ( address + 3, string, strlen ( expected ) );
+    ReadLog ( address + 3, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( "t string", string );
 }
 
@@ -193,7 +193,7 @@ TEST ( Logger, ReadPositionPastWrite )
 
     LogString ( expected, 0 );
 
-    ReadLog ( address + 20, string, strlen ( expected ) );
+    ReadLog ( address + 20, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( "", string );
 }
 
@@ -201,9 +201,9 @@ TEST ( Logger, WriteLog )
 {
     const char* const expected = "test string";
 
-    WriteLog ( address, expected, strlen ( expected ) );
+    WriteLog ( address, expected, ( const uint32_t ) strlen ( expected ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 }
 

@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "unity_fixture.h"      /* UNITY */
+#include <unity_fixture.h>      /* UNITY */
 #include "voltage_handler.h"    /* CUT */
 #include "logger.h"             /* CUT */
 #include "stm32l412xx-bsp.h"    /* CUT */
@@ -363,7 +363,7 @@ TEST ( Voltage_Handler, NormalToErrorLowPrintout )
     char* expected = "Error Low Voltage 240 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -378,7 +378,7 @@ TEST ( Voltage_Handler, NormalToLowPrintout )
     char* expected = "Low Voltage 260 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -393,7 +393,7 @@ TEST ( Voltage_Handler, NormalToHighPrintout )
     char* expected = "High Voltage 300 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -408,7 +408,7 @@ TEST ( Voltage_Handler, NormalToErrorHighPrintout )
     char* expected = "Error High Voltage 320 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -423,7 +423,7 @@ TEST ( Voltage_Handler, NormalToNormalNoPrintout )
     char* expected = "";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -441,7 +441,7 @@ TEST ( Voltage_Handler, ErrorLowToLowPrintout )
     char* expected = "Low Voltage 260 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -459,7 +459,7 @@ TEST ( Voltage_Handler, ErrorLowToNormalPrintout )
     char* expected = "Normal Voltage 280 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -477,7 +477,7 @@ TEST ( Voltage_Handler, ErrorLowToHighPrintout )
     char* expected = "High Voltage 300 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -495,7 +495,7 @@ TEST ( Voltage_Handler, ErrorLowToErrorHighPrintout )
     char* expected = "Error High Voltage 320 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -513,7 +513,7 @@ TEST ( Voltage_Handler, ErrorLowToErrorLowNoPrintout )
     char* expected = "";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -531,7 +531,7 @@ TEST ( Voltage_Handler, LowToErrorLowPrintout )
     char* expected = "Error Low Voltage 240 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -549,7 +549,7 @@ TEST ( Voltage_Handler, LowToNormalPrintout )
     char* expected = "Normal Voltage 280 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -567,7 +567,7 @@ TEST ( Voltage_Handler, LowToHighPrintout )
     char* expected = "High Voltage 300 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -585,7 +585,7 @@ TEST ( Voltage_Handler, LowToErrorHighPrintout )
     char* expected = "Error High Voltage 320 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -603,7 +603,7 @@ TEST ( Voltage_Handler, LowToLowNoPrintout )
     char* expected = "";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -621,7 +621,7 @@ TEST ( Voltage_Handler, HighToErrorLowPrintout )
     char* expected = "Error Low Voltage 240 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -639,7 +639,7 @@ TEST ( Voltage_Handler, HighToLowPrintout )
     char* expected = "Low Voltage 260 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -657,7 +657,7 @@ TEST ( Voltage_Handler, HighToNormalPrintout )
     char* expected = "Normal Voltage 280 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -675,7 +675,7 @@ TEST ( Voltage_Handler, HighToErrorHighPrintout )
     char* expected = "Error High Voltage 320 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -695,7 +695,7 @@ TEST ( Voltage_Handler, HighToHighNoPrintout )
     char* expected = "";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -713,7 +713,7 @@ TEST ( Voltage_Handler, ErrorHighToErrorLowPrintout )
     char* expected = "Error Low Voltage 240 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -731,7 +731,7 @@ TEST ( Voltage_Handler, ErrorHighToLowPrintout )
     char* expected = "Low Voltage 260 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -749,7 +749,7 @@ TEST ( Voltage_Handler, ErrorHighToNormalPrintout )
     char* expected = "Normal Voltage 280 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -767,7 +767,7 @@ TEST ( Voltage_Handler, ErrorHighToHighPrintout )
     char* expected = "High Voltage 300 dV\n";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -785,7 +785,7 @@ TEST ( Voltage_Handler, ErrorHighToErrorHighNoPrintout )
     char* expected = "";
     char* string = ( char* ) calloc ( 100, sizeof ( char ) );
 
-    ReadLog ( address, string, strlen ( expected ) );
+    ReadLog ( address, string, ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     free ( string );
@@ -801,7 +801,7 @@ TEST ( Voltage_Handler, LogVoltage )
     LogVoltage();
 
     ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
-              strlen ( expected ) );
+              ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     numVoltageLogs++;
@@ -824,7 +824,7 @@ TEST ( Voltage_Handler, LogVoltageAgain )
     LogVoltage();
 
     ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
-              strlen ( expected ) );
+              ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
 
     numVoltageLogs++;
@@ -854,7 +854,7 @@ TEST ( Voltage_Handler, LogFiftyVoltages )
     {
         snprintf ( expected, sizeof ( expected ), "%hu", i );
         ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
-                  strlen ( expected ) );
+                  ( const uint32_t ) strlen ( expected ) );
         TEST_ASSERT_EQUAL_STRING ( expected, string );
         numVoltageLogs++;
 
@@ -911,7 +911,8 @@ TEST ( Voltage_Handler, WriteLogOverflow )
     LogVoltage();
 
     // Make sure that last log was written at STARTING_VOLTAGE_ADDRESS
-    ReadLog ( STARTING_VOLTAGE_ADDRESS, string, strlen ( expected ) );
+    ReadLog ( STARTING_VOLTAGE_ADDRESS, string,
+              ( const uint32_t ) strlen ( expected ) );
     TEST_ASSERT_EQUAL_STRING ( expected, string );
     numVoltageLogs++;
 

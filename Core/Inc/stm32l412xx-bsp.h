@@ -151,6 +151,7 @@ typedef enum
 typedef struct
 {
     uint8_t is_running; /**< pwm is running */
+    uint8_t reserved [ 3 ]; /** for padding */
     uint32_t pulse_width; /**< pulse width value */
 } PwmStruct;
 
@@ -160,6 +161,7 @@ typedef struct
 typedef struct
 {
     uint8_t is_running; /**< timer is running */
+    uint8_t reserved [ 3 ]; /** for padding */
     uint32_t time; /**< timer value */
 } TimerStruct;
 

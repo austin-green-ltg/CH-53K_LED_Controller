@@ -70,6 +70,7 @@ static uint32_t numTemperatureLogs = 0;
 static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
 {
     char str [ 20 ];
+    memset ( str, '\0', 20 );
 
     switch ( temp1 )
     {

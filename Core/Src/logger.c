@@ -39,7 +39,7 @@ static uint32_t tail_pointer = 0;
   */
 void LogString ( const char* const string, uint8_t write_beginning )
 {
-    uint32_t write_bytes = strlen ( string ) + 1;
+    uint32_t write_bytes = ( uint32_t ) ( strlen ( string ) + 1 );
     uint32_t address = tail_pointer;
     tail_pointer += write_bytes;
 
