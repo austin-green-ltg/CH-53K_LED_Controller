@@ -34,9 +34,19 @@
 void StartDelayCounter ( void ); // start the counter
 
 /**
+  * @brief Starts the log delay counter, only needs to be called once on init
+  */
+void StartLogDelayCounter ( void ); // start the counter
+
+/**
   * @brief Restart the delay counter
   */
 void RestartDelayCounter ( void );
+
+/**
+  * @brief Restart the log delay counter
+  */
+void RestartLogDelayCounter ( void );
 
 /**
   * @brief Checks if the delay (ms) was hit based on timer value
@@ -44,6 +54,13 @@ void RestartDelayCounter ( void );
   * @param[out] Returns 1 if delay has been hit
   */
 uint8_t DelayHit ( uint32_t delay_ms );
+
+/**
+  * @brief Checks if the log delay (ms) was hit based on timer value
+  * @param[in] delay_ms Time in ms to check if log timer has hit
+  * @param[out] Returns 1 if log delay has been hit
+  */
+uint8_t LogDelayHit ( uint32_t delay_ms );
 
 /**
   * @brief Returns a delay value for a brightness level

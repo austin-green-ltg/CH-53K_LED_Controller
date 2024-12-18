@@ -34,6 +34,10 @@ const float Tim2ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM2_CLK_DEV /
                            ( float ) AHB_CLK_PRESCALER / ( float ) APB1_CLK_PRESCALER /
                            ( float ) TIM2_CLK_PRESCALER / 1000.0f ); // 10 / ms
 
+const float Tim6ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM6_CLK_DEV /
+                           ( float ) AHB_CLK_PRESCALER / ( float ) APB1_CLK_PRESCALER /
+                           ( float ) TIM6_CLK_PRESCALER / 1000.0f ); // 10 / ms
+
 /**
   * @brief Starts the delay counter, only needs to be called once on init
   */
@@ -41,6 +45,16 @@ void StartDelayCounter ( void )
 {
     StartTIM2();
     RestartDelayCounter();
+    return;
+}
+
+/**
+  * @brief Starts the log delay counter, only needs to be called once on init
+  */
+void StartLogDelayCounter ( void )
+{
+    StartTIM6();
+    RestartLogDelayCounter();
     return;
 }
 
@@ -54,6 +68,15 @@ void RestartDelayCounter ( void )
 }
 
 /**
+  * @brief Restart the log delay counter
+  */
+void RestartLogDelayCounter ( void )
+{
+    RestartTIM6();
+    return;
+}
+
+/**
   * @brief Checks if the delay (ms) was hit based on timer value
   * @param[in] delay_ms Time in ms to check if timer has hit
   * @param[out] Returns 1 if delay has been hit
@@ -61,6 +84,18 @@ void RestartDelayCounter ( void )
 uint8_t DelayHit ( uint32_t delay_ms )
 {
     uint8_t isDelayHit = ( GetTIM2Cnt() >= ( uint32_t ) ( delay_ms * Tim2ClkKhz +
+                           0.5f ) );
+    return isDelayHit;
+}
+
+/**
+  * @brief Checks if the log delay (ms) was hit based on timer value
+  * @param[in] delay_ms Time in ms to check if log timer has hit
+  * @param[out] Returns 1 if log delay has been hit
+  */
+uint8_t LogDelayHit ( uint32_t delay_ms )
+{
+    uint8_t isDelayHit = ( GetTIM6Cnt() >= ( uint32_t ) ( delay_ms * Tim6ClkKhz +
                            0.5f ) );
     return isDelayHit;
 }

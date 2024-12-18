@@ -164,6 +164,35 @@ uint32_t GetTIM2Cnt ( void )
 }
 
 /**
+  * @brief Starts Timer 6 counter
+  */
+void StartTIM6 ( void )
+{
+    LL_TIM_EnableCounter ( TIM6 );
+
+    return;
+}
+
+/**
+  * @brief Resets Timer 6 counter to zero
+  */
+void RestartTIM6 ( void )
+{
+    LL_TIM_SetCounter ( TIM6, 0 );
+
+    return;
+}
+
+/**
+  * @brief Returns value in the Timer 6 counter
+  * @param[out] Value of Timer 6 counter
+  */
+uint32_t GetTIM6Cnt ( void )
+{
+    return LL_TIM_GetCounter ( TIM6 );
+}
+
+/**
   * @brief Returns raw ADC value 0x0 to 0xFFF from thermistor.
   *         0x0 = 0V, 0xFFF = 3.3V
   * @param[out] Thermistor raw ADC value

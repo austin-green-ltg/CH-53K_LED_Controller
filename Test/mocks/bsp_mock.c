@@ -5,6 +5,7 @@
 PwmStruct pwm_vis;
 PwmStruct pwm_ir;
 TimerStruct timer;
+TimerStruct logTimer;
 GPIO_PinState on_off_pin = 0;
 GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
@@ -100,6 +101,24 @@ extern const float Tim2ClkKhz;
 uint32_t GetTIM2Cnt( void )
 {
     return (uint32_t)(timer.time * Tim2ClkKhz);
+}
+
+void StartTIM6( void )
+{
+    logTimer.is_running = 1;
+    logTimer.time = 0;
+}
+
+void RestartTIM6( void )
+{
+    logTimer.is_running = 1;
+    logTimer.time = 0;
+}
+
+extern const float Tim6ClkKhz;
+uint32_t GetTIM6Cnt( void )
+{
+    return (uint32_t)(logTimer.time * Tim6ClkKhz);
 }
 
 int16_t GetThermistorValue( void )

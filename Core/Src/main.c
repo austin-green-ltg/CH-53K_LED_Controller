@@ -54,6 +54,8 @@
 #define AVG_STEP_TIME_MS     ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2.0f) // 147.5
 #define AVG_STEP_DIFF_MS     (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)         // 12.5, distance between lower step time and average step time
 
+#define LOG_DELAY_MS    (1000)
+
 const float LowStepTimeMs = ( LOWER_STEP_TIME_MS - AVG_STEP_DIFF_MS )
                             ; // 122.5
 const float HighStepTimeMs = ( UPPER_STEP_TIME_MS + AVG_STEP_DIFF_MS )
@@ -117,6 +119,7 @@ int main ( void )
     MX_GPIO_Init();
     MX_TIM1_Init();
     MX_TIM2_Init();
+    MX_TIM6_Init();
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
     /* Peripherals enabled for UART */
     MX_TIM15_Init();
@@ -135,11 +138,15 @@ int main ( void )
     SetPwm ( 1 );
 
     StartDelayCounter();
+    StartLogDelayCounter();
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
     /* Peripherals enabled for UART */
     LL_TIM_EnableCounter ( TIM15 );
     TIM15->CNT = 0;
 #endif /* ENABLE_UART_DEBUGGING */
+
+    // if brightness has changed since last log
+    uint8_t isBrightnessChanged = 0;
 
     /* USER CODE END 2 */
 
@@ -173,17 +180,24 @@ int main ( void )
                 DecreaseBrightness ( prevDimPressed, !togglePressed );
 
                 RestartDelayCounter();
+
+                isBrightnessChanged = 1; // mark brightness as changed
             }
             else if ( ( brightPressed == BUTTON_PRESSED ) && brightnessDelayHit )
             {
                 IncreaseBrightness ( prevBrightPressed, !togglePressed );
 
                 RestartDelayCounter();
+
+                isBrightnessChanged = 1; // mark brightness as changed
             }
-            else
+
+            // Check to see if brightness has changed
+            if ( isBrightnessChanged )
             {
+                // If so, log
                 LogPwm();
-                LogVitals();
+                isBrightnessChanged = 0;
             }
 
             // save previous button state
@@ -195,11 +209,14 @@ int main ( void )
             DisablePWM1();
             prevDimPressed = BUTTON_UNPRESSED;
             prevBrightPressed = BUTTON_UNPRESSED;
-            LogPwm();
-            LogVitals();
         }
 
         // log brightness levels
+        if ( LogDelayHit ( LOG_DELAY_MS ) )
+        {
+            LogVitals();
+            RestartLogDelayCounter();
+        }
     }
 
     /* USER CODE END 3 */
