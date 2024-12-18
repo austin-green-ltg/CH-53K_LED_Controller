@@ -188,10 +188,10 @@ int main ( void )
     StartPWM12();
 
     uint16_t voltage_mv = 0;
-    uint16_t temp_dc = 0;
+    uint16_t current_ma = 0;
     uint16_t conv_voltage = 0;
-    uint16_t conv_temp = 0;
-    uint16_t out_temp = 0;
+    uint16_t conv_current = 0;
+    uint16_t current_out = 0;
 
     /* USER CODE END 2 */
 
@@ -204,13 +204,13 @@ int main ( void )
         /* USER CODE BEGIN 3 */
 
         voltage_mv = ( int16_t ) ( ( float ) value_adc * VDD_VALUE / 4095.0f + 0.5f ) ;
-        temp_dc = voltage_mv - 500;
+        current_ma = voltage_mv * 2;
 
         conv_voltage = ( int16_t ) ( ( float ) voltage_mv * 255.0f / VDD_VALUE + 0.5f );
-        conv_temp = ( int16_t ) ( ( float ) temp_dc * 255.0f / 2800.0f + 0.5f );
-        out_temp = ( int16_t ) ( ( float ) temp_dc / 10.0f + 0.5f ) + 3;
+        conv_current = ( int16_t ) ( ( float ) current_ma * 255.0f / (VDD_VALUE * 2) + 0.5f );
+        current_out = ( int16_t ) ( ( float ) current_ma * 255.0f / 22500.0f + 0.5f );
 
-        SetPW12 ( out_temp );
+        SetPW12 ( current_out );
 
         // SetPW12((GetTemperature() + 400) / 10);
 
