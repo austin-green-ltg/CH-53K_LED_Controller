@@ -212,7 +212,7 @@ void disableWriteProtect ( void )
   */
 void enableChipSelect ( void )
 {
-    LL_GPIO_ResetOutputPin ( SPI_NSS_GPIO_Port, SPI_NSS_Pin );
+    LL_GPIO_SetOutputPin ( SPI_NSS_GPIO_Port, SPI_NSS_Pin );
 }
 
 /**
@@ -220,7 +220,16 @@ void enableChipSelect ( void )
   */
 void disableChipSelect ( void )
 {
-    LL_GPIO_SetOutputPin ( SPI_NSS_GPIO_Port, SPI_NSS_Pin );
+    LL_GPIO_ResetOutputPin ( SPI_NSS_GPIO_Port, SPI_NSS_Pin );
+}
+
+static void nop ( uint32_t num )
+{
+    volatile uint32_t i;
+
+    for ( i = 0; i < num; i++ )
+    {
+    }
 }
 
 /**
@@ -230,17 +239,93 @@ void disableChipSelect ( void )
   */
 void transferData ( const unsigned char* const txData, const uint32_t bytes )
 {
-    uint32_t xferCnt = 0;
+    /* Set the transaction information */
+    const uint8_t* pTxBuffPtr = ( const uint8_t* ) txData;
+    uint32_t TxXferCount = bytes;
 
-    while ( xferCnt > bytes )
+    /* Check if the SPI is already enabled */
+    if (!LL_SPI_IsEnabled ( SPI1 ) )
+    {
+        /* Enable SPI peripheral */
+        LL_SPI_Enable ( SPI1 );
+    }
+
+    /* Transmit data in 8 Bit mode */
+    while ( TxXferCount > 0U )
     {
         /* Wait until TXE flag is set to send data */
         if ( LL_SPI_IsActiveFlag_TXE ( SPI1 ) )
         {
-            LL_SPI_TransmitData8 ( SPI1, txData [ xferCnt ] );
-            xferCnt++;
+            LL_SPI_TransmitData8 ( SPI1, ( uint8_t ) (* ( pTxBuffPtr ) ) );
+            pTxBuffPtr++;
+            TxXferCount--;
         }
     }
+
+    /* Control if the TX fifo is empty */
+    while ( LL_SPI_GetTxFIFOLevel ( SPI1 ) != LL_SPI_TX_FIFO_EMPTY )
+    {
+        nop ( 100 );
+    }
+
+    /* Control the BSY flag */
+    while ( LL_SPI_IsActiveFlag_BSY ( SPI1 ) )
+    {
+        nop ( 100 );
+    }
+
+    /* Control if the RX fifo is empty */
+    volatile uint8_t tmpreg8 = 0;
+
+    while ( LL_SPI_GetRxFIFOLevel ( SPI1 ) != LL_SPI_RX_FIFO_EMPTY )
+    {
+        nop ( 100 );
+        tmpreg8 = LL_SPI_ReceiveData8 ( SPI1 );
+        ( void ) tmpreg8;
+    }
+
+    LL_SPI_ClearFlag_OVR ( SPI1 );
+
+    // while ( xferBusy == 1 )
+    // {
+    // nop ( 100 );
+    // }
+    //
+    // xferBusy = 1;
+    //
+    // if (!LL_SPI_IsEnabled ( SPI1 ) )
+    // {
+    // LL_SPI_Enable ( SPI1 );
+    // }
+    // uint32_t xferCnt = 0;
+    // while ( xferCnt < bytes )
+    // {
+    // /* Wait until TXE flag is set to send data */
+    // if ( LL_SPI_IsActiveFlag_TXE ( SPI1 ) )
+    // {
+    // LL_SPI_TransmitData8 ( SPI1, txData [ xferCnt ] );
+    // xferCnt++;
+    // }
+    // }
+
+    ////    while ( LL_SPI_GetTxFIFOLevel ( SPI1 ) != LL_SPI_TX_FIFO_EMPTY )
+    ////    {
+    ////        nop ( 100 );
+    ////    }
+    ////
+    ////     while ( !LL_SPI_IsActiveFlag_BSY ( SPI1 ) )
+    ////     {
+    ////        nop(100);
+    ////     }
+    //
+    // while ( LL_SPI_GetTxFIFOLevel ( SPI1 ) != LL_SPI_TX_FIFO_EMPTY )
+    // {
+    // nop(100);
+    // }
+
+    // LL_SPI_ClearFlag_OVR ( SPI1 );
+    //
+    // xferBusy = 0;
 }
 
 /**
@@ -250,16 +335,97 @@ void transferData ( const unsigned char* const txData, const uint32_t bytes )
   */
 void receiveData ( unsigned char* rxData, const uint32_t bytes )
 {
-    uint32_t xferCnt = 0;
+    // use transmitReceiveData with dummy transmit data
+    transmitReceiveData ( rxData, rxData, bytes );
+}
 
-    while ( xferCnt > bytes )
+/****
+    * @brief Sends and gets data from SPI lines
+    * @param[in] txData Pointer to data to send
+    * @param[in] rxData Pointer to data buffer
+    * @param[in] bytes  Number of bytes to send and receive
+    */
+void transmitReceiveData ( const unsigned char* const txData,
+                           unsigned char* rxData, const uint32_t bytes )
+{
+    /* Variable used to alternate Rx and Tx during transfer */
+    uint32_t txallowed = 1U;
+
+    /* Set the transaction information */
+    uint8_t* pRxBuffPtr = ( uint8_t* ) rxData;
+    uint32_t RxXferCount = bytes;
+    const uint8_t* pTxBuffPtr = ( const uint8_t* ) txData;
+    uint32_t TxXferCount = bytes;
+
+    LL_SPI_SetRxFIFOThreshold ( SPI1, LL_SPI_RX_FIFO_TH_QUARTER );
+
+    /* Check if the SPI is already enabled */
+    if (!LL_SPI_IsEnabled ( SPI1 ) )
     {
-        /* Check the RXNE flag */
-        if ( LL_SPI_IsActiveFlag_RXNE ( SPI1 ) )
+        /* Enable SPI peripheral */
+        LL_SPI_Enable ( SPI1 );
+    }
+
+    /* Transmit and Receive data in 8 Bit mode */
+    {
+        if ( TxXferCount == 0x01U )
         {
-            rxData [ xferCnt ] = LL_SPI_ReceiveData8 ( SPI1 );
-            xferCnt++;
+            LL_SPI_TransmitData8 ( SPI1, ( uint8_t ) (* ( pTxBuffPtr ) ) );
+            pTxBuffPtr++;
+            TxXferCount--;
+
         }
+
+        while ( ( TxXferCount > 0U ) || ( RxXferCount > 0U ) )
+        {
+            /* Check TXE flag */
+            if ( ( LL_SPI_IsActiveFlag_TXE ( SPI1 ) ) &&
+                    ( TxXferCount > 0U ) && ( txallowed == 1U ) )
+            {
+
+                LL_SPI_TransmitData8 ( SPI1, ( uint8_t ) (* ( pTxBuffPtr ) ) );
+                pTxBuffPtr++;
+                TxXferCount--;
+
+                /* Next Data is a reception (Rx). Tx not allowed */
+                txallowed = 0U;
+
+            }
+
+            /* Wait until RXNE flag is reset */
+            if ( ( LL_SPI_IsActiveFlag_RXNE ( SPI1 ) ) &&
+                    ( RxXferCount > 0U ) )
+            {
+                (* ( uint8_t* ) pRxBuffPtr ) = LL_SPI_ReceiveData8 ( SPI1 );
+                pRxBuffPtr++;
+                RxXferCount--;
+
+                /* Next Data is a Transmission (Tx). Tx is allowed */
+                txallowed = 1U;
+            }
+        }
+    }
+
+    /* Control if the TX fifo is empty */
+    while ( LL_SPI_GetTxFIFOLevel ( SPI1 ) != LL_SPI_TX_FIFO_EMPTY )
+    {
+        nop ( 100 );
+    }
+
+    /* Control the BSY flag */
+    while ( LL_SPI_IsActiveFlag_BSY ( SPI1 ) )
+    {
+        nop ( 100 );
+    }
+
+    /* Control if the RX fifo is empty */
+    volatile uint8_t tmpreg8 = 0;
+
+    while ( LL_SPI_GetRxFIFOLevel ( SPI1 ) != LL_SPI_RX_FIFO_EMPTY )
+    {
+        nop ( 100 );
+        tmpreg8 = LL_SPI_ReceiveData8 ( SPI1 );
+        ( void ) tmpreg8;
     }
 }
 

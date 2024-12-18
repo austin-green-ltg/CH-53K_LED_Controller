@@ -318,6 +318,16 @@ void transferData ( const unsigned char* const txData, const uint32_t bytes );
   */
 void receiveData ( unsigned char* rxData, const uint32_t bytes );
 
+
+/****
+    * @brief Sends and gets data from SPI lines
+    * @param[in] txData Pointer to data to send
+    * @param[in] rxData Pointer to data buffer
+    * @param[in] bytes  Number of bytes to send and receive
+    */
+void transmitReceiveData ( const unsigned char* const txData,
+                           unsigned char* rxData, const uint32_t bytes );
+
 /**
   * @brief Sends character via UART line
   * @param[in] c Character to send via UART
