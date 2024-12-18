@@ -250,13 +250,53 @@ int main ( void )
 
         if ( onOffPressed )
         {
+
             if ( togglePressed )
             {
-                SetPW12 ( 11 );
+                SetPwm (!togglePressed );
+
+                const int8_t CurrBrightness = GetBrightness (!togglePressed );;
+                const uint16_t BrightnessDelay_ms = ( uint16_t ) ( ( LowStepTimeMs +
+                                                    CurrBrightness ) * HOLD_BRIGHTNESS_JUMP );
+
+                uint8_t brightnessDelayHit = DelayHit ( BrightnessDelay_ms );
+
+                GPIO_PinState dimPressed = IsDimPressed();
+                GPIO_PinState brightPressed = IsBrightPressed();
+
+                if ( ( dimPressed == BUTTON_PRESSED ) && brightnessDelayHit )
+                {
+                    DecreaseBrightness ( prevDimPressed, !togglePressed );
+
+                    RestartDelayCounter();
+
+                    isBrightnessChanged = 1; // mark brightness as changed
+                }
+                else if ( ( brightPressed == BUTTON_PRESSED ) && brightnessDelayHit )
+                {
+                    IncreaseBrightness ( prevBrightPressed, !togglePressed );
+
+                    RestartDelayCounter();
+
+                    isBrightnessChanged = 1; // mark brightness as changed
+                }
+
+                // Check to see if brightness has changed
+                if ( isBrightnessChanged )
+                {
+                    // If so, log
+                    LogPwm();
+                    isBrightnessChanged = 0;
+                }
+
+                // save previous button state
+                prevDimPressed = dimPressed;
+                prevBrightPressed = brightPressed;
             }
             else
             {
                 SetPW12 ( temp_out );
+                StartPWM12();
             }
         }
         else
@@ -264,80 +304,19 @@ int main ( void )
             if ( togglePressed )
             {
                 SetPW12 ( conv_out );
+                StartPWM12();
             }
             else
             {
                 SetPW12 ( current_out );
+                StartPWM12();
             }
+
+            prevDimPressed = BUTTON_UNPRESSED;
+            prevBrightPressed = BUTTON_UNPRESSED;
         }
 
-        // SetPW12((GetTemperature() + 400) / 10);
-
-        // if ( GetCurrentRange() == CurrentError )
-        // {
-        // // TODO: Do something
-        // }
-        //
-        // if ( GetVoltageRange() == VoltageErrorLow ||
-        // GetVoltageRange() == VoltageErrorHigh )
-        // {
-        // // TODO: Do something
-        // }
-        //
-        // GPIO_PinState onOffPressed = IsOnOffPressed(); // 0 = Off, 1 = On
-        //
-        // if ( onOffPressed )
-        // {
-        // EnablePWM1();
-        // GPIO_PinState togglePressed = IsTogglePressed(); // 0 = IR, 1 = Visible
-        // SetPwm (!togglePressed );
-        //
-        // const int8_t CurrBrightness = GetBrightness (!togglePressed );;
-        // const uint16_t BrightnessDelay_ms = ( uint16_t ) ( ( LowStepTimeMs +
-        // CurrBrightness ) * HOLD_BRIGHTNESS_JUMP );
-        //
-        // uint8_t brightnessDelayHit = DelayHit ( BrightnessDelay_ms );
-        //
-        // GPIO_PinState dimPressed = IsDimPressed();
-        // GPIO_PinState brightPressed = IsBrightPressed();
-        //
-        // if ( ( dimPressed == BUTTON_PRESSED ) && brightnessDelayHit )
-        // {
-        // DecreaseBrightness ( prevDimPressed, !togglePressed );
-        //
-        // RestartDelayCounter();
-        //
-        // isBrightnessChanged = 1; // mark brightness as changed
-        // }
-        // else if ( ( brightPressed == BUTTON_PRESSED ) && brightnessDelayHit )
-        // {
-        // IncreaseBrightness ( prevBrightPressed, !togglePressed );
-        //
-        // RestartDelayCounter();
-        //
-        // isBrightnessChanged = 1; // mark brightness as changed
-        // }
-        //
-        // // Check to see if brightness has changed
-        // if ( isBrightnessChanged )
-        // {
-        // // If so, log
-        // LogPwm();
-        // isBrightnessChanged = 0;
-        // }
-        //
-        // // save previous button state
-        // prevDimPressed = dimPressed;
-        // prevBrightPressed = brightPressed;
-        // }
-        // else
-        // {
-        // DisablePWM1();
-        // prevDimPressed = BUTTON_UNPRESSED;
-        // prevBrightPressed = BUTTON_UNPRESSED;
-        // }
-
-        // log brightness levels
+        // log levels
         if ( LogDelayHit ( LOG_DELAY_MS ) )
         {
             LogVitals();
