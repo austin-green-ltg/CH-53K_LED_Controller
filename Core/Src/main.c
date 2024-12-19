@@ -19,7 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 // #include "adc.h"
-#include "dma.h"
+// #include "dma.h"
 // #include "spi.h"
 // #include "tim.h"
 // #include "usart.h"
@@ -82,8 +82,13 @@ void SystemClock_Config ( void );
 
 void LogVitals ( void );
 
-void LL_ADC_Start_DMA ( ADC_HandleTypeDef *hadc, uint32_t* pData,
+void LL_ADC_Start_DMA ( uint32_t* pData,
                         uint32_t Length );
+void LL_DMA_Start_IT ( uint32_t SrcAddress,
+                       uint32_t DstAddress, uint32_t DataLength );
+
+void LL_DMA_SetConfig ( uint32_t SrcAddress,
+                        uint32_t DstAddress, uint32_t DataLength );
 
 /* USER CODE END PFP */
 
@@ -137,7 +142,7 @@ int main ( void )
     MX_USB_DEVICE_Init();
     /* USER CODE BEGIN 2 */
 
-    LL_ADC_Start_DMA (&hadc1, ( uint32_t* ) value_adc, 3 );
+    LL_ADC_Start_DMA ( ( uint32_t* ) value_adc, 3 );
 
     InitPwm();
 
@@ -357,100 +362,117 @@ void LogVitals ( void )
     LogVoltage();
 }
 
-void LL_ADC_Start_DMA ( ADC_HandleTypeDef *hadc, uint32_t* pData,
+void LL_ADC_Start_DMA ( uint32_t* pData,
                         uint32_t Length )
 {
-    uint32_t tmp_multimode_config = LL_ADC_GetMultimode ( __LL_ADC_COMMON_INSTANCE (
-                                        ADC1 ) );
-
     /* Perform ADC enable and conversion start if no conversion is on going */
+    /* Ensure that multimode regular conversions are not enabled.   */
+    /* Otherwise, dedicated API HAL_ADCEx_MultiModeStart_DMA() must be used.  */
+    /* Enable the ADC peripheral */
+    /* ADC enable and wait for ADC ready (in case of ADC is disabled or         */
+    /* enabling phase not yet completed: flag ADC ready not yet set).           */
+    /* Timeout implemented to not be stuck if ADC cannot be enabled (possible   */
+    /* causes: ADC clock not running, ...).                                     */
+    if ( LL_ADC_IsEnabled ( ADC1 ) == 0UL )
     {
-        /* Process locked */
-        hadc->Lock = HAL_LOCKED;
+        /* Enable the ADC peripheral */
+        LL_ADC_Enable ( ADC1 );
 
-        /* Ensure that multimode regular conversions are not enabled.   */
-        /* Otherwise, dedicated API HAL_ADCEx_MultiModeStart_DMA() must be used.  */
+        while ( LL_ADC_IsActiveFlag_ADRDY ( ADC1 ) == 0UL )
         {
-            /* Enable the ADC peripheral */
-            ADC_Enable ( hadc );
-
-            /* Start conversion if ADC is effectively enabled */
+            /*  If ADEN bit is set less than 4 ADC clock cycles after the ADCAL bit
+                has been cleared (after a calibration), ADEN bit is reset by the
+                calibration logic.
+                The workaround is to continue setting ADEN until ADRDY is becomes 1.
+                Additionally, ADC_ENABLE_TIMEOUT is defined to encompass this
+                4 ADC clock cycle duration */
+            /* Note: Test of ADC enabled required due to hardware constraint to     */
+            /*       not enable ADC if already enabled.                             */
+            if ( LL_ADC_IsEnabled ( ADC1 ) == 0UL )
             {
-                /* Set ADC state                                                        */
-                /* - Clear state bitfield related to regular group conversion results   */
-                /* - Set state bitfield related to regular operation                    */
-                ADC_STATE_CLR_SET ( hadc->State,
-                                    HAL_ADC_STATE_READY | HAL_ADC_STATE_REG_EOC | HAL_ADC_STATE_REG_OVR |
-                                    HAL_ADC_STATE_REG_EOSMP,
-                                    HAL_ADC_STATE_REG_BUSY );
-
-                /* Reset HAL_ADC_STATE_MULTIMODE_SLAVE bit
-                  - if ADC instance is master or if multimode feature is not available
-                  - if multimode setting is disabled (ADC instance slave in independent mode) */
-                if ( ( __LL_ADC_MULTI_INSTANCE_MASTER ( ADC1 ) == ADC1 )
-                        || ( tmp_multimode_config == LL_ADC_MULTI_INDEPENDENT )
-                   )
-                {
-                    CLEAR_BIT ( hadc->State, HAL_ADC_STATE_MULTIMODE_SLAVE );
-                }
-
-                /* Check if a conversion is on going on ADC group injected */
-                if ( ( hadc->State & HAL_ADC_STATE_INJ_BUSY ) != 0UL )
-                {
-                    /* Reset ADC error code fields related to regular conversions only */
-                    CLEAR_BIT ( hadc->ErrorCode, ( HAL_ADC_ERROR_OVR | HAL_ADC_ERROR_DMA ) );
-                }
-                else
-                {
-                    /* Reset all ADC error code fields */
-                    ADC_CLEAR_ERRORCODE ( hadc );
-                }
-
-                /* Set the DMA transfer complete callback */
-                hadc->DMA_Handle->XferCpltCallback = ADC_DMAConvCplt;
-
-                /* Set the DMA half transfer complete callback */
-                hadc->DMA_Handle->XferHalfCpltCallback = ADC_DMAHalfConvCplt;
-
-                /* Set the DMA error callback */
-                hadc->DMA_Handle->XferErrorCallback = ADC_DMAError;
-
-
-                /* Manage ADC and DMA start: ADC overrun interruption, DMA start,     */
-                /* ADC start (in case of SW start):                                   */
-
-                /* Clear regular group conversion flag and overrun flag               */
-                /* (To ensure of no unknown state from potential previous ADC         */
-                /* operations)                                                        */
-                __HAL_ADC_CLEAR_FLAG ( hadc, ( ADC_FLAG_EOC | ADC_FLAG_EOS | ADC_FLAG_OVR ) );
-
-                /* Process unlocked */
-                /* Unlock before starting ADC conversions: in case of potential         */
-                /* interruption, to let the process to ADC IRQ Handler.                 */
-                hadc->Lock = HAL_UNLOCKED;
-
-                /* With DMA, overrun event is always considered as an error even if
-                   hadc->Init.Overrun is set to ADC_OVR_DATA_OVERWRITTEN. Therefore,
-                   ADC_IT_OVR is enabled. */
-                __HAL_ADC_ENABLE_IT ( hadc, ADC_IT_OVR );
-
-                /* Enable ADC DMA mode */
-                SET_BIT ( ADC1->CFGR, ADC_CFGR_DMAEN );
-
-                /* Start the DMA channel */
-                HAL_DMA_Start_IT ( hadc->DMA_Handle, ( uint32_t ) &ADC1->DR, ( uint32_t ) pData,
-                                   Length );
-
-                /* Enable conversion of regular group.                                  */
-                /* If software start has been selected, conversion starts immediately.  */
-                /* If external trigger has been selected, conversion will start at next */
-                /* trigger event.                                                       */
-                /* Start ADC group regular conversion */
-                LL_ADC_REG_StartConversion ( ADC1 );
+                LL_ADC_Enable ( ADC1 );
             }
-
         }
     }
+
+    /* Start conversion if ADC is effectively enabled */
+    /* Set ADC state                                                        */
+    /* - Clear state bitfield related to regular group conversion results   */
+    /* - Set state bitfield related to regular operation                    */
+    LL_ADC_ClearFlag_ADRDY ( ADC1 );
+    LL_ADC_ClearFlag_EOC ( ADC1 );
+    LL_ADC_ClearFlag_OVR ( ADC1 );
+    LL_ADC_ClearFlag_EOSMP ( ADC1 );
+
+    /* Manage ADC and DMA start: ADC overrun interruption, DMA start,     */
+    /* ADC start (in case of SW start):                                   */
+
+    /* Clear regular group conversion flag and overrun flag               */
+    /* (To ensure of no unknown state from potential previous ADC         */
+    /* operations)                                                        */
+    LL_ADC_ClearFlag_EOC ( ADC1 );
+    LL_ADC_ClearFlag_EOS ( ADC1 );
+    LL_ADC_ClearFlag_OVR ( ADC1 );
+
+    /* With DMA, overrun event is always considered as an error even if
+       hadc->Init.Overrun is set to ADC_OVR_DATA_OVERWRITTEN. Therefore,
+       ADC_IT_OVR is enabled. */
+    LL_ADC_EnableIT_OVR ( ADC1 );
+
+    /* Enable ADC DMA mode */
+    LL_ADC_REG_SetDMATransfer ( ADC1, LL_ADC_REG_DMA_TRANSFER_UNLIMITED );
+
+    /* Start the DMA channel */
+    LL_DMA_Start_IT ( ( uint32_t ) &ADC1->DR, ( uint32_t ) pData,
+                      Length );
+
+    /* Enable conversion of regular group.                                  */
+    /* If software start has been selected, conversion starts immediately.  */
+    /* If external trigger has been selected, conversion will start at next */
+    /* trigger event.                                                       */
+    /* Start ADC group regular conversion */
+    LL_ADC_REG_StartConversion ( ADC1 );
+}
+
+void LL_DMA_Start_IT ( uint32_t SrcAddress,
+                       uint32_t DstAddress, uint32_t DataLength )
+{
+
+    /* Disable the peripheral */
+    LL_DMA_DisableChannel ( DMA1, LL_DMA_CHANNEL_1 );
+
+    /* Configure the source, destination address and the data length & clear flags*/
+    LL_DMA_SetConfig ( SrcAddress, DstAddress, DataLength );
+
+    /* Enable the transfer complete interrupt */
+    /* Enable the transfer Error interrupt */
+    /* Enable the Half transfer complete interrupt as well */
+    LL_DMA_EnableIT_TC ( DMA1, LL_DMA_CHANNEL_1 );
+    LL_DMA_EnableIT_HT ( DMA1, LL_DMA_CHANNEL_1 );
+    LL_DMA_EnableIT_TE ( DMA1, LL_DMA_CHANNEL_1 );
+
+    /* Enable the Peripheral */
+    LL_DMA_EnableChannel ( DMA1, LL_DMA_CHANNEL_1 );
+}
+
+void LL_DMA_SetConfig ( uint32_t SrcAddress,
+                        uint32_t DstAddress, uint32_t DataLength )
+{
+    /* Clear all flags */
+    LL_DMA_ClearFlag_GI1 ( DMA1 );
+    LL_DMA_ClearFlag_TC1 ( DMA1 );
+    LL_DMA_ClearFlag_HT1 ( DMA1 );
+    LL_DMA_ClearFlag_TE1 ( DMA1 );
+
+    /* Configure DMA Channel data length */
+    // DMA1_Channel1->CNDTR = DataLength;
+    LL_DMA_SetDataLength ( DMA1, LL_DMA_CHANNEL_1, DataLength );
+
+    /* Configure DMA Channel source and destination address */
+    LL_DMA_ConfigAddresses ( DMA1, LL_DMA_CHANNEL_1, SrcAddress, DstAddress,
+                             LL_DMA_DIRECTION_PERIPH_TO_MEMORY );
+    // DMA1_Channel1->CPAR = SrcAddress;
+    // DMA1_Channel1->CMAR = DstAddress;
 }
 
 /* USER CODE END 4 */

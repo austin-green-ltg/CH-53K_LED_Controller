@@ -210,7 +210,7 @@ uint16_t GetThermistorValue ( void )
   */
 uint16_t GetCurrentValue ( void )
 {
-    return value_adc [ 1 ];
+    return value_adc [ 2 ];
 }
 
 /**
@@ -219,7 +219,7 @@ uint16_t GetCurrentValue ( void )
   */
 uint16_t GetVoltageValue ( void )
 {
-    return value_adc [ 2 ];
+    return value_adc [ 1 ];
 }
 
 /**

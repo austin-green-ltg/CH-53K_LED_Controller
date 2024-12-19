@@ -32,6 +32,7 @@ C_SRCS := \
   button_handler.c \
   current_handler.c \
   delay_handler.c \
+  dma.c \
   fram.c \
   gpio.c \
   logger.c \

@@ -101,6 +101,7 @@ void HAL_ADC_MspInit ( ADC_HandleTypeDef* adcHandle )
     if ( adcHandle->Instance == ADC1 )
     {
         /* USER CODE BEGIN ADC1_MspInit 0 */
+
         /* USER CODE END ADC1_MspInit 0 */
         /* ADC1 clock enable */
         __HAL_RCC_ADC_CLK_ENABLE();
@@ -142,6 +143,7 @@ void HAL_ADC_MspInit ( ADC_HandleTypeDef* adcHandle )
         __HAL_LINKDMA ( adcHandle, DMA_Handle, hdma_adc1 );
 
         /* USER CODE BEGIN ADC1_MspInit 1 */
+
         /* USER CODE END ADC1_MspInit 1 */
     }
 }
@@ -152,6 +154,7 @@ void HAL_ADC_MspDeInit ( ADC_HandleTypeDef* adcHandle )
     if ( adcHandle->Instance == ADC1 )
     {
         /* USER CODE BEGIN ADC1_MspDeInit 0 */
+
         /* USER CODE END ADC1_MspDeInit 0 */
         /* Peripheral clock disable */
         __HAL_RCC_ADC_CLK_DISABLE();
@@ -168,6 +171,7 @@ void HAL_ADC_MspDeInit ( ADC_HandleTypeDef* adcHandle )
         /* ADC1 DMA DeInit */
         HAL_DMA_DeInit ( adcHandle->DMA_Handle );
         /* USER CODE BEGIN ADC1_MspDeInit 1 */
+
         /* USER CODE END ADC1_MspDeInit 1 */
     }
 }
