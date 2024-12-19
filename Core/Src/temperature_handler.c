@@ -34,13 +34,13 @@
 #include "logger.h"
 
 /** Heating Threshold 1 (heating up from Cool to Warm) in dC */
-const int32_t HeatingThreshold1_dC = ( 1000 );
+const int16_t HeatingThreshold1_dC = ( 1000 );
 /** Heating Threshold 2 (heating up from Warm to Hot) in dC */
-const int32_t HeatingThreshold2_dC = ( 1200 );
+const int16_t HeatingThreshold2_dC = ( 1200 );
 /** Cooling Threshold 1 (cooling down from Warm to Cool) in dC */
-const int32_t CoolingThreshold1_dC = ( 800 ) ;
+const int16_t CoolingThreshold1_dC = ( 800 ) ;
 /** Cooling Threshold 2 (cooling down from Hot to Warm) in dC */
-const int32_t CoolingThreshold2_dC = ( 1000 );
+const int16_t CoolingThreshold2_dC = ( 1000 );
 
 /**
   * Temperature Thermistor to dC Conversion Constant

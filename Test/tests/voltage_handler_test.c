@@ -47,8 +47,17 @@ TEST ( Voltage_Handler, GetDefaultVoltageRange )
 
 TEST ( Voltage_Handler, GetVoltage )
 {
+    // Max
+    voltage_value_dV = 581;
+    TEST_ASSERT_EQUAL_INT32 ( 581, GetVoltage() );
+
+    // Min
+    voltage_value_dV = 0;
+    TEST_ASSERT_EQUAL_INT32 ( 0, GetVoltage() );
+
     voltage_value_dV = VoltageNormalValue_dV;
     TEST_ASSERT_EQUAL_UINT16 ( VoltageNormalValue_dV, GetVoltage() );
+
     voltage_value_dV = 292u;
     TEST_ASSERT_EQUAL_UINT16 ( 292u, GetVoltage() );
 

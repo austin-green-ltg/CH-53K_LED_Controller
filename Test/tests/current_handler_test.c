@@ -44,6 +44,14 @@ TEST ( Current_Handler, GetDefaultCurrentRange )
 
 TEST ( Current_Handler, GetCurrent )
 {
+    // Max
+    current_value_dA = 66;
+    TEST_ASSERT_EQUAL_INT32 ( 66, GetCurrent() );
+
+    // Min
+    current_value_dA = 0;
+    TEST_ASSERT_EQUAL_INT32 ( 0, GetCurrent() );
+
     current_value_dA = 10u;
     TEST_ASSERT_EQUAL_UINT16 ( 10u, GetCurrent() );
     current_value_dA = 25u;

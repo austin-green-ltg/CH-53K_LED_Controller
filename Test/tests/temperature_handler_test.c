@@ -5,15 +5,15 @@
 #include "logger.h"                 /* CUT */
 #include "stm32l412xx-bsp.h"        /* CUT */
 
-const uint16_t HeatingWarmTherm_dC = 1000u;
-const uint16_t HeatingHotTherm_dC = 1200u;
-const uint16_t CoolingCoolTherm_dC = 800u;
-const uint16_t CoolingWarmTherm_dC = 1000u;
+const int16_t HeatingWarmTherm_dC = 1000u;
+const int16_t HeatingHotTherm_dC = 1200u;
+const int16_t CoolingCoolTherm_dC = 800u;
+const int16_t CoolingWarmTherm_dC = 1000u;
 
 extern void initFram ( void );
 
 extern uint32_t address; // last written to address
-extern uint16_t thermistor_value_dC;
+extern int16_t thermistor_value_dC;
 
 static uint32_t numTemperatureLogs = 0;
 
@@ -51,6 +51,14 @@ TEST ( Temperature_Handler, GetDefaultTemperatureRange )
 
 TEST ( Temperature_Handler, GetTemperature )
 {
+    // Max
+    thermistor_value_dC = 2800;
+    TEST_ASSERT_EQUAL_INT32 ( 2800, GetTemperature() );
+
+    // Min
+    thermistor_value_dC = -500;
+    TEST_ASSERT_EQUAL_INT32 (-500, GetTemperature() );
+
     thermistor_value_dC = 200;
     TEST_ASSERT_EQUAL_INT32 ( 200, GetTemperature() );
 
