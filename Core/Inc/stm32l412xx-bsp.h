@@ -288,19 +288,19 @@ uint32_t GetTIM6Cnt ( void );
   * @brief Returns raw ADC value from thermistor
   * @param[out] Thermistor raw ADC value
   */
-int16_t GetThermistorValue ( void );
+uint16_t GetThermistorValue ( void );
 
 /**
   * @brief Returns raw ADC value from ammeter
   * @param[out] Ammeter raw ADC value
   */
-int16_t GetCurrentValue ( void );
+uint16_t GetCurrentValue ( void );
 
 /**
   * @brief Returns raw ADC value from voltmeter
   * @param[out] Voltmeter raw ADC value
   */
-int16_t GetVoltageValue ( void );
+uint16_t GetVoltageValue ( void );
 
 /**
   * @brief Enables SPI write protect line (active high)

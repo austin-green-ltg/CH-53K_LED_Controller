@@ -121,24 +121,24 @@ uint32_t GetTIM6Cnt( void )
     return (uint32_t)(logTimer.time * Tim6ClkKhz);
 }
 
-int16_t GetThermistorValue( void )
+uint16_t GetThermistorValue( void )
 {
     // value is in dC
     // to get to raw, add 500 to get mV
     // then multiply by 0xFFF / 3300 to get raw value
-    return (int16_t)((thermistor_value_dC + 500.0f) * MV_TO_RAW + 0.5f) ;
+    return (uint16_t)((thermistor_value_dC + 500.0f) * MV_TO_RAW + 0.5f) ;
 }
 
-int16_t GetCurrentValue( void )
+uint16_t GetCurrentValue( void )
 {
     // value is in dA
     // to get to raw, multiply by 100 to get mA
     // divide by 2 to get mV
     // then multiply by 0xFFF / 3300 to get raw value
-    return (int16_t)((current_value_dA * 100.0f / 2.0f) * MV_TO_RAW + 0.5f);
+    return (uint16_t)((current_value_dA * 100.0f / 2.0f) * MV_TO_RAW + 0.5f);
 }
 
-int16_t GetVoltageValue( void )
+uint16_t GetVoltageValue( void )
 {
     const float voltage_divider = 15.0f / 264.0f;
 
@@ -146,7 +146,7 @@ int16_t GetVoltageValue( void )
     // to get to raw, multiply by 100 to get mV
     // divide by voltage divider value to get mV
     // then multiply by 0xFFF / 3300 to get raw value
-    return (int16_t)((voltage_value_dV * 100.0f * voltage_divider) * MV_TO_RAW + 0.5f);
+    return (uint16_t)((voltage_value_dV * 100.0f * voltage_divider) * MV_TO_RAW + 0.5f);
 }
 
 

@@ -148,10 +148,10 @@ void LogTemperature ( void )
   *
   * @param[out] temperature level in dC
   */
-uint16_t GetTemperature ( void )
+int16_t GetTemperature ( void )
 {
-    uint16_t temperature = ( uint16_t ) ( ( float ) GetThermistorValue() *
-                                          thermistor_to_dC + 0.5f ) + (-500 );
+    int16_t temperature = ( int16_t ) ( ( float ) GetThermistorValue() *
+                                        thermistor_to_dC + 0.5f ) + (-500 );
     return ( temperature );
 }
 

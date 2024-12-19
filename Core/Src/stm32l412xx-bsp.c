@@ -197,7 +197,7 @@ uint32_t GetTIM6Cnt ( void )
   *         0x0 = 0V, 0xFFF = 3.3V
   * @param[out] Thermistor raw ADC value
   */
-int16_t GetThermistorValue ( void )
+uint16_t GetThermistorValue ( void )
 {
     return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_1 );
 }
@@ -206,7 +206,7 @@ int16_t GetThermistorValue ( void )
   * @brief Returns raw ADC value from ammeter
   * @param[out] Ammeter raw ADC value
   */
-int16_t GetCurrentValue ( void )
+uint16_t GetCurrentValue ( void )
 {
     return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_2 );
 }
@@ -215,7 +215,7 @@ int16_t GetCurrentValue ( void )
   * @brief Returns raw ADC value from voltmeter
   * @param[out] Voltmeter raw ADC value
   */
-int16_t GetVoltageValue ( void )
+uint16_t GetVoltageValue ( void )
 {
     return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_3 );
 }
