@@ -74,7 +74,7 @@ const float HighStepTimeMs = ( UPPER_STEP_TIME_MS + AVG_STEP_DIFF_MS )
 
 /* USER CODE BEGIN PV */
 
-uint16_t value_adc [ 3 ];
+extern uint16_t value_adc [ 3 ];
 
 /* Delay between ADC end of calibration and ADC enable.                     */
 /* Delay estimation in CPU cycles: Case of ADC enable done                  */
@@ -186,24 +186,15 @@ int main ( void )
     EnablePWM1();
     StartPWM12();
 
-    const float voltage_divider = 15.0f / 264.0f;
     const uint16_t expected_voltage_mv = 22500;
 
-    uint16_t temp_voltage_mv = 0;
-    uint16_t conv_temp_voltage = 0;
     uint16_t temp_dc = 0;
-    uint16_t conv_temp = 0;
     uint16_t temp_out = 0;
 
-    uint16_t voltage_voltage_mv = 0;
-    uint16_t conv_voltage_voltage = 0;
     uint16_t out_voltage_mv = 0;
     uint16_t conv_out = 0;
 
-    uint16_t current_voltage_mv = 0;
-    uint16_t conv_current_voltage = 0;
     uint16_t current_ma = 0;
-    uint16_t conv_current = 0;
     uint16_t current_out = 0;
 
     /* USER CODE END 2 */
@@ -217,31 +208,18 @@ int main ( void )
         /* USER CODE BEGIN 3 */
 
         // Temperature
-        temp_voltage_mv = ( int16_t ) ( ( float ) value_adc [ 0 ] * VDD_VALUE / 4095.0f
-                                        + 0.5f ) ;
-        conv_temp_voltage = ( int16_t ) ( ( float ) temp_voltage_mv * 255.0f / VDD_VALUE
-                                          + 0.5f );
-        temp_dc = temp_voltage_mv - 500;
-        conv_temp = ( int16_t ) ( ( float ) temp_dc * 255.0f / ( VDD_VALUE - 500.0f ) +
-                                  0.5f );
+        temp_dc = GetTemperature() ;
+        // Convert to show actual tempurature in dC(?) on voltmeter
         temp_out = ( int16_t ) ( ( float ) temp_dc / 10.0f + 0.5f ) + 3u;
 
         // Voltage
-        voltage_voltage_mv = ( int16_t ) ( ( float ) value_adc [ 1 ] * VDD_VALUE /
-                                           4095.0f + 0.5f ) ;
-        conv_voltage_voltage = ( int16_t ) ( ( float ) voltage_voltage_mv * 255.0f /
-                                             VDD_VALUE + 0.5f );
-        out_voltage_mv = ( int16_t ) ( ( float ) voltage_voltage_mv / voltage_divider );
+        out_voltage_mv = GetVoltage() * 100 ;
+        // Convert to show actual voltage in V(?) on voltmeter
         conv_out = ( int16_t ) ( ( float ) out_voltage_mv * 255.0f /
                                  expected_voltage_mv / 10.0f + 0.5f );
         // Current
-        current_voltage_mv = ( int16_t ) ( ( float ) value_adc [ 2 ] * VDD_VALUE /
-                                           4095.0f + 0.5f ) ;
-        conv_current_voltage = ( int16_t ) ( ( float ) current_voltage_mv * 255.0f /
-                                             VDD_VALUE + 0.5f );
-        current_ma = current_voltage_mv * 2;
-        conv_current = ( int16_t ) ( ( float ) current_ma * 255.0f /
-                                     ( VDD_VALUE * 2 ) + 0.5f );
+        current_ma = GetCurrent() * 100 ;
+        // Convert to show actual current in A(?) on voltmeter
         current_out = ( int16_t ) ( ( float ) current_ma * 255.0f / expected_voltage_mv
                                     + 0.5f );
 
