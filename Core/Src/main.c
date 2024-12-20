@@ -161,6 +161,20 @@ int main ( void )
     // if brightness has changed since last log
     uint8_t isBrightnessChanged = 0;
 
+    EnablePWM1();
+    StartPWM12();
+
+    const uint16_t expected_voltage_mv = 22500;
+
+    uint16_t temp_dc = 0;
+    uint16_t temp_out = 0;
+
+    uint16_t out_voltage_mv = 0;
+    uint16_t conv_out = 0;
+
+    uint16_t current_ma = 0;
+    uint16_t current_out = 0;
+
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -171,12 +185,30 @@ int main ( void )
 
         /* USER CODE BEGIN 3 */
 
+        // Temperature
+        temp_dc = GetTemperature() ;
+        // Convert to show actual tempurature in dC(?) on voltmeter
+        temp_out = ( int16_t ) ( ( float ) temp_dc / 10.0f + 0.5f ) + 3u;
+
+        // Voltage
+        out_voltage_mv = GetVoltage() * 100 ;
+        // Convert to show actual voltage in V(?) on voltmeter
+        conv_out = ( int16_t ) ( ( float ) out_voltage_mv * 255.0f /
+                                 expected_voltage_mv / 10.0f + 0.5f );
+        // Current
+        current_ma = GetCurrent() * 100 ;
+        // Convert to show actual current in A(?) on voltmeter
+        current_out = ( int16_t ) ( ( float ) current_ma * 255.0f / expected_voltage_mv
+                                    + 0.5f );
+
         GPIO_PinState onOffPressed = IsOnOffPressed(); // 0 = Off, 1 = On
+        GPIO_PinState togglePressed = IsTogglePressed(); // 0 = IR, 1 = Visible
 
         if ( onOffPressed )
         {
-            EnablePWM1();
-            GPIO_PinState togglePressed = IsTogglePressed(); // 0 = IR, 1 = Visible
+
+            if ( togglePressed )
+            {
             SetPwm (!togglePressed );
 
             const int8_t CurrBrightness = GetBrightness (!togglePressed );;
@@ -219,7 +251,23 @@ int main ( void )
         }
         else
         {
-            DisablePWM1();
+                SetPW12 ( temp_out );
+                StartPWM12();
+            }
+        }
+        else
+        {
+            if ( togglePressed )
+            {
+                SetPW12 ( conv_out );
+                StartPWM12();
+            }
+            else
+            {
+                SetPW12 ( current_out );
+                StartPWM12();
+            }
+
             prevDimPressed = BUTTON_UNPRESSED;
             prevBrightPressed = BUTTON_UNPRESSED;
         }
