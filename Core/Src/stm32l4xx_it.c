@@ -34,7 +34,6 @@
 
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_FS;
-extern DMA_HandleTypeDef hdma_adc1;
 /* USER CODE BEGIN EV */
 /* USER CODE END EV */
 
@@ -166,8 +165,58 @@ void SysTick_Handler ( void )
 void DMA1_Channel1_IRQHandler ( void )
 {
     /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
+
+    /* Half Transfer Complete Interrupt management ******************************/
+    if ( ( ( LL_DMA_IsActiveFlag_HT1 ( DMA1 ) ) != 0U ) &&
+            ( ( LL_DMA_IsEnabledIT_HT ( DMA1, LL_DMA_CHANNEL_1 ) ) != 0U ) )
+    {
+        /* Disable the half transfer interrupt if the DMA mode is not CIRCULAR */
+        if ( ( LL_DMA_GetMode ( DMA1, LL_DMA_CHANNEL_1 ) ) == 0U )
+        {
+            /* Disable the half transfer interrupt */
+            LL_DMA_DisableIT_HT ( DMA1, LL_DMA_CHANNEL_1 );
+        }
+
+        /* Clear the half transfer complete flag */
+        LL_DMA_ClearFlag_HT1 ( DMA1 );
+
+        /* DMA peripheral state is not updated in Half Transfer */
+        /* but in Transfer Complete case */
+    }
+
+    /* Transfer Complete Interrupt management ***********************************/
+    else if ( ( ( LL_DMA_IsActiveFlag_TC1 ( DMA1 ) ) != 0U ) &&
+              ( ( LL_DMA_IsEnabledIT_TC ( DMA1, LL_DMA_CHANNEL_1 ) ) != 0U ) )
+    {
+        if ( ( LL_DMA_GetMode ( DMA1, LL_DMA_CHANNEL_1 ) ) == 0U )
+        {
+            /* Disable the transfer complete interrupt if the DMA mode is not CIRCULAR */
+            /* Disable the transfer complete and error interrupt */
+            /* if the DMA mode is not CIRCULAR  */
+            LL_DMA_DisableIT_TC ( DMA1, LL_DMA_CHANNEL_1 );
+            LL_DMA_DisableIT_TE ( DMA1, LL_DMA_CHANNEL_1 );
+        }
+
+        /* Clear the transfer complete flag */
+        LL_DMA_ClearFlag_TC1 ( DMA1 );
+    }
+
+    /* Transfer Error Interrupt management **************************************/
+    else if ( ( ( LL_DMA_IsActiveFlag_TE1 ( DMA1 ) ) != 0U ) &&
+              ( ( LL_DMA_IsEnabledIT_TE ( DMA1, LL_DMA_CHANNEL_1 ) ) != 0U ) )
+    {
+        /* When a DMA transfer error occurs */
+        /* A hardware clear of its EN bits is performed */
+        /* Disable ALL DMA IT */
+        LL_DMA_DisableIT_TC ( DMA1, LL_DMA_CHANNEL_1 );
+        LL_DMA_DisableIT_HT ( DMA1, LL_DMA_CHANNEL_1 );
+        LL_DMA_DisableIT_TE ( DMA1, LL_DMA_CHANNEL_1 );
+
+        /* Clear all flags */
+        LL_DMA_ClearFlag_TE1 ( DMA1 );
+    }
+
     /* USER CODE END DMA1_Channel1_IRQn 0 */
-    HAL_DMA_IRQHandler (&hdma_adc1 );
     /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
     /* USER CODE END DMA1_Channel1_IRQn 1 */
 }

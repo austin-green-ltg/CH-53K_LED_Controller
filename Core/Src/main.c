@@ -142,6 +142,7 @@ int main ( void )
     MX_USB_DEVICE_Init();
     /* USER CODE BEGIN 2 */
 
+    // HAL_ADC_Start_DMA ( &hadc1, ( uint32_t* ) value_adc, 3 );
     LL_ADC_Start_DMA ( ( uint32_t* ) value_adc, 3 );
 
     InitPwm();
