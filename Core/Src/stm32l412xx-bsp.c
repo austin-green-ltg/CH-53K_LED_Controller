@@ -192,6 +192,8 @@ uint32_t GetTIM6Cnt ( void )
     return LL_TIM_GetCounter ( TIM6 );
 }
 
+
+uint16_t value_adc [ 3 ];
 /**
   * @brief Returns raw ADC value 0x0 to 0xFFF from thermistor.
   *         0x0 = 0V, 0xFFF = 3.3V
@@ -199,7 +201,7 @@ uint32_t GetTIM6Cnt ( void )
   */
 uint16_t GetThermistorValue ( void )
 {
-    return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_1 );
+    return value_adc [ 0 ];
 }
 
 /**
@@ -208,7 +210,7 @@ uint16_t GetThermistorValue ( void )
   */
 uint16_t GetCurrentValue ( void )
 {
-    return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_2 );
+    return value_adc [ 2 ];
 }
 
 /**
@@ -217,7 +219,7 @@ uint16_t GetCurrentValue ( void )
   */
 uint16_t GetVoltageValue ( void )
 {
-    return LL_ADC_INJ_ReadConversionData12 ( ADC1, LL_ADC_INJ_RANK_3 );
+    return value_adc [ 1 ];
 }
 
 /**
