@@ -163,7 +163,7 @@ int main ( void )
     // if brightness has changed since last log
     uint8_t isBrightnessChanged = 0;
 
-    uint8_t k [ 7 ] = {0xFF, 0, 0, 0, 0, 0, 0};
+    uint8_t k [ 8 ] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
     int16_t temperature = 0;
     uint16_t voltage = 0;
     uint16_t current = 0;
@@ -236,13 +236,13 @@ int main ( void )
             temperature = GetTemperature();
             current = GetCurrent();
             voltage = GetVoltage();
-            k [ 1 ] = temperature & 0xFF;
-            k [ 2 ] = temperature >> 0x8;
-            k [ 3 ] = current & 0xFF;
-            k [ 4 ] = current >> 0x8;
-            k [ 5 ] = voltage & 0xFF;
-            k [ 6 ] = voltage >> 0x8;
-            CDC_Transmit_FS ( k, 7 );
+            k [ 2 ] = temperature & 0xFF;
+            k [ 3 ] = temperature >> 0x8;
+            k [ 4 ] = current & 0xFF;
+            k [ 5 ] = current >> 0x8;
+            k [ 6 ] = voltage & 0xFF;
+            k [ 7 ] = voltage >> 0x8;
+            CDC_Transmit_FS ( k, 8 );
             LogVitals();
             RestartLogDelayCounter();
         }

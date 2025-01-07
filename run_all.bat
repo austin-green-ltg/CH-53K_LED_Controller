@@ -2,9 +2,9 @@ cd .\Core
 call format.bat
 cd ..
 cd .\Docs\latex
-call make.bat
+start call make.bat
 cd ..\..
 cd .\Test
 call format.bat
-call run_tests_rebuild.bat
+start call run_tests_rebuild.bat
 cd ..
