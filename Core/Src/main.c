@@ -233,6 +233,11 @@ int main ( void )
             LogVitals();
             RestartLogDelayCounter();
         }
+
+        if ( checkLine() == 1 )
+        {
+            sendRecordedLogs();
+        }
     }
 
     /* USER CODE END 3 */
