@@ -31,6 +31,7 @@ C_SRCS := \
   adc.c \
   button_handler.c \
   current_handler.c \
+  com.c \
   delay_handler.c \
   dma.c \
   fram.c \

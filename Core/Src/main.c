@@ -34,8 +34,8 @@
 #include "current_handler.h"
 #include "voltage_handler.h"
 #include "temperature_handler.h"
+#include "com.h"
 #include "my_printf.h"
-#include "usbd_cdc_if.h"
 #include "string.h"
 
 /* USER CODE END Includes */
@@ -163,10 +163,6 @@ int main ( void )
     // if brightness has changed since last log
     uint8_t isBrightnessChanged = 0;
 
-    uint8_t k [ 8 ] = {0xFF, 0, 0, 0, 0, 0, 0, 0};
-    int16_t temperature = 0;
-    uint16_t voltage = 0;
-    uint16_t current = 0;
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -233,16 +229,7 @@ int main ( void )
         // log levels
         if ( LogDelayHit ( LOG_DELAY_MS ) )
         {
-            temperature = GetTemperature();
-            current = GetCurrent();
-            voltage = GetVoltage();
-            k [ 2 ] = (temperature & 0x00FF);
-            k [ 3 ] = (temperature & 0xFF00) >> 0x8;
-            k [ 4 ] = (current & 0x00FF);
-            k [ 5 ] = (current & 0xFF00) >> 0x8;
-            k [ 6 ] = (voltage & 0x00FF);
-            k [ 7 ] = (voltage & 0xFF00) >> 0x8;
-            CDC_Transmit_FS ( k, 8 );
+            sendLiveLogs();
             LogVitals();
             RestartLogDelayCounter();
         }

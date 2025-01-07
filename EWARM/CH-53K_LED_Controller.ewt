@@ -1478,10 +1478,16 @@
                     <name>$PROJ_DIR$\..\Core\Src\button_handler.c</name>
                 </file>
                 <file>
+                    <name>$PROJ_DIR$\..\Core\Src\com.c</name>
+                </file>
+                <file>
                     <name>$PROJ_DIR$\..\Core\Src\current_handler.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Core\Src\delay_handler.c</name>
+                </file>
+                <file>
+                    <name>$PROJ_DIR$\..\Core\Src\dma.c</name>
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Core\Src\fram.c</name>
@@ -1534,10 +1540,10 @@
                         <name>$PROJ_DIR$\..\USB_DEVICE\App\usb_device.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_desc.c</name>
+                        <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_cdc_if.c</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_dfu_if.c</name>
+                        <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_desc.c</name>
                     </file>
                 </group>
                 <group>
@@ -1647,13 +1653,13 @@
         <group>
             <name>USB_Device_Library</name>
             <file>
+                <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</name>
+            </file>
+            <file>
                 <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_core.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</name>
-            </file>
-            <file>
-                <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Class\DFU\Src\usbd_dfu.c</name>
             </file>
             <file>
                 <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
