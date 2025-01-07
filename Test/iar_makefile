@@ -8,7 +8,7 @@ VPATH := . \
   ../USB_DEVICE/Target \
   ../Drivers/STM32L4xx_HAL_Driver\Src \
   ../Middlewares/ST/STM32_USB_Device_Library/Core/Src \
-  ../Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Src \
+  ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src \
   ../EWARM \
 
 # list of all include directories needed by this project
@@ -19,7 +19,7 @@ INCLUDES := -I. \
   -I ../Drivers/STM32L4xx_HAL_Driver/Inc \
   -I ../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy \
   -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc \
-  -I ../Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Inc \
+  -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc \
   -I ../Drivers/CMSIS/Device/ST/STM32L4xx/Include \
   -I ../Drivers/CMSIS/Include \
 #-----------------------------------------------------------------------------
@@ -79,8 +79,8 @@ C_SRCS := \
   usbd_core.c \
   usbd_ctlreq.c \
   usbd_desc.c \
-  usbd_dfu.c \
-  usbd_dfu_if.c \
+  usbd_cdc.c \
+  usbd_cdc_if.c \
   usbd_ioreq.c \
   voltage_handler.c \
 

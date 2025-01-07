@@ -360,9 +360,9 @@
           <state>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Inc</state>
           <state>$PROJ_DIR$/../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy</state>
           <state>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc</state>
-          <state>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Class/DFU/Inc</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Device/ST/STM32L4xx/Include</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Include</state>
+          <state>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1181,7 +1181,7 @@
             <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_desc.c</name>
           </file>
           <file>
-            <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_dfu_if.c</name>
+            <name>$PROJ_DIR$/../USB_DEVICE/App/usbd_cdc_if.c</name>
           </file>
         </group>
         <group>
@@ -1300,7 +1300,7 @@
         <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Class\DFU\Src\usbd_dfu.c</name>
+        <name>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.c</name>
       </file>
     </group>
   </group>
