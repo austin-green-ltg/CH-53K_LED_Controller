@@ -236,12 +236,12 @@ int main ( void )
             temperature = GetTemperature();
             current = GetCurrent();
             voltage = GetVoltage();
-            k [ 2 ] = temperature & 0xFF;
-            k [ 3 ] = temperature >> 0x8;
-            k [ 4 ] = current & 0xFF;
-            k [ 5 ] = current >> 0x8;
-            k [ 6 ] = voltage & 0xFF;
-            k [ 7 ] = voltage >> 0x8;
+            k [ 2 ] = (temperature & 0x00FF);
+            k [ 3 ] = (temperature & 0xFF00) >> 0x8;
+            k [ 4 ] = (current & 0x00FF);
+            k [ 5 ] = (current & 0xFF00) >> 0x8;
+            k [ 6 ] = (voltage & 0x00FF);
+            k [ 7 ] = (voltage & 0xFF00) >> 0x8;
             CDC_Transmit_FS ( k, 8 );
             LogVitals();
             RestartLogDelayCounter();
