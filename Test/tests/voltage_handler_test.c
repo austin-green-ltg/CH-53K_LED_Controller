@@ -802,16 +802,19 @@ TEST ( Voltage_Handler, ErrorHighToErrorHighNoPrintout )
 
 TEST ( Voltage_Handler, LogVoltage )
 {
-    char expected [ VOLTAGE_LOG_SIZE ] = "10";
     char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
 
     voltage_value_dV = 10;
+    int16_t expected = voltage_value_dV;
+    int16_t actual = 0;
 
     LogVoltage();
 
     ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
-              ( const uint32_t ) strlen ( expected ) );
-    TEST_ASSERT_EQUAL_STRING ( expected, string );
+              VOLTAGE_LOG_SIZE );
+
+    numFromCharArray ( string, actual );
+    TEST_ASSERT_EQUAL_INT16 ( expected, actual );
 
     numVoltageLogs++;
 
@@ -825,16 +828,19 @@ TEST ( Voltage_Handler, LogVoltage )
 
 TEST ( Voltage_Handler, LogVoltageAgain )
 {
-    char expected [ VOLTAGE_LOG_SIZE ] = "1";
     char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
 
     voltage_value_dV = 1;
+    int16_t expected = voltage_value_dV;
+    int16_t actual = 0;
 
     LogVoltage();
 
     ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
-              ( const uint32_t ) strlen ( expected ) );
-    TEST_ASSERT_EQUAL_STRING ( expected, string );
+              VOLTAGE_LOG_SIZE );
+
+    numFromCharArray ( string, actual );
+    TEST_ASSERT_EQUAL_INT16 ( expected, actual );
 
     numVoltageLogs++;
 
@@ -848,7 +854,6 @@ TEST ( Voltage_Handler, LogVoltageAgain )
 
 TEST ( Voltage_Handler, LogFiftyVoltages )
 {
-    char expected [ VOLTAGE_LOG_SIZE ];
     char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
 
     const uint8_t logs_to_write = 50;
@@ -861,10 +866,14 @@ TEST ( Voltage_Handler, LogFiftyVoltages )
 
     for ( uint16_t i = 0; i < logs_to_write; i++ )
     {
-        snprintf ( expected, sizeof ( expected ), "%hu", i );
+        int16_t expected = i;
+        int16_t actual = 0;
         ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
-                  ( const uint32_t ) strlen ( expected ) );
-        TEST_ASSERT_EQUAL_STRING ( expected, string );
+                  VOLTAGE_LOG_SIZE );
+
+        numFromCharArray ( string, actual );
+        TEST_ASSERT_EQUAL_INT16 ( expected, actual );
+
         numVoltageLogs++;
 
         if ( numVoltageLogs >= TOTAL_VOLTAGE_LOGS )
@@ -901,7 +910,6 @@ TEST ( Voltage_Handler, ReadWholeLog )
 
 TEST ( Voltage_Handler, WriteLogOverflow )
 {
-    char expected [ VOLTAGE_LOG_SIZE ];
     char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
 
     // Fill Log Up
@@ -915,14 +923,18 @@ TEST ( Voltage_Handler, WriteLogOverflow )
 
     // Write One More
     voltage_value_dV = 27;
-    snprintf ( expected, sizeof ( expected ), "%hu", voltage_value_dV );
+    int16_t expected = voltage_value_dV;
+    int16_t actual = 0;
 
     LogVoltage();
 
     // Make sure that last log was written at STARTING_VOLTAGE_ADDRESS
     ReadLog ( STARTING_VOLTAGE_ADDRESS, string,
-              ( const uint32_t ) strlen ( expected ) );
-    TEST_ASSERT_EQUAL_STRING ( expected, string );
+              VOLTAGE_LOG_SIZE );
+
+    numFromCharArray ( string, actual );
+    TEST_ASSERT_EQUAL_INT16 ( expected, actual );
+
     numVoltageLogs++;
 
     if ( numVoltageLogs > TOTAL_VOLTAGE_LOGS )

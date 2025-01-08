@@ -100,8 +100,10 @@ static void LogVoltageChange ( VoltageRange_e range, uint16_t voltageValue )
 void LogVoltage ( void )
 {
     char str [ VOLTAGE_LOG_SIZE ];
+    uint16_t voltage = GetVoltage();
 
-    snprintf ( str, sizeof ( str ), "%hu", GetVoltage() );
+    numToCharArray ( str, voltage );
+    str [ 2 ] = '\0';
 
     if ( numVoltageLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
     {

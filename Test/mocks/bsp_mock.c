@@ -184,6 +184,7 @@ void disableChipSelect( void )
 #define FRAM_SIZE 0xFFFF
 static uint8_t framMem[FRAM_SIZE];
 uint32_t address = 0;
+uint8_t address_set = 0;
 void initFram( void );
 void initFram( void )
 {
@@ -207,9 +208,10 @@ void transferData( const unsigned char* const txData, const uint32_t bytes )
     {
         readStatusRegisterSignal = 1;
     }
-    else if ((txData[0] == OC_READ || txData[0] == OC_WRITE) && bytes == 3)
+    else if ((txData[0] == OC_READ || txData[0] == OC_WRITE) && bytes == 3 && address_set == 0)
     {
         address = (txData[1] << 8) + txData[2];
+        address_set = 1;
     }
     else
     {
@@ -217,6 +219,7 @@ void transferData( const unsigned char* const txData, const uint32_t bytes )
         {
             framMem[i] = txData[i - address];
         }
+        address_set = 0;
     }
 }
 
@@ -233,6 +236,7 @@ void receiveData( unsigned char* rxData, const uint32_t bytes )
         {
             rxData[i - address] = framMem[i];
         }
+        address_set = 0;
     }
 }
 

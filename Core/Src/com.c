@@ -66,12 +66,9 @@ void sendLiveLogs ( void )
     current = GetCurrent();
     voltage = GetVoltage();
 
-    pk [ 2 ] = ( temperature & 0x00FF );
-    pk [ 3 ] = ( temperature & 0xFF00 ) >> 0x8;
-    pk [ 4 ] = ( current & 0x00FF );
-    pk [ 5 ] = ( current & 0xFF00 ) >> 0x8;
-    pk [ 6 ] = ( voltage & 0x00FF );
-    pk [ 7 ] = ( voltage & 0xFF00 ) >> 0x8;
+    numToCharArray (&pk [ 2 ], temperature );
+    numToCharArray (&pk [ 4 ], current );
+    numToCharArray (&pk [ 6 ], voltage );
 
     CDC_Transmit_FS ( pk, LIVE_PACKET_SIZE );
 

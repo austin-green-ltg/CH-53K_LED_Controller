@@ -373,17 +373,20 @@ TEST ( Temperature_Handler, HotToHotNoPrintout )
 
 TEST ( Temperature_Handler, LogTemperature )
 {
-    char expected [ TEMPERATURE_LOG_SIZE ] = "10";
     char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
 
     thermistor_value_dC = 10;
+    int16_t expected = thermistor_value_dC;
+    int16_t actual = 0;
 
     LogTemperature();
 
     ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
               TEMPERATURE_LOG_SIZE, string,
-              ( const uint32_t ) strlen ( expected ) );
-    TEST_ASSERT_EQUAL_STRING ( expected, string );
+              TEMPERATURE_LOG_SIZE );
+
+    numFromCharArray ( string, actual );
+    TEST_ASSERT_EQUAL_INT16 ( expected, actual );
 
     numTemperatureLogs++;
 
@@ -397,17 +400,20 @@ TEST ( Temperature_Handler, LogTemperature )
 
 TEST ( Temperature_Handler, LogTemperatureAgain )
 {
-    char expected [ TEMPERATURE_LOG_SIZE ] = "1";
     char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
 
     thermistor_value_dC = 1;
+    int16_t expected = thermistor_value_dC;
+    int16_t actual = 0;
 
     LogTemperature();
 
     ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
               TEMPERATURE_LOG_SIZE, string,
-              ( const uint32_t ) strlen ( expected ) );
-    TEST_ASSERT_EQUAL_STRING ( expected, string );
+              TEMPERATURE_LOG_SIZE );
+
+    numFromCharArray ( string, actual );
+    TEST_ASSERT_EQUAL_INT16 ( expected, actual );
 
     numTemperatureLogs++;
 
@@ -421,7 +427,6 @@ TEST ( Temperature_Handler, LogTemperatureAgain )
 
 TEST ( Temperature_Handler, LogFiftyTemperatures )
 {
-    char expected [ TEMPERATURE_LOG_SIZE ];
     char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
 
     const uint8_t logs_to_write = 50;
@@ -434,11 +439,15 @@ TEST ( Temperature_Handler, LogFiftyTemperatures )
 
     for ( uint16_t i = 0; i < logs_to_write; i++ )
     {
-        snprintf ( expected, sizeof ( expected ), "%hu", i );
+        int16_t expected = i;
+        int16_t actual = 0;
         ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
                   TEMPERATURE_LOG_SIZE, string,
-                  ( const uint32_t ) strlen ( expected ) );
-        TEST_ASSERT_EQUAL_STRING ( expected, string );
+                  TEMPERATURE_LOG_SIZE );
+
+        numFromCharArray ( string, actual );
+        TEST_ASSERT_EQUAL_INT16 ( expected, actual );
+
         numTemperatureLogs++;
 
         if ( numTemperatureLogs >= TOTAL_TEMPERATURE_LOGS )
@@ -476,7 +485,6 @@ TEST ( Temperature_Handler, ReadWholeLog )
 
 TEST ( Temperature_Handler, WriteLogOverflow )
 {
-    char expected [ TEMPERATURE_LOG_SIZE ];
     char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
 
     // Fill Log Up
@@ -490,14 +498,18 @@ TEST ( Temperature_Handler, WriteLogOverflow )
 
     // Write One More
     thermistor_value_dC = 27;
-    snprintf ( expected, sizeof ( expected ), "%hu", thermistor_value_dC );
+    int16_t expected = thermistor_value_dC;
+    int16_t actual = 0;
 
     LogTemperature();
 
     // Make sure that last log was written at STARTING_TEMPERATURE_ADDRESS
     ReadLog ( STARTING_TEMPERATURE_ADDRESS, string,
-              ( const uint32_t ) strlen ( expected ) );
-    TEST_ASSERT_EQUAL_STRING ( expected, string );
+              TEMPERATURE_LOG_SIZE );
+
+    numFromCharArray ( string, actual );
+    TEST_ASSERT_EQUAL_INT16 ( expected, actual );
+
     numTemperatureLogs++;
 
     if ( numTemperatureLogs > TOTAL_TEMPERATURE_LOGS )

@@ -52,6 +52,9 @@
 #define STARTING_TEMPERATURE_ADDRESS    (STARTING_CURRENT_ADDRESS + CURRENT_LOG_SPACE)
 #define STARTING_VOLTAGE_ADDRESS        (STARTING_TEMPERATURE_ADDRESS + TEMPERATURE_LOG_SPACE)
 
+#define numToCharArray(arr, num)    (arr) [0] = ( (num) & 0x00FF ); (arr) [ 1 ] = ( (num) & 0xFF00 ) >> 0x8;
+#define numFromCharArray(arr, num)  (num) = (arr) [0] | ((arr)[1] << 0x8)
+
 /**
   * @brief Log a string to tail_pointer, use write_beginning flag to write the beginning
   * @param[in] string Pointer to string to log

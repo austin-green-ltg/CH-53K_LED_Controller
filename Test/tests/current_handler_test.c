@@ -338,16 +338,19 @@ TEST ( Current_Handler, ErrorToErrorNoPrintout )
 
 TEST ( Current_Handler, LogCurrent )
 {
-    char expected [ CURRENT_LOG_SIZE ] = "10";
     char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
 
     current_value_dA = 10;
+    int16_t expected = current_value_dA;
+    int16_t actual = 0;
 
     LogCurrent();
 
     ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, string,
-              ( const uint32_t ) strlen ( expected ) );
-    TEST_ASSERT_EQUAL_STRING ( expected, string );
+              CURRENT_LOG_SIZE );
+
+    numFromCharArray ( string, actual );
+    TEST_ASSERT_EQUAL_INT16 ( expected, actual );
 
     numCurrentLogs++;
 
@@ -361,16 +364,19 @@ TEST ( Current_Handler, LogCurrent )
 
 TEST ( Current_Handler, LogCurrentAgain )
 {
-    char expected [ CURRENT_LOG_SIZE ] = "1";
     char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
 
     current_value_dA = 1;
+    int16_t expected = current_value_dA;
+    int16_t actual = 0;
 
     LogCurrent();
 
     ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, string,
-              ( const uint32_t ) strlen ( expected ) );
-    TEST_ASSERT_EQUAL_STRING ( expected, string );
+              CURRENT_LOG_SIZE );
+
+    numFromCharArray ( string, actual );
+    TEST_ASSERT_EQUAL_INT16 ( expected, actual );
 
     numCurrentLogs++;
 
@@ -384,7 +390,6 @@ TEST ( Current_Handler, LogCurrentAgain )
 
 TEST ( Current_Handler, LogFiftyCurrents )
 {
-    char expected [ CURRENT_LOG_SIZE ];
     char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
 
     const uint8_t logs_to_write = 50;
@@ -397,10 +402,14 @@ TEST ( Current_Handler, LogFiftyCurrents )
 
     for ( uint16_t i = 0; i < logs_to_write; i++ )
     {
-        snprintf ( expected, sizeof ( expected ), "%hu", i );
+        int16_t expected = i;
+        int16_t actual = 0;
         ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, string,
-                  ( const uint32_t ) strlen ( expected ) );
-        TEST_ASSERT_EQUAL_STRING ( expected, string );
+                  CURRENT_LOG_SIZE );
+
+        numFromCharArray ( string, actual );
+        TEST_ASSERT_EQUAL_INT16 ( expected, actual );
+
         numCurrentLogs++;
 
         if ( numCurrentLogs >= TOTAL_CURRENT_LOGS )
@@ -437,7 +446,6 @@ TEST ( Current_Handler, ReadWholeLog )
 
 TEST ( Current_Handler, WriteLogOverflow )
 {
-    char expected [ CURRENT_LOG_SIZE ];
     char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
 
     // Fill Log Up
@@ -451,14 +459,18 @@ TEST ( Current_Handler, WriteLogOverflow )
 
     // Write One More
     current_value_dA = 27;
-    snprintf ( expected, sizeof ( expected ), "%hu", current_value_dA );
+    int16_t expected = current_value_dA;
+    int16_t actual = 0;
 
     LogCurrent();
 
     // Make sure that last log was written at STARTING_CURRENT_ADDRESS
     ReadLog ( STARTING_CURRENT_ADDRESS, string,
-              ( const uint32_t ) strlen ( expected ) );
-    TEST_ASSERT_EQUAL_STRING ( expected, string );
+              CURRENT_LOG_SIZE );
+
+    numFromCharArray ( string, actual );
+    TEST_ASSERT_EQUAL_INT16 ( expected, actual );
+
     numCurrentLogs++;
 
     if ( numCurrentLogs > TOTAL_CURRENT_LOGS )

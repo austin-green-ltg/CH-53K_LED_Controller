@@ -124,8 +124,10 @@ static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
 void LogTemperature ( void )
 {
     char str [ TEMPERATURE_LOG_SIZE ];
+    int16_t temperature = GetTemperature();
 
-    snprintf ( str, sizeof ( str ), "%hu", GetTemperature() );
+    numToCharArray ( str, temperature );
+    str [ 2 ] = '\0';
 
     if ( numTemperatureLogs * TEMPERATURE_LOG_SIZE >= TEMPERATURE_LOG_SPACE )
     {

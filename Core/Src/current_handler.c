@@ -85,8 +85,10 @@ static void LogCurrentChange ( CurrentRange_e range, uint16_t currentValue )
 void LogCurrent ( void )
 {
     char str [ CURRENT_LOG_SIZE ];
+    uint16_t current = GetCurrent();
 
-    snprintf ( str, sizeof ( str ), "%hu", GetCurrent() );
+    numToCharArray ( str, current );
+    str [ 2 ] = '\0';
 
     if ( numCurrentLogs * CURRENT_LOG_SIZE >= CURRENT_LOG_SPACE )
     {
