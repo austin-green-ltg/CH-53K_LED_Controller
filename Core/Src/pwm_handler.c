@@ -45,15 +45,15 @@
 #endif /* ENABLE_UART_DEBUGGING */
 
 /* Brightness Steps */
-/** Max Brightness Step (49) */
+/** Max Brightness Step (50) */
 const uint8_t MaxBrightness = ( BRIGHTNESS_STEPS - 1 )
-                              ; // 49
+                              ; // 50
 /** Min Brightness Step (0) */
 const uint8_t MinBrightness = ( 0 )
                               ; // 0
 /** Half Brightness Step (24) */
 const uint8_t HalfBrightness = ( ( uint8_t ) ( ( BRIGHTNESS_STEPS - 1 ) /
-                                 2.0f ) ); // Rounds down to 24
+                                 2.0f ) ); // 25
 
 /* Pulse Width Values */
 #define PW_PERIOD (255)             // Period of PWM timer
@@ -72,12 +72,14 @@ const float HotPwmRatio = ( 0.50f );
 
 /* Private variables ---------------------------------------------------------*/
 /** Brightness to PWM value array (out of 255) */
-static const uint8_t PwmArray [ BRIGHTNESS_STEPS ] = { 0, 5, 10, 16, 21, 26, 31, 36, 42, 47,
-                                                       52, 57, 62, 68, 73, 78, 83, 88, 94, 99,
-                                                       104, 109, 114, 120, 125, 130, 135, 141, 146, 151,
-                                                       156, 161, 167, 172, 177, 182, 187, 193, 198, 203,
-                                                       208, 213, 219, 224, 229, 234, 239, 245, 250, 255
+static const uint8_t PwmArray [ BRIGHTNESS_STEPS ] = { 0,
+                                                       5, 10, 15, 20, 26, 31, 36, 41, 46, 51,
+                                                       56, 61, 66, 71, 77, 82, 87, 92, 97, 102,
+                                                       107, 112, 117, 122, 128, 133, 138, 143, 148, 153,
+                                                       158, 163, 168, 173, 179, 184, 189, 194, 199, 204,
+                                                       209, 214, 219, 224, 230, 235, 240, 245, 250, 255
                                                      };
+
 /** Initial led brightness, changed to half brightness on init */
 static int8_t visBrightness = 0;
 static int8_t irBrightness = 0;

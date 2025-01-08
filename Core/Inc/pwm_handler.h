@@ -29,7 +29,7 @@
 #include <stdint.h>
 
 /* Brightness Steps */
-#define BRIGHTNESS_STEPS        (50)
+#define BRIGHTNESS_STEPS        (51)
 #define HOLD_BRIGHTNESS_JUMP    (3)
 
 /**

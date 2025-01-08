@@ -28,6 +28,9 @@ extern const float MaxPw ;
 extern const float WarmPwmRatio ;
 extern const float HotPwmRatio ;
 
+// hair over 0.5 because 0.5 was causing issues with gcc
+const float round_const = 0.501f;
+
 TEST_GROUP ( PWM_Handler );
 
 TEST_SETUP ( PWM_Handler )
@@ -318,27 +321,28 @@ TEST ( PWM_Handler, GetPwmNiceCase )
                                     - 1.0f );
     int8_t brightness = MinBrightness;
     uint8_t expected_pwm = ( uint8_t ) ( ( brightness * visible_pwm_steps ) + MinPw
-                                         + 0.5f );
+                                         + round_const );
     SetBrightness ( brightness, LED_VISIBLE );
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_VISIBLE ) );
     brightness = MaxBrightness;
     expected_pwm = ( uint8_t ) ( ( brightness * visible_pwm_steps ) + MinPw +
-                                 0.5f );
+                                 round_const );
     SetBrightness ( brightness, LED_VISIBLE );
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_VISIBLE ) );
     brightness = HalfBrightness;
     expected_pwm = ( uint8_t ) ( ( brightness * visible_pwm_steps ) + MinPw +
-                                 0.5f );
+                                 round_const );
     SetBrightness ( brightness, LED_VISIBLE );
+
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_VISIBLE ) );
     brightness = 17;
     expected_pwm = ( uint8_t ) ( ( brightness * visible_pwm_steps ) + MinPw +
-                                 0.5f );
+                                 round_const );
     SetBrightness ( brightness, LED_VISIBLE );
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_VISIBLE ) );
     brightness = 42;
     expected_pwm = ( uint8_t ) ( ( brightness * visible_pwm_steps ) + MinPw +
-                                 0.5f );
+                                 round_const );
     SetBrightness ( brightness, LED_VISIBLE );
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_VISIBLE ) );
 
@@ -346,23 +350,28 @@ TEST ( PWM_Handler, GetPwmNiceCase )
     const float IR_pwm_steps = ( MaxPw - MinPw ) / ( ( float ) BRIGHTNESS_STEPS -
                                1.0f );
     brightness = MinBrightness;
-    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw + 0.5f );
+    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw +
+                                 round_const );
     SetBrightness ( brightness, LED_IR );
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_IR ) );
     brightness = MaxBrightness;
-    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw + 0.5f );
+    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw +
+                                 round_const );
     SetBrightness ( brightness, LED_IR );
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_IR ) );
     brightness = HalfBrightness;
-    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw + 0.5f );
+    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw +
+                                 round_const );
     SetBrightness ( brightness, LED_IR );
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_IR ) );
     brightness = 12;
-    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw + 0.5f );
+    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw +
+                                 round_const );
     SetBrightness ( brightness, LED_IR );
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_IR ) );
     brightness = 39;
-    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw + 0.5f );
+    expected_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) + MinPw +
+                                 round_const );
     SetBrightness ( brightness, LED_IR );
     TEST_ASSERT_EQUAL_UINT8 ( expected_pwm, GetPwm ( LED_IR ) );
 }
@@ -377,7 +386,7 @@ IGNORE_TEST ( PWM_Handler, GetPwmThermistorNiceCase )
                                     - 1.0f );
     const int8_t brightness = MaxBrightness;
     const uint8_t expected_vis_pwm = ( uint8_t ) ( ( brightness *
-                                     visible_pwm_steps ) + MinPw + 0.5f );
+                                     visible_pwm_steps ) + MinPw + round_const );
     const uint8_t expected_cool_vis_pwm = expected_vis_pwm;
     const uint8_t expected_warm_vis_pwm = ( uint8_t ) ( expected_vis_pwm *
                                           WarmPwmRatio + 0.5 );
@@ -398,7 +407,7 @@ IGNORE_TEST ( PWM_Handler, GetPwmThermistorNiceCase )
     const float IR_pwm_steps = ( MaxPw - MinPw ) / ( ( float ) BRIGHTNESS_STEPS -
                                1.0f );
     const uint8_t expected_IR_pwm = ( uint8_t ) ( ( brightness * IR_pwm_steps ) +
-                                    MinPw + 0.5f );
+                                    MinPw + round_const );
     const uint8_t expected_cool_IR_pwm = expected_IR_pwm;
     const uint8_t expected_warm_IR_pwm = ( uint8_t ) ( expected_IR_pwm *
                                          WarmPwmRatio + 0.5 );

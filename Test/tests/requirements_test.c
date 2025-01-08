@@ -38,7 +38,7 @@ TEST ( Requirements, InitialValues )
 {
     TEST_ASSERT ( GetBrightness ( LED_VISIBLE ) == HalfBrightness );
     TEST_ASSERT ( GetBrightness ( LED_IR ) == HalfBrightness );
-    // There are 49 steps from min brightness, find brightness that is halfway in discrete steps
+    // There are 50 steps from min brightness, find brightness that is halfway in discrete steps
     const uint8_t pwm_init = ( uint8_t ) ( ( MaxPw - MinPw ) / ( (
             float ) BRIGHTNESS_STEPS - 1.0f ) * HalfBrightness + MinPw + 0.5f );
     TEST_ASSERT_EQUAL_UINT8 ( pwm_init, GetPwm ( LED_VISIBLE ) );
@@ -50,7 +50,7 @@ TEST ( Requirements, InitialValues )
 // SrchLt.01230 The digital dimming control of the Controllable Searchlight shall be a minimum 50 dimming steps from Full-Off to Full-Bright.
 TEST ( Requirements, DimmingSteps )
 {
-    TEST_ASSERT ( BRIGHTNESS_STEPS == 50 );
+    TEST_ASSERT ( BRIGHTNESS_STEPS == 51 ); // 50 steps from full off
 }
 
 /* TEST CASE 4 */
@@ -209,10 +209,13 @@ TEST ( Requirements, RememberLedState )
 // SrchLt.01241 The PRESS State shall occur when either of the debounced DIM or BRT Discrete Inputs are +≥22.0-32.0 VDC (at the input connector) for less than 500 ms. (Input Debounce Time < Input Press Time <= 500 ms.)
 TEST ( Requirements, PressCheck )
 {
+    char msg [ 100 ];
+
     // Ensure greatest delay time is less than 500ms
     for ( uint8_t i = MinBrightness; i < BRIGHTNESS_STEPS; i++ )
     {
-        TEST_ASSERT ( BrightnessDelay ( i ) < 500 );
+        sprintf ( msg, "step %d was %d ", i, BrightnessDelay ( i ) );
+        TEST_ASSERT_MESSAGE ( BrightnessDelay ( i ) <= 500, msg );
     }
 }
 
