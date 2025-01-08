@@ -234,9 +234,12 @@ int main ( void )
             RestartLogDelayCounter();
         }
 
-        if ( checkLine() == 1 )
+        uint8_t logType = checkLine();
+
+        if ( logType != 0 )
         {
-            sendRecordedLogs();
+            sendRecordedLogs ( logType );
+            RestartLogDelayCounter();
         }
     }
 
