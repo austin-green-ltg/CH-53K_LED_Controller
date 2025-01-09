@@ -780,15 +780,10 @@ uint8_t GetPwm ( uint8_t isIr )
   */
 void LogPwm ( void )
 {
-    char str [ PWM_LOG_SIZE ];
-
     for ( uint8_t i = 0; i < TOTAL_PWM_LOGS; i++ )
     {
-
-        snprintf ( str, sizeof ( str ), "%c", GetBrightness ( i ) );
-
-        WriteLog ( STARTING_PWM_ADDRESS + i * PWM_LOG_SIZE, str,
+        char brightness [ 1 ] = {GetBrightness ( i ) };
+        WriteLog ( STARTING_PWM_ADDRESS + i * PWM_LOG_SIZE, brightness,
                    PWM_LOG_SIZE );
-
     }
 }

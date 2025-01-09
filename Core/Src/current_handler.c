@@ -84,19 +84,37 @@ static void LogCurrentChange ( CurrentRange_e range, uint16_t currentValue )
   */
 void LogCurrent ( void )
 {
-    char str [ CURRENT_LOG_SIZE ];
+    // Double storage for eof constant, overwrite eof on next log
+    char str [ CURRENT_LOG_SIZE * 2 ];
     uint16_t current = GetCurrent();
 
     numToCharArray ( str, current );
-    str [ 2 ] = '\0';
+    numToCharArray (&str [ 2 ], eol_uint_const );
 
-    if ( numCurrentLogs * CURRENT_LOG_SIZE >= CURRENT_LOG_SPACE )
+    if ( numCurrentLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
     {
+        // Write at start of log
         numCurrentLogs = 0;
-    }
 
-    WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, str,
-               CURRENT_LOG_SIZE );
+        WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, str,
+                   CURRENT_LOG_SIZE * 2 );
+    }
+    else if ( numCurrentLogs * VOLTAGE_LOG_SIZE + VOLTAGE_LOG_SIZE >=
+              VOLTAGE_LOG_SPACE )
+    {
+        // write end of log, then write eol to beginning of log
+        WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, str,
+                   CURRENT_LOG_SIZE );
+        WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE,
+                   &str [ CURRENT_LOG_SIZE ],
+                   CURRENT_LOG_SIZE );
+    }
+    else
+    {
+        // write normal
+        WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, str,
+                   CURRENT_LOG_SIZE * 2 );
+    }
 
     numCurrentLogs++;
 }

@@ -24,10 +24,14 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <limits.h>
 
 #include "logger.h"
 #include "fram.h"
 #include "stm32l412xx-bsp.h"
+
+const uint16_t eol_uint_const = UINT16_MAX; // max uint16 65,535
+const int16_t eol_int_const = INT16_MIN; // min int16 -32,768
 
 /** Signals end of data */
 static uint32_t tail_pointer = 0;

@@ -633,19 +633,17 @@ TEST ( PWM_Handler, SetBrightnessEdgeCase )
 
 TEST ( PWM_Handler, LogPwm )
 {
-    char expectedIr [ PWM_LOG_SIZE ];
-    char expectedVis [ PWM_LOG_SIZE ];
+    char expectedIr = 0;
+    char expectedVis = 0;
     char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
     char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
-    memset ( expectedIr, '\0', PWM_LOG_SIZE );
-    memset ( expectedVis, '\0', PWM_LOG_SIZE );
 
     uint8_t brightness = HalfBrightness;
     SetBrightness ( brightness, LED_VISIBLE );
-    snprintf ( expectedVis, sizeof ( expectedVis ), "%c", brightness );
+    expectedVis = brightness;
 
     SetBrightness ( brightness, LED_IR );
-    snprintf ( expectedIr, sizeof ( expectedIr ), "%c", brightness );
+    expectedIr = brightness;
 
     LogPwm();
 
@@ -657,8 +655,8 @@ TEST ( PWM_Handler, LogPwm )
               PWM_LOG_SIZE, stringIr,
               PWM_LOG_SIZE );
 
-    TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
-    TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
+    TEST_ASSERT_EQUAL_INT8 ( expectedVis, stringVis [ 0 ] );
+    TEST_ASSERT_EQUAL_INT8 ( expectedIr, stringIr [ 0 ] );
 
     free ( stringVis );
     free ( stringIr );
@@ -666,20 +664,18 @@ TEST ( PWM_Handler, LogPwm )
 
 TEST ( PWM_Handler, LogPwmAgain )
 {
-    char expectedIr [ PWM_LOG_SIZE ];
-    char expectedVis [ PWM_LOG_SIZE ];
+    char expectedIr = 0;
+    char expectedVis = 0;
     char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
     char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
-    memset ( expectedIr, '\0', PWM_LOG_SIZE );
-    memset ( expectedVis, '\0', PWM_LOG_SIZE );
 
     uint8_t brightness = MinBrightness;
     SetBrightness ( brightness, LED_VISIBLE );
-    snprintf ( expectedVis, sizeof ( expectedVis ), "%c", brightness );
+    expectedVis = brightness;
 
     brightness = MaxBrightness;
     SetBrightness ( brightness, LED_IR );
-    snprintf ( expectedIr, sizeof ( expectedIr ), "%c", brightness );
+    expectedIr = brightness;
 
     LogPwm();
 
@@ -691,8 +687,8 @@ TEST ( PWM_Handler, LogPwmAgain )
               PWM_LOG_SIZE, stringIr,
               PWM_LOG_SIZE );
 
-    TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
-    TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
+    TEST_ASSERT_EQUAL_INT8 ( expectedVis, stringVis [ 0 ] );
+    TEST_ASSERT_EQUAL_INT8 ( expectedIr, stringIr [ 0 ] );
 
     free ( stringVis );
     free ( stringIr );
@@ -700,12 +696,10 @@ TEST ( PWM_Handler, LogPwmAgain )
 
 TEST ( PWM_Handler, LogFiftyPWMs )
 {
-    char expectedIr [ PWM_LOG_SIZE ];
-    char expectedVis [ PWM_LOG_SIZE ];
+    char expectedIr = 0;
+    char expectedVis = 0;
     char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
     char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
-    memset ( expectedIr, '\0', PWM_LOG_SIZE );
-    memset ( expectedVis, '\0', PWM_LOG_SIZE );
 
     const uint8_t logs_to_write = 50;
 
@@ -718,12 +712,12 @@ TEST ( PWM_Handler, LogFiftyPWMs )
         if ( i % 2 == 0 )
         {
             SetBrightness ( brightness, LED_VISIBLE );
-            snprintf ( expectedVis, sizeof ( expectedVis ), "%c", brightness );
+            expectedVis = brightness;
         }
         else
         {
             SetBrightness ( brightness, LED_IR );
-            snprintf ( expectedIr, sizeof ( expectedIr ), "%c", brightness );
+            expectedIr = brightness;
         }
 
         LogPwm();
@@ -737,8 +731,8 @@ TEST ( PWM_Handler, LogFiftyPWMs )
               PWM_LOG_SIZE, stringIr,
               PWM_LOG_SIZE );
 
-    TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
-    TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
+    TEST_ASSERT_EQUAL_INT8 ( expectedVis, stringVis [ 0 ] );
+    TEST_ASSERT_EQUAL_INT8 ( expectedIr, stringIr [ 0 ] );
 
     free ( stringVis );
     free ( stringIr );
@@ -765,12 +759,10 @@ TEST ( PWM_Handler, ReadWholeLog )
 
 TEST ( PWM_Handler, WriteLogOverflow )
 {
-    char expectedIr [ PWM_LOG_SIZE ];
-    char expectedVis [ PWM_LOG_SIZE ];
+    char expectedIr = 0;
+    char expectedVis = 0;
     char* stringIr = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
     char* stringVis = ( char* ) calloc ( PWM_LOG_SIZE, sizeof ( char ) );
-    memset ( expectedIr, '\0', PWM_LOG_SIZE );
-    memset ( expectedVis, '\0', PWM_LOG_SIZE );
 
     // Fill Log Up
     LogPwm();
@@ -778,11 +770,11 @@ TEST ( PWM_Handler, WriteLogOverflow )
     // Write One More
     uint8_t brightness = rand() % ( MaxBrightness + 1 );
     SetBrightness ( brightness, LED_VISIBLE );
-    snprintf ( expectedVis, sizeof ( expectedVis ), "%c", brightness );
+    expectedVis = brightness;
 
     brightness = rand() % ( MaxBrightness + 1 );
     SetBrightness ( brightness, LED_IR );
-    snprintf ( expectedIr, sizeof ( expectedIr ), "%c", brightness );
+    expectedIr = brightness;
 
     LogPwm();
 
@@ -795,8 +787,8 @@ TEST ( PWM_Handler, WriteLogOverflow )
               PWM_LOG_SIZE, stringIr,
               PWM_LOG_SIZE );
 
-    TEST_ASSERT_EQUAL_STRING ( expectedVis, stringVis );
-    TEST_ASSERT_EQUAL_STRING ( expectedIr, stringIr );
+    TEST_ASSERT_EQUAL_INT8 ( expectedVis, stringVis [ 0 ] );
+    TEST_ASSERT_EQUAL_INT8 ( expectedIr, stringIr [ 0 ] );
 
     free ( stringVis );
     free ( stringIr );

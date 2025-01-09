@@ -99,19 +99,36 @@ static void LogVoltageChange ( VoltageRange_e range, uint16_t voltageValue )
   */
 void LogVoltage ( void )
 {
-    char str [ VOLTAGE_LOG_SIZE ];
+    // Double storage for eof constant, overwrite eof on next log
+    char str [ VOLTAGE_LOG_SIZE * 2 ];
     uint16_t voltage = GetVoltage();
 
     numToCharArray ( str, voltage );
-    str [ 2 ] = '\0';
+    numToCharArray (&str [ 2 ], eol_uint_const );
 
     if ( numVoltageLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
     {
+        // Write at start of log
         numVoltageLogs = 0;
-    }
 
-    WriteLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, str,
-               VOLTAGE_LOG_SIZE );
+        WriteLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, str,
+                   VOLTAGE_LOG_SIZE * 2 );
+    }
+    else if ( numVoltageLogs * VOLTAGE_LOG_SIZE + VOLTAGE_LOG_SIZE >=
+              VOLTAGE_LOG_SPACE )
+    {
+        // write end of log, then write eol to beginning of log
+        WriteLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, str,
+                   VOLTAGE_LOG_SIZE );
+        WriteLog ( STARTING_VOLTAGE_ADDRESS, &str [ VOLTAGE_LOG_SIZE ],
+                   VOLTAGE_LOG_SIZE );
+    }
+    else
+    {
+        // write normal
+        WriteLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, str,
+                   VOLTAGE_LOG_SIZE * 2 );
+    }
 
     numVoltageLogs++;
 }

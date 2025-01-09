@@ -28,9 +28,9 @@
 
 #include <stdint.h>
 
-#define CHAR_LOG_SIZE   (2) // 1 byte plus null pointer
-#define SHORT_LOG_SIZE  (3) // 2 bytes plus null pointer
-#define INT_LOG_SIZE    (5) // 4 bytes plus null pointer
+#define CHAR_LOG_SIZE   (1)
+#define SHORT_LOG_SIZE  (2)
+#define INT_LOG_SIZE    (4)
 
 #define PWM_LOG_SIZE            (CHAR_LOG_SIZE)
 #define CURRENT_LOG_SIZE        (SHORT_LOG_SIZE)
@@ -54,6 +54,9 @@
 
 #define numToCharArray(arr, num)    (arr) [0] = ( (num) & 0x00FF ); (arr) [ 1 ] = ( (num) & 0xFF00 ) >> 0x8;
 #define numFromCharArray(arr, num)  (num) = (arr) [0] | ((arr)[1] << 0x8)
+
+extern const uint16_t eol_uint_const; // max uint16 65,536
+extern const int16_t eol_int_const ; // min int16 -32,768
 
 /**
   * @brief Log a string to tail_pointer, use write_beginning flag to write the beginning

@@ -123,20 +123,40 @@ static void LogTempChange ( TemperatureRange_e temp1, TemperatureRange_e temp2 )
   */
 void LogTemperature ( void )
 {
-    char str [ TEMPERATURE_LOG_SIZE ];
+    // Double storage for eof constant, overwrite eof on next log
+    char str [ TEMPERATURE_LOG_SIZE * 2 ];
     int16_t temperature = GetTemperature();
 
     numToCharArray ( str, temperature );
-    str [ 2 ] = '\0';
+    numToCharArray (&str [ 2 ], eol_int_const );
 
-    if ( numTemperatureLogs * TEMPERATURE_LOG_SIZE >= TEMPERATURE_LOG_SPACE )
+    if ( numTemperatureLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
     {
+        // Write at start of log
         numTemperatureLogs = 0;
-    }
 
-    WriteLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
-               TEMPERATURE_LOG_SIZE, str,
-               TEMPERATURE_LOG_SIZE );
+        WriteLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+                   TEMPERATURE_LOG_SIZE, str,
+                   TEMPERATURE_LOG_SIZE * 2 );
+    }
+    else if ( numTemperatureLogs * VOLTAGE_LOG_SIZE + VOLTAGE_LOG_SIZE >=
+              VOLTAGE_LOG_SPACE )
+    {
+        // write end of log, then write eol to beginning of log
+        WriteLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+                   TEMPERATURE_LOG_SIZE, str,
+                   TEMPERATURE_LOG_SIZE );
+        WriteLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+                   TEMPERATURE_LOG_SIZE, &str [ TEMPERATURE_LOG_SIZE ],
+                   TEMPERATURE_LOG_SIZE );
+    }
+    else
+    {
+        // write normal
+        WriteLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+                   TEMPERATURE_LOG_SIZE, str,
+                   TEMPERATURE_LOG_SIZE * 2 );
+    }
 
     numTemperatureLogs++;
 }
