@@ -238,11 +238,15 @@ int main ( void )
             RestartLogDelayCounter();
         }
 
-        uint8_t logType = checkLine();
+        uint8_t response [ 2 ] = {0, 0};
+        checkLine ( response );
 
-        if ( logType != 0 )
+        uint8_t response_type = response [ 0 ];
+        uint8_t response_num = response [ 1 ];
+
+        if ( response_type != 0 )
         {
-            sendRecordedLogs ( logType );
+            sendRecordedLogs ( response_type, response_num );
             RestartLogDelayCounter();
         }
     }

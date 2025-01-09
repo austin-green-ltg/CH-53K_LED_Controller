@@ -5,12 +5,15 @@
 #include "voltage_handler.h"
 #include "logger.h"
 
-#define RECEIVE_PACKET_SIZE     (2)
-#define RECORDED_PACKET_SIZE    (2)
-#define RECORDED_TEMP_PACKET_SIZE   (2 + TEMPERATURE_LOG_SPACE)   // 302
-#define RECORDED_CURR_PACKET_SIZE   (2 + CURRENT_LOG_SPACE)       // 302
-#define RECORDED_VOLT_PACKET_SIZE   (2 + VOLTAGE_LOG_SPACE)       // 302
-#define LIVE_PACKET_SIZE (8)
+#define HEADER_PACKET_SIZE          (3)
+#define RECEIVE_PACKET_SIZE         (HEADER_PACKET_SIZE)
+#define RECORDED_PACKET_SIZE        (HEADER_PACKET_SIZE)
+#define RECORDED_TEMP_PACKET_SIZE   (HEADER_PACKET_SIZE + TEMPERATURE_LOG_SPACE)   // 203
+#define RECORDED_CURR_PACKET_SIZE   (HEADER_PACKET_SIZE + CURRENT_LOG_SPACE)       // 203
+#define RECORDED_VOLT_PACKET_SIZE   (HEADER_PACKET_SIZE + VOLTAGE_LOG_SPACE)       // 203
+#define LIVE_PACKET_SIZE            (HEADER_PACKET_SIZE + TEMPERATURE_LOG_SIZE + CURRENT_LOG_SIZE + VOLTAGE_LOG_SIZE) // 9
+
+#define MAX_LOG_SIZE (500) // Bytes
 
 #define CMD_HDR_CHAR    ('C')  /* command header character */
 #define RSP_HDR_CHAR    ('R')  /* response header character */
@@ -26,38 +29,21 @@ enum
     RECORDED_VOLT_LOGS = 4
 };
 
-uint8_t checkLine ( void )
+void checkLine ( uint8_t* response_received )
 {
-    uint8_t response_received = 0;
+    memset ( response_received, '\0', 2 );
 
     if ( receivePacket [ 0 ] == CMD_HDR_CHAR )
     {
-        if ( receivePacket [ 1 ] == RECORDED_LOGS )
-        {
-            response_received = RECORDED_LOGS;
-        }
-        else if ( receivePacket [ 1 ] == RECORDED_TEMP_LOGS )
-        {
-            response_received = RECORDED_TEMP_LOGS;
-        }
-        else if ( receivePacket [ 1 ] == RECORDED_CURR_LOGS )
-        {
-            response_received = RECORDED_CURR_LOGS;
-        }
-        else if ( receivePacket [ 1 ] == RECORDED_VOLT_LOGS )
-        {
-            response_received = RECORDED_VOLT_LOGS;
-        }
+        memcpy ( response_received, &receivePacket [ 1 ], 2 );
     }
 
-    memset ( receivePacket, '\0', 2 );
-
-    return response_received;
+    memset ( receivePacket, '\0', 3 );
 }
 
 void sendLiveLogs ( void )
 {
-    uint8_t pk [ LIVE_PACKET_SIZE ] = {RSP_HDR_CHAR, LIVE_LOGS};
+    uint8_t pk [ LIVE_PACKET_SIZE ] = {RSP_HDR_CHAR, LIVE_LOGS, 0};
     int16_t temperature = 0;
     uint16_t voltage = 0;
     uint16_t current = 0;
@@ -66,19 +52,22 @@ void sendLiveLogs ( void )
     current = GetCurrent();
     voltage = GetVoltage();
 
-    numToCharArray (&pk [ 2 ], temperature );
-    numToCharArray (&pk [ 4 ], current );
-    numToCharArray (&pk [ 6 ], voltage );
+    numToCharArray (&pk [ HEADER_PACKET_SIZE ], temperature );
+    numToCharArray (&pk [ HEADER_PACKET_SIZE + TEMPERATURE_LOG_SIZE ], current );
+    numToCharArray (&pk [ HEADER_PACKET_SIZE + TEMPERATURE_LOG_SIZE +
+                          CURRENT_LOG_SIZE ], voltage );
 
     CDC_Transmit_FS ( pk, LIVE_PACKET_SIZE );
 
     return;
 }
 
-void sendRecordedLogs ( uint8_t type )
+void sendRecordedLogs ( uint8_t type, uint8_t num )
 {
     uint8_t* pk;
     uint16_t size = 0;
+
+    (void) num;
 
     switch ( type )
     {
@@ -88,8 +77,9 @@ void sendRecordedLogs ( uint8_t type )
             pk = ( uint8_t* ) malloc ( size );
             pk [ 0 ] = RSP_HDR_CHAR;
             pk [ 1 ] = RECORDED_TEMP_LOGS;
+            pk [ 2 ] = 0xFF;
 
-            ReadLog ( STARTING_TEMPERATURE_ADDRESS, ( char* ) &pk [ 2 ],
+            ReadLog ( STARTING_TEMPERATURE_ADDRESS, ( char* ) &pk [ HEADER_PACKET_SIZE ],
                       TEMPERATURE_LOG_SPACE );
 
             break;
@@ -100,8 +90,10 @@ void sendRecordedLogs ( uint8_t type )
             pk = ( uint8_t* ) malloc ( size );
             pk [ 0 ] = RSP_HDR_CHAR;
             pk [ 1 ] = RECORDED_CURR_LOGS;
+            pk [ 2 ] = 0xFF;
 
-            ReadLog ( STARTING_CURRENT_ADDRESS, ( char* ) &pk [ 2 ], CURRENT_LOG_SPACE );
+            ReadLog ( STARTING_CURRENT_ADDRESS, ( char* ) &pk [ HEADER_PACKET_SIZE ],
+                      CURRENT_LOG_SPACE );
 
             break;
 
@@ -111,8 +103,10 @@ void sendRecordedLogs ( uint8_t type )
             pk = ( uint8_t* ) malloc ( size );
             pk [ 0 ] = RSP_HDR_CHAR;
             pk [ 1 ] = RECORDED_VOLT_LOGS;
+            pk [ 2 ] = 0xFF;
 
-            ReadLog ( STARTING_VOLTAGE_ADDRESS, ( char* ) &pk [ 2 ], VOLTAGE_LOG_SPACE );
+            ReadLog ( STARTING_VOLTAGE_ADDRESS, ( char* ) &pk [ HEADER_PACKET_SIZE ],
+                      VOLTAGE_LOG_SPACE );
 
             break;
 
@@ -122,6 +116,7 @@ void sendRecordedLogs ( uint8_t type )
             pk = ( uint8_t* ) malloc ( size );
             pk [ 0 ] = RSP_HDR_CHAR;
             pk [ 1 ] = RECORDED_LOGS;
+            pk [ 2 ] = 0xFF;
 
             break;
     }

@@ -1,7 +1,7 @@
 #include <stdint.h>
 
-uint8_t checkLine ( void );
+void checkLine ( uint8_t* response_received );
 
 void sendLiveLogs ( void );
 
-void sendRecordedLogs ( uint8_t type );
+void sendRecordedLogs ( uint8_t type, uint8_t num );
