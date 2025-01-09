@@ -362,6 +362,57 @@ TEST ( Current_Handler, LogCurrent )
     free ( string );
 }
 
+TEST ( Current_Handler, findCurrentLogEOL )
+{
+    char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
+    int16_t int_str = 0;
+
+    // Log Current
+    LogCurrent();
+
+    numCurrentLogs++;
+
+    if ( numCurrentLogs >= TOTAL_CURRENT_LOGS )
+    {
+        numCurrentLogs = 0;
+    }
+
+
+    // Read EOL
+    ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs *
+              CURRENT_LOG_SIZE, string,
+              CURRENT_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+    // FindEOL Function
+    findCurrentLogEOL();
+
+    // Write Log
+    LogCurrent();
+
+    numCurrentLogs++;
+
+    if ( numCurrentLogs >= TOTAL_CURRENT_LOGS )
+    {
+        numCurrentLogs = 0;
+    }
+
+    // Read EOL at next
+    ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs *
+              CURRENT_LOG_SIZE, string,
+              CURRENT_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+}
+
 TEST ( Current_Handler, LogCurrentAgain )
 {
     char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
@@ -482,6 +533,99 @@ TEST ( Current_Handler, WriteLogOverflow )
 
 }
 
+TEST ( Current_Handler, findCurrentLogEOLLast )
+{
+    char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
+    int16_t int_str = 0;
+
+    // Fill Log Up Minus Last Spot
+    while ( numCurrentLogs < TOTAL_CURRENT_LOGS - 1 )
+    {
+        LogCurrent();
+        numCurrentLogs++;
+    }
+
+    const uint32_t last_entry = STARTING_CURRENT_ADDRESS + CURRENT_LOG_SPACE
+                                - CURRENT_LOG_SIZE;
+
+    // Read EOL
+    ReadLog ( last_entry, string,
+              CURRENT_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+    // FindEOL Function
+    findCurrentLogEOL();
+
+    // Write Log
+    LogCurrent();
+
+    // EOL should now be at beginning
+    numCurrentLogs = 0;
+
+    // Read EOL at next
+    ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs *
+              CURRENT_LOG_SIZE, string,
+              CURRENT_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+}
+
+TEST ( Current_Handler, findCurrentLogEOLFirst )
+{
+    char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
+    int16_t int_str = 0;
+
+    // Fill Log Up Minus Last Spot
+    while ( numCurrentLogs < TOTAL_CURRENT_LOGS )
+    {
+        LogCurrent();
+        numCurrentLogs++;
+    }
+
+    // EOL should now be at beginning
+    numCurrentLogs = 0;
+
+    // Read EOL
+    ReadLog ( STARTING_CURRENT_ADDRESS, string,
+              CURRENT_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+    // FindEOL Function
+    findCurrentLogEOL();
+
+    // Write Log
+    LogCurrent();
+
+    numCurrentLogs++;
+
+    if ( numCurrentLogs > TOTAL_CURRENT_LOGS )
+    {
+        numCurrentLogs = 0;
+    }
+
+    // Read EOL at next
+    ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs *
+              CURRENT_LOG_SIZE, string,
+              CURRENT_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+}
+
 /* end Current_Handler tests */
 
 
@@ -507,8 +651,11 @@ TEST_GROUP_RUNNER ( Current_Handler )
     RUN_TEST_CASE ( Current_Handler, ErrorToHighPrintout );
     RUN_TEST_CASE ( Current_Handler, ErrorToErrorNoPrintout );
     RUN_TEST_CASE ( Current_Handler, LogCurrent );
+    RUN_TEST_CASE ( Current_Handler, findCurrentLogEOL );
     RUN_TEST_CASE ( Current_Handler, LogCurrentAgain );
     RUN_TEST_CASE ( Current_Handler, LogFiftyCurrents );
     RUN_TEST_CASE ( Current_Handler, ReadWholeLog );
     RUN_TEST_CASE ( Current_Handler, WriteLogOverflow );
+    RUN_TEST_CASE ( Current_Handler, findCurrentLogEOLLast );
+    RUN_TEST_CASE ( Current_Handler, findCurrentLogEOLFirst );
 }

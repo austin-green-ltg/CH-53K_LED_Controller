@@ -398,6 +398,57 @@ TEST ( Temperature_Handler, LogTemperature )
     free ( string );
 }
 
+TEST ( Temperature_Handler, findTemperatureLogEOL )
+{
+    char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
+    int16_t int_str = 0;
+
+    // Log Temperature
+    LogTemperature();
+
+    numTemperatureLogs++;
+
+    if ( numTemperatureLogs >= TOTAL_TEMPERATURE_LOGS )
+    {
+        numTemperatureLogs = 0;
+    }
+
+
+    // Read EOL
+    ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+              TEMPERATURE_LOG_SIZE, string,
+              TEMPERATURE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_int_const, int_str );
+
+    // FindEOL Function
+    findTemperatureLogEOL();
+
+    // Write Log
+    LogTemperature();
+
+    numTemperatureLogs++;
+
+    if ( numTemperatureLogs >= TOTAL_TEMPERATURE_LOGS )
+    {
+        numTemperatureLogs = 0;
+    }
+
+    // Read EOL at next
+    ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+              TEMPERATURE_LOG_SIZE, string,
+              TEMPERATURE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_int_const, int_str );
+
+}
+
 TEST ( Temperature_Handler, LogTemperatureAgain )
 {
     char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
@@ -521,6 +572,99 @@ TEST ( Temperature_Handler, WriteLogOverflow )
 
 }
 
+TEST ( Temperature_Handler, findTemperatureLogEOLLast )
+{
+    char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
+    int16_t int_str = 0;
+
+    // Fill Log Up Minus Last Spot
+    while ( numTemperatureLogs < TOTAL_TEMPERATURE_LOGS - 1 )
+    {
+        LogTemperature();
+        numTemperatureLogs++;
+    }
+
+    const uint32_t last_entry = STARTING_TEMPERATURE_ADDRESS + TEMPERATURE_LOG_SPACE
+                                - TEMPERATURE_LOG_SIZE;
+
+    // Read EOL
+    ReadLog ( last_entry, string,
+              TEMPERATURE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_int_const, int_str );
+
+    // FindEOL Function
+    findTemperatureLogEOL();
+
+    // Write Log
+    LogTemperature();
+
+    // EOL should now be at beginning
+    numTemperatureLogs = 0;
+
+    // Read EOL at next
+    ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+              TEMPERATURE_LOG_SIZE, string,
+              TEMPERATURE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_int_const, int_str );
+
+}
+
+TEST ( Temperature_Handler, findTemperatureLogEOLFirst )
+{
+    char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
+    int16_t int_str = 0;
+
+    // Fill Log Up Minus Last Spot
+    while ( numTemperatureLogs < TOTAL_TEMPERATURE_LOGS )
+    {
+        LogTemperature();
+        numTemperatureLogs++;
+    }
+
+    // EOL should now be at beginning
+    numTemperatureLogs = 0;
+
+    // Read EOL
+    ReadLog ( STARTING_TEMPERATURE_ADDRESS, string,
+              TEMPERATURE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_int_const, int_str );
+
+    // FindEOL Function
+    findTemperatureLogEOL();
+
+    // Write Log
+    LogTemperature();
+
+    numTemperatureLogs++;
+
+    if ( numTemperatureLogs > TOTAL_TEMPERATURE_LOGS )
+    {
+        numTemperatureLogs = 0;
+    }
+
+    // Read EOL at next
+    ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
+              TEMPERATURE_LOG_SIZE, string,
+              TEMPERATURE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_int_const, int_str );
+}
+
 /* end temperature_handler tests */
 
 
@@ -546,8 +690,11 @@ TEST_GROUP_RUNNER ( Temperature_Handler )
     RUN_TEST_CASE ( Temperature_Handler, HotToWarmPrintout );
     RUN_TEST_CASE ( Temperature_Handler, HotToHotNoPrintout );
     RUN_TEST_CASE ( Temperature_Handler, LogTemperature );
+    RUN_TEST_CASE ( Temperature_Handler, findTemperatureLogEOL );
     RUN_TEST_CASE ( Temperature_Handler, LogTemperatureAgain );
     RUN_TEST_CASE ( Temperature_Handler, LogFiftyTemperatures );
     RUN_TEST_CASE ( Temperature_Handler, ReadWholeLog );
     RUN_TEST_CASE ( Temperature_Handler, WriteLogOverflow );
+    RUN_TEST_CASE ( Temperature_Handler, findTemperatureLogEOLLast );
+    RUN_TEST_CASE ( Temperature_Handler, findTemperatureLogEOLFirst );
 }

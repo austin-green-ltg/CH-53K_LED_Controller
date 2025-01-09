@@ -83,6 +83,7 @@ void SystemClock_Config ( void );
 /* USER CODE BEGIN PFP */
 
 void LogVitals ( void );
+void FindVitalsEOL ( void );
 
 void LL_ADC_Start_DMA ( uint32_t* pData,
                         uint32_t Length );
@@ -159,6 +160,9 @@ int main ( void )
     LL_TIM_EnableCounter ( TIM15 );
     TIM15->CNT = 0;
 #endif /* ENABLE_UART_DEBUGGING */
+
+    // Init Logs
+    FindVitalsEOL();
 
     // if brightness has changed since last log
     uint8_t isBrightnessChanged = 0;
@@ -322,6 +326,13 @@ void LogVitals ( void )
     LogTemperature();
     LogCurrent();
     LogVoltage();
+}
+
+void FindVitalsEOL ( void )
+{
+    findTemperatureLogEOL();
+    findCurrentLogEOL();
+    findVoltageLogEOL();
 }
 
 void LL_ADC_Start_DMA ( uint32_t* pData,

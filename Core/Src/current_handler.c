@@ -91,7 +91,7 @@ void LogCurrent ( void )
     numToCharArray ( str, current );
     numToCharArray (&str [ 2 ], eol_uint_const );
 
-    if ( numCurrentLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
+    if ( numCurrentLogs * CURRENT_LOG_SIZE >= CURRENT_LOG_SPACE )
     {
         // Write at start of log
         numCurrentLogs = 0;
@@ -99,13 +99,13 @@ void LogCurrent ( void )
         WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, str,
                    CURRENT_LOG_SIZE * 2 );
     }
-    else if ( numCurrentLogs * VOLTAGE_LOG_SIZE + VOLTAGE_LOG_SIZE >=
-              VOLTAGE_LOG_SPACE )
+    else if ( numCurrentLogs * CURRENT_LOG_SIZE + CURRENT_LOG_SIZE >=
+              CURRENT_LOG_SPACE )
     {
         // write end of log, then write eol to beginning of log
         WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, str,
                    CURRENT_LOG_SIZE );
-        WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE,
+        WriteLog ( STARTING_CURRENT_ADDRESS,
                    &str [ CURRENT_LOG_SIZE ],
                    CURRENT_LOG_SIZE );
     }
@@ -117,6 +117,34 @@ void LogCurrent ( void )
     }
 
     numCurrentLogs++;
+}
+
+/**
+  * @brief Finds Current EOL string in logs
+  */
+void findCurrentLogEOL ( void )
+{
+    char str [ CURRENT_LOG_SIZE ];
+    char eol [ CURRENT_LOG_SIZE ];
+
+    numToCharArray ( eol, eol_uint_const );
+
+    numCurrentLogs = 0; // if none found, start at beginning
+
+    for ( uint32_t i = STARTING_CURRENT_ADDRESS;
+            i <= STARTING_CURRENT_ADDRESS + CURRENT_LOG_SPACE;
+            i += CURRENT_LOG_SIZE )
+    {
+        ReadLog ( i, str, CURRENT_LOG_SIZE );
+
+        if ( eol [ 0 ] == str [ 0 ] && eol [ 1 ] == str [ 1 ] )
+        {
+            numCurrentLogs = ( i - STARTING_CURRENT_ADDRESS ) / CURRENT_LOG_SIZE;
+            return;
+        }
+    }
+
+    return;
 }
 
 /**

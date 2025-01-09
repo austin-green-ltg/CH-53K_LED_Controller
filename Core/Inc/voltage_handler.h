@@ -43,6 +43,11 @@ typedef enum
 void LogVoltage ( void );
 
 /**
+  * @brief Finds Voltage EOL string in logs
+  */
+void findVoltageLogEOL ( void );
+
+/**
   * @brief Get voltage from voltmeter
   *
   * @param[out] voltage level in dV

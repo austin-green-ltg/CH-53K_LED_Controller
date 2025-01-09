@@ -41,6 +41,11 @@ typedef enum
 void LogCurrent ( void );
 
 /**
+  * @brief Finds Current EOL string in logs
+  */
+void findCurrentLogEOL ( void );
+
+/**
   * @brief Get current from ammeter
   *
   * @param[out] current level in dA

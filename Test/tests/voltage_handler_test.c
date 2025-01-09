@@ -826,6 +826,57 @@ TEST ( Voltage_Handler, LogVoltage )
     free ( string );
 }
 
+TEST ( Voltage_Handler, findVoltageLogEOL )
+{
+    char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
+    int16_t int_str = 0;
+
+    // Log Voltage
+    LogVoltage();
+
+    numVoltageLogs++;
+
+    if ( numVoltageLogs >= TOTAL_VOLTAGE_LOGS )
+    {
+        numVoltageLogs = 0;
+    }
+
+
+    // Read EOL
+    ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs *
+              VOLTAGE_LOG_SIZE, string,
+              VOLTAGE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+    // FindEOL Function
+    findVoltageLogEOL();
+
+    // Write Log
+    LogVoltage();
+
+    numVoltageLogs++;
+
+    if ( numVoltageLogs >= TOTAL_VOLTAGE_LOGS )
+    {
+        numVoltageLogs = 0;
+    }
+
+    // Read EOL at next
+    ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs *
+              VOLTAGE_LOG_SIZE, string,
+              VOLTAGE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+}
+
 TEST ( Voltage_Handler, LogVoltageAgain )
 {
     char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
@@ -946,6 +997,99 @@ TEST ( Voltage_Handler, WriteLogOverflow )
 
 }
 
+TEST ( Voltage_Handler, findVoltageLogEOLLast )
+{
+    char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
+    int16_t int_str = 0;
+
+    // Fill Log Up Minus Last Spot
+    while ( numVoltageLogs < TOTAL_VOLTAGE_LOGS - 1 )
+    {
+        LogVoltage();
+        numVoltageLogs++;
+    }
+
+    const uint32_t last_entry = STARTING_VOLTAGE_ADDRESS + VOLTAGE_LOG_SPACE
+                                - VOLTAGE_LOG_SIZE;
+
+    // Read EOL
+    ReadLog ( last_entry, string,
+              VOLTAGE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+    // FindEOL Function
+    findVoltageLogEOL();
+
+    // Write Log
+    LogVoltage();
+
+    // EOL should now be at beginning
+    numVoltageLogs = 0;
+
+    // Read EOL at next
+    ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs *
+              VOLTAGE_LOG_SIZE, string,
+              VOLTAGE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+}
+
+TEST ( Voltage_Handler, findVoltageLogEOLFirst )
+{
+    char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
+    int16_t int_str = 0;
+
+    // Fill Log Up Minus Last Spot
+    while ( numVoltageLogs < TOTAL_VOLTAGE_LOGS )
+    {
+        LogVoltage();
+        numVoltageLogs++;
+    }
+
+    // EOL should now be at beginning
+    numVoltageLogs = 0;
+
+    // Read EOL
+    ReadLog ( STARTING_VOLTAGE_ADDRESS, string,
+              VOLTAGE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+
+    // FindEOL Function
+    findVoltageLogEOL();
+
+    // Write Log
+    LogVoltage();
+
+    numVoltageLogs++;
+
+    if ( numVoltageLogs > TOTAL_VOLTAGE_LOGS )
+    {
+        numVoltageLogs = 0;
+    }
+
+    // Read EOL at next
+    ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs *
+              VOLTAGE_LOG_SIZE, string,
+              VOLTAGE_LOG_SIZE );
+
+    // Verify it is EOL
+    numFromCharArray ( string, int_str );
+
+    TEST_ASSERT_EQUAL_INT16 ( eol_uint_const, int_str );
+}
+
 /* end Voltage_Handler tests */
 
 
@@ -991,8 +1135,11 @@ TEST_GROUP_RUNNER ( Voltage_Handler )
     RUN_TEST_CASE ( Voltage_Handler, ErrorHighToHighPrintout );
     RUN_TEST_CASE ( Voltage_Handler, ErrorHighToErrorHighNoPrintout );
     RUN_TEST_CASE ( Voltage_Handler, LogVoltage );
+    RUN_TEST_CASE ( Voltage_Handler, findVoltageLogEOL );
     RUN_TEST_CASE ( Voltage_Handler, LogVoltageAgain );
     RUN_TEST_CASE ( Voltage_Handler, LogFiftyVoltages );
     RUN_TEST_CASE ( Voltage_Handler, ReadWholeLog );
     RUN_TEST_CASE ( Voltage_Handler, WriteLogOverflow );
+    RUN_TEST_CASE ( Voltage_Handler, findVoltageLogEOLLast );
+    RUN_TEST_CASE ( Voltage_Handler, findVoltageLogEOLFirst );
 }

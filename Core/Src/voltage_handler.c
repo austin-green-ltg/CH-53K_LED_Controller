@@ -134,6 +134,34 @@ void LogVoltage ( void )
 }
 
 /**
+  * @brief Finds Voltage EOL string in logs
+  */
+void findVoltageLogEOL ( void )
+{
+    char str [ VOLTAGE_LOG_SIZE ];
+    char eol [ VOLTAGE_LOG_SIZE ];
+
+    numToCharArray ( eol, eol_uint_const );
+
+    numVoltageLogs = 0; // if none found, start at beginning
+
+    for ( uint32_t i = STARTING_VOLTAGE_ADDRESS;
+            i <= STARTING_VOLTAGE_ADDRESS + VOLTAGE_LOG_SPACE;
+            i += VOLTAGE_LOG_SIZE )
+    {
+        ReadLog ( i, str, VOLTAGE_LOG_SIZE );
+
+        if ( eol [ 0 ] == str [ 0 ] && eol [ 1 ] == str [ 1 ] )
+        {
+            numVoltageLogs = ( i - STARTING_VOLTAGE_ADDRESS ) / VOLTAGE_LOG_SIZE;
+            return;
+        }
+    }
+
+    return;
+}
+
+/**
   * @brief Get voltage from voltmeter
   *
   * @param[out] voltage level in dV

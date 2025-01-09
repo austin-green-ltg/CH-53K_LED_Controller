@@ -43,6 +43,11 @@ typedef enum
 void LogTemperature ( void );
 
 /**
+  * @brief Finds Temperature EOL string in logs
+  */
+void findTemperatureLogEOL ( void );
+
+/**
   * @brief Get temperature from thermistor
   *
   * @param[out] temperature level in dC

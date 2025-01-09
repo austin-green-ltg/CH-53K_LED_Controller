@@ -130,7 +130,7 @@ void LogTemperature ( void )
     numToCharArray ( str, temperature );
     numToCharArray (&str [ 2 ], eol_int_const );
 
-    if ( numTemperatureLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
+    if ( numTemperatureLogs * TEMPERATURE_LOG_SIZE >= TEMPERATURE_LOG_SPACE )
     {
         // Write at start of log
         numTemperatureLogs = 0;
@@ -139,15 +139,14 @@ void LogTemperature ( void )
                    TEMPERATURE_LOG_SIZE, str,
                    TEMPERATURE_LOG_SIZE * 2 );
     }
-    else if ( numTemperatureLogs * VOLTAGE_LOG_SIZE + VOLTAGE_LOG_SIZE >=
-              VOLTAGE_LOG_SPACE )
+    else if ( numTemperatureLogs * TEMPERATURE_LOG_SIZE + TEMPERATURE_LOG_SIZE >=
+              TEMPERATURE_LOG_SPACE )
     {
         // write end of log, then write eol to beginning of log
         WriteLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
                    TEMPERATURE_LOG_SIZE, str,
                    TEMPERATURE_LOG_SIZE );
-        WriteLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
-                   TEMPERATURE_LOG_SIZE, &str [ TEMPERATURE_LOG_SIZE ],
+        WriteLog ( STARTING_TEMPERATURE_ADDRESS, &str [ TEMPERATURE_LOG_SIZE ],
                    TEMPERATURE_LOG_SIZE );
     }
     else
@@ -159,6 +158,35 @@ void LogTemperature ( void )
     }
 
     numTemperatureLogs++;
+}
+
+/**
+  * @brief Finds Temperature EOL string in logs
+  */
+void findTemperatureLogEOL ( void )
+{
+    char str [ TEMPERATURE_LOG_SIZE ];
+    char eol [ TEMPERATURE_LOG_SIZE ];
+
+    numToCharArray ( eol, eol_int_const );
+
+    numTemperatureLogs = 0; // if none found, start at beginning
+
+    for ( uint32_t i = STARTING_TEMPERATURE_ADDRESS;
+            i <= STARTING_TEMPERATURE_ADDRESS + TEMPERATURE_LOG_SPACE;
+            i += TEMPERATURE_LOG_SIZE )
+    {
+        ReadLog ( i, str, TEMPERATURE_LOG_SIZE );
+
+        if ( eol [ 0 ] == str [ 0 ] && eol [ 1 ] == str [ 1 ] )
+        {
+            numTemperatureLogs = ( i - STARTING_TEMPERATURE_ADDRESS ) /
+                                 TEMPERATURE_LOG_SIZE;
+            return;
+        }
+    }
+
+    return;
 }
 
 /**
