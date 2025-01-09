@@ -65,63 +65,88 @@ void sendLiveLogs ( void )
 void sendRecordedLogs ( uint8_t type, uint8_t num )
 {
     uint8_t* pk;
-    uint16_t size = 0;
-
-    (void) num;
+    uint16_t packet_size = 0;
+    uint16_t log_size = 0;
+    uint32_t total_sent = num * MAX_LOG_SIZE;
+    uint8_t log_num = 0xFF;
+    uint32_t address = 0;
 
     switch ( type )
     {
         case RECORDED_TEMP_LOGS:
-            size = RECORDED_TEMP_PACKET_SIZE;
 
-            pk = ( uint8_t* ) malloc ( size );
-            pk [ 0 ] = RSP_HDR_CHAR;
-            pk [ 1 ] = RECORDED_TEMP_LOGS;
-            pk [ 2 ] = 0xFF;
+            address = STARTING_TEMPERATURE_ADDRESS + total_sent;
 
-            ReadLog ( STARTING_TEMPERATURE_ADDRESS, ( char* ) &pk [ HEADER_PACKET_SIZE ],
-                      TEMPERATURE_LOG_SPACE );
+            if ( ( total_sent + MAX_LOG_SIZE ) < TEMPERATURE_LOG_SPACE )
+            {
+                // full log able to be sent
+                log_size = MAX_LOG_SIZE;
+
+                log_num = num;
+
+            }
+            else
+            {
+                // last of logs
+                log_size = TEMPERATURE_LOG_SPACE - total_sent;
+            }
 
             break;
 
         case RECORDED_CURR_LOGS:
-            size = RECORDED_CURR_PACKET_SIZE;
 
-            pk = ( uint8_t* ) malloc ( size );
-            pk [ 0 ] = RSP_HDR_CHAR;
-            pk [ 1 ] = RECORDED_CURR_LOGS;
-            pk [ 2 ] = 0xFF;
+            address = STARTING_TEMPERATURE_ADDRESS + total_sent;
 
-            ReadLog ( STARTING_CURRENT_ADDRESS, ( char* ) &pk [ HEADER_PACKET_SIZE ],
-                      CURRENT_LOG_SPACE );
+            if ( ( total_sent + MAX_LOG_SIZE ) < CURRENT_LOG_SPACE )
+            {
+                // full log able to be sent
+                log_size = MAX_LOG_SIZE;
+
+                log_num = num;
+            }
+            else
+            {
+                // last of logs
+                log_size = CURRENT_LOG_SPACE - total_sent;
+            }
 
             break;
 
         case RECORDED_VOLT_LOGS:
-            size = RECORDED_VOLT_PACKET_SIZE;
 
-            pk = ( uint8_t* ) malloc ( size );
-            pk [ 0 ] = RSP_HDR_CHAR;
-            pk [ 1 ] = RECORDED_VOLT_LOGS;
-            pk [ 2 ] = 0xFF;
+            address = STARTING_TEMPERATURE_ADDRESS + total_sent;
 
-            ReadLog ( STARTING_VOLTAGE_ADDRESS, ( char* ) &pk [ HEADER_PACKET_SIZE ],
-                      VOLTAGE_LOG_SPACE );
+            if ( ( total_sent + MAX_LOG_SIZE ) < VOLTAGE_LOG_SPACE )
+            {
+                // full log able to be sent
+                log_size = MAX_LOG_SIZE;
+
+                log_num = num;
+            }
+            else
+            {
+                // last of logs
+                log_size = VOLTAGE_LOG_SPACE - total_sent;
+            }
 
             break;
 
         default:
-            size = RECORDED_PACKET_SIZE;
-
-            pk = ( uint8_t* ) malloc ( size );
-            pk [ 0 ] = RSP_HDR_CHAR;
-            pk [ 1 ] = RECORDED_LOGS;
-            pk [ 2 ] = 0xFF;
 
             break;
     }
 
-    CDC_Transmit_FS ( pk, size );
+    packet_size = HEADER_PACKET_SIZE + log_size;
+    pk = ( uint8_t* ) malloc ( packet_size );
+
+    pk [ 0 ] = RSP_HDR_CHAR;
+    pk [ 1 ] = type;
+    pk [ 2 ] = log_num;
+
+    ReadLog ( address, ( char* ) &pk [ HEADER_PACKET_SIZE ],
+              log_size );
+
+    CDC_Transmit_FS ( pk, packet_size );
 
     free ( pk );
 
