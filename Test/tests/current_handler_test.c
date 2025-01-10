@@ -14,7 +14,7 @@ extern void initFram ( void );
 extern uint32_t address; // last written to address
 extern uint16_t current_value_dA;
 
-static uint32_t numCurrentLogs = 0;
+static uint16_t numCurrentLogs = 0;
 
 TEST_GROUP ( Current_Handler );
 
@@ -478,9 +478,9 @@ TEST ( Current_Handler, ReadWholeLog )
 
     char* string = ( char* ) calloc ( CURRENT_LOG_SIZE, sizeof ( char ) );
 
-    const uint8_t logs_to_read = TOTAL_CURRENT_LOGS;
+    const uint16_t logs_to_read = TOTAL_CURRENT_LOGS;
 
-    for ( uint8_t i = 0; i < logs_to_read; i++ )
+    for ( uint16_t i = 0; i < logs_to_read; i++ )
     {
         ReadLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, string,
                   CURRENT_LOG_SIZE );

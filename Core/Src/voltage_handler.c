@@ -51,7 +51,7 @@ const uint16_t VoltageErrorHighThreshold_dV = 320u;
 /** default voltage state is VoltageNormal */
 static VoltageRange_e voltage_threshold = VoltageNormal;
 
-static uint32_t numVoltageLogs = 0;
+static uint16_t numVoltageLogs = 0;
 
 /**
   * @brief Logs voltage change to storage

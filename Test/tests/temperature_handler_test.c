@@ -15,7 +15,7 @@ extern void initFram ( void );
 extern uint32_t address; // last written to address
 extern int16_t thermistor_value_dC;
 
-static uint32_t numTemperatureLogs = 0;
+static uint16_t numTemperatureLogs = 0;
 
 TEST_GROUP ( Temperature_Handler );
 
@@ -516,9 +516,9 @@ TEST ( Temperature_Handler, ReadWholeLog )
 
     char* string = ( char* ) calloc ( TEMPERATURE_LOG_SIZE, sizeof ( char ) );
 
-    const uint8_t logs_to_read = TOTAL_TEMPERATURE_LOGS;
+    const uint16_t logs_to_read = TOTAL_TEMPERATURE_LOGS;
 
-    for ( uint8_t i = 0; i < logs_to_read; i++ )
+    for ( uint16_t i = 0; i < logs_to_read; i++ )
     {
         ReadLog ( STARTING_TEMPERATURE_ADDRESS + numTemperatureLogs *
                   TEMPERATURE_LOG_SIZE, string,

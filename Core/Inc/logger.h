@@ -32,15 +32,19 @@
 #define SHORT_LOG_SIZE  (2)
 #define INT_LOG_SIZE    (4)
 
+// EEPROM is 256Kb = 32KB
+// 10KB per log
 #define PWM_LOG_SIZE            (CHAR_LOG_SIZE)
 #define CURRENT_LOG_SIZE        (SHORT_LOG_SIZE)
 #define TEMPERATURE_LOG_SIZE    (SHORT_LOG_SIZE)
 #define VOLTAGE_LOG_SIZE        (SHORT_LOG_SIZE)
 
 #define TOTAL_PWM_LOGS          (3) // IR, VIS, Previous Init
-#define TOTAL_CURRENT_LOGS      (100)
-#define TOTAL_TEMPERATURE_LOGS  (100)
-#define TOTAL_VOLTAGE_LOGS      (100)
+#define VITAL_LOGS              (500)
+// #define VITAL_LOGS              (5000)
+#define TOTAL_CURRENT_LOGS      (VITAL_LOGS)
+#define TOTAL_TEMPERATURE_LOGS  (VITAL_LOGS)
+#define TOTAL_VOLTAGE_LOGS      (VITAL_LOGS)
 
 #define PWM_LOG_SPACE           (PWM_LOG_SIZE * TOTAL_PWM_LOGS)
 #define CURRENT_LOG_SPACE       (CURRENT_LOG_SIZE * TOTAL_CURRENT_LOGS)

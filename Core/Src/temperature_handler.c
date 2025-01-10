@@ -59,7 +59,7 @@ const float dC_to_thermistor = MV_TO_RAW;
 /** default temperature state is TempCool */
 static TemperatureRange_e temperature_threshold = TempCool;
 
-static uint32_t numTemperatureLogs = 0;
+static uint16_t numTemperatureLogs = 0;
 
 /**
   * @brief Logs temperature change to storage

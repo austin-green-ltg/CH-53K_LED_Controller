@@ -16,7 +16,7 @@ extern void initFram ( void );
 extern uint32_t address; // last written to address
 extern uint16_t voltage_value_dV;
 
-static uint32_t numVoltageLogs = 0;
+static uint16_t numVoltageLogs = 0;
 
 TEST_GROUP ( Voltage_Handler );
 
@@ -942,9 +942,9 @@ TEST ( Voltage_Handler, ReadWholeLog )
 
     char* string = ( char* ) calloc ( VOLTAGE_LOG_SIZE, sizeof ( char ) );
 
-    const uint8_t logs_to_read = TOTAL_VOLTAGE_LOGS;
+    const uint16_t logs_to_read = TOTAL_VOLTAGE_LOGS;
 
-    for ( uint8_t i = 0; i < logs_to_read; i++ )
+    for ( uint16_t i = 0; i < logs_to_read; i++ )
     {
         ReadLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, string,
                   VOLTAGE_LOG_SIZE );

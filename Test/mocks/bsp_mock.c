@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 #include "stm32l412xx-bsp.h"
 
@@ -181,14 +182,14 @@ void disableChipSelect( void )
     chipEnable = 0;
 }
 
-#define FRAM_SIZE 0xFFFF
+#define FRAM_SIZE 0x3FFFF // 32KB
 static uint8_t framMem[FRAM_SIZE];
 uint32_t address = 0;
 uint8_t address_set = 0;
 void initFram( void );
 void initFram( void )
 {
-    for (uint32_t i = 0; i < FRAM_SIZE; i++) framMem[i] = 0;
+    memset(framMem, 0, FRAM_SIZE);
     address = 0;
 }
 

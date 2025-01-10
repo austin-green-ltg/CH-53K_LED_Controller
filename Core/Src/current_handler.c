@@ -44,7 +44,7 @@ const uint16_t CurrentErrorThreshold_dA = 40u;
 /** default current state is CurrentNormal */
 static CurrentRange_e current_threshold = CurrentNormal;
 
-static uint32_t numCurrentLogs = 0;
+static uint16_t numCurrentLogs = 0;
 
 /**
   * @brief Logs current change to storage
