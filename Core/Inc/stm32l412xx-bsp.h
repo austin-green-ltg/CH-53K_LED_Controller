@@ -52,10 +52,6 @@
 #include "dma.h"
 #include "spi.h"
 #include "tim.h"
-#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-    /* Peripherals enabled for UART */
-    #include "usart.h"
-#endif /* ENABLE_UART_DEBUGGING */
 // #include "usb_device.h"
 #include "gpio.h"
 
@@ -176,13 +172,14 @@ enum { PIN_SET = 1, PIN_RESET = 0};
 /* Clock frequency Values */
 #define CLK_FREQ_HZ         (80000000)
 #define TIM2_CLK_DEV        (1)
-#define TIM6_CLK_DEV        (1)
+#define TIM15_CLK_DEV       (1)
 #define TIM16_CLK_DEV       (1)
 #define AHB_CLK_PRESCALER   (1)
 #define APB1_CLK_PRESCALER  (1)
+#define APB2_CLK_PRESCALER  (1)
 #define TIM2_CLK_PRESCALER  (8000)
-#define TIM6_CLK_PRESCALER  (0xFFFF)
-#define TIM16_CLK_PRESCALER (0xFFFF)
+#define TIM15_CLK_PRESCALER (40000)
+#define TIM16_CLK_PRESCALER (40000)
 
 #define RAW_TO_MV (3300.0f / 4095.0f)
 #define MV_TO_RAW (4095.0f / 3300.0f)
@@ -274,18 +271,18 @@ uint32_t GetTIM2Cnt ( void );
 /**
   * @brief Starts Timer 6 counter
   */
-void StartTIM6 ( void );
+void StartTIM15 ( void );
 
 /**
   * @brief Resets Timer 6 counter to zero
   */
-void RestartTIM6 ( void );
+void RestartTIM15 ( void );
 
 /**
   * @brief Returns value in the Timer 6 counter
   * @param[out] Value of Timer 6 counter
   */
-uint32_t GetTIM6Cnt ( void );
+uint32_t GetTIM15Cnt ( void );
 
 /**
   * @brief Starts Timer 16 counter
@@ -364,11 +361,5 @@ void receiveData ( unsigned char* rxData, const uint32_t bytes );
     */
 void transmitReceiveData ( const unsigned char* const txData,
                            unsigned char* rxData, const uint32_t bytes );
-
-/**
-  * @brief Sends character via UART line
-  * @param[in] c Character to send via UART
-  */
-void sendUARTChar ( char c );
 
 #endif /* INC_bsph */

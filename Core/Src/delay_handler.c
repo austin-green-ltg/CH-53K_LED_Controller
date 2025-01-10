@@ -34,13 +34,13 @@ const float Tim2ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM2_CLK_DEV /
                            ( float ) AHB_CLK_PRESCALER / ( float ) APB1_CLK_PRESCALER /
                            ( float ) TIM2_CLK_PRESCALER / 1000.0f ); // 10 / ms
 
-const float Tim6ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM6_CLK_DEV /
-                           ( float ) AHB_CLK_PRESCALER / ( float ) APB1_CLK_PRESCALER /
-                           ( float ) TIM6_CLK_PRESCALER / 1000.0f ); // ~1.22 / ms
+const float Tim15ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM15_CLK_DEV /
+                            ( float ) AHB_CLK_PRESCALER / ( float ) APB2_CLK_PRESCALER /
+                            ( float ) TIM15_CLK_PRESCALER / 1000.0f ); // 2 / ms
 
 const float Tim16ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM16_CLK_DEV /
-                            ( float ) AHB_CLK_PRESCALER / ( float ) APB1_CLK_PRESCALER /
-                            ( float ) TIM16_CLK_PRESCALER / 1000.0f ); // ~1.22 / ms
+                            ( float ) AHB_CLK_PRESCALER / ( float ) APB2_CLK_PRESCALER /
+                            ( float ) TIM16_CLK_PRESCALER / 1000.0f ); // 2 / ms
 
 /**
   * @brief Starts the delay counter, only needs to be called once on init
@@ -57,7 +57,7 @@ void StartDelayCounter ( void )
   */
 void StartLogDelayCounter ( void )
 {
-    StartTIM6();
+    StartTIM15();
     RestartLogDelayCounter();
     return;
 }
@@ -86,7 +86,7 @@ void RestartDelayCounter ( void )
   */
 void RestartLogDelayCounter ( void )
 {
-    RestartTIM6();
+    RestartTIM15();
     return;
 }
 
@@ -118,7 +118,7 @@ uint8_t DelayHit ( uint16_t delay_ms )
   */
 uint8_t LogDelayHit ( uint16_t delay_ms )
 {
-    uint8_t isDelayHit = ( GetTIM6Cnt() >= ( uint32_t ) ( delay_ms * Tim6ClkKhz +
+    uint8_t isDelayHit = ( GetTIM15Cnt() >= ( uint32_t ) ( delay_ms * Tim15ClkKhz +
                            0.5f ) );
     return isDelayHit;
 }

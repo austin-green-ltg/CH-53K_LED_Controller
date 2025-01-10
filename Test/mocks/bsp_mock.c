@@ -105,22 +105,22 @@ uint32_t GetTIM2Cnt( void )
     return (uint32_t)(timer.time * Tim2ClkKhz + 0.5f);
 }
 
-void StartTIM6( void )
+void StartTIM15( void )
 {
     logTimer.is_running = 1;
     logTimer.time = 0;
 }
 
-void RestartTIM6( void )
+void RestartTIM15( void )
 {
     logTimer.is_running = 1;
     logTimer.time = 0;
 }
 
-extern const float Tim6ClkKhz;
-uint32_t GetTIM6Cnt( void )
+extern const float Tim15ClkKhz;
+uint32_t GetTIM15Cnt( void )
 {
-    return (uint32_t)(logTimer.time * Tim6ClkKhz + 0.5f);
+    return (uint32_t)(logTimer.time * Tim15ClkKhz + 0.5f);
 }
 
 void StartTIM16( void )
@@ -263,10 +263,4 @@ void receiveData( unsigned char* rxData, const uint32_t bytes )
         }
         address_set = 0;
     }
-}
-
-void sendUARTChar(char c)
-{
-    (void)c;
-    return;
 }

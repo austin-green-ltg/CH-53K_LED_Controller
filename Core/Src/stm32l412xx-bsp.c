@@ -166,9 +166,9 @@ uint32_t GetTIM2Cnt ( void )
 /**
   * @brief Starts Timer 6 counter
   */
-void StartTIM6 ( void )
+void StartTIM15 ( void )
 {
-    LL_TIM_EnableCounter ( TIM6 );
+    LL_TIM_EnableCounter ( TIM15 );
 
     return;
 }
@@ -176,9 +176,9 @@ void StartTIM6 ( void )
 /**
   * @brief Resets Timer 6 counter to zero
   */
-void RestartTIM6 ( void )
+void RestartTIM15 ( void )
 {
-    LL_TIM_SetCounter ( TIM6, 0 );
+    LL_TIM_SetCounter ( TIM15, 0 );
 
     return;
 }
@@ -187,9 +187,9 @@ void RestartTIM6 ( void )
   * @brief Returns value in the Timer 6 counter
   * @param[out] Value of Timer 6 counter
   */
-uint32_t GetTIM6Cnt ( void )
+uint32_t GetTIM15Cnt ( void )
 {
-    return LL_TIM_GetCounter ( TIM6 );
+    return LL_TIM_GetCounter ( TIM15 );
 }
 
 /**
@@ -487,22 +487,4 @@ void transmitReceiveData ( const unsigned char* const txData,
         tmpreg8 = LL_SPI_ReceiveData8 ( SPI1 );
         ( void ) tmpreg8;
     }
-}
-
-/**
-  * @brief Sends character via UART line
-  * @param[in] c Character to send via UART
-  */
-void sendUARTChar ( char c )
-{
-#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-
-    while (!LL_USART_IsActiveFlag_TXE ( USART2 ) ) {};
-
-    LL_USART_TransmitData8 ( USART2, ( uint8_t ) ( c & 0xFFU ) );
-
-    while ( LL_USART_IsActiveFlag_TC ( USART2 ) ) {}
-
-    return;
-#endif /* ENABLE_UART_DEBUGGING */
 }

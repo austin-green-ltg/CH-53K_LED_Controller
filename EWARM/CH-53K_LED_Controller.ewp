@@ -1131,9 +1131,6 @@
           <name>$PROJ_DIR$\..\Core\Src\logger.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\Core\Src\my_printf.c</name>
-        </file>
-        <file>
           <name>$PROJ_DIR$\..\Core\Src\pwm_handler.c</name>
         </file>
         <file>

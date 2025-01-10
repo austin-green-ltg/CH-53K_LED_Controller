@@ -22,7 +22,7 @@
 // #include "dma.h"
 // #include "spi.h"
 // #include "tim.h"
-// #include "usart.h"
+#include "usart.h"
 #include "usb_device.h"
 // #include "gpio.h"
 
@@ -35,7 +35,6 @@
 #include "voltage_handler.h"
 #include "temperature_handler.h"
 #include "com.h"
-#include "my_printf.h"
 #include "string.h"
 
 /* USER CODE END Includes */
@@ -135,13 +134,9 @@ int main ( void )
     MX_DMA_Init();
     MX_TIM1_Init();
     MX_TIM2_Init();
-    MX_TIM6_Init();
-    MX_TIM16_Init();
-#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-    /* Peripherals enabled for UART */
     MX_TIM15_Init();
+    MX_TIM16_Init();
     MX_USART2_UART_Init();
-#endif /* ENABLE_UART_DEBUGGING */
     MX_ADC1_Init();
     MX_SPI1_Init();
     MX_USB_DEVICE_Init();
@@ -158,11 +153,6 @@ int main ( void )
     StartDelayCounter();
     StartLogDelayCounter();
     StartLiveLogDelayCounter();
-#ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
-    /* Peripherals enabled for UART */
-    LL_TIM_EnableCounter ( TIM15 );
-    TIM15->CNT = 0;
-#endif /* ENABLE_UART_DEBUGGING */
 
     // Init Logs
     FindVitalsEOL();
