@@ -780,10 +780,15 @@ uint8_t GetPwm ( uint8_t isIr )
   */
 void LogPwm ( void )
 {
-    for ( uint8_t i = 0; i < TOTAL_PWM_LOGS; i++ )
+    const uint8_t numPwmLogs = TOTAL_PWM_LOGS - 1; // Don't include prev init
+    char brightnessLog [ TOTAL_PWM_LOGS - 1 ]; // Don't include prev init
+
+
+    for ( uint8_t i = 0; i < numPwmLogs; i++ )
     {
-        char brightness [ 1 ] = {GetBrightness ( i ) };
-        WriteLog ( STARTING_PWM_ADDRESS + i * PWM_LOG_SIZE, brightness,
-                   PWM_LOG_SIZE );
+        brightnessLog [ i ] = ( char ) GetBrightness ( i );
     }
+
+    WriteLog ( STARTING_PWM_ADDRESS, brightnessLog,
+               PWM_LOG_SIZE * numPwmLogs );
 }

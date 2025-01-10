@@ -797,17 +797,17 @@ TEST ( PWM_Handler, WriteLogOverflow )
 
 TEST ( PWM_Handler, PwmRetainsValueThroughReset )
 {
-    uint8_t brightnessVis = rand() % ( MaxBrightness + 1 );
+    int8_t brightnessVis = rand() % ( MaxBrightness + 1 );
     SetBrightness ( brightnessVis, LED_VISIBLE );
-    uint8_t brightnessIr = rand() % ( MaxBrightness + 1 );
+    int8_t brightnessIr = rand() % ( MaxBrightness + 1 );
     SetBrightness ( brightnessIr, LED_IR );
 
     LogPwm();
 
     InitPwm();
 
-    TEST_ASSERT_EQUAL_UINT8 ( brightnessVis, GetBrightness ( LED_VISIBLE ) );
-    TEST_ASSERT_EQUAL_UINT8 ( brightnessIr, GetBrightness ( LED_IR ) );
+    TEST_ASSERT_EQUAL_INT8 ( brightnessVis, GetBrightness ( LED_VISIBLE ) );
+    TEST_ASSERT_EQUAL_INT8 ( brightnessIr, GetBrightness ( LED_IR ) );
 
 }
 

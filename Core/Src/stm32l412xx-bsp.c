@@ -192,6 +192,35 @@ uint32_t GetTIM6Cnt ( void )
     return LL_TIM_GetCounter ( TIM6 );
 }
 
+/**
+  * @brief Starts Timer 16 counter
+  */
+void StartTIM16 ( void )
+{
+    LL_TIM_EnableCounter ( TIM16 );
+
+    return;
+}
+
+/**
+  * @brief Resets Timer 16 counter to zero
+  */
+void RestartTIM16 ( void )
+{
+    LL_TIM_SetCounter ( TIM16, 0 );
+
+    return;
+}
+
+/**
+  * @brief Returns value in the Timer 16 counter
+  * @param[out] Value of Timer 16 counter
+  */
+uint32_t GetTIM16Cnt ( void )
+{
+    return LL_TIM_GetCounter ( TIM16 );
+}
+
 
 uint16_t value_adc [ 3 ];
 /**

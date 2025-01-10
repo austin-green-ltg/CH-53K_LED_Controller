@@ -177,10 +177,12 @@ enum { PIN_SET = 1, PIN_RESET = 0};
 #define CLK_FREQ_HZ         (80000000)
 #define TIM2_CLK_DEV        (1)
 #define TIM6_CLK_DEV        (1)
+#define TIM16_CLK_DEV       (1)
 #define AHB_CLK_PRESCALER   (1)
 #define APB1_CLK_PRESCALER  (1)
 #define TIM2_CLK_PRESCALER  (8000)
-#define TIM6_CLK_PRESCALER  (8000)
+#define TIM6_CLK_PRESCALER  (0xFFFF)
+#define TIM16_CLK_PRESCALER (0xFFFF)
 
 #define RAW_TO_MV (3300.0f / 4095.0f)
 #define MV_TO_RAW (4095.0f / 3300.0f)
@@ -284,6 +286,22 @@ void RestartTIM6 ( void );
   * @param[out] Value of Timer 6 counter
   */
 uint32_t GetTIM6Cnt ( void );
+
+/**
+  * @brief Starts Timer 16 counter
+  */
+void StartTIM16 ( void );
+
+/**
+  * @brief Resets Timer 16 counter to zero
+  */
+void RestartTIM16 ( void );
+
+/**
+  * @brief Returns value in the Timer 16 counter
+  * @param[out] Value of Timer 16 counter
+  */
+uint32_t GetTIM16Cnt ( void );
 
 /**
   * @brief Returns raw ADC value from thermistor

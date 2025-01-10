@@ -7,6 +7,7 @@ PwmStruct pwm_vis;
 PwmStruct pwm_ir;
 TimerStruct timer;
 TimerStruct logTimer;
+TimerStruct liveLogTimer;
 GPIO_PinState on_off_pin = 0;
 GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
@@ -101,7 +102,7 @@ void RestartTIM2( void )
 extern const float Tim2ClkKhz;
 uint32_t GetTIM2Cnt( void )
 {
-    return (uint32_t)(timer.time * Tim2ClkKhz);
+    return (uint32_t)(timer.time * Tim2ClkKhz + 0.5f);
 }
 
 void StartTIM6( void )
@@ -119,7 +120,25 @@ void RestartTIM6( void )
 extern const float Tim6ClkKhz;
 uint32_t GetTIM6Cnt( void )
 {
-    return (uint32_t)(logTimer.time * Tim6ClkKhz);
+    return (uint32_t)(logTimer.time * Tim6ClkKhz + 0.5f);
+}
+
+void StartTIM16( void )
+{
+    liveLogTimer.is_running = 1;
+    liveLogTimer.time = 0;
+}
+
+void RestartTIM16( void )
+{
+    liveLogTimer.is_running = 1;
+    liveLogTimer.time = 0;
+}
+
+extern const float Tim16ClkKhz;
+uint32_t GetTIM16Cnt( void )
+{
+    return (uint32_t)(liveLogTimer.time * Tim16ClkKhz + 0.5f);
 }
 
 uint16_t GetThermistorValue( void )
@@ -191,6 +210,11 @@ void initFram( void )
 {
     memset(framMem, 0, FRAM_SIZE);
     address = 0;
+    writeProtect = 0;
+    chipEnable = 0;
+    writeEnable = 0;
+    statusRegister = 0;
+    readStatusRegisterSignal = 0;
 }
 
 void transferData( const unsigned char* const txData, const uint32_t bytes )

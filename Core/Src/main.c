@@ -57,7 +57,8 @@
 #define AVG_STEP_TIME_MS     ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2.0f) // 147.5
 #define AVG_STEP_DIFF_MS     (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)         // 12.5, distance between lower step time and average step time
 
-#define LOG_DELAY_MS    (1000)
+#define LOG_DELAY_MS        (60000) // 1 minute
+#define LIVE_LOG_DELAY_MS    (1000)  // 1 second
 
 const float LowStepTimeMs = ( LOWER_STEP_TIME_MS - AVG_STEP_DIFF_MS )
                             ; // 122.5
@@ -135,6 +136,7 @@ int main ( void )
     MX_TIM1_Init();
     MX_TIM2_Init();
     MX_TIM6_Init();
+    MX_TIM16_Init();
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
     /* Peripherals enabled for UART */
     MX_TIM15_Init();
@@ -155,6 +157,7 @@ int main ( void )
 
     StartDelayCounter();
     StartLogDelayCounter();
+    StartLiveLogDelayCounter();
 #ifdef ENABLE_UART_DEBUGGING /* tracing enabled */
     /* Peripherals enabled for UART */
     LL_TIM_EnableCounter ( TIM15 );
@@ -233,9 +236,15 @@ int main ( void )
         // log levels
         if ( LogDelayHit ( LOG_DELAY_MS ) )
         {
-            sendLiveLogs();
             LogVitals();
             RestartLogDelayCounter();
+        }
+
+        // log levels
+        if ( LiveLogDelayHit ( LIVE_LOG_DELAY_MS ) )
+        {
+            sendLiveLogs();
+            RestartLiveLogDelayCounter();
         }
 
         uint8_t response [ 2 ] = {0, 0};
@@ -247,7 +256,7 @@ int main ( void )
         if ( response_type != 0 )
         {
             sendRecordedLogs ( response_type, response_num );
-            RestartLogDelayCounter();
+            RestartLiveLogDelayCounter();
         }
     }
 

@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <limits.h>
 
 #include <unity_fixture.h>      /* UNITY */
 #include "delay_handler.h"      /* CUT */
@@ -11,6 +12,7 @@ TEST_GROUP ( Delay_Handler );
 
 extern TimerStruct timer;
 extern TimerStruct logTimer;
+extern TimerStruct liveLogTimer;
 
 TEST_SETUP ( Delay_Handler )
 {
@@ -24,6 +26,8 @@ TEST_TEAR_DOWN ( Delay_Handler )
     timer.time = 0;
     logTimer.is_running = 0;
     logTimer.time = 0;
+    liveLogTimer.is_running = 0;
+    liveLogTimer.time = 0;
 }
 
 /* start delay_handler tests */
@@ -41,60 +45,119 @@ TEST ( Delay_Handler, StartLogDelayCounter )
     TEST_ASSERT_EQUAL_INT ( 0, logTimer.time );
 }
 
+TEST ( Delay_Handler, StartLiveLogDelayCounter )
+{
+    StartLiveLogDelayCounter();
+    TEST_ASSERT_EQUAL_INT ( 1, liveLogTimer.is_running );
+    TEST_ASSERT_EQUAL_INT ( 0, liveLogTimer.time );
+}
+
 TEST ( Delay_Handler, RestartDelayCounter )
 {
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
     StartDelayCounter();
-    timer.time = 100;
-    TEST_ASSERT_EQUAL_INT ( 100, timer.time );
+
+    timer.time = time;
+    TEST_ASSERT_EQUAL_INT ( time, timer.time );
     RestartDelayCounter();
     TEST_ASSERT_EQUAL_INT ( 0, timer.time );
 }
 
 TEST ( Delay_Handler, RestartLogDelayCounter )
 {
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
     StartLogDelayCounter();
-    logTimer.time = 100;
-    TEST_ASSERT_EQUAL_INT ( 100, logTimer.time );
+
+    logTimer.time = time;
+    TEST_ASSERT_EQUAL_INT ( time, logTimer.time );
     RestartLogDelayCounter();
     TEST_ASSERT_EQUAL_INT ( 0, logTimer.time );
 }
 
+TEST ( Delay_Handler, RestartLiveLogDelayCounter )
+{
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    StartLiveLogDelayCounter();
+
+    liveLogTimer.time = time;
+    TEST_ASSERT_EQUAL_INT ( time, liveLogTimer.time );
+    RestartLiveLogDelayCounter();
+    TEST_ASSERT_EQUAL_INT ( 0, liveLogTimer.time );
+}
+
 TEST ( Delay_Handler, delayNotHit )
 {
-    TEST_ASSERT_FALSE ( DelayHit ( 100 ) );
-    timer.time = 99;
-    TEST_ASSERT_FALSE ( DelayHit ( 100 ) );
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+
+    TEST_ASSERT_FALSE ( DelayHit ( time ) );
+    timer.time = time - 1;
+    TEST_ASSERT_FALSE ( DelayHit ( time ) );
 }
 
 TEST ( Delay_Handler, logDelayNotHit )
 {
-    TEST_ASSERT_FALSE ( LogDelayHit ( 100 ) );
-    logTimer.time = 99;
-    TEST_ASSERT_FALSE ( LogDelayHit ( 100 ) );
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+
+    TEST_ASSERT_FALSE ( LogDelayHit ( time ) );
+    logTimer.time = time - 1;
+    TEST_ASSERT_FALSE ( LogDelayHit ( time ) );
+}
+
+TEST ( Delay_Handler, liveLogDelayNotHit )
+{
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+
+    TEST_ASSERT_FALSE ( LiveLogDelayHit ( time ) );
+    liveLogTimer.time = time - 1;
+    TEST_ASSERT_FALSE ( LiveLogDelayHit ( time ) );
 }
 
 TEST ( Delay_Handler, delayExactHit )
 {
-    timer.time = 100;
-    TEST_ASSERT_TRUE ( DelayHit ( 100 ) );
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+
+    timer.time = time;
+    TEST_ASSERT_TRUE ( DelayHit ( time ) );
 }
 
 TEST ( Delay_Handler, logDelayExactHit )
 {
-    logTimer.time = 100;
-    TEST_ASSERT_TRUE ( LogDelayHit ( 100 ) );
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+
+    logTimer.time = time;
+    TEST_ASSERT_TRUE ( LogDelayHit ( time ) );
+}
+
+TEST ( Delay_Handler, liveLogDelayExactHit )
+{
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+
+    liveLogTimer.time = time;
+    TEST_ASSERT_TRUE ( LiveLogDelayHit ( time ) );
 }
 
 TEST ( Delay_Handler, delayPassedHit )
 {
-    timer.time = 101;
-    TEST_ASSERT_TRUE ( DelayHit ( 100 ) );
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+
+    timer.time = time + 1;
+    TEST_ASSERT_TRUE ( DelayHit ( time ) );
 }
 
 TEST ( Delay_Handler, logDelayPassedHit )
 {
-    logTimer.time = 101;
-    TEST_ASSERT_TRUE ( LogDelayHit ( 100 ) );
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+
+    logTimer.time = time + 1;
+    TEST_ASSERT_TRUE ( LogDelayHit ( time ) );
+}
+
+TEST ( Delay_Handler, liveLogDelayPassedHit )
+{
+    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+
+    liveLogTimer.time = time + 1;
+    TEST_ASSERT_TRUE ( LiveLogDelayHit ( time ) );
 }
 
 #define ITERATIONS (100)
@@ -122,13 +185,18 @@ TEST_GROUP_RUNNER ( Delay_Handler )
 {
     RUN_TEST_CASE ( Delay_Handler, StartDelayCounter );
     RUN_TEST_CASE ( Delay_Handler, StartLogDelayCounter );
+    RUN_TEST_CASE ( Delay_Handler, StartLiveLogDelayCounter );
     RUN_TEST_CASE ( Delay_Handler, RestartDelayCounter );
     RUN_TEST_CASE ( Delay_Handler, RestartLogDelayCounter );
+    RUN_TEST_CASE ( Delay_Handler, RestartLiveLogDelayCounter );
     RUN_TEST_CASE ( Delay_Handler, delayNotHit );
     RUN_TEST_CASE ( Delay_Handler, logDelayNotHit );
+    RUN_TEST_CASE ( Delay_Handler, liveLogDelayNotHit );
     RUN_TEST_CASE ( Delay_Handler, delayExactHit );
     RUN_TEST_CASE ( Delay_Handler, logDelayExactHit );
+    RUN_TEST_CASE ( Delay_Handler, liveLogDelayExactHit );
     RUN_TEST_CASE ( Delay_Handler, delayPassedHit );
     RUN_TEST_CASE ( Delay_Handler, logDelayPassedHit );
+    RUN_TEST_CASE ( Delay_Handler, liveLogDelayPassedHit );
     RUN_TEST_CASE ( Delay_Handler, BrightnessDelay );
 }
