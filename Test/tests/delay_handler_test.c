@@ -54,7 +54,7 @@ TEST ( Delay_Handler, StartLiveLogDelayCounter )
 
 TEST ( Delay_Handler, RestartDelayCounter )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
     StartDelayCounter();
 
     timer.time = time;
@@ -65,7 +65,7 @@ TEST ( Delay_Handler, RestartDelayCounter )
 
 TEST ( Delay_Handler, RestartLogDelayCounter )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
     StartLogDelayCounter();
 
     logTimer.time = time;
@@ -76,7 +76,7 @@ TEST ( Delay_Handler, RestartLogDelayCounter )
 
 TEST ( Delay_Handler, RestartLiveLogDelayCounter )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
     StartLiveLogDelayCounter();
 
     liveLogTimer.time = time;
@@ -87,7 +87,7 @@ TEST ( Delay_Handler, RestartLiveLogDelayCounter )
 
 TEST ( Delay_Handler, delayNotHit )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
 
     TEST_ASSERT_FALSE ( DelayHit ( time ) );
     timer.time = time - 1;
@@ -96,7 +96,7 @@ TEST ( Delay_Handler, delayNotHit )
 
 TEST ( Delay_Handler, logDelayNotHit )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
 
     TEST_ASSERT_FALSE ( LogDelayHit ( time ) );
     logTimer.time = time - 1;
@@ -105,7 +105,7 @@ TEST ( Delay_Handler, logDelayNotHit )
 
 TEST ( Delay_Handler, liveLogDelayNotHit )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
 
     TEST_ASSERT_FALSE ( LiveLogDelayHit ( time ) );
     liveLogTimer.time = time - 1;
@@ -114,7 +114,7 @@ TEST ( Delay_Handler, liveLogDelayNotHit )
 
 TEST ( Delay_Handler, delayExactHit )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
 
     timer.time = time;
     TEST_ASSERT_TRUE ( DelayHit ( time ) );
@@ -122,15 +122,16 @@ TEST ( Delay_Handler, delayExactHit )
 
 TEST ( Delay_Handler, logDelayExactHit )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
 
     logTimer.time = time;
+
     TEST_ASSERT_TRUE ( LogDelayHit ( time ) );
 }
 
 TEST ( Delay_Handler, liveLogDelayExactHit )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
 
     liveLogTimer.time = time;
     TEST_ASSERT_TRUE ( LiveLogDelayHit ( time ) );
@@ -138,7 +139,7 @@ TEST ( Delay_Handler, liveLogDelayExactHit )
 
 TEST ( Delay_Handler, delayPassedHit )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
 
     timer.time = time + 1;
     TEST_ASSERT_TRUE ( DelayHit ( time ) );
@@ -146,7 +147,7 @@ TEST ( Delay_Handler, delayPassedHit )
 
 TEST ( Delay_Handler, logDelayPassedHit )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
 
     logTimer.time = time + 1;
     TEST_ASSERT_TRUE ( LogDelayHit ( time ) );
@@ -154,7 +155,7 @@ TEST ( Delay_Handler, logDelayPassedHit )
 
 TEST ( Delay_Handler, liveLogDelayPassedHit )
 {
-    const uint32_t time = ( rand() % UINT32_MAX - 1 ) + 1; // not 0, not max
+    const uint16_t time = ( rand() % UINT16_MAX - 1 ) + 1; // not 0, not max
 
     liveLogTimer.time = time + 1;
     TEST_ASSERT_TRUE ( LiveLogDelayHit ( time ) );

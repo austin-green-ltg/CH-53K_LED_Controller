@@ -63,21 +63,21 @@ void RestartLiveLogDelayCounter ( void );
   * @param[in] delay_ms Time in ms to check if timer has hit
   * @param[out] Returns 1 if delay has been hit
   */
-uint8_t DelayHit ( uint32_t delay_ms );
+uint8_t DelayHit ( uint16_t delay_ms );
 
 /**
   * @brief Checks if the log delay (ms) was hit based on timer value
   * @param[in] delay_ms Time in ms to check if log timer has hit
   * @param[out] Returns 1 if log delay has been hit
   */
-uint8_t LogDelayHit ( uint32_t delay_ms );
+uint8_t LogDelayHit ( uint16_t delay_ms );
 
 /**
   * @brief Checks if the live log delay (ms) was hit based on timer value
   * @param[in] delay_ms Time in ms to check if live log timer has hit
   * @param[out] Returns 1 if live log delay has been hit
   */
-uint8_t LiveLogDelayHit ( uint32_t delay_ms );
+uint8_t LiveLogDelayHit ( uint16_t delay_ms );
 
 /**
   * @brief Returns a delay value for a brightness level

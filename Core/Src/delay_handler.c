@@ -104,7 +104,7 @@ void RestartLiveLogDelayCounter ( void )
   * @param[in] delay_ms Time in ms to check if timer has hit
   * @param[out] Returns 1 if delay has been hit
   */
-uint8_t DelayHit ( uint32_t delay_ms )
+uint8_t DelayHit ( uint16_t delay_ms )
 {
     uint8_t isDelayHit = ( GetTIM2Cnt() >= ( uint32_t ) ( delay_ms * Tim2ClkKhz +
                            0.5f ) );
@@ -116,7 +116,7 @@ uint8_t DelayHit ( uint32_t delay_ms )
   * @param[in] delay_ms Time in ms to check if log timer has hit
   * @param[out] Returns 1 if log delay has been hit
   */
-uint8_t LogDelayHit ( uint32_t delay_ms )
+uint8_t LogDelayHit ( uint16_t delay_ms )
 {
     uint8_t isDelayHit = ( GetTIM6Cnt() >= ( uint32_t ) ( delay_ms * Tim6ClkKhz +
                            0.5f ) );
@@ -128,7 +128,7 @@ uint8_t LogDelayHit ( uint32_t delay_ms )
   * @param[in] delay_ms Time in ms to check if live log timer has hit
   * @param[out] Returns 1 if live log delay has been hit
   */
-uint8_t LiveLogDelayHit ( uint32_t delay_ms )
+uint8_t LiveLogDelayHit ( uint16_t delay_ms )
 {
     uint8_t isDelayHit = ( GetTIM16Cnt() >= ( uint32_t ) ( delay_ms * Tim16ClkKhz +
                            0.5f ) );

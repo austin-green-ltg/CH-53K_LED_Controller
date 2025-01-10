@@ -162,8 +162,8 @@ typedef struct
 typedef struct
 {
     uint8_t is_running; /**< timer is running */
-    uint8_t reserved [ 3 ]; /** for padding */
-    uint32_t time; /**< timer value */
+    uint8_t reserved ; /** for padding */
+    uint16_t time; /**< timer value */
 } TimerStruct;
 
 #endif /* STM32L412xx */
