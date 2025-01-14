@@ -36,6 +36,7 @@
 #include "temperature_handler.h"
 #include "com.h"
 #include "string.h"
+#include "logger.h"
 
 /* USER CODE END Includes */
 
@@ -56,7 +57,7 @@
 #define AVG_STEP_TIME_MS     ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2.0f) // 147.5
 #define AVG_STEP_DIFF_MS     (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)         // 12.5, distance between lower step time and average step time
 
-#define LOG_DELAY_MS        (60000) // 1 minute
+#define LOG_DELAY_MS        (10000) // 10 seconds
 #define LIVE_LOG_DELAY_MS    (1000)  // 1 second
 
 const float LowStepTimeMs = ( LOWER_STEP_TIME_MS - AVG_STEP_DIFF_MS )
@@ -84,6 +85,7 @@ void SystemClock_Config ( void );
 
 void LogVitals ( void );
 void FindVitalsEOL ( void );
+void EraseLogs ( void );
 
 void LL_ADC_Start_DMA ( uint32_t* pData,
                         uint32_t Length );
@@ -336,6 +338,17 @@ void FindVitalsEOL ( void )
     findTemperatureLogEOL();
     findCurrentLogEOL();
     findVoltageLogEOL();
+}
+
+// Writes Zero to Log Space
+void EraseLogs ( void )
+{
+#define TOTAL_VITALS_SIZE (TOTAL_CURRENT_LOGS + TOTAL_TEMPERATURE_LOGS + TOTAL_VOLTAGE_LOGS)
+
+    uint8_t pk [ TOTAL_VITALS_SIZE ];
+    memset ( pk, 0, TOTAL_VITALS_SIZE );
+
+    WriteLog ( STARTING_CURRENT_ADDRESS, ( char const* ) pk, TOTAL_VITALS_SIZE );
 }
 
 void LL_ADC_Start_DMA ( uint32_t* pData,
