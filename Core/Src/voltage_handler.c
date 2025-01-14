@@ -106,7 +106,7 @@ void LogVoltage ( void )
     numToCharArray ( str, voltage );
     numToCharArray (&str [ 2 ], eol_uint_const );
 
-    if ( numVoltageLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
+    if ( ( uint32_t ) numVoltageLogs * VOLTAGE_LOG_SIZE >= VOLTAGE_LOG_SPACE )
     {
         // Write at start of log
         numVoltageLogs = 0;
@@ -114,7 +114,7 @@ void LogVoltage ( void )
         WriteLog ( STARTING_VOLTAGE_ADDRESS + numVoltageLogs * VOLTAGE_LOG_SIZE, str,
                    VOLTAGE_LOG_SIZE * 2 );
     }
-    else if ( numVoltageLogs * VOLTAGE_LOG_SIZE + VOLTAGE_LOG_SIZE >=
+    else if ( ( uint32_t ) numVoltageLogs * VOLTAGE_LOG_SIZE + VOLTAGE_LOG_SIZE >=
               VOLTAGE_LOG_SPACE )
     {
         // write end of log, then write eol to beginning of log
@@ -131,11 +131,6 @@ void LogVoltage ( void )
     }
 
     numVoltageLogs++;
-
-    if ( numVoltageLogs >= TOTAL_VOLTAGE_LOGS )
-    {
-        numVoltageLogs = 0;
-    }
 }
 
 /**

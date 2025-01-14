@@ -44,8 +44,8 @@ void checkLine ( uint8_t* response_received )
 {
     if ( receivePacket [ 0 ] == CMD_HDR_CHAR )
     {
-        response_received[0] = receivePacket[1];
-        response_received[1] = receivePacket[2];
+        response_received [ 0 ] = receivePacket [ 1 ];
+        response_received [ 1 ] = receivePacket [ 2 ];
     }
 
     memset ( receivePacket, '\0', 3 );

@@ -130,7 +130,8 @@ void LogTemperature ( void )
     numToCharArray ( str, temperature );
     numToCharArray (&str [ 2 ], eol_int_const );
 
-    if ( numTemperatureLogs * TEMPERATURE_LOG_SIZE >= TEMPERATURE_LOG_SPACE )
+    if ( ( uint32_t ) numTemperatureLogs * TEMPERATURE_LOG_SIZE >=
+            TEMPERATURE_LOG_SPACE )
     {
         // Write at start of log
         numTemperatureLogs = 0;
@@ -139,7 +140,8 @@ void LogTemperature ( void )
                    TEMPERATURE_LOG_SIZE, str,
                    TEMPERATURE_LOG_SIZE * 2 );
     }
-    else if ( numTemperatureLogs * TEMPERATURE_LOG_SIZE + TEMPERATURE_LOG_SIZE >=
+    else if ( ( uint32_t ) numTemperatureLogs * TEMPERATURE_LOG_SIZE +
+              TEMPERATURE_LOG_SIZE >=
               TEMPERATURE_LOG_SPACE )
     {
         // write end of log, then write eol to beginning of log
@@ -158,11 +160,6 @@ void LogTemperature ( void )
     }
 
     numTemperatureLogs++;
-
-    if ( numTemperatureLogs >= TOTAL_TEMPERATURE_LOGS )
-    {
-        numTemperatureLogs = 0;
-    }
 }
 
 /**

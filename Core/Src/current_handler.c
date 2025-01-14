@@ -91,7 +91,7 @@ void LogCurrent ( void )
     numToCharArray ( str, current );
     numToCharArray (&str [ 2 ], eol_uint_const );
 
-    if ( numCurrentLogs * CURRENT_LOG_SIZE >= CURRENT_LOG_SPACE )
+    if ( ( uint32_t ) numCurrentLogs * CURRENT_LOG_SIZE >= CURRENT_LOG_SPACE )
     {
         // Write at start of log
         numCurrentLogs = 0;
@@ -99,7 +99,7 @@ void LogCurrent ( void )
         WriteLog ( STARTING_CURRENT_ADDRESS + numCurrentLogs * CURRENT_LOG_SIZE, str,
                    CURRENT_LOG_SIZE * 2 );
     }
-    else if ( numCurrentLogs * CURRENT_LOG_SIZE + CURRENT_LOG_SIZE >=
+    else if ( ( uint32_t ) numCurrentLogs * CURRENT_LOG_SIZE + CURRENT_LOG_SIZE >=
               CURRENT_LOG_SPACE )
     {
         // write end of log, then write eol to beginning of log
@@ -117,11 +117,6 @@ void LogCurrent ( void )
     }
 
     numCurrentLogs++;
-
-    if ( numCurrentLogs >= TOTAL_CURRENT_LOGS )
-    {
-        numCurrentLogs = 0;
-    }
 }
 
 /**
