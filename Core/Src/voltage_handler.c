@@ -131,6 +131,11 @@ void LogVoltage ( void )
     }
 
     numVoltageLogs++;
+
+    if ( numVoltageLogs >= TOTAL_VOLTAGE_LOGS )
+    {
+        numVoltageLogs = 0;
+    }
 }
 
 /**

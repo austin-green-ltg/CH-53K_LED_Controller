@@ -117,6 +117,11 @@ void LogCurrent ( void )
     }
 
     numCurrentLogs++;
+
+    if ( numCurrentLogs >= TOTAL_CURRENT_LOGS )
+    {
+        numCurrentLogs = 0;
+    }
 }
 
 /**

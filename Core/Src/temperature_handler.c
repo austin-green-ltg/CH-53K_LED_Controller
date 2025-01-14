@@ -158,6 +158,11 @@ void LogTemperature ( void )
     }
 
     numTemperatureLogs++;
+
+    if ( numTemperatureLogs >= TOTAL_TEMPERATURE_LOGS )
+    {
+        numTemperatureLogs = 0;
+    }
 }
 
 /**
