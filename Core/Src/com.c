@@ -44,7 +44,8 @@ void checkLine ( uint8_t* response_received )
 {
     if ( receivePacket [ 0 ] == CMD_HDR_CHAR )
     {
-        memcpy ( response_received, &receivePacket [ 1 ], 2 );
+        response_received[0] = receivePacket[1];
+        response_received[1] = receivePacket[2];
     }
 
     memset ( receivePacket, '\0', 3 );
@@ -104,7 +105,7 @@ void sendRecordedLogs ( uint8_t type, uint8_t num )
 
         case RECORDED_CURR_LOGS:
 
-            address = STARTING_TEMPERATURE_ADDRESS + total_sent;
+            address = STARTING_CURRENT_ADDRESS + total_sent;
 
             if ( ( total_sent + MAX_LOG_SIZE ) < CURRENT_LOG_SPACE )
             {
@@ -123,7 +124,7 @@ void sendRecordedLogs ( uint8_t type, uint8_t num )
 
         case RECORDED_VOLT_LOGS:
 
-            address = STARTING_TEMPERATURE_ADDRESS + total_sent;
+            address = STARTING_VOLTAGE_ADDRESS + total_sent;
 
             if ( ( total_sent + MAX_LOG_SIZE ) < VOLTAGE_LOG_SPACE )
             {
