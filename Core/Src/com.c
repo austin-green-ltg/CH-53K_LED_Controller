@@ -26,13 +26,22 @@ enum
     RECORDED_LOGS = 1,
     RECORDED_TEMP_LOGS = 2,
     RECORDED_CURR_LOGS = 3,
-    RECORDED_VOLT_LOGS = 4
+    RECORDED_VOLT_LOGS = 4,
+    INFO = UINT8_MAX - 1
 };
+
+//static void sendInfo (uint8_t info)
+//{
+//
+// uint8_t pk[3] = {RSP_HDR_CHAR, INFO, info};
+//
+// CDC_Transmit_FS ( pk, HEADER_PACKET_SIZE );
+//
+// return;
+//}
 
 void checkLine ( uint8_t* response_received )
 {
-    memset ( response_received, '\0', 2 );
-
     if ( receivePacket [ 0 ] == CMD_HDR_CHAR )
     {
         memcpy ( response_received, &receivePacket [ 1 ], 2 );
@@ -120,7 +129,6 @@ void sendRecordedLogs ( uint8_t type, uint8_t num )
             {
                 // full log able to be sent
                 log_size = MAX_LOG_SIZE;
-
                 log_num = num;
             }
             else
@@ -149,6 +157,9 @@ void sendRecordedLogs ( uint8_t type, uint8_t num )
     CDC_Transmit_FS ( pk, packet_size );
 
     free ( pk );
+
+    // Not ideal, but prevents timeouts and only used occasionally
+    HAL_Delay ( 100 );
 
     return;
 }

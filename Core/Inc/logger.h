@@ -40,8 +40,7 @@
 #define VOLTAGE_LOG_SIZE        (SHORT_LOG_SIZE)
 
 #define TOTAL_PWM_LOGS          (3) // IR, VIS, Previous Init
-#define VITAL_LOGS              (500)
-// #define VITAL_LOGS              (5000)
+#define VITAL_LOGS              (5000)
 #define TOTAL_CURRENT_LOGS      (VITAL_LOGS)
 #define TOTAL_TEMPERATURE_LOGS  (VITAL_LOGS)
 #define TOTAL_VOLTAGE_LOGS      (VITAL_LOGS)
