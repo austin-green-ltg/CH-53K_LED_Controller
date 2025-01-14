@@ -160,7 +160,17 @@ typedef struct
     uint8_t is_running; /**< timer is running */
     uint8_t reserved ; /** for padding */
     uint16_t time; /**< timer value */
-} TimerStruct;
+} TimerStruct16Bit;
+
+/**
+  * Testing Timer Struct
+  */
+typedef struct
+{
+    uint8_t is_running; /**< timer is running */
+    uint8_t reserved [ 3 ] ; /** for padding */
+    uint32_t time; /**< timer value */
+} TimerStruct32Bit;
 
 #endif /* STM32L412xx */
 
@@ -177,8 +187,8 @@ enum { PIN_SET = 1, PIN_RESET = 0};
 #define AHB_CLK_PRESCALER   (1)
 #define APB1_CLK_PRESCALER  (1)
 #define APB2_CLK_PRESCALER  (1)
-#define TIM2_CLK_PRESCALER  (8000)
-#define TIM15_CLK_PRESCALER (40000)
+#define TIM2_CLK_PRESCALER  (40000)
+#define TIM15_CLK_PRESCALER (8000)
 #define TIM16_CLK_PRESCALER (40000)
 
 #define RAW_TO_MV (3300.0f / 4095.0f)

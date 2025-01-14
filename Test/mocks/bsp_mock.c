@@ -5,9 +5,9 @@
 
 PwmStruct pwm_vis;
 PwmStruct pwm_ir;
-TimerStruct timer;
-TimerStruct logTimer;
-TimerStruct liveLogTimer;
+TimerStruct16Bit timer;
+TimerStruct32Bit logTimer;
+TimerStruct16Bit liveLogTimer;
 GPIO_PinState on_off_pin = 0;
 GPIO_PinState toggle_pin = 0;
 GPIO_PinState dim_pin = 0;
@@ -89,38 +89,38 @@ void SetPW12( uint32_t pulse_width )
 
 void StartTIM2( void )
 {
-    timer.is_running = 1;
-    timer.time = 0;
+    logTimer.is_running = 1;
+    logTimer.time = 0;
 }
 
 void RestartTIM2( void )
 {
-    timer.is_running = 1;
-    timer.time = 0;
+    logTimer.is_running = 1;
+    logTimer.time = 0;
 }
 
 extern const float Tim2ClkKhz;
 uint32_t GetTIM2Cnt( void )
 {
-    return (uint32_t)(timer.time * Tim2ClkKhz + 0.5f);
+    return (uint32_t)(logTimer.time * Tim2ClkKhz + 0.5f);
 }
 
 void StartTIM15( void )
 {
-    logTimer.is_running = 1;
-    logTimer.time = 0;
+    timer.is_running = 1;
+    timer.time = 0;
 }
 
 void RestartTIM15( void )
 {
-    logTimer.is_running = 1;
-    logTimer.time = 0;
+    timer.is_running = 1;
+    timer.time = 0;
 }
 
 extern const float Tim15ClkKhz;
 uint32_t GetTIM15Cnt( void )
 {
-    return (uint32_t)(logTimer.time * Tim15ClkKhz + 0.5f);
+    return (uint32_t)(timer.time * Tim15ClkKhz + 0.5f);
 }
 
 void StartTIM16( void )

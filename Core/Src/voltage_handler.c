@@ -153,7 +153,8 @@ void findVoltageLogEOL ( void )
 
         if ( eol [ 0 ] == str [ 0 ] && eol [ 1 ] == str [ 1 ] )
         {
-            numVoltageLogs = ( i - STARTING_VOLTAGE_ADDRESS ) / VOLTAGE_LOG_SIZE;
+            numVoltageLogs = ( uint16_t ) ( ( i - STARTING_VOLTAGE_ADDRESS ) /
+                                            VOLTAGE_LOG_SIZE );
             return;
         }
     }

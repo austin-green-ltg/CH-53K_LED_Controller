@@ -57,8 +57,8 @@
 #define AVG_STEP_TIME_MS     ((UPPER_STEP_TIME_MS + LOWER_STEP_TIME_MS) / 2.0f) // 147.5
 #define AVG_STEP_DIFF_MS     (AVG_STEP_TIME_MS    - LOWER_STEP_TIME_MS)         // 12.5, distance between lower step time and average step time
 
-#define LOG_DELAY_MS        (10000) // 10 seconds
-#define LIVE_LOG_DELAY_MS    (1000)  // 1 second
+#define LOG_DELAY_MS        (600000) // 10 minutes
+#define LIVE_LOG_DELAY_MS   (1000)   // 1 second
 
 const float LowStepTimeMs = ( LOWER_STEP_TIME_MS - AVG_STEP_DIFF_MS )
                             ; // 122.5

@@ -32,11 +32,11 @@
   */
 const float Tim2ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM2_CLK_DEV /
                            ( float ) AHB_CLK_PRESCALER / ( float ) APB1_CLK_PRESCALER /
-                           ( float ) TIM2_CLK_PRESCALER / 1000.0f ); // 10 / ms
+                           ( float ) TIM2_CLK_PRESCALER / 1000.0f ); // 2 / ms
 
 const float Tim15ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM15_CLK_DEV /
                             ( float ) AHB_CLK_PRESCALER / ( float ) APB2_CLK_PRESCALER /
-                            ( float ) TIM15_CLK_PRESCALER / 1000.0f ); // 2 / ms
+                            ( float ) TIM15_CLK_PRESCALER / 1000.0f ); // 10 / ms
 
 const float Tim16ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM16_CLK_DEV /
                             ( float ) AHB_CLK_PRESCALER / ( float ) APB2_CLK_PRESCALER /
@@ -47,7 +47,7 @@ const float Tim16ClkKhz = ( CLK_FREQ_HZ / ( float ) TIM16_CLK_DEV /
   */
 void StartDelayCounter ( void )
 {
-    StartTIM2();
+    StartTIM15();
     RestartDelayCounter();
     return;
 }
@@ -57,7 +57,7 @@ void StartDelayCounter ( void )
   */
 void StartLogDelayCounter ( void )
 {
-    StartTIM15();
+    StartTIM2();
     RestartLogDelayCounter();
     return;
 }
@@ -77,7 +77,7 @@ void StartLiveLogDelayCounter ( void )
   */
 void RestartDelayCounter ( void )
 {
-    RestartTIM2();
+    RestartTIM15();
     return;
 }
 
@@ -86,7 +86,7 @@ void RestartDelayCounter ( void )
   */
 void RestartLogDelayCounter ( void )
 {
-    RestartTIM15();
+    RestartTIM2();
     return;
 }
 
@@ -106,7 +106,7 @@ void RestartLiveLogDelayCounter ( void )
   */
 uint8_t DelayHit ( uint16_t delay_ms )
 {
-    uint8_t isDelayHit = ( GetTIM2Cnt() >= ( uint32_t ) ( delay_ms * Tim2ClkKhz +
+    uint8_t isDelayHit = ( GetTIM15Cnt() >= ( uint32_t ) ( delay_ms * Tim15ClkKhz +
                            0.5f ) );
     return isDelayHit;
 }
@@ -116,9 +116,9 @@ uint8_t DelayHit ( uint16_t delay_ms )
   * @param[in] delay_ms Time in ms to check if log timer has hit
   * @param[out] Returns 1 if log delay has been hit
   */
-uint8_t LogDelayHit ( uint16_t delay_ms )
+uint8_t LogDelayHit ( uint32_t delay_ms )
 {
-    uint8_t isDelayHit = ( GetTIM15Cnt() >= ( uint32_t ) ( delay_ms * Tim15ClkKhz +
+    uint8_t isDelayHit = ( GetTIM2Cnt() >= ( uint32_t ) ( delay_ms * Tim2ClkKhz +
                            0.5f ) );
     return isDelayHit;
 }

@@ -139,7 +139,8 @@ void findCurrentLogEOL ( void )
 
         if ( eol [ 0 ] == str [ 0 ] && eol [ 1 ] == str [ 1 ] )
         {
-            numCurrentLogs = ( i - STARTING_CURRENT_ADDRESS ) / CURRENT_LOG_SIZE;
+            numCurrentLogs = ( uint16_t ) ( ( i - STARTING_CURRENT_ADDRESS ) /
+                                            CURRENT_LOG_SIZE );
             return;
         }
     }

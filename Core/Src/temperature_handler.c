@@ -182,8 +182,8 @@ void findTemperatureLogEOL ( void )
 
         if ( eol [ 0 ] == str [ 0 ] && eol [ 1 ] == str [ 1 ] )
         {
-            numTemperatureLogs = ( i - STARTING_TEMPERATURE_ADDRESS ) /
-                                 TEMPERATURE_LOG_SIZE;
+            numTemperatureLogs = ( uint16_t ) ( ( i - STARTING_TEMPERATURE_ADDRESS ) /
+                                                TEMPERATURE_LOG_SIZE );
             return;
         }
     }

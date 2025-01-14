@@ -70,7 +70,7 @@ uint8_t DelayHit ( uint16_t delay_ms );
   * @param[in] delay_ms Time in ms to check if log timer has hit
   * @param[out] Returns 1 if log delay has been hit
   */
-uint8_t LogDelayHit ( uint16_t delay_ms );
+uint8_t LogDelayHit ( uint32_t delay_ms );
 
 /**
   * @brief Checks if the live log delay (ms) was hit based on timer value

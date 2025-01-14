@@ -10,9 +10,9 @@
 
 TEST_GROUP ( Delay_Handler );
 
-extern TimerStruct timer;
-extern TimerStruct logTimer;
-extern TimerStruct liveLogTimer;
+extern TimerStruct16Bit timer;
+extern TimerStruct32Bit logTimer;
+extern TimerStruct16Bit liveLogTimer;
 
 TEST_SETUP ( Delay_Handler )
 {
