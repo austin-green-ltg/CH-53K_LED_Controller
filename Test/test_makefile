@@ -23,6 +23,7 @@ INCLUDES := -I. \
 C_SRCS := \
 	bsp_mock.c \
 	button_handler.c \
+	com.c \
 	current_handler.c \
 	delay_handler.c \
 	fram.c \
@@ -34,6 +35,7 @@ C_SRCS := \
 # test files
 TEST_SRCS := \
 	button_handler_test.c \
+	com_test.c \
 	current_handler_test.c \
 	delay_handler_test.c \
 	fram_test.c \

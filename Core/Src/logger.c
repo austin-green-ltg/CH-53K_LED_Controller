@@ -99,14 +99,8 @@ void ReadLog ( const uint32_t address, char* string, const uint32_t bytes )
 {
     uint32_t read_bytes = bytes;
 
-    if ( string == NULL )
+    if ( string == NULL || bytes == 0 )
     {
-        return;
-    }
-
-    if ( bytes == 0 )
-    {
-        string [ 0 ] = '\0';
         return;
     }
 

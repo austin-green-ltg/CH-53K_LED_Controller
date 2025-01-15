@@ -24,12 +24,12 @@ TEST_SETUP ( Voltage_Handler )
 {
     /* executed before *every* non-skipped test */
     initFram();
+    voltage_value_dV = VoltageNormalValue_dV; // return to default value
 }
 
 TEST_TEAR_DOWN ( Voltage_Handler )
 {
     /* executed after *every* non-skipped and non-failing test */
-    voltage_value_dV = VoltageNormalValue_dV; // return to default value
     GetVoltageRange(); // set voltage range
 }
 

@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Core\Src\button_handler.c" />
+    <ClCompile Include="..\..\Core\Src\com.c" />
     <ClCompile Include="..\..\Core\Src\current_handler.c" />
     <ClCompile Include="..\..\Core\Src\delay_handler.c" />
     <ClCompile Include="..\..\Core\Src\fram.c" />
@@ -190,10 +191,12 @@
       <WarningLevel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">TurnOffAllWarnings</WarningLevel>
       <DiagnosticsFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Classic</DiagnosticsFormat>
     </ClCompile>
+    <ClCompile Include="..\tests\com_test.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Core\Inc\adc.h" />
     <ClInclude Include="..\..\Core\Inc\button_handler.h" />
+    <ClInclude Include="..\..\Core\Inc\com.h" />
     <ClInclude Include="..\..\Core\Inc\current_handler.h" />
     <ClInclude Include="..\..\Core\Inc\delay_handler.h" />
     <ClInclude Include="..\..\Core\Inc\fram.h" />

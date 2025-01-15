@@ -24,6 +24,10 @@
 
 #include "stm32l412xx-bsp.h"
 
+#include "usbd_cdc_if.h"
+
+uint8_t receivePacket [ 3 ];
+
 /**
   * @brief Reads on/off pin value
   * @param[out] On/Off pin state
@@ -487,4 +491,26 @@ void transmitReceiveData ( const unsigned char* const txData,
         tmpreg8 = LL_SPI_ReceiveData8 ( SPI1 );
         ( void ) tmpreg8;
     }
+}
+
+/**
+  * @brief  Send data over serial connection.
+  *         Currently uses USB via CDC_Transmit_FS
+  *
+  * @param  Buf: Buffer of data to be sent
+  * @param  Len: Number of data to be sent (in bytes)
+  */
+void sendSerialData ( uint8_t* Buf, uint16_t Len )
+{
+    CDC_Transmit_FS ( Buf, Len );
+}
+
+/**
+  * @brief  Delays by a given number of milliseconds
+  *
+  * @param  delay_ms: number of ms to delay
+  */
+void delay ( uint32_t delay_ms )
+{
+    HAL_Delay ( delay_ms );
 }

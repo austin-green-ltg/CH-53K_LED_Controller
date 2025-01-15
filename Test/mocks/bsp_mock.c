@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "stm32l412xx-bsp.h"
 
@@ -20,6 +21,8 @@ uint8_t chipEnable = 0;
 uint8_t writeEnable = 0;
 uint8_t statusRegister = 0;
 uint8_t readStatusRegisterSignal = 0;
+
+uint8_t receivePacket[3];
 
 GPIO_PinState ReadOnOffPin( void )
 {
@@ -201,7 +204,7 @@ void disableChipSelect( void )
     chipEnable = 0;
 }
 
-#define FRAM_SIZE 0x3FFFF // 32KB
+#define FRAM_SIZE 0x40000 // 32KB
 static uint8_t framMem[FRAM_SIZE];
 uint32_t address = 0;
 uint8_t address_set = 0;
@@ -215,6 +218,12 @@ void initFram( void )
     writeEnable = 0;
     statusRegister = 0;
     readStatusRegisterSignal = 0;
+}
+
+void fillFram( void );
+void fillFram( void )
+{
+    for (uint32_t i = 0; i < FRAM_SIZE; i++) framMem[i] = (uint8_t)rand();
 }
 
 void transferData( const unsigned char* const txData, const uint32_t bytes )
@@ -263,4 +272,45 @@ void receiveData( unsigned char* rxData, const uint32_t bytes )
         }
         address_set = 0;
     }
+}
+
+void transmitReceiveData(const unsigned char* const txData,
+    unsigned char* rxData, const uint32_t bytes)
+{
+    receiveData(rxData, bytes);
+    transferData(txData, bytes);
+}
+
+#define SERIAL_BUFFER_SIZE (UINT16_MAX)
+uint8_t serialBuffer[SERIAL_BUFFER_SIZE];
+uint16_t last_len = 0;
+void initSerialBuffer(void);
+void initSerialBuffer(void)
+{
+    memset(serialBuffer, 0, SERIAL_BUFFER_SIZE);
+    last_len = 0;
+}
+
+/**
+  * @brief  Send data over serial connection.
+  *         Currently uses USB via CDC_Transmit_FS
+  *
+  * @param  Buf: Buffer of data to be sent
+  * @param  Len: Number of data to be sent (in bytes)
+  */
+void sendSerialData(uint8_t* Buf, uint16_t Len)
+{
+    memcpy(serialBuffer, Buf, Len);
+    last_len = Len;
+}
+
+/**
+  * @brief  Delays by a given number of milliseconds
+  *
+  * @param  delay_ms: number of ms to delay
+  */
+void delay ( uint32_t delay_ms )
+{
+    (void)delay_ms;
+    return; // not concerned with actually waiting in tests
 }

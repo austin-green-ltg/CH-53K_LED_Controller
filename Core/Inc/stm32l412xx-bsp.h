@@ -372,4 +372,20 @@ void receiveData ( unsigned char* rxData, const uint32_t bytes );
 void transmitReceiveData ( const unsigned char* const txData,
                            unsigned char* rxData, const uint32_t bytes );
 
+/**
+  * @brief  Send data over serial connection.
+  *         Currently uses USB via CDC_Transmit_FS
+  *
+  * @param  Buf: Buffer of data to be sent
+  * @param  Len: Number of data to be sent (in bytes)
+  */
+void sendSerialData ( uint8_t* Buf, uint16_t Len );
+
+/**
+  * @brief  Delays by a given number of milliseconds
+  *
+  * @param  delay_ms: number of ms to delay
+  */
+void delay ( uint32_t delay_ms );
+
 #endif /* INC_bsph */

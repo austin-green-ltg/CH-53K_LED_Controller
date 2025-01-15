@@ -22,19 +22,20 @@ TEST_SETUP ( Current_Handler )
 {
     /* executed before *every* non-skipped test */
     initFram();
+    current_value_dA = CurrentNormalValue; // return to default value
 }
 
 TEST_TEAR_DOWN ( Current_Handler )
 {
     /* executed after *every* non-skipped and non-failing test */
-    current_value_dA = CurrentNormalValue; // return to default value
     GetCurrentRange(); // set current range
 }
 
 /* start Current_Handler tests */
 TEST ( Current_Handler, GetDefaultCurrent )
 {
-    TEST_ASSERT_EQUAL_UINT16 ( 0u, GetCurrent() ); // Default value
+
+    TEST_ASSERT_EQUAL_UINT16 ( CurrentNormalValue, GetCurrent() ); // Default value
 }
 
 TEST ( Current_Handler, GetDefaultCurrentRange )
