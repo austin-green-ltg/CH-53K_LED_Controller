@@ -11,3 +11,5 @@ REM Compile with IAR Compiler
 start cmd.exe /k make -f iar_makefile
 REM Run Tests
 start cmd.exe /k make -f test_makefile
+
+exit

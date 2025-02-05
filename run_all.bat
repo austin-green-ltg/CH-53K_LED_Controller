@@ -8,3 +8,4 @@ cd .\Test
 call format.bat
 start call run_tests_rebuild.bat
 cd ..
+exit

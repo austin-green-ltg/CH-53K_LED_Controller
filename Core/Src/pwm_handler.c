@@ -38,14 +38,14 @@
 
 /* Brightness Steps */
 /** Max Brightness Step (50) */
-const uint8_t MaxBrightness = ( BRIGHTNESS_STEPS - 1 )
-                              ; // 50
+const int8_t MaxBrightness = ( BRIGHTNESS_STEPS - 1 )
+                             ; // 50
 /** Min Brightness Step (0) */
-const uint8_t MinBrightness = ( 0 )
-                              ; // 0
+const int8_t MinBrightness = ( 0 )
+                             ; // 0
 /** Half Brightness Step (24) */
-const uint8_t HalfBrightness = ( ( uint8_t ) ( ( BRIGHTNESS_STEPS - 1 ) /
-                                 2.0f ) ); // 25
+const int8_t HalfBrightness = ( ( int8_t ) ( ( BRIGHTNESS_STEPS - 1 ) /
+                                2.0f ) ); // 25
 
 /* Pulse Width Values */
 #define PW_PERIOD (255)             // Period of PWM timer
@@ -102,8 +102,8 @@ void InitPwm ( void )
     }
     else
     {
-        visBrightness = ( uint8_t ) stringVis [ 0 ];
-        irBrightness = ( uint8_t ) stringIr [ 0 ];
+        visBrightness = ( int8_t ) stringVis [ 0 ];
+        irBrightness = ( int8_t ) stringIr [ 0 ];
     }
 
     WriteLog ( STARTING_PWM_ADDRESS + 2 * PWM_LOG_SIZE, "1",
