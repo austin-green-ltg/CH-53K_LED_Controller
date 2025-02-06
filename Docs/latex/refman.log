@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.4)  5 FEB 2025 14:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.9.4)  6 FEB 2025 11:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1838,7 +1838,7 @@ Package rerunfilecheck Info: File `refman.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  19799 strings out of 473899
- 340828 string characters out of 5738692
+ 340476 string characters out of 5738692
  1983960 words of memory out of 5000000
  41364 multiletter control sequences out of 15000+600000
  612764 words of font info for 104 fonts, out of 8000000 for 9000

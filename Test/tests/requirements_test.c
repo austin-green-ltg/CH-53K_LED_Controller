@@ -12,8 +12,8 @@ enum {LED_VISIBLE = 0, LED_IR = 1};
 extern const uint8_t MinBrightness ;
 extern const uint8_t MaxBrightness ;
 extern const uint8_t HalfBrightness ;
-extern const float MinPw ;
-extern const float MaxPw ;
+extern const uint8_t MinPw ;
+extern const uint8_t MaxPw ;
 
 TEST_GROUP ( Requirements );
 

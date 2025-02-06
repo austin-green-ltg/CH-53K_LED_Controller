@@ -43,16 +43,16 @@ const int8_t MaxBrightness = ( BRIGHTNESS_STEPS - 1 )
 /** Min Brightness Step (0) */
 const int8_t MinBrightness = ( 0 )
                              ; // 0
-/** Half Brightness Step (24) */
+/** Half Brightness Step (25) */
 const int8_t HalfBrightness = ( ( int8_t ) ( ( BRIGHTNESS_STEPS - 1 ) /
                                 2.0f ) ); // 25
 
 /* Pulse Width Values */
 #define PW_PERIOD (255)             // Period of PWM timer
 /** Min pulse width value (0) */
-const float MinPw = ( 0 ) ; // relative pulse width
+const uint8_t MinPw = ( 0 ) ; // relative pulse width
 /** Max pulse width value (PW_PERIOD(255)) */
-const float MaxPw = ( PW_PERIOD ); // relative pulse width
+const uint8_t MaxPw = ( PW_PERIOD ); // relative pulse width
 
 /* Thermal State Constants */
 /** Warm thermal state pwm constant */
@@ -95,18 +95,41 @@ void InitPwm ( void )
     ReadLog ( STARTING_PWM_ADDRESS + 2 * PWM_LOG_SIZE, stringPrevInit,
               PWM_LOG_SIZE );
 
-    if ( stringPrevInit [ 0 ] == 0 )
-    {
-        visBrightness = HalfBrightness;
-        irBrightness = HalfBrightness;
-    }
-    else
+    if ( stringPrevInit [ 0 ] == 1 )
     {
         visBrightness = ( int8_t ) stringVis [ 0 ];
         irBrightness = ( int8_t ) stringIr [ 0 ];
     }
+    else
+    {
+        visBrightness = HalfBrightness;
+        irBrightness = HalfBrightness;
+    }
 
-    WriteLog ( STARTING_PWM_ADDRESS + 2 * PWM_LOG_SIZE, "1",
+    // This shouldn't happen, but just in case
+    if ( visBrightness > MaxBrightness )
+    {
+        visBrightness = MaxBrightness;
+    }
+
+    if ( visBrightness < MinBrightness )
+    {
+        visBrightness = MinBrightness;
+    }
+
+    if ( irBrightness > MaxBrightness )
+    {
+        irBrightness = MaxBrightness;
+    }
+
+    if ( irBrightness < MinBrightness )
+    {
+        irBrightness = MaxBrightness;
+    }
+
+    stringPrevInit [ 0 ] = 1;
+
+    WriteLog ( STARTING_PWM_ADDRESS + 2 * PWM_LOG_SIZE, stringPrevInit,
                PWM_LOG_SIZE );
 
     EnablePWM1();
@@ -313,7 +336,7 @@ void IncreaseBrightness ( uint8_t button_held, uint8_t isIr )
   */
 void SetPwm ( uint8_t isIr )
 {
-    uint32_t pulse_width = GetPwm ( isIr );
+    uint8_t pulse_width = GetPwm ( isIr );
     TurnOffPwm (!isIr ); // turn off other pwm signal
 
     isIr ? SetPW12 ( pulse_width ) : SetPW11 ( pulse_width );
@@ -405,7 +428,8 @@ void SetBrightness ( int8_t brightness, uint8_t isIr )
   */
 uint8_t GetPwm ( uint8_t isIr )
 {
-    uint8_t pwm = isIr ? PwmArray [ irBrightness ] : PwmArray [ visBrightness ];
+    uint8_t pwm = isIr ? PwmArray [ ( uint8_t ) irBrightness ] :
+                  PwmArray [ ( uint8_t ) visBrightness ];
 
     /* Disable temperature based PWM */
     // TemperatureRange_e temperature_range = GetTemperatureRange();
@@ -439,7 +463,7 @@ uint8_t GetPwm ( uint8_t isIr )
 void LogPwm ( void )
 {
     const uint8_t numPwmLogs = TOTAL_PWM_LOGS - 1; // Don't include prev init
-    char brightnessLog [ TOTAL_PWM_LOGS - 1 ]; // Don't include prev init
+    char brightnessLog [ TOTAL_PWM_LOGS ];
 
 
     for ( uint8_t i = 0; i < numPwmLogs; i++ )
@@ -447,6 +471,8 @@ void LogPwm ( void )
         brightnessLog [ i ] = ( char ) GetBrightness ( i );
     }
 
+    brightnessLog [ numPwmLogs ] = 1; // prev init
+
     WriteLog ( STARTING_PWM_ADDRESS, brightnessLog,
-               PWM_LOG_SIZE * numPwmLogs );
+               PWM_LOG_SIZE * TOTAL_PWM_LOGS );
 }

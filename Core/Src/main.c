@@ -86,6 +86,7 @@ void SystemClock_Config ( void );
 void LogVitals ( void );
 void FindVitalsEOL ( void );
 void EraseLogs ( void );
+int verifyLogRead ( void );
 
 void LL_ADC_Start_DMA ( uint32_t* pData,
                         uint32_t Length );
@@ -150,8 +151,6 @@ int main ( void )
     GPIO_PinState prevDimPressed = BUTTON_UNPRESSED;
     GPIO_PinState prevBrightPressed = BUTTON_UNPRESSED;
 
-    SetPwm ( 1 );
-
     StartDelayCounter();
     StartLogDelayCounter();
     StartLiveLogDelayCounter();
@@ -161,6 +160,8 @@ int main ( void )
 
     // if brightness has changed since last log
     uint8_t isBrightnessChanged = 0;
+
+    // EraseLogs();
 
     /* USER CODE END 2 */
 
@@ -250,6 +251,15 @@ int main ( void )
             sendRecordedLogs ( response_type, response_num );
             RestartLiveLogDelayCounter();
         }
+
+        // int8_t isLogCorrect = verifyLogRead();
+
+        // if (isLogCorrect != 0)
+        // {
+        // DisablePWM1();
+        // return isLogCorrect;
+        // }
+
     }
 
     /* USER CODE END 3 */
@@ -343,12 +353,49 @@ void FindVitalsEOL ( void )
 // Writes Zero to Log Space
 void EraseLogs ( void )
 {
-#define TOTAL_VITALS_SIZE (TOTAL_CURRENT_LOGS + TOTAL_TEMPERATURE_LOGS + TOTAL_VOLTAGE_LOGS)
+#define TOTAL_SPACE (PWM_LOG_SPACE + CURRENT_LOG_SPACE + TEMPERATURE_LOG_SPACE + VOLTAGE_LOG_SPACE)
+    uint8_t zero_array [ TOTAL_SPACE ];
+    memset ( zero_array, 0, TOTAL_SPACE );
 
-    uint8_t pk [ TOTAL_VITALS_SIZE ];
-    memset ( pk, 0, TOTAL_VITALS_SIZE );
+    WriteLog ( STARTING_PWM_ADDRESS, ( char const* ) zero_array, TOTAL_SPACE );
+}
 
-    WriteLog ( STARTING_CURRENT_ADDRESS, ( char const* ) pk, TOTAL_VITALS_SIZE );
+// Verify that the pwm log is being written correctly
+int verifyLogRead ( void )
+{
+    char stringVis [ PWM_LOG_SIZE ];
+    char stringIr [ PWM_LOG_SIZE ];
+    char stringPrevInit [ PWM_LOG_SIZE ];
+
+    ReadLog ( STARTING_PWM_ADDRESS, stringVis,
+              PWM_LOG_SIZE );
+
+    ReadLog ( STARTING_PWM_ADDRESS + PWM_LOG_SIZE, stringIr,
+              PWM_LOG_SIZE );
+
+    ReadLog ( STARTING_PWM_ADDRESS + 2 * PWM_LOG_SIZE, stringPrevInit,
+              PWM_LOG_SIZE );
+
+    uint8_t isVisCorrect = ( int8_t ) stringVis [ 0 ] == GetBrightness ( 0 );
+    uint8_t isIrCorrect = ( int8_t ) stringIr [ 0 ] == GetBrightness ( 1 );
+    uint8_t isPrevInitCorrect = ( int8_t ) stringPrevInit [ 0 ] == 1;
+
+    if (!isPrevInitCorrect )
+    {
+        return -1;
+    }
+    else if (!isVisCorrect )
+    {
+        return -2;
+    }
+    else if (!isIrCorrect )
+    {
+        return -3;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 void LL_ADC_Start_DMA ( uint32_t* pData,

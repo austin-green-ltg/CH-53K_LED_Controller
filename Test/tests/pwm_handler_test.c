@@ -23,8 +23,8 @@ extern int16_t thermistor_value_dC;
 extern const uint8_t MinBrightness ;
 extern const uint8_t MaxBrightness ;
 extern const uint8_t HalfBrightness ;
-extern const float MinPw ;
-extern const float MaxPw ;
+extern const uint8_t MinPw ;
+extern const uint8_t MaxPw ;
 extern const float WarmPwmRatio ;
 extern const float HotPwmRatio ;
 
